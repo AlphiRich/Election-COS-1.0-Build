@@ -15,6 +15,7 @@ import { ReportIncidentPage } from '@/modules/incidents/ReportIncidentPage';
 import { WardsPage } from '@/modules/wards/WardsPage';
 import { WardDetailPage } from '@/modules/wards/WardDetailPage';
 import { FieldDiaryPage } from '@/modules/field-diary/FieldDiaryPage';
+import { GatheringsPage } from '@/modules/gatherings/GatheringsPage';
 import { IncidentsPage } from '@/modules/incidents/IncidentsPage';
 import { LogisticsPage } from '@/modules/logistics/LogisticsPage';
 import { FinancePage } from '@/modules/finance/FinancePage';
@@ -50,6 +51,7 @@ export const router = createBrowserRouter([
       { path: 'wards', element: <WardsPage /> },
       { path: 'wards/:wardCode', element: <WardDetailPage /> },
       { path: 'diary', element: <FieldDiaryPage /> },
+      { path: 'gatherings', element: <GatheringsPage /> },
       { path: 'incidents', element: <IncidentsPage /> },
       { path: 'logistics', element: <LogisticsPage /> },
       { path: 'finance', element: <FinancePage /> },

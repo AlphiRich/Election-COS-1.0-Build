@@ -34,6 +34,7 @@ import { warRoomCountersRepository } from './adapters/firestore/warRoomCountersR
 import { municipalityProfileRepository } from './adapters/firestore/municipalityProfileRepository';
 import { fileStoreRepository } from './adapters/firestore/fileStoreRepository';
 import { entitlementsRepository } from './adapters/firestore/entitlementsRepository';
+import { gatheringsRepository } from './adapters/firestore/gatheringsRepository';
 import { connectivityProbe } from './adapters/firestore/connectivityProbe';
 
 const adapter = (import.meta.env.VITE_DAL_ADAPTER as string | undefined) ?? 'firestore';
@@ -82,6 +83,7 @@ export const dal = {
   // backend at all. It is here because the rule in §2.2 is about the
   // Firebase SDK, not about documents — the chrome may not import the
   // SDK, so this is the seam it reaches the link state through.
+  gatherings: gatheringsRepository,
   connectivity: connectivityProbe,
 };
 

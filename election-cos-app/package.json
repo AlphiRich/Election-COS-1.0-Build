@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc -b && vite build && node scripts/build-sw.mjs",
     "build:site": "vite build --config vite.site.config.ts",
-    "check:all": "npm run lint && npm run typecheck && npm run check:hex && npm run check:type-scale && npm run check:headers && npm run check:fonts && npm run test && npm run test:functions",
+    "check:all": "npm run lint && npm run typecheck && npm run check:hex && npm run check:type-scale && npm run check:headers && npm run check:fonts && npm run typecheck:functions && npm run test && npm run test:functions",
     "check:fonts": "node tools/fonts/vendor-fonts.mjs --check",
     "check:headers": "node scripts/sync-hosting-headers.mjs --check",
     "check:hex": "node scripts/check-no-hex.mjs",
@@ -27,6 +27,7 @@
     "rehearse": "vite-node scripts/rehearse-results-night.ts --",
     "test": "vitest run",
     "test:functions": "npm --prefix functions run test",
+    "typecheck:functions": "npm --prefix functions run build",
     "test:watch": "vitest",
     "typecheck": "tsc -b --noEmit"
   },

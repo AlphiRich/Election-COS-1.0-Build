@@ -13,6 +13,7 @@
  * wrong signal for the one page that quotes an Act and a Constitutional
  * Court judgment. Now on `text-body-md`, like everything else.
  */
+import { Link } from 'react-router-dom';
 import { Card, PageHeader } from '@/components/ui';
 
 export function GatheringsAdvisoryPage() {
@@ -24,6 +25,13 @@ export function GatheringsAdvisoryPage() {
       />
 
       <div className="mt-4 space-y-4 text-body-md font-body leading-relaxed text-ink">
+        <p>
+          <Link to="/gatherings" className="underline">
+            Track the notice deadline for your planned gatherings
+          </Link>
+          .
+        </p>
+
         <p>
           Campaign rallies, marches, and public meetings are regulated by the Regulation of
           Gatherings Act 205 of 1993. <strong>Section 3(2)</strong> requires the convener to give

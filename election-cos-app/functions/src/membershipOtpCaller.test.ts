@@ -12,7 +12,14 @@ import { callerFrom } from './membershipOtpCallables';
 
 type Req = Parameters<typeof callerFrom>[0];
 
-const req = (auth: unknown, data: unknown = {}): Req => ({ auth, data, rawRequest: {}, acceptsStreaming: false }) as Req;
+// Through `unknown`: a hand-built request cannot satisfy `CallableRequest`'s
+// Express `rawRequest` structurally, and the cast is the honest statement
+// that this is a stand-in. Left as a direct `as Req`, `tsc` rejects it —
+// which `vitest` never noticed, because it transpiles without typechecking,
+// and which `firebase.json`'s predeploy `npm run build` would have hit on
+// the first functions deploy.
+const req = (auth: unknown, data: unknown = {}): Req =>
+  ({ auth, data, rawRequest: {}, acceptsStreaming: false }) as unknown as Req;
 const signedIn = (token: Record<string, unknown>, uid = 'agent-1') => req({ uid, token });
 
 function refusal(request: Req): { code: string; message: string } {

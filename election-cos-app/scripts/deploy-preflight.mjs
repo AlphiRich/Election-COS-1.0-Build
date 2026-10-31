@@ -51,6 +51,7 @@
  *   node scripts/deploy-preflight.mjs            # check, report, exit 0/1
  *   node scripts/deploy-preflight.mjs --json     # machine-readable
  */
+import { spawnSync } from 'node:child_process';
 import { readFileSync, existsSync, statSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
@@ -400,11 +401,32 @@ try {
     }
   }
 
+  // PRESENCE IS NOT CORRECTNESS. This check used to stop at "a predeploy
+  // hook exists". `firebase.json` runs `npm run build` before every
+  // functions deploy, and a committed test file had a type error that
+  // `vitest` never noticed (it transpiles without typechecking) — so the
+  // hook existed, this check passed, and the first deploy would have died
+  // in predeploy. Compile each codebase for real.
+  for (const codebase of codebases) {
+    const dir = codebase.source ?? 'functions';
+    if (!existsSync(path.join(ROOT, dir, 'tsconfig.json'))) continue;
+    const tsc = spawnSync('npx', ['--no-install', 'tsc', '--noEmit', '-p', dir], {
+      cwd: ROOT,
+      encoding: 'utf8',
+    });
+    if (tsc.status !== 0) {
+      const first = `${tsc.stdout ?? ''}${tsc.stderr ?? ''}`
+        .split('\n')
+        .find((line) => /error TS\d+/.test(line));
+      problems.push(`${dir} does not compile: ${first?.trim() ?? `tsc exited ${tsc.status}`}`);
+    }
+  }
+
   if (codebases.length === 0) {
     add('functions build', 'PASS', 'no functions codebase declared');
   } else if (problems.length > 0) {
     add('functions build', 'FAIL', problems.join('; '),
-      'Add a predeploy hook that runs the build, or the deploy succeeds and every function is dead on arrival.');
+      'If it does not compile, run `npm run typecheck:functions` and fix it: firebase.json runs that build in predeploy, so a deploy would stop there. If the hook is missing, add one, or the deploy succeeds and every function is dead on arrival.');
   } else {
     add('functions build', 'PASS', `${codebases.length} codebase(s) build before deploy`);
   }

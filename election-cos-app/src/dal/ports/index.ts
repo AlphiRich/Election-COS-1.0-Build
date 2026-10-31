@@ -24,3 +24,4 @@ export * from './dataSubjectRequests';
 export * from './warRoomCounters';
 export * from './municipalityProfile';
 export * from './connectivity';
+export * from './gatherings';

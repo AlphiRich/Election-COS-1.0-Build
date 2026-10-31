@@ -116,6 +116,30 @@ service cloud.firestore {
       allow delete: if false;
     }
 
+    // ---- gatherings and their notice countdown ------------------------------
+    //
+    // Regulation of Gatherings Act notice tracking. A gathering is a planned
+    // event, scoped by ward like the diary. Clients may create and edit it,
+    // and may mark notice lodged; they may NOT delete it (soft delete only)
+    // and may NOT write the alerts below.
+
+    match /tenants/{tid}/gatherings/{gatheringId} {
+      allow read: if tenantOK(tid) && cap('diary.view') && inScope(tid, resource.data);
+      allow create, update: if tenantOK(tid) && cap('diary.edit')
+                             && inScope(tid, request.resource.data)
+                             && request.resource.data.noticeStatus in ['NOT_LODGED', 'LODGED'];
+      allow delete: if false;
+    }
+
+    // Raised by the hourly sweep (functions/src/rgaNoticeScheduled.ts) with
+    // the Admin SDK. Readable by anyone who can read the gathering's ward;
+    // never writable from a client, so an alert can neither be forged nor
+    // silenced from a handset.
+    match /tenants/{tid}/gatheringAlerts/{alertId} {
+      allow read: if tenantOK(tid) && cap('diary.view') && inScope(tid, resource.data);
+      allow write: if false;
+    }
+
     // ---- incidents — fixed taxonomy enforced here too, §6.4 ---------------
 
     match /tenants/{tid}/incidents/{incidentId} {

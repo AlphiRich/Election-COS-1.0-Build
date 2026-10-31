@@ -16,6 +16,7 @@ import { dal } from '@/dal';
 import { useSession } from '@/auth/useSession';
 import { DiaryEntryCard } from './DiaryEntryCard';
 import { DiaryEntryForm } from './DiaryEntryForm';
+import { Link } from 'react-router-dom';
 import { Button, Card, Field, PageHeader } from '@/components/ui';
 
 export function FieldDiaryPage() {
@@ -55,6 +56,14 @@ export function FieldDiaryPage() {
           </Button>
         }
       />
+
+      <p className="text-body-md font-body text-slate">
+        Planning a rally or march?{' '}
+        <Link to="/gatherings" className="underline">
+          Track its notice deadline
+        </Link>
+        .
+      </p>
 
       {/* Was a bare <label> wrapping the input, which associates nothing —
           a screen reader announced an unlabelled text field. `Field`
