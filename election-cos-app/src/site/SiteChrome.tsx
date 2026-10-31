@@ -119,7 +119,13 @@ export function SiteHeader({ enquirySubject }: { enquirySubject: string }) {
 
 /* ----------------------------------------------------------- footer */
 
-export function SiteFooter({ onWithdrawAdConsent }: { onWithdrawAdConsent: () => void }) {
+export function SiteFooter({
+  onWithdrawAdConsent,
+  adsEnabled,
+}: {
+  onWithdrawAdConsent: () => void;
+  adsEnabled: boolean;
+}) {
   return (
     <footer className="bg-ink text-line text-site-sm">
       <div className="mx-auto grid max-w-[1200px] grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-8 px-6 pb-8 pt-14">
@@ -165,7 +171,7 @@ export function SiteFooter({ onWithdrawAdConsent }: { onWithdrawAdConsent: () =>
            * it was to give is not consent, and somebody who said yes on
            * an explainer should not have to find that explainer again.
            */}
-          <AdConsentWithdrawLink onWithdraw={onWithdrawAdConsent} />
+          {adsEnabled && <AdConsentWithdrawLink onWithdraw={onWithdrawAdConsent} />}
         </div>
 
         <div className="flex flex-col gap-1.5">
@@ -191,16 +197,18 @@ export function SiteShell({
   children,
   enquirySubject,
   onWithdrawAdConsent,
+  adsEnabled,
 }: {
   children: ReactNode;
   enquirySubject: string;
   onWithdrawAdConsent: () => void;
+  adsEnabled: boolean;
 }) {
   return (
     <div className="min-h-screen bg-paper font-body text-site-body text-ink">
       <SiteHeader enquirySubject={enquirySubject} />
       <main>{children}</main>
-      <SiteFooter onWithdrawAdConsent={onWithdrawAdConsent} />
+      <SiteFooter onWithdrawAdConsent={onWithdrawAdConsent} adsEnabled={adsEnabled} />
     </div>
   );
 }

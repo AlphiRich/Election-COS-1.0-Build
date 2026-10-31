@@ -33,6 +33,7 @@ import { SitePackages } from './pages/SitePackages';
 import { SiteContact } from './pages/SiteContact';
 import { SiteExplainer, SiteExplainers } from './pages/SiteExplainers';
 import { ConsentBanner } from './ads/ConsentBanner';
+import { AD_CLIENT_ID } from './ads/adPolicy';
 import {
   clearAdConsent,
   hasAdConsent,
@@ -92,7 +93,12 @@ export function SiteApp() {
   const consented = hasAdConsent(consent);
 
   return (
-    <SiteShell enquirySubject={SUBJECTS[pathname] ?? SUBJECTS['/']} onWithdrawAdConsent={withdraw}>
+    <SiteShell
+      enquirySubject={SUBJECTS[pathname] ?? SUBJECTS['/']}
+      onWithdrawAdConsent={withdraw}
+      // A withdrawal link for something that is not running would imply it is.
+      adsEnabled={AD_CLIENT_ID !== null}
+    >
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<SiteHome />} />

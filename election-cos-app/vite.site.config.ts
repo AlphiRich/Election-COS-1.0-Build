@@ -10,10 +10,11 @@
  * application should spend a canvasser's data on. Separate `outDir`,
  * separate deploy target, one set of tokens and conventions.
  */
-import { defineConfig, type Plugin } from 'vite';
+import { defineConfig, loadEnv, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import { renameSync } from 'node:fs';
 import path from 'node:path';
+import { adsTxtFor, resolveAdClientId } from './src/site/ads/adConfig';
 
 /**
  * The entry is `site.html` in the source tree so it cannot be confused
@@ -33,8 +34,26 @@ function entryAsIndex(outDir: string): Plugin {
 
 const OUT_DIR = path.resolve(__dirname, 'dist-site');
 
-export default defineConfig({
-  plugins: [react(), entryAsIndex(OUT_DIR)],
+/**
+ * `/ads.txt`, emitted only when advertising is configured. Same two-variable
+ * rule as the client (see src/site/ads/adConfig.ts), so the site never
+ * publishes a seller declaration for inventory it is not selling.
+ */
+function adsTxt(mode: string): Plugin {
+  return {
+    name: 'ecos-site-ads-txt',
+    generateBundle() {
+      const env = loadEnv(mode, __dirname, 'VITE_');
+      const body = adsTxtFor(
+        resolveAdClientId(env.VITE_AD_CLIENT_ID, env.VITE_AD_CATEGORY_BLOCKS_CONFIRMED),
+      );
+      if (body) this.emitFile({ type: 'asset', fileName: 'ads.txt', source: body });
+    },
+  };
+}
+
+export default defineConfig(({ mode }) => ({
+  plugins: [react(), entryAsIndex(OUT_DIR), adsTxt(mode)],
   resolve: {
     alias: { '@': path.resolve(__dirname, 'src') },
   },
@@ -45,4 +64,4 @@ export default defineConfig({
       input: path.resolve(__dirname, 'site.html'),
     },
   },
-});
+}));

@@ -96,7 +96,7 @@ export function SiteExplainer({ hasConsent }: { hasConsent: boolean }) {
       </article>
 
       {/* The one slot. See this file's header for why it is here. */}
-      <AdSlot pathname={explainer.path} hasConsent={hasConsent} slotId={explainer.slug} />
+      <AdSlot pathname={explainer.path} hasConsent={hasConsent} />
 
       <SiteCard className="flex flex-col gap-2 p-6">
         <h2 className="m-0 font-site-display text-site-h6">Sources</h2>

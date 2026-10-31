@@ -22,7 +22,7 @@
  * That is a straightforward reader-honesty point and it costs nothing.
  */
 import { useEffect, useRef } from 'react';
-import { AD_CLIENT_ID, adDecision } from './adPolicy';
+import { AD_CLIENT_ID, AD_SLOT_ID, adDecision } from './adPolicy';
 
 const AD_SCRIPT_SRC = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
 const SCRIPT_ID = 'ecos-ad-script';
@@ -39,16 +39,11 @@ function ensureAdScript(clientId: string): void {
   document.head.appendChild(script);
 }
 
-export function AdSlot({
-  pathname,
-  hasConsent,
-  slotId,
-}: {
-  pathname: string;
-  hasConsent: boolean;
-  slotId: string;
-}) {
-  const { allowed } = adDecision({ pathname, hasConsent });
+export function AdSlot({ pathname, hasConsent }: { pathname: string; hasConsent: boolean }) {
+  // No numeric ad unit configured means nothing to render and nothing to
+  // load, however eligible the page and however willing the visitor.
+  const { allowed: policyAllows } = adDecision({ pathname, hasConsent });
+  const allowed = policyAllows && AD_SLOT_ID !== null;
   const pushed = useRef(false);
 
   useEffect(() => {
@@ -98,7 +93,7 @@ export function AdSlot({
       <ins
         className="adsbygoogle block"
         style={{ display: 'block' }}
-        data-ad-slot={slotId}
+        data-ad-slot={AD_SLOT_ID ?? undefined}
         data-ad-format="auto"
         data-full-width-responsive="true"
       />

@@ -24,7 +24,7 @@
  *
  * It says what it is for in one sentence, before asking.
  */
-import { adDecision } from './adPolicy';
+import { shouldAskConsent } from './adPolicy';
 
 export function ConsentBanner({
   pathname,
@@ -33,14 +33,9 @@ export function ConsentBanner({
   pathname: string;
   onChoice: (choice: 'granted' | 'refused') => void;
 }) {
-  /*
-   * Ask only where a yes would mean something. `adDecision` with
-   * `hasConsent: true` answers exactly that question — "if this visitor
-   * said yes, would an advert be allowed here?" — so the banner cannot
-   * drift out of step with the policy it is collecting consent for.
-   */
-  const wouldAllow = adDecision({ pathname, hasConsent: true, clientId: 'probe' }).allowed;
-  if (!wouldAllow) return null;
+  // Ask only where a yes would result in an advert: an eligible page AND a
+  // configured account. See `shouldAskConsent` for the defect this replaces.
+  if (!shouldAskConsent(pathname)) return null;
 
   return (
     <div

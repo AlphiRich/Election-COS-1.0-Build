@@ -54,20 +54,29 @@
  * whatever the consent banner says.
  */
 
+import { resolveAdClientId, resolveAdSlotId } from './adConfig';
+
 /** Bumped when the wording changes; a stored consent below this is void. */
 export const AD_CONSENT_VERSION = 2;
 
 /**
- * The publisher id, once the account exists and the category blocks in
- * `REQUIRED_BLOCKED_CATEGORIES` have been applied to it.
+ * The publisher id. `null` unless BOTH build variables are set — see
+ * `adConfig.ts` for why there are two and why the second is a statement
+ * rather than a control.
  *
- * `null` until then, and `adDecision` refuses while it is null. A
- * half-configured account is the one state in which the category blocks
- * might not be in force, so the code declines to run at all rather than
- * serve uncategorised inventory for however long it takes somebody to
- * finish the setup.
+ * `adDecision` refuses while this is null. A half-configured account is
+ * the one state in which the category blocks might not be in force, so the
+ * code declines to run at all rather than serve uncategorised inventory.
  */
-export const AD_CLIENT_ID: string | null = null;
+export const AD_CLIENT_ID: string | null = resolveAdClientId(
+  import.meta.env.VITE_AD_CLIENT_ID as string | undefined,
+  import.meta.env.VITE_AD_CATEGORY_BLOCKS_CONFIRMED as string | undefined,
+);
+
+/** The numeric AdSense ad-unit id. See `resolveAdSlotId` for why it is not a name. */
+export const AD_SLOT_ID: string | null = resolveAdSlotId(
+  import.meta.env.VITE_AD_SLOT_ID as string | undefined,
+);
 
 /**
  * The explainer pages, and only these.
@@ -182,6 +191,21 @@ export function adDecision({
     return { allowed: false, refusal: 'NOT_CONFIGURED' };
   }
   return { allowed: true, refusal: null };
+}
+
+/**
+ * Should the banner ask? Only where a "yes" would actually result in an
+ * advert: an eligible page AND a configured account.
+ *
+ * The first draft probed `adDecision` with a dummy client id so the banner
+ * showed even when advertising was not configured — and so told every
+ * visitor to an explainer "we show adverts on our pages" while none were
+ * ever served. Asking for consent to something that is not happening is a
+ * false statement to the public, and it trains people to dismiss the
+ * banner that will one day be real.
+ */
+export function shouldAskConsent(pathname: string, clientId: string | null = AD_CLIENT_ID): boolean {
+  return adDecision({ pathname, hasConsent: true, clientId }).allowed;
 }
 
 /** `/explainers/`, `/explainers?utm=x` and `/EXPLAINERS` all normalise. */

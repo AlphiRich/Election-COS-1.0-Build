@@ -5177,5 +5177,146 @@ credential, as established in §39.
 
 ---
 
+## §44 — The RGA notice countdown, and what "the advertising must happen" actually needs
+
+### 44.1 The countdown — built, and proved on real Firestore
+
+`functions/src/rgaNotice.ts` (pure), `rgaNoticeScheduled.ts` (hourly
+sweep), a `gatherings` collection with rules, and a `/gatherings` screen
+reached from the Field Diary and the advisory (the primary nav is fixed
+at nine items, §3.2).
+
+**What is statute and what is not.** Seven days and 48 hours come from the
+Regulation of Gatherings Act 205 of 1993 s 3, as the repository's own
+advisory page reads it. The **72-hour rung is house policy**; the alert and
+the screen both say so. Boundaries follow the Act's wording: notice at
+exactly 168 h is still in time (the alert fires *at* that point, as a
+last-moment warning), and "less than 48 hours" is strict. Recording
+that notice was lodged is shown as the convener's statement; nothing says
+the officer received or accepted it, and nothing calls a gathering lawful.
+
+**Idempotent, and how that was shown.** An alert's id is a function of the
+gathering and the stage and of nothing else; it is written create-if-absent.
+
+| Test | Result |
+| --- | --- |
+| three sequential sweeps, real Firestore | created 4, 0, 0 |
+| five **concurrent** sweeps over empty alerts | created 0, 0, 0, 3, 1 — total 4, exactly 4 documents |
+| same gathering id in two tenants | two alerts; tenant taken from the document path |
+| lodged / far-off / past / deleted gatherings | raise nothing |
+| real sweep over records created by the UI | 2 alerts (none for the lodged one); second run 0 |
+
+The first "parallel" run proved nothing — it ran after the alerts already
+existed — and was replaced by the race above. The emulator run also
+caught a bug in the first draft that no unit test could: a path walk one
+level too deep, which would have attributed every alert to no tenant,
+because the in-memory fake never builds a Firestore path.
+
+**Rules**, tested with a real ID token over REST *with positive controls*
+(the first attempt returned 403 to everything, including requests that
+should succeed, and so proved nothing): own-ward create, read and mark-
+lodged succeed; another ward, an invalid status, moving a gathering across
+wards, deletion, forging an alert and an unauthenticated read are refused.
+A VD-scoped user cannot read gatherings (they carry no `vdCode`), which
+fails closed.
+
+**Not done, and said plainly:**
+- Alerts reach an *in-app list* only. No push, SMS or email. The sweep
+  writes them, so a delivery channel can be added without touching it.
+- Deploying needs what §39 already lists (Blaze billing; Cloud Scheduler
+  is required for a scheduled function) **plus** the new composite index
+  (`gatherings`, collection-group: `noticeStatus`, `startsAt`) and,
+  optionally, a TTL policy on `gatheringAlerts.expireAt`.
+- Time is epoch-based. A gathering entered in the wrong timezone is wrong
+  by that amount; the form uses the browser's local time.
+
+### 44.2 A deploy blocker found on the way
+
+`npm run build` in `functions/` **failed** on a committed test file from the
+OTP work (a cast `tsc` rejects and `vitest` never checks), and
+`firebase.json` runs that build in predeploy — so the first functions
+deploy would have stopped there. The preflight reported "1 codebase(s)
+build before deploy" because it only checked that a hook *exists*.
+Presence is not correctness (rule 5). Fixed the cast; added
+`typecheck:functions` to `check:all`; and the preflight now compiles each
+codebase, proved by reintroducing the original error and watching it fail.
+
+### 44.3 Advertising: what is built, and what only you can do
+
+I took "must happen" to mean **AdSense display on the explainer pages**,
+per your directive. (If you meant *buying* Google Ads per the strategy,
+that is a separate account and spend; the guardrails are in §43.4.)
+
+**I cannot make an advert appear by myself.** It needs an AdSense account,
+site approval and console settings that only the account owner can do.
+What I could do was remove every obstacle on my side, and checking found
+three real defects that would have stopped it or misled visitors:
+
+1. **The consent banner told visitors "we show adverts on our explainer
+   pages" while none were being served.** It probed with a dummy account id
+   so that it always appeared. A false statement to the public. It now asks
+   only where a "yes" would produce an advert.
+2. **The ad slot was given `data-ad-slot="party-funding-thresholds"`.**
+   AdSense units are *numeric ids from the console*. A fully approved
+   account would have rendered an empty box and nobody would have known
+   why. It is now a validated numeric id.
+3. **A withdrawal link for adverts sat in every footer** although none run.
+   Hidden until they do.
+
+Switching on is now **configuration, not code** — three build variables,
+all required:
+
+| Variable | Meaning |
+| --- | --- |
+| `VITE_AD_CLIENT_ID` | AdSense publisher id (`ca-pub-` + digits; anything else is refused) |
+| `VITE_AD_SLOT_ID` | numeric ad-unit id from the console |
+| `VITE_AD_CATEGORY_BLOCKS_CONFIRMED=true` | **your statement** that political and election categories are blocked in the console |
+
+The third is not a technical control — nothing here can see the console.
+It exists so enabling adverts requires typing the sentence the directive
+requires, and an id on its own resolves to *off*. When all three are set,
+`ads.txt` is emitted automatically; otherwise none is, so the site never
+publishes a seller declaration for inventory it is not selling.
+
+**Proved by watching the network**, with a fake publisher id and Google's
+host intercepted: nothing contacts Google before an answer; exactly one
+script request after "Allow"; **zero** on the home, compliance, packages,
+contact and casework pages even for a consenting visitor; withdrawal asks
+again; refusal is honoured. The shipped (unconfigured) build asks nothing,
+shows no slot, no footer link, no `ads.txt`.
+
+**Owner checklist, in order:**
+
+1. **A real privacy notice.** The footer's "Privacy notice" currently
+   links to `/#pledge`, which is not one. AdSense's programme policies and
+   POPIA s 18 both need a notice that names the ad vendor, what it
+   collects and how to withdraw. A privacy notice is a legal instrument —
+   rule 3, attorney work. Brief offered on request; it is the first thing
+   to do, because approval depends on it.
+2. **AdSense account + the site added and approved** (`electioncos.co.za`).
+   Approval looks at content volume; three explainers is thin and the
+   traffic today is zero. Expect it to take time, and expect **no revenue
+   until pages are indexed and visited**. The R-figures in the demo's
+   Revenue tab are placeholders, not forecasts.
+3. **In the console, block the categories** in
+   `REQUIRED_BLOCKED_CATEGORIES` (Politics; Elections; political advocacy;
+   political fundraising; government services; religion; gambling).
+   Console names do not map one-to-one — check each against what the
+   console actually offers, and say which could not be matched.
+4. **Create an ad unit**; copy its numeric id.
+5. **Set the three variables** in the site's build environment.
+6. **Decide where the site is hosted** (still open, §43.3 ADR-02). Whatever
+   serves it needs a CSP that allows Google's ad hosts. **Do not copy
+   that into the application's CSP** — `firebase.json` is deliberately
+   strict and must stay so; the app never carries adverts.
+
+### 44.4 Still open
+
+The credentials (`FIREBASE_SERVICE_ACCOUNT`, IEC); the Item 12 reading
+(§41.4); the domain decision and Phase B (§42.3); whether the citizen
+pivot (§43.2) is wanted; ADR-06's amendment (§43.3).
+
+---
+
 *Append new batches as §7-style tables. Identity by hash; filenames in
 this project repeat across conversations and are not reliable keys.*
