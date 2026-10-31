@@ -41,25 +41,38 @@ import { AdConsentWithdrawLink } from './ads/ConsentBanner';
 
 /* ------------------------------------------------------------- mark */
 
-/** The product mark: a ballot hexagon with a check. Decorative. */
+/**
+ * The product mark: a ballot box with a ballot and a check, joined to a
+ * small node network. Supplied 31 Oct 2026 and drawn here as vector so it
+ * stays crisp at the 24 px digital minimum. Decorative: the name beside it
+ * carries the meaning. Colours are the approved tokens only.
+ */
 export function SiteMark({ size = 36 }: { size?: number }) {
+  // A paper tile behind the mark so it reads on the Ink header as well as
+  // on Paper; the tile is part of the mark's footprint, not extra chrome.
   return (
-    <svg width={size} height={size} viewBox="0 0 36 36" aria-hidden="true" className="flex-none">
-      <rect width="36" height="36" rx="8" className="fill-paper" />
-      <polygon
-        points="18,5 29,11.5 29,24.5 18,31 7,24.5 7,11.5"
+    <svg width={size} height={size} viewBox="-12 -23 154 154" aria-hidden="true" className="flex-none">
+      <rect x="-12" y="-23" width="154" height="154" rx="22" className="fill-paper" />
+      <path
+        d="M5 33V78H62V33 M5 33H20 M62 33H47"
         fill="none"
         className="stroke-ink"
-        strokeWidth="2.2"
+        strokeWidth="10"
       />
+      <path d="M85.3 17H88.7V100H85.3Z M38 56.3H121V59.7H38Z" className="fill-ink" />
+      <path d="M37 2L65 10L53 45H17Z" className="fill-gold" />
       <path
-        d="M12.5 18.5 L16.5 22.5 L24 14"
+        d="M31 23L38 30L50 17"
         fill="none"
-        className="stroke-gold"
-        strokeWidth="3"
+        className="stroke-paper"
+        strokeWidth="4"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
+      <path d="M77 50H97V70H77Z" className="fill-teal" />
+      <circle cx="87" cy="18" r="7.3" className="fill-gold" />
+      <circle cx="87" cy="99" r="7.3" className="fill-gold" />
+      <circle cx="121" cy="59" r="7.3" className="fill-gold" />
     </svg>
   );
 }

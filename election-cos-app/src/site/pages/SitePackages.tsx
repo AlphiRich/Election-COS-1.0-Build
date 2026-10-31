@@ -96,7 +96,7 @@ export function SitePackages() {
             leaves your device.
           </p>
           <p className="m-0 text-site-caption text-slate">Illustrative, not legal advice.</p>
-          <Link to="/compliance" className="mt-2 self-start font-semibold">
+          <Link to="/tools/party-funding-checker" className="mt-2 self-start font-semibold">
             Open the checker →
           </Link>
         </SiteCard>

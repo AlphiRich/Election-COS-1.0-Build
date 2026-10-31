@@ -32,6 +32,7 @@ import { SiteCompliance } from './pages/SiteCompliance';
 import { SitePackages } from './pages/SitePackages';
 import { SiteContact } from './pages/SiteContact';
 import { SiteExplainer, SiteExplainers } from './pages/SiteExplainers';
+import { SiteFundingChecker } from './pages/SiteFundingChecker';
 import { ConsentBanner } from './ads/ConsentBanner';
 import { AD_CLIENT_ID } from './ads/adPolicy';
 import {
@@ -50,6 +51,7 @@ const SUBJECTS: Record<string, string> = {
   '/packages': 'Packages enquiry',
   '/contact': 'Election Campaign OS enquiry',
   '/explainers': 'Election Campaign OS enquiry',
+  '/tools/party-funding-checker': 'Election Campaign OS enquiry',
 };
 
 /**
@@ -110,6 +112,10 @@ export function SiteApp() {
         <Route
           path="/explainers/:slug"
           element={<SiteExplainer hasConsent={consented} />}
+        />
+        <Route
+          path="/tools/party-funding-checker"
+          element={<SiteFundingChecker hasConsent={consented} />}
         />
         <Route path="*" element={<SiteHome />} />
       </Routes>

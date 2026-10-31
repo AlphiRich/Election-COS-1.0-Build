@@ -91,6 +91,9 @@ export const AD_ELIGIBLE_PATHS: readonly string[] = [
   '/explainers/party-funding-thresholds',
   '/explainers/how-a-council-is-made-up',
   '/explainers/popia-and-voter-contact',
+  // A free public tool with a written answer and sources. Added 31 Oct
+  // 2026 when the site became useful to the public, not only to buyers.
+  '/tools/party-funding-checker',
 ];
 
 /**

@@ -120,8 +120,17 @@ describe('explainer pages only', () => {
     // revenue, and an entry with no article is a path that would accept
     // an advert on a page that does not exist.
     const articlePaths = EXPLAINERS.map((e) => e.path).sort();
-    const eligibleArticles = AD_ELIGIBLE_PATHS.filter((p) => p !== '/explainers').sort();
+    const eligibleArticles = AD_ELIGIBLE_PATHS.filter(
+      (p) => p !== '/explainers' && !p.startsWith('/tools/'),
+    ).sort();
     expect(eligibleArticles).toEqual(articlePaths);
+  });
+
+  it('lists exactly the public tools that exist, and no others', () => {
+    // Same two-way guard as the articles: a tool path with no route would
+    // accept an advert on nothing, and a tool with no entry never earns.
+    const tools = AD_ELIGIBLE_PATHS.filter((p) => p.startsWith('/tools/')).sort();
+    expect(tools).toEqual(['/tools/party-funding-checker']);
   });
 
   it('a trailing slash or query string is not a way around the allowlist', () => {

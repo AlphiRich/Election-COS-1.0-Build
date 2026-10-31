@@ -174,7 +174,9 @@ describe('what the explainers refuse to do', () => {
 describe('the explainers and the ad policy agree', () => {
   it('every article is ad-eligible and every eligible article exists', () => {
     const articles = EXPLAINERS.map((e) => e.path).sort();
-    const eligible = AD_ELIGIBLE_PATHS.filter((p) => p !== '/explainers').sort();
+    const eligible = AD_ELIGIBLE_PATHS.filter(
+      (p) => p !== '/explainers' && !p.startsWith('/tools/'),
+    ).sort();
     expect(eligible).toEqual(articles);
   });
 

@@ -5320,3 +5320,44 @@ pivot (§43.2) is wanted; ADR-06's amendment (§43.3).
 
 *Append new batches as §7-style tables. Identity by hash; filenames in
 this project repeat across conversations and are not reliable keys.*
+
+## §45 — Public product, brand mark, ad-funded tools (31 Oct 2026)
+
+**Decision (founder, 31 Oct 2026):** it is too late to sell to the target
+market this cycle; the product is to be useful to the public, funded by
+advertising. The public URL is `electioncos.co.za`.
+
+**Built**
+- `src/site/tools/fundingCheck.ts` + test: a free party-funding threshold
+  checker (R200,000 disclosure line, R30m annual line, warning at 80%).
+  Figures held to `ppfaDefaults.ts` by test. Never says lawful/compliant;
+  does not decide cross-year aggregation (open, §6.8.1). Browser only.
+- `src/site/pages/SiteFundingChecker.tsx`, route
+  `/tools/party-funding-checker`, nav item "Free tool", linked from
+  Packages (it previously linked to `/compliance`, which has no checker).
+- Ad allowlist gains that one literal path; a two-way test now guards the
+  tools list as it does the explainers. Ads remain consent-first,
+  non-personalised and confined to the site origin.
+- `SiteMark` redrawn as vector from the supplied ballot-box logo, on a
+  paper tile so it reads on the Ink header.
+- `SITE_DOMAIN` / `SITE_ORIGIN` = `electioncos.co.za` added. The war-room
+  app stays on `app.electioncos.co.za` deliberately: advert code must not
+  share an origin with campaign data.
+
+**Verified by running:** built site served; checker returned the right
+band for R184,500, rejected "abc" with a message, and fits 320 px with no
+horizontal scroll (a 20 px overflow from an unconstrained input was found
+and fixed).
+
+**Found, not fixed**
+- Home (`/`) overflows horizontally by ~24 px at 320 px (hero block);
+  `/explainers` by ~4 px. Both pre-date this change.
+- Gazette date disagrees: `siteContent.ts` says 6 August 2025;
+  `ppfaDefaults.ts` says 18 August 2025 (both "No. 53182"). One is wrong.
+- The supplied design-system PDF still says "Do not create or use a
+  logo" and lists `#2FE74A`/`#A6E7E` typos and `electoncos.ca.za`; the
+  Canva copy was corrected but not committed. The ballot-box mark is used
+  on the founder's explicit instruction.
+- Ads still require the owner checklist (privacy notice, AdSense
+  approval, console category blocks, numeric ad unit, three build vars).
+  Nothing earns until those exist.

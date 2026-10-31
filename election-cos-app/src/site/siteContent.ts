@@ -44,6 +44,7 @@ export const PLACEHOLDER_RE = /\[[A-Z0-9][A-Z0-9 ,.\-/]*\]/;
 export const SITE = {
   productName: 'Election Campaign OS',
   byline: 'by Innovation Consult',
+  siteOrigin: 'https://electioncos.co.za',
   appOrigin: 'https://app.electioncos.co.za',
   corporateUrl: 'https://innovationconsult.co.za',
   /** Reg. number and trading style as settled 29 Oct 2026. */
@@ -80,6 +81,7 @@ export const SITE_NAV: NavItem[] = [
   { label: 'Compliance', href: '/compliance' },
   { label: 'Packages', href: '/packages' },
   { label: 'Explainers', href: '/explainers' },
+  { label: 'Free tool', href: '/tools/party-funding-checker' },
   { label: 'About', href: '/#pledge' },
 ];
 

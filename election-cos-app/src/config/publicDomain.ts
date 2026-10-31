@@ -45,6 +45,16 @@
  */
 export const APP_DOMAIN = 'app.electioncos.co.za';
 
+/**
+ * The PUBLIC SITE's domain: where the free tools, the explainers and the
+ * consent-gated adverts live. Set 31 Oct 2026 by decision ("the url is
+ * electioncos.co.za"). The war-room application stays on `APP_DOMAIN`, a
+ * different origin, on purpose: advert code must never share an origin
+ * with campaign data (see `src/site/ads/adPolicy.ts`, point 3).
+ */
+export const SITE_DOMAIN = 'electioncos.co.za';
+export const SITE_ORIGIN = `https://${SITE_DOMAIN}` as const;
+
 /** The application's canonical origin. No trailing slash. */
 export const APP_ORIGIN = `https://${APP_DOMAIN}` as const;
 
