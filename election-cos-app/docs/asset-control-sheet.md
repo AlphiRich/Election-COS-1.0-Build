@@ -4914,5 +4914,268 @@ it, and needs no third-party tag anywhere near a voter record.
 
 ---
 
+## §43 — The marketing-and-advertising batch, and the pivot that does not belong
+
+Fourteen files, a pasted Google Ads strategy page (1.1 MB, sent twice),
+and a Google Cloud tag plan. No instruction came with them beyond
+"retry", so this is the standing instruction applied: identify, verify,
+and reconcile against what the build already decided in §41–42.
+
+**Not read, by rule:** the numeric-named PDFs in the uploads folder
+(`8682…`, `8691…`) are earlier batches of IEC roll material. Nothing in
+this batch asked for them, and no voter row is read or copied.
+
+### 43.1 What arrived (identity by hash)
+
+| Asset | Identity | Verdict |
+| --- | --- | --- |
+| `From Ward-Level Win…` PDF ×4 | **One file, four copies** — identical sha `83e853782d` | Research draft. Keep one; see 43.4. |
+| `The Dual-Funnel Playbook` PDF / ODT | **Two different documents** — 7.6k vs 19.9k words, shas differ | Research draft. See 43.4. |
+| `Bridging the Gap…` PDF | Distinct | Research draft. The only one of the three that uses R1,800. |
+| `Election Campaign OS 1.0.html` | Google Ads strategy page | Internal strategy. See 43.4. |
+| `Marketing_Asset_Architecture.md` | Distinct | Asset manifest. See 43.5. |
+| `Electon-COS_1.0.docx` + `DeepSeek – Into the Unknown1.PDF` | The PDF is the chat that generated the docx | **Not adopted.** See 43.2. |
+| `Election-COS_Demo_1.html` | Single-file sales demo | Three defects. See 43.6. |
+| `newfile.py` | Corrected compliance agent | Keep the fixes. See 43.7. |
+| `…White_Paper.docx` | Marketing-site architecture, ADR-01…09 | Keep, with one ADR amended. See 43.3. |
+| `municipal-electoral-research.skill` | 3-file archive | See 43.8. |
+| GCP tag plan | Pasted | Two corrections. See 43.9. |
+
+### 43.2 `Electon-COS_1.0.docx` — a pivot that contradicts the product
+
+The document is a single AI generation answering this prompt (visible in
+the DeepSeek PDF): *deprecate party tenancy revenue; make advertising the
+cardinal go-to-market; add citizen/individual voter usage.* It produces
+a spec that makes the citizen the root entity, serves "targeted" ads
+from `voting_district` and `issue_preferences`, sells placement to
+"candidates, PACs and advocacy groups", and instructs engineers to drop
+the `Party_Tenant` table, disable subscription billing and **remove
+multi-tenancy** ("a unified public square").
+
+**Not built, and not a close call.** In order of weight:
+
+1. **POPIA s 26.** `issue_preferences` joined to a voter's district is a
+   profile of political opinion, which is special personal information.
+   Using it to select which candidate's advert a voter sees is the
+   exact processing §41.6 and §42.1 set out as having no lawful basis
+   here.
+2. **It reverses the directive of 30 October** — consent-gated adverts
+   on explainer pages only, political and election categories blocked.
+   This spec serves political adverts to individuals; that is the
+   category the directive blocks.
+3. **Multi-tenancy is the isolation guarantee**, not a billing detail.
+   Removing it removes "cross-tenant isolation ensures party data never
+   mixes", which is a headline claim on the public site and in the
+   strategy.
+4. It is the US model (`democrats.election-cos.com`, PACs, a "Paid for
+   by" ledger under US finance law) transplanted into South Africa. The
+   statutes this build was verified against are the Municipal
+   Structures Act, the PPFA and POPIA, none of which it mentions.
+
+**What is worth keeping from it:** the idea of a *public transparency
+ledger of who paid for what* is a sound control, and the directive's
+ads already carry the label "Advertisement". It is noted for when a
+services marketplace (§41.6) exists, where it would apply to sponsored
+listings.
+
+**Decision needed from you only if the pivot is genuinely wanted** —
+say so plainly and it becomes a separate piece of work with an attorney
+in front of it. The default stands: not built.
+
+### 43.3 The white paper — and ADR-06
+
+Nine recorded decisions, most of which this build already honours:
+static first (01), marketing site separate from the application (02),
+no personal data on the edge (04), claims as data (07), a neutrality
+lint (08), free tier only (09).
+
+**ADR-06 says "no cookies before consent, and no advertising in
+version 1", and defers advertising as "a separate decision" because it
+risks "showing party adverts on a neutral product site".** The
+directive *is* that decision, and it was made narrowly: explainers
+only, consent first, political categories blocked. ADR-06 should be
+amended to record it rather than left contradicting the code. The
+amendment, for the document owner:
+
+> ADR-06 (amended 30 Oct 2026): No cookies before consent. Advertising
+> is permitted on explainer pages only, after an active opt-in, with
+> political and election categories blocked at the ad-network account
+> and non-personalised ads requested. It is disabled until the account
+> configuration in §42.1 is confirmed.
+
+Where the build and the white paper still differ, honestly:
+
+- **ADR-03/04 — leads in their own project, via a Worker, nothing
+  stored on the edge.** Our contact form posts nowhere and says so. When
+  the endpoint is built it must follow these two decisions rather than
+  invent a store.
+- **ADR-07 — claims as data, build fails if a claim's check is not
+  marked passed.** Not implemented. We pin the *placeholder set* and the
+  figures, which is weaker: a claim row can say "built" without a
+  linked test result.
+- **ADR-02 — marketing site on Workers.** Ours is a static Vite build
+  (`dist-site/`); where it is hosted is undecided.
+
+### 43.4 The Google Ads research and strategy page
+
+Four documents on one subject that **disagree with each other**:
+
+- **Price.** Three say the entry package is **R2,900**; "Bridging the
+  Gap" says **R1,800** (the published price). A guard now fails the
+  site if R2,900 ever appears in its content
+  (`siteContent.test.ts`, proved by injection), because the wrong figure
+  is the one that gets copied into ad copy.
+- **Targeting.** "From Ward-Level Win" recommends Customer Match and
+  lookalike audiences. The Dual-Funnel playbook says those are
+  "generally prohibited for election ads". Neither cites Google's
+  policy page; both cite agency blogs. **Unverified either way** — it
+  must be checked in the Ads account against the live policy before any
+  of it is relied on.
+- **Customer Match is wrong on our own terms regardless of Google's
+  rules.** A list of the people who bought campaign software is a list
+  of party and candidate affiliations, and uploading it is a disclosure
+  to a third party of exactly the signal the neutrality pledge keeps
+  out. Do not upload customer lists; run contextual search only.
+- **"Get Your Free Trial Now" / "Start Free Trial".** No trial exists
+  in the published price list. A CTA for something that is not offered
+  is a claim.
+- **"[Competitor Name] alternative"** bidding: no competitor is named
+  anywhere; do not invent one.
+
+The strategy page (`Election Campaign OS 1.0.html`) additionally:
+
+- **Swaps two brand tokens.** It labels `#6A6E7E` as `--ec-ink` and
+  `#1A2246` as `--ec-slate`; in `tokens.ts` those are the other way
+  round (ink `#1A2246`, slate `#6A6E7E`), and it gives `--ec-paper` as
+  `#DCD6C8`, which is our `line`, not `paper` (`#F7F4EE`). Its "blue"
+  `#33427E` is our `teal`. A Canva Brand Kit built from it would put ad
+  text in grey on a stone background. Use `tokens.ts`; the Marketing
+  Asset manifest has them right.
+- **States regulatory facts from a news article** — an "Electoral Code
+  of Conduct on Countering Disinformation" in force 4 September 2026
+  with a 36-hour correction duty, and a 47% fall in 18–19 registration
+  in 2019. Rule 2: not copy until traced to a primary source.
+- **Names a party and its ad spend.** Fine for an internal strategy;
+  it must never reach published copy (ADR-08).
+
+Whether *our own* adverts count as political content under Google's
+policy is **not established by any of these documents** and not decided
+here. Check in the Ads account before launch, including whether
+advertiser verification applies.
+
+### 43.5 `Marketing_Asset_Architecture.md`
+
+The right brand tokens and a useful manifest. Four things to fix before
+Canva work starts:
+
+1. **"Paid for by Innovation Consult (Pty) Ltd"** hard-codes the legal
+   name. Standing instruction: the entity is Just Be Trading 10 (Pty)
+   Ltd t/a Innovation Consult, a name change is pending, and the product
+   will be leased to a subsidiary. Take it from `SITE.entity`, never
+   from copy.
+2. **"Manage your ward legally."** Implies compliance is assured. The
+   Capability statement's first row says what it does *not* claim:
+   "that it ensures compliance". Reword, don't scrap — e.g. "Track
+   your ward's consent and funding obligations."
+3. **"Start Free Trial"** — no trial (43.4).
+4. **A WhatsApp Polling Engine QR code and a "Daily Ground Intelligence
+   Newsletter" with "live polling ingestion data", "implemented in
+   `voter_sentiment_engine.py`".** Neither exists in this repository.
+   Polling and results commentary also breach the pledge ("no
+   predictions or results commentary"). Do not print a QR code to a
+   service that is not there.
+
+### 43.6 `Election-COS_Demo_1.html`
+
+A well-made single-file demo, and three defects a buyer would find:
+
+- **The seat calculator offers Hare and Droop** — the two formulas §37
+  established are wrong for a municipality. It also allocates on one
+  vote total, so it cannot show ward seats at all. A demo that computes
+  a council wrongly on a page selling computational honesty is the one
+  mistake that is unrecoverable.
+- **The donor ledger's disclosure input defaults to 100,000** — the
+  superseded threshold. Every other figure here is R200,000.
+- **Its Revenue tab places adverts on "public ward results and turnout
+  pages"**, which the directive does not allow (explainers only) and
+  which the pledge's "no results commentary" rules out.
+
+Also: "Dedicated single-tenant deployment ~R14,000" is on no published
+price list. The three correct prices (R45,000, R1,800, R2,500) match.
+
+### 43.7 `newfile.py` — keep the fixes, not the code
+
+The same compliance agent as the earlier upload, corrected: tenant
+validated as a UUID and bound as a parameter (SEC-03/04); thresholds
+read from the database, R200,000/R30m (LAW-01); the Regulation of
+Gatherings Act notice at s 3 with the 48-hour prohibition cliff
+(LAW-03); no data subject's name written into a remediation record
+(LAW-04); no emulated runtime (OPS-01). All consistent with this
+build's rules.
+
+It is PostgreSQL and `google-adk`, and the database here is Firestore,
+so it cannot be adopted as code. Two things in it are worth carrying:
+
+- **The notice ladder is new value.** We have an RGA *advisory page* and
+  no countdown that tells a ward lead an event is inside 48 hours with
+  no notice lodged. That is a real feature, and a Cloud Function over
+  events is the right shape for it. Not built this turn.
+- **A defect, found by reading and not by running** (it needs a
+  database): `popia_retention_sweep` inserts a remediation task for
+  every unexpired unconsented record **on every run**, and
+  `rga_notice_audit` inserts a notification per event per run, neither
+  with a uniqueness check. Run nightly, they create duplicates nightly.
+  It is the same class as the counter double-counting fixed in
+  `warRoomCounters.ts` (at-least-once delivery, non-idempotent write),
+  and the same fix applies: a deterministic id per record per window.
+
+### 43.8 `municipal-electoral-research.skill`
+
+Its discipline matches this project's own ("assume nothing that cannot
+be traced to a specific primary source"; AI-generated drafts are an
+excluded tier). **The archive is incomplete:** the skill tells the
+reader to follow `references/pr-formula-template.md` for the seat
+formula, but the archive holds three files and that is not one of them.
+So what formula it teaches is **unknowable from this upload** — and
+given §41.4, that is the file that matters. Ask for the missing file
+before relying on the skill for any seat calculation.
+
+### 43.9 The Google Cloud tag plan
+
+Two corrections to the pasted text:
+
+- **Tags do not affect search visibility.** The plan is framed as
+  "maximize visibility and exploit election-related searches". Resource
+  Manager tags are IAM, organisation-policy and billing metadata,
+  visible only inside the project. They do nothing for search ranking
+  or discoverability. Worth doing for governance; not for marketing.
+- **The key name differs between the two halves.** The script says
+  `deployment-environment`, the table and the `gcloud` commands say
+  `environment`. Pick one before creating the key.
+
+One judgement call: a tag such as `compliance-tier: popia-restricted`
+asserts a control. If no organisation policy or IAM condition actually
+keys off it, it is a label claiming protection that nothing enforces —
+the same shape of problem as a presence check passing on the wrong
+value. Create it when something uses it. The commands themselves are
+valid syntax; **not run**, since this environment has no Google
+credential, as established in §39.
+
+### 43.10 Open, in priority order
+
+1. **Is the citizen/advertiser pivot (43.2) wanted?** Default: no.
+2. Amend ADR-06 in the white paper (43.3).
+3. Check Google's political-content policy in the Ads account for our own
+   adverts, and do not upload Customer Match lists (43.4).
+4. Reword the three claims in the asset manifest and drop the QR code
+   (43.5).
+5. Ask for `pr-formula-template.md` (43.8).
+6. The RGA notice ladder, built idempotently, is the best engineering
+   item in this batch (43.7).
+7. Unchanged: the two credentials, the Item 12 reading (§41.4), the
+   domain decision and the Phase B question (§42.3).
+
+---
+
 *Append new batches as §7-style tables. Identity by hash; filenames in
 this project repeat across conversations and are not reliable keys.*

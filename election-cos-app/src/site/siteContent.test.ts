@@ -20,6 +20,7 @@ import {
   EXAMPLE_CASE,
   FUNDING_POINTS,
   FUNDING_SOURCE,
+  HERO,
   PACKAGES,
   PILLARS,
   PLACEHOLDER_RE,
@@ -99,6 +100,21 @@ describe('the party-funding thresholds', () => {
     expect(prose).not.toContain('R100,000');
     expect(prose).not.toContain('R15 million');
     expect(prose).not.toContain('R15,000,000');
+  });
+
+  it('carries no retired price anywhere on the site', () => {
+    /**
+     * R2,900 was the "single-ward package" in the Google Ads research
+     * documents of 30 October (the Dual-Funnel playbook and "From
+     * Ward-Level Win to National Campaign"). The published price is
+     * R1,800 a ward, and the third document in that same batch ("Bridging
+     * the Gap") uses R1,800 — so the research outputs disagree with each
+     * other, and the wrong one is the one that would be copied into ad
+     * copy. Same defect class as the retired PPFA thresholds above: a
+     * superseded figure arriving in prose while the real value is right.
+     */
+    const everything = JSON.stringify({ PACKAGES, CASEWORK_FAQ, HERO, CLAIM_ROWS, SITE });
+    expect(everything).not.toMatch(/R\s?2[ ,]?900/);
   });
 
   it('cites the gazette and says the thresholds are contested', () => {
