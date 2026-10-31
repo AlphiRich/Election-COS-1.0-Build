@@ -673,6 +673,33 @@ a real headless-browser screenshot (see above) — the first time in this
 build's history a session has actually run the app rather than only
 compiled/tested it.
 
+**31 Oct 2026 — programme cleanup of nineteen HTML screens; the RGA countdown;
+advertising made a configuration switch.** Three things, recorded together
+because they touch the same ground.
+
+(1) **Screen disposition.** Nineteen HTML screens classified in
+`docs/screen-disposition-2026-10-31.md`: 11 delete, 1 quarantine, 5
+layout-reference, 1 rebuild, 1 superseded. **None of the files was retained**,
+so nothing was deleted from disk and the verdicts are the reviewer's as
+reported. The proposed audit-log rebuild was *not* committed: the screen
+already exists (`AuditLogPage.tsx`), and the draft invented event kinds that
+nothing writes and called the log "immutable" where the real screen is
+required, by test, to say it is not tamper-evident. The proposed sync
+reference was committed only after correcting four false claims — notably that
+`functions/src/sync.ts` "returns 501" (it has been implemented since session
+38; it has never run against Firestore and nothing in the client calls it).
+
+(2) **The RGA notice countdown is built, superseding the "NOT built" line
+under *What was deliberately NOT built*** (spec §6.7: "the static advisory
+page *is* the entire feature"). Built at the founder's direction on 30–31 Oct:
+`functions/src/rgaNotice.ts`, an hourly idempotent sweep, a `gatherings`
+collection with rules, and `/gatherings`. Seven days and 48 hours are
+statutory; the 72-hour rung is house policy and says so. See control sheet §44.
+
+(3) **A functions deploy blocker was found and fixed**: `npm run build` in
+`functions/` failed on a committed test file and `firebase.json` runs it in
+predeploy; the preflight had only checked that a hook existed. It now compiles.
+
 **Session 38 (16 Oct 2026) — the beta build; the app runs for the first
 time.** Four things, three of them finished.
 

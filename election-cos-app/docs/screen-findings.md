@@ -311,3 +311,14 @@ reasonable follow-up, not done this session.
 No screens exist for Municipality Config or Data Subject Requests
 specifically — both built from the governing data model and their own
 existing stub notes only, same as the PPFA module above.
+
+## 31 Oct 2026 — nineteen further HTML screens
+
+Nineteen HTML screens were received and classified; see
+`docs/screen-disposition-2026-10-31.md`. None was retained in the repository,
+so the verdicts are the reviewer's as reported. Result: 11 delete, 1
+quarantine, 5 layout-reference, 1 rebuild (`docs/screen-references/sync-reconciliation.html`),
+1 superseded (the audit log already exists). The scope-creep fields on the
+profiling and detail screens remain **undecided** and are a product decision,
+not a screen decision.
+
