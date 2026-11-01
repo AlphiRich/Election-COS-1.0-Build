@@ -42,3 +42,6 @@ the user sets the inputs. The white paper also forbids predictions and results c
 A1 → A4 → A3 → A2 → A7 → A5 → A6 (about one working session each, A1 to A3 before polling day).
 Each item: code, a test that fails when the code is broken (shown by injection), control-sheet and change-log
 entries, `npm run check:all` green, then push. Tier B items land disabled with a one-line unblock instruction.
+
+## Status (1 Nov 2026, end of Session 52)
+Tier A: A1 to A7 built, tested, injection-proved. Tier B: cost guard, dispatch (disabled) and vault primitive built; the Firebase-paid-plan items (9, 17, 24 counters, 13 scheduling) and the PPFA export (18) stay held for the reasons above. Tier C (agents 11, 23, 27 to 32) deliberately NOT built: no sourced method or data, and the white paper bars predictions. Open: emulator matrix for every collection (peer-dependency conflict), moving the other audit writers onto the chain, wiring photo compression to a capture screen and the vault to uploads, the founder decisions in Tier D.

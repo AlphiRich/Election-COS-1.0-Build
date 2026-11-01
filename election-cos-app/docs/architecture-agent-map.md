@@ -9,7 +9,7 @@ bounded responsibility, not a service.
 | # | Name in the document | In this build | Status |
 |---|---|---|---|
 | 1 | OFFLINE_SYNC_SENTINEL | `src/offline/` (Dexie outbox, sync status), `outboxStatus.ts` (state machine, 6 tests) | built; retry counting wired into the outbox (5th failure becomes a visible rejection with a reason); other states still derived, not stored |
-| 2 | MEDIA_COMPRESSION | photo queue exists; no client-side compression | not built |
+| 2 | MEDIA_COMPRESSION | `src/offline/photoCompress.ts`: long edge 1600 px, JPEG quality stepped down to a 400 KB target, EXIF/GPS dropped by re-encode. Real Chromium: 12.2 MB noise photo to 406 KB, GPS gone. **No capture screen calls it yet** (the app has no photo UI) | built (module); not wired to a screen |
 | 3 | FIELD_CONTEXT_GUARD | capability gates in the UI (`resolveAccess`), rules on the server | built |
 | 4 | OFFLINE_CONSENT_VALIDATOR | the consent gate in `VoterForm`; roll capture needs spoken consent + typed name (`rollCapture.ts`) | built |
 | 5 | TENANT_CONTEXT | tenant from the **verified token claim**; the path is checked by the rules. **Not** from a request header (the supplied worker trusted `X-Tenant-ID`) | built (rules, claims Worker) |
@@ -17,7 +17,7 @@ bounded responsibility, not a service.
 | 7 | POPIA_MASKING | phone/ID masking, `householdSafety.ts`, IEC mask never copied; `src/exportSweep.test.ts` scans every text export (audit CSV, usage statement, ground intelligence, sign-off) fed hostile input, and fails if a new download is added without being classified. The four PDF exports are not text-scanned (compressed; personal data by design, own document tests) | built |
 | 8 | SOFT_DELETE | soft-delete in every repository; hard delete denied by rules | built |
 | 9 | LWW_RECONCILIATION | `functions/src/syncMerge.ts` | built; needs Blaze to run |
-| 10 | DOCUMENT_VAULT | Cloud Storage + `storage.rules`; no KMS envelope | partial |
+| 10 | DOCUMENT_VAULT | Cloud Storage + `storage.rules`; `functions/src/documentVault.ts` envelope encryption (AES-256-GCM, per-document key, wrapped under a supplied KEK, context bound); refuses with no key | built (primitive); not wired to uploads; KEK decision open |
 | 11 | SIMULATION_ORCHESTRATOR | none | not built |
 | 12 | RLS_SESSION_GUARDIAN | `firestore.rules` (tenant, capability, ward + station scope); 15 emulator cases for the roll | built |
 | 13 | POPIA_CONSENT_TRIGGER | voters cannot be written without `popiaConsentGiven`. **No 48-hour hard purge**: the audit rates it critical; quarantine then human release is the design | gate built; quarantine and named-person release built as pure functions (`functions/src/consentQuarantine.ts`), not exported or scheduled; no purge by design |
@@ -27,12 +27,12 @@ bounded responsibility, not a service.
 | 17 | PGA_EVENT_AUDITOR | `functions/src/rgaNoticeScheduled.ts`, `rgaNotice.ts` | built; needs Blaze |
 | 18 | PPFA_AGGREGATOR | `functions/src/ppfaAggregation.ts`, deliberately **not exported** pending legal confirmation. Bands are R200,000 / R30 million (Gazette 53182), not R80k/R15M | held back on purpose |
 | 19 | POPIA_PURGE_DAEMON | replaced by quarantine (see 13); deletion goes through the data-subject route | by design |
-| 20 | INCIDENT_DISPATCH | needs a WhatsApp credential this project does not have | not built |
+| 20 | INCIDENT_DISPATCH | `functions/src/incidentDispatch.ts`: channel interface, off by default, minimal message, cost-guarded, once per incident and responder. No real channel until a WhatsApp credential exists | built (disabled) |
 | 21 | AUDIT_LOG_WRITER | server-written `auditLog`; CSV export. Hash chain (`functions/src/auditChain.ts`, verified in the export) on the OTP-challenge writer only; other writers unchained, no external anchor | partial |
 | 22 | DATASET_INGESTION | `tools/source-acquisition`, `src/modules/ingest/`, `tools/voters-roll` | built |
 | 23 | CAMPAIGN_DIRECTOR | none | not built |
-| 24 | COMPLIANCE_WAR_ROOM | war-room counters (`warRoomCounters.ts`) | partial |
-| 25 | SCENARIO_POLICY | the ward scenario tool states its inputs as assumptions; no source-of-truth register gate | partial |
+| 24 | COMPLIANCE_WAR_ROOM | war-room counters (`warRoomCounters.ts`) read from the counters document with an honest empty state; the triggers need the Firebase paid plan to run | built; needs Blaze |
+| 25 | SCENARIO_POLICY | `scenarioPolicy.ts`: every input labelled sourced (with a citation) or assumption; a swing can never be sourced; shown on the Ward Comparison screen | built |
 | 26 | BASELINE_LOADER | 2021 NW405 ward results pinned to the superseded delimitation (`wardResults2021.ts`) | built for NW405 |
 | 27–32 | TURNOUT_ELASTICITY, PARTY_SUPPORT, WARD_SWING, MK_ENTRY, COALITION_POST, MONTE_CARLO | `wardScenario.ts` is a deterministic swing tool the user sets. No Monte Carlo, no entrant model, no hung-council frequency: **no data or method behind them** (the 68.5 % figure is unsourced) | not built |
 

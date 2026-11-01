@@ -58,6 +58,7 @@ import {
 } from './wardResults2021';
 import { majorityPosition, projectCouncil, seatChange, type Swing } from './wardScenario';
 import { summarizeSentiment } from './sentimentSummary';
+import { scenarioInputs } from './scenarioPolicy';
 
 /** Polling day, as proclaimed. */
 const ELECTION_DATE = new Date('2026-11-04T00:00:00Z');
@@ -86,6 +87,10 @@ export function WardComparisonPage() {
 
   const projection = useMemo(
     () => projectCouncil({ swing, projectedValidVotes: turnoutVotes }),
+    [swing, turnoutVotes],
+  );
+  const inputs = useMemo(
+    () => scenarioInputs(swing, turnoutVotes, NW405_2021_EXAMPLE.totalValidVotes),
     [swing, turnoutVotes],
   );
   const majority = majorityPosition(projection);
@@ -202,6 +207,19 @@ export function WardComparisonPage() {
               />
             )}
           </Field>
+        </div>
+
+        <div className="mt-4">
+          <SectionLabel as="h3">Inputs in force</SectionLabel>
+          <ul className="mt-1 space-y-1 text-body-md font-body">
+            {inputs.map((i) => (
+              <li key={i.name}>
+                <span className="font-mono">{i.name}</span>: {int(i.value)} {i.unit}{' '}
+                <strong>{i.kind === 'sourced' ? '(sourced)' : '(assumption you set)'}</strong>
+                {i.source ? <span className="text-slate"> — {i.source}</span> : null}
+              </li>
+            ))}
+          </ul>
         </div>
 
         {projection.netSwing !== 0 && (

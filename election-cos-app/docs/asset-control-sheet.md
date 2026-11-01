@@ -5563,3 +5563,7 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | Consent quarantine | `functions/src/consentQuarantine.ts` (+5) | Built as pure functions; not exported/scheduled |
 | Export masking sweep | `src/lib/piiScan.ts`, `src/exportSweep.test.ts` (6) | Built; PDFs not text-scanned |
 | Cost guard | `functions/src/costGuard.ts` (+10) | Built; one paid action wired; price unset so sends are refused until configured |
+| Photo compression | `src/offline/photoCompress.ts` (+7) | Built; browser-verified; no capture screen yet |
+| Scenario policy | `src/modules/analytics/scenarioPolicy.ts` (+6) | Built; on Ward Comparison |
+| Document vault | `functions/src/documentVault.ts` (+5) | Built; not wired; KEK decision open |
+| Incident dispatch | `functions/src/incidentDispatch.ts` (+5) | Built; disabled; no channel credential |
