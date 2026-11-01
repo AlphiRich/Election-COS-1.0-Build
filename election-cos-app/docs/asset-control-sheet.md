@@ -5567,3 +5567,4 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | Scenario policy | `src/modules/analytics/scenarioPolicy.ts` (+6) | Built; on Ward Comparison |
 | Document vault | `functions/src/documentVault.ts` (+5) | Built; not wired; KEK decision open |
 | Incident dispatch | `functions/src/incidentDispatch.ts` (+5) | Built; disabled; no channel credential |
+| Scenario runner | `src/modules/analytics/scenarioRunner.ts` (+14), `ScenarioRunnerPage.tsx` (+3) | Built; assumption-driven, not a forecast; not back-tested |

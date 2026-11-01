@@ -18,7 +18,7 @@ bounded responsibility, not a service.
 | 8 | SOFT_DELETE | soft-delete in every repository; hard delete denied by rules | built |
 | 9 | LWW_RECONCILIATION | `functions/src/syncMerge.ts` | built; needs Blaze to run |
 | 10 | DOCUMENT_VAULT | Cloud Storage + `storage.rules`; `functions/src/documentVault.ts` envelope encryption (AES-256-GCM, per-document key, wrapped under a supplied KEK, context bound); refuses with no key | built (primitive); not wired to uploads; KEK decision open |
-| 11 | SIMULATION_ORCHESTRATOR | none | not built |
+| 11 | SIMULATION_ORCHESTRATOR | `scenarioRunner.ts` + `/analytics/scenario-runner`: seeded Monte Carlo over the user's stated swing/turnout distributions, through the one Schedule 1 calculation; sensitivity (tornado); sampling error on every frequency | built (assumption-driven, not forecasting) |
 | 12 | RLS_SESSION_GUARDIAN | `firestore.rules` (tenant, capability, ward + station scope); 15 emulator cases for the roll | built |
 | 13 | POPIA_CONSENT_TRIGGER | voters cannot be written without `popiaConsentGiven`. **No 48-hour hard purge**: the audit rates it critical; quarantine then human release is the design | gate built; quarantine and named-person release built as pure functions (`functions/src/consentQuarantine.ts`), not exported or scheduled; no purge by design |
 | 14 | INDEX_HEALTH | not applicable to Firestore (indexes are declared) | n/a |
@@ -34,7 +34,7 @@ bounded responsibility, not a service.
 | 24 | COMPLIANCE_WAR_ROOM | war-room counters (`warRoomCounters.ts`) read from the counters document with an honest empty state; the triggers need the Firebase paid plan to run | built; needs Blaze |
 | 25 | SCENARIO_POLICY | `scenarioPolicy.ts`: every input labelled sourced (with a citation) or assumption; a swing can never be sourced; shown on the Ward Comparison screen | built |
 | 26 | BASELINE_LOADER | 2021 NW405 ward results pinned to the superseded delimitation (`wardResults2021.ts`) | built for NW405 |
-| 27–32 | TURNOUT_ELASTICITY, PARTY_SUPPORT, WARD_SWING, MK_ENTRY, COALITION_POST, MONTE_CARLO | `wardScenario.ts` is a deterministic swing tool the user sets. No Monte Carlo, no entrant model, no hung-council frequency: **no data or method behind them** (the 68.5 % figure is unsourced) | not built |
+| 27–32 (MONTE_CARLO part built; the rest not) | TURNOUT_ELASTICITY, PARTY_SUPPORT, WARD_SWING, MK_ENTRY, COALITION_POST, MONTE_CARLO | `wardScenario.ts` is a deterministic swing tool the user sets. No Monte Carlo, no entrant model, no hung-council frequency: **no data or method behind them** (the 68.5 % figure is unsourced) | not built |
 
 ## The three listings
 - **4.1 `fn_calculate_schedule1_quotas`** — the supplied version allocated 65 of 67 seats on the 2021 result (no floor, no
@@ -49,3 +49,5 @@ bounded responsibility, not a service.
 AWS ECS/RDS, the GCP landing page host, and the Python simulators: no account or credentials here, and the AWS/Postgres
 half contradicts the recorded Firestore decision. If that decision has changed, it is a new project with its own plan,
 not an edit to this one. Say so and I will scope it.
+
+MONTE_CARLO (32) is now `scenarioRunner.ts`, run over assumptions the user states. TURNOUT_ELASTICITY, PARTY_SUPPORT, WARD_SWING (as an estimated model), MK_ENTRY and COALITION_POST remain unbuilt: each needs a cited method and a sourced dataset that the build does not hold. The Gemini 'simulator API' note (unsourced shares, a 132,140-voter pool) and the NotebookLM engine-updates note (Item 17/18 claims contradicted by the Gazette text) were read and not adopted.

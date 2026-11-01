@@ -35,6 +35,7 @@
  * sample into a forecast and put a number in a campaign manager's mouth
  * that nothing here can stand behind.
  */
+import { Link } from 'react-router-dom';
 import { useMemo, useState } from 'react';
 import { useQueries } from '@tanstack/react-query';
 import { dal } from '@/dal';
@@ -148,6 +149,10 @@ export function WardComparisonPage() {
         canvass record, not a poll. <strong>Nothing on this screen is a forecast</strong> — the swing
         is yours to set, and every projected figure is a consequence of it.
       </BasisNote>
+
+      <p className="text-body-md font-body">
+        Unsure of the swing? <Link to="/analytics/scenario-runner">Run it across a range of assumptions</Link>.
+      </p>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <StatTile

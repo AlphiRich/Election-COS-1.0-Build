@@ -25,6 +25,7 @@ import { ThresholdAnalyzerPage } from '@/modules/analytics/ThresholdAnalyzerPage
 import { ScheduledReportsPage } from '@/modules/analytics/ScheduledReportsPage';
 import { BuildReviewPage } from '@/modules/analytics/BuildReviewPage';
 import { WardComparisonPage } from '@/modules/analytics/WardComparisonPage';
+import { ScenarioRunnerPage } from '@/modules/analytics/ScenarioRunnerPage';
 import { SettingsPage } from '@/modules/settings/SettingsPage';
 import { MunicipalityConfigPage } from '@/modules/settings/MunicipalityConfigPage';
 import { PermissionsPage } from '@/modules/settings/PermissionsPage';
@@ -66,6 +67,7 @@ export const router = createBrowserRouter([
           { path: 'thresholds', element: <ThresholdAnalyzerPage /> },
           { path: 'scheduled-reports', element: <ScheduledReportsPage /> },
           { path: 'ward-comparison', element: <WardComparisonPage /> },
+          { path: 'scenario-runner', element: <ScenarioRunnerPage /> },
           { path: 'build-review', element: <BuildReviewPage /> },
         ],
       },

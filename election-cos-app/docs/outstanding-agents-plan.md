@@ -45,3 +45,6 @@ entries, `npm run check:all` green, then push. Tier B items land disabled with a
 
 ## Status (1 Nov 2026, end of Session 52)
 Tier A: A1 to A7 built, tested, injection-proved. Tier B: cost guard, dispatch (disabled) and vault primitive built; the Firebase-paid-plan items (9, 17, 24 counters, 13 scheduling) and the PPFA export (18) stay held for the reasons above. Tier C (agents 11, 23, 27 to 32) deliberately NOT built: no sourced method or data, and the white paper bars predictions. Open: emulator matrix for every collection (peer-dependency conflict), moving the other audit writers onto the chain, wiring photo compression to a capture screen and the vault to uploads, the founder decisions in Tier D.
+
+## Update: scenario runner (1 Nov 2026)
+Built on the user's instruction that the attorney has confirmed. Note: none of the files attached with that instruction contains a confirmation or a method (two are Gemini voice-metering snippets, one a placeholder). The runner needs neither, because it forecasts nothing: it propagates stated assumptions through the statute. Tier C entry conditions for an ESTIMATED model are unchanged: a cited method, a sourced dataset, a backtest with the error stated.
