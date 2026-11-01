@@ -5540,3 +5540,14 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | Tour page | `src/site/pages/SiteTutorial.tsx`, route `/tutorial` | Built; browser-verified at phone and desktop width |
 | Recorded video | — | **Not made.** The page is the script. |
 
+
+## 61. Public website reconciliation (Session 51)
+
+| Asset | Path | Status |
+|---|---|---|
+| New pages | `src/site/pages/Site{Platform,About,Legal,NotFound,SignIn}.tsx`, `platformContent.ts` | Built; legal pages are facts-only, attorney text pending |
+| Claims gate + lint | `src/site/claimsGate.ts` (+4 tests) | Built |
+| Site headers / host | `site-hosting/_headers` (+2 tests), `wrangler.site.jsonc` | Built; not deployed |
+| Size budget | `scripts/check-site-budget.mjs` | Built; 133 KB gzip home, JS target 50 KB **not met** |
+| Reconciliation | `docs/website-reconciliation.md` | Written |
+| Agents plan | `docs/outstanding-agents-plan.md` | Written; no agent built from it yet |

@@ -19,6 +19,7 @@
  * twice in prose while the seed values were right — the ecos-v2 fork
  * (§4d) and the App Code Build Stack (§37.3).
  */
+import { gatedClaims } from '../claimsGate';
 import { Link } from 'react-router-dom';
 import {
   CLAIMS_CAPTION,
@@ -87,7 +88,7 @@ export function SiteCompliance() {
               </tr>
             </thead>
             <tbody>
-              {CLAIM_ROWS.map((r) => (
+              {gatedClaims(CLAIM_ROWS).map(({ row: r, gate }) => (
                 <tr key={r.ref} className="border-t border-line align-top">
                   <td className="px-5 py-4">{r.does}</td>
                   <td className="px-5 py-4">
@@ -96,7 +97,14 @@ export function SiteCompliance() {
                       <span>{r.not}</span>
                     </span>
                   </td>
-                  <td className="px-5 py-4 font-mono text-site-caption text-teal">{r.ref}</td>
+                  <td className="px-5 py-4 font-mono text-site-caption text-teal">
+                    {r.ref}
+                    {gate === 'pending' && (
+                      <span className="mt-1 block font-body text-site-micro text-slate">
+                        Draft: check pending
+                      </span>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>

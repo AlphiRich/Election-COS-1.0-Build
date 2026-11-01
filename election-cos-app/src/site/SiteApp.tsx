@@ -25,18 +25,39 @@
  * second copy of the policy that could drift from the first.
  */
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
+import { Suspense, lazy, useCallback, useEffect, useState } from 'react';
 import { SiteShell } from './SiteChrome';
 import { SiteHome } from './pages/SiteHome';
-import { SiteForCampaigns } from './pages/SiteForCampaigns';
-import { SiteCasework } from './pages/SiteCasework';
-import { SiteCompliance } from './pages/SiteCompliance';
-import { SitePackages } from './pages/SitePackages';
-import { SiteResearch } from './pages/SiteResearch';
-import { SiteTutorial } from './pages/SiteTutorial';
-import { SiteContact } from './pages/SiteContact';
-import { SiteExplainer, SiteExplainers } from './pages/SiteExplainers';
-import { SiteFundingChecker } from './pages/SiteFundingChecker';
+const SiteForCampaigns = lazy(() =>
+  import('./pages/SiteForCampaigns').then((m) => ({ default: m.SiteForCampaigns })),
+);
+const SiteCasework = lazy(() =>
+  import('./pages/SiteCasework').then((m) => ({ default: m.SiteCasework })),
+);
+const SiteCompliance = lazy(() =>
+  import('./pages/SiteCompliance').then((m) => ({ default: m.SiteCompliance })),
+);
+const SitePackages = lazy(() =>
+  import('./pages/SitePackages').then((m) => ({ default: m.SitePackages })),
+);
+const SiteResearch = lazy(() =>
+  import('./pages/SiteResearch').then((m) => ({ default: m.SiteResearch })),
+);
+const SiteTutorial = lazy(() =>
+  import('./pages/SiteTutorial').then((m) => ({ default: m.SiteTutorial })),
+);
+const SiteContact = lazy(() =>
+  import('./pages/SiteContact').then((m) => ({ default: m.SiteContact })),
+);
+const SiteExplainer = lazy(() =>
+  import('./pages/SiteExplainers').then((m) => ({ default: m.SiteExplainer })),
+);
+const SiteExplainers = lazy(() =>
+  import('./pages/SiteExplainers').then((m) => ({ default: m.SiteExplainers })),
+);
+const SiteFundingChecker = lazy(() =>
+  import('./pages/SiteFundingChecker').then((m) => ({ default: m.SiteFundingChecker })),
+);
 import {
   COALITION_PATH,
   COUNCIL_PATH,
@@ -44,21 +65,60 @@ import {
   SEATS_PATH,
   SiteVoterTools,
 } from './pages/SiteVoterTools';
-import { SiteCouncilFinder } from './pages/SiteCouncilFinder';
-import { SiteVoterCheck } from './pages/SiteVoterCheck';
-import { SiteSeatTool } from './pages/SiteSeatTool';
-import { SiteCoalitionTool } from './pages/SiteCoalitionTool';
-import { SiteWhatsInTheApp } from './pages/SiteWhatsInTheApp';
-import { SiteCodeOfConduct } from './pages/SiteCodeOfConduct';
-import { SiteElectionDay } from './pages/SiteElectionDay';
-import { SiteResults } from './pages/SiteResults';
-import { SiteManifestos } from './pages/SiteManifestos';
-import { SiteCandidates } from './pages/SiteCandidates';
-import { SiteAreaStats } from './pages/SiteAreaStats';
-import { SiteAgentTool } from './pages/SiteAgentTool';
-import { SiteForms } from './pages/SiteForms';
-import { SiteSeatModel } from './pages/SiteSeatModel';
-import { SiteOfficialSources } from './pages/SiteOfficialSources';
+const SiteCouncilFinder = lazy(() =>
+  import('./pages/SiteCouncilFinder').then((m) => ({ default: m.SiteCouncilFinder })),
+);
+const SiteVoterCheck = lazy(() =>
+  import('./pages/SiteVoterCheck').then((m) => ({ default: m.SiteVoterCheck })),
+);
+const SiteSeatTool = lazy(() =>
+  import('./pages/SiteSeatTool').then((m) => ({ default: m.SiteSeatTool })),
+);
+const SiteCoalitionTool = lazy(() =>
+  import('./pages/SiteCoalitionTool').then((m) => ({ default: m.SiteCoalitionTool })),
+);
+const SiteWhatsInTheApp = lazy(() =>
+  import('./pages/SiteWhatsInTheApp').then((m) => ({ default: m.SiteWhatsInTheApp })),
+);
+const SiteCodeOfConduct = lazy(() =>
+  import('./pages/SiteCodeOfConduct').then((m) => ({ default: m.SiteCodeOfConduct })),
+);
+const SiteElectionDay = lazy(() =>
+  import('./pages/SiteElectionDay').then((m) => ({ default: m.SiteElectionDay })),
+);
+const SiteResults = lazy(() =>
+  import('./pages/SiteResults').then((m) => ({ default: m.SiteResults })),
+);
+const SiteManifestos = lazy(() =>
+  import('./pages/SiteManifestos').then((m) => ({ default: m.SiteManifestos })),
+);
+const SiteCandidates = lazy(() =>
+  import('./pages/SiteCandidates').then((m) => ({ default: m.SiteCandidates })),
+);
+const SiteAreaStats = lazy(() =>
+  import('./pages/SiteAreaStats').then((m) => ({ default: m.SiteAreaStats })),
+);
+const SiteAgentTool = lazy(() =>
+  import('./pages/SiteAgentTool').then((m) => ({ default: m.SiteAgentTool })),
+);
+const SiteForms = lazy(() => import('./pages/SiteForms').then((m) => ({ default: m.SiteForms })));
+const SiteSeatModel = lazy(() =>
+  import('./pages/SiteSeatModel').then((m) => ({ default: m.SiteSeatModel })),
+);
+const SiteOfficialSources = lazy(() =>
+  import('./pages/SiteOfficialSources').then((m) => ({ default: m.SiteOfficialSources })),
+);
+const SitePlatform = lazy(() =>
+  import('./pages/SitePlatform').then((m) => ({ default: m.SitePlatform })),
+);
+const SiteAbout = lazy(() => import('./pages/SiteAbout').then((m) => ({ default: m.SiteAbout })));
+const SiteLegal = lazy(() => import('./pages/SiteLegal').then((m) => ({ default: m.SiteLegal })));
+const SiteNotFound = lazy(() =>
+  import('./pages/SiteNotFound').then((m) => ({ default: m.SiteNotFound })),
+);
+const SiteSignIn = lazy(() =>
+  import('./pages/SiteSignIn').then((m) => ({ default: m.SiteSignIn })),
+);
 import { ConsentBanner } from './ads/ConsentBanner';
 import { AD_CLIENT_ID } from './ads/adPolicy';
 import {
@@ -129,43 +189,48 @@ export function SiteApp() {
       adsEnabled={AD_CLIENT_ID !== null}
     >
       <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<SiteHome />} />
-        <Route path="/for-campaigns" element={<SiteForCampaigns />} />
-        <Route path="/casework-tracker" element={<SiteCasework />} />
-        <Route path="/compliance" element={<SiteCompliance />} />
-        <Route path="/packages" element={<SitePackages />} />
-        <Route path="/contact" element={<SiteContact />} />
-        <Route path="/book-a-demo" element={<SiteContact variant="demo" />} />
-        <Route path="/research" element={<SiteResearch />} />
-        <Route path="/tutorial" element={<SiteTutorial />} />
-        <Route path="/explainers" element={<SiteExplainers />} />
-        <Route
-          path="/explainers/:slug"
-          element={<SiteExplainer hasConsent={consented} />}
-        />
-        <Route
-          path="/tools/party-funding-checker"
-          element={<SiteFundingChecker hasConsent={consented} />}
-        />
-        <Route path="/tools" element={<SiteVoterTools />} />
-        <Route path={COUNCIL_PATH} element={<SiteCouncilFinder />} />
-        <Route path={DETAILS_PATH} element={<SiteVoterCheck />} />
-        <Route path={SEATS_PATH} element={<SiteSeatTool />} />
-        <Route path={COALITION_PATH} element={<SiteCoalitionTool />} />
-        <Route path="/whats-in-the-app" element={<SiteWhatsInTheApp />} />
-        <Route path="/code-of-conduct" element={<SiteCodeOfConduct />} />
-        <Route path="/election-day" element={<SiteElectionDay />} />
-        <Route path="/results" element={<SiteResults />} />
-        <Route path="/tools/party-manifestos" element={<SiteManifestos />} />
-        <Route path="/tools/know-your-candidates" element={<SiteCandidates />} />
-        <Route path="/for-campaigns/voters-in-your-area" element={<SiteAreaStats />} />
-        <Route path="/for-campaigns/agent-tool" element={<SiteAgentTool />} />
-        <Route path="/for-campaigns/forms" element={<SiteForms />} />
-        <Route path="/official-sources" element={<SiteOfficialSources />} />
-        <Route path="/for-campaigns/seat-model" element={<SiteSeatModel />} />
-        <Route path="*" element={<SiteHome />} />
-      </Routes>
+      <Suspense fallback={<p className="p-6">Loading…</p>}>
+        <Routes>
+          <Route path="/" element={<SiteHome />} />
+          <Route path="/for-campaigns" element={<SiteForCampaigns />} />
+          <Route path="/casework-tracker" element={<SiteCasework />} />
+          <Route path="/compliance" element={<SiteCompliance />} />
+          <Route path="/packages" element={<SitePackages />} />
+          <Route path="/contact" element={<SiteContact />} />
+          <Route path="/book-a-demo" element={<SiteContact variant="demo" />} />
+          <Route path="/research" element={<SiteResearch />} />
+          <Route path="/tutorial" element={<SiteTutorial />} />
+          <Route path="/explainers" element={<SiteExplainers />} />
+          <Route path="/explainers/:slug" element={<SiteExplainer hasConsent={consented} />} />
+          <Route
+            path="/tools/party-funding-checker"
+            element={<SiteFundingChecker hasConsent={consented} />}
+          />
+          <Route path="/tools" element={<SiteVoterTools />} />
+          <Route path={COUNCIL_PATH} element={<SiteCouncilFinder />} />
+          <Route path={DETAILS_PATH} element={<SiteVoterCheck />} />
+          <Route path={SEATS_PATH} element={<SiteSeatTool />} />
+          <Route path={COALITION_PATH} element={<SiteCoalitionTool />} />
+          <Route path="/whats-in-the-app" element={<SiteWhatsInTheApp />} />
+          <Route path="/code-of-conduct" element={<SiteCodeOfConduct />} />
+          <Route path="/election-day" element={<SiteElectionDay />} />
+          <Route path="/results" element={<SiteResults />} />
+          <Route path="/tools/party-manifestos" element={<SiteManifestos />} />
+          <Route path="/tools/know-your-candidates" element={<SiteCandidates />} />
+          <Route path="/for-campaigns/voters-in-your-area" element={<SiteAreaStats />} />
+          <Route path="/for-campaigns/agent-tool" element={<SiteAgentTool />} />
+          <Route path="/for-campaigns/forms" element={<SiteForms />} />
+          <Route path="/official-sources" element={<SiteOfficialSources />} />
+          <Route path="/for-campaigns/seat-model" element={<SiteSeatModel />} />
+          <Route path="/platform" element={<SitePlatform />} />
+          <Route path="/about" element={<SiteAbout />} />
+          <Route path="/legal/privacy" element={<SiteLegal kind="privacy" />} />
+          <Route path="/legal/terms" element={<SiteLegal kind="terms" />} />
+          <Route path="/legal/cookies" element={<SiteLegal kind="cookies" />} />
+          <Route path="/sign-in" element={<SiteSignIn />} />
+          <Route path="*" element={<SiteNotFound />} />
+        </Routes>
+      </Suspense>
 
       {consent === 'unasked' && <ConsentBanner pathname={pathname} onChoice={choose} />}
     </SiteShell>

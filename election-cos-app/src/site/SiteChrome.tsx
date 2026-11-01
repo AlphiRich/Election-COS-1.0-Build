@@ -173,16 +173,16 @@ export function SiteFooter({
 
         <div className="flex flex-col gap-1.5">
           <span className="font-semibold text-paper">Legal</span>
-          <Link to="/for-campaigns#pledge" className="text-line">
+          <Link to="/legal/privacy" className="text-line">
             Privacy notice
           </Link>
-          <Link to="/for-campaigns#pledge" className="text-line">
+          <Link to="/legal/terms" className="text-line">
             Terms
           </Link>
-          <Link to="/for-campaigns#pledge" className="text-line">
+          <Link to="/legal/cookies" className="text-line">
             Cookie notice
           </Link>
-          <Link to="/for-campaigns#pledge" className="text-line">
+          <Link to="/about#pledge" className="text-line">
             Neutrality pledge
           </Link>
           <Link to="/code-of-conduct" className="text-line">
@@ -217,6 +217,12 @@ export function SiteFooter({
           <a href={SITE.corporateUrl} className="text-line">
             innovationconsult.co.za
           </a>
+          <Link to="/platform" className="text-line">
+            Platform
+          </Link>
+          <Link to="/about" className="text-line">
+            About
+          </Link>
           <a href={SITE.appOrigin} className="text-line">
             Sign in
           </a>
