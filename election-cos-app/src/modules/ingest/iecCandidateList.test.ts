@@ -27,7 +27,7 @@ type E = {
 const entries: E[] = data.entries;
 
 describe('the Commission’s North West certified list, as fetched on 1 November 2026', () => {
-  it('records where it came from and that nobody has confirmed it yet', () => {
+  it('records where it came from, who confirmed it, and on what basis', () => {
     const p = data.provenance;
     expect(p.url).toMatch(
       /^https:\/\/www\.elections\.org\.za\/pw\/Documents\/Candidate Lists\/LGE2026\//,
@@ -35,9 +35,11 @@ describe('the Commission’s North West certified list, as fetched on 1 November
     expect(p.sha256).toBe('b121e2680b67cc49348703e419f6891b48f99b0d5edaab91bbb2dbfb403cb8f0');
     expect(p.bytes).toBe(3_217_349);
     expect(p.headline).toMatch(/CCT 282\/26/);
-    expect(p.status).toBe('UNCONFIRMED');
-    expect(p.confirmedBy).toBeNull();
-    expect(publishableCandidates(data)).toEqual([]);
+    expect(p.status).toBe('CONFIRMED');
+    expect(p.confirmedBy).toMatch(/site owner/);
+    expect(p.confirmedOn).toBe('2026-11-01');
+    expect(p.confirmationBasis).toMatch(/directly from elections\.org\.za/);
+    expect(publishableCandidates(data)).toHaveLength(10_018);
   });
 
   it('holds 10,018 candidates across the 22 North West municipalities, and nothing else', () => {
@@ -157,7 +159,7 @@ describe('publishing candidates to the site', () => {
           confirmedBy: 'A. Person',
           confirmedOn: '2026-11-02',
         }
-      : data.provenance,
+      : { ...data.provenance, status: 'UNCONFIRMED', confirmedBy: null, confirmedOn: null },
   });
 
   it('writes nothing for an unconfirmed dataset', () => {

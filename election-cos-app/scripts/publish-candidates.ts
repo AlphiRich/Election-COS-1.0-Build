@@ -31,6 +31,7 @@ type Dataset = CandidateDataset & {
     source?: string;
     fetchedOn?: string | null;
     pdfTitle?: string;
+    publishedLabel?: string;
   };
 };
 
@@ -53,7 +54,9 @@ export function publishCandidates(
     if (!m) {
       m = {
         municipalityCode: e.municipalityCode,
-        source: `${p.source ?? 'Electoral Commission'}: ${p.pdfTitle ?? 'certified candidate list'}`,
+        source:
+          p.publishedLabel ??
+          `${p.source ?? 'Electoral Commission'}: ${p.pdfTitle ?? 'certified candidate list'}`,
         fetchedOn: p.fetchedOn ?? null,
         confirmedBy: p.confirmedBy!,
         confirmedOn: p.confirmedOn!,

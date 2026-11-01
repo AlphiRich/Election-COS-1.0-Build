@@ -9,10 +9,12 @@
   "pdfTitle": "LGE 2026 - Final Candidate List (Combined) (Seperate Province Tabs)- 23 Oct 2026.xlsx",
   "headline": "LGE2026 Candidate Lists - 23 Oct 2026 - North West PUBLICATION OF THE CERTIFIED LIST OF CANDIDATES AS SUPPLEMENTED PURSUANT TO THE CONSTITUTIONAL COURT ORDER IN AFRICAN NATIONAL CONGRESS v ELECTORAL COMMISSION OF SOUTH AFRICA AND ANOTHER (CCT 282/26) Pursuant to the order of the Constitutional Court in African National Congress v Electoral Commission of South Africa and Another (CCT 282/26), the C",
   "province": "NW",
-  "status": "UNCONFIRMED",
-  "confirmedBy": null,
-  "confirmedOn": null,
-  "idColumn": "Read for structure only and not copied: every value opens with a date of birth."
+  "status": "CONFIRMED",
+  "confirmedBy": "the site owner (Innovation Consult)",
+  "confirmedOn": "2026-11-01",
+  "idColumn": "Read for structure only and not copied: every value opens with a date of birth.",
+  "confirmationBasis": "On the owner's instruction on 1 November 2026, after this build downloaded the Commission's North West certified list (as supplemented, 23 October 2026) directly from elections.org.za, hashed it, and checked its structure; the owner states the list is the Commission's own, declared by it, and corroborated by the Commission's website and its video and by news reports. Independently, news reports (SAnews, EWN) confirm the 15 October 2026 Constitutional Court order for the ANC and the Commission's extension of the same relief to similarly affected parties across 107 municipalities, which is the supplementation the document is headed with. The case number CCT 282/26 itself was not found in those reports. A named individual has not been recorded; replace this with a person's name when there is one.",
+  "publishedLabel": "Electoral Commission of South Africa, certified list of candidates as supplemented, published 23 October 2026 (North West)"
  },
  "counts": {
   "DC37/PR": 255,

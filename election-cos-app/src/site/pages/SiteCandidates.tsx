@@ -44,7 +44,7 @@ export function SiteCandidates() {
     setPublished(null);
     if (!code2) return;
     let live = true;
-    fetch(`/candidates/${code2}.json`)
+    fetch(`${import.meta.env.BASE_URL}candidates/${code2}.json`)
       .then((r) => (r.ok ? r.json() : null))
       .then(
         (j) =>
