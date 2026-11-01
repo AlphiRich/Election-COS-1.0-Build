@@ -20,13 +20,13 @@ bounded responsibility, not a service.
 | 10 | DOCUMENT_VAULT | Cloud Storage + `storage.rules`; no KMS envelope | partial |
 | 11 | SIMULATION_ORCHESTRATOR | none | not built |
 | 12 | RLS_SESSION_GUARDIAN | `firestore.rules` (tenant, capability, ward + station scope); 15 emulator cases for the roll | built |
-| 13 | POPIA_CONSENT_TRIGGER | voters cannot be written without `popiaConsentGiven`. **No 48-hour hard purge**: the audit rates it critical; quarantine then human release is the design | gate built; purge not built |
+| 13 | POPIA_CONSENT_TRIGGER | voters cannot be written without `popiaConsentGiven`. **No 48-hour hard purge**: the audit rates it critical; quarantine then human release is the design | gate built; quarantine and named-person release built as pure functions (`functions/src/consentQuarantine.ts`), not exported or scheduled; no purge by design |
 | 14 | INDEX_HEALTH | not applicable to Firestore (indexes are declared) | n/a |
-| 15 | RLS_AUDIT | not built | not built |
+| 15 | RLS_AUDIT | `src/rulesAudit.test.ts`: static audit of `firestore.rules` (tenant tie on every allow, no `if true`, deny catch-all, server-only collections closed, delete denied except 3 named config collections). Emulator matrix remains `tools/voters-roll/appRules.emulator.ts` | built (static); emulator matrix for every collection not built (`@firebase/rules-unit-testing` will not install against this tree's peers) |
 | 16 | QUOTA_FORMULA_GUARDIAN | `seatCalculator.ts` (authoritative, reproduces the IEC result) and `db/schedule1_quota.sql` (cross-check, tested on Postgres 16) | built |
 | 17 | PGA_EVENT_AUDITOR | `functions/src/rgaNoticeScheduled.ts`, `rgaNotice.ts` | built; needs Blaze |
 | 18 | PPFA_AGGREGATOR | `functions/src/ppfaAggregation.ts`, deliberately **not exported** pending legal confirmation. Bands are R200,000 / R30 million (Gazette 53182), not R80k/R15M | held back on purpose |
-| 19 | POPIA_PURGE_DAEMON | not built (see 13) | not built |
+| 19 | POPIA_PURGE_DAEMON | replaced by quarantine (see 13); deletion goes through the data-subject route | by design |
 | 20 | INCIDENT_DISPATCH | needs a WhatsApp credential this project does not have | not built |
 | 21 | AUDIT_LOG_WRITER | server-written `auditLog`; CSV export. Hash chain (`functions/src/auditChain.ts`, verified in the export) on the OTP-challenge writer only; other writers unchained, no external anchor | partial |
 | 22 | DATASET_INGESTION | `tools/source-acquisition`, `src/modules/ingest/`, `tools/voters-roll` | built |

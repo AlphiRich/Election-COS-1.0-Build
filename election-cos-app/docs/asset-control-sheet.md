@@ -5558,3 +5558,6 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 |---|---|---|
 | Outbox retry cap wired | `src/offline/outbox.ts` (+1 test) | Built |
 | Audit hash chain | `functions/src/auditChain.ts` (+2), `src/modules/settings/auditChain.ts` (+5), export column | Built; one writer adopted; no external anchor; needs Blaze to run |
+
+| Rules static audit | `src/rulesAudit.test.ts` (7) | Built; emulator matrix not built |
+| Consent quarantine | `functions/src/consentQuarantine.ts` (+5) | Built as pure functions; not exported/scheduled |
