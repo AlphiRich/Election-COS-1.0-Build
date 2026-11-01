@@ -35,6 +35,7 @@ import { municipalityProfileRepository } from './adapters/firestore/municipality
 import { fileStoreRepository } from './adapters/firestore/fileStoreRepository';
 import { entitlementsRepository } from './adapters/firestore/entitlementsRepository';
 import { gatheringsRepository } from './adapters/firestore/gatheringsRepository';
+import { rollRepository } from './adapters/firestore/rollRepository';
 import { connectivityProbe } from './adapters/firestore/connectivityProbe';
 
 const adapter = (import.meta.env.VITE_DAL_ADAPTER as string | undefined) ?? 'firestore';
@@ -78,6 +79,9 @@ export const dal = {
   // What the tenant bought, as opposed to what the user may do — see
   // src/auth/modules.ts. Read-only: provisioned server-side.
   entitlements: entitlementsRepository,
+  // The certified voters' roll for the caller's own district, and the
+  // per-use events that meter it. See src/dal/ports/roll.ts.
+  roll: rollRepository,
   // Not a repository: no documents are read through it, only the
   // listener metadata that says whether the client is talking to the
   // backend at all. It is here because the rule in §2.2 is about the

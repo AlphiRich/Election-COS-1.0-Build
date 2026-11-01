@@ -43,7 +43,8 @@ export type ModuleKey =
   | 'ppfa-disclosure'
   | 'ward-sentiment'
   | 'incident-pro'
-  | 'casework';
+  | 'casework'
+  | 'voter-verification';
 
 export type EntitlementScope = 'TENANT' | 'WARD';
 
@@ -67,6 +68,14 @@ export interface ModuleDefinition {
    * actually govern would be a claim rather than a fact.
    */
   gatedCapabilities: Capability[];
+  /**
+   * How the module is charged. Absent means a flat subscription. 'PER_USE'
+   * means each verification or capture is counted as a usage event and
+   * invoiced from the count on the platform's published, identical terms.
+   * The module still needs an entitlement (the campaign has switched it
+   * on); the entitlement carries no price and neither do the events.
+   */
+  metering?: 'PER_USE';
   description: string;
 }
 
@@ -124,6 +133,16 @@ export const MODULES: ModuleDefinition[] = [
     gatedCapabilities: [],
     description:
       'Post-election constituency casework, bought per ward. Not built here yet.',
+  },
+  {
+    key: 'voter-verification',
+    label: 'Voter verification & capture',
+    scope: 'TENANT',
+    bundled: false,
+    metering: 'PER_USE',
+    gatedCapabilities: ['roll.view', 'roll.capture'],
+    description:
+      'Lets canvassers check people against the certified voters\' roll for their own district and, with the voter\'s consent, capture them. Charged per verification and per capture, counted as they happen, so a party pays for the doors it actually works and for the day\'s statistics it reads.',
   },
 ];
 

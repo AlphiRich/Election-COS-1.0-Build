@@ -76,6 +76,7 @@ export const SEED_ROLES: Role[] = [
       'settings.permissions',
       'dsr.view',
       'dsr.manage',
+      'roll.view',
     ],
   },
   {
@@ -95,6 +96,7 @@ export const SEED_ROLES: Role[] = [
       'logistics.view',
       'logistics.edit',
       'analytics.view',
+      'roll.view',
     ],
   },
   {
@@ -113,6 +115,8 @@ export const SEED_ROLES: Role[] = [
       'logistics.view',
       'logistics.edit',
       'analytics.view',
+      'roll.view',
+      'roll.capture',
     ],
   },
   {
@@ -134,6 +138,8 @@ export const SEED_ROLES: Role[] = [
       // capability (logistics.approve) nobody at this level holds.
       'logistics.view',
       'logistics.edit',
+      'roll.view',
+      'roll.capture',
     ],
   },
   {
@@ -141,7 +147,15 @@ export const SEED_ROLES: Role[] = [
     label: 'Canvasser',
     geoScope: 'VD',
     systemRole: true,
-    defaultCaps: ['voters.view', 'voters.edit', 'diary.view', 'diary.edit', 'incidents.create'],
+    defaultCaps: [
+      'voters.view',
+      'voters.edit',
+      'diary.view',
+      'diary.edit',
+      'incidents.create',
+      'roll.view',
+      'roll.capture',
+    ],
   },
   {
     id: 'compliance-officer',

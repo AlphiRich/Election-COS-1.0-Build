@@ -25,3 +25,4 @@ export * from './warRoomCounters';
 export * from './municipalityProfile';
 export * from './connectivity';
 export * from './gatherings';
+export * from './roll';

@@ -5477,3 +5477,18 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 ## 54. Voters'-roll ingestion toolkit (1 Nov 2026)
 
 `IC-ECOS-DATA-2026-02` README and zip received: code only, **no roll data**. Reviewed, `tsc` clean, 29 of 31 unit tests pass (2 need the roll, 10 rules tests need the emulator and were not run). **Not merged**: its Firestore rules sit outside `/tenants/{tid}/`, scope VD canvassers by `vdCode` alone (our split-station rule needs ward + VD), use different roles and claims, and pin different Firebase versions; its PostgreSQL half targets a database this build does not use. Whether the roll is loaded into the product at all is the open POPIA decision of §11.1. Detail and the adaptation work order: change log, "the voters'-roll ingestion toolkit".
+
+## 55. Voters' roll — field screen, tenant adaptation, per-use metering (Session 50)
+
+| Asset | Path | Status |
+|---|---|---|
+| Roll port | `src/dal/ports/roll.ts` | Built; types only |
+| Firestore adapter | `src/dal/adapters/firestore/rollRepository.ts` | Built; untested against live Firestore |
+| Capture + meter rules | `src/modules/roll/rollCapture.ts` (+ test, 16) | Built, guard-proved by injection |
+| Field screen | `src/modules/roll/RollFieldPage.tsx`, route `/roll` | Built; online only; no roll loaded to show |
+| Module / caps | `voter-verification`, `roll.view`, `roll.capture` | Built; roles mirror regenerated |
+| Rules | `firestore.rules` roll + usageEvents blocks | Emulator 15/15 |
+| Toolkit patch | `tools/voters-roll/tenant-adaptation.patch`, `appRules.emulator.ts`, README | Toolkit tests 29 pass patched |
+| Payment / invoice / price list | — | **Not built; not drafted.** |
+| Roll data | — | **None in this build.** POPIA basis undecided. |
+

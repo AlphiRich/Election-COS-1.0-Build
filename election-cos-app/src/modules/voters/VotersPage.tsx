@@ -67,6 +67,14 @@ export function VotersPage() {
             >
               Work a round
             </Link>
+            {session?.caps.includes('roll.view') && (
+              <Link
+                to="/roll"
+                className="inline-flex min-h-11 items-center rounded border border-ink/20 px-4 py-2 text-label-caps font-display uppercase text-ink"
+              >
+                Voters’ roll
+              </Link>
+            )}
             <Link
               to="/voters/import"
               className="inline-flex min-h-11 items-center rounded border border-ink/20 px-4 py-2 text-label-caps font-display uppercase text-ink"

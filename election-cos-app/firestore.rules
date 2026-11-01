@@ -234,6 +234,84 @@ service cloud.firestore {
       allow delete: if false;
     }
 
+    // ---- voters' roll (module `voter-verification`) -----------------------
+    //
+    // IC-ECOS-DATA-2026-02 adapted to the tenant structure. The roll is
+    // personal information supplied for electoral purposes. It is the
+    // TARGET LIST, never the voter register: nothing here writes `voters`
+    // or `households` (those are consent-gated, above).
+    //
+    // Entries and addresses are written only by tools/voters-roll with the
+    // Admin SDK, so no client may write them. Reads are narrowed by
+    // inScope() — which, for a VD-scoped canvasser, checks ward AND
+    // station, because split stations are real — and limited to the one
+    // edition the tenant has activated, so a superseded roll is not
+    // readable from a device. Rules are not filters: a query must carry
+    // the edition and the scope itself (rollRepository does).
+    function activeRollEdition(tid, d) {
+      return d.rollEdition == get(/databases/$(database)/documents/tenants/$(tid)/roll_meta/active).data.edition;
+    }
+
+    match /tenants/{tid}/roll_meta/{docId} {
+      allow read: if tenantOK(tid) && cap('roll.view');
+      allow write: if false;
+    }
+
+    match /tenants/{tid}/roll_editions/{edition} {
+      allow read: if tenantOK(tid) && cap('settings.tenant');
+      allow write: if false;
+    }
+
+    match /tenants/{tid}/roll_addresses/{addressId} {
+      allow read: if tenantOK(tid) && cap('roll.view') && inScope(tid, resource.data)
+                   && activeRollEdition(tid, resource.data);
+      allow write: if false;
+    }
+
+    match /tenants/{tid}/roll_entries/{entryId} {
+      allow read: if tenantOK(tid) && cap('roll.view') && inScope(tid, resource.data)
+                   && activeRollEdition(tid, resource.data);
+      allow write: if false;
+    }
+
+    // Rejected roll entries are an audit record for the ingest, not a
+    // field tool: no client reads or writes them.
+    match /tenants/{tid}/roll_rejected/{entryId} {
+      allow read, write: if false;
+    }
+
+    // ---- usage events: what the per-use meter counts -------------------------
+    //
+    // One document per chargeable instance, id `{VERIFY|CAPTURE}::{rollEntryId}`
+    // so a retry cannot count a person twice. Create-only: nobody edits or
+    // deletes a billing fact from a client. The module must have been
+    // switched on (an entitlement record, written server-side) and not
+    // lapsed. The event carries no price, by design — see auth/modules.ts.
+    // The client-written event is a convenience tally; invoicing
+    // reconciles it against the `voters` created from the roll.
+    function rollModuleOn(tid, at) {
+      let path = /databases/$(database)/documents/tenants/$(tid)/entitlements/voter-verification;
+      return exists(path)
+        && (get(path).data.get('activeUntil', null) == null
+            || get(path).data.get('activeUntil', '') > at);
+    }
+
+    match /tenants/{tid}/usageEvents/{eventId} {
+      allow read: if tenantOK(tid) && cap('roll.view') && inScope(tid, resource.data);
+      allow create: if tenantOK(tid) && cap('roll.capture')
+                     && inScope(tid, request.resource.data)
+                     && request.resource.data.tenantId == tid
+                     && request.resource.data.uid == request.auth.uid
+                     && request.resource.data.kind in ['VERIFY', 'CAPTURE']
+                     && eventId == request.resource.data.kind + '::' + request.resource.data.rollEntryId
+                     && request.resource.data.at is string
+                     && request.resource.data.recordedAt == request.time
+                     && rollModuleOn(tid, request.resource.data.at)
+                     && !('amount' in request.resource.data)
+                     && !('price' in request.resource.data);
+      allow update, delete: if false;
+    }
+
     // ---- documents ----------------------------------------------------------
 
     // Referral records (documentId `referral-{incidentId}`, see

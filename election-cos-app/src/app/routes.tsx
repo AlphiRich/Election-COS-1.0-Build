@@ -34,6 +34,7 @@ import { SubscriptionPage } from '@/modules/settings/SubscriptionPage';
 import { AuditLogPage } from '@/modules/settings/AuditLogPage';
 import { IncidentReportPage } from '@/modules/incidents/report/IncidentReportPage';
 import { GatheringsAdvisoryPage } from '@/modules/knowledge/GatheringsAdvisoryPage';
+import { RollFieldPage } from '@/modules/roll/RollFieldPage';
 import { ElectionTimetablePage } from '@/modules/knowledge/ElectionTimetablePage';
 
 export const router = createBrowserRouter([
@@ -46,6 +47,7 @@ export const router = createBrowserRouter([
       { path: 'voters', element: <VotersPage /> },
       { path: 'voters/import', element: <BulkImportPage /> },
       { path: 'round', element: <RoundPage /> },
+      { path: 'roll', element: <RollFieldPage /> },
       { path: 'incidents/new', element: <ReportIncidentPage /> },
       { path: 'incidents/report', element: <IncidentReportPage /> },
       { path: 'wards', element: <WardsPage /> },
