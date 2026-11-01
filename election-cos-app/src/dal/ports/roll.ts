@@ -12,7 +12,7 @@
  * is the only writer of entries and addresses; a client can only read
  * them, in its own scope, and write usage events.
  */
-import type { SessionContext } from "./session";
+import type { SessionContext } from './session';
 
 export interface RollEntry {
   id: string;
@@ -39,7 +39,7 @@ export interface RollAddress {
 }
 
 /** What is counted. Each is one chargeable instance. */
-export type UsageKind = "VERIFY" | "CAPTURE";
+export type UsageKind = 'VERIFY' | 'CAPTURE';
 
 export interface UsageEvent {
   /** `${kind}::${rollEntryId}` — a retry cannot count the same person twice. */
@@ -72,7 +72,7 @@ export interface RollRepository {
   recordVerification(
     ctx: SessionContext,
     usage: UsageEvent,
-  ): Promise<"COUNTED" | "ALREADY_COUNTED">;
+  ): Promise<'COUNTED' | 'ALREADY_COUNTED'>;
   /**
    * Create the voter (and the household, if new) and count the capture, as
    * ONE atomic write. A voter without its capture event, or the reverse,

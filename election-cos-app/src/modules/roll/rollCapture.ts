@@ -29,35 +29,24 @@
  * costs is on the platform's published, identical terms and is applied at
  * invoicing, not stored against a tenant (see modules.ts).
  */
-import type {
-  RollAddress,
-  RollEntry,
-  UsageEvent,
-  UsageKind,
-} from "@/dal/ports/roll";
-import type { SessionContext } from "@/dal/ports/session";
-import type { VoterDraft } from "@/dal/ports/voters";
+import type { RollAddress, RollEntry, UsageEvent, UsageKind } from '@/dal/ports/roll';
+import type { SessionContext } from '@/dal/ports/session';
+import type { VoterDraft } from '@/dal/ports/voters';
 
 export class CaptureRefused extends Error {
   constructor(
-    readonly reason:
-      | "NO_CONSENT"
-      | "NAME_NOT_CONFIRMED"
-      | "OUT_OF_SCOPE"
-      | "NO_ADDRESS",
+    readonly reason: 'NO_CONSENT' | 'NAME_NOT_CONFIRMED' | 'OUT_OF_SCOPE' | 'NO_ADDRESS',
     message: string,
   ) {
     super(message);
   }
 }
 
-const norm = (s: string) => s.trim().replace(/\s+/g, " ").toUpperCase();
+const norm = (s: string) => s.trim().replace(/\s+/g, ' ').toUpperCase();
 
 /** The name a canvasser would say aloud: first given name + surname. */
-export function spokenName(
-  e: Pick<RollEntry, "fullNames" | "surname">,
-): string {
-  const first = e.fullNames.trim().split(/\s+/)[0] ?? "";
+export function spokenName(e: Pick<RollEntry, 'fullNames' | 'surname'>): string {
+  const first = e.fullNames.trim().split(/\s+/)[0] ?? '';
   return `${first} ${e.surname}`.trim();
 }
 
@@ -68,15 +57,15 @@ export function usageId(kind: UsageKind, rollEntryId: string): string {
 /** Entries must sit inside the caller's own district — the rules enforce it; this refuses early. */
 export function inCallerScope(
   ctx: SessionContext,
-  e: Pick<RollEntry, "wardCode" | "vdCode">,
+  e: Pick<RollEntry, 'wardCode' | 'vdCode'>,
 ): boolean {
   switch (ctx.geoScope) {
-    case "TENANT":
-    case "MUNICIPALITY":
+    case 'TENANT':
+    case 'MUNICIPALITY':
       return true;
-    case "WARD":
+    case 'WARD':
       return Boolean(ctx.wardScope) && e.wardCode === ctx.wardScope;
-    case "VD":
+    case 'VD':
       return (
         Boolean(ctx.wardScope) &&
         Boolean(ctx.vdScope) &&
@@ -86,21 +75,14 @@ export function inCallerScope(
   }
 }
 
-export function buildVerification(
-  ctx: SessionContext,
-  e: RollEntry,
-  now: Date,
-): UsageEvent {
+export function buildVerification(ctx: SessionContext, e: RollEntry, now: Date): UsageEvent {
   if (!inCallerScope(ctx, e)) {
-    throw new CaptureRefused(
-      "OUT_OF_SCOPE",
-      "This person is outside your district.",
-    );
+    throw new CaptureRefused('OUT_OF_SCOPE', 'This person is outside your district.');
   }
   return {
-    id: usageId("VERIFY", e.id),
+    id: usageId('VERIFY', e.id),
     tenantId: ctx.tenantId,
-    kind: "VERIFY",
+    kind: 'VERIFY',
     rollEntryId: e.id,
     rollEdition: e.rollEdition,
     wardCode: e.wardCode,
@@ -116,7 +98,7 @@ export interface ConsentInput {
   /** What the canvasser typed to confirm WHO consented. Must match the spoken name. */
   confirmedName: string;
   /** Optional, only if the voter volunteers it. */
-  sentiment?: VoterDraft["sentiment"];
+  sentiment?: VoterDraft['sentiment'];
 }
 
 export function buildCapture(
@@ -127,24 +109,21 @@ export function buildCapture(
   now: Date,
 ) {
   if (!inCallerScope(ctx, e)) {
-    throw new CaptureRefused(
-      "OUT_OF_SCOPE",
-      "This person is outside your district.",
-    );
+    throw new CaptureRefused('OUT_OF_SCOPE', 'This person is outside your district.');
   }
   if (!input.consentGiven) {
-    throw new CaptureRefused("NO_CONSENT", "No consent, nothing is recorded.");
+    throw new CaptureRefused('NO_CONSENT', 'No consent, nothing is recorded.');
   }
   if (norm(input.confirmedName) !== norm(spokenName(e))) {
     throw new CaptureRefused(
-      "NAME_NOT_CONFIRMED",
+      'NAME_NOT_CONFIRMED',
       `Type the name of the person who agreed (${spokenName(e)}) to confirm it was them.`,
     );
   }
   if (!e.addressId || !address || address.id !== e.addressId) {
     throw new CaptureRefused(
-      "NO_ADDRESS",
-      "This person has no address on the roll; capture them from the household screen instead.",
+      'NO_ADDRESS',
+      'This person has no address on the roll; capture them from the household screen instead.',
     );
   }
   const householdId = `roll-${e.addressId}`;
@@ -155,13 +134,13 @@ export function buildCapture(
     householdId,
     vdCode: e.vdCode,
     wardCode: e.wardCode,
-    firstName: e.fullNames.trim().split(/\s+/)[0] ?? "",
+    firstName: e.fullNames.trim().split(/\s+/)[0] ?? '',
     lastName: e.surname,
-    phoneMasked: "",
-    sentiment: input.sentiment ?? "UNDECIDED",
+    phoneMasked: '',
+    sentiment: input.sentiment ?? 'UNDECIDED',
     popiaConsentGiven: true,
     popiaConsentAt: at,
-    popiaConsentMethod: "VERBAL_DOORSTEP",
+    popiaConsentMethod: 'VERBAL_DOORSTEP',
     popiaConsentReference: `roll:${e.rollEdition}:${e.id}:by:${ctx.uid}`,
     rollEntryId: e.id,
     rollEdition: e.rollEdition,
@@ -172,25 +151,20 @@ export function buildCapture(
     vdCode: e.vdCode,
     wardCode: e.wardCode,
     addressLine: address.addressRaw,
-    dwellingType: "OTHER" as const,
+    dwellingType: 'OTHER' as const,
   };
   const usage: UsageEvent = {
     ...buildVerification(ctx, e, now),
-    id: usageId("CAPTURE", e.id),
-    kind: "CAPTURE",
+    id: usageId('CAPTURE', e.id),
+    kind: 'CAPTURE',
   };
   return { household, voter, usage };
 }
 
 /** Addresses with their people count, biggest first, optionally filtered by a typed fragment. */
-export function findAddresses(
-  addresses: RollAddress[],
-  fragment: string,
-): RollAddress[] {
+export function findAddresses(addresses: RollAddress[], fragment: string): RollAddress[] {
   const f = norm(fragment);
-  const hit = f
-    ? addresses.filter((a) => norm(a.addressRaw).includes(f))
-    : addresses;
+  const hit = f ? addresses.filter((a) => norm(a.addressRaw).includes(f)) : addresses;
   return [...hit].sort((a, b) => a.addressRaw.localeCompare(b.addressRaw));
 }
 
@@ -214,13 +188,13 @@ export function summariseUsage(events: UsageEvent[]): UsageSummary {
     byHour: {},
     byUser: {},
   };
-  const bump = (m: UsageSummary["byVd"], k: string, kind: UsageKind) => {
+  const bump = (m: UsageSummary['byVd'], k: string, kind: UsageKind) => {
     const c = (m[k] ??= { verify: 0, capture: 0 });
-    if (kind === "VERIFY") c.verify++;
+    if (kind === 'VERIFY') c.verify++;
     else c.capture++;
   };
   for (const e of events) {
-    if (e.kind === "VERIFY") out.verify++;
+    if (e.kind === 'VERIFY') out.verify++;
     else out.capture++;
     bump(out.byVd, `${e.wardCode}::${e.vdCode}`, e.kind);
     bump(out.byUser, e.uid, e.kind);
@@ -228,7 +202,7 @@ export function summariseUsage(events: UsageEvent[]): UsageSummary {
       new Date(new Date(e.at).getTime() + 2 * 3_600_000)
         .toISOString()
         .slice(0, 13)
-        .replace("T", " ") + ":00";
+        .replace('T', ' ') + ':00';
     bump(out.byHour, sast, e.kind);
   }
   out.captureRate = out.verify ? out.capture / out.verify : null;
