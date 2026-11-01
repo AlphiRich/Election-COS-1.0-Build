@@ -5505,3 +5505,11 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | Rules | `enquiries/{id}` closed to clients | Guarded by test; not emulator-run |
 | Company site hosting (GCP vs Cloudflare) | — | **Undecided** |
 
+## 57. Claims Worker (Spark-plan path) and attorney-review statement (Session 50)
+
+| Asset | Path | Status |
+|---|---|---|
+| Claims Worker | `worker/src/index.ts` (+test 13), `wrangler.jsonc` | Built, type-checked; **not deployed**; secrets not set |
+| Client | `src/auth/claimsApi.ts` (+test 4), `AuthProvider.tsx` | Built; off unless `VITE_CLAIMS_WORKER=true` |
+| Attorney review | owner's statement, 1 Nov 2026 | **Stated approved; reference/scope not on file** — file it against §11.1 |
+

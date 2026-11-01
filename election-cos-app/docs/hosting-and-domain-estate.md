@@ -55,3 +55,26 @@ the app with that review done. The registry currently says `cloudflareProxied: t
 - Any product-line site or subdomain (names undecided); the company site's host (GCP vs Cloudflare).
 - Email/WhatsApp notification of a new enquiry to staff; a console view of `enquiries`.
 - A report library: reports are commissioned, not published; nothing is listed that has not been written.
+
+## Running with no Google billing: the claims Worker (`worker/`, `wrangler.jsonc`)
+Cloud Functions need the paid Blaze plan. `resolveCapabilities` (a Firestore trigger) is how a user gets the
+`tenantId` / `caps` claims every rule reads, so on the free Spark plan **nobody can use the app**. The Worker does the
+same job on request, on Cloudflare's free tier, in *route mode*: Cloudflare sends only `app.electioncos.co.za/api/*`
+to it; everything else goes on to Firebase Hosting. It was adapted from a supplied Spark-plan build (that build also
+contained a client-side "demo accounts" mode that grants every capability from a fake token; **that was not taken**).
+To switch on:
+1. Create a **dedicated** service account with only *Cloud Datastore User* and *Firebase Authentication Admin*. Do not
+   use the default Admin SDK account: the key sits in a third party's secret store and whoever can read it can act as it.
+2. `npx wrangler secret put FIREBASE_SERVICE_ACCOUNT` (whole JSON) and `npx wrangler secret put OWNER_EMAILS`
+   (comma-separated verified emails allowed to create the first tenant). Neither goes in the repo.
+3. `npx wrangler deploy` (needs a Cloudflare API token with the Workers template; the zone must be in the same account).
+4. Build the app with `VITE_CLAIMS_WORKER=true` and `VITE_DEFAULT_TENANT_ID=<tenant>` (and optionally
+   `VITE_DEFAULT_TENANT_NAME`). With either unset the app does not call the Worker.
+5. Add the app hostname to Firebase Auth → Authorised domains.
+Verified: 13 Worker tests against a faked Google (no token → 401; wrong project → 401; claims come from the staff record
+and a request that asks for `team.manage` does not get it; inactive or missing staff are stripped; only a verified owner
+email bootstraps, once; non-API paths pass to the origin). **Not verified:** a live deploy, the real Google endpoints
+and scopes, and the cached access token across Worker isolates. Free-tier limits: Workers 100k requests a day;
+Firestore Spark about 50k reads and 20k writes a day, with writes failing, not billing, past the limit — a real
+constraint for a polling-day field team.
+
