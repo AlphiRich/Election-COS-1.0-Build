@@ -68,6 +68,18 @@
         "src/modules/reference/municipalCodeHistory.ts",
         "src/modules/reference/municipalRegister.test.ts"
       ]
+    },
+    {
+      "id": "lge2026-candidate-csv-notebooklm-2026-10-20",
+      "filename": "lge2026_candidate_database.csv",
+      "sha256": "b3ca94cc55ecab791408a90349b51aa3e710ee52b9a52b942fb6821990e02ad3",
+      "bytes": 7966,
+      "receivedOn": "2026-11-01",
+      "note": "51 rows (JB Marks 45, Moses Kotane 1, Ditsobotla 1, Matlosana 1, Nelson Mandela Bay 3) exported from a NotebookLM notebook on 2026-10-20, which names LGE2026 Certified Candidate List PDFs for NW and EC as its source. Those PDFs were NOT supplied and this build has not seen them or fetched anything. Not the Electoral Commission's file and a small partial extract: JB Marks wards 6-10 and 29-34 have no candidate, ANC and DA PR lists have gaps, no EFF, ACDP, BOSA or SACP rows, no ActionSA PR list. Its ID column opens every value with a date of birth and was refused. Ingested into src/data/iec/candidates-lge2026-notebooklm-2026-10-20.json as UNCONFIRMED and PARTIAL, 48 candidates placed, 3 held out (ward not stated). Not shown to any voter: nothing is publishable until a named person has compared it with the Commission's list.",
+      "usedBy": [
+        "src/modules/ingest/candidateList.ts",
+        "scripts/ingest-candidates.ts"
+      ]
     }
   ],
   "sources": [

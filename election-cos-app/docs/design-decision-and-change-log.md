@@ -2797,3 +2797,46 @@ implemented badly.
 
 **Verified:** `npm run check:all` green — 992 tests, 63 files (3 new).
 Nothing adopted from the supplied report.
+
+---
+
+## Session 50 — Five NotebookLM exports, 1 November 2026
+
+Five files arrived together, all exported from one NotebookLM notebook on 20 October 2026. They are four different kinds of thing.
+
+### Intake triage
+
+| # | Asset | Kind | Decision |
+|---|---|---|---|
+| 1 | `lge2026_candidate_database.csv` (51 rows) | Candidate data | **Ingested into quarantine**, not published |
+| 2 | `Candidate-database-schema-2026-10-20.md` and `.html` | Description of #1 | Read; one claim contradicted by #1; no data in it |
+| 3 | `Candidate_Screening_Analysis_Dual-Nomination_Check.md` | Analysis of #1 | **Rejected** |
+| 4 | `notebooklm-chat-…-complete-walkthrough…md` | Marketing walkthrough | **Not ingested**; three claims contradict the build |
+
+### 1. The candidate CSV
+
+**What it is.** A 7,966-byte extract (SHA-256 `b3ca94cc…2ad3`). Its own notes name `LGE2026 Certified Candidate List - NW.pdf` and `- EC.pdf` as the source. **Neither PDF was supplied and nothing was fetched**, so this build has not seen a primary document for it. It is not the Electoral Commission's file.
+
+**Decision.** Ingested by `scripts/ingest-candidates.ts` through `src/modules/ingest/candidateList.ts` into `src/data/iec/candidates-lge2026-notebooklm-2026-10-20.json`, recorded `UNCONFIRMED` and `PARTIAL`, with the checks below. `publishableCandidates()` returns nothing until a named person records `confirmedBy` and `confirmedOn`, and a test fails if any public-site file imports the data, so the names cannot ship in the bundle. The public "Know your ward candidates" page therefore still shows its empty state.
+
+**Why quarantined, from the file itself:**
+- **Short.** 51 rows; the Commission's NW workbook the project reviewed earlier had 9,731. JB Marks (34 wards) has candidates in 23 wards; **wards 6–10 and 29–34 have none**. ANC has PR ranks 1, 2, 16, 17, 18 only; DA has 3–6 and neither 1, 2 nor anything after 6; ActionSA has 18 consecutive wards (11–28) and no PR list; EFF, ACDP, BOSA and SACP, which the schema note says are covered, have no rows. A voter shown this would see most wards as uncontested.
+- **The ID column was refused.** All 51 values open with a full date of birth (`YYMMDD****08*`), the mask shape `src/lib/saIdNumber.ts` exists to refuse and `docs/nw-candidate-list-2026-review.md` §5 already rejected. It was read only to be counted. A test proves it reaches no record, and the guard was proved by injection.
+- **Three rows not placed.** Moses Kotane, Ditsobotla and Matlosana give a ward id but no ward number. The id layout is confirmed for NW405 only (2021 seed), so the suffix was not used to guess a ward.
+- **What held up.** Every NW405 ward row's number agrees with its own ward id; every PR rank agrees with its list position; every municipality, name and province matches Annexure A; no repeats. These are checks the earlier workbook failed, so this file's structure is better than that one's, though its coverage is far worse.
+
+**To unlock it:** supply the Commission's candidate-list PDFs for NW and EC (or the Commission's own workbook). Compare, fix, then set `provenance.confirmedBy` and `confirmedOn`. Do not set them on the strength of this file.
+
+### 2. The schema note and HTML
+Plain description of #1 plus a 1.4 MB HTML rendering that carries 3,119 characters of text and no data. It says JB Marks has "full coverage across all 34 wards". The CSV it describes does not.
+
+### 3. The dual-nomination and Mayoral Committee analysis — rejected
+- **Not reproducible.** It lists eight people as both ward and PR candidates with PR ranks (DA 7, ANC 5 and 8, PA 2, ActionSA 1, FF+ 3 and 4, MK 1). The CSV it says it used contains **no dual nominations** (the ingester reports none) and none of those ranks. It cites a "flagged" CSV that was not supplied.
+- **The legal basis is unchecked.** It rests the dual-nomination rule on "Schedule 1 of the Municipal Structures Act". The text of the Municipal Electoral Act read this session (2000 text) neither requires nor forbids it, and the Structures Act was not read, so the rule is neither adopted nor disputed.
+- **Named people are given invented ratings and accusations.** A 100-point "Mayoral Committee screening" scores real, named candidates and "vetoes" two of them for "an active SIU SCM procurement inquiry" and "financial disclosure". No source is given, the scores are not computed from anything in this build, and publishing or storing them as findings about identifiable people would be an unsupported allegation. Not ingested, not repeated. Build rule 2 (no fabricated candidate records) applies.
+- The offer to generate "Mayoral Committee Appointment Certificates" for six named people is declined for the same reason.
+
+### 4. The platform walkthrough — not ingested
+It is a script for a product tour, not data. Three things in it contradict this build and must not be copied: the PPFA limits "R100k disclosure / R15M cap" (superseded: **R200,000 / R30,000,000**, Gazette 53182, 18 August 2025); "Droop and Hare quota thresholds" (the quota here is the Commission's `Q = A ÷ (B − C − D) + 1`, and the Droop reading was disproved against its own 2021 report); and performance and integration claims (OCR in under 1.8 seconds, "Google Maps Platform vector integration", "Dexie IndexedDB", "CampaignToken wallet metering") that this build has not been shown to deliver. Nothing from it went on the public site.
+
+**Verified:** `check:all`; ingester guards proved by injection (confirmation gate removed, ward/ward-id check removed, ID value added to a record), each failing exactly the intended test and reverted clean.
