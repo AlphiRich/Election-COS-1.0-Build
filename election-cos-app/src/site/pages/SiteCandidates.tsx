@@ -1,0 +1,141 @@
+/**
+ * Election Campaign OS — public site, know your ward candidates
+ * (`/tools/know-your-candidates`)
+ *
+ * Municipality, then ward. Names appear only from `CERTIFIED_CANDIDATES`,
+ * which is empty until a certified list is loaded (see `tools/candidates.ts`
+ * for why), so today the page does what it can honestly do: it takes a
+ * voter to their ward and says where the names are published.
+ *
+ * It does not offer "use my location". Turning a location into a ward
+ * needs the Municipal Demarcation Board's ward boundary maps, which this
+ * build does not hold, and a guess would put somebody in the wrong ward.
+ */
+import { useMemo, useState } from 'react';
+import { SiteCard, SiteSection } from '../SiteChrome';
+import { PageIntro, SourceNote } from './pageParts';
+import { findCouncil, searchCouncils } from '../tools/councilFinder';
+import { CANDIDATE_SOURCE, CERTIFIED_CANDIDATES, candidatesFor } from '../tools/candidates';
+import { findStations } from '../tools/wardFinder';
+
+const IEC = 'https://www.elections.org.za';
+
+export function SiteCandidates() {
+  const [query, setQuery] = useState('');
+  const [code, setCode] = useState('');
+  const [ward, setWard] = useState('');
+  const matches = useMemo(() => searchCouncils(query).filter((c) => c.wards !== null), [query]);
+  const council = code ? findCouncil(code) : null;
+  const wardNo = Number(ward);
+  const names = council && wardNo ? candidatesFor(CERTIFIED_CANDIDATES, council.code, wardNo) : [];
+  const stations = council?.code === 'NW405' && wardNo ? findStations(String(wardNo)) : [];
+
+  return (
+    <>
+      <PageIntro
+        eyebrow="Voter tool"
+        title="Know your ward candidates"
+        lead="Choose your municipality, then your ward, to see who is standing for ward councillor."
+      />
+      <SiteSection className="pb-8">
+        <SiteCard className="flex max-w-[760px] flex-col gap-4 p-8">
+          <label htmlFor="cand-search" className="font-semibold">
+            Search municipalities
+          </label>
+          <input
+            id="cand-search"
+            type="search"
+            className="site-field"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Name or province"
+            autoComplete="off"
+          />
+          <label htmlFor="cand-muni" className="font-semibold">
+            Municipality ({matches.length} shown)
+          </label>
+          <select
+            id="cand-muni"
+            className="site-field"
+            value={matches.some((m) => m.code === code) ? code : ''}
+            onChange={(e) => {
+              setCode(e.target.value);
+              setWard('');
+            }}
+          >
+            <option value="">Choose a municipality</option>
+            {matches.map((m) => (
+              <option key={m.code} value={m.code}>
+                {m.name} · {m.province}
+              </option>
+            ))}
+          </select>
+          {council && council.wards !== null && (
+            <>
+              <label htmlFor="cand-ward" className="font-semibold">
+                Ward (1 to {council.wards})
+              </label>
+              <select
+                id="cand-ward"
+                className="site-field"
+                value={ward}
+                onChange={(e) => setWard(e.target.value)}
+              >
+                <option value="">Choose a ward</option>
+                {Array.from({ length: council.wards }, (_, i) => i + 1).map((n) => (
+                  <option key={n} value={n}>
+                    Ward {n}
+                  </option>
+                ))}
+              </select>
+            </>
+          )}
+        </SiteCard>
+      </SiteSection>
+
+      {council && wardNo > 0 && (
+        <SiteSection labelledBy="res-h" className="pb-8">
+          <div className="flex max-w-[760px] flex-col gap-4">
+            <h2 id="res-h" className="m-0 font-site-display text-site-h4">
+              {council.name}, Ward {wardNo}
+            </h2>
+            <div role="status" aria-live="polite">
+              {names.length > 0 ? (
+                <ul className="m-0 flex list-none flex-col gap-2 p-0">
+                  {names.map((c) => (
+                    <li key={c.name} className="rounded-[10px] border border-line bg-white p-4">
+                      <span className="font-semibold">{c.name}</span> · {c.party}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <SiteCard className="p-6">
+                  <p className="m-0 font-semibold">Candidate names are not loaded here yet</p>
+                  <p className="mb-0 mt-1 text-site-sm">
+                    This site shows only names from the Electoral Commission’s certified list, and
+                    that list has not been loaded. See who is standing in this ward at{' '}
+                    <a href={IEC} className="font-semibold text-teal">
+                      elections.org.za
+                    </a>
+                    .
+                  </p>
+                </SiteCard>
+              )}
+            </div>
+            {stations.length > 0 && (
+              <p className="m-0 text-site-sm">
+                Voting stations in this ward: {stations.map((s) => s.stationName).join('; ')}.
+              </p>
+            )}
+          </div>
+        </SiteSection>
+      )}
+
+      <SourceNote>
+        {CANDIDATE_SOURCE} Wards come from Annexure A to IEC Circular 1 of 2025. “Use my location”
+        is not offered: it needs the Municipal Demarcation Board’s ward boundary maps, which this
+        site does not hold, and guessing a ward would be worse than not offering it.
+      </SourceNote>
+    </>
+  );
+}

@@ -16,11 +16,10 @@
  */
 import { useState } from 'react';
 import { Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
-import { JB_MARKS_SOURCE, findStations } from '../tools/wardFinder';
+import { StationSearch } from './StationSearch';
 
 const IEC = 'https://www.elections.org.za';
 const MDB = 'https://www.demarcation.org.za';
-const nf = new Intl.NumberFormat('en-ZA');
 
 const STEPS = [
   {
@@ -64,8 +63,6 @@ const DATES = [
 
 export function SiteVoterCheck() {
   const [done, setDone] = useState<Record<string, boolean>>({});
-  const [q, setQ] = useState('');
-  const hits = findStations(q);
   const finished = STEPS.filter((s) => done[s.id]).length;
 
   return (
@@ -127,75 +124,7 @@ export function SiteVoterCheck() {
             Type a ward number (for example 12) or part of a voting station’s name. This covers JB
             Marks Local Municipality only.
           </p>
-          <label htmlFor="station-q" className="font-semibold">
-            Ward number or station name
-          </label>
-          <input
-            id="station-q"
-            type="search"
-            className="site-field"
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            autoComplete="off"
-            placeholder="12, or school, or church"
-          />
-          <div role="status" aria-live="polite">
-            {q.trim() !== '' && hits.length === 0 && (
-              <p className="m-0 text-site-sm">
-                No match. Try fewer letters, or check the Electoral Commission’s list of voting
-                stations.
-              </p>
-            )}
-          </div>
-          {hits.length > 0 && (
-            <div className="relative overflow-x-auto">
-              <table className="w-full min-w-[520px] border-collapse text-site-sm">
-                <caption className="pb-2 text-left text-site-caption text-slate">
-                  {hits.length} voting station{hits.length === 1 ? '' : 's'} found
-                </caption>
-                <thead>
-                  <tr className="border-b border-line text-left">
-                    <th scope="col" className="py-2 pr-4">
-                      Ward
-                    </th>
-                    <th scope="col" className="py-2 pr-4">
-                      Voting station
-                    </th>
-                    <th scope="col" className="py-2 text-right">
-                      Registered voters
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {hits.slice(0, 40).map((h) => (
-                    <tr key={`${h.wardNumber}-${h.vdCode}`} className="border-b border-line">
-                      <th scope="row" className="py-2 pr-4 text-left font-semibold">
-                        Ward {h.wardNumber}
-                      </th>
-                      <td className="py-2 pr-4">
-                        {h.stationName}
-                        {h.splitAcrossWards && (
-                          <span className="block text-site-caption text-slate">
-                            This station serves more than one ward.
-                          </span>
-                        )}
-                      </td>
-                      <td className="py-2 text-right font-mono">{nf.format(h.stationVoters)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              {hits.length > 40 && (
-                <p className="m-0 pt-2 text-site-caption text-slate">
-                  Showing the first 40. Narrow the search to see the rest.
-                </p>
-              )}
-            </div>
-          )}
-          <p className="m-0 text-site-caption text-slate">
-            Source: {JB_MARKS_SOURCE} Voter counts are the delimitation’s, not today’s roll. The
-            Electoral Commission’s own list of voting stations is the one to rely on.
-          </p>
+          <StationSearch idPrefix="vc" />
         </SiteCard>
       </SiteSection>
 

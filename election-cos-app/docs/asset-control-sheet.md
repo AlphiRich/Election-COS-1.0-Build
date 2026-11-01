@@ -5409,3 +5409,36 @@ Built on the public site, all client-side, no network request, no storage, no ad
 ## 49. Footer contact details (1 Nov 2026)
 
 Footer address is now the postal address supplied by the owner, **P.O. Box 2590, Potchefstroom, 2520** (replaces the bracketed street address). The footer Contact column now lists the WhatsApp enquiry number **082 449 7310** as a link; `SITE.whatsApp` holds the number once and `whatsAppHref` is built from it, with a test that the displayed and dialled forms agree. Still bracketed: fourth mailbox, B-BBEE note, information officer name, consent wording version, onboarding and data-ownership FAQ answers.
+
+## 50. Election-week build (1 Nov 2026)
+
+New public routes, all client-side except the results feed. Nav is now Explainers, Voter tools, Election day, For campaigns, Compliance; a gold ribbon on every page counts down to voting opening (07:00 SAST, 4 Nov 2026), then to closing (21:00), then says voting has closed.
+
+| Route | Purpose | Source of truth |
+|---|---|---|
+| `/election-day` | hours, what to take, lost-ID guidance, station finder with Google/Apple/Waze map links (JB Marks) | Act s 40, s 45; earlier-election ID rules (flagged as such) |
+| `/code-of-conduct` | voters' rights and protections; parties' must / must-not; agent rules at the station; consequences | Act 27 of 2000 Sch 1, ss 40, 45, 78, 79 — **primary text read in full** (polity.org.za copy of the 2000 Act) |
+| `/results` | link to the IEC, plus a figures board that rechecks `/results/feed.json` every 30 min | feed validated by `resultsFeed.ts`; empty state when no feed |
+| `/tools/party-manifestos` | identical web and YouTube searches for any party name; IEC voter-education YouTube search | search URLs only |
+| `/tools/know-your-candidates` | municipality, then ward; names from `CERTIFIED_CANDIDATES` | **empty on purpose** |
+| `/for-campaigns/voters-in-your-area` | voters, wards, councillors per municipality; provincial totals; JB Marks ward table vs the ±15% band | Annexure A; MDB notice 1300 of 2025 |
+| `/for-campaigns/agent-tool` | station log: hourly tally, incidents, objections, count check, CSV | Act ss 40, 51, 59, 61, 62, 63; stored in the browser only, no field for voter names or IDs |
+| `/for-campaigns/forms` | documents the Act requires of agents and where to get the official forms | Act ss 39, 40, 51, 59, 62, 63; **no form numbers** |
+
+**Results bot:** `scripts/results-bot.ts` (+ `results-bot-cli.ts`), `@deployable fails-closed`; validates, refuses stale or invalid feeds, writes atomically; run end to end with an invented fixture (board rendered it; fixture removed). It does **not** read the IEC's own format, because that format has not been seen. Scheduling example in `docs/results-bot.md`, deliberately not enabled.
+
+**Asked for and NOT built, with reasons**
+1. **Age cohorts for every voting district.** Annexure A has voter totals per municipality and no age data; no national VD file is held. Extrapolating would be an invented statistic (rule 2). The page says so. Needs an IEC age breakdown of the roll to be loaded.
+2. **Candidate names and "use my location".** No certified candidate list is held (rule 2). Location to ward needs MDB ward boundary polygons, not held. The ward picker and lookup are finished; names appear when `CERTIFIED_CANDIDATES` is filled.
+3. **Reading the IEC's live results.** Format unseen; elections.org.za is not reachable from this build environment.
+4. **Party logos in outcome simulations.** Parties' logos are their trademarks, none are held, and the pledge says no predictions or results commentary. Not built.
+5. **Form numbers and the IEC document index.** elections.org.za unreachable; wrong form numbers on election eve are worse than none.
+6. **Party websites.** Not hand-picked: unchecked links can be wrong and a chosen list is not neutral. Neutral search links instead.
+
+**Owner checks**
+- The Code text is the Act **as published in 2000**; amendments may exist. The item 9(1)(b) reference matches the Commission's 2026 notice about disinformation, but that notice itself was not read.
+- Voting hours are the s 45(1) default. The Commission may set other hours (s 45(2)); the ribbon says so. Confirm no 2026 determination exists.
+- Lost-ID text describes earlier elections (green ID book, smart card, valid temporary identity certificate) and links to Home Affairs and the IEC; no 2026 notice was available.
+- Map links are name searches, not IEC-verified pins.
+
+**Verification:** `check:all`; guards proved by injection where new logic was added (see commit); every new route at 320 and 1280 px: no horizontal overflow, no console errors; agent log persisted across reload; results board rendered an invented fixture through the bot and rejected a missing source with exit 1.

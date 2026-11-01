@@ -63,6 +63,58 @@ export function SiteWhatsInTheApp() {
         </SiteCard>
       </SiteSection>
 
+      <SiteSection labelledBy="free-h" className="pb-10">
+        <div className="flex flex-col gap-4">
+          <h2 id="free-h" className="m-0 font-site-display text-site-h4">
+            Free for any campaign team, today
+          </h2>
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-4">
+            {[
+              [
+                '/for-campaigns/agent-tool',
+                'Station log for party agents',
+                'Hourly tallies, incidents, objections and a count check, with a CSV you keep. No voter names.',
+              ],
+              [
+                '/for-campaigns/voters-in-your-area',
+                'Registered voters in your area',
+                'Voters, wards and councillors for every municipality, and JB Marks ward by ward.',
+              ],
+              [
+                '/for-campaigns/forms',
+                'Election-day documents',
+                'The documents the Act requires of an agent, and where to get the official forms.',
+              ],
+              [
+                '/tools/how-seats-are-calculated',
+                'Seat what-ifs',
+                'Try vote shares and ward wins and see the seats follow, step by step.',
+              ],
+              [
+                '/tools/party-funding-checker',
+                'Party-funding checker',
+                'Where a donor’s total sits against the disclosure line.',
+              ],
+            ].map(([to, t, b]) => (
+              <Link
+                key={to}
+                to={to}
+                className="flex min-w-0 flex-col gap-1.5 rounded-[10px] border border-line bg-white p-6 text-ink no-underline"
+              >
+                <span className="font-semibold">{t}</span>
+                <span className="text-site-sm text-slate">{b}</span>
+                <span className="mt-auto pt-1 font-semibold text-teal">Open →</span>
+              </Link>
+            ))}
+          </div>
+          <p className="m-0 text-site-caption text-slate">
+            The full app adds what these cannot: shared data across a whole campaign, ward-scoped
+            access, signed referrals and nightly funding totals. Built features are marked Built,
+            and nothing marked Roadmap is available yet.
+          </p>
+        </div>
+      </SiteSection>
+
       <SiteSection labelledBy="safe-h" className="pb-10">
         <h2 id="safe-h" className="mb-6 mt-0 font-site-display text-site-h4">
           Built to work in the field and to keep data safe

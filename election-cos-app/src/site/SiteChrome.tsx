@@ -38,6 +38,7 @@ import type { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SITE, SITE_NAV, whatsAppHref } from './siteContent';
 import { AdConsentWithdrawLink } from './ads/ConsentBanner';
+import { VotingRibbon } from './VotingRibbon';
 
 /* ------------------------------------------------------------- mark */
 
@@ -181,6 +182,12 @@ export function SiteFooter({
           <Link to="/for-campaigns#pledge" className="text-line">
             Neutrality pledge
           </Link>
+          <Link to="/code-of-conduct" className="text-line">
+            Electoral Code of Conduct
+          </Link>
+          <Link to="/results" className="text-line">
+            Results
+          </Link>
           {/*
            * In the footer, on every page — including the ones where no
            * advert ever appears. Consent that is harder to withdraw than
@@ -194,6 +201,12 @@ export function SiteFooter({
           <span className="font-semibold text-paper">Company</span>
           <Link to="/casework-tracker" className="text-line">
             Casework Tracker
+          </Link>
+          <Link to="/packages" className="text-line">
+            Packages
+          </Link>
+          <Link to="/whats-in-the-app" className="text-line">
+            What is in the app
           </Link>
           <a href={SITE.corporateUrl} className="text-line">
             innovationconsult.co.za
@@ -225,6 +238,7 @@ export function SiteShell({
 }) {
   return (
     <div className="min-h-screen bg-paper font-body text-site-body text-ink">
+      <VotingRibbon />
       <SiteHeader enquirySubject={enquirySubject} />
       <main>{children}</main>
       <SiteFooter onWithdrawAdConsent={onWithdrawAdConsent} adsEnabled={adsEnabled} />

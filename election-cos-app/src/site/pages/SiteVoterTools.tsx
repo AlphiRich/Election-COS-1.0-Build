@@ -15,7 +15,40 @@ export const DETAILS_PATH = '/tools/check-your-details';
 export const SEATS_PATH = '/tools/how-seats-are-calculated';
 export const COALITION_PATH = '/tools/how-coalitions-work';
 
+export const CANDIDATES_PATH = '/tools/know-your-candidates';
+export const MANIFESTOS_PATH = '/tools/party-manifestos';
+
 const TOOLS = [
+  {
+    to: '/election-day',
+    title: 'Election day guide',
+    body: 'Hours, what to take, what to do if your ID is lost, and directions to your voting station.',
+    source: 'Municipal Electoral Act, sections 40 and 45',
+  },
+  {
+    to: '/code-of-conduct',
+    title: 'The Electoral Code of Conduct',
+    body: 'What every party and candidate must and must not do, and what protects you as a voter.',
+    source: 'Municipal Electoral Act, Schedule 1',
+  },
+  {
+    to: CANDIDATES_PATH,
+    title: 'Know your ward candidates',
+    body: 'Choose your municipality and ward and find who is standing, with a pointer to the Electoral Commission’s certified list.',
+    source: 'Annexure A to IEC Circular 1 of 2025; Electoral Commission candidate lists',
+  },
+  {
+    to: MANIFESTOS_PATH,
+    title: 'Read and watch the manifestos',
+    body: 'Search for any party’s manifesto on the web or on YouTube. Same searches for everyone.',
+    source: 'Search links, no endorsements',
+  },
+  {
+    to: '/results',
+    title: 'Election results',
+    body: 'Go to the Electoral Commission’s results, with a figures board that rechecks every 30 minutes when a feed is available.',
+    source: 'Electoral Commission',
+  },
   {
     to: DETAILS_PATH,
     title: 'Check your voter details',
@@ -56,8 +89,8 @@ export function SiteVoterTools() {
           <Eyebrow>Free tools</Eyebrow>
           <h1 className="m-0 font-site-display text-site-h3 md:text-site-h1">Voter tools</h1>
           <p className="m-0 text-site-lead">
-            Five tools, all free, none asking you to sign in. Nothing you type is sent anywhere.
-            None of them tells you who to vote for.
+            All free, none asking you to sign in. Nothing you type is sent anywhere. None of them
+            tells you who to vote for.
           </p>
         </div>
       </SiteSection>

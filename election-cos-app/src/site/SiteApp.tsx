@@ -47,6 +47,14 @@ import { SiteVoterCheck } from './pages/SiteVoterCheck';
 import { SiteSeatTool } from './pages/SiteSeatTool';
 import { SiteCoalitionTool } from './pages/SiteCoalitionTool';
 import { SiteWhatsInTheApp } from './pages/SiteWhatsInTheApp';
+import { SiteCodeOfConduct } from './pages/SiteCodeOfConduct';
+import { SiteElectionDay } from './pages/SiteElectionDay';
+import { SiteResults } from './pages/SiteResults';
+import { SiteManifestos } from './pages/SiteManifestos';
+import { SiteCandidates } from './pages/SiteCandidates';
+import { SiteAreaStats } from './pages/SiteAreaStats';
+import { SiteAgentTool } from './pages/SiteAgentTool';
+import { SiteForms } from './pages/SiteForms';
 import { ConsentBanner } from './ads/ConsentBanner';
 import { AD_CLIENT_ID } from './ads/adPolicy';
 import {
@@ -139,6 +147,14 @@ export function SiteApp() {
         <Route path={SEATS_PATH} element={<SiteSeatTool />} />
         <Route path={COALITION_PATH} element={<SiteCoalitionTool />} />
         <Route path="/whats-in-the-app" element={<SiteWhatsInTheApp />} />
+        <Route path="/code-of-conduct" element={<SiteCodeOfConduct />} />
+        <Route path="/election-day" element={<SiteElectionDay />} />
+        <Route path="/results" element={<SiteResults />} />
+        <Route path="/tools/party-manifestos" element={<SiteManifestos />} />
+        <Route path="/tools/know-your-candidates" element={<SiteCandidates />} />
+        <Route path="/for-campaigns/voters-in-your-area" element={<SiteAreaStats />} />
+        <Route path="/for-campaigns/agent-tool" element={<SiteAgentTool />} />
+        <Route path="/for-campaigns/forms" element={<SiteForms />} />
         <Route path="*" element={<SiteHome />} />
       </Routes>
 
