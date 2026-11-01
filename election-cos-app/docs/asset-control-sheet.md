@@ -5491,4 +5491,5 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | Toolkit patch | `tools/voters-roll/tenant-adaptation.patch`, `appRules.emulator.ts`, README | Toolkit tests 29 pass patched |
 | Payment / invoice / price list | — | **Not built; not drafted.** |
 | Roll data | — | **None in this build.** POPIA basis undecided. |
+| Build Review page | `src/modules/analytics/BuildReviewPage.tsx`, `buildReview.ts` (+test 7), route `/analytics/build-review` | Built from sourced figures; supplied dashboard's numbers reconciled, not copied. Not browser-rendered. |
 

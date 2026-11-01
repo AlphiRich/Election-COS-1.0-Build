@@ -21,6 +21,12 @@ const SUB_VIEWS = [
       'Certified 2021 ward results, the swing each ward would need to turn, captured canvass sentiment, and a Schedule 1 projection under a swing you set.',
   },
   {
+    to: '/analytics/build-review',
+    label: 'Build Review',
+    description:
+      'Quota, seats and ward-size band recomputed from sourced figures, field roll usage, and what a supplied dashboard claimed, checked.',
+  },
+  {
     to: '/analytics/scheduled-reports',
     label: 'Sentiment Summary Report',
     description: 'Tenant-wide sentiment breakdown, on demand, CSV export.',

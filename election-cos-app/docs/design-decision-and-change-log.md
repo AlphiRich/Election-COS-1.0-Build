@@ -2903,3 +2903,13 @@ The session's network settings were changed, and `elections.org.za` became reach
 - **Not done / open:** no roll data exists in this build; POPIA basis + retention + attorney review undecided (register §11.1); offline path (Dexie sync) not wired; no payment flow, prices or invoice job (deliberately — published identical terms, no drafting of commercial terms); server-side invoicing reconciliation not built; 106 vs 108 VDs unexplained.
 - New attachments this turn (Stitch re-export order: 178 screens missing code, 121 unrecoverable; human-centred AI audit v1/v2; white paper): read. The audit's consent-gate, saved-vs-received, and F1/F2/F3/F7 findings informed this screen; the rest are not acted on here.
 
+### Session 50 (cont.) — "master build dashboard" incorporated as a checked Build Review
+
+The supplied static dashboard (`election_campaign_os_master_build_dashboard.html`, plus an "_updated" variant with commercial/legal panels) is a presentation page with hard-coded figures. Its *functionality* (one-screen operator view of roll, quota, seats, ward sizes, field usage) is built as `/analytics/build-review` (`BuildReviewPage`, `buildReview.ts`, 7 tests) from live sources. Its *numbers* are not copied; each was tested:
+- **Matches:** quota 1,515 (but it is the 2021 quota, mislabelled "certified 2026"); 34 + 33 = 67.
+- **Contradicted:** seat split ANC 33/DA 23/EFF 7 (sourced 2021 result differs, e.g. ANC won 24 ward seats, not 18); top ward sizes 4,210–5,140 exceed the proclaimed upper norm 4,127; "50,400 deceased" vs the toolkit's 52,176 rejected (rejected ≠ deceased).
+- **Unreconciled:** 131,963 verified vs Annexure A 122,059 (no roll loaded to arbitrate); address categories sum 1,175 short of 82,607 and the chart adds voters to points; 106 vs 108 VDs.
+- **Unsourced, not shown:** turnout series and scenarios S1–S5; 68.5 % hung-council probability; swing ranking.
+- **Not carried:** token/tier prices (no prices against a tenant; published identical terms); 32-agent Cloudflare/AWS topology (Firestore decision); 02:00 48-hour hard purge presented as active (audit F3); six legal documents shown "Active" (build rule 3; attorney review undecided).
+Guard proved by injection (ward sizes lowered under the norm → test fails; restored → passes). Not rendered in a browser this turn.
+

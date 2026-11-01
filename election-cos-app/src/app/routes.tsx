@@ -23,6 +23,7 @@ import { AnalyticsPage } from '@/modules/analytics/AnalyticsPage';
 import { SeatCalculatorPage } from '@/modules/analytics/SeatCalculatorPage';
 import { ThresholdAnalyzerPage } from '@/modules/analytics/ThresholdAnalyzerPage';
 import { ScheduledReportsPage } from '@/modules/analytics/ScheduledReportsPage';
+import { BuildReviewPage } from '@/modules/analytics/BuildReviewPage';
 import { WardComparisonPage } from '@/modules/analytics/WardComparisonPage';
 import { SettingsPage } from '@/modules/settings/SettingsPage';
 import { MunicipalityConfigPage } from '@/modules/settings/MunicipalityConfigPage';
@@ -65,6 +66,7 @@ export const router = createBrowserRouter([
           { path: 'thresholds', element: <ThresholdAnalyzerPage /> },
           { path: 'scheduled-reports', element: <ScheduledReportsPage /> },
           { path: 'ward-comparison', element: <WardComparisonPage /> },
+          { path: 'build-review', element: <BuildReviewPage /> },
         ],
       },
       {
