@@ -78,6 +78,20 @@ export function nw405Seats2021() {
   });
 }
 
+/**
+ * `fn_calculate_schedule1_quotas` from the supplied tech-architecture
+ * document, transcribed: quota = valid votes / council seats (no floor, no
+ * +1), seats = TRUNC(votes / quota), and nothing allocates the remainder.
+ * Run on the 2021 result so its answer can be set beside the IEC's.
+ */
+export function suppliedSqlQuota() {
+  const parties = NW405_2021_EXAMPLE.parties;
+  const valid = parties.reduce((n, p) => n + p.votes, 0);
+  const quota = valid / NW405_2021_EXAMPLE.totalSeats;
+  const seats = parties.reduce((n, p) => n + Math.trunc(p.votes / quota), 0);
+  return { quota, seatsAllocated: seats, ofSeats: NW405_2021_EXAMPLE.totalSeats };
+}
+
 export function reconcile(): ReviewRow[] {
   const c = DASHBOARD_CLAIMS;
   const reg = nw405Register();
@@ -185,6 +199,44 @@ export function reconcile(): ReviewRow[] {
     note: 'Superseded. Government Gazette 53182 of 18 August 2025 proclaimed a R200,000 disclosure line and a R30 million annual cap, which the funding checker and the compliance page use (still under court challenge). The R80,000 and R100,000 figures are the earlier regimes.',
   });
 
+  const sql = suppliedSqlQuota();
+  rows.push({
+    id: 'tech-quota-sql',
+    claim:
+      'Schedule 1 quota enforced in the database by fn_calculate_schedule1_quotas (tech architecture document)',
+    status: 'CONTRADICTED',
+    note: `Run on the 2021 result the function gives a quota of ${sql.quota.toFixed(2)} (no whole number, no "+1"), allocates ${sql.seatsAllocated} of ${sql.ofSeats} seats, never allocates the rest, ignores ward seats won and treats ward plus PR votes as one pool. The IEC published ${seats.quota.toLocaleString()} and 67 of 67. Not adopted; the app's calculator reproduces the IEC result.`,
+  });
+
+  rows.push({
+    id: 'tech-edge-tenant-header',
+    claim: 'Edge worker injects tenant context from an X-Tenant-ID request header',
+    status: 'CONTRADICTED',
+    note: 'A header the caller sets is not an authority. The worker forwards it unverified, so any client could name another tenant. This build takes the tenant from the verified token (tenantId claim) and the rules compare it to the path.',
+  });
+
+  rows.push({
+    id: 'tech-firebase-static',
+    claim:
+      '"Firebase is strictly bounded to static asset delivery; no application logic or database operations execute on Firebase"',
+    status: 'CONTRADICTED',
+    note: 'The build uses Firebase Auth, Firestore, Cloud Functions (africa-south1) and Hosting. The document describes a different system.',
+  });
+
+  rows.push({
+    id: 'tech-ppfa-bands',
+    claim: 'PPFA aggregation against R80k / R200k / R15M',
+    status: 'CONTRADICTED',
+    note: 'Mixes a superseded floor and cap with the current disclosure line. Proclaimed: R200,000 disclosure, R30 million cap (Gazette 53182).',
+  });
+
+  rows.push({
+    id: 'tech-outbox-states',
+    claim: 'Outbox states PENDING / IN_FLIGHT / APPLIED / CONFLICT / REJECTED / DISCARDED',
+    status: 'UNRECONCILED',
+    note: 'The build’s local states are LOCAL_ONLY / PENDING / SYNCED / REJECTED / CONFLICT, with a server contract in syncTypes.ts. Different vocabulary; the build’s is the tested one.',
+  });
+
   for (const [id, claim, note] of [
     [
       'turnout',
@@ -203,8 +255,8 @@ export function reconcile(): ReviewRow[] {
     ],
     [
       'agents',
-      '32-agent topology on Cloudflare Workers, AWS Fargate and Cloud SQL',
-      'Firestore is the database and Firebase the platform (BUILD-STATUS, 13 Sep 2026). Not carried.',
+      '32-agent topology on Cloudflare Workers, AWS Fargate / RDS PostgreSQL and a GCP landing page (dashboards and the tech architecture document)',
+      'Firestore is the database and Firebase the platform, decided by the project owner on 13 Sep 2026 and not re-opened. Not carried. This is the fifth upload to propose Postgres or AWS.',
     ],
     [
       'purge',

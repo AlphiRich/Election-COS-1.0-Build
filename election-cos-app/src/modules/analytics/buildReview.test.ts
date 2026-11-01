@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { DASHBOARD_CLAIMS, nw405Register, nw405Seats2021, reconcile } from './buildReview';
+import {
+  DASHBOARD_CLAIMS,
+  nw405Register,
+  nw405Seats2021,
+  reconcile,
+  suppliedSqlQuota,
+} from './buildReview';
 
 const row = (id: string) => reconcile().find((r) => r.id === id)!;
 
@@ -33,6 +39,22 @@ describe('the master-build dashboard, checked against this build', () => {
     expect(row('ppfa-superseded').status).toBe('CONTRADICTED');
     expect(row('ppfa-superseded').note).toMatch(/53182/);
     expect(row('financial-model').status).toBe('OUT_OF_SCOPE');
+  });
+
+  it('shows the supplied SQL quota function does not reproduce the IEC result', () => {
+    const sql = suppliedSqlQuota();
+    expect(sql.quota).toBeCloseTo(1514.01, 2);
+    expect(sql.seatsAllocated).toBe(65);
+    expect(sql.seatsAllocated).toBeLessThan(sql.ofSeats);
+    expect(nw405Seats2021().parties.reduce((n, p) => n + p.totalSeats, 0)).toBe(67);
+    for (const id of [
+      'tech-quota-sql',
+      'tech-edge-tenant-header',
+      'tech-firebase-static',
+      'tech-ppfa-bands',
+    ]) {
+      expect(row(id).status, id).toBe('CONTRADICTED');
+    }
   });
 
   it('accepts the 34 + 33 = 67 arithmetic because the register agrees', () => {
