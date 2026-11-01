@@ -43,7 +43,10 @@ import {
   summariseQueue,
   transitionRefusalReason,
 } from './canvassQueue';
-import { Card, DataLine, Field, PageHeader, SectionLabel, StatTile } from '@/components/ui';
+import { Button, Card, DataLine, Field, PageHeader, SectionLabel, StatTile } from '@/components/ui';
+import { downloadText } from '@/lib/csv';
+import { readQueueDepth } from '@/offline/queueDepth';
+import { buildSignoff, sastDay, signoffHtml } from './dailySignoff';
 
 /** Outcomes a canvasser records at a door, in the order they occur. */
 const OUTCOMES: ContactStatus[] = ['CONTACTED', 'NO_ANSWER', 'INACCESSIBLE', 'REFUSED_RECONTACT'];
@@ -100,13 +103,50 @@ export function RoundPage() {
     closeDoor.mutate({ household, status });
   }
 
+  /** End-of-day count for this voting district, as a printable file. Nothing is sent. */
+  async function downloadSignoff() {
+    const now = new Date();
+    const day = sastDay(now.toISOString());
+    const from = new Date(`${day}T00:00:00+02:00`).toISOString();
+    const [voters, incidents, pendingSync] = await Promise.all([
+      dal.voters.listByVD(session!, session!.vdScope!, { pageSize: 500 }),
+      dal.incidents.listByDateRange(session!, from, now.toISOString()),
+      readQueueDepth(),
+    ]);
+    downloadText(
+      `vd-signoff-${session!.vdScope}-${day}.html`,
+      'text/html',
+      signoffHtml(
+        buildSignoff({
+          day,
+          wardCode,
+          vdCode: session!.vdScope!,
+          households: householdsQuery.data?.items ?? [],
+          voters: voters.items,
+          incidents,
+          pendingSync,
+          now,
+        }),
+      ),
+    );
+  }
+
   return (
     <div className="space-y-6 max-w-3xl">
       <PageHeader
         slug="/round"
         title="Round"
         action={
-          /*
+          <div className="flex flex-wrap items-center gap-2">
+            <Button
+              variant="ghost"
+              disabled={!wardCode || !session.vdScope}
+              title={session.vdScope ? undefined : 'Sign-off is for a voting-district login'}
+              onClick={() => void downloadSignoff()}
+            >
+              Daily sign-off
+            </Button>
+          {/*
            * A canvasser holds incidents.create and not incidents.view, so
            * the Incidents nav item is hidden from them and this was the
            * only permission in the product with nowhere to use it. Linked
@@ -122,7 +162,8 @@ export function RoundPage() {
             >
               Report an incident
             </Link>
-          ) : undefined
+          ) : undefined}
+          </div>
         }
       />
 

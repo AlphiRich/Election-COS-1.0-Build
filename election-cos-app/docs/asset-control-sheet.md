@@ -5526,3 +5526,9 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | Ground intelligence | `src/modules/analytics/groundIntelligence.ts` (+6), button on Sentiment report | Built; incidents only |
 | Agent map | `docs/architecture-agent-map.md` | Written |
 
+## 59. VD daily sign-off (Session 50)
+
+| Asset | Path | Status |
+|---|---|---|
+| Sign-off generator | `src/modules/voters/dailySignoff.ts` (+8), button on Round page | Built; counts only; capture-rate alert off until a campaign sets a level; not browser-rendered |
+
