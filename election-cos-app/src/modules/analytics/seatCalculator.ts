@@ -9,7 +9,12 @@
  *   Quota        Q  = floor(totalValidVotes / (totalSeats - indep - noList)) + 1
  *   Entitlement  E  = floor(partyVotes / Q)
  *   PR seats     PR = max(0, E - wardSeatsWon)                // never negative
- *   Overhang     if wardSeatsWon > E, party retains ward seats; council expands
+ *   Overhang     if wardSeatsWon > E, party retains ward seats; council expands.
+ *                Item 16: such a party takes NO list seat, not even a remainder
+ *                seat that ranks to it (that seat is consumed, not reassigned,
+ *                and the council ends larger than B by the overhang). Fixed
+ *                1 Nov 2026 after a synthetic fixture showed it still being
+ *                given a list seat on top of its wards.
  *   Ties         highest remainder; if still tied, flag for manual
  *                resolution — NEVER auto-resolve
  *
@@ -127,11 +132,14 @@ export function allocateSeats(input: SeatAllocationInput): SeatAllocationResult 
     const remainder = p.votes - entitlement * quota;
     const prSeats = Math.max(0, entitlement - p.wardSeatsWon); // never negative
     const overhangSeats = Math.max(0, p.wardSeatsWon - entitlement);
-    return { ...p, entitlement, remainder, prSeats, overhangSeats };
+    return { ...p, entitlement, remainder, prSeats, overhangSeats, remSeats: 0 };
   });
 
   const totalOverhang = working.reduce((sum, p) => sum + p.overhangSeats, 0);
-  const councilSizeFinal = totalSeats + totalOverhang; // overhang expands the council, never shrinks it
+  // Overhang expands the council. This is the starting size; a remainder seat that
+  // Item 16 forbids a party to take from its list shrinks it again (see `consumed`).
+  let councilSizeFinal = totalSeats + totalOverhang;
+  let consumed = 0;
 
   // independentWardSeats/noPRListWardSeats are real council seats (already
   // counted in totalSeats) held by nobody in `parties[]` — reserve them out
@@ -171,7 +179,15 @@ export function allocateSeats(input: SeatAllocationInput): SeatAllocationResult 
       }
 
       for (const p of tiedGroup) {
-        p.prSeats += 1;
+        // Item 13 gives this party one more seat. Item 16 then says a party whose ward
+        // seats are equal to or greater than the seats it is entitled to takes NO list
+        // seat: so the seat is only added to its list if its total now exceeds its wards.
+        // Otherwise the seat is consumed and is not given to anyone else (the Act has no
+        // mechanism for that; the council is simply larger than B by the overhang).
+        const before = p.prSeats;
+        p.remSeats += 1;
+        p.prSeats = Math.max(0, p.entitlement + p.remSeats - p.wardSeatsWon);
+        if (p.prSeats === before) consumed += 1;
         remainingSeats -= 1;
       }
       progressed = true;
@@ -180,6 +196,8 @@ export function allocateSeats(input: SeatAllocationInput): SeatAllocationResult 
     if (!progressed) break; // safety valve — no parties to award to
   }
 
+  councilSizeFinal -= consumed;
+  for (const p of working) p.overhangSeats = Math.max(0, p.wardSeatsWon - (p.entitlement + p.remSeats));
   allocatedSoFar = working.reduce((sum, p) => sum + p.wardSeatsWon + p.prSeats, 0) + reservedSeats;
   const pendingSeats = councilSizeFinal - allocatedSoFar;
 

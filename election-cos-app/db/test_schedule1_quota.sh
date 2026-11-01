@@ -28,7 +28,15 @@ EXPECT=$'ABC,0\nANC,33\nATM,0\nBLF,0\nDA,17\nEFF,6\nF4SD,0\nPA,2\nVFP,9'
 [ "$QUOTA" = "1515" ] || { echo "FAIL quota $QUOTA"; exit 1; }
 [ "$TOTAL" = "67" ]   || { echo "FAIL total $TOTAL"; exit 1; }
 [ "$OUT" = "$EXPECT" ] || { echo "FAIL seats"; echo "$OUT"; exit 1; }
+# Item 16 (excessive seats), hand-worked in seatCalculator.test.ts: B=34, A=34000
+run "$P postgres -c \"INSERT INTO demarcation_version VALUES ('SYN-16','TEST',34,0,0,'2026-01-01');\""
+for row in "P,9500,12" "Q,14000,10" "R,10500,12"; do
+  IFS=, read -r id v w <<<"$row"
+  run "$P postgres -c \"INSERT INTO party_electoral_result VALUES ('SYN-16','$id',0,$v,$w,'$H');\""
+done
+SYN="$(run "$P postgres -c \"SELECT party_id,total_seats FROM fn_calculate_schedule1_quotas('SYN-16')\"")"
+[ "$SYN" = $'P,12\nQ,14\nR,12' ] || { echo "FAIL item 16 fixture"; echo "$SYN"; exit 1; }
 # a version that would violate the constraints is refused
 if run "$P postgres -c \"INSERT INTO party_electoral_result VALUES ('LGE-2021','X',-1,0,0,'$H')\"" 2>/dev/null; then echo "FAIL negative votes accepted"; exit 1; fi
 if run "$P postgres -c \"INSERT INTO party_electoral_result VALUES ('LGE-2021','Y',1,0,0,'nothex')\"" 2>/dev/null; then echo "FAIL bad provenance hash accepted"; exit 1; fi
-echo "OK: quota 1515, 67 of 67 seats, every party matches the IEC result"
+echo "OK: quota 1515, 67 of 67 seats, every party matches the IEC result; Item 16 fixture 12/14/12"

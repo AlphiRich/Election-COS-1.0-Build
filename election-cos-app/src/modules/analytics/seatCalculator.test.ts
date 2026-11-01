@@ -167,3 +167,70 @@ describe('allocateSeats — ties are flagged, never auto-resolved', () => {
     expect(tie.partyIds.sort()).toEqual(['A', 'B']);
   });
 });
+
+/**
+ * Schedule 1 Item 16, "excessive seats" — the step an earlier implementation
+ * omitted, and which this one half-implemented until a synthetic fixture
+ * (no published result forces it) showed a party holding more ward seats than
+ * its entitlement still being handed a list seat on top.
+ *
+ * Hand-worked, B = 34, A = 34,000, C = 0, D = 0:
+ *   quota = floor(34,000 / 34) + 1 = 1,001
+ *   entitlements: P 9 (rem 491), Q 13 (rem 987), R 10 (rem 490)  -> 32 seats, 2 by remainder
+ *   remainder seats go to Q (987) and P (491)
+ *   P: 9 + 1 = 10 total, but holds 12 wards  -> Item 16: no list seat; the seat is not reassigned
+ *   Q: 13 + 1 = 14 total, holds 10 wards     -> 4 list seats
+ *   R: 10 total, holds 12 wards              -> no list seat
+ *   council = 12 + 14 + 12 = 38 = B + (12 - 10) + (12 - 10): larger than proclaimed, not capped
+ */
+describe('Item 16: excessive seats', () => {
+  const fixture = () =>
+    allocateSeats({
+      totalValidVotes: 34_000,
+      totalSeats: 34,
+      parties: [
+        { id: 'P', name: 'P', votes: 9_500, wardSeatsWon: 12 },
+        { id: 'Q', name: 'Q', votes: 14_000, wardSeatsWon: 10 },
+        { id: 'R', name: 'R', votes: 10_500, wardSeatsWon: 12 },
+      ],
+    });
+
+  it('gives a party whose ward seats equal or exceed its entitlement no list seats, even when it ranks for a remainder seat', () => {
+    const r = fixture();
+    const byId = Object.fromEntries(r.parties.map((p) => [p.id, p]));
+    expect(r.quota).toBe(1_001);
+    expect(byId.P!.prSeats).toBe(0);
+    expect(byId.R!.prSeats).toBe(0);
+    expect(byId.Q!.prSeats).toBe(4);
+  });
+
+  it('keeps every ward seat and lets the council exceed its proclaimed size, without capping it', () => {
+    const r = fixture();
+    const total = (id: string) => r.parties.find((p) => p.id === id)!.totalSeats;
+    expect([total('P'), total('Q'), total('R')]).toEqual([12, 14, 12]);
+    expect(r.councilSizeFinal).toBe(38);
+    expect(r.totalSeatsAllocated).toBe(38);
+    expect(r.pendingSeats).toBe(0);
+    expect(r.parties.find((p) => p.id === 'P')!.overhangSeats).toBe(2);
+    expect(r.parties.find((p) => p.id === 'R')!.overhangSeats).toBe(2);
+  });
+
+  it('is unchanged where nobody is in excess: the published NW405 result still holds', () => {
+    // covered in seatCalculator.nw405-2021.test.ts; this asserts the near-miss, wards == entitlement
+    const r = allocateSeats({
+      totalValidVotes: 1_000,
+      totalSeats: 4,
+      parties: [
+        { id: 'A', name: 'A', votes: 600, wardSeatsWon: 2 },
+        { id: 'B', name: 'B', votes: 400, wardSeatsWon: 0 },
+      ],
+    });
+    // quota 251; A 2 (rem 98), B 1 (rem 149); 1 remainder seat -> B. A holds exactly its 2: no excess.
+    expect(r.parties.map((p) => [p.id, p.totalSeats])).toEqual([
+      ['A', 2],
+      ['B', 2],
+    ]);
+    expect(r.councilSizeFinal).toBe(4);
+  });
+});
+

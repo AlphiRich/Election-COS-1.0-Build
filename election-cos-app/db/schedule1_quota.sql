@@ -10,7 +10,8 @@
 --   * quota = valid votes / seats          -> floor(valid / (B - C - D)) + 1
 --   * seats = TRUNC(votes / quota), and nothing allocates the rest
 --                                          -> largest remainder fills B
---   * ward seats ignored                   -> PR seats = entitlement - ward seats won
+--   * ward seats ignored                   -> PR seats = total - ward seats won, never negative;
+--                                             Item 16: a party at or over its entitlement gets no list seat
 --   * ties                                 -> never guessed: flagged, seats left pending
 -- On the 2021 NW405 result the supplied function allocated 65 of 67 seats.
 --
@@ -88,6 +89,7 @@ BEGIN
            (r.ward_votes + r.pr_votes) % v_quota               AS rem,
            GREATEST(0, (r.ward_votes + r.pr_votes) / v_quota - r.ward_seats_won) AS pr,
            GREATEST(0, r.ward_seats_won - (r.ward_votes + r.pr_votes) / v_quota) AS overhang,
+           0                                                   AS rem_seats,
            FALSE                                               AS got_this_pass
       FROM party_electoral_result r WHERE r.demarcation_version_id = p_version;
 
@@ -106,7 +108,12 @@ BEGIN
             IF v_group > v_remain THEN
                 EXIT outer;               -- cannot award unambiguously: stop, never guess
             END IF;
-            UPDATE w SET pr = pr + 1, got_this_pass = TRUE WHERE NOT got_this_pass AND rem = v_rem;
+            -- Item 13 gives the party a seat; Item 16 then gives it a LIST seat only if its total now
+            -- exceeds the ward seats it already holds. (Right-hand sides read the old row.)
+            UPDATE w SET rem_seats = rem_seats + 1,
+                         pr = GREATEST(0, ent + rem_seats + 1 - wards),
+                         got_this_pass = TRUE
+             WHERE NOT got_this_pass AND rem = v_rem;
             v_remain := v_remain - v_group;
             v_progress := TRUE;
         END LOOP;
