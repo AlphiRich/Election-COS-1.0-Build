@@ -122,6 +122,9 @@ export function SiteHeader({ enquirySubject }: { enquirySubject: string }) {
           <a href={SITE.appOrigin} className="text-site-sm font-semibold text-paper">
             Sign in
           </a>
+          <Link to="/book-a-demo" className="site-btn-outline-paper text-site-sm">
+            Book a demo
+          </Link>
           <a href={whatsAppHref(enquirySubject)} className="site-btn-primary text-site-sm">
             Talk to us
           </a>

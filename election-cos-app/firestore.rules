@@ -50,6 +50,14 @@ service cloud.firestore {
       return request.resource.data[field] == resource.data[field];
     }
 
+    // Sales enquiries (Book a demo, report requests) are written by the
+    // `submitEnquiry` Cloud Function with the Admin SDK and read by staff
+    // in the console. No client, signed in or not, reads or writes them:
+    // an open collection here would be a public contact list.
+    match /enquiries/{enquiryId} {
+      allow read, write: if false;
+    }
+
     // Deny by default; every collection below is an explicit exception.
     match /tenants/{tid}/{document=**} {
       allow read, write: if false;

@@ -79,6 +79,7 @@ export interface NavItem {
 }
 
 export const SITE_NAV: NavItem[] = [
+  { label: 'Research', href: '/research' },
   { label: 'Explainers', href: '/explainers' },
   { label: 'Voter tools', href: '/tools' },
   { label: 'Election day', href: '/election-day' },
@@ -427,6 +428,7 @@ export const CONTACT_INTERESTS = [
   'Provincial package',
   'PPFA add-on consultation',
   'Capability and Limitations Statement',
+  'Commission a research report',
 ];
 
 /** The consent wording version, recorded with every submission. */

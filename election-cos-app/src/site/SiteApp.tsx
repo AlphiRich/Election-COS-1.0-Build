@@ -32,6 +32,7 @@ import { SiteForCampaigns } from './pages/SiteForCampaigns';
 import { SiteCasework } from './pages/SiteCasework';
 import { SiteCompliance } from './pages/SiteCompliance';
 import { SitePackages } from './pages/SitePackages';
+import { SiteResearch } from './pages/SiteResearch';
 import { SiteContact } from './pages/SiteContact';
 import { SiteExplainer, SiteExplainers } from './pages/SiteExplainers';
 import { SiteFundingChecker } from './pages/SiteFundingChecker';
@@ -134,6 +135,8 @@ export function SiteApp() {
         <Route path="/compliance" element={<SiteCompliance />} />
         <Route path="/packages" element={<SitePackages />} />
         <Route path="/contact" element={<SiteContact />} />
+        <Route path="/book-a-demo" element={<SiteContact variant="demo" />} />
+        <Route path="/research" element={<SiteResearch />} />
         <Route path="/explainers" element={<SiteExplainers />} />
         <Route
           path="/explainers/:slug"

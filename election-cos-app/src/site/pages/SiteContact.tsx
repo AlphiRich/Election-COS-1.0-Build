@@ -26,7 +26,8 @@
  * the application, for the same reason: the burden of showing consent
  * was given sits with the responsible party.
  */
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import {
   CONSENT_VERSION,
   CONTACT_INTERESTS,
@@ -36,6 +37,15 @@ import {
   whatsAppHref,
 } from '../siteContent';
 import { Eyebrow, SiteCard, SiteSection, WhatsAppIcon } from '../SiteChrome';
+import {
+  enquiryConfig,
+  enquiryPayload,
+  mountTurnstile,
+  sendEnquiry,
+} from '../enquiryClient';
+
+const CONFIG = enquiryConfig(import.meta.env as Record<string, string | undefined>);
+const DEMO = 'Book a demo';
 
 function Field({
   id,
@@ -62,16 +72,55 @@ function Field({
   );
 }
 
-export function SiteContact() {
+export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'demo' }) {
+  const demo = variant === 'demo';
+  const [params] = useSearchParams();
+  // A link from the Research page can pre-select a report request. Only a
+  // known interest or a well-formed report slug is honoured; anything else
+  // in the URL is ignored, never rendered.
+  const asked = params.get('interest') ?? '';
+  const askedOk = /^report:[a-z0-9-]{1,60}$/.test(asked) || CONTACT_INTERESTS.includes(asked);
+  const startInterest = demo ? DEMO : askedOk ? asked : CONTACT_INTERESTS[0];
   const [sent, setSent] = useState(false);
+  const [token, setToken] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const widget = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!CONFIG || sent || !widget.current) return;
+    return mountTurnstile(widget.current, CONFIG.siteKey, setToken);
+  }, [sent]);
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError(null);
+    if (!CONFIG) {
+      setSent(true); // preview: nothing is sent, and the confirmation says so
+      return;
+    }
+    if (!token) {
+      setError('Please wait for the security check to finish, then send again.');
+      return;
+    }
+    setBusy(true);
+    const r = await sendEnquiry(CONFIG, enquiryPayload(new FormData(e.currentTarget), CONSENT_VERSION, token));
+    setBusy(false);
+    if (r.ok) setSent(true);
+    else setError(r.message);
+  }
 
   return (
     <>
       <SiteSection className="flex flex-col gap-4 pb-10 pt-[88px]">
-        <Eyebrow>Contact</Eyebrow>
-        <h1 className="m-0 font-site-display text-site-h3 md:text-site-h1">Talk to us</h1>
+        <Eyebrow>{demo ? 'Demo' : 'Contact'}</Eyebrow>
+        <h1 className="m-0 font-site-display text-site-h3 md:text-site-h1">
+          {demo ? 'Book a demo' : 'Talk to us'}
+        </h1>
         <p className="m-0 max-w-[36em] text-site-lead">
-          Tell us your role and your wards. We reply within one working day.
+          {demo
+            ? 'See the platform on invented data, for your role and your wards. Tell us when suits you; we reply within one working day to confirm.'
+            : 'Tell us your role and your wards. We reply within one working day.'}
         </p>
       </SiteSection>
 
@@ -83,15 +132,24 @@ export function SiteContact() {
               <h2 className="m-0 font-site-display text-site-h4">
                 Thank you. We have your enquiry.
               </h2>
-              <p className="m-0">
-                This is the confirmation the design specifies. Nothing has been sent: there is no
-                enquiry endpoint on this deployment yet, and a form that said otherwise would be
-                telling you something untrue.
-              </p>
-              <p className="m-0">
-                To reach somebody now, use WhatsApp or email{' '}
-                <a href={`mailto:${SITE.mailboxes[0]}`}>{SITE.mailboxes[0]}</a>.
-              </p>
+              {CONFIG ? (
+                <p className="m-0">
+                  We will reply within one working day. For something urgent, message us on
+                  WhatsApp.
+                </p>
+              ) : (
+                <>
+                  <p className="m-0">
+                    This is the confirmation the design specifies. Nothing has been sent: the
+                    enquiry service is not switched on for this deployment yet, and a form that
+                    said otherwise would be telling you something untrue.
+                  </p>
+                  <p className="m-0">
+                    To reach somebody now, use WhatsApp or email{' '}
+                    <a href={`mailto:${SITE.mailboxes[0]}`}>{SITE.mailboxes[0]}</a>.
+                  </p>
+                </>
+              )}
               <button
                 type="button"
                 onClick={() => setSent(false)}
@@ -103,12 +161,18 @@ export function SiteContact() {
           ) : (
             <form
               className="flex flex-col gap-5"
-              onSubmit={(e) => {
-                e.preventDefault();
-                setSent(true);
-              }}
+              onSubmit={onSubmit}
             >
-              <h2 className="m-0 font-site-display text-site-h4">Your enquiry</h2>
+              <h2 className="m-0 font-site-display text-site-h4">
+                {demo ? 'Your demo request' : 'Your enquiry'}
+              </h2>
+              {/* Honeypot: hidden from people and from assistive technology. */}
+              <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                <label>
+                  Leave this empty
+                  <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+                </label>
+              </div>
 
               <Field id="f-name" label="Name" required>
                 <input id="f-name" name="name" type="text" required className="site-field" />
@@ -140,12 +204,17 @@ export function SiteContact() {
                     id="f-interest"
                     name="interest"
                     required
-                    defaultValue={CONTACT_INTERESTS[0]}
+                    defaultValue={startInterest}
                     className="site-field"
                   >
-                    {CONTACT_INTERESTS.map((i) => (
+                    {[DEMO, ...CONTACT_INTERESTS.filter((i) => i !== DEMO)].map((i) => (
                       <option key={i}>{i}</option>
                     ))}
+                    {startInterest.startsWith('report:') && (
+                      <option value={startInterest}>
+                        Research report: {startInterest.slice(7).replace(/-/g, ' ')}
+                      </option>
+                    )}
                   </select>
                 </Field>
               </div>
@@ -167,6 +236,12 @@ export function SiteContact() {
               <p className="m-0 text-site-caption text-slate">
                 Needed for the Casework Tracker and ward packages.
               </p>
+
+              {demo && (
+                <Field id="f-window" label="When suits you" hint="For example: weekday mornings, or after 17:00.">
+                  <input id="f-window" name="demoWindow" type="text" maxLength={120} className="site-field" />
+                </Field>
+              )}
 
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="f-msg" className="text-site-sm font-semibold">
@@ -227,12 +302,18 @@ export function SiteContact() {
 
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <span className="text-site-micro text-slate">
-                  Protected by an invisible Cloudflare Turnstile check.
+                  Protected by a Cloudflare Turnstile check.
                 </span>
-                <button type="submit" className="site-btn-primary">
-                  Send enquiry
+                <button type="submit" disabled={busy} className="site-btn-primary">
+                  {busy ? 'Sending…' : demo ? 'Request a demo' : 'Send enquiry'}
                 </button>
               </div>
+              {CONFIG && <div ref={widget} />}
+              {error && (
+                <p role="alert" className="m-0 text-site-sm font-semibold text-ink">
+                  {error}
+                </p>
+              )}
             </form>
           )}
         </SiteCard>

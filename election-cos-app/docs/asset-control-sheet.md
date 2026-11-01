@@ -5493,3 +5493,15 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | Roll data | — | **None in this build.** POPIA basis undecided. |
 | Build Review page | `src/modules/analytics/BuildReviewPage.tsx`, `buildReview.ts` (+test 7), route `/analytics/build-review` | Built from sourced figures; supplied dashboard's numbers reconciled, not copied. Not browser-rendered. |
 
+## 56. Hosting estate, enquiry service, Book a demo, Research (Session 50)
+
+| Asset | Path | Status |
+|---|---|---|
+| Domain estate registry | `src/config/estate.ts` (+test 10) | Built; product subdomains none (unnamed) |
+| Runbook | `docs/hosting-and-domain-estate.md` | Written; Cloudflare-proxy residency decision open |
+| Enquiry logic + endpoint | `functions/src/enquiry.ts`, `enquiryHttp.ts`, `enquiryOrigins.ts` | Built; **fails-closed until `TURNSTILE_SECRET` is set**; not deployed |
+| Site client | `src/site/enquiryClient.ts` | Built; off until `VITE_ENQUIRY_URL` + `VITE_TURNSTILE_SITE_KEY` set |
+| Pages | `/book-a-demo`, `/research`, header CTA | Built; not browser-rendered |
+| Rules | `enquiries/{id}` closed to clients | Guarded by test; not emulator-run |
+| Company site hosting (GCP vs Cloudflare) | — | **Undecided** |
+
