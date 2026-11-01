@@ -281,17 +281,25 @@ export function SiteSeatTool() {
                       </tbody>
                     </table>
                   </div>
+                  {d.excessiveParties.length > 0 && (
+                    <p className="m-0 text-site-sm">
+                      A party won as many ward seats as its votes entitle it to, or more. It keeps
+                      every ward seat and takes no list seats, and the other parties are counted
+                      again with a new quota of {d.newQuota ?? 'not set'} (Schedule 1, item 16).
+                    </p>
+                  )}
                   {d.councilSizeFinal > num(seats) && (
                     <p className="m-0 text-site-sm">
-                      A party won more ward seats than its entitlement, so the council grows to{' '}
-                      {d.councilSizeFinal} seats. This is called overhang.
+                      After that recalculation the council is shown as {d.councilSizeFinal} seats,
+                      more than its proclaimed {num(seats)}. The Act does not say what follows.
                     </p>
                   )}
                   {d.pendingSeats > 0 && (
                     <p className="m-0 text-site-sm">
                       {d.pendingSeats} seat{d.pendingSeats === 1 ? '' : 's'} could not be awarded
-                      because parties are tied on the remainder. A tie like this is resolved by the
-                      Electoral Commission, not by this tool.
+                      because parties are level on both the remainder and the votes. The Act breaks
+                      a tie on the remainder by votes and is silent on a tie on both, so this tool
+                      leaves the seat open.
                     </p>
                   )}
                 </>

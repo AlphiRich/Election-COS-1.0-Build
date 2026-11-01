@@ -152,18 +152,37 @@ export function SeatCalculatorPage() {
             </div>
           </div>
 
+          {result.data.excessiveParties.length > 0 && (
+            <div className="bg-white border-l-4 border-gold rounded p-4 space-y-1">
+              <h2 className="text-label-caps font-display uppercase text-ink">
+                Excessive seats (Schedule 1, item 16)
+              </h2>
+              <p className="text-body-md font-body text-ink">
+                {result.data.excessiveParties.join(', ')} won ward seats equal to or above its
+                entitlement. It keeps every ward seat and takes no list seats. A new quota of{' '}
+                {result.data.newQuota ?? 'not set'} was used for the other parties, and the council
+                stays {result.data.councilSizeFinal} seats unless a note below says otherwise.
+              </p>
+              {result.data.notes.map((n) => (
+                <p key={n} className="text-body-md font-body text-slate">
+                  {n}
+                </p>
+              ))}
+            </div>
+          )}
+
           {result.data.tieFlags.length > 0 && (
             <div className="bg-white border-l-4 border-maroon rounded p-4 space-y-1">
               {/* Maroon, which SectionLabel's `tone` does not offer —
                   kept as markup rather than adding a third tone for one
                   call site. */}
               <h2 className="text-label-caps font-display uppercase text-maroon">
-                Tied — needs manual resolution
+                Level on surplus and votes: the Act is silent
               </h2>
               {result.data.tieFlags.map((tie, i) => (
                 <p key={i} className="text-body-md font-body text-ink">
                   {tie.seatsContested} seat{tie.seatsContested === 1 ? '' : 's'} contested at remainder {tie.remainder}{' '}
-                  between: {tie.partyIds.join(', ')}. Not auto-resolved — see build spec §8.2.
+                  between: {tie.partyIds.join(', ')}. A tie on the surplus alone is settled by votes (item 13(2)(b)); this is a tie on both, so the seat is left open.
                 </p>
               ))}
             </div>
@@ -172,7 +191,7 @@ export function SeatCalculatorPage() {
           {/* The shared Table, which brings tabular-nums: six columns of
               figures compared across parties is the whole point of this
               screen, and proportional digits defeat it. */}
-          <Table caption="Seats allocated to each party, with ward, PR and overhang seats, and coalition selection">
+          <Table caption="Seats allocated to each party, with ward and PR seats, and coalition selection">
             <thead>
               <tr>
                 <Th>Party</Th>

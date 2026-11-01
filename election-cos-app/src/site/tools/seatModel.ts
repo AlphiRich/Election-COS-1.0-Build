@@ -19,9 +19,10 @@
  *  - NO MINIMUM THRESHOLD. The mock-up excluded parties under 1%; the
  *    formula this build implements has no such cut-off, so the model does
  *    not invent one.
- *  - OVERHANG expands the council rather than re-running the quota without
- *    the over-represented party, and tied remainders are flagged for the
- *    Commission rather than assigned by array order.
+ *  - EXCESSIVE WARD SEATS follow Item 16 as amended in 2021: the over-
+ *    represented party keeps its ward seats and takes no list seats, and the
+ *    quota is set again for the other parties. Tied surpluses go to the party
+ *    with more valid votes (Item 13(2)(b)); only a tie on both is flagged.
  *  - INDEPENDENT AND LIST-LESS WARD WINNERS are deducted from the quota's
  *    denominator as `C` and `D`, as the Commission's own report prints.
  *  - DISTRICT COUNCILS are refused: they use a different Schedule.
@@ -143,16 +144,23 @@ export function runModel(input: ModelInput): ModelResult {
     return { ok: false, reason: e instanceof Error ? e.message : 'The model could not run.' };
   }
 
-  if (result.councilSizeFinal > council.councillors) {
+  if (result.excessiveParties.length > 0) {
     findings.push({
       severity: 'info',
-      text: `Overhang: a party won more wards than its vote share entitles it to, so the council grows from ${council.councillors} to ${result.councilSizeFinal} seats.`,
+      text: `Excessive seats: ${result.excessiveParties.join(', ')} won as many ward seats as its votes entitle it to, or more. It keeps every ward seat and takes no list seats, and a new quota (${result.newQuota ?? 'not set'}) is used for the other parties (Schedule 1, item 16).`,
+    });
+  }
+  for (const n of result.notes) findings.push({ severity: 'warning', text: n });
+  if (result.councilSizeFinal > council.councillors) {
+    findings.push({
+      severity: 'warning',
+      text: `After the recalculation the council is shown as ${result.councilSizeFinal} seats, larger than its proclaimed ${council.councillors}. The Act does not say what follows.`,
     });
   }
   for (const t of result.tieFlags) {
     findings.push({
       severity: 'blocking',
-      text: `A tie on the remainder (${t.remainder}) between ${t.partyIds.join(', ')} leaves ${t.seatsContested} seat${t.seatsContested === 1 ? '' : 's'} unawarded. The Electoral Commission resolves ties, not this model.`,
+      text: `${t.partyIds.join(', ')} are level on both the surplus (${t.remainder}) and the votes, so ${t.seatsContested} seat${t.seatsContested === 1 ? '' : 's'} cannot be awarded. The Act settles a tie on surplus by votes and says nothing about a tie on both, so this model leaves the seat open.`,
     });
   }
   const turnoutPercent = Math.round((totalValidVotes / council.registeredVoters) * 1000) / 10;

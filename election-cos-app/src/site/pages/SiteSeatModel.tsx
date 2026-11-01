@@ -464,10 +464,9 @@ export function SiteSeatModel() {
                           <tr key={p.id} className="border-b border-line">
                             <th scope="row" className="px-3 py-1.5 text-left font-semibold">
                               {p.name}
-                              {p.overhangSeats > 0 && (
+                              {p.excessive && (
                                 <span className="block text-site-caption font-normal text-slate">
-                                  Overhang: {p.overhangSeats} ward seat
-                                  {p.overhangSeats === 1 ? '' : 's'} above entitlement
+                                  Excessive seats: keeps its ward seats, takes no list seats
                                 </span>
                               )}
                             </th>
