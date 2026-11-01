@@ -348,7 +348,7 @@ export const FUNDING_POINTS = [
  * ecos-v2 fork's settings copy.
  */
 export const FUNDING_SOURCE =
-  'Thresholds as proclaimed on 6 August 2025 (Government Gazette 53182). ' +
+  'Thresholds as published on 18 August 2025 (Government Gazette 53182). ' +
   'These thresholds are under court challenge; we update them when the law changes.';
 
 export const EXAMPLE_DONOR = {

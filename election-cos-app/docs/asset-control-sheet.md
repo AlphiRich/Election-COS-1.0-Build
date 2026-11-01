@@ -5370,3 +5370,10 @@ and fixed).
 - **Fixed:** horizontal overflow at 320 px (home 24 px, for-campaigns 24 px, explainers 4 px) — grid minimums now `min(100%, N px)`. Measured scrollWidth = 320 on `/`, `/for-campaigns`, `/explainers`, checker; 1280 at desktop.
 - **Verification:** `check:all` passes (lint, types, hex, type-scale, headers, fonts, tests, functions tests).
 - **Not done:** the war-room app itself is unchanged and stays at `app.electioncos.co.za` behind sign-in; ads still need the owner checklist (§45); gazette date conflict unresolved; footer placeholders (street address, fourth mailbox, B-BBEE note) still bracketed.
+
+## 47. Gazette date conflict (1 Nov 2026)
+
+- **Conflict:** site copy said "proclaimed 6 August 2025"; `ppfaDefaults.ts` says "Gazette No. 53182, 18 August 2025".
+- **Evidence found (web search only, secondary):** Acts Online lists the regulations as Proclamation Notice R. 275 of 2025, Gazette 53182, dated 18 August 2025. TimesLive and BusinessDay articles dated 18 August 2025 report the thresholds (R200,000 / R30 million). One report gives 6 August as the day the President signed. That reading would reconcile both dates (signed 6 Aug, published 18 Aug) but is not established.
+- **Resolved to:** the *gazette* date, 18 August 2025, everywhere on the public site, matching the application. The 6 August signing date is no longer asserted.
+- **NOT verified against the IEC:** `www.elections.org.za`, `acts.co.za` and `timeslive.co.za` do not resolve from this session (network allowlist), so the IEC site could not be read. Owner action: open the Gazette 53182 PDF (or the IEC party-funding page) and confirm number, date and Proclamation Notice R. 275; then, if wished, restore the signing date as a separate fact.

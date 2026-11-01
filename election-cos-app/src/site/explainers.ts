@@ -66,7 +66,7 @@ export const EXPLAINERS: Explainer[] = [
         heading: 'The two figures',
         paragraphs: [
           'A donation above R200,000 must be disclosed. A single donor may give a party no more than R30 million in a financial year.',
-          'Both were proclaimed on 6 August 2025 in Government Gazette 53182. They replaced an earlier regime in which the disclosure line was R100,000 and the annual cap R15 million, and a still earlier R80,000 figure. Material published before August 2025 — including some that is still online — quotes the superseded numbers.',
+          'Both were published in Government Gazette 53182 of 18 August 2025. They replaced an earlier regime in which the disclosure line was R100,000 and the annual cap R15 million, and a still earlier R80,000 figure. Material published before August 2025 — including some that is still online — quotes the superseded numbers.',
         ],
       },
       {
@@ -86,7 +86,7 @@ export const EXPLAINERS: Explainer[] = [
     ],
     sources: [
       'Political Party Funding Act 6 of 2018',
-      'Government Gazette 53182, 6 August 2025 — the proclaimed thresholds',
+      'Government Gazette 53182, 18 August 2025 — the proclaimed thresholds',
     ],
     updated: '29 October 2026',
   },
