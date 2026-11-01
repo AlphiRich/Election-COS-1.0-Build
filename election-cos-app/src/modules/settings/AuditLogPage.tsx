@@ -20,7 +20,9 @@ import {
   groupByDay,
   isUnknownAction,
 } from './auditTrail';
-import { Card, DataLine, Field, PageHeader, SectionLabel } from '@/components/ui';
+import { Button, Card, DataLine, Field, PageHeader, SectionLabel } from '@/components/ui';
+import { downloadText } from '@/lib/csv';
+import { auditCsv, auditExportFilename } from './auditExport';
 
 const PAGE_SIZES = [50, 200, 500] as const;
 
@@ -55,7 +57,22 @@ export function AuditLogPage() {
         slug="/settings/audit"
         title="Audit log"
         action={
-          /* Was a bare <label> around the select — no association. */
+          <div className="flex flex-wrap items-end gap-3">
+            <Button
+              variant="ghost"
+              disabled={!canRead || events.length === 0}
+              onClick={() => {
+                const now = new Date();
+                downloadText(
+                  auditExportFilename(session.tenantId, now),
+                  'text/csv',
+                  auditCsv(session.tenantId, events, now),
+                );
+              }}
+            >
+              Export CSV
+            </Button>
+          {/* Was a bare <label> around the select — no association. */}
           <Field label="Show">
             {(props) => (
               <select {...props} value={limitCount} onChange={(e) => setLimitCount(Number(e.target.value))}>
@@ -67,6 +84,7 @@ export function AuditLogPage() {
               </select>
             )}
           </Field>
+          </div>
         }
       />
 

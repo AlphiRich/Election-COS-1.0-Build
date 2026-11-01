@@ -34,6 +34,8 @@ import { useSession } from '@/auth/useSession';
 import { SENTIMENT_META, SENTIMENT_ORDER } from '@/modules/voters/sentiment';
 import { TONE_PILL_CLASSES } from '@/design/toneClasses';
 import { summarizeSentiment } from './sentimentSummary';
+import { buildGroundIntelligence, groundIntelligenceHtml } from './groundIntelligence';
+import { downloadText } from '@/lib/csv';
 import { Button, Card, PageHeader, SectionLabel, StatTile } from '@/components/ui';
 
 function downloadCsv(filename: string, rows: (string | number)[][]) {
@@ -49,6 +51,20 @@ function downloadCsv(filename: string, rows: (string | number)[][]) {
 
 export function ScheduledReportsPage() {
   const session = useSession();
+
+  /** Daily Ground Intelligence: generated here, in the browser, as a file. Nothing is sent. */
+  async function downloadGroundIntelligence() {
+    const now = new Date();
+    const sast = new Date(now.getTime() + 2 * 3_600_000).toISOString();
+    const period = sast.slice(0, 7);
+    const from = new Date(`${period}-01T00:00:00+02:00`).toISOString();
+    const incidents = await dal.incidents.listByDateRange(session!, from, now.toISOString());
+    downloadText(
+      `ground-intelligence-${session!.tenantId}-${sast.slice(0, 10)}.html`,
+      'text/html',
+      groundIntelligenceHtml(buildGroundIntelligence(incidents, period, now)),
+    );
+  }
 
   const countersQuery = useQuery({
     queryKey: ['warRoomCounters', session?.tenantId],
@@ -100,9 +116,18 @@ export function ScheduledReportsPage() {
           'See this page\'s header comment for what "Automated Reporting" would still need to be fully real.'
         }
         action={
-          <Button onClick={handleExport} disabled={!summary} className="whitespace-nowrap">
-            Export CSV
-          </Button>
+          <div className="flex flex-wrap gap-2">
+            <Button onClick={handleExport} disabled={!summary} className="whitespace-nowrap">
+              Export CSV
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={() => void downloadGroundIntelligence()}
+              className="whitespace-nowrap"
+            >
+              Ground intelligence (HTML)
+            </Button>
+          </div>
         }
       />
 

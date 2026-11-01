@@ -29,13 +29,17 @@
  * that is sold but unbuilt — because the remedies differ and so do the
  * conversations.
  */
+import { useState } from 'react';
+import { dal } from '@/dal';
 import { useSession } from '@/auth/useSession';
+import { downloadText } from '@/lib/csv';
+import { buildStatement, sastPeriod, statementCsv } from '@/modules/roll/usageStatement';
 import { useEntitlements } from '@/auth/useEntitlements';
 import { isModuleActive, subscribedWards } from '@/auth/entitlements';
 import { MODULES, type ModuleDefinition } from '@/auth/modules';
 import type { TenantEntitlement } from '@/dal/ports/entitlements';
 import { SUBSCRIPTION_PRICE_BASIS, UNBUILT_MODULE_BASIS } from './subscriptionView';
-import { BasisNote, Card, DataLine, PageHeader, Pill } from '@/components/ui';
+import { BasisNote, Button, Card, DataLine, Field, PageHeader, Pill } from '@/components/ui';
 
 /** Modules with no surfaces in this build. See `modules.ts`. */
 function isBuilt(module: ModuleDefinition): boolean {
@@ -46,6 +50,61 @@ function windowText(entitlement: TenantEntitlement): string {
   const from = new Date(entitlement.activeFrom).toLocaleDateString('en-ZA');
   if (!entitlement.activeUntil) return `From ${from}, open-ended`;
   return `${from} to ${new Date(entitlement.activeUntil).toLocaleDateString('en-ZA')}`;
+}
+
+/**
+ * Usage statement for a per-use module: a file of counts by month, for
+ * whoever invoices. No prices (see modules.ts), no people (see
+ * usageStatement.ts). Not a screen of figures: it only produces the file.
+ */
+function UsageStatementCard() {
+  const session = useSession()!;
+  const [period, setPeriod] = useState(() => sastPeriod(new Date().toISOString()));
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function download(kind: 'csv' | 'json') {
+    setBusy(true);
+    setError(null);
+    try {
+      const events = await dal.roll.listUsage(session);
+      const s = buildStatement(session, events, period, new Date());
+      if (kind === 'csv') {
+        downloadText(`usage-${session.tenantId}-${period}.csv`, 'text/csv', statementCsv(s));
+      } else {
+        downloadText(`usage-${session.tenantId}-${period}.json`, 'application/json', JSON.stringify(s, null, 2));
+      }
+    } catch {
+      setError('The usage could not be read, so no statement was made.');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <Card className="space-y-3">
+      <p className="font-display">Usage statement — voter verification and capture</p>
+      <p className="text-body-md font-body text-slate">
+        A file of how many people were confirmed and recorded in the month, by ward and station. It holds
+        counts only: no prices and no names. A statement from a ward or district login covers that scope only,
+        and says so in the file.
+      </p>
+      <div className="flex flex-wrap items-end gap-3">
+        <Field label="Month (SAST)">
+          {(props) => (
+            <input {...props} type="month" value={period} onChange={(e) => setPeriod(e.target.value)} />
+          )}
+        </Field>
+        <Button disabled={busy || !period} onClick={() => void download('csv')}>
+          Download CSV
+        </Button>
+        <Button variant="ghost" disabled={busy || !period} onClick={() => void download('json')}>
+          Download JSON
+        </Button>
+      </div>
+      {error && <p className="text-body-md font-body text-maroon">{error}</p>}
+    </Card>
+  );
 }
 
 export function SubscriptionPage() {
@@ -137,6 +196,8 @@ export function SubscriptionPage() {
           );
         })}
       </div>
+
+      {session.caps.includes('roll.view') && <UsageStatementCard />}
 
       <div className="border-t border-ink/10 pt-4">
         <BasisNote>{UNBUILT_MODULE_BASIS}</BasisNote>

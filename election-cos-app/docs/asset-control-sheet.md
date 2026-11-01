@@ -5513,3 +5513,16 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | Client | `src/auth/claimsApi.ts` (+test 4), `AuthProvider.tsx` | Built; off unless `VITE_CLAIMS_WORKER=true` |
 | Attorney review | owner's statement, 1 Nov 2026 | **Stated approved; reference/scope not on file** — file it against §11.1 |
 
+## 58. Architecture listings, exports (Session 50)
+
+| Asset | Path | Status |
+|---|---|---|
+| Schedule 1 SQL + test | `db/schedule1_quota.sql`, `db/test_schedule1_quota.sh` | Passes on Postgres 16; injection-proved; not part of the Firebase runtime |
+| Outbox status machine | `src/offline/outboxStatus.ts` (+6) | Built; not wired to Dexie |
+| Edge gate | `worker/src/edge.ts` (+6), mounted on `/api/sync` | Built; not deployed |
+| CSV/download helper | `src/lib/csv.ts` (+3) | Built |
+| Audit export | `src/modules/settings/auditExport.ts` (+4), button on Audit log | Built |
+| Usage statement | `src/modules/roll/usageStatement.ts` (+5), card on Subscription | Built; no payment/invoice |
+| Ground intelligence | `src/modules/analytics/groundIntelligence.ts` (+6), button on Sentiment report | Built; incidents only |
+| Agent map | `docs/architecture-agent-map.md` | Written |
+

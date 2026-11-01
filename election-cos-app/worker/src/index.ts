@@ -34,6 +34,7 @@
  */
 import { createRemoteJWKSet, jwtVerify, SignJWT, importPKCS8, type JWTPayload } from 'jose';
 import { SEED_ROLES } from '../../src/auth/seedRoles';
+import { gateSync } from './edge';
 
 // Minimal Workers types, so this package needs no extra type dependency.
 interface Fetcher {
@@ -99,7 +100,7 @@ interface FirebaseToken extends JWTPayload {
   caps?: Caps;
 }
 
-async function verifyIdToken(req: Request, env: Env): Promise<FirebaseToken> {
+export async function verifyIdToken(req: Request, env: Env): Promise<FirebaseToken> {
   const header = req.headers.get('authorization') ?? '';
   const token = header.startsWith('Bearer ') ? header.slice(7) : '';
   if (!token) throw new HttpError(401, 'Missing Firebase ID token');
@@ -410,6 +411,14 @@ async function handleApi(req: Request, env: Env, url: URL): Promise<Response> {
 export default {
   async fetch(req: Request, env: Env): Promise<Response> {
     const url = new URL(req.url);
+    if (url.pathname === '/api/sync') {
+      // Edge gate: verified token, per-user throttle, header hygiene. The origin does the work.
+      return gateSync(req, {
+        verify: (r) => verifyIdToken(r, env).then((t) => ({ uid: t.uid })),
+        forward: (r) => fetch(r),
+        now: () => Date.now(),
+      });
+    }
     if (url.pathname.startsWith('/api/')) {
       try {
         return await handleApi(req, env, url);
