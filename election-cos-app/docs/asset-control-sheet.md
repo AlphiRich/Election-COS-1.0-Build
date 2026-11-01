@@ -5579,3 +5579,4 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | App dashboard | `src/modules/polls/PollsPage.tsx`, `/analytics/polls`, `dal.polls`, rules, index | Built; not browser-verified (auth-gated) |
 | WhatsApp API sending | none | **Not built**: needs credential and a poll-contact opt-in |
 | Notice wording | `POLL_NOTICE_VERSION` placeholder | Pending attorney |
+| Multi-provider sign-in | `src/auth/authProviders.ts` (+9), `firebaseAuth.ts` `signInWithProvider` (+3), `SignInPage.tsx` | Built; only Google enabled by default; others need Firebase console + Meta/Microsoft/Apple app setup; popup flow not browser-tested (needs live providers) |

@@ -24,11 +24,19 @@
  * cannot ship. `signInPage.test.ts` asserts that.
  */
 import { useState } from 'react';
-import { signInWithEmail, signInWithGoogle, signUpWithEmail } from './firebaseAuth';
+import { signInWithEmail, signInWithProvider, signUpWithEmail } from './firebaseAuth';
+import {
+  PROVIDER_LABEL,
+  enabledProviders,
+  signInErrorMessage,
+  type ProviderId,
+} from './authProviders';
 import { GoogleIcon } from './GoogleIcon';
 import { usingEmulators } from '@/dal/adapters/firestore/client';
 import { Button, DataLine, Field } from '@/components/ui';
 import { NAV_FOOTER_LINE, PRODUCT_NAME } from '@/lib/legalText';
+
+const PROVIDERS = enabledProviders(import.meta.env.VITE_AUTH_PROVIDERS as string | undefined);
 
 export function SignInPage() {
   const [pending, setPending] = useState(false);
@@ -54,11 +62,11 @@ export function SignInPage() {
     }
   }
 
-  async function handleSignIn() {
+  async function handleSignIn(provider: ProviderId) {
     setPending(true);
     setError(null);
     try {
-      await signInWithGoogle();
+      await signInWithProvider(provider);
       // onIdTokenChanged in AuthProvider.tsx picks up the new user; no
       // navigation needed here.
     } catch (err) {
@@ -67,11 +75,7 @@ export function SignInPage() {
         setError('Firebase is not configured for this environment yet — see BUILD-STATUS.md.');
         return;
       }
-      const code = (err as { code?: string })?.code;
-      if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') {
-        return; // user closed the popup — not an error worth showing
-      }
-      setError('Sign-in failed. Try again, or contact your administrator if this keeps happening.');
+      setError(signInErrorMessage((err as { code?: string })?.code));
     }
   }
 
@@ -82,34 +86,39 @@ export function SignInPage() {
           {/* IC-ECOS-NAMING-2026-V1 §2.3 fixes this header string exactly. */}
           <h1 className="text-headline-md font-display text-ink">Sign in to {PRODUCT_NAME}</h1>
           <p className="text-body-md font-body text-slate mt-2">
-            Use your party-issued Google account to continue.
+            Choose how you sign in. Use the same method each time.
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={handleSignIn}
-          disabled={pending}
-          className="w-full flex items-center justify-center gap-3 border border-ink/20 rounded py-2.5 text-body-md font-body text-ink disabled:opacity-50"
-        >
-          <GoogleIcon />
-          {pending ? 'Signing in…' : 'Sign in with Google'}
-        </button>
+        <div className="space-y-3">
+          {PROVIDERS.map((id) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => void handleSignIn(id)}
+              disabled={pending}
+              className="w-full min-h-11 flex items-center justify-center gap-3 border border-ink/20 rounded py-2.5 text-body-md font-body text-ink disabled:opacity-50"
+            >
+              {id === 'google' && <GoogleIcon />}
+              {pending ? 'Signing in…' : `Sign in with ${PROVIDER_LABEL[id]}`}
+            </button>
+          ))}
+        </div>
 
         {error && <p className="text-body-md font-body text-maroon">{error}</p>}
 
         <p className="text-body-md font-body text-slate">
-          Signing in doesn't grant access on its own — an administrator still has to assign you a role and
-          geographic scope in Settings → Permissions before you can see any data (§4.4).
+          Signing in doesn't grant access on its own — an administrator still has to assign you a
+          role and geographic scope in Settings → Permissions before you can see any data (§4.4).
         </p>
 
         {usingEmulators() && (
           <div className="border-t border-ink/10 pt-5 space-y-3">
             <p className="text-label-caps font-display uppercase text-gold">Local emulator</p>
             <p className="text-body-md font-body text-slate">
-              This build is pointed at the local Firebase emulator suite, so Google sign-in is unavailable.
-              Use any email and password; the account is created on first use and discarded when the emulator
-              stops.
+              This build is pointed at the local Firebase emulator suite, so Google sign-in is
+              unavailable. Use any email and password; the account is created on first use and
+              discarded when the emulator stops.
             </p>
             <Field label="Email">
               {(props) => (
