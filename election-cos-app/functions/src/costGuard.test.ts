@@ -78,7 +78,7 @@ describe('the month', () => {
   });
 });
 
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 
 describe('every paid send is behind the guard', () => {
@@ -95,8 +95,7 @@ describe('every paid send is behind the guard', () => {
   });
   it('no other function file calls the WhatsApp delivery', () => {
     const dir = __dirname;
-    const offenders = require('node:fs')
-      .readdirSync(dir)
+    const offenders = readdirSync(dir)
       .filter((f: string) => f.endsWith('.ts') && !f.endsWith('.test.ts'))
       .filter((f: string) => /deliverOtp\(/.test(readFileSync(path.join(dir, f), 'utf-8')))
       .filter(
