@@ -25,6 +25,7 @@
 import type { Household } from '@/dal/ports/households';
 import type { Incident } from '@/dal/ports/incidents';
 import type { Voter } from '@/dal/ports/voters';
+import { tokens } from '@/design/tokens';
 
 export const SIGNOFF_SCHEMA = 'ecos.vd-signoff/1';
 
@@ -145,7 +146,7 @@ export function signoffHtml(s: Signoff): string {
   const cats = Object.entries(s.incidentsByCategory);
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VD sign-off ${esc(s.vdCode)} ${esc(s.day)}</title>
-<style>body{font:16px/1.6 Arial,sans-serif;color:#1A2246;margin:0;background:#fff}main{max-width:720px;margin:0 auto;padding:28px 20px}h1{margin:0 0 4px;font-size:1.6rem}table{width:100%;border-collapse:collapse;margin:12px 0}th,td{text-align:left;padding:8px 10px;border-top:1px solid #D6D1C8}th{width:60%;font-weight:600}.note{border-left:4px solid #B7913F;padding:10px 14px;background:#F7F4EE;margin:16px 0}.sig{display:flex;gap:24px;margin-top:36px}.sig div{flex:1;border-top:1px solid #1A2246;padding-top:6px;font-size:.9rem}@media print{main{padding:0}}</style></head>
+<style>body{font:16px/1.6 Arial,sans-serif;color:${tokens.color.ink};margin:0;background:white}main{max-width:720px;margin:0 auto;padding:28px 20px}h1{margin:0 0 4px;font-size:1.6rem}table{width:100%;border-collapse:collapse;margin:12px 0}th,td{text-align:left;padding:8px 10px;border-top:1px solid ${tokens.color.line}}th{width:60%;font-weight:600}.note{border-left:4px solid ${tokens.color.gold};padding:10px 14px;background:${tokens.color.paper};margin:16px 0}.sig{display:flex;gap:24px;margin-top:36px}.sig div{flex:1;border-top:1px solid ${tokens.color.ink};padding-top:6px;font-size:.9rem}@media print{main{padding:0}}</style></head>
 <body><main>
 <h1>VD Captain daily sign-off</h1>
 <p>Ward ${esc(s.wardCode)} · Voting district ${esc(s.vdCode)} · ${esc(s.day)}</p>
@@ -159,6 +160,6 @@ ${cats.length ? `<table>${cats.map(([c, n]) => row(`Incidents: ${c.replace(/_/g,
 <div class="note"><strong>${esc(s.alert.replace(/_/g, ' '))}.</strong> ${esc(ALERT_TEXT[s.alert])}</div>
 <p>Counts only: no names, no ID numbers. Supportive responses are what voters said at the door and what the canvasser recorded; they are not pledges and not a prediction.</p>
 <div class="sig"><div>VD Captain</div><div>Ward Lead</div><div>Date and time</div></div>
-<p style="font-size:.85rem;color:#6A6E7E">Generated ${esc(s.generatedAt)} in the browser. Nothing was sent.</p>
+<p style="font-size:.85rem;color:${tokens.color.slate}">Generated ${esc(s.generatedAt)} in the browser. Nothing was sent.</p>
 </main></body></html>`;
 }

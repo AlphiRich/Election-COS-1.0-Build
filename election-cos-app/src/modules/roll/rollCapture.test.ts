@@ -7,6 +7,7 @@ import { MODULES, gatingModule } from '@/auth/modules';
 import { SEED_ROLES } from '@/auth/seedRoles';
 import {
   CaptureRefused,
+  assertCapturable,
   buildCapture,
   buildVerification,
   findAddresses,
@@ -125,6 +126,23 @@ describe('capturing a voter from the roll', () => {
     expect(() => buildCapture(ctx(), entry({ addressId: null }), undefined, ok, NOW)).toThrowError(
       CaptureRefused,
     );
+  });
+});
+
+describe('never writing a person again from the roll', () => {
+  it('lets a first capture through', () => {
+    expect(() => assertCapturable(null)).not.toThrow();
+  });
+  it('refuses a person already on file, and one erased at their own request, with different words', () => {
+    expect(() => assertCapturable({ deletedAt: null })).toThrowError(/already recorded/);
+    try {
+      assertCapturable({ deletedAt: '2026-11-03T08:00:00Z' });
+      expect.unreachable();
+    } catch (e) {
+      expect(e).toBeInstanceOf(CaptureRefused);
+      expect((e as CaptureRefused).reason).toBe('ALREADY_RECORDED');
+      expect((e as Error).message).toMatch(/removed .* must not be recorded again/);
+    }
   });
 });
 

@@ -24,6 +24,7 @@
  * assessment. The notice says so, in the preview's words.
  */
 import type { Incident } from '@/dal/ports/incidents';
+import { tokens } from '@/design/tokens';
 
 export const MIN_CELL = 5;
 
@@ -113,7 +114,7 @@ export function groundIntelligenceHtml(g: GroundIntelligence): string {
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Daily Ground Intelligence ${esc(g.period)}</title>
-<style>body{margin:0;background:#F7F4EE;color:#1A2246;font:16px/1.65 Arial,sans-serif}main{max-width:760px;margin:0 auto;padding:32px 20px}header{border-bottom:3px solid #B7913F;padding-bottom:20px}h1,h2{line-height:1.2}h1{margin:0;font-size:2rem}h2{margin:4px 0 12px;font-size:1.25rem}.eyebrow{color:#33427E;font-size:.85rem;font-weight:600}.card{margin:20px 0;padding:20px;border:1px solid #D6D1C8;border-radius:8px;background:#fff}ul{margin:0;padding:0;list-style:none}li{display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-top:1px solid #E8E5DF}strong{font-family:Consolas,monospace}.small{color:#6A6E7E;font-size:.9rem}.notice{margin-top:28px;padding:16px;border-left:4px solid #B7913F;background:#fff}.empty{padding:18px;background:#fff}footer{margin-top:24px;color:#6A6E7E;font-size:.9rem}</style></head>
+<style>body{margin:0;background:${tokens.color.paper};color:${tokens.color.ink};font:16px/1.65 Arial,sans-serif}main{max-width:760px;margin:0 auto;padding:32px 20px}header{border-bottom:3px solid ${tokens.color.gold};padding-bottom:20px}h1,h2{line-height:1.2}h1{margin:0;font-size:2rem}h2{margin:4px 0 12px;font-size:1.25rem}.eyebrow{color:${tokens.color.teal};font-size:.85rem;font-weight:600}.card{margin:20px 0;padding:20px;border:1px solid ${tokens.color.line};border-radius:8px;background:white}ul{margin:0;padding:0;list-style:none}li{display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-top:1px solid ${tokens.color.line}}strong{font-family:Consolas,monospace}.small{color:${tokens.color.slate};font-size:.9rem}.notice{margin-top:28px;padding:16px;border-left:4px solid ${tokens.color.gold};background:white}.empty{padding:18px;background:white}footer{margin-top:24px;color:${tokens.color.slate};font-size:.9rem}</style></head>
 <body><main>
 <header><p class="eyebrow">GROUND INTELLIGENCE</p><h1>Daily Ground Intelligence</h1><p>Reporting period: ${esc(g.period)}</p></header>
 <h2>Aggregated field signals</h2>

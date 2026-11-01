@@ -35,7 +35,12 @@ import type { VoterDraft } from '@/dal/ports/voters';
 
 export class CaptureRefused extends Error {
   constructor(
-    readonly reason: 'NO_CONSENT' | 'NAME_NOT_CONFIRMED' | 'OUT_OF_SCOPE' | 'NO_ADDRESS',
+    readonly reason:
+      | 'NO_CONSENT'
+      | 'NAME_NOT_CONFIRMED'
+      | 'OUT_OF_SCOPE'
+      | 'NO_ADDRESS'
+      | 'ALREADY_RECORDED',
     message: string,
   ) {
     super(message);
@@ -73,6 +78,26 @@ export function inCallerScope(
         e.vdCode === ctx.vdScope
       );
   }
+}
+
+/**
+ * A person already on file is never written again from the roll.
+ *
+ * The voter id is deterministic (`roll-<entry>`), so a second capture would
+ * overwrite the first. Worse, if the first record was soft-deleted because
+ * the person asked to be erased, an overwrite would set `deletedAt` back to
+ * null and bring them back. Someone who asked to go does not return because
+ * a different canvasser knocked and got a yes; that is a conversation for a
+ * person to have with the Information Officer, not a write.
+ */
+export function assertCapturable(existing: { deletedAt: string | null } | null): void {
+  if (existing === null) return;
+  throw new CaptureRefused(
+    'ALREADY_RECORDED',
+    existing.deletedAt
+      ? 'This person was removed from the campaign’s records and must not be recorded again here. Tell your Ward Lead.'
+      : 'This person is already recorded.',
+  );
 }
 
 export function buildVerification(ctx: SessionContext, e: RollEntry, now: Date): UsageEvent {

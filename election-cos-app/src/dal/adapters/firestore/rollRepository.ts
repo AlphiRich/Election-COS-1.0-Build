@@ -17,6 +17,7 @@ import {
 } from 'firebase/firestore';
 import type { SessionContext } from '@/dal/ports/session';
 import type { RollAddress, RollEntry, RollRepository, UsageEvent } from '@/dal/ports/roll';
+import { assertCapturable } from '@/modules/roll/rollCapture';
 import { db, geoScopeConstraints, stampOnWrite, tenantCollectionPath, toISO } from './base';
 
 const entry = (id: string, d: Record<string, unknown>): RollEntry => ({
@@ -103,17 +104,27 @@ export const rollRepository: RollRepository = {
   },
 
   async captureWithConsent(ctx, w) {
+    // Never overwrite a person already on file, including one erased at their own request.
+    const voterRef = doc(db(), path(ctx, 'voters'), w.voter.id);
+    const existingVoter = await getDoc(voterRef);
+    assertCapturable(
+      existingVoter.exists()
+        ? { deletedAt: toISO(existingVoter.data().deletedAt as string | null) }
+        : null,
+    );
+    const householdRef = doc(db(), path(ctx, 'households'), w.household.id);
+    const existingHousehold = await getDoc(householdRef);
     const batch = writeBatch(db());
-    // Household: merge, so a second voter at the same door does not erase the first's.
+    // A second voter at a door must not reset the household's createdAt or revive a deleted
+    // one: only a NEW household gets the create stamp.
     batch.set(
-      doc(db(), path(ctx, 'households'), w.household.id),
-      { ...w.household, ...stampOnWrite(ctx, true) },
+      householdRef,
+      existingHousehold.exists()
+        ? { updatedAt: serverTimestamp(), updatedBy: ctx.uid }
+        : { ...w.household, ...stampOnWrite(ctx, true) },
       { merge: true },
     );
-    batch.set(doc(db(), path(ctx, 'voters'), w.voter.id), {
-      ...w.voter,
-      ...stampOnWrite(ctx, true),
-    });
+    batch.set(voterRef, { ...w.voter, ...stampOnWrite(ctx, true) });
     batch.set(doc(db(), path(ctx, 'usageEvents'), w.usage.id), {
       ...w.usage,
       recordedAt: serverTimestamp(),
