@@ -141,7 +141,7 @@ export function SiteFooter({
 }) {
   return (
     <footer className="bg-ink text-line text-site-sm">
-      <div className="mx-auto grid max-w-[1200px] grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-8 px-6 pb-8 pt-14">
+      <div className="mx-auto grid max-w-[1200px] grid-cols-[repeat(auto-fit,minmax(min(100%,220px),1fr))] gap-8 px-6 pb-8 pt-14">
         <div className="flex flex-col gap-2">
           <span className="font-site-display text-site-h6 text-paper">
             {SITE.productName} {SITE.byline}
@@ -166,16 +166,16 @@ export function SiteFooter({
 
         <div className="flex flex-col gap-1.5">
           <span className="font-semibold text-paper">Legal</span>
-          <Link to="/#pledge" className="text-line">
+          <Link to="/for-campaigns#pledge" className="text-line">
             Privacy notice
           </Link>
-          <Link to="/#pledge" className="text-line">
+          <Link to="/for-campaigns#pledge" className="text-line">
             Terms
           </Link>
-          <Link to="/#pledge" className="text-line">
+          <Link to="/for-campaigns#pledge" className="text-line">
             Cookie notice
           </Link>
-          <Link to="/#pledge" className="text-line">
+          <Link to="/for-campaigns#pledge" className="text-line">
             Neutrality pledge
           </Link>
           {/*

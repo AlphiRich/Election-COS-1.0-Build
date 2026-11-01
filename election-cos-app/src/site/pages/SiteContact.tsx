@@ -75,7 +75,7 @@ export function SiteContact() {
         </p>
       </SiteSection>
 
-      <SiteSection className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] items-start gap-10 pb-[88px]">
+      <SiteSection className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] items-start gap-10 pb-[88px]">
         {/* ------------------------------------------------- the form */}
         <SiteCard className="p-8">
           {sent ? (
@@ -114,7 +114,7 @@ export function SiteContact() {
                 <input id="f-name" name="name" type="text" required className="site-field" />
               </Field>
 
-              <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-5">
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,200px),1fr))] gap-5">
                 <Field id="f-mobile" label="Mobile">
                   <input id="f-mobile" name="mobile" type="tel" className="site-field" />
                 </Field>
@@ -126,7 +126,7 @@ export function SiteContact() {
                 Give us at least one way to reach you: mobile or email.
               </p>
 
-              <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-5">
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,200px),1fr))] gap-5">
                 <Field id="f-role" label="Your role" required>
                   <select id="f-role" name="role" required defaultValue="" className="site-field">
                     <option value="">Choose one</option>
@@ -150,7 +150,7 @@ export function SiteContact() {
                 </Field>
               </div>
 
-              <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-5">
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,200px),1fr))] gap-5">
                 <Field id="f-muni" label="Municipality">
                   <input id="f-muni" name="municipality" type="text" className="site-field" />
                 </Field>

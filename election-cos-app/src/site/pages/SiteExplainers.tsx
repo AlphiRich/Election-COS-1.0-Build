@@ -40,7 +40,7 @@ export function SiteExplainers() {
         <h2 id="ex-h" className="sr-only">
           Explainer articles
         </h2>
-        <ul className="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-5 p-0">
+        <ul className="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-5 p-0">
           {EXPLAINERS.map((e) => (
             <li key={e.slug} className="flex">
               <SiteCard className="flex w-full flex-col gap-3 p-8">

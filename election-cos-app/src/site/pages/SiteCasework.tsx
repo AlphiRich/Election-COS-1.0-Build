@@ -55,7 +55,7 @@ export function SiteCasework() {
   return (
     <>
       {/* ------------------------------------------------------- hero */}
-      <SiteSection className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] items-end gap-12 pb-[72px] pt-[88px]">
+      <SiteSection className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] items-end gap-12 pb-[72px] pt-[88px]">
         <div className="flex flex-col gap-5">
           <Eyebrow>Councillor Casework Tracker</Eyebrow>
           <h1 className="m-0 font-site-display text-site-h3 md:text-site-hero">
@@ -93,7 +93,7 @@ export function SiteCasework() {
           <h2 id="flow-h" className="mb-10 mt-0 font-site-display text-site-h3">
             How a case moves
           </h2>
-          <ol className="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(190px,1fr))] gap-4 p-0">
+          <ol className="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,190px),1fr))] gap-4 p-0">
             {CASE_STEPS.map((s) => (
               <li
                 key={s.n}
@@ -111,7 +111,7 @@ export function SiteCasework() {
       {/* ---------------------------------------------- signed referral */}
       <SiteSection
         labelledBy="ref-h"
-        className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] items-center gap-14 py-[88px]"
+        className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] items-center gap-14 py-[88px]"
       >
         <div className="flex flex-col gap-4">
           <h2 id="ref-h" className="m-0 font-site-display text-site-h3">
@@ -153,7 +153,7 @@ export function SiteCasework() {
       {/* ---------------------------------------------------- features */}
       <SiteSection
         label="Built for the ward"
-        className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5 pb-[88px]"
+        className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-5 pb-[88px]"
       >
         {CASEWORK_FEATURES.map((f) => (
           <article

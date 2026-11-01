@@ -1,7 +1,8 @@
 /**
  * Election Campaign OS — public site router
  *
- * Seven routes now: the five the canvas names (`/`, `/casework-tracker`,
+ * `/` is the public front door; the selling pages sit under `/for-campaigns`.
+ * Seven routes before that: the five the canvas names (`/`, `/casework-tracker`,
  * `/compliance`, `/packages`, `/contact`) plus the explainer index and
  * its articles.
  *
@@ -27,6 +28,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 import { SiteShell } from './SiteChrome';
 import { SiteHome } from './pages/SiteHome';
+import { SiteForCampaigns } from './pages/SiteForCampaigns';
 import { SiteCasework } from './pages/SiteCasework';
 import { SiteCompliance } from './pages/SiteCompliance';
 import { SitePackages } from './pages/SitePackages';
@@ -46,6 +48,7 @@ import {
 /** Per-page enquiry subject, so a WhatsApp message arrives with context. */
 const SUBJECTS: Record<string, string> = {
   '/': 'Election Campaign OS enquiry',
+  '/for-campaigns': 'Election Campaign OS enquiry',
   '/casework-tracker': 'Casework Tracker enquiry',
   '/compliance': 'Compliance enquiry',
   '/packages': 'Packages enquiry',
@@ -104,6 +107,7 @@ export function SiteApp() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<SiteHome />} />
+        <Route path="/for-campaigns" element={<SiteForCampaigns />} />
         <Route path="/casework-tracker" element={<SiteCasework />} />
         <Route path="/compliance" element={<SiteCompliance />} />
         <Route path="/packages" element={<SitePackages />} />

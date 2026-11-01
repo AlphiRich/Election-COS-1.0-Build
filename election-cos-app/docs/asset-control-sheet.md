@@ -5361,3 +5361,12 @@ and fixed).
 - Ads still require the owner checklist (privacy notice, AdSense
   approval, console category blocks, numeric ad unit, three build vars).
   Nothing earns until those exist.
+
+## 46. Public-facing reconfiguration (1 Nov 2026)
+
+- **Decision:** the front door of electioncos.co.za is now for the public, not for buyers. `/` is a plain-language home (disclosure-line checker, link to the Electoral Commission for registration checks, the three explainers, a "what this site will not do" statement). The former home page moved unchanged to `/for-campaigns`; Casework Tracker, Packages and Compliance stay as they were.
+- **Nav:** Explainers, Free tool, For campaigns, Casework Tracker, Packages, Compliance. Footer and nav anchors to the neutrality pledge and pillars now point at `/for-campaigns#…`.
+- **Claims made on the new home:** checker runs in the browser and sends nothing (it is a pure function; no network call); each explainer lists sources; the page does not endorse a party. Polling day 4 Nov 2026 is stated in the eyebrow.
+- **Fixed:** horizontal overflow at 320 px (home 24 px, for-campaigns 24 px, explainers 4 px) — grid minimums now `min(100%, N px)`. Measured scrollWidth = 320 on `/`, `/for-campaigns`, `/explainers`, checker; 1280 at desktop.
+- **Verification:** `check:all` passes (lint, types, hex, type-scale, headers, fonts, tests, functions tests).
+- **Not done:** the war-room app itself is unchanged and stays at `app.electioncos.co.za` behind sign-in; ads still need the owner checklist (§45); gazette date conflict unresolved; footer placeholders (street address, fourth mailbox, B-BBEE note) still bracketed.

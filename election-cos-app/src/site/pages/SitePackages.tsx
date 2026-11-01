@@ -85,7 +85,7 @@ export function SitePackages() {
       </SiteSection>
 
       {/* ------------------------------------------------- tool + help */}
-      <SiteSection className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-5 pb-[88px]">
+      <SiteSection className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-5 pb-[88px]">
         <SiteCard className="flex flex-col gap-3 p-8">
           <Eyebrow>Free tool</Eyebrow>
           <h2 id="tool-h" className="m-0 font-site-display text-site-h4">

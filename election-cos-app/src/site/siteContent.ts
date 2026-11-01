@@ -76,13 +76,12 @@ export interface NavItem {
 }
 
 export const SITE_NAV: NavItem[] = [
-  { label: 'Casework Tracker', href: '/casework-tracker' },
-  { label: 'Platform', href: '/#pillars' },
-  { label: 'Compliance', href: '/compliance' },
-  { label: 'Packages', href: '/packages' },
   { label: 'Explainers', href: '/explainers' },
   { label: 'Free tool', href: '/tools/party-funding-checker' },
-  { label: 'About', href: '/#pledge' },
+  { label: 'For campaigns', href: '/for-campaigns' },
+  { label: 'Casework Tracker', href: '/casework-tracker' },
+  { label: 'Packages', href: '/packages' },
+  { label: 'Compliance', href: '/compliance' },
 ];
 
 /* ------------------------------------------------------------- home */
@@ -113,7 +112,7 @@ export const HERO = {
     line: 'Comply before you campaign.',
     sub: 'Party-funding tracking, POPIA-by-design voter contact and offline field operations, set up before the proclamation.',
     cta: 'See the platform',
-    ctaHref: '/#pillars',
+    ctaHref: '/for-campaigns#pillars',
     band: 'Set up your wards before the proclamation',
   },
 } as const;
@@ -138,7 +137,7 @@ export const AUDIENCES: Audience[] = [
     title: 'Party structures',
     blurb: 'Run field operations, funding tracking and ward intelligence across a municipality.',
     linkLabel: 'The platform',
-    href: '/#pillars',
+    href: '/for-campaigns#pillars',
     icon: 'grid',
   },
   {

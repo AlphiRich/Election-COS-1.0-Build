@@ -106,7 +106,7 @@ export function SiteCompliance() {
 
       {/* ------------------------------------------------ party funding */}
       <section aria-labelledby="ppfa-h" className="border-y border-line bg-white">
-        <div className="mx-auto grid max-w-[1200px] grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-12 px-6 py-20">
+        <div className="mx-auto grid max-w-[1200px] grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-12 px-6 py-20">
           <div className="flex flex-col gap-4">
             <h2 id="ppfa-h" className="m-0 font-site-display text-site-h3">
               Party funding, tracked nightly
@@ -163,7 +163,7 @@ export function SiteCompliance() {
       </section>
 
       {/* ------------------------------------------------ add-on, POPIA */}
-      <SiteSection className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-5 py-20">
+      <SiteSection className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-5 py-20">
         <article
           aria-labelledby="addon-h"
           className="flex flex-col gap-3.5 rounded-[10px] bg-ink p-8 text-paper"
