@@ -47,3 +47,45 @@ export function formatCountdown(ms: number): string {
   const hms = [h, m, s].map((n) => String(n).padStart(2, '0')).join(':');
   return days > 0 ? `${days} ${days === 1 ? 'day' : 'days'} ${hms}` : hms;
 }
+
+/**
+ * Special votes, 2 and 3 November 2026, for voters who applied (applications
+ * closed on 12 October). Dates are from the Electoral Commission's 2026
+ * election timetable as summarised in `docs/iec-election-timetable-2026.md`.
+ *
+ * Special-vote HOURS are deliberately not stated: the only source this
+ * build has seen for them is a local news report, not the Commission.
+ *
+ * Day boundaries are midnight South African time, which is 22:00 UTC the
+ * evening before.
+ */
+export const SPECIAL_VOTES_START = Date.UTC(2026, 10, 1, 22, 0, 0); // 00:00 on 2 Nov SAST
+export const SPECIAL_VOTES_END = Date.UTC(2026, 10, 3, 22, 0, 0); // 00:00 on 4 Nov SAST
+const DAY_MS = 24 * 3600 * 1000;
+const SPECIAL_LAST_DAY_START = SPECIAL_VOTES_END - DAY_MS;
+
+export type SpecialVotesPhase = 'upcoming' | 'tomorrow' | 'today' | 'last-day' | 'over';
+
+export function specialVotesPhase(nowMs: number): SpecialVotesPhase {
+  if (nowMs >= SPECIAL_VOTES_END) return 'over';
+  if (nowMs >= SPECIAL_LAST_DAY_START) return 'last-day';
+  if (nowMs >= SPECIAL_VOTES_START) return 'today';
+  if (nowMs >= SPECIAL_VOTES_START - DAY_MS) return 'tomorrow';
+  return 'upcoming';
+}
+
+/** The ribbon sentence, or null once special votes are over. */
+export function specialVotesNotice(nowMs: number): string | null {
+  switch (specialVotesPhase(nowMs)) {
+    case 'upcoming':
+      return 'Special votes: 2 and 3 November, for voters who applied.';
+    case 'tomorrow':
+      return 'Special votes start tomorrow, 2 November, and run 2 and 3 November, for voters who applied.';
+    case 'today':
+      return 'Special votes are under way today, 2 November, and continue on 3 November, for voters who applied.';
+    case 'last-day':
+      return 'Last day of special votes today, 3 November, for voters who applied.';
+    case 'over':
+      return null;
+  }
+}

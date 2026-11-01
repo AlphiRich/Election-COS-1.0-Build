@@ -9,7 +9,12 @@
  */
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ELECTION_DAY_LABEL, formatCountdown, votingClock } from './electionDay';
+import {
+  ELECTION_DAY_LABEL,
+  formatCountdown,
+  specialVotesNotice,
+  votingClock,
+} from './electionDay';
 
 export function VotingRibbon() {
   const [now, setNow] = useState(() => Date.now());
@@ -18,6 +23,7 @@ export function VotingRibbon() {
     return () => window.clearInterval(id);
   }, []);
   const c = votingClock(now);
+  const special = specialVotesNotice(now);
 
   return (
     <div
@@ -48,6 +54,7 @@ export function VotingRibbon() {
             <strong>Voting has closed. Results are declared by the Electoral Commission.</strong>
           )}
         </p>
+        {special && <p className="m-0 w-full font-semibold sm:order-last">{special}</p>}
         <p className="m-0 flex flex-wrap gap-x-4">
           <Link to="/election-day" className="font-semibold text-ink underline">
             Election day guide
