@@ -13,6 +13,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { SiteCard, SiteSection } from '../SiteChrome';
 import { PageIntro, SourceNote } from './pageParts';
+import { IEC_LINK, PARTY_AGENT_RULES_IEC } from '../officialSources';
 import { HOURS, checkCount, emptyLog, toCsv, type StationLog } from '../tools/agentLog';
 
 const KEY = 'ecos-agent-log-v1';
@@ -119,6 +120,40 @@ export function SiteAgentTool() {
             Summary of the Local Government: Municipal Electoral Act 27 of 2000 as published in
             2000, not legal advice. Your party’s election agent and the Electoral Commission’s
             current instructions come first.
+          </p>
+        </SiteCard>
+      </SiteSection>
+
+      <SiteSection labelledBy="iec-h" className="pb-8">
+        <SiteCard className="flex max-w-[900px] flex-col gap-3 p-6">
+          <h2 id="iec-h" className="m-0 font-site-display text-site-h5">
+            What the Electoral Commission says about party agents
+          </h2>
+          <ul className="m-0 flex list-disc flex-col gap-1.5 pl-5 text-site-sm">
+            {PARTY_AGENT_RULES_IEC.map((r) => (
+              <li key={r}>{r}</li>
+            ))}
+          </ul>
+          <p className="m-0 flex flex-wrap gap-x-5 gap-y-1 font-semibold">
+            <a href={IEC_LINK.partyAgents} className="text-teal">
+              Party agents →
+            </a>
+            <a href={IEC_LINK.counting} className="text-teal">
+              Counting →
+            </a>
+            <a href={IEC_LINK.voting} className="text-teal">
+              Voting →
+            </a>
+            <a href={IEC_LINK.objections} className="text-teal">
+              Objections →
+            </a>
+          </p>
+          <p className="m-0 text-site-caption text-slate">
+            The Commission’s Objections page describes the 2024 national and provincial process and
+            its deadlines. For this election, objections to declared municipal results are dealt
+            with under section 65 of the Municipal Electoral Act, so read the current rules before
+            relying on that page’s dates. Because nobody outside the venue may be contacted until
+            results are final, this log stays on your device and sends nothing.
           </p>
         </SiteCard>
       </SiteSection>

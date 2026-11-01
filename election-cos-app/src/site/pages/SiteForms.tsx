@@ -11,9 +11,8 @@
  */
 import { SiteCard, SiteSection } from '../SiteChrome';
 import { PageIntro, SourceNote } from './pageParts';
-import { IEC_VOTER_EDUCATION_VIDEOS } from '../tools/manifestoLinks';
+import { IEC_LINK } from '../officialSources';
 
-const IEC = 'https://www.elections.org.za';
 const ACT = 'https://www.polity.org.za/polity/govdocs/legislation/2000/act27.pdf';
 
 const ROWS = [
@@ -69,23 +68,36 @@ export function SiteForms() {
             Get the official forms and documents
           </h2>
           <p className="m-0 text-site-sm">
-            The prescribed forms are published by the Electoral Commission. Download them from its
-            site or collect them from your local Commission office.
+            The prescribed forms are published by the Electoral Commission. Its forms page lists a
+            folder “For Parties and Candidates (Municipal Elections)” and a national and provincial
+            one, and opens them by script, so this site could not list the individual forms or their
+            numbers. Open the municipal folder there, or collect forms from your local Commission
+            office.
           </p>
           <p className="m-0 flex flex-wrap gap-x-5 gap-y-1 font-semibold">
-            <a href={IEC} className="text-teal">
-              Electoral Commission: documents and forms →
+            <a href={IEC_LINK.forms} className="text-teal">
+              Party and candidate forms →
+            </a>
+            <a href={IEC_LINK.documentLibrary} className="text-teal">
+              Document library →
+            </a>
+            <a href={IEC_LINK.laws} className="text-teal">
+              Laws and regulations →
+            </a>
+            <a href={IEC_LINK.partyAgents} className="text-teal">
+              Party agents →
+            </a>
+            <a href={IEC_LINK.localOffices} className="text-teal">
+              Find a local office →
             </a>
             <a href={ACT} className="text-teal">
               The Municipal Electoral Act (2000 text) →
             </a>
-            <a href={IEC_VOTER_EDUCATION_VIDEOS} className="text-teal">
-              Commission videos on YouTube →
-            </a>
           </p>
           <p className="m-0 text-site-caption text-slate">
-            Form numbers are not listed here. They are set in the Commission’s regulations, which
-            this site could not open, and a wrong number on election eve is worse than none.
+            The Commission’s Party agents page names no form numbers either: it says only that the
+            party issues an appointment form and gives notice to the presiding officer. Form numbers
+            are therefore not listed here.
           </p>
         </SiteCard>
       </SiteSection>

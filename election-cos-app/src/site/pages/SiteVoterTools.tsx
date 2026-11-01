@@ -20,6 +20,12 @@ export const MANIFESTOS_PATH = '/tools/party-manifestos';
 
 const TOOLS = [
   {
+    to: '/official-sources',
+    title: 'Official Commission sources',
+    body: 'The Electoral Commission’s own pages for voting, counting, objections, party agents, results and reporting problems.',
+    source: 'elections.org.za',
+  },
+  {
     to: '/election-day',
     title: 'Election day guide',
     body: 'Hours, what to take, what to do if your ID is lost, and directions to your voting station.',

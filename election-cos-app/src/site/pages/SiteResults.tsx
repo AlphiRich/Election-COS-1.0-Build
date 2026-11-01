@@ -13,10 +13,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import { SiteCard, SiteSection } from '../SiteChrome';
 import { PageIntro, SourceNote } from './pageParts';
+import { IEC_LINK } from '../officialSources';
 import { lookupMunicipality } from '@/modules/reference/municipalRegister';
 import { shares, validateFeed, type ResultsFeed } from '../tools/resultsFeed';
 
-const IEC = 'https://www.elections.org.za';
 const EVERY_MS = 30 * 60 * 1000;
 const nf = new Intl.NumberFormat('en-ZA');
 const BALLOT: Record<string, string> = {
@@ -61,8 +61,11 @@ export function SiteResults() {
         lead="Official results are declared by the Electoral Commission. Start there. The board below shows figures only when a checked feed is available."
       >
         <p className="m-0">
-          <a href={IEC} className="site-btn-primary">
-            Go to the Electoral Commission’s results
+          <a href={IEC_LINK.lgeDashboard} className="site-btn-primary">
+            Municipal results dashboard
+          </a>
+          <a href={IEC_LINK.results} className="site-btn-outline-ink ml-3">
+            Results site
           </a>
         </p>
       </PageIntro>

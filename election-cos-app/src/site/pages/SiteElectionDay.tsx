@@ -12,6 +12,7 @@ import { PageIntro, SourceNote } from './pageParts';
 import { StationSearch } from './StationSearch';
 import { HOURS_BASIS } from '../electionDay';
 import { IEC_VOTER_EDUCATION_VIDEOS } from '../tools/manifestoLinks';
+import { IEC_LINK } from '../officialSources';
 
 const IEC = 'https://www.elections.org.za';
 const DHA = 'https://www.dha.gov.za';
@@ -101,6 +102,14 @@ export function SiteElectionDay() {
             app you use. For other municipalities, use the Electoral Commission’s list of voting
             stations.
           </p>
+          <p className="m-0 flex flex-wrap gap-x-5 gap-y-1 font-semibold">
+            <a href={IEC_LINK.stationFinder} className="text-teal">
+              The Commission’s voting station finder →
+            </a>
+            <a href={IEC_LINK.votingStations} className="text-teal">
+              Voting stations list, LGE 2026 →
+            </a>
+          </p>
           <StationSearch idPrefix="ed" />
         </SiteCard>
       </SiteSection>
@@ -123,6 +132,26 @@ export function SiteElectionDay() {
           <li>
             <Link to="/results" className="text-teal">
               Results →
+            </Link>
+          </li>
+          <li>
+            <a href={IEC_LINK.voting} className="text-teal">
+              How voting works, from the Commission →
+            </a>
+          </li>
+          <li>
+            <a href={IEC_LINK.real411} className="text-teal">
+              Report election disinformation (Real411) →
+            </a>
+          </li>
+          <li>
+            <a href={IEC_LINK.fraud} className="text-teal">
+              Report electoral fraud →
+            </a>
+          </li>
+          <li>
+            <Link to="/official-sources" className="text-teal">
+              All the Commission’s pages →
             </Link>
           </li>
           <li>

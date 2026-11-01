@@ -21,6 +21,7 @@ import {
   VOTER_PROTECTIONS,
   VOTING_DAY_RIGHTS,
 } from '../codeOfConduct';
+import { IEC_LINK } from '../officialSources';
 
 export function SiteCodeOfConduct() {
   return (
@@ -112,6 +113,51 @@ export function SiteCodeOfConduct() {
           </h2>
           <p className="m-0 text-site-base">{CONSEQUENCES}</p>
           <p className="m-0 font-mono text-site-micro text-slate">{CONSEQUENCES_REF}</p>
+          <p className="m-0 text-site-sm">
+            The Electoral Commission’s own page on the Code says the same in outline: it binds
+            parties, their agents and candidates from the proclamation of the election until the
+            results are announced, breach is an offence, and parties can be fined up to R200,000.
+            Complaints about breaches go to the Electoral Court, whose Secretary’s number the
+            Commission gives as 051 412-7400.
+          </p>
+          <p className="m-0 flex flex-wrap gap-x-5 gap-y-1 text-site-sm font-semibold">
+            <a href={IEC_LINK.codeOfConduct} className="text-teal">
+              Commission’s page on the Code →
+            </a>
+            <a href={IEC_LINK.laws} className="text-teal">
+              Laws and regulations →
+            </a>
+          </p>
+        </SiteCard>
+      </SiteSection>
+
+      <SiteSection id="disinformation" labelledBy="dis-h" className="pb-10">
+        <SiteCard className="flex max-w-[760px] flex-col gap-2 p-8">
+          <h2 id="dis-h" className="m-0 font-site-display text-site-h4">
+            Seen election disinformation?
+          </h2>
+          <p className="m-0 text-site-base">
+            The Commission sends reports to Real411, an independent platform for digital election
+            complaints. Include a link or screenshot, and where and when you saw it. Complaints
+            cannot be anonymous, though your identity is kept confidential in the outcome.
+          </p>
+          <p className="m-0 text-site-caption text-slate">
+            The Commission describes disinformation as false or misleading information shared by
+            someone who knows it is untrue, or has no reasonable basis to believe it, and meant to
+            mislead voters or disrupt the election. It does not include satire, opinion, fair
+            criticism or genuine political debate.
+          </p>
+          <p className="m-0 flex flex-wrap gap-x-5 gap-y-1 font-semibold">
+            <a href={IEC_LINK.real411} className="text-teal">
+              Report to Real411 →
+            </a>
+            <a href={IEC_LINK.disinformation} className="text-teal">
+              The Commission’s page →
+            </a>
+            <a href={IEC_LINK.fraud} className="text-teal">
+              Report electoral fraud →
+            </a>
+          </p>
         </SiteCard>
       </SiteSection>
 

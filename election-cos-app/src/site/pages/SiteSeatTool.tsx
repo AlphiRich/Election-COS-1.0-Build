@@ -18,6 +18,7 @@ import { useMemo, useState } from 'react';
 import { Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
 import { allocateSeats } from '@/modules/analytics/seatCalculator';
 import { NW405_2021_EXAMPLE } from '@/modules/analytics/nw405Example';
+import { IEC_LINK } from '../officialSources';
 
 interface Row {
   id: string;
@@ -305,7 +306,11 @@ export function SiteSeatTool() {
           This is a teaching tool. It follows the quota printed on the Electoral Commission’s seat
           calculation report for JB Marks in 2021, Q = (A ÷ (B − C − D)) + 1, with no independent or
           list-less ward winners. Official results are declared by the Electoral Commission, and
-          this tool does not predict any election.
+          this tool does not predict any election. The Commission’s own explainer:{' '}
+          <a href={IEC_LINK.seatsExplainer} className="font-semibold text-teal">
+            how council seats are calculated
+          </a>
+          .
         </p>
       </SiteSection>
     </>

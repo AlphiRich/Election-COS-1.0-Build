@@ -156,9 +156,21 @@ describe('the source registry is honest about what has been checked', () => {
       expect(note, `${source.id} is CONFIRMED without saying who verified it`).toMatch(
         /confirmed by the supplier|fetched by/i,
       );
-      expect(note, `${source.id} is CONFIRMED without admitting this build has not fetched it`).toMatch(
-        /has NOT fetched it/,
-      );
+      // Two honest ways to be CONFIRMED. A supplier fetched it and this build
+      // did not, and says so. Or this build fetched it, and then the entry
+      // must carry the proof: when, and the SHA-256 and byte count of what
+      // came back. Claiming a fetch with no hash is just a claim.
+      const fetched = (source as { fetched?: { on?: string; sha256?: string; bytes?: number } }).fetched;
+      if (fetched) {
+        expect(note, `${source.id} claims a fetch but its note does not say so`).toMatch(/FETCHED BY THIS BUILD/);
+        expect(fetched.on, `${source.id} fetch has no date`).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+        expect(fetched.sha256, `${source.id} fetch has no SHA-256`).toMatch(/^[0-9a-f]{64}$/);
+        expect(fetched.bytes, `${source.id} fetch has no byte count`).toBeGreaterThan(0);
+      } else {
+        expect(note, `${source.id} is CONFIRMED without admitting this build has not fetched it`).toMatch(
+          /has NOT fetched it/,
+        );
+      }
     }
   });
 

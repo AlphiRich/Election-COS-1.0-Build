@@ -188,6 +188,9 @@ export function SiteFooter({
           <Link to="/results" className="text-line">
             Results
           </Link>
+          <Link to="/official-sources" className="text-line">
+            Official Commission sources
+          </Link>
           {/*
            * In the footer, on every page — including the ones where no
            * advert ever appears. Consent that is harder to withdraw than

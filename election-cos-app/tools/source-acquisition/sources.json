@@ -600,6 +600,50 @@
         "min_bytes": 131072,
         "reject_html": true
       }
+    },
+    {
+      "id": "iec-lge2026-candidate-list-nw-23102026",
+      "province": "NW",
+      "category": "IEC_Candidate_Lists",
+      "filename": "Supplementary list NW 23102026.pdf",
+      "url": "https://www.elections.org.za/pw/Documents/Candidate%20Lists/LGE2026/LGE2026%20Supplementary%20List%2023102026/Supplementary%20list%20NW%2023102026.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's certified list of candidates as supplemented pursuant to the Constitutional Court order in ANC v Electoral Commission (CCT 282/26), published 23 October 2026 on the page https://www.elections.org.za/pw/Parties-And-Candidates/Candidate-Lists-LGE-2026. FETCHED BY THIS BUILD on 2026-11-01 (the page's relative link ../Documents/... resolves under /pw/, not the site root; the root path 404s). 3,217,349 bytes, %PDF magic, application/pdf, Last-Modified 23 Oct 2026 13:41 GMT. The page labels the file with a smaller size than was served. Columns: Municipality, Party, Ward \\\\ List Order, IDNumber (every value opens with a date of birth and is never copied), Fullname, Surname. Extracted by tools/candidates/extract-iec-candidate-list.py with the structural checks listed there.",
+      "expect": {
+        "content_type": [
+          "application/pdf"
+        ],
+        "min_bytes": 3000000,
+        "reject_html": true
+      },
+      "fetched": {
+        "on": "2026-11-01",
+        "by": "this build, directly from the Commission",
+        "sha256": "b121e2680b67cc49348703e419f6891b48f99b0d5edaab91bbb2dbfb403cb8f0",
+        "bytes": 3217349
+      }
+    },
+    {
+      "id": "iec-lge2026-candidate-list-ec-23102026",
+      "province": "EC",
+      "category": "IEC_Candidate_Lists",
+      "filename": "Supplementary list EC 23102026.pdf",
+      "url": "https://www.elections.org.za/pw/Documents/Candidate%20Lists/LGE2026/LGE2026%20Supplementary%20List%2023102026/Supplementary%20list%20EC%2023102026.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's certified list of candidates as supplemented pursuant to the Constitutional Court order in ANC v Electoral Commission (CCT 282/26), published 23 October 2026 on the page https://www.elections.org.za/pw/Parties-And-Candidates/Candidate-Lists-LGE-2026. FETCHED BY THIS BUILD on 2026-11-01 (the page's relative link ../Documents/... resolves under /pw/, not the site root; the root path 404s). 4,669,755 bytes, %PDF magic, application/pdf, Last-Modified 23 Oct 2026 13:41 GMT. The page labels the file with a smaller size than was served. Columns: Municipality, Party, Ward \\\\ List Order, IDNumber (every value opens with a date of birth and is never copied), Fullname, Surname. Extracted by tools/candidates/extract-iec-candidate-list.py with the structural checks listed there.",
+      "expect": {
+        "content_type": [
+          "application/pdf"
+        ],
+        "min_bytes": 4000000,
+        "reject_html": true
+      },
+      "fetched": {
+        "on": "2026-11-01",
+        "by": "this build, directly from the Commission",
+        "sha256": "a64f66d65008944c71c0adbc96d93ec11021801539c9db2f04311fd33fd57bb5",
+        "bytes": 4669755
+      }
     }
   ]
 }

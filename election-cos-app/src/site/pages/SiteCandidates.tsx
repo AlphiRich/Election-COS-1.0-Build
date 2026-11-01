@@ -11,14 +11,22 @@
  * needs the Municipal Demarcation Board's ward boundary maps, which this
  * build does not hold, and a guess would put somebody in the wrong ward.
  */
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { SiteCard, SiteSection } from '../SiteChrome';
 import { PageIntro, SourceNote } from './pageParts';
+import { IEC_LINK } from '../officialSources';
 import { findCouncil, searchCouncils } from '../tools/councilFinder';
-import { CANDIDATE_SOURCE, CERTIFIED_CANDIDATES, candidatesFor } from '../tools/candidates';
+import { CANDIDATE_SOURCE } from '../tools/candidates';
 import { findStations } from '../tools/wardFinder';
 
-const IEC = 'https://www.elections.org.za';
+interface PublishedFile {
+  municipalityCode: string;
+  source: string;
+  fetchedOn: string | null;
+  confirmedBy: string;
+  confirmedOn: string;
+  wards: Record<string, Array<{ name: string; party: string }>>;
+}
 
 export function SiteCandidates() {
   const [query, setQuery] = useState('');
@@ -27,7 +35,27 @@ export function SiteCandidates() {
   const matches = useMemo(() => searchCouncils(query).filter((c) => c.wards !== null), [query]);
   const council = code ? findCouncil(code) : null;
   const wardNo = Number(ward);
-  const names = council && wardNo ? candidatesFor(CERTIFIED_CANDIDATES, council.code, wardNo) : [];
+  // Names come from one small file per municipality that exists only once a
+  // named person has confirmed the dataset (scripts/publish-candidates.ts).
+  // No file means no names, and the page says why.
+  const [published, setPublished] = useState<PublishedFile | null>(null);
+  const code2 = council?.code;
+  useEffect(() => {
+    setPublished(null);
+    if (!code2) return;
+    let live = true;
+    fetch(`/candidates/${code2}.json`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then(
+        (j) =>
+          live && setPublished(j && j.municipalityCode === code2 ? (j as PublishedFile) : null),
+      )
+      .catch(() => live && setPublished(null));
+    return () => {
+      live = false;
+    };
+  }, [code2]);
+  const names = published && wardNo ? (published.wards[String(wardNo)] ?? []) : [];
   const stations = council?.code === 'NW405' && wardNo ? findStations(String(wardNo)) : [];
 
   return (
@@ -103,24 +131,36 @@ export function SiteCandidates() {
               {names.length > 0 ? (
                 <ul className="m-0 flex list-none flex-col gap-2 p-0">
                   {names.map((c) => (
-                    <li key={c.name} className="rounded-[10px] border border-line bg-white p-4">
+                    <li
+                      key={`${c.party}-${c.name}`}
+                      className="rounded-[10px] border border-line bg-white p-4"
+                    >
                       <span className="font-semibold">{c.name}</span> · {c.party}
                     </li>
                   ))}
                 </ul>
-              ) : (
+              ) : null}
+              {names.length > 0 && published ? (
+                <p className="mb-0 mt-3 text-site-caption text-slate">
+                  Source: {published.source}. Fetched{' '}
+                  {published.fetchedOn ?? 'on a date not recorded'}; checked against the
+                  Commission’s list by {published.confirmedBy} on {published.confirmedOn}. This is
+                  the ward ballot only; each party’s PR list is on the Commission’s page.
+                </p>
+              ) : null}
+              {names.length === 0 ? (
                 <SiteCard className="p-6">
                   <p className="m-0 font-semibold">Candidate names are not loaded here yet</p>
                   <p className="mb-0 mt-1 text-site-sm">
                     This site shows only names from the Electoral Commission’s certified list, and
                     that list has not been loaded. See who is standing in this ward at{' '}
-                    <a href={IEC} className="font-semibold text-teal">
-                      elections.org.za
+                    <a href={IEC_LINK.candidateLists} className="font-semibold text-teal">
+                      the Commission’s certified candidate lists
                     </a>
                     .
                   </p>
                 </SiteCard>
-              )}
+              ) : null}
             </div>
             {stations.length > 0 && (
               <p className="m-0 text-site-sm">

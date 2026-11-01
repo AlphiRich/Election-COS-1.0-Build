@@ -15,6 +15,7 @@
 import { useMemo, useRef, useState } from 'react';
 import { SiteCard, SiteSection } from '../SiteChrome';
 import { PageIntro, SourceNote } from './pageParts';
+import { IEC_LINK } from '../officialSources';
 import { searchCouncils } from '../tools/councilFinder';
 import { NW405_2021_EXAMPLE } from '@/modules/analytics/nw405Example';
 import { CSV_MAX_BYTES, parseCsv, runModel } from '../tools/seatModel';
@@ -631,7 +632,12 @@ export function SiteSeatModel() {
         results. It uses the quota on the Commission’s own 2021 JB Marks seat calculation report, Q
         = (A ÷ (B − C − D)) + 1, with A the PR-ballot votes, B the council size, C independent ward
         seats and D ward seats won by parties with no PR list. Council size and ward counts:
-        Annexure A to IEC Circular 1 of 2025. The model applies no minimum vote threshold.
+        Annexure A to IEC Circular 1 of 2025. The model applies no minimum vote threshold. The
+        Commission’s own explainer:{' '}
+        <a href={IEC_LINK.seatsExplainer} className="font-semibold text-teal">
+          how council seats are calculated
+        </a>
+        .
       </SourceNote>
     </>
   );
