@@ -5551,3 +5551,10 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | Size budget | `scripts/check-site-budget.mjs` | Built; 133 KB gzip home, JS target 50 KB **not met** |
 | Reconciliation | `docs/website-reconciliation.md` | Written |
 | Agents plan | `docs/outstanding-agents-plan.md` | Written; no agent built from it yet |
+
+## 62. Outstanding agents, first two (Session 52)
+
+| Asset | Path | Status |
+|---|---|---|
+| Outbox retry cap wired | `src/offline/outbox.ts` (+1 test) | Built |
+| Audit hash chain | `functions/src/auditChain.ts` (+2), `src/modules/settings/auditChain.ts` (+5), export column | Built; one writer adopted; no external anchor; needs Blaze to run |

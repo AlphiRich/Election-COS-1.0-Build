@@ -62,6 +62,7 @@
  * `phoneVerifiedAt` on the voter record is a schema change across the
  * port, the rules and the adapter, and belongs in its own turn.
  */
+import { appendChained, firestoreChainStore } from './auditChain';
 import { onCall, HttpsError, type CallableRequest } from 'firebase-functions/v2/https';
 import { getFirestore, FieldValue, Timestamp } from 'firebase-admin/firestore';
 import { getApps, initializeApp } from 'firebase-admin/app';
@@ -122,15 +123,18 @@ async function writeAudit(
   tenantId: string,
   event: { actorUid: string; action: string; targetId: string; metadata?: Record<string, unknown> },
 ): Promise<void> {
-  await getFirestore().collection(`tenants/${tenantId}/auditLog`).add({
+  await appendChained(
+    firestoreChainStore(),
     tenantId,
-    actorUid: event.actorUid,
-    action: event.action,
-    targetType: 'membershipOtpChallenge',
-    targetId: event.targetId,
-    occurredAt: FieldValue.serverTimestamp(),
-    metadata: event.metadata ?? {},
-  });
+    {
+      actorUid: event.actorUid,
+      action: event.action,
+      targetType: 'membershipOtpChallenge',
+      targetId: event.targetId,
+      metadata: event.metadata,
+    },
+    new Date(),
+  );
 }
 
 /* --------------------------------------------------------------- request */

@@ -17,6 +17,10 @@ function fromFirestore(id: string, data: Record<string, unknown>): AuditEvent {
     targetId: data.targetId as string,
     occurredAt: data.occurredAt as string,
     metadata: data.metadata as Record<string, unknown> | undefined,
+    seq: data.seq as number | undefined,
+    occurredAtIso: data.occurredAtIso as string | undefined,
+    prevHash: data.prevHash as string | undefined,
+    hash: data.hash as string | undefined,
   };
 }
 

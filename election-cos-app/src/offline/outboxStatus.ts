@@ -18,10 +18,10 @@
  * for field trust (finding F1); the machine makes the silent path
  * unrepresentable rather than discouraged.
  *
- * NOT WIRED INTO THE DEXIE SCHEMA. The shipped outbox (`outbox.ts`) deletes an
- * entry when the server accepts it and marks the record, and changing a
- * stored schema days before polling is a larger risk than this fix is worth.
- * `uiState` maps these onto the states the app already shows.
+ * WIRED (Session 52). `outbox.ts` counts retryable failures in `OutboxEntry.retryCount`
+ * (not an indexed field, so the Dexie schema version is unchanged and old rows read as 0),
+ * and `transition` decides when the fifth failure becomes a rejection. `uiState` maps these
+ * onto the states the app already shows.
  */
 export type OutboxStatus =
   | 'PENDING'

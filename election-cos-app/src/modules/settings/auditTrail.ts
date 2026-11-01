@@ -52,10 +52,12 @@ import type { AuditEvent } from '@/dal/ports/auditLog';
  */
 export const AUDIT_INTEGRITY_BASIS =
   'This log is append-only from inside the application: the security rules deny every client write, so ' +
-  'nothing you or anybody else does in this platform can edit or remove an entry. It is not tamper-evident ' +
-  'beyond that — there is no hash chain, so an administrator holding server credentials could alter it and ' +
-  'the record would not show it. Treat it as a reliable account of what the platform did, not as evidence ' +
-  'that nobody has interfered with it.';
+  'nothing you or anybody else does in this platform can edit or remove an entry. Entries marked ' +
+  '"verified" in the export are hash-chained, so a later edit or removal breaks the chain and is reported. ' +
+  'Every other entry has no hash chain and is not tamper-evident beyond that: an administrator holding ' +
+  'server credentials could alter it and the record would not show it. Even a chain is not anchored outside ' +
+  'the platform. Treat the log as a reliable account of what the platform did, not as evidence that nobody ' +
+  'has interfered with it.';
 
 export const AUDIT_SCOPE_BASIS =
   'Specific acts are recorded — unmasking an identity number, exporting the donor ledger, changing a ' +

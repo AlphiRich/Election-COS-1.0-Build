@@ -14,6 +14,7 @@
  * own — see the note on `ensureOpen()` in db.ts.
  */
 import { offlineDb, type ConflictEntry, type OutboxEntry, type SyncState } from './db';
+import { MAX_RETRIES, transition } from './outboxStatus';
 import type { SyncOperation, SyncResponse } from './syncTypes';
 
 export async function enqueue(entry: Omit<OutboxEntry, 'seq'>): Promise<void> {
@@ -66,10 +67,33 @@ export async function applySyncResponse(response: SyncResponse): Promise<void> {
     const table = tableFor(outboxEntry.entity);
     if (!rejected.retryable) {
       // §7.6: stop retrying, surface it. The UI reads _syncState === 'REJECTED'.
-      await table.update(outboxEntry.entityId, { _syncState: 'REJECTED' as SyncState });
+      await table.update(outboxEntry.entityId, {
+        _syncState: 'REJECTED' as SyncState,
+        _rejectedReason: rejected.message || rejected.code,
+      });
       await offlineDb.outbox.delete(rejected.seq);
+      continue;
     }
-    // retryable rejections are left in the outbox for the next sync attempt.
+    // A retryable failure is counted. The state machine stops it at MAX_RETRIES and
+    // turns it into a rejection a person sees, rather than retrying for ever.
+    const next = transition(
+      {
+        mutationId: String(rejected.seq),
+        status: 'IN_FLIGHT',
+        retryCount: outboxEntry.retryCount ?? 0,
+      },
+      'PENDING',
+      { now: new Date() },
+    );
+    if (next.status === 'REJECTED') {
+      await table.update(outboxEntry.entityId, {
+        _syncState: 'REJECTED' as SyncState,
+        _rejectedReason: `${next.rejectedReason} (${MAX_RETRIES} tries)`,
+      });
+      await offlineDb.outbox.delete(rejected.seq);
+    } else {
+      await offlineDb.outbox.update(rejected.seq, { retryCount: next.retryCount });
+    }
   }
 
   for (const conflict of response.conflicts) {

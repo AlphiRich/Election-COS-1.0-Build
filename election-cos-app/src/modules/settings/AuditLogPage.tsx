@@ -22,6 +22,7 @@ import {
 } from './auditTrail';
 import { Button, Card, DataLine, Field, PageHeader, SectionLabel } from '@/components/ui';
 import { downloadText } from '@/lib/csv';
+import { verifyChain } from './auditChain';
 import { auditCsv, auditExportFilename } from './auditExport';
 
 const PAGE_SIZES = [50, 200, 500] as const;
@@ -61,12 +62,14 @@ export function AuditLogPage() {
             <Button
               variant="ghost"
               disabled={!canRead || events.length === 0}
-              onClick={() => {
+              onClick={async () => {
                 const now = new Date();
+                // The list is newest first; the chain is checked oldest first.
+                const status = (await verifyChain([...events].reverse())).reverse();
                 downloadText(
                   auditExportFilename(session.tenantId, now),
                   'text/csv',
-                  auditCsv(session.tenantId, events, now),
+                  auditCsv(session.tenantId, events, now, status),
                 );
               }}
             >

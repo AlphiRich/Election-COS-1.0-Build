@@ -17,9 +17,13 @@
  */
 import type { AuditEvent } from '@/dal/ports/auditLog';
 import { toCsv } from '@/lib/csv';
+import type { ChainStatus } from './auditChain';
 import { AUDIT_INTEGRITY_BASIS, AUDIT_SCOPE_BASIS, describeAction } from './auditTrail';
 
-export function auditCsv(tenantId: string, events: AuditEvent[], exportedAt: Date): string {
+export function auditCsv(tenantId: string, events: AuditEvent[],
+  exportedAt: Date,
+  chain: ChainStatus[] = [],
+): string {
   return toCsv([
     ['Election Campaign OS audit log export'],
     ['Tenant', tenantId],
@@ -28,14 +32,15 @@ export function auditCsv(tenantId: string, events: AuditEvent[], exportedAt: Dat
     ['Basis', AUDIT_INTEGRITY_BASIS],
     ['Scope', AUDIT_SCOPE_BASIS],
     [],
-    ['occurredAt', 'actorUid', 'action', 'description', 'targetType', 'targetId'],
-    ...events.map((e) => [
+    ['occurredAt', 'actorUid', 'action', 'description', 'targetType', 'targetId', 'chain'],
+    ...events.map((e, i) => [
       e.occurredAt,
       e.actorUid,
       e.action,
       describeAction(e.action),
       e.targetType,
       e.targetId,
+      chain[i] ?? 'not chained',
     ]),
   ]);
 }

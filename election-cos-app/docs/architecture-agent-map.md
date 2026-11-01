@@ -8,7 +8,7 @@ bounded responsibility, not a service.
 
 | # | Name in the document | In this build | Status |
 |---|---|---|---|
-| 1 | OFFLINE_SYNC_SENTINEL | `src/offline/` (Dexie outbox, sync status), `outboxStatus.ts` (state machine, 6 tests) | built; status machine **not yet wired** into the stored schema |
+| 1 | OFFLINE_SYNC_SENTINEL | `src/offline/` (Dexie outbox, sync status), `outboxStatus.ts` (state machine, 6 tests) | built; retry counting wired into the outbox (5th failure becomes a visible rejection with a reason); other states still derived, not stored |
 | 2 | MEDIA_COMPRESSION | photo queue exists; no client-side compression | not built |
 | 3 | FIELD_CONTEXT_GUARD | capability gates in the UI (`resolveAccess`), rules on the server | built |
 | 4 | OFFLINE_CONSENT_VALIDATOR | the consent gate in `VoterForm`; roll capture needs spoken consent + typed name (`rollCapture.ts`) | built |
@@ -28,7 +28,7 @@ bounded responsibility, not a service.
 | 18 | PPFA_AGGREGATOR | `functions/src/ppfaAggregation.ts`, deliberately **not exported** pending legal confirmation. Bands are R200,000 / R30 million (Gazette 53182), not R80k/R15M | held back on purpose |
 | 19 | POPIA_PURGE_DAEMON | not built (see 13) | not built |
 | 20 | INCIDENT_DISPATCH | needs a WhatsApp credential this project does not have | not built |
-| 21 | AUDIT_LOG_WRITER | server-written `auditLog`; export to CSV added. **No hash chain**, and the page says so | partial |
+| 21 | AUDIT_LOG_WRITER | server-written `auditLog`; CSV export. Hash chain (`functions/src/auditChain.ts`, verified in the export) on the OTP-challenge writer only; other writers unchained, no external anchor | partial |
 | 22 | DATASET_INGESTION | `tools/source-acquisition`, `src/modules/ingest/`, `tools/voters-roll` | built |
 | 23 | CAMPAIGN_DIRECTOR | none | not built |
 | 24 | COMPLIANCE_WAR_ROOM | war-room counters (`warRoomCounters.ts`) | partial |
