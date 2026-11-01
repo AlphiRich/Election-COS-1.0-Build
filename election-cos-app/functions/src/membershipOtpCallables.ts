@@ -62,6 +62,13 @@
  * `phoneVerifiedAt` on the voter record is a schema change across the
  * port, the rules and the adapter, and belongs in its own turn.
  */
+import {
+  CostGuardError,
+  firestoreSpendStore,
+  parseUnitCost,
+  reserveSpend,
+} from './costGuard';
+import { WHATSAPP_COST_CENTS_PER_MESSAGE } from './membershipOtpDelivery';
 import { appendChained, firestoreChainStore } from './auditChain';
 import { onCall, HttpsError, type CallableRequest } from 'firebase-functions/v2/https';
 import { getFirestore, FieldValue, Timestamp } from 'firebase-admin/firestore';
@@ -195,6 +202,27 @@ export const requestMembershipOtp = onCall<RequestPayload>(
     const now = Date.now();
     if (!canResend(latest, now)) {
       throw new HttpsError('resource-exhausted', 'A code was just sent. Wait a minute before asking for another.');
+    }
+
+    // Paid action: reserve its cost against the month's ceiling BEFORE anything is created
+    // or sent. Unconfigured price or a reached ceiling stops the send (functions/src/costGuard.ts).
+    try {
+      await reserveSpend(
+        firestoreSpendStore(),
+        parseUnitCost(WHATSAPP_COST_CENTS_PER_MESSAGE.value()),
+        new Date(),
+      );
+    } catch (error) {
+      if (error instanceof CostGuardError) {
+        logger.warn('requestMembershipOtp: refused by cost guard', { code: error.code });
+        throw new HttpsError(
+          'resource-exhausted',
+          error.code === 'CEILING_REACHED'
+            ? 'Message sending is paused: the monthly usage limit has been reached and needs approval.'
+            : 'Message sending is not configured on this deployment.',
+        );
+      }
+      throw error;
     }
 
     const code = generateOtp();

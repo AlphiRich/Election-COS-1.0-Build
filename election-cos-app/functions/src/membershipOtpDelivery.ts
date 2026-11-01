@@ -29,6 +29,13 @@ export const WHATSAPP_PHONE_NUMBER_ID = defineSecret('WHATSAPP_PHONE_NUMBER_ID')
 export const WHATSAPP_TEMPLATE_NAME = defineString('WHATSAPP_TEMPLATE_NAME', {
   default: 'membership_otp_verify',
 });
+/**
+ * What Meta charges per message, in whole cents of rand. NO DEFAULT on purpose: the price is the
+ * owner's to read off the Meta bill, not a figure to assume here. Unset = paid sends refused.
+ */
+export const WHATSAPP_COST_CENTS_PER_MESSAGE = defineString('WHATSAPP_COST_CENTS_PER_MESSAGE', {
+  default: '',
+});
 export const WHATSAPP_GRAPH_VERSION = defineString('WHATSAPP_GRAPH_VERSION', { default: 'v21.0' });
 
 /** No credential configured. Distinct from "the send was attempted and failed". */
