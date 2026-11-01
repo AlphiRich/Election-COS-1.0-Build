@@ -5405,3 +5405,7 @@ Built on the public site, all client-side, no network request, no storage, no ad
 4. Links: elections.org.za and demarcation.org.za (MDB) are linked, not fetched.
 
 **Verification:** guards proved by injection (majority off by one, ward "3" matching "13/30", PR count off by one — each fails exactly the intended test; reverted). Run in a browser at 320 and 1280: no horizontal overflow, no console errors. Defect found by running it: an absolutely positioned `sr-only` label inside an `overflow-x-auto` table escaped the clip and widened the page by 43 px at 320 px — fixed with `relative` on the scroller.
+
+## 49. Footer contact details (1 Nov 2026)
+
+Footer address is now the postal address supplied by the owner, **P.O. Box 2590, Potchefstroom, 2520** (replaces the bracketed street address). The footer Contact column now lists the WhatsApp enquiry number **082 449 7310** as a link; `SITE.whatsApp` holds the number once and `whatsAppHref` is built from it, with a test that the displayed and dialled forms agree. Still bracketed: fourth mailbox, B-BBEE note, information officer name, consent wording version, onboarding and data-ownership FAQ answers.

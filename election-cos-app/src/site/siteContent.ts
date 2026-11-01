@@ -50,7 +50,10 @@ export const SITE = {
   /** Reg. number and trading style as settled 29 Oct 2026. */
   entity: 'Just Be Trading 10 (Pty) Ltd t/a Innovation Consult',
   registration: 'Reg. 2007/021390/07',
-  address: '[STREET ADDRESS], Potchefstroom',
+  /** Postal, not street: the company takes post at a box. */
+  address: 'P.O. Box 2590, Potchefstroom, 2520',
+  /** The one WhatsApp number for enquiries. `whatsAppHref` is built from `e164`. */
+  whatsApp: { display: '082 449 7310', e164: '27824497310' },
   bbbee: '[B-BBEE STATUTORY COMPLIANCE NOTE]',
   mailboxes: [
     'info@innovationconsult.co.za',
@@ -67,7 +70,7 @@ export const SITE = {
  * the text is encoded once and correctly.
  */
 export function whatsAppHref(subject: string): string {
-  return `https://wa.me/27824497310?text=${encodeURIComponent(subject)}`;
+  return `https://wa.me/${SITE.whatsApp.e164}?text=${encodeURIComponent(subject)}`;
 }
 
 export interface NavItem {

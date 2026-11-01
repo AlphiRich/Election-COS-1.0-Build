@@ -153,6 +153,9 @@ export function SiteFooter({
 
         <div className="flex flex-col gap-1.5">
           <span className="font-semibold text-paper">Contact</span>
+          <a href={whatsAppHref('Election Campaign OS enquiry')} className="text-line">
+            WhatsApp enquiries: {SITE.whatsApp.display}
+          </a>
           {SITE.mailboxes.map((box) =>
             box.startsWith('[') ? (
               <span key={box}>{box}</span>

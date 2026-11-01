@@ -146,7 +146,6 @@ describe('what the site will not do', () => {
       'claims · T-01 reference': CLAIM_ROWS[0].ref,
       'claims · T-06 reference': CLAIM_ROWS[5].ref,
       'information officer': INFORMATION_OFFICER,
-      'street address': SITE.address,
       'B-BBEE note': SITE.bbbee,
       'fourth mailbox': SITE.mailboxes[3],
       'consent wording version': CONSENT_VERSION,
@@ -155,6 +154,14 @@ describe('what the site will not do', () => {
     for (const [what, text] of Object.entries(open)) {
       expect(text, `${what} should still be a placeholder`).toMatch(PLACEHOLDER_RE);
     }
+  });
+
+  it('gives a postal address and one WhatsApp number, and builds every enquiry link from it', () => {
+    expect(SITE.address).toBe('P.O. Box 2590, Potchefstroom, 2520');
+    expect(SITE.address).not.toMatch(PLACEHOLDER_RE);
+    // The number as written for people and as dialled must be the same number.
+    expect('0' + SITE.whatsApp.e164.slice(2)).toBe(SITE.whatsApp.display.replace(/\s/g, ''));
+    expect(whatsAppHref('x')).toBe(`https://wa.me/${SITE.whatsApp.e164}?text=x`);
   });
 
   it('labels every example as invented, on every surface it appears', () => {
