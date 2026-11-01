@@ -28,6 +28,12 @@
  */
 
 @layer base {
+  /* A utility such as `flex` sets display after the browser's own hidden
+     rule and wins, so a tab panel marked `hidden` stayed on screen. */
+  [hidden] {
+    display: none !important;
+  }
+
   html {
     /* The canvas sets the body background on <body>; doing it on html as
        well stops a white band under a short page on iOS. */

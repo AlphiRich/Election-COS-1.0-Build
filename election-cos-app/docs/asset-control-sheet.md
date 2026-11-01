@@ -5442,3 +5442,26 @@ New public routes, all client-side except the results feed. Nav is now Explainer
 - Map links are name searches, not IEC-verified pins.
 
 **Verification:** `check:all`; guards proved by injection where new logic was added (see commit); every new route at 320 and 1280 px: no horizontal overflow, no console errors; agent log persisted across reload; results board rendered an invented fixture through the bot and rejected a missing source with exit 1.
+
+## 51. Seat allocation model (1 Nov 2026)
+
+`/for-campaigns/seat-model`: a four-tab (Setup, Parties, Results, Charts) what-if model for campaign teams, replacing a pasted React mock-up. Built on `allocateSeats` (reproduces the IEC 2021 JB Marks report: quota 1,515; ANC 33, DA 17, VFP 9, EFF 6, PA 2) in the design-system tokens (Ink, Amber/gold, Blue, Green, Slate, Maroon, Line); charts are HTML bars, no charting library, no raw hex.
+
+**What the mock-up got wrong, and what the model does instead**
+| Mock-up | Model |
+|---|---|
+| Council size from "voters ÷ 8,600 + 48" and a free override | Councillors and wards from Annexure A; no override (rule 1) |
+| Ward seats = ⌈seats ÷ 2⌉ | Wards from the register; PR seats = councillors − wards |
+| Quota from ward votes + PR votes (each voter counted twice) | PR-ballot votes only; ward wins entered as seats won |
+| 1% exclusion threshold | None: the formula this build implements has no such cut-off |
+| Over-represented party removed and quota re-run | Overhang expands the council; ties on remainder flagged, never auto-resolved |
+| Independents only deducted | C (independents) and D (list-less ward winners) both deducted from the denominator |
+| Invented "JB Marks" party figures | The real 2021 result, labelled history |
+| Cyclic top-up by array order | Largest remainder, ties refused |
+| Any municipality accepted | District councils refused (different Schedule) |
+
+Also: more ward winners than the municipality has wards is refused; undecided wards and list-less ward winners are warned; CSV import accepts plain integers only (no guessing at thousands separators), ≤100 KB, ≤40 parties.
+
+**Found by running it:** every tab panel showed at once, because `flex` out-ranks the browser's `[hidden]` rule. Fixed site-wide in `site.css` and guarded by `siteHidden.test.ts` (proved by injection).
+
+**Not built: the pasted IEC integration blueprint.** It assumes Node/Express + Prisma + PostgreSQL; this build is Firebase (Firestore, Cloud Functions, africa-south1). It calls `https://api.elections.org.za/v1/voter-roll`, an API this build has not seen and the IEC is not known to publish. It hashes ID numbers with plain SHA-256, which is not masking: a 13-digit SA ID has so little entropy (birth date, sequence, checksum) that every hash can be reversed by enumeration; the build's own rule is KMS-backed handling (`unmaskCandidateIdNumber` fails closed). It would bulk-load a voters' roll into a campaign database, which the IEC restricts by law. A table called `AuditLog` is not tamper-proof just by being named so. Nothing from it was implemented. The `ecos-electoral-data-harvest` and `iec-data-ingestion` rules already in the repo govern any real ingestion.

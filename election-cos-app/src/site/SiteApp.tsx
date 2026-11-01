@@ -55,6 +55,7 @@ import { SiteCandidates } from './pages/SiteCandidates';
 import { SiteAreaStats } from './pages/SiteAreaStats';
 import { SiteAgentTool } from './pages/SiteAgentTool';
 import { SiteForms } from './pages/SiteForms';
+import { SiteSeatModel } from './pages/SiteSeatModel';
 import { ConsentBanner } from './ads/ConsentBanner';
 import { AD_CLIENT_ID } from './ads/adPolicy';
 import {
@@ -155,6 +156,7 @@ export function SiteApp() {
         <Route path="/for-campaigns/voters-in-your-area" element={<SiteAreaStats />} />
         <Route path="/for-campaigns/agent-tool" element={<SiteAgentTool />} />
         <Route path="/for-campaigns/forms" element={<SiteForms />} />
+        <Route path="/for-campaigns/seat-model" element={<SiteSeatModel />} />
         <Route path="*" element={<SiteHome />} />
       </Routes>
 
