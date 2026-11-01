@@ -2868,3 +2868,28 @@ The session's network settings were changed, and `elections.org.za` became reach
 **What it switched on.** `npm run build:site` now ends with `scripts/publish-candidates-cli.ts`, which writes `dist-site/candidates/<code>.json` for each of the 18 North West local municipalities (548 KB in all; ward candidates only). The page fetches one municipality when a voter picks it. Run in a browser: JB Marks Ward 11 shows 15 candidates, Ward 1 shows 14, Moses Kotane Ward 4 shows 16, with the source line, at 320 and 1280 px, no overflow. If the dataset ever loses its confirmation, `build:site` fails loudly rather than shipping without candidates.
 
 **Scope.** Ward candidates only; PR lists are on the Commission's page, which the site links. North West only; the Eastern Cape list was verified and not stored. Other provinces were not fetched.
+
+---
+
+## Session 50 — the voters'-roll ingestion toolkit (A-087's code), reviewed, not merged
+
+**What arrived (1 Nov 2026).** `IC-ECOS-DATA-2026-02-README.md` (SHA-256 `8b9c675a…`) and `ElectionCOS-ingestion-voters-roll.zip` (`3794165c…`, 34 files, 151 KB): the toolkit that A-087 described in the 28 October batch. **It contains no roll data**: no CSV, PDF or personal record, only code, tests and a nested `CLAUDE.md`. So nothing was ingested and nothing could be: the 31 (or 347) roll PDFs are not in this session and were not asked for.
+
+**What was done.** Unzipped outside the repository. `tsc --noEmit` clean. `vitest`: 29 passed, 2 skipped (they need the real roll). The 10 Firestore-rules tests need the emulator (`firebase-tools`, not installed here) and were **not run**. The parser (`parse_iec_voters_roll.py`, pdfplumber, reads local files only) was read, not run: no PDFs.
+
+**Decision: reviewed and recorded; not merged into the repository.** The toolkit's hard rules match this register's (never commit roll data; never write roll records into `voter`/`household`; never relax a gate; editions immutable; field roles see only their own scope, active edition only). Its gates are good practice and are the pattern §11.3 asks for. It is not mergeable as supplied, for reasons that are the build's own:
+
+1. **Its Firestore rules bypass tenant isolation.** They put `roll_entries`, `roll_addresses` and the rest at the top level and key access on claims `role`, `wardCode`, `vdCode`, then say to "merge into the app's rules". This build's rules put every collection under `/tenants/{tid}/…` with claims `tenantId`, `caps`, `geoScope`, `wardScope` (spec §4.1, "no exceptions"). Merging as written would create the one set of collections in the project that sit outside the tenant path.
+2. **It scopes a VD canvasser by `vdCode` alone.** Our rules narrow on VD **and** ward because 25 to 26 of the 108 gazetted stations are split across wards (one across three), so `vdCode` alone shows a canvasser another ward's portion. The roll itself places all 106 VDs it carries in exactly one ward (§13.4), so its data cannot populate the composite `wardCode::vdCode` key for the split stations. The toolkit's one-ward-per-VD gate is correct for the roll and wrong for the delimitation, and the register already records that as a user decision.
+3. **Role names differ** (`HQ_ADMIN`, `LOCAL_HEAD`, `VD_CAPTAIN`… against this app's seven roles and capabilities).
+4. **Dependency versions differ** (it pins `firebase` ^11 and `firebase-admin` ^13; the app has ^10.13 and ^12.5).
+5. **PostgreSQL and Prisma half** targets a database this build does not use and, by the toolkit's own open item 2, conflicts with its stated schema. Not adopted.
+6. **106 VDs against 108 gazetted:** two stations are missing from the roll the toolkit reconciles. Unexplained.
+
+**One open item it lists can now be partly closed.** "Ward-number mapping is derived (`64005031` → `NW405-W31`, last three digits)": the Commission's own candidate list, downloaded today, uses the same id for NW405 (`64005001`…`64005034`, all in 1 to 34). That is the Commission confirming the format from a second document. MDB confirmation of the *mapping to ward names* is a separate thing and stays open; `wardMappingBasis` should not be set to `MDB_CONFIRMED` on this evidence.
+
+**What is not decided, and is not mine to decide:**
+- **Whether the roll is loaded into Election Campaign OS at all.** The toolkit's own open item 3 says the same: lawful basis, retention date and attorney review come first (build rule 3: no legal conclusions drafted here). §11.1 already says "a POPIA decision, not a technical one".
+- **Whether to adapt the toolkit** to the tenant path, claims, composite key and role set. That is a bounded piece of work. It should not be started three days before an election on data this session has not seen.
+
+**If the answer to the first is yes:** the adaptation list above is the work order, the toolkit's gates carry over unchanged, and the first act is to run its parser on the PDFs on the owner's own machine, outside this repository, and check that every VD reads PASS.
