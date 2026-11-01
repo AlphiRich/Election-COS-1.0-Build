@@ -1,0 +1,198 @@
+/* ECOS component layer — every state themed, never browser default */
+.ecos-label { font-family: var(--font-body); font-size: var(--text-caption); line-height: var(--lh-caption); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--text-secondary); }
+.ecos-mono { font-family: var(--font-mono); font-size: var(--text-code); line-height: var(--lh-code); font-variant-numeric: tabular-nums; }
+.ecos-icon { font-size: 1.25em; line-height: 1; display: inline-block; vertical-align: -0.2em; }
+
+/* Button */
+.ecos-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); height: var(--control-height); padding: 0 var(--space-4); border: 1px solid transparent; border-radius: var(--radius-1); font: var(--weight-semibold) var(--text-small)/1 var(--font-body); cursor: pointer; white-space: nowrap; transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); text-decoration: none; }
+.ecos-btn .ecos-icon { font-size: 18px; }
+.ecos-btn--sm { height: var(--control-height-sm); padding: 0 var(--space-3); font-size: var(--text-caption); }
+.ecos-btn--lg { height: var(--touch-target); padding: 0 var(--space-5); font-size: var(--text-body); }
+.ecos-btn--block { width: 100%; }
+.ecos-btn--primary { background: var(--amber); color: var(--ink); }
+.ecos-btn--primary:hover { background: var(--amber-hover); }
+.ecos-btn--primary:active { background: var(--amber-press); }
+.ecos-btn--secondary { background: var(--blue); color: var(--paper); }
+.ecos-btn--secondary:hover { background: var(--blue-hover); }
+.ecos-btn--secondary:active { background: var(--blue-press); }
+.ecos-btn--outline { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.ecos-btn--outline:hover { background: var(--ink-tint); border-color: var(--ink); }
+.ecos-btn--outline:active { background: var(--paper-sunk); }
+.ecos-btn--ghost { background: transparent; color: var(--blue); }
+.ecos-btn--ghost:hover { background: var(--blue-tint); }
+.ecos-btn--ghost:active { background: color-mix(in oklab, var(--blue) 16%, var(--paper)); }
+.ecos-btn--ink { background: var(--ink); color: var(--paper); }
+.ecos-btn--ink:hover { background: var(--ink-90); }
+.ecos-btn--ink:active { background: var(--ink-80); }
+.ecos-btn--destructive { background: transparent; color: var(--ink); border-color: var(--ink); box-shadow: inset 3px 0 0 var(--amber); }
+.ecos-btn--destructive:hover { background: var(--roadmap-tint); }
+.ecos-btn:disabled, .ecos-btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; pointer-events: none; }
+.ecos-btn--icon { width: var(--control-height); padding: 0; }
+.ecos-btn--icon.ecos-btn--sm { width: var(--control-height-sm); }
+.ecos-btn--icon.ecos-btn--lg { width: var(--touch-target); }
+.ecos-inverse .ecos-btn:focus-visible, .ecos-btn--ink:focus-visible { outline-color: var(--focus-ring-inverse); }
+
+/* Status badge — uppercase system label */
+.ecos-badge { display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 var(--space-2); border-radius: var(--radius-1); font: var(--weight-semibold) 11px/1 var(--font-body); letter-spacing: var(--tracking-label); text-transform: uppercase; white-space: nowrap; border: 1px solid transparent; }
+.ecos-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.ecos-badge--nodot::before { display: none; }
+.ecos-badge--built { background: var(--status-built-bg); color: var(--green); }
+.ecos-badge--roadmap { background: var(--status-roadmap-bg); color: var(--roadmap); }
+.ecos-badge--info { background: var(--status-info-bg); color: var(--blue); }
+.ecos-badge--neutral { background: var(--ink-tint); color: var(--slate); }
+.ecos-badge--ink { background: var(--ink); color: var(--paper); }
+.ecos-badge--ink::before { background: var(--amber); }
+.ecos-badge--outline { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+
+/* Code tag — ward codes, IDs, IEC numbers */
+.ecos-code { display: inline-flex; align-items: center; gap: 4px; padding: 1px 6px; border-radius: var(--radius-1); background: var(--ink-tint); color: var(--ink); font: var(--weight-mono-medium) 13px/20px var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ecos-code--plain { background: transparent; padding: 0; }
+.ecos-code--inverse { background: color-mix(in oklab, var(--paper) 12%, var(--ink)); color: var(--paper); }
+
+/* Card — discrete items only */
+.ecos-card { background: var(--surface-raised); border: var(--border-hair); border-radius: var(--radius-2); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); }
+.ecos-card--interactive { cursor: pointer; transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
+.ecos-card--interactive:hover { border-color: var(--ink); }
+.ecos-card--selected { border-color: var(--ink); box-shadow: inset 0 3px 0 var(--amber); }
+.ecos-card--inverse { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.ecos-card__kicker { font: var(--weight-semibold) 11px/1 var(--font-body); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--slate); }
+.ecos-card--inverse .ecos-card__kicker { color: var(--amber); }
+.ecos-card__title { font: var(--weight-display) var(--text-h4)/var(--lh-h4) var(--font-display); }
+
+/* Fields */
+.ecos-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.ecos-field > .ecos-input, .ecos-field > .ecos-select { max-width: 100%; }
+.ecos-field__label { font: var(--weight-semibold) var(--text-small)/20px var(--font-body); color: var(--ink); }
+.ecos-field__hint { font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--slate); }
+.ecos-field__error { font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--ink); font-weight: var(--weight-semibold); display: flex; gap: 6px; align-items: center; }
+.ecos-field__error .ecos-icon { color: var(--amber); }
+.ecos-input, .ecos-select { height: var(--control-height); box-sizing: border-box; width: 100%; padding: 0 var(--space-3); border: 1px solid var(--line-strong); border-radius: var(--radius-1); background: var(--paper-raised); color: var(--ink); font: var(--weight-regular) var(--text-small)/1 var(--font-body); transition: border-color var(--dur-fast) var(--ease); }
+.ecos-input--mono { font-family: var(--font-mono); }
+.ecos-input::placeholder { color: var(--slate); }
+.ecos-input:hover, .ecos-select:hover { border-color: var(--slate); }
+.ecos-input:focus, .ecos-select:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue); }
+.ecos-input[aria-invalid="true"] { border-color: var(--ink); box-shadow: inset 3px 0 0 var(--amber); }
+.ecos-input:disabled, .ecos-select:disabled { opacity: .45; cursor: not-allowed; }
+.ecos-input--lg, .ecos-select--lg { height: var(--touch-target); font-size: var(--text-body); }
+.ecos-select { appearance: none; padding-right: 36px; background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%); background-position: calc(100% - 18px) 52%, calc(100% - 13px) 52%; background-size: 5px 5px; background-repeat: no-repeat; cursor: pointer; }
+
+/* Check / radio / switch */
+.ecos-check { display: inline-flex; align-items: flex-start; gap: var(--space-2); cursor: pointer; font-size: var(--text-small); line-height: 20px; color: var(--ink); min-height: 20px; }
+.ecos-check input { appearance: none; margin: 0; flex: none; width: 18px; height: 18px; border: 1.5px solid var(--slate); border-radius: var(--radius-1); background: var(--paper-raised); display: grid; place-content: center; cursor: pointer; transition: background var(--dur-fast) var(--ease); margin-top: 1px; }
+.ecos-check input[type="radio"] { border-radius: 50%; }
+.ecos-check input:hover { border-color: var(--ink); }
+.ecos-check input:checked { background: var(--ink); border-color: var(--ink); }
+.ecos-check input[type="checkbox"]:checked::after { content: ""; width: 9px; height: 5px; border-left: 2px solid var(--paper); border-bottom: 2px solid var(--paper); transform: rotate(-45deg) translate(1px,-1px); }
+.ecos-check input[type="radio"]:checked { background: var(--paper-raised); border: 5px solid var(--ink); }
+.ecos-check input:disabled { opacity: .45; cursor: not-allowed; }
+.ecos-switch { display: inline-flex; align-items: center; gap: var(--space-3); cursor: pointer; font-size: var(--text-small); color: var(--ink); }
+.ecos-switch input { appearance: none; margin: 0; width: 36px; height: 20px; border-radius: 999px; background: var(--line-strong); position: relative; cursor: pointer; transition: background var(--dur-base) var(--ease); flex: none; }
+.ecos-switch input::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--paper-raised); transition: transform var(--dur-base) var(--ease); box-shadow: 0 1px 2px color-mix(in oklab, var(--ink) 30%, transparent); }
+.ecos-switch input:checked { background: var(--green); }
+.ecos-switch input:checked::after { transform: translateX(16px); }
+.ecos-switch input:disabled { opacity: .45; cursor: not-allowed; }
+
+/* Alert — inline notice */
+.ecos-alert { display: grid; grid-template-columns: auto 1fr auto; gap: var(--space-3); align-items: start; padding: var(--space-3) var(--space-4); border-radius: var(--radius-1); font-size: var(--text-small); line-height: var(--lh-small); border: 1px solid; }
+.ecos-alert .ecos-icon { font-size: 20px; margin-top: 1px; }
+.ecos-alert__title { font-weight: var(--weight-semibold); }
+.ecos-alert--info { background: var(--blue-tint); border-color: color-mix(in oklab, var(--blue) 25%, var(--paper)); color: var(--ink); }
+.ecos-alert--info .ecos-icon { color: var(--blue); }
+.ecos-alert--success { background: var(--green-tint); border-color: color-mix(in oklab, var(--green) 25%, var(--paper)); color: var(--ink); }
+.ecos-alert--success .ecos-icon { color: var(--green); }
+.ecos-alert--warning { background: var(--roadmap-tint); border-color: color-mix(in oklab, var(--amber) 45%, var(--paper)); color: var(--ink); }
+.ecos-alert--warning .ecos-icon { color: var(--roadmap); }
+.ecos-alert--critical { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.ecos-alert--critical .ecos-icon { color: var(--amber); }
+
+/* Toast */
+.ecos-toast { display: flex; align-items: center; gap: var(--space-3); min-width: 320px; max-width: 440px; padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4); background: var(--ink); color: var(--paper); border-radius: var(--radius-2); box-shadow: var(--shadow-3); font-size: var(--text-small); line-height: 20px; border-top: 3px solid var(--amber); }
+.ecos-toast--success { border-top-color: var(--green); }
+.ecos-toast .ecos-icon { font-size: 20px; color: var(--amber); }
+.ecos-toast--success .ecos-icon { color: color-mix(in oklab, var(--green) 55%, var(--paper)); }
+.ecos-toast__body { flex: 1; }
+.ecos-toast .ecos-btn { color: var(--paper); }
+.ecos-toast .ecos-btn:hover { background: color-mix(in oklab, var(--paper) 12%, var(--ink)); }
+
+/* Dialog */
+.ecos-dialog-backdrop { position: fixed; inset: 0; background: var(--overlay); display: grid; place-items: center; padding: var(--space-5); z-index: 50; }
+.ecos-dialog { width: 100%; max-width: 560px; max-height: calc(100vh - 48px); overflow-y: auto; overflow-x: hidden; box-sizing: border-box; background: var(--paper); border-radius: var(--radius-2); box-shadow: var(--shadow-3); border-top: 4px solid var(--ink); display: flex; flex-direction: column; }
+.ecos-dialog__head { padding: var(--space-5) var(--space-5) 0; display: flex; justify-content: space-between; gap: var(--space-4); align-items: flex-start; }
+.ecos-dialog__title { font: var(--weight-display) var(--text-h3)/var(--lh-h3) var(--font-display); }
+.ecos-dialog__body { padding: var(--space-4) var(--space-5); min-width: 0; display: flex; flex-direction: column; gap: var(--space-4); font-size: var(--text-small); line-height: var(--lh-small); }
+.ecos-dialog__actions { padding: var(--space-4) var(--space-5); display: flex; justify-content: flex-end; gap: var(--space-2); border-top: var(--border-hair); background: var(--paper-sunk); }
+
+/* Tooltip */
+.ecos-tooltip { position: relative; display: inline-flex; }
+.ecos-tooltip__tip { position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--paper); font: var(--weight-regular) var(--text-caption)/18px var(--font-body); padding: 6px 10px; border-radius: var(--radius-1); white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity var(--dur-fast) var(--ease); z-index: 20; }
+.ecos-tooltip:hover .ecos-tooltip__tip, .ecos-tooltip:focus-within .ecos-tooltip__tip, .ecos-tooltip--open .ecos-tooltip__tip { opacity: 1; }
+
+/* Tabs — underline, Ink active + Amber marker */
+.ecos-tabs { display: flex; gap: var(--space-5); border-bottom: var(--border-hair); }
+.ecos-tab { appearance: none; background: none; border: 0; padding: var(--space-3) 0; margin-bottom: -1px; font: var(--weight-semibold) var(--text-small)/20px var(--font-body); color: var(--slate); cursor: pointer; border-bottom: 3px solid transparent; display: inline-flex; gap: var(--space-2); align-items: center; }
+.ecos-tab:hover { color: var(--ink); }
+.ecos-tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--amber); }
+.ecos-tab__count { font: var(--weight-mono-medium) 12px/1 var(--font-mono); color: var(--slate); }
+
+/* Side nav (Ink field) */
+.ecos-sidenav { background: var(--ink); color: var(--paper); display: flex; flex-direction: column; gap: 2px; padding: var(--space-4) var(--space-3); }
+.ecos-sidenav__section { font: var(--weight-semibold) 11px/1 var(--font-body); letter-spacing: var(--tracking-label); text-transform: uppercase; color: color-mix(in oklab, var(--paper) 60%, var(--ink)); padding: var(--space-5) var(--space-3) var(--space-2); }
+.ecos-sidenav__item { appearance: none; background: none; border: 0; width: 100%; text-align: left; display: flex; align-items: center; gap: var(--space-3); height: 40px; padding: 0 var(--space-3); border-radius: var(--radius-1); color: color-mix(in oklab, var(--paper) 82%, var(--ink)); font: var(--weight-regular) var(--text-small)/1 var(--font-body); cursor: pointer; position: relative; text-decoration: none; }
+.ecos-sidenav__item:hover { background: color-mix(in oklab, var(--paper) 8%, var(--ink)); color: var(--paper); }
+.ecos-sidenav__item[aria-current="page"] { background: color-mix(in oklab, var(--paper) 10%, var(--ink)); color: var(--paper); font-weight: var(--weight-semibold); }
+.ecos-sidenav__item[aria-current="page"]::before { content: ""; position: absolute; left: -12px; top: 8px; bottom: 8px; width: 3px; background: var(--amber); }
+.ecos-sidenav__item:focus-visible { outline-color: var(--amber); }
+.ecos-sidenav__item .ecos-icon { font-size: 20px; }
+.ecos-sidenav__meta { margin-left: auto; font: 11px/1 var(--font-mono); color: var(--amber); }
+
+/* App bar */
+.ecos-appbar { display: flex; align-items: center; gap: var(--space-5); height: 56px; padding: 0 var(--space-5); background: var(--paper); border-bottom: var(--border-hair); }
+.ecos-wordmark { display: inline-flex; align-items: baseline; gap: 2px; font: var(--weight-display) 20px/1 var(--font-display); letter-spacing: -0.01em; color: var(--ink); white-space: nowrap; }
+.ecos-wordmark sup { font: var(--weight-mono-medium) 0.55em/1 var(--font-mono); color: var(--slate); vertical-align: super; }
+.ecos-inverse .ecos-wordmark, .ecos-wordmark--inverse { color: var(--paper); }
+.ecos-inverse .ecos-wordmark sup, .ecos-wordmark--inverse sup { color: var(--amber); }
+
+/* Table */
+.ecos-table { width: 100%; border-collapse: collapse; font-size: var(--text-small); line-height: 20px; }
+.ecos-table th { text-align: left; font: var(--weight-semibold) 11px/16px var(--font-body); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--slate); padding: var(--space-2) var(--space-3); border-bottom: 2px solid var(--ink); white-space: nowrap; }
+.ecos-table td { padding: var(--space-3); border-bottom: var(--border-hair); vertical-align: middle; color: var(--ink); }
+.ecos-table tbody tr:hover td { background: var(--ink-tint); }
+.ecos-table--dense td { padding: var(--space-2) var(--space-3); }
+.ecos-table td.num, .ecos-table th.num { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* Stat — a key figure */
+.ecos-stat { display: flex; flex-direction: column; gap: var(--space-1); }
+.ecos-stat__value { font: var(--weight-mono-medium) 32px/36px var(--font-mono); color: var(--ink); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.ecos-stat__delta { font: var(--weight-semibold) var(--text-caption)/var(--lh-caption) var(--font-body); color: var(--slate); }
+
+/* RBAC: role badge */
+.ecos-role { display: inline-flex; align-items: center; gap: var(--space-2); height: 26px; padding: 0 var(--space-2) 0 6px; border-radius: var(--radius-1); border: 1px solid var(--line-strong); background: var(--paper-raised); font-size: var(--text-caption); line-height: 1; color: var(--ink); white-space: nowrap; }
+.ecos-role__glyph { width: 16px; height: 16px; border-radius: 2px; background: var(--ink); color: var(--amber); display: grid; place-items: center; font: 700 9px/1 var(--font-mono); }
+.ecos-role__label { font-weight: var(--weight-semibold); }
+.ecos-role__key { font: var(--weight-regular) 11px/1 var(--font-mono); color: var(--slate); }
+
+/* RBAC: capability matrix cell */
+.ecos-cap { width: 28px; height: 28px; border-radius: var(--radius-1); display: inline-grid; place-items: center; border: 1px solid transparent; background: none; cursor: default; font-size: 16px; }
+.ecos-cap--granted { background: var(--ink); color: var(--paper); }
+.ecos-cap--scoped { background: var(--blue-tint); color: var(--blue); border-color: color-mix(in oklab, var(--blue) 30%, var(--paper)); }
+.ecos-cap--delegable { box-shadow: inset 0 -3px 0 var(--amber); }
+.ecos-cap--none { color: var(--line-strong); }
+button.ecos-cap { cursor: pointer; }
+button.ecos-cap:hover { border-color: var(--ink); }
+
+/* RBAC: rule check list */
+.ecos-rule { display: grid; grid-template-columns: 20px 1fr; gap: var(--space-2); font-size: var(--text-small); line-height: 20px; }
+.ecos-rule .ecos-icon { font-size: 18px; margin-top: 1px; }
+.ecos-rule--pass .ecos-icon { color: var(--green); }
+.ecos-rule--fail .ecos-icon { color: var(--roadmap); }
+.ecos-rule--fail { font-weight: var(--weight-semibold); }
+.ecos-rule--pending .ecos-icon { color: var(--line-strong); }
+.ecos-rule--pending { color: var(--slate); }
+
+/* RBAC: capability token */
+.ecos-token { background: var(--ink); color: var(--paper); border-radius: var(--radius-2); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4); }
+.ecos-token__claims { font: var(--weight-regular) 13px/22px var(--font-mono); display: grid; grid-template-columns: max-content 1fr; column-gap: var(--space-4); }
+.ecos-token__claims dt { color: color-mix(in oklab, var(--paper) 55%, var(--ink)); }
+.ecos-token__claims dd { margin: 0; color: var(--paper); word-break: break-word; }
+.ecos-token__meter { height: 4px; background: color-mix(in oklab, var(--paper) 14%, var(--ink)); border-radius: 2px; overflow: hidden; }
+.ecos-token__meter > span { display: block; height: 100%; background: var(--amber); }

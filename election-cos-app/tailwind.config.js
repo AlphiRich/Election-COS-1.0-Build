@@ -22,6 +22,8 @@ export default {
         teal: '#33427E',
         green: '#2F7E4A',
         slate: '#6A6E7E',
+        // Planned / in progress, and warning text on paper (gold fails as text).
+        roadmap: '#8A6A2A',
         // Public-site border/rule. Borders only, never text — 1.5:1 on
         // paper. See src/design/tokens.ts for why the site needs its own.
         line: '#DCD6C8',

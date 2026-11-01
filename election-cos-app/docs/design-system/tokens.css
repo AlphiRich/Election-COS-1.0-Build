@@ -1,0 +1,134 @@
+/* ===== tokens/colors.css ===== */
+/* Election-COS 1.0 — approved palette only. "Don't add new colours." */
+:root {
+  /* Base palette (Design System Protocol §2) */
+  --ink: #1A2246;      /* primary text, headings, dark fields, footer */
+  --paper: #F7F4EE;    /* page background */
+  --amber: #B7913F;    /* CTA fill, status markers, warnings, focus on Ink — NEVER text on Paper */
+  --slate: #6A6E7E;    /* secondary text, captions, inactive */
+  --blue: #33427E;     /* links, secondary actions, info */
+  --green: #2F7E4A;    /* success, "Built" */
+  --roadmap: #8A6A2A;  /* "Roadmap" / planned / in progress; deep amber safe for text on Paper */
+  --line: #DCD6C8;     /* borders only */
+
+  /* Mixed steps — tints/shades of approved colours, never new hues */
+  --ink-90: color-mix(in oklab, var(--ink) 90%, var(--paper));
+  --ink-80: color-mix(in oklab, var(--ink) 80%, var(--paper));
+  --paper-raised: color-mix(in oklab, var(--paper) 55%, #ffffff);
+  --paper-sunk: color-mix(in oklab, var(--paper) 92%, var(--line));
+  --amber-hover: color-mix(in oklab, var(--amber) 88%, var(--paper));
+  --amber-press: color-mix(in oklab, var(--amber) 85%, var(--ink));
+  --blue-hover: color-mix(in oklab, var(--blue) 88%, var(--ink));
+  --blue-press: color-mix(in oklab, var(--blue) 75%, var(--ink));
+  --blue-tint: color-mix(in oklab, var(--blue) 9%, var(--paper));
+  --green-tint: color-mix(in oklab, var(--green) 10%, var(--paper));
+  --roadmap-tint: color-mix(in oklab, var(--amber) 16%, var(--paper));
+  --ink-tint: color-mix(in oklab, var(--ink) 6%, var(--paper));
+  --line-strong: color-mix(in oklab, var(--line) 70%, var(--slate));
+
+  /* Semantic aliases */
+  --surface-page: var(--paper);
+  --surface-raised: var(--paper-raised);
+  --surface-sunk: var(--paper-sunk);
+  --surface-inverse: var(--ink);
+  --text-primary: var(--ink);
+  --text-secondary: var(--slate);
+  --text-inverse: var(--paper);
+  --text-link: var(--blue);
+  --text-accent-on-inverse: var(--amber);
+  --border-default: var(--line);
+  --border-strong: var(--line-strong);
+  --action-primary: var(--amber);          /* fill; label is Ink */
+  --action-primary-label: var(--ink);
+  --action-secondary: var(--blue);         /* fill; label is Paper */
+  --action-secondary-label: var(--paper);
+  --status-built: var(--green);
+  --status-built-bg: var(--green-tint);
+  --status-roadmap: var(--roadmap);
+  --status-roadmap-bg: var(--roadmap-tint);
+  --status-info: var(--blue);
+  --status-info-bg: var(--blue-tint);
+  --status-warning: var(--roadmap);        /* warning text on Paper — Amber fails 2.68:1 */
+  --status-warning-mark: var(--amber);     /* non-text marker beside warning text */
+  --focus-ring: var(--blue);               /* on Paper */
+  --focus-ring-inverse: var(--amber);      /* on Ink — 5.24:1 */
+  --overlay: color-mix(in oklab, var(--ink) 55%, transparent);
+}
+
+/* ===== tokens/typography.css ===== */
+:root {
+  --font-display: "Archivo", "Public Sans", system-ui, sans-serif;
+  --font-body: "Public Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --weight-display: 700;
+  --weight-regular: 400;
+  --weight-semibold: 600;
+  --weight-mono-medium: 500;
+
+  /* Desktop type scale — size / line-height (Protocol p.6) */
+  --text-h1: 48px;   --lh-h1: 52px;
+  --text-h2: 32px;   --lh-h2: 36px;
+  --text-h3: 24px;   --lh-h3: 30px;
+  --text-h4: 18px;   --lh-h4: 24px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-small: 14px; --lh-small: 23px;
+  --text-caption: 12px; --lh-caption: 20px;
+  --text-code: 14px; --lh-code: 22px;
+  --lh-ratio: 1.65;
+  --tracking-display: -0.01em;
+  --tracking-label: 0.08em;   /* uppercase system labels: BUILT, ROADMAP */
+}
+
+/* ===== tokens/spacing.css ===== */
+:root {
+  /* 4px base step */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+
+  /* Layout systems (Protocol §4) */
+  --grid-columns: 12;
+  --grid-max: 1200px;
+  --grid-gutter: 24px;
+  --touch-target: 48px;       /* Field (mobile) minimum */
+  --control-height: 40px;     /* War Room (desktop) controls */
+  --control-height-sm: 32px;
+
+  /* Civic document: near-square corners, hairline edges, almost no shadow */
+  --radius-1: 2px;
+  --radius-2: 4px;
+  --radius-pill: 999px;
+  --border-hair: 1px solid var(--line);
+  --border-rule: 2px solid var(--ink);
+  --shadow-1: 0 1px 0 var(--line);
+  --shadow-2: 0 1px 2px color-mix(in oklab, var(--ink) 10%, transparent), 0 4px 12px color-mix(in oklab, var(--ink) 6%, transparent);
+  --shadow-3: 0 2px 4px color-mix(in oklab, var(--ink) 12%, transparent), 0 16px 40px color-mix(in oklab, var(--ink) 14%, transparent);
+
+  --ease: cubic-bezier(.2,.6,.2,1);
+  --dur-fast: 120ms;
+  --dur-base: 180ms;
+}
+
+/* ===== tokens/fonts.css ===== */
+/* Archivo 700 · Public Sans 400/600 · IBM Plex Mono 400/500 — Google Fonts (no binaries supplied) */
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:ital,wght@0,400;0,600;1,400&display=swap");
+
+/* ===== tokens/icons.css ===== */
+/* Phosphor Icons, duotone weight — CDN substitute (no icon set supplied) */
+@import url("https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css");
+
+/* ===== tokens/base.css ===== */
+html, body { margin: 0; background: var(--surface-page); color: var(--text-primary); }
+body { font-family: var(--font-body); font-size: var(--text-body); line-height: var(--lh-ratio); -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: var(--weight-display); letter-spacing: var(--tracking-display); margin: 0; text-wrap: balance; }
+h1 { font-size: var(--text-h1); line-height: var(--lh-h1); }
+h2 { font-size: var(--text-h2); line-height: var(--lh-h2); }
+h3 { font-size: var(--text-h3); line-height: var(--lh-h3); }
+h4 { font-size: var(--text-h4); line-height: var(--lh-h4); }
+p { margin: 0; text-wrap: pretty; }
+a { color: var(--text-link); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { color: var(--ink); text-decoration-thickness: 2px; }
+code, kbd, samp { font-family: var(--font-mono); font-size: 0.875em; }
+::selection { background: color-mix(in oklab, var(--amber) 35%, var(--paper)); color: var(--ink); }
+:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+

@@ -25,6 +25,15 @@ export const tokens = {
     green: '#2F7E4A',
     slate: '#6A6E7E',
     /**
+     * "Roadmap" / planned / in-progress, and warning TEXT on paper.
+     *
+     * From the supplied ECOS design system (`docs/design-system/`). It is a
+     * deep amber that passes as text on paper, which `gold` does not (2.68:1);
+     * gold stays a fill and a marker. Added so "planned" has a name that is
+     * not red.
+     */
+    roadmap: '#8A6A2A',
+    /**
      * Border and rule colour for the public site (`--ec-line` in the
      * design canvas). A warm stone that reads as a ruled line on paper.
      *
