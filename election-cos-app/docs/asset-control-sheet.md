@@ -5532,3 +5532,11 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 |---|---|---|
 | Sign-off generator | `src/modules/voters/dailySignoff.ts` (+8), button on Round page | Built; counts only; capture-rate alert off until a campaign sets a level; not browser-rendered |
 
+## 60. 60-second tour page (Session 50)
+
+| Asset | Path | Status |
+|---|---|---|
+| Tour content + guards | `src/site/tutorial.ts` (+7) | Built; claims limited to what the build does |
+| Tour page | `src/site/pages/SiteTutorial.tsx`, route `/tutorial` | Built; browser-verified at phone and desktop width |
+| Recorded video | — | **Not made.** The page is the script. |
+

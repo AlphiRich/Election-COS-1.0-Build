@@ -55,6 +55,9 @@ export function SiteHome() {
             <Link to="/explainers" className="site-btn-outline-paper">
               Read the explainers
             </Link>
+            <Link to="/tutorial" className="site-btn-outline-paper">
+              See the 60-second tour
+            </Link>
           </div>
         </div>
       </section>
