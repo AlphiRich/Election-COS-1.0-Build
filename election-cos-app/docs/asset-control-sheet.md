@@ -5561,3 +5561,4 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 
 | Rules static audit | `src/rulesAudit.test.ts` (7) | Built; emulator matrix not built |
 | Consent quarantine | `functions/src/consentQuarantine.ts` (+5) | Built as pure functions; not exported/scheduled |
+| Export masking sweep | `src/lib/piiScan.ts`, `src/exportSweep.test.ts` (6) | Built; PDFs not text-scanned |

@@ -14,7 +14,7 @@ bounded responsibility, not a service.
 | 4 | OFFLINE_CONSENT_VALIDATOR | the consent gate in `VoterForm`; roll capture needs spoken consent + typed name (`rollCapture.ts`) | built |
 | 5 | TENANT_CONTEXT | tenant from the **verified token claim**; the path is checked by the rules. **Not** from a request header (the supplied worker trusted `X-Tenant-ID`) | built (rules, claims Worker) |
 | 6 | SYNC_THROTTLE | `worker/src/edge.ts`: verified token, per-user token bucket, 5 MB cap, header scrub (6 tests) | built; best-effort per isolate, real limit is a Cloudflare rule |
-| 7 | POPIA_MASKING | phone/ID masking, `householdSafety.ts`, IEC mask never copied | built (partial) |
+| 7 | POPIA_MASKING | phone/ID masking, `householdSafety.ts`, IEC mask never copied; `src/exportSweep.test.ts` scans every text export (audit CSV, usage statement, ground intelligence, sign-off) fed hostile input, and fails if a new download is added without being classified. The four PDF exports are not text-scanned (compressed; personal data by design, own document tests) | built |
 | 8 | SOFT_DELETE | soft-delete in every repository; hard delete denied by rules | built |
 | 9 | LWW_RECONCILIATION | `functions/src/syncMerge.ts` | built; needs Blaze to run |
 | 10 | DOCUMENT_VAULT | Cloud Storage + `storage.rules`; no KMS envelope | partial |
