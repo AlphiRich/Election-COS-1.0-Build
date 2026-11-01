@@ -28,6 +28,14 @@ export default {
         // paper. See src/design/tokens.ts for why the site needs its own.
         line: '#DCD6C8',
       },
+      // The case-journey animation on /watch: each step lights gold in turn.
+      keyframes: {
+        'ecos-lit': {
+          '0%, 100%': { backgroundColor: '#FFFFFF', borderColor: '#DCD6C8' },
+          '20%, 45%': { backgroundColor: '#B7913F', borderColor: '#B7913F' },
+        },
+      },
+      animation: { 'ecos-lit': 'ecos-lit 10s linear infinite' },
       fontFamily: {
         display: ['"Archivo Narrow"', 'sans-serif'],
         body: ['"Public Sans"', 'sans-serif'],

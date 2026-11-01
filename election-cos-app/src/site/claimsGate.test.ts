@@ -17,6 +17,8 @@ function code(file: string): string | null {
 const MARKETING = [
   'siteContent.ts',
   'platformContent.ts',
+  'explainerVideos.ts',
+  'pages/SiteWatch.tsx',
   'pages/SiteHome.tsx',
   'pages/SiteForCampaigns.tsx',
   'pages/SiteCasework.tsx',

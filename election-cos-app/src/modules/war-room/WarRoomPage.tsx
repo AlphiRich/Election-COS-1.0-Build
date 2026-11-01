@@ -30,6 +30,7 @@ import { CONTACT_STATUS_LABEL } from '@/modules/voters/canvassQueue';
 import { TONE_PILL_CLASSES } from '@/design/toneClasses';
 import { totalsFor } from '@/modules/wards/wardStats';
 import { reconcileSeed } from '@/modules/wards/seedReconciliation';
+import { SITE_DOMAIN } from '@/config/publicDomain';
 import { BasisNote, Card, PageHeader, SectionLabel, StatTile } from '@/components/ui';
 
 const QUICK_LINKS = [
@@ -93,6 +94,18 @@ export function WarRoomPage() {
   return (
     <div className="space-y-6 max-w-4xl">
       <PageHeader slug="/war-room" title="War Room" />
+
+      <Card>
+        <SectionLabel as="h2">Start here: short videos</SectionLabel>
+        <p className="text-body-md font-body mt-1">
+          Each one makes a single point in ten to thirty seconds, with the words underneath if you would
+          rather read.{' '}
+          <a href={`https://${SITE_DOMAIN}/watch#parties`} target="_blank" rel="noopener noreferrer">
+            Watch the explainers
+          </a>
+          .
+        </p>
+      </Card>
 
       {(countersQuery.isLoading || wardsQuery.isLoading) && (
         <p className="text-body-md font-body text-slate">Loading…</p>

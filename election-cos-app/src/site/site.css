@@ -107,3 +107,11 @@
     @apply py-3;
   }
 }
+
+/* The case-journey animation on /watch: the keyframes live in tailwind.config.js (token colours);
+   it stops for people who ask for reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-ecos-lit {
+    animation: none;
+  }
+}

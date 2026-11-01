@@ -1,0 +1,151 @@
+/**
+ * Election Campaign OS — the short video explainers.
+ *
+ * ONE IDEA PER VIDEO, TEN TO THIRTY SECONDS. Voters and campaign staff will not read a manual,
+ * so each explainer is a short video with its words on screen. The words are also kept here as
+ * `readIt`, shown under the video, so nobody has to watch to know what it says and a screen reader
+ * gets the same content.
+ *
+ * NO VIDEO IS FAKED. `youtubeId` is null until a video has actually been recorded and uploaded
+ * to YouTube. A null id never produces a player; the page shows the text and says plainly that
+ * the video is not out yet. Videos live on YouTube so the static site stays light; the player
+ * is loaded only AFTER a click, from youtube-nocookie.com, so visiting the page sends nothing to
+ * YouTube (no cookie, no IP) before the person asks for the video.
+ *
+ * Every claim here is a fact about this software and is held to the same lint as the rest of
+ * the marketing source (no party names, no forbidden claims). Examples use invented data.
+ */
+export type Audience = 'voters' | 'parties';
+
+export interface Explainer {
+  id: string;
+  audience: Audience;
+  title: string;
+  /** Target running time in seconds. Short on purpose. */
+  seconds: number;
+  /** The video's words, as text. */
+  readIt: string;
+  /** 11-character YouTube video id, or null while no video exists. */
+  youtubeId: string | null;
+}
+
+export const MAX_SECONDS = 60;
+
+export const EXPLAINERS: Explainer[] = [
+  {
+    id: 'canvasser-knocks',
+    audience: 'voters',
+    title: 'When a canvasser knocks',
+    seconds: 20,
+    readIt:
+      'They must ask your permission before they record anything about you. You can say no. If you say no, nothing is stored, and there is no list of people who said no.',
+    youtubeId: null,
+  },
+  {
+    id: 'poll-answer',
+    audience: 'voters',
+    title: 'Your answer to a poll',
+    seconds: 20,
+    readIt:
+      'A poll asks for a choice and nothing else: no name, number or ID. Your answer is counted with others and is not linked to you. You can pick "Prefer not to say".',
+    youtubeId: null,
+  },
+  {
+    id: 'seats-won',
+    audience: 'voters',
+    title: 'How seats are won',
+    seconds: 30,
+    readIt:
+      'Some seats are won in wards, the rest from the party vote. Schedule 1 of the Municipal Structures Act turns votes into seats. The calculator shows the working, with the law cited.',
+    youtubeId: null,
+  },
+  {
+    id: 'roles',
+    audience: 'parties',
+    title: 'Seven roles, each sees only its own ground',
+    seconds: 10,
+    readIt:
+      'A ward lead sees a ward. A canvasser sees a voting district. The refusal is made by the database rules, not only by the screen.',
+    youtubeId: null,
+  },
+  {
+    id: 'command-view',
+    audience: 'parties',
+    title: 'One view of the campaign',
+    seconds: 10,
+    readIt:
+      'People recorded with consent, doors worked, incidents open. Counts only. Nothing on it names a voter.',
+    youtubeId: null,
+  },
+  {
+    id: 'capture-consent',
+    audience: 'parties',
+    title: 'Capture with consent',
+    seconds: 10,
+    readIt:
+      'The canvasser types the person’s name back before the record button works, so a mis-tap cannot create consent. A refusal stores nothing.',
+    youtubeId: null,
+  },
+  {
+    id: 'offline',
+    audience: 'parties',
+    title: 'Offline in a dead zone',
+    seconds: 10,
+    readIt:
+      'Work is kept on the phone and sent when signal returns. The screen shows what is still waiting. Clearing the browser’s data removes anything not yet sent, and the app says so.',
+    youtubeId: null,
+  },
+  {
+    id: 'funding-30-day',
+    audience: 'parties',
+    title: 'Funding line and the 30-day clock',
+    seconds: 10,
+    readIt:
+      'A donor’s payments are added up against the R200,000 disclosure line (Government Gazette 53182, under court challenge). A person’s request about their own data is tracked against a 30-day target.',
+    youtubeId: null,
+  },
+  {
+    id: 'sentiment-polls',
+    audience: 'parties',
+    title: 'Sentiment polls: what they can and cannot tell you',
+    seconds: 30,
+    readIt:
+      'Answers come from people who chose to reply to a link. They are not a random sample, so there is no margin of error and no forecast. Groups under five answers are hidden.',
+    youtubeId: null,
+  },
+  {
+    id: 'scenario-runner',
+    audience: 'parties',
+    title: 'The scenario runner: your assumptions, run many times',
+    seconds: 30,
+    readIt:
+      'You set the swing and how unsure you are. The software repeats the seat calculation across that range and shows which assumption matters most. It is not a prediction.',
+    youtubeId: null,
+  },
+];
+
+const YOUTUBE_ID_RE = /^[A-Za-z0-9_-]{11}$/;
+
+export const isYoutubeId = (id: string | null | undefined): id is string =>
+  typeof id === 'string' && YOUTUBE_ID_RE.test(id);
+
+/**
+ * The player address, or null when there is no valid id. Always the privacy-enhanced host;
+ * captions on by default; related videos limited to the same channel; autoplay because it is only
+ * ever requested after the person has pressed play.
+ */
+export function embedUrl(id: string | null | undefined): string | null {
+  if (!isYoutubeId(id)) return null;
+  const q = new URLSearchParams({
+    autoplay: '1',
+    rel: '0',
+    cc_load_policy: '1',
+    modestbranding: '1',
+    playsinline: '1',
+  });
+  return `https://www.youtube-nocookie.com/embed/${id}?${q.toString()}`;
+}
+
+export const byAudience = (a: Audience) => EXPLAINERS.filter((e) => e.audience === a);
+
+export const fmtSeconds = (s: number) => `0:${String(s).padStart(2, '0')}`;

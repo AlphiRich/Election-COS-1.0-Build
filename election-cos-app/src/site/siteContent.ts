@@ -80,6 +80,7 @@ export interface NavItem {
 
 export const SITE_NAV: NavItem[] = [
   { label: 'Tour', href: '/tutorial' },
+  { label: 'Videos', href: '/watch' },
   { label: 'Research', href: '/research' },
   { label: 'Explainers', href: '/explainers' },
   { label: 'Voter tools', href: '/tools' },

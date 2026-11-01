@@ -17,4 +17,10 @@ describe('public-site headers', () => {
     expect(script).not.toMatch(/unsafe-/);
     expect(script).not.toMatch(/\*/);
   });
+  it('allows the privacy-enhanced YouTube player in frames, and not the ordinary YouTube host', () => {
+    const frame = /frame-src ([^;]*)/.exec(h)![1];
+    expect(frame).toContain('https://www.youtube-nocookie.com');
+    expect(frame).not.toMatch(/https:\/\/(www\.)?youtube\.com/);
+    expect(frame).not.toContain('*');
+  });
 });
