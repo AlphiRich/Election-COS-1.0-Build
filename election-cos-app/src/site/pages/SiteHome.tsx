@@ -16,9 +16,18 @@
 import { Link } from 'react-router-dom';
 import { EXPLAINERS } from '../explainers';
 import { FUNDING_CHECKER_PATH } from './SiteFundingChecker';
+import { COALITION_PATH, COUNCIL_PATH, DETAILS_PATH, SEATS_PATH } from './SiteVoterTools';
 import { Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
 
 const IEC_URL = 'https://www.elections.org.za';
+
+const TOOLS = [
+  { to: DETAILS_PATH, title: 'Check your voter details', body: 'A polling-week checklist, and a ward and voting station search for JB Marks.' },
+  { to: COUNCIL_PATH, title: 'Your council and your ballot', body: 'How many councillors, wards and PR seats your municipality has, and what you vote on.' },
+  { to: SEATS_PATH, title: 'How seats are calculated', body: 'Step from votes to seats, starting from a real result.' },
+  { to: COALITION_PATH, title: 'How coalitions work', body: 'Combine parties and see whether they pass half the seats.' },
+  { to: FUNDING_CHECKER_PATH, title: 'Party-funding checker', body: 'Where one donor’s total sits against the disclosure line.' },
+];
 
 const WONT = [
   'Tell you who to vote for. This site does not endorse any party or candidate.',
@@ -40,8 +49,8 @@ export function SiteHome() {
             personal details. Free to read, with the source beside every figure.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
-            <Link to={FUNDING_CHECKER_PATH} className="site-btn-primary">
-              Try the party-funding checker
+            <Link to="/tools" className="site-btn-primary">
+              Open the voter tools
             </Link>
             <Link to="/explainers" className="site-btn-outline-paper">
               Read the explainers
@@ -51,28 +60,27 @@ export function SiteHome() {
       </section>
 
       <SiteSection labelledBy="tool-h" className="pb-6 pt-[72px]">
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-5">
-          <SiteCard className="flex min-w-0 flex-col gap-3 p-8">
-            <Eyebrow>Free tool</Eyebrow>
-            <h2 id="tool-h" className="m-0 font-site-display text-site-h4">
-              Did a donation cross the disclosure line?
-            </h2>
-            <p className="m-0 text-site-base text-slate">
-              Enter what one donor has given. It tells you which side of the published thresholds
-              the total falls on. It runs in your browser and nothing you type is sent anywhere.
-            </p>
-            <Link to={FUNDING_CHECKER_PATH} className="mt-auto pt-2 font-semibold text-teal">
-              Open the checker →
+        <h2 id="tool-h" className="mb-8 mt-0 font-site-display text-site-h3">
+          Tools you can use now
+        </h2>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-5">
+          {TOOLS.map((t) => (
+            <Link
+              key={t.to}
+              to={t.to}
+              className="flex min-w-0 flex-col gap-2 rounded-[10px] border border-line bg-white p-7 text-ink no-underline"
+            >
+              <span className="font-site-display text-site-h5">{t.title}</span>
+              <span className="text-site-sm text-slate">{t.body}</span>
+              <span className="mt-auto pt-2 font-semibold text-teal">Open →</span>
             </Link>
-          </SiteCard>
-
-          <SiteCard className="flex min-w-0 flex-col gap-3 p-8">
-            <Eyebrow>Before polling day</Eyebrow>
-            <h2 className="m-0 font-site-display text-site-h4">Check you are registered</h2>
-            <p className="m-0 text-site-base text-slate">
+          ))}
+          <SiteCard className="flex min-w-0 flex-col gap-2 p-7">
+            <span className="font-site-display text-site-h5">Check you are registered</span>
+            <span className="text-site-sm text-slate">
               Registration is checked with the Electoral Commission, not here. This site holds no
-              voters&rsquo; roll.
-            </p>
+              voters’ roll.
+            </span>
             <a href={IEC_URL} className="mt-auto pt-2 font-semibold text-teal">
               Go to elections.org.za →
             </a>

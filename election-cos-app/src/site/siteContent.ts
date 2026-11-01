@@ -77,9 +77,9 @@ export interface NavItem {
 
 export const SITE_NAV: NavItem[] = [
   { label: 'Explainers', href: '/explainers' },
-  { label: 'Free tool', href: '/tools/party-funding-checker' },
+  { label: 'Voter tools', href: '/tools' },
   { label: 'For campaigns', href: '/for-campaigns' },
-  { label: 'Casework Tracker', href: '/casework-tracker' },
+  { label: 'What is in the app', href: '/whats-in-the-app' },
   { label: 'Packages', href: '/packages' },
   { label: 'Compliance', href: '/compliance' },
 ];

@@ -189,6 +189,9 @@ export function SiteFooter({
 
         <div className="flex flex-col gap-1.5">
           <span className="font-semibold text-paper">Company</span>
+          <Link to="/casework-tracker" className="text-line">
+            Casework Tracker
+          </Link>
           <a href={SITE.corporateUrl} className="text-line">
             innovationconsult.co.za
           </a>

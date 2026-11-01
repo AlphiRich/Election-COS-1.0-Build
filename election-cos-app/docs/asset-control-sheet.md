@@ -5379,3 +5379,29 @@ and fixed).
 - **NOT verified against the IEC:** `www.elections.org.za`, `acts.co.za` and `timeslive.co.za` do not resolve from this session (network allowlist), so the IEC site could not be read. Owner action: open the Gazette 53182 PDF (or the IEC party-funding page) and confirm number, date and Proclamation Notice R. 275; then, if wished, restore the signing date as a separate fact.
 
 - **Update (1 Nov 2026):** the owner independently confirmed by web search that Government Gazette No. 53182, dated 18 August 2025, contains Proclamation Notice R. 275 of 2025 (Regulations on Political Party Funding, under Act 6 of 2018), citing the gazette PDF (hosted via businesstech.co.za) and Acts Online. This agrees with the site copy and `ppfaDefaults.ts`. **Status: corroborated by two independent public sources; not read on elections.org.za** (still unreachable from the build session). The 6 August signing date remains unestablished and is not asserted anywhere.
+
+## 48. Public voter tools (1 Nov 2026)
+
+Built on the public site, all client-side, no network request, no storage, no ads (none of these paths is in `AD_ELIGIBLE_PATHS`; the funding checker and explainers remain the only ad pages). Nav: Explainers, Voter tools, For campaigns, What is in the app, Packages, Compliance. Casework Tracker moved to the footer and the For campaigns page.
+
+| Route | What it does | Data source |
+|---|---|---|
+| `/tools` | index | — |
+| `/tools/your-council` | councillors, wards, PR seats (= councillors − wards), voters at delimitation, ballots, for all 258 municipalities | `municipalRegister.ts` (Annexure A, IEC Circular 1 of 2025). District councils show no ward or PR figure |
+| `/tools/check-your-details` | polling-week checklist (checkboxes, in-memory only), key dates, JB Marks ward and voting-station search | IEC timetable summary (`docs/iec-election-timetable-2026.md`); MDB notice, Prov. Notice 1300 of 2025 (`seed-data/jb-marks-nw405-wards-vds.json`) |
+| `/tools/how-seats-are-calculated` | step-through of quota, entitlement, PR seats, remainder; opens on the real 2021 JB Marks result, editable | `allocateSeats` (regression-tested against the IEC 2021 report) |
+| `/tools/how-coalitions-work` | combine parties, more-than-half check, every minimal majority | arithmetic on seat numbers; example seeded from the 2021 result |
+| `/whats-in-the-app` | capabilities, case journey, field features | `siteContent.ts` (same claims as the compliance page) |
+
+**Deliberately not built, and why**
+- **Voters' roll lookup / "verify my details".** The roll is the IEC's, this build holds no voter, and the page never asks for an ID number. The tool sends personal checks to elections.org.za.
+- **Candidate names ("who is my councillor candidate").** No certified candidate list is held, and the build does not invent people (rule 2). The page says so and points to the IEC.
+- **Ward search outside JB Marks.** Only NW405 ward and station records exist. Others are sent to the MDB and the IEC.
+
+**Owner checks before launch (not verifiable from this session — elections.org.za is not reachable here)**
+1. The ballot descriptions on `/tools/your-council` (two ballots in a metro; ward, PR and district ballots in a local municipality) are the usual arrangement, written from general knowledge and flagged on the page. Confirm against the IEC's voter-education material.
+2. The Item 12 denominator reading: the seat tool uses `B − C − D` (the formula printed on the IEC's 2021 JB Marks report). §41.4 still sends the reading to an attorney; the tool says it is a teaching tool, uses no independents or list-less winners in the example, and that results are declared by the IEC. The explainers still do not state the formula.
+3. Pledge line "No predictions or results commentary": the tools show only the historical 2021 result as a worked example, labelled history on 2021 boundaries, with no commentary.
+4. Links: elections.org.za and demarcation.org.za (MDB) are linked, not fetched.
+
+**Verification:** guards proved by injection (majority off by one, ward "3" matching "13/30", PR count off by one — each fails exactly the intended test; reverted). Run in a browser at 320 and 1280: no horizontal overflow, no console errors. Defect found by running it: an absolutely positioned `sr-only` label inside an `overflow-x-auto` table escaped the clip and widened the page by 43 px at 320 px — fixed with `relative` on the scroller.

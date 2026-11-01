@@ -35,6 +35,18 @@ import { SitePackages } from './pages/SitePackages';
 import { SiteContact } from './pages/SiteContact';
 import { SiteExplainer, SiteExplainers } from './pages/SiteExplainers';
 import { SiteFundingChecker } from './pages/SiteFundingChecker';
+import {
+  COALITION_PATH,
+  COUNCIL_PATH,
+  DETAILS_PATH,
+  SEATS_PATH,
+  SiteVoterTools,
+} from './pages/SiteVoterTools';
+import { SiteCouncilFinder } from './pages/SiteCouncilFinder';
+import { SiteVoterCheck } from './pages/SiteVoterCheck';
+import { SiteSeatTool } from './pages/SiteSeatTool';
+import { SiteCoalitionTool } from './pages/SiteCoalitionTool';
+import { SiteWhatsInTheApp } from './pages/SiteWhatsInTheApp';
 import { ConsentBanner } from './ads/ConsentBanner';
 import { AD_CLIENT_ID } from './ads/adPolicy';
 import {
@@ -121,6 +133,12 @@ export function SiteApp() {
           path="/tools/party-funding-checker"
           element={<SiteFundingChecker hasConsent={consented} />}
         />
+        <Route path="/tools" element={<SiteVoterTools />} />
+        <Route path={COUNCIL_PATH} element={<SiteCouncilFinder />} />
+        <Route path={DETAILS_PATH} element={<SiteVoterCheck />} />
+        <Route path={SEATS_PATH} element={<SiteSeatTool />} />
+        <Route path={COALITION_PATH} element={<SiteCoalitionTool />} />
+        <Route path="/whats-in-the-app" element={<SiteWhatsInTheApp />} />
         <Route path="*" element={<SiteHome />} />
       </Routes>
 
