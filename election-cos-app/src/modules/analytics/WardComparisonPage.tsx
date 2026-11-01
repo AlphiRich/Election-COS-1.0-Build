@@ -151,7 +151,7 @@ export function WardComparisonPage() {
       </BasisNote>
 
       <p className="text-body-md font-body">
-        Unsure of the swing? <Link to="/analytics/scenario-runner">Run it across a range of assumptions</Link>.
+        Unsure of the swing? <Link to="/analytics/scenario-runner">Run it across a range of assumptions</Link>, or see <Link to="/analytics/polls">voter sentiment polls</Link>.
       </p>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

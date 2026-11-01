@@ -46,6 +46,7 @@ export const LEGAL_PAGES: Record<
       'Please never type an ID number into the form. The form refuses one.',
       'Enquiries are stored in Johannesburg (africa-south1). Sign-in to the application is the disclosed exception to that.',
       'No analytics or advertising cookie is set before you choose to allow it.',
+      'If you answer a poll, your answer is counted with others and is not linked to your name, number or device. A poll asks only for a choice, never for personal details.',
     ],
     pending:
       'The full privacy notice, with the Information Officer’s details, is pending attorney sign-off.',

@@ -27,6 +27,7 @@ const MARKETING = [
   'pages/SiteLegal.tsx',
   'pages/SiteContact.tsx',
   'pages/SiteNotFound.tsx',
+  'pages/SitePoll.tsx',
 ];
 
 describe('claims gate (C.7)', () => {

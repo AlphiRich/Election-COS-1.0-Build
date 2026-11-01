@@ -22,6 +22,7 @@ export * from './ppfaConfig';
 export * from './donationAlerts';
 export * from './dataSubjectRequests';
 export * from './warRoomCounters';
+export * from './polls';
 export * from './municipalityProfile';
 export * from './connectivity';
 export * from './gatherings';

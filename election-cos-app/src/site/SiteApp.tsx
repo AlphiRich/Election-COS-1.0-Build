@@ -111,6 +111,7 @@ const SiteOfficialSources = lazy(() =>
 const SitePlatform = lazy(() =>
   import('./pages/SitePlatform').then((m) => ({ default: m.SitePlatform })),
 );
+const SitePoll = lazy(() => import('./pages/SitePoll').then((m) => ({ default: m.SitePoll })));
 const SiteAbout = lazy(() => import('./pages/SiteAbout').then((m) => ({ default: m.SiteAbout })));
 const SiteLegal = lazy(() => import('./pages/SiteLegal').then((m) => ({ default: m.SiteLegal })));
 const SiteNotFound = lazy(() =>
@@ -223,6 +224,7 @@ export function SiteApp() {
           <Route path="/official-sources" element={<SiteOfficialSources />} />
           <Route path="/for-campaigns/seat-model" element={<SiteSeatModel />} />
           <Route path="/platform" element={<SitePlatform />} />
+          <Route path="/poll/:pollId" element={<SitePoll />} />
           <Route path="/about" element={<SiteAbout />} />
           <Route path="/legal/privacy" element={<SiteLegal kind="privacy" />} />
           <Route path="/legal/terms" element={<SiteLegal kind="terms" />} />

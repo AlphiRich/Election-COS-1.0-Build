@@ -30,6 +30,7 @@ import { donationsRepository } from './adapters/firestore/donationsRepository';
 import { ppfaConfigRepository } from './adapters/firestore/ppfaConfigRepository';
 import { donationAlertsRepository } from './adapters/firestore/donationAlertsRepository';
 import { dataSubjectRequestsRepository } from './adapters/firestore/dataSubjectRequestsRepository';
+import { pollsRepository } from './adapters/firestore/pollsRepository';
 import { warRoomCountersRepository } from './adapters/firestore/warRoomCountersRepository';
 import { municipalityProfileRepository } from './adapters/firestore/municipalityProfileRepository';
 import { fileStoreRepository } from './adapters/firestore/fileStoreRepository';
@@ -72,6 +73,7 @@ export const dal = {
   donationAlerts: donationAlertsRepository,
   dataSubjectRequests: dataSubjectRequestsRepository,
   warRoomCounters: warRoomCountersRepository,
+  polls: pollsRepository,
   municipalityProfile: municipalityProfileRepository,
   // Cloud Storage rather than Firestore, but the same rule applies: module
   // code reaches object storage through the DAL or not at all (§5, §10).
