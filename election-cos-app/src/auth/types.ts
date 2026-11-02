@@ -49,7 +49,13 @@ export type Capability =
   // are split — a request log should be readable more widely than it's
   // actionable.
   | 'dsr.view'
-  | 'dsr.manage';
+  | 'dsr.manage'
+  // Voters'-roll field work (module `voter-verification`, metered per use).
+  // `roll.view` reads the roll for your own scope and shows usage
+  // statistics; `roll.capture` records a verification and, with the
+  // voter's consent, creates the voter record.
+  | 'roll.view'
+  | 'roll.capture';
 
 export type GeoScope = 'TENANT' | 'MUNICIPALITY' | 'WARD' | 'VD';
 

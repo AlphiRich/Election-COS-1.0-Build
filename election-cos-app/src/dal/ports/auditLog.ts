@@ -15,6 +15,11 @@ export interface AuditEvent {
   targetId: string;
   occurredAt: string;
   metadata?: Record<string, unknown>;
+  /** Present on chained entries only (see settings/auditChain.ts). */
+  seq?: number;
+  occurredAtIso?: string;
+  prevHash?: string;
+  hash?: string;
 }
 
 export interface AuditLogRepository {

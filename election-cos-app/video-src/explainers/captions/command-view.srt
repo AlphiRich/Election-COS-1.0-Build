@@ -1,0 +1,11 @@
+1
+00:00:01,200 --> 00:00:04,350
+People recorded with consent, doors worked, incidents open.
+
+2
+00:00:04,400 --> 00:00:06,250
+Counts only.
+
+3
+00:00:06,300 --> 00:00:08,650
+Nothing on it names a voter.

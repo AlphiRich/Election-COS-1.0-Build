@@ -80,6 +80,29 @@ describe('applySyncResponse (§7.5 conflicts visible, §7.6 rejections actionabl
     expect(await drainOutboxBatch(10)).toHaveLength(1);
   });
 
+  it('a retryable failure is counted, and the fifth turns into a visible rejection with a reason', async () => {
+    await seedVoter('v9');
+    await enqueue({ entity: 'voter', entityId: 'v9', op: 'upsert', payload: {}, _localUpdatedAt: new Date().toISOString() });
+    const fail = async () => {
+      const [op] = await drainOutboxBatch(10);
+      await applySyncResponse({
+        accepted: [],
+        rejected: [{ seq: op.seq, code: 'UNKNOWN', retryable: true, message: 'transient' }],
+        conflicts: [],
+        changes: [],
+        nextSince: new Date().toISOString(),
+      });
+    };
+    for (let i = 0; i < 4; i++) await fail();
+    expect(await drainOutboxBatch(10)).toHaveLength(1); // still trying after four
+    expect((await offlineDb.outbox.toArray())[0].retryCount).toBe(4);
+    await fail(); // the fifth
+    const voter = await offlineDb.voters.get('v9');
+    expect(voter?._syncState).toBe('REJECTED');
+    expect(String(voter?._rejectedReason)).toMatch(/several tries/);
+    expect(await drainOutboxBatch(10)).toHaveLength(0);
+  });
+
   it('enqueue survives the browser having closed the connection (backgrounded tab)', async () => {
     // The real-world case this covers: a canvasser backgrounds the app,
     // the browser closes IndexedDB under storage pressure, they return and

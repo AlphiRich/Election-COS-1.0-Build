@@ -23,9 +23,12 @@
  * src/auth/types.ts StaffProfile and src/dal/ports/staff.ts.
  */
 import { getFirebaseAuth } from '@/dal/adapters/firestore/client';
+import { PROVIDER_SCOPES, type ProviderId } from './authProviders';
 import {
   createUserWithEmailAndPassword,
+  FacebookAuthProvider,
   GoogleAuthProvider,
+  OAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut as firebaseSignOut,
@@ -116,8 +119,27 @@ export async function signInWithEmail({ email, password }: MinimalAuthCredential
  * policy change to make on purpose, not by silently skipping this scrub.
  */
 export async function signInWithGoogle(): Promise<User> {
-  const provider = new GoogleAuthProvider();
-  const credential = await signInWithPopup(getFirebaseAuth(), provider);
+  return signInWithProvider('google');
+}
+
+function buildProvider(id: ProviderId) {
+  const provider =
+    id === 'google'
+      ? new GoogleAuthProvider()
+      : id === 'facebook'
+        ? new FacebookAuthProvider()
+        : new OAuthProvider(id === 'microsoft' ? 'microsoft.com' : 'apple.com');
+  for (const scope of PROVIDER_SCOPES[id]) provider.addScope(scope);
+  return provider;
+}
+
+/**
+ * Sign in with any listed provider (popup flow). The same profile scrub as Google applies to all:
+ * a provider that volunteers a name or photo has it removed from the Auth record straight away.
+ * No account linking is attempted; see authProviders.ts for why.
+ */
+export async function signInWithProvider(id: ProviderId): Promise<User> {
+  const credential = await signInWithPopup(getFirebaseAuth(), buildProvider(id));
   if (credential.user.displayName || credential.user.photoURL) {
     await updateProfile(credential.user, { displayName: null, photoURL: null });
   }

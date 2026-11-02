@@ -1,0 +1,162 @@
+diff -ruN '--exclude=node_modules' '--exclude=package-lock.json' a/firestore/src/cli.ts b/firestore/src/cli.ts
+--- a/firestore/src/cli.ts	2026-10-28 12:52:50.000000000 +0000
++++ b/firestore/src/cli.ts	2026-11-01 18:13:02.231059830 +0000
+@@ -15,6 +15,7 @@
+ import { getFirestore } from "firebase-admin/firestore";
+ import { buildFromCsvDir, GateError } from "./build.js";
+ import { runIngest, runPurge } from "./ingest-core.js";
++import { tenantRoot } from "./model.js";
+ import { AdminSink } from "./sink.js";
+ 
+ function args(argv: string[]) {
+@@ -59,12 +60,13 @@
+       `${t.rejectedEntries.toLocaleString()} rejected, ${t.addresses.toLocaleString()} addresses, ${t.votersWithoutAddress.toLocaleString()} without address`);
+     if (a["dry-run"]) { console.log("Dry run: nothing written."); return; }
+     if (!a.project) throw new Error("--project is required");
+-    const sink = new AdminSink(connect(String(a.project), a.confirm as string | undefined));
++    if (!a.tenant) throw new Error("--tenant is required (the roll lives under /tenants/<tenant>/)");
++    const sink = new AdminSink(connect(String(a.project), a.confirm as string | undefined), tenantRoot(String(a.tenant ?? "")));
+     const res = await runIngest(sink, built, { log, force: !!a.force });
+     console.log(`Done: ${res.status}, ${res.written.toLocaleString()} documents written.`);
+   } else if (command === "purge") {
+-    if (!a.project || !a.edition) throw new Error("--project and --edition are required");
+-    const sink = new AdminSink(connect(String(a.project), a.confirm as string | undefined));
++    if (!a.project || !a.edition || !a.tenant) throw new Error("--project, --tenant and --edition are required");
++    const sink = new AdminSink(connect(String(a.project), a.confirm as string | undefined), tenantRoot(String(a.tenant ?? "")));
+     const res = await runPurge(sink, edition, { log, allowActive: !!a["allow-active"] });
+     console.log(`Purged edition ${edition}: ${res.deleted.toLocaleString()} documents deleted.`);
+   } else {
+diff -ruN '--exclude=node_modules' '--exclude=package-lock.json' a/firestore/src/ingest-core.ts b/firestore/src/ingest-core.ts
+--- a/firestore/src/ingest-core.ts	2026-10-28 12:52:38.000000000 +0000
++++ b/firestore/src/ingest-core.ts	2026-11-01 18:12:59.589355919 +0000
+@@ -12,7 +12,7 @@
+  * is never seen by the field app.
+  */
+ import type { Built } from "./build.js";
+-import { ACTIVE_POINTER_DOC, COLLECTIONS as C } from "./model.js";
++import { ACTIVE_POINTER_DOC, COLLECTIONS as C, vdDocId } from "./model.js";
+ import { SERVER_TIME, type Sink } from "./sink.js";
+ 
+ export interface IngestOptions {
+@@ -96,7 +96,7 @@
+     // ---- publish reference docs, then flip the active pointer atomically
+     await step("ward + VD reference docs", () => {
+       for (const [id, w] of built.wards) sink.set(C.wards, id, { ...w }, true);
+-      for (const [id, d] of built.vds) sink.set(C.vds, id, { ...d }, true);
++      for (const d of built.vds.values()) sink.set(C.vds, vdDocId(d.wardCode, d.vdCode), { ...d }, true);
+     });
+ 
+     const flip: Parameters<Sink["commit"]>[0] = [
+diff -ruN '--exclude=node_modules' '--exclude=package-lock.json' a/firestore/src/model.ts b/firestore/src/model.ts
+--- a/firestore/src/model.ts	2026-10-28 12:50:52.000000000 +0000
++++ b/firestore/src/model.ts	2026-11-01 18:12:59.589045303 +0000
+@@ -136,7 +136,7 @@
+ export function wardFromIecId(iecWardId: string, municipalityCode: string) {
+   if (!/^\d{8}$/.test(iecWardId)) throw new Error(`Unexpected IEC ward id: ${iecWardId}`);
+   const wardNumber = Number(iecWardId.slice(-3));
+-  return { wardNumber, wardCode: `${municipalityCode}-W${wardNumber}` };
++  return { wardNumber, wardCode: `${municipalityCode}-W${String(wardNumber).padStart(2, "0")}` };
+ }
+ 
+ /** Firestore IDs may not contain "/" and should avoid "__" prefixes. */
+@@ -147,4 +147,12 @@
+ 
+ export const entryId = (edition: string, vd: string, seq: number) =>
+   `${edition}_${vd}_${String(seq).padStart(5, "0")}`;
++/** Tenant-structure adaptation: the app keys a voting district by (ward, station) because
++ *  25 of NW405's 108 station codes sit in more than one ward. */
++export const vdDocId = (wardCode: string, vdCode: string) => `${wardCode}::${vdCode}`;
++/** Where the roll lives in the app: every collection under /tenants/{tenantId}/ (BUILD-2026-V2 4.1). */
++export const tenantRoot = (tenantId: string) => {
++  if (!/^[A-Za-z0-9_-]{1,64}$/.test(tenantId)) throw new Error(`Bad tenant id: ${tenantId}`);
++  return `tenants/${tenantId}`;
++};
+ // addressId lives in build.ts (server-only: it needs node:crypto).
+diff -ruN '--exclude=node_modules' '--exclude=package-lock.json' a/firestore/src/sink.ts b/firestore/src/sink.ts
+--- a/firestore/src/sink.ts	2026-10-28 12:52:05.000000000 +0000
++++ b/firestore/src/sink.ts	2026-11-01 18:12:59.589793222 +0000
+@@ -36,10 +36,13 @@
+   private written = 0;
+   private failures: string[] = [];
+ 
+-  constructor(private db: Firestore) {
++  constructor(private db: Firestore, private root = "") {
+     this.bw = this.newWriter();
+   }
+ 
++  /** Collection path under the tenant root, e.g. tenants/<tid>/roll_entries. */
++  private col(c: string) { return this.db.collection(this.root ? `${this.root}/${c}` : c); }
++
+   private newWriter(): BulkWriter {
+     const bw = this.db.bulkWriter();
+     bw.onWriteResult(() => { this.written++; });
+@@ -52,12 +55,12 @@
+   }
+ 
+   set(collection: string, id: string, data: Record<string, unknown>, merge = false) {
+-    const ref = this.db.collection(collection).doc(id);
++    const ref = this.col(collection).doc(id);
+     void this.bw.set(ref, materialise(data, FieldValue.serverTimestamp()), { merge }).catch(() => {});
+   }
+ 
+   delete(collection: string, id: string) {
+-    void this.bw.delete(this.db.collection(collection).doc(id)).catch(() => {});
++    void this.bw.delete(this.col(collection).doc(id)).catch(() => {});
+   }
+ 
+   async flush() {
+@@ -73,28 +76,28 @@
+   }
+ 
+   async get(collection: string, id: string) {
+-    const snap = await this.db.collection(collection).doc(id).get();
++    const snap = await this.col(collection).doc(id).get();
+     return snap.exists ? (snap.data() as Record<string, unknown>) : undefined;
+   }
+ 
+   async count(collection: string, filters: Filter[]) {
+-    let q: FirebaseFirestore.Query = this.db.collection(collection);
++    let q: FirebaseFirestore.Query = this.col(collection);
+     for (const [f, v] of filters) q = q.where(f, "==", v);
+     return (await q.count().get()).data().count;
+   }
+ 
+   async listIds(collection: string, filters: Filter[], pageSize: number, after?: string) {
+-    let q: FirebaseFirestore.Query = this.db.collection(collection);
++    let q: FirebaseFirestore.Query = this.col(collection);
+     for (const [f, v] of filters) q = q.where(f, "==", v);
+     q = q.orderBy("__name__").limit(pageSize).select();
+-    if (after) q = q.startAfter(this.db.collection(collection).doc(after));
++    if (after) q = q.startAfter(this.col(collection).doc(after));
+     return (await q.get()).docs.map((d) => d.id);
+   }
+ 
+   async commit(writes: { collection: string; id: string; data: Record<string, unknown>; merge?: boolean }[]) {
+     const batch = this.db.batch();
+     for (const w of writes) {
+-      batch.set(this.db.collection(w.collection).doc(w.id), materialise(w.data, FieldValue.serverTimestamp()), { merge: !!w.merge });
++      batch.set(this.col(w.collection).doc(w.id), materialise(w.data, FieldValue.serverTimestamp()), { merge: !!w.merge });
+     }
+     await batch.commit();
+   }
+diff -ruN '--exclude=node_modules' '--exclude=package-lock.json' a/test/ingest.test.ts b/test/ingest.test.ts
+--- a/test/ingest.test.ts	2026-10-28 12:57:25.000000000 +0000
++++ b/test/ingest.test.ts	2026-11-01 18:13:02.239057736 +0000
+@@ -18,7 +18,7 @@
+   });
+   it("derives app ward code from IEC ward id", () => {
+     expect(wardFromIecId("64005031", "NW405")).toEqual({ wardNumber: 31, wardCode: "NW405-W31" });
+-    expect(wardFromIecId("64005001", "NW405").wardCode).toBe("NW405-W1");
++    expect(wardFromIecId("64005001", "NW405").wardCode).toBe("NW405-W01");
+     expect(() => wardFromIecId("6400503", "NW405")).toThrow();
+   });
+ });
+@@ -78,7 +78,7 @@
+     expect(await sink.count(C.addresses, [["rollEdition", E1]])).toBe(8);
+     expect((await sink.get(C.meta, "active"))!.edition).toBe(E1);
+     expect((await sink.get(C.editions, E1))!.status).toBe("ACTIVE");
+-    expect((await sink.get(C.vds, "86999001"))!.wardCode).toBe("NW405-W31");
++    expect((await sink.get(C.vds, "NW405-W31::86999001"))!.wardCode).toBe("NW405-W31");
+   });
+ 
+   it("is a no-op when the same edition and CSVs are already active", async () => {

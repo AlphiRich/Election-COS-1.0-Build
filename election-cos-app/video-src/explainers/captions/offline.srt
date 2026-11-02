@@ -1,0 +1,11 @@
+1
+00:00:01,200 --> 00:00:05,350
+Work is kept on the phone and sent when signal returns.
+
+2
+00:00:05,400 --> 00:00:08,050
+The screen shows what is still waiting.
+
+3
+00:00:08,100 --> 00:00:13,450
+Clearing the browser’s data removes anything not yet sent, and the app says so.

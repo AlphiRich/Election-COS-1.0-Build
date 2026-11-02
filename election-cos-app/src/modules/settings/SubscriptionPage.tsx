@@ -29,12 +29,17 @@
  * that is sold but unbuilt — because the remedies differ and so do the
  * conversations.
  */
+import { useState } from 'react';
+import { dal } from '@/dal';
 import { useSession } from '@/auth/useSession';
+import { downloadText } from '@/lib/csv';
+import { buildStatement, sastPeriod, statementCsv } from '@/modules/roll/usageStatement';
 import { useEntitlements } from '@/auth/useEntitlements';
 import { isModuleActive, subscribedWards } from '@/auth/entitlements';
 import { MODULES, type ModuleDefinition } from '@/auth/modules';
 import type { TenantEntitlement } from '@/dal/ports/entitlements';
 import { SUBSCRIPTION_PRICE_BASIS, UNBUILT_MODULE_BASIS } from './subscriptionView';
+import { BasisNote, Button, Card, DataLine, Field, PageHeader, Pill } from '@/components/ui';
 
 /** Modules with no surfaces in this build. See `modules.ts`. */
 function isBuilt(module: ModuleDefinition): boolean {
@@ -47,19 +52,73 @@ function windowText(entitlement: TenantEntitlement): string {
   return `${from} to ${new Date(entitlement.activeUntil).toLocaleDateString('en-ZA')}`;
 }
 
+/**
+ * Usage statement for a per-use module: a file of counts by month, for
+ * whoever invoices. No prices (see modules.ts), no people (see
+ * usageStatement.ts). Not a screen of figures: it only produces the file.
+ */
+function UsageStatementCard() {
+  const session = useSession()!;
+  const [period, setPeriod] = useState(() => sastPeriod(new Date().toISOString()));
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function download(kind: 'csv' | 'json') {
+    setBusy(true);
+    setError(null);
+    try {
+      const events = await dal.roll.listUsage(session);
+      const s = buildStatement(session, events, period, new Date());
+      if (kind === 'csv') {
+        downloadText(`usage-${session.tenantId}-${period}.csv`, 'text/csv', statementCsv(s));
+      } else {
+        downloadText(`usage-${session.tenantId}-${period}.json`, 'application/json', JSON.stringify(s, null, 2));
+      }
+    } catch {
+      setError('The usage could not be read, so no statement was made.');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <Card className="space-y-3">
+      <p className="font-display">Usage statement — voter verification and capture</p>
+      <p className="text-body-md font-body text-slate">
+        A file of how many people were confirmed and recorded in the month, by ward and station. It holds
+        counts only: no prices and no names. A statement from a ward or district login covers that scope only,
+        and says so in the file.
+      </p>
+      <div className="flex flex-wrap items-end gap-3">
+        <Field label="Month (SAST)">
+          {(props) => (
+            <input {...props} type="month" value={period} onChange={(e) => setPeriod(e.target.value)} />
+          )}
+        </Field>
+        <Button disabled={busy || !period} onClick={() => void download('csv')}>
+          Download CSV
+        </Button>
+        <Button variant="ghost" disabled={busy || !period} onClick={() => void download('json')}>
+          Download JSON
+        </Button>
+      </div>
+      {error && <p className="text-body-md font-body text-maroon">{error}</p>}
+    </Card>
+  );
+}
+
 export function SubscriptionPage() {
   const session = useSession();
   const { entitlements, isLoading, isError } = useEntitlements();
 
   if (!session) {
     return (
-      <div className="rounded-lg border border-slate/30 bg-white p-6 max-w-lg">
-        <p className="text-label-caps font-display uppercase text-slate">/settings/subscription</p>
-        <h1 className="text-headline-md font-display text-ink mt-1">Subscription</h1>
+      <Card className="max-w-lg">
+        <PageHeader slug="/settings/subscription" title="Subscription" />
         <p className="mt-3 text-body-md font-body text-slate">
           No active session — see BUILD-STATUS.md (no live Firebase project provisioned yet).
         </p>
-      </div>
+      </Card>
     );
   }
 
@@ -68,11 +127,11 @@ export function SubscriptionPage() {
 
   return (
     <div className="space-y-6 max-w-2xl">
-      <div>
-        <p className="text-label-caps font-display uppercase text-slate">/settings/subscription</p>
-        <h1 className="text-headline-md font-display text-ink mt-1">What your subscription includes</h1>
-        <p className="text-body-md font-body text-slate mt-2">{SUBSCRIPTION_PRICE_BASIS}</p>
-      </div>
+      <PageHeader
+        slug="/settings/subscription"
+        title="What your subscription includes"
+        description={SUBSCRIPTION_PRICE_BASIS}
+      />
 
       {isLoading && <p className="text-body-md font-body text-slate">Loading…</p>}
 
@@ -101,32 +160,30 @@ export function SubscriptionPage() {
           const on = module.bundled || active || wardActive;
 
           return (
-            <div key={module.key} className="bg-white border border-ink/10 rounded-lg p-4 space-y-1">
+            <Card key={module.key} className="space-y-1">
               <div className="flex items-start justify-between gap-3">
                 <p className="text-body-md font-body text-ink font-semibold">{module.label}</p>
-                <span
-                  className={`px-2 py-1 rounded text-label-caps font-display uppercase whitespace-nowrap ${
-                    on ? 'bg-green/10 text-green' : 'bg-slate/10 text-slate'
-                  }`}
+                <Pill
+                  className={`whitespace-nowrap ${on ? 'bg-green/10 text-green' : 'bg-slate/10 text-slate'}`}
                 >
                   {module.bundled ? 'Included' : on ? 'Subscribed' : 'Not subscribed'}
-                </span>
+                </Pill>
               </div>
 
               <p className="text-body-md font-body text-slate">{module.description}</p>
 
               {module.scope === 'WARD' && (
-                <p className="text-data-mono font-mono text-slate">
+                <DataLine>
                   Bought ward by ward · {wards.length > 0 ? wards.join(', ') : 'no wards subscribed'}
-                </p>
+                </DataLine>
               )}
 
               {relevant.map((entitlement) => (
-                <p key={entitlement.id} className="text-data-mono font-mono text-slate">
+                <DataLine key={entitlement.id}>
                   {entitlement.wardCode ? `${entitlement.wardCode} · ` : ''}
                   {windowText(entitlement)}
                   {entitlement.sourceReference ? ` · ${entitlement.sourceReference}` : ''}
-                </p>
+                </DataLine>
               ))}
 
               {!isBuilt(module) && (
@@ -135,17 +192,21 @@ export function SubscriptionPage() {
                   not here.
                 </p>
               )}
-            </div>
+            </Card>
           );
         })}
       </div>
 
-      <p className="text-body-md font-body text-slate border-t border-ink/10 pt-4">{UNBUILT_MODULE_BASIS}</p>
-      <p className="text-body-md font-body text-slate">
+      {session.caps.includes('roll.view') && <UsageStatementCard />}
+
+      <div className="border-t border-ink/10 pt-4">
+        <BasisNote>{UNBUILT_MODULE_BASIS}</BasisNote>
+      </div>
+      <BasisNote>
         A subscription cannot be changed from inside the platform. Entitlements are written by Innovation
         Consult against an agreement — no administrator, including you, can grant a campaign a module it has
         not bought.
-      </p>
+      </BasisNote>
     </div>
   );
 }

@@ -33,11 +33,29 @@ service cloud.firestore {
       return scope == 'TENANT'
         || scope == 'MUNICIPALITY'
         || (scope == 'WARD' && data.wardCode == request.auth.token.wardScope)
-        || (scope == 'VD' && data.vdCode == request.auth.token.vdScope);
+        // A VD-scoped user is narrowed on BOTH the voting district and
+        // the ward. Not belt-and-braces: 25 of NW405's 108 station codes
+        // are split across wards, and one — 86910239, Lesego Primary —
+        // across three. Narrowing on vdCode alone would show a canvasser
+        // assigned to one ward's portion of a split station the other
+        // wards' voters too. A token with no wardScope fails this
+        // comparison against every real record, which is fail-closed and
+        // is what a stale token should do.
+        || (scope == 'VD'
+            && data.vdCode == request.auth.token.vdScope
+            && data.wardCode == request.auth.token.wardScope);
     }
 
     function isUnchanged(field) {
       return request.resource.data[field] == resource.data[field];
+    }
+
+    // Sales enquiries (Book a demo, report requests) are written by the
+    // `submitEnquiry` Cloud Function with the Admin SDK and read by staff
+    // in the console. No client, signed in or not, reads or writes them:
+    // an open collection here would be a public contact list.
+    match /enquiries/{enquiryId} {
+      allow read, write: if false;
     }
 
     // Deny by default; every collection below is an explicit exception.
@@ -104,6 +122,30 @@ service cloud.firestore {
                              && request.resource.data.activityType in
                                 ['CANVASS', 'RALLY', 'OBSERVATION', 'OTHER'];
       allow delete: if false;
+    }
+
+    // ---- gatherings and their notice countdown ------------------------------
+    //
+    // Regulation of Gatherings Act notice tracking. A gathering is a planned
+    // event, scoped by ward like the diary. Clients may create and edit it,
+    // and may mark notice lodged; they may NOT delete it (soft delete only)
+    // and may NOT write the alerts below.
+
+    match /tenants/{tid}/gatherings/{gatheringId} {
+      allow read: if tenantOK(tid) && cap('diary.view') && inScope(tid, resource.data);
+      allow create, update: if tenantOK(tid) && cap('diary.edit')
+                             && inScope(tid, request.resource.data)
+                             && request.resource.data.noticeStatus in ['NOT_LODGED', 'LODGED'];
+      allow delete: if false;
+    }
+
+    // Raised by the hourly sweep (functions/src/rgaNoticeScheduled.ts) with
+    // the Admin SDK. Readable by anyone who can read the gathering's ward;
+    // never writable from a client, so an alert can neither be forged nor
+    // silenced from a handset.
+    match /tenants/{tid}/gatheringAlerts/{alertId} {
+      allow read: if tenantOK(tid) && cap('diary.view') && inScope(tid, resource.data);
+      allow write: if false;
     }
 
     // ---- incidents — fixed taxonomy enforced here too, §6.4 ---------------
@@ -200,6 +242,84 @@ service cloud.firestore {
       allow delete: if false;
     }
 
+    // ---- voters' roll (module `voter-verification`) -----------------------
+    //
+    // IC-ECOS-DATA-2026-02 adapted to the tenant structure. The roll is
+    // personal information supplied for electoral purposes. It is the
+    // TARGET LIST, never the voter register: nothing here writes `voters`
+    // or `households` (those are consent-gated, above).
+    //
+    // Entries and addresses are written only by tools/voters-roll with the
+    // Admin SDK, so no client may write them. Reads are narrowed by
+    // inScope() — which, for a VD-scoped canvasser, checks ward AND
+    // station, because split stations are real — and limited to the one
+    // edition the tenant has activated, so a superseded roll is not
+    // readable from a device. Rules are not filters: a query must carry
+    // the edition and the scope itself (rollRepository does).
+    function activeRollEdition(tid, d) {
+      return d.rollEdition == get(/databases/$(database)/documents/tenants/$(tid)/roll_meta/active).data.edition;
+    }
+
+    match /tenants/{tid}/roll_meta/{docId} {
+      allow read: if tenantOK(tid) && cap('roll.view');
+      allow write: if false;
+    }
+
+    match /tenants/{tid}/roll_editions/{edition} {
+      allow read: if tenantOK(tid) && cap('settings.tenant');
+      allow write: if false;
+    }
+
+    match /tenants/{tid}/roll_addresses/{addressId} {
+      allow read: if tenantOK(tid) && cap('roll.view') && inScope(tid, resource.data)
+                   && activeRollEdition(tid, resource.data);
+      allow write: if false;
+    }
+
+    match /tenants/{tid}/roll_entries/{entryId} {
+      allow read: if tenantOK(tid) && cap('roll.view') && inScope(tid, resource.data)
+                   && activeRollEdition(tid, resource.data);
+      allow write: if false;
+    }
+
+    // Rejected roll entries are an audit record for the ingest, not a
+    // field tool: no client reads or writes them.
+    match /tenants/{tid}/roll_rejected/{entryId} {
+      allow read, write: if false;
+    }
+
+    // ---- usage events: what the per-use meter counts -------------------------
+    //
+    // One document per chargeable instance, id `{VERIFY|CAPTURE}::{rollEntryId}`
+    // so a retry cannot count a person twice. Create-only: nobody edits or
+    // deletes a billing fact from a client. The module must have been
+    // switched on (an entitlement record, written server-side) and not
+    // lapsed. The event carries no price, by design — see auth/modules.ts.
+    // The client-written event is a convenience tally; invoicing
+    // reconciles it against the `voters` created from the roll.
+    function rollModuleOn(tid, at) {
+      let path = /databases/$(database)/documents/tenants/$(tid)/entitlements/voter-verification;
+      return exists(path)
+        && (get(path).data.get('activeUntil', null) == null
+            || get(path).data.get('activeUntil', '') > at);
+    }
+
+    match /tenants/{tid}/usageEvents/{eventId} {
+      allow read: if tenantOK(tid) && cap('roll.view') && inScope(tid, resource.data);
+      allow create: if tenantOK(tid) && cap('roll.capture')
+                     && inScope(tid, request.resource.data)
+                     && request.resource.data.tenantId == tid
+                     && request.resource.data.uid == request.auth.uid
+                     && request.resource.data.kind in ['VERIFY', 'CAPTURE']
+                     && eventId == request.resource.data.kind + '::' + request.resource.data.rollEntryId
+                     && request.resource.data.at is string
+                     && request.resource.data.recordedAt == request.time
+                     && rollModuleOn(tid, request.resource.data.at)
+                     && !('amount' in request.resource.data)
+                     && !('price' in request.resource.data);
+      allow update, delete: if false;
+    }
+
     // ---- documents ----------------------------------------------------------
 
     // Referral records (documentId `referral-{incidentId}`, see
@@ -267,11 +387,53 @@ service cloud.firestore {
       allow update, delete: if false; // append-only, never mutated or removed
     }
 
+    // ---- voter sentiment polls -------------------------------------------
+    // Definitions are written by staff with settings.tenant. The tallies are written ONLY by the
+    // `poll` Cloud Function (counts, no per-response rows, no identifiers). Single-use link tokens
+    // live under polls/{id}/tokens and fall to the tenant default-deny: no client touches them.
+
+    match /tenants/{tid}/polls/{pollId} {
+      allow read: if tenantOK(tid) && cap('analytics.view');
+      allow create, update: if tenantOK(tid) && cap('settings.tenant');
+      allow delete: if false; // a poll with answers is a record
+    }
+
+    match /tenants/{tid}/pollTallies/{pollId} {
+      allow read: if tenantOK(tid) && cap('analytics.view');
+      allow write: if false; // Cloud Functions (admin SDK) only
+    }
+
     // ---- analytics counters (pre-aggregated, §7.4 / §8.1) ------------------
 
     match /tenants/{tid}/counters/{counterId} {
       allow read: if tenantOK(tid) && cap('warroom.view');
       allow write: if false; // Cloud Functions (admin SDK) only
+    }
+
+    // One marker per counter trigger event, so an at-least-once redelivery
+    // cannot increment a counter twice (functions/src/warRoomCounters.ts).
+    // The default-deny above already covered this; it is written out so a
+    // reviewer does not have to derive it, and so that nobody "fixes" the
+    // read by granting one. Nothing on the client reads these, ever: a
+    // client that could read them could also infer write activity in wards
+    // it has no scope for. They expire by TTL policy on `expireAt`.
+    match /tenants/{tid}/counterEvents/{eventDocId} {
+      allow read, write: if false; // Cloud Functions (admin SDK) only
+    }
+
+    // ---- membership OTP challenges ---------------------------------------
+    // One document per code sent (functions/src/membershipOtpCallables.ts).
+    // Holds a scrypt hash, its salt, an attempt counter and a phone MASK —
+    // never a number, and never the code.
+    //
+    // Clients get nothing, not even read. A client that could read the
+    // attempt counter could watch a lockout approach, and one that could
+    // write would own the counter outright. Everything a screen needs comes
+    // back from the callable's own return value. The default-deny above
+    // already covered this; it is written out so a reviewer does not have
+    // to derive it. Expiry is by TTL policy on `expireAt`.
+    match /tenants/{tid}/membershipOtpChallenges/{challengeId} {
+      allow read, write: if false; // Cloud Functions (admin SDK) only
     }
 
     // ---- audit log — append-only, written by Cloud Functions --------------

@@ -1,6 +1,16 @@
 {
-  "//": "Election-COS1.0 — real project, confirmed by the human session 10. Was previously only a guess (see docs/phase-0-infra-plan.md) between this ID and innovation-consult-ecos-dev/-prod; that ambiguity is now resolved in favour of this one. Region (africa-south1) must still be verified/set in the console — see this repo's BUILD-STATUS.md session 10 entry, this cannot be changed after Firestore/Storage data exists.",
+  "//": "Election-COS1.0 — project electioncos1-0 (project number 960903975002, display name 'Election-COS'). Changed from election2026-campaignms7-0 on 28 Oct 2026, confirmed four ways: the console Project info card, the GCP dashboard analysis, an authenticated Cloud Shell prompt, and the deploy log. Region is settled — 'gcloud firestore databases list' returns the (default) database in africa-south1, FIRESTORE_NATIVE, and 'gcloud app describe' reports no App Engine application, so nothing pinned the location elsewhere. See docs/asset-control-sheet.md §28.",
   "projects": {
-    "default": "election2026-campaignms7-0"
+    "default": "electioncos1-0"
+  },
+  "//targets": "The 'app' target is the Hosting site serving app.electioncos.co.za — the PWA. It resolves to the project's default site, electioncos1-0, which is also what electioncos1-0.web.app serves and what publicDomain.ts carries as HOSTING_ORIGIN. The apex, electioncos.co.za, is NOT here: it is served from Cloudflare and is deliberately a different thing. Naming the target rather than relying on the default site is what makes 'firebase deploy --only hosting:app' mean something, and what keeps a second site from being deployed to by accident later.",
+  "targets": {
+    "electioncos1-0": {
+      "hosting": {
+        "app": [
+          "electioncos1-0"
+        ]
+      }
+    }
   }
 }

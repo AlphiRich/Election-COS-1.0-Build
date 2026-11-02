@@ -673,6 +673,89 @@ a real headless-browser screenshot (see above) — the first time in this
 build's history a session has actually run the app rather than only
 compiled/tested it.
 
+**31 Oct 2026 — programme cleanup of nineteen HTML screens; the RGA countdown;
+advertising made a configuration switch.** Three things, recorded together
+because they touch the same ground.
+
+(1) **Screen disposition.** Nineteen HTML screens classified in
+`docs/screen-disposition-2026-10-31.md`: 11 delete, 1 quarantine, 5
+layout-reference, 1 rebuild, 1 superseded. **None of the files was retained**,
+so nothing was deleted from disk and the verdicts are the reviewer's as
+reported. The proposed audit-log rebuild was *not* committed: the screen
+already exists (`AuditLogPage.tsx`), and the draft invented event kinds that
+nothing writes and called the log "immutable" where the real screen is
+required, by test, to say it is not tamper-evident. The proposed sync
+reference was committed only after correcting four false claims — notably that
+`functions/src/sync.ts` "returns 501" (it has been implemented since session
+38; it has never run against Firestore and nothing in the client calls it).
+
+(2) **The RGA notice countdown is built, superseding the "NOT built" line
+under *What was deliberately NOT built*** (spec §6.7: "the static advisory
+page *is* the entire feature"). Built at the founder's direction on 30–31 Oct:
+`functions/src/rgaNotice.ts`, an hourly idempotent sweep, a `gatherings`
+collection with rules, and `/gatherings`. Seven days and 48 hours are
+statutory; the 72-hour rung is house policy and says so. See control sheet §44.
+
+(3) **A functions deploy blocker was found and fixed**: `npm run build` in
+`functions/` failed on a committed test file and `firebase.json` runs it in
+predeploy; the preflight had only checked that a hook existed. It now compiles.
+
+**Session 38 (16 Oct 2026) — the beta build; the app runs for the first
+time.** Four things, three of them finished.
+
+(1) **The brand typefaces had never been loaded.** Declared in
+`tailwind.config.js` and `tokens.ts` since session 1, asserted in sync by
+`tokens.test.ts` since then, and loaded by nothing — no `<link>`, no
+`@import`. Everything rendered in the browser's generic sans-serif for
+thirty-seven sessions. Now 18 self-hosted woff2 faces
+(`tools/fonts/vendor-fonts.mjs`), self-hosted rather than CDN-linked so
+the app renders offline and no third party sees a request on every page
+load of an application holding voter records.
+
+(2) **`functions/src/sync.ts` is implemented**, after being a declared
+skeleton since session 7. Split so the decisions are testable without the
+live Firestore this build has never had: `syncMerge.ts` is pure functions
+(33 tests), `sync.ts` is the shell. Per-field last-write-wins, tenant from
+the verified token only, idempotency that stores the response rather than
+a flag, one transaction per operation.
+
+(3) **The PWA shell exists** — manifest, icons, service worker,
+registration, update prompt. The worker caches the application and never
+the data; offline data stays in Dexie, which is tenant-scoped, clearable
+on sign-out and wiped when a phone changes hands.
+
+(4) **The application had never been run, by anyone.** `signInWithPopup`
+needs live Google OAuth, there was no emulator wiring, and no project has
+ever been reachable — so no signed-in screen of this product had ever been
+seen. `client.ts` now connects to the local emulator suite behind
+`VITE_FIREBASE_USE_EMULATORS` (refused in any production build), the
+sign-in screen offers email sign-in behind the same gate, and
+`tools/dev/grant-claims.mjs` + `tools/dev/seed-emulator.mjs` make it
+usable. See `docs/running-locally.md`.
+
+Running it immediately found three defects no test had: the fonts above,
+ward lists sorting 1, 10, 11, 2, 20 on a 34-ward municipality, and fixed
+grids cramping at 390px. All three fixed.
+
+**Blocker #2 is narrower but still stands.** The project
+`election2026-campaignms7-0` is real and reachable (the BigQuery
+connector authenticates against it), but BigQuery cannot deploy, `gcloud`
+has no credential, and `firebase login` needs an interactive browser.
+`firebase-tools` is now a devDependency, `npm run deploy` runs
+checks → build → preflight → deploy, and `scripts/deploy-preflight.mjs`
+verifies project, credential, web config, build freshness, function
+regions and rules before anything is sent. **It fails on exactly two
+items, both of which only the account owner can supply: a deploy
+credential (`GOOGLE_APPLICATION_CREDENTIALS` or `FIREBASE_TOKEN`) and the
+six `VITE_FIREBASE_*` web app config values.** Nothing has been deployed
+and nothing claims to have been.
+
+**Verified:** `npm run check:all` — 965 tests, lint/typecheck/hex/fonts
+green; `npm run build` green; nine routes driven in headless Chromium at
+two viewports, signed in against the emulator with the real NW405 seed
+loaded (34 wards, 136 VD records, 122,059 voters), no console errors.
+
+
 Read this before doing anything else in this repo. It says plainly what's
 real, what's a placeholder, and what's blocked on something only a human
 can unblock.
@@ -1880,8 +1963,9 @@ touches PPFA.
 
 ## What session 2 added
 
-- **`docs/phase-0-infra-plan.md`** — real domain names
-  (`app.electioncampaignos.co.za` etc.), GCP project IDs
+- **`docs/phase-0-infra-plan.md`** — domain names (then planned as
+  `app.electioncampaignos.co.za` etc.; superseded 16 Oct 2026 by the
+  registered `electioscos.co.za`), GCP project IDs
   (`innovation-consult-ecos-{dev,prod}`), the account register, and the
   pre-launch checklist, sourced from `03-implementation-rollout-plan.md`.
   `.env.example` and `.firebaserc.example` updated to match. This partially
@@ -1916,7 +2000,7 @@ touches PPFA.
   or `firebase/storage` — only `src/dal/adapters/firestore/**` can.
 - `scripts/check-no-hex.mjs`: fails on any raw hex colour literal outside
   `src/design/tokens.ts` (ESLint alone can't reliably catch these in JSX
-  template strings, so this is a source-text scan, run in CI).
+  template strings, so this is a source-text scan, run by `npm run check:hex`).
 - GitHub Actions CI (`.github/workflows/ci.yml`): lint → typecheck →
   hex-check → test → build, scoped to `election-cos-app/**` changes.
 - `firebase.json`, `firestore.rules`, `firestore.indexes.json`,
@@ -2060,10 +2144,13 @@ touches PPFA.
       `_MESSAGING_SENDER_ID`, `_APP_ID` (project ID is already filled in).
    3. Authentication → Sign-in method → enable **Google** as a provider,
       and confirm a support email is set (Google requires one).
-   4. Authentication → Settings → Authorized domains — add whatever
-      domain the app will actually be served from for local dev
-      (`localhost` is usually pre-authorized) and, later, the real
-      `app.electioncampaignos.co.za` once that's live.
+   4. Authentication → Settings → Authorized domains — `localhost` is
+      usually pre-authorized; add **`electioscos.co.za`** (registered
+      16 Oct 2026) once it is connected to Hosting. Sign-in from a domain
+      that is not on this list is refused.
+      (This step used to name `app.electioncampaignos.co.za`, which was
+      planned in session 2 and never registered — see
+      `docs/phase-0-infra-plan.md`.)
    5. Verify Firestore exists in **`africa-south1`** — build spec §0 rule
       1, and irreversible once set. If Firestore hasn't been created at
       all yet, create it there now, before anything writes to it.

@@ -1,0 +1,7 @@
+1
+00:00:01,200 --> 00:00:08,050
+The canvasser types the person’s name back before the record button works, so a mis-tap cannot create consent.
+
+2
+00:00:08,100 --> 00:00:09,850
+A refusal stores nothing.

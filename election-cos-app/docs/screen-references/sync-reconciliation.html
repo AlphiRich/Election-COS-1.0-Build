@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sync reconciliation — design reference</title>
+<!--
+  DESIGN REFERENCE — NOT A SHIPPED SCREEN, AND NOT WIRED INTO THE APP.
+
+  Shows what a reconciliation view would look like. Every state below is
+  ILLUSTRATIVE (invented ids), and every behavioural claim is tagged with
+  where it is, or is not, true in the code.
+
+  Corrected from the version first supplied (31 Oct 2026), which said:
+   - the sync endpoint "is a skeleton that returns 501". It is not: it has
+     been implemented since session 38 (token verified, tenant taken from
+     the token, stored-response idempotency, one transaction per operation,
+     33 merge tests). What is true is that it has never run against
+     Firestore, and that nothing in the client calls it.
+   - documents "go through Firestore's persistent cache". No persistent
+     cache is configured; the client uses the SDK default.
+   - a "Drain outbox now" button calling drainOutboxBatch(). No screen has
+     one, and nothing sends the outbox.
+   - a rules-based conflict protocol with a "stale log". The real one is
+     per-field last-write-wins in functions/src/syncMerge.ts.
+  And "AES-256 end-to-end encryption" was already removed: local data is
+  stored unencrypted in IndexedDB.
+
+  Colours are the product tokens (src/design/tokens.ts). No external
+  scripts or fonts: this file works offline and makes no third-party request.
+-->
+<style>
+  :root{--ink:#1A2246;--paper:#F7F4EE;--gold:#B7913F;--teal:#33427E;--slate:#6A6E7E;
+        --line:#DCD6C8;--green:#2F7E4A;--maroon:#7E1F2E;--roadmap:#8A6A2A}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,sans-serif}
+  code{font:13px ui-monospace,monospace;background:#fff;border:1px solid var(--line);border-radius:3px;padding:0 4px}
+  header{background:#fff;border-bottom:1px solid var(--line);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .eyebrow{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--slate)}
+  h1{font-size:18px;margin:0}
+  main{max-width:30rem;margin:0 auto;padding:16px;display:grid;gap:16px}
+  .tag{font:12px ui-monospace,monospace;border:1px solid var(--roadmap);color:var(--roadmap);padding:2px 8px;border-radius:4px;white-space:nowrap}
+  .card{background:#fff;border:1px solid var(--line);border-radius:6px;padding:16px}
+  .card.warn{border-color:var(--roadmap);background:#FBF6EA}
+  .card.dark{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .label{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);margin:0 0 8px}
+  .dark .label{color:var(--gold)}
+  .small{font-size:13px;color:var(--slate)} .dark .small{color:var(--paper);opacity:.85}
+  .row{display:flex;gap:12px;border:1px solid var(--line);border-radius:6px;padding:12px;margin-top:10px}
+  .bar{width:4px;border-radius:2px;flex:none}
+  .row .top{display:flex;justify-content:space-between;gap:8px;font-weight:600;font-size:14px}
+  .state{font:12px ui-monospace,monospace;text-transform:uppercase}
+  .mono{font:12px ui-monospace,monospace;color:var(--slate)}
+  .disabled{width:100%;min-height:44px;border:1px dashed var(--slate);border-radius:6px;background:transparent;color:var(--slate);font:600 14px system-ui}
+  ul{margin:0;padding-left:18px} li{margin:4px 0;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div><div class="eyebrow">Design reference · not wired into the app</div><h1>Sync reconciliation</h1></div>
+  <span class="tag">NOT WIRED</span>
+</header>
+<main>
+
+  <section class="card warn">
+    <p class="label">Where this stands, as of 31 Oct 2026</p>
+    <p class="small" style="color:var(--ink)">
+      The server endpoint <code>functions/src/sync.ts</code> is <strong>implemented but has never run against
+      Firestore</strong>: its merge logic is proven by 33 unit tests, its Firestore plumbing by review only.
+      <strong>Nothing in the client calls it.</strong> The outbox queues operations and can fold a response back
+      in (<code>src/offline/outbox.ts</code>, tested); no code sends the queue. So a canvasser's captures
+      accumulate on the handset, and this screen would be the place that says so.
+    </p>
+  </section>
+
+  <section class="card">
+    <p class="label">On this device</p>
+    <p style="margin:0;font-weight:600">Dexie / IndexedDB</p>
+    <p class="small" style="margin:6px 0 0">
+      Tables in use: <code>outbox</code> and <code>conflicts</code>. <code>photoQueue</code> is declared and
+      nothing writes it yet. Stored unencrypted; the app does not claim otherwise.
+    </p>
+  </section>
+
+  <section class="card dark">
+    <p class="label">How a conflict is decided</p>
+    <p class="small" style="margin:0 0 8px">
+      <strong>Per field, last write wins</strong> — not per document. A canvasser correcting a phone number does
+      not revert the sentiment a ward lead recorded ten minutes earlier; each field wins its own contest, using a
+      <code style="color:var(--ink)">_fieldUpdatedAt</code> map kept on the server.
+    </p>
+    <ul class="small">
+      <li>Equal timestamps keep the <strong>server's</strong> value, so a retry reaches the same answer.</li>
+      <li>A field the server has no timestamp for loses to any incoming value.</li>
+      <li>The losing value is not discarded silently: the device records <em>yours</em> and <em>theirs</em> in
+        <code style="color:var(--ink)">conflicts</code> with <code style="color:var(--ink)">resolved: false</code>, for a person to review.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <p class="label">What the outbox can show — illustrative rows</p>
+
+    <div class="row"><span class="bar" style="background:var(--roadmap)"></span><div style="flex:1">
+      <div class="top"><span>Voter · example</span><span class="state" style="color:var(--roadmap)">Pending</span></div>
+      <div class="mono">seq 41 · upsert</div>
+      <div class="small">Waiting to be sent. A retryable rejection also leaves it here for the next attempt.</div></div></div>
+
+    <div class="row"><span class="bar" style="background:var(--teal)"></span><div style="flex:1">
+      <div class="top"><span>Incident · example</span><span class="state" style="color:var(--teal)">Conflict</span></div>
+      <div class="mono">seq 42 · upsert · field: severity</div>
+      <div class="small">The server's value was kept. Your value is held in the conflicts table so you can see what was overridden.</div></div></div>
+
+    <div class="row"><span class="bar" style="background:var(--green)"></span><div style="flex:1">
+      <div class="top"><span>Voter · example</span><span class="state" style="color:var(--green)">Synced</span></div>
+      <div class="mono">seq 40</div>
+      <div class="small">Accepted by the server and removed from the outbox.</div></div></div>
+
+    <div class="row"><span class="bar" style="background:var(--maroon)"></span><div style="flex:1">
+      <div class="top"><span>Voter · example</span><span class="state" style="color:var(--maroon)">Rejected</span></div>
+      <div class="mono">CONSENT_REQUIRED · retryable: false</div>
+      <div class="small">Retrying stopped. The canvasser must record consent before this record can sync.</div></div></div>
+  </section>
+
+  <section>
+    <button class="disabled" disabled>Send now — does not exist yet</button>
+    <p class="small" style="text-align:center;margin:8px 0 0">
+      No screen has this control and no code sends the outbox. <code>drainOutboxBatch()</code> exists and is
+      tested; nothing calls it.
+    </p>
+  </section>
+
+  <section class="card">
+    <p class="label">Evidence</p>
+    <ul>
+      <li>Outbox queue, <code>applySyncResponse</code> outcomes — <strong style="color:var(--green)">tested</strong> (<code>src/offline/outbox.test.ts</code>).</li>
+      <li>Per-field merge, tie-break, rejection codes — <strong style="color:var(--green)">tested</strong> (<code>functions/src/syncMerge.test.ts</code>, 33 cases).</li>
+      <li>Endpoint against a real Firestore — <strong style="color:var(--roadmap)">never run</strong>.</li>
+      <li>Client sending the outbox — <strong style="color:var(--maroon)">not built</strong>.</li>
+      <li>This screen — <strong style="color:var(--maroon)">not built</strong>. A sync <em>indicator</em> exists (<code>src/app/SyncStatus.tsx</code>); a reconciliation <em>view</em> does not.</li>
+    </ul>
+  </section>
+
+</main>
+</body>
+</html>

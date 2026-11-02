@@ -5,6 +5,7 @@
  * Summary Report.
  */
 import { Link } from 'react-router-dom';
+import { PageHeader } from '@/components/ui';
 
 const SUB_VIEWS = [
   { to: '/analytics/seat-calculator', label: 'Vote Calculator', description: 'MMP seat allocation (Schedule 1).' },
@@ -12,6 +13,18 @@ const SUB_VIEWS = [
     to: '/analytics/thresholds',
     label: 'Threshold Analyzer',
     description: 'Electoral 1% qualification threshold — not PPFA funding thresholds.',
+  },
+  {
+    to: '/analytics/ward-comparison',
+    label: 'Ward Comparison & Scenario',
+    description:
+      'Certified 2021 ward results, the swing each ward would need to turn, captured canvass sentiment, and a Schedule 1 projection under a swing you set.',
+  },
+  {
+    to: '/analytics/build-review',
+    label: 'Build Review',
+    description:
+      'Quota, seats and ward-size band recomputed from sourced figures, field roll usage, and what a supplied dashboard claimed, checked.',
   },
   {
     to: '/analytics/scheduled-reports',
@@ -23,10 +36,7 @@ const SUB_VIEWS = [
 export function AnalyticsPage() {
   return (
     <div className="space-y-6 max-w-2xl">
-      <div>
-        <p className="text-label-caps font-display uppercase text-slate">/analytics</p>
-        <h1 className="text-headline-md font-display text-ink mt-1">Analytics</h1>
-      </div>
+      <PageHeader slug="/analytics" title="Analytics" />
 
       <div className="grid gap-3">
         {SUB_VIEWS.map((view) => (

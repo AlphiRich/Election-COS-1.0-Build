@@ -67,6 +67,7 @@ import {
   type PrListIssueCode,
 } from '@/modules/candidates/prList';
 import { ID_CAPTURE_BASIS } from '@/modules/candidates/candidateCapture';
+import { SPLIT_VD_BASIS } from '@/modules/settings/staffProvisioning';
 import { PERMISSIONS_SOP } from './sops/permissionsSop';
 import { PRIMARY_NAV, navItemAccess } from '@/app/nav';
 import { MODULES } from '@/auth/modules';
@@ -1561,7 +1562,7 @@ describe('SOP-12 describes roles, permissions and the subscription honestly', ()
 });
 
 /**
- * The manual is complete at twelve. This is the guard that the register
+ * The manual is complete at sixteen (twelve at first issue; 13 to 16 added with the reference data). This is the guard that the register
  * says so rather than quietly printing a shorter list.
  */
 describe('the finished manual', () => {
@@ -1580,6 +1581,12 @@ describe('the finished manual', () => {
       'SOP-10',
       'SOP-11',
       'SOP-12',
+      'SOP-13',
+      'SOP-14',
+      'SOP-15',
+      'SOP-16',
+      'SOP-17',
+      'SOP-18',
     ]);
   });
 
@@ -1598,5 +1605,47 @@ describe('the finished manual', () => {
       });
       expect(manual.sops.length, `${role.id} receives no procedure`).toBeGreaterThan(0);
     }
+  });
+});
+
+
+/**
+ * Session 32. A voting-district role is now narrowed on its ward as well
+ * as its district, because a polling station's roll can be split across
+ * wards. Two SOPs walk an administrator through provisioning, and a
+ * procedure that still told them to leave the ward blank would produce
+ * accounts the rules deny.
+ */
+describe('the split-voting-district rule reaches the manual', () => {
+  const lines = (sop: Sop) =>
+    sop.sections.flatMap((section) => [
+      section.heading,
+      ...(section.body ?? []),
+      ...(section.steps ?? []),
+      ...(section.warnings ?? []),
+    ]);
+
+  it('is carried by both procedures that provision somebody', () => {
+    expect(lines(TENANT_SETUP_SOP)).toContain(SPLIT_VD_BASIS);
+    expect(lines(PERMISSIONS_SOP)).toContain(SPLIT_VD_BASIS);
+  });
+
+  it('no longer tells anybody a VD role takes no ward', () => {
+    // The instruction this replaced. It was correct against the old rule
+    // and would now produce an account denied every record.
+    for (const sop of SOPS) {
+      const text = JSON.stringify(sop);
+      expect(text, sop.number).not.toMatch(/narrowed on the VD, not the ward/i);
+      expect(text, sop.number).not.toMatch(/A ward code here would be .{0,40}never consulted/i);
+    }
+  });
+
+  it('agrees with the validator that both codes are required', () => {
+    expect(
+      provisioningProblems({ ...EMPTY_DRAFT, signInId: 'u', firstName: 'A', lastName: 'B', phone: '082 000 0000', roleId: 'canvasser', vdScope: '86910239' }, []),
+    ).toHaveLength(1);
+    expect(
+      provisioningProblems({ ...EMPTY_DRAFT, signInId: 'u', firstName: 'A', lastName: 'B', phone: '082 000 0000', roleId: 'canvasser', vdScope: '86910239', wardScope: 'NW405-W8' }, []),
+    ).toEqual([]);
   });
 });

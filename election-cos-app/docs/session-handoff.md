@@ -1,0 +1,253 @@
+# Election Campaign OS — state of the build
+
+Written 16 October 2026, at the end of the session that routed the deploy
+through CI. One page, so that picking this up cold does not require
+reading forty sessions of change log.
+
+Governing spec `IC-ECOS-BUILD-2026-V2`. Branch
+`claude/election-campaign-os-jlzsw3` in `AlphiRich/innovation_consult_front`;
+the application is the `election-cos-app/` subtree.
+
+**Read `.claude/skills/ecos-build-discipline/SKILL.md` before changing
+anything.** It holds the thirteen rules this build arrived at the hard way,
+including the standing instruction on the proclaimed delimitation.
+
+---
+
+## T−18 days
+
+**Election day is 4 November 2026. This was written 17 October.**
+
+The 20-week plan in `municipal-gantt-planner-v2_1.xlsx` (reviewed in
+`docs/historic-assets-review-2026-10-17.md`) puts a **production code
+freeze at 28–31 October — 11 days out.**
+
+Against that: the build is verified and runnable, and **has never been
+deployed**, because it waits on two values only the account holder can
+supply (issues #4 and #5), plus the `africa-south1` confirmation that
+cannot be undone later (#6) and the domain connection (#16).
+
+Nothing in this document is more urgent than those four.
+
+**And as of 25 October: CI has never run.** `ci.yml` sat at
+`election-cos-app/.github/workflows/`, which GitHub does not read — the
+Actions API reported zero workflows for this repository. Moved to the
+root and widened to `check:all`, with a guard test
+(`workflowLocation.test.ts`) so it cannot recur. **It is still not
+running**, because a workflow has to be on the **default branch** to
+execute or be dispatchable, and both workflows exist only on
+`claude/election-campaign-os-jlzsw3`.
+
+That is also why **deploy Route B cannot be used yet.** The "Run
+workflow" button for `deploy-ecos.yml` will not appear until the file is
+on `main`. Merging the branch is a decision for the account holder; no
+pull request has been opened.
+
+## Where it stands in one line
+
+The beta is built, verified and runnable; it has been driven end to end
+against the emulator with real NW405 seed data; it is **not deployed**,
+and the only thing standing between it and a live URL is two values that
+only the account holder can supply.
+
+## Verification, as of this commit
+
+| | |
+|---|---|
+| `npm run check:all` | green — 965 tests, 60 files (lint, typecheck, hex guard, type-scale guard, font guard) |
+| Route drive | 25 routes × phone and desktop, signed in: clean (session 45) |
+| CI | **has never run** — workflows are not on `main`. See T−18 above |
+| `npm audit --omit=dev` | 0 critical · 5 high · 8 moderate, all transitive in the Firebase SDK. See below |
+| Landing card | all three probe branches driven: custom / fallback / fails closed (session 46) |
+| `cd functions && npm test` | green — 52 tests, 2 files |
+| `npm run build` | green, with service-worker precache manifest |
+| `npm run preflight` | 2 failures, both the account holder's to clear (below) |
+
+## What is built
+
+- **The nine-item nav and all its routes**, 27 page components across 16
+  modules, driven signed-in at phone and desktop width with no console
+  errors.
+- **Capability RBAC** — 26 capabilities, 7 seed roles, enforced in
+  `firestore.rules` against `request.auth.token.caps`, not in the UI. Nav
+  visibility is a convenience; it is never the access check.
+- **The proclaimed 2026 delimitation, hardwired.** Annexure A to IEC
+  Circular 1 of 2025: 258 municipalities, 214 warded, 4,488 wards,
+  27,723,675 voters (metros and locals). Extracted behind a SHA-256 gate
+  with five per-row relations and a whole-table roll identity verified;
+  all 44 districts reconcile against their locals.
+- **Seat calculation** — Municipal Structures Act Schedule 1 Item 12
+  quota and Item 16, Schedule 2 for category C, routed by category. PR
+  seats are **derived** (`councillors − wardSeats`), never stored.
+- **Offline-first sync** — per-field last-write-wins over an
+  `_fieldUpdatedAt` map, in pure functions with 33 tests, behind an
+  idempotent endpoint that takes the tenant from the verified token and
+  runs one transaction per operation.
+- **PWA shell** — manifest, service worker that caches the app and never
+  the data, update banner, 18 self-hosted woff2 faces.
+- **Design system** — tokens plus the shared primitives in
+  `src/components/ui`, with all 27 page components migrated onto them.
+  `check-no-hex.mjs` fails the build on a raw hex in product source and
+  `check-type-scale.mjs` on an off-token font size; both exist because
+  `tailwind.config.js` extends its theme rather than replacing it, so
+  off-token values otherwise keep working silently.
+- **The deploy path** — `npm run deploy` (checks → build → preflight →
+  `firebase deploy`), and `.github/workflows/deploy-ecos.yml` for the
+  route that does not need a credential in this container.
+- **The corporate landing page launch card** — probes the application and
+  becomes a real link on its own. Needs no second deploy and cannot show
+  a dead link.
+
+## What is blocked, and on whom
+
+**Deployment — the account holder.** Two values, both documented with
+exact IAM roles in `docs/deploy-credentials-request.md`:
+
+1. A deploy credential — a service-account JSON as
+   `GOOGLE_APPLICATION_CREDENTIALS`, or `FIREBASE_TOKEN`. **Not in chat.**
+2. The six `VITE_FIREBASE_*` web-config values. These are public by
+   design and may go in chat or in Actions variables.
+
+Three routes, in `docs/deploy-credentials-request.md`: deploy from your
+own machine, deploy via GitHub Actions (one repository secret, six
+variables, **Run workflow**), or add the credential to this environment.
+
+No Google credential can reach this container —
+`gcloud auth print-access-token` returns the literal string
+`proxy-injected`. That is why the Actions route exists. Retrying the
+deploy from here cannot work.
+
+**One thing nobody can check for you:** that Firestore and Storage were
+created in `africa-south1`. Fixed at creation, unreadable without
+authenticating, unchangeable once data exists. If either is elsewhere the
+remedy is a new project — cheap today, impossible after a campaign has
+loaded a roll.
+
+## What is deliberately unbuilt, and why
+
+Not a backlog. Each of these is a decision.
+
+- **`ppfaAggregation.ts`** — written, not exported, will not deploy. Held
+  pending the §6.8.1 legal confirmation.
+- **`unmaskCandidateIdNumber`** — deploys and fails closed. Throws
+  `unimplemented` as its entire body pending a Cloud KMS key, so it
+  cannot return a wrong answer.
+- **Binding legal instruments** — Terms of Use, licence, tenancy
+  agreement, indemnities, limitation of liability. Attorney work. Briefs
+  only, under `docs/legal-drafts/`.
+- **The three concept screens** from the session-39 design reference —
+  Field Performance, Ward Sentiment Summary, Ward Sentiment Drilldown.
+  Volunteer identity, hours and per-ward sentiment segmentation have no
+  data model here. The reference itself says so. Building them means
+  shipping invented numbers.
+- **War Room's fuller dashboard** — volunteer presence, campaign
+  velocity, live diary feed. No traceable data source yet.
+- **Dark mode** — a field tool that must stay legible on a cracked
+  Android screen in direct sun does not get one for free.
+
+## Real work remaining, in rough order of value
+
+1. **Deploy**, once the two values land, and confirm the region.
+2. **Connect `electioscos.co.za`** (registered 16 Oct 2026). Four console
+   steps in a strict order — §4.1 of
+   `docs/deploy-credentials-request.md`. **Step 4 before step 3 takes
+   sign-in down for everybody**, and the preflight warns about exactly
+   that. Nothing in the build waits on this: the landing card probes the
+   custom domain first and Hosting's `.web.app` second, so the public
+   link works either way.
+
+3. **Registered voters per 2026 ward** — the annexure gives municipal
+   totals, not per-ward. Needed before the ward-level figures mean
+   anything outside NW405.
+4. **The VD → 2026-ward spatial join.** 26 of 108 NW405 station codes
+   split across wards, which is why `VotingDistrict.id` is
+   `${wardCode}::${vdCode}`. The rest of the country needs the same
+   treatment and it needs the shapefiles.
+5. **Results history and code history for the other eight provinces.**
+   NW is complete; `provinceReviewStatus()` reports the gap honestly and
+   `unreviewedProvinces()` lists it.
+6. ~~**Re-run the routes against the emulator.**~~ **Done, session 45.**
+   25 routes × 2 viewports, signed in with the NW405 seed: no console
+   errors, no page errors, no horizontal overflow, no missing content.
+   It found four real defects first — all of them in form *components*
+   the page migration never covered. See changelog session 45.
+
+   **Start the emulators with `--only auth,firestore,storage`.**
+   `npm run emulators` takes the whole suite down in this container: the
+   functions emulator's startup gets a plaintext `request blocked` from
+   the egress proxy where it expects JSON. Details in
+   `docs/running-locally.md`.
+
+### What the migration established, for whoever touches the UI next
+
+All 27 page components are on the primitives in `src/components/ui`
+(session 44, nine commits). Three things are worth carrying forward:
+
+**Do it by hand, not by `sed`.** The 27 turned up ~125 buttons with no
+distinguishing accessible name, 5 files off the type scale, 3 selection
+states that existed only in colour, 5 checkbox groups with no
+`fieldset`/`legend`, 3 headings a naive substitution would have demoted
+to paragraphs, 2 tables with proportional figures in numeric columns, 2
+duplicate copies of `StatTile`, 2 genuinely unlabelled controls, 3
+accessible names polluted by text inside the label, and a real
+shared-mutation defect in Logistics. None of it was visible in a test
+run.
+
+**One finding is a correction, and it is the most useful of the lot.**
+The claim that these pages had "unlabelled inputs" was **wrong** — a
+control nested inside its `<label>` is implicitly associated. That claim
+had sat in `src/components/ui/index.tsx` since session 38 and was
+repeated instead of checked. See changelog entry 44.2. **An existing
+comment asserting a defect is not evidence of the defect.**
+
+**Reach for a prop, not `className`.** Appending `text-ink`,
+`text-data-mono` or `p-0` races the primitive's own class in the same
+Tailwind group, and the winner is decided by stylesheet order rather
+than by the class attribute. `SectionLabel` takes `as` and `tone`,
+`Field` takes `mono`; nothing takes a padding override. Where a variant
+is genuinely one-off — a maroon alarm tile, a green confirm, a gold
+outline — the markup stays hand-rolled with the reason in the file.
+7. **Upgrade `firebase` 10 → 13 — AFTER the election, not before.**
+   `npm audit` reports 5 high and 8 moderate advisories in production
+   dependencies. Every one is transitive inside the Firebase SDK
+   (`@firebase/firestore`, `@grpc/grpc-js`, `undici`), and the remedy
+   npm proposes is **`firebase@9.14.0`** — a downgrade of two majors
+   from the installed `10.14.1`, to a 2022 release. `npm audit fix
+   --force` would make the product materially worse.
+
+   The real remedy is `firebase@13.1.0`, two major versions up, with
+   breaking-change risk across auth, Firestore and storage. Doing that
+   **ten days before an election on a product that has never been
+   deployed** is the wrong trade. CI blocks on `critical` only and
+   reports high/moderate, which is why that job is green and honest
+   rather than red and ignored.
+
+8. **A Cloud Function to resolve an email to a Firebase uid**, so an
+   administrator can grant access without the new user reading their own
+   uid off the "Awaiting access" screen.
+9. **A Firestore TTL policy** on `tenants/{tid}/_syncIdempotency`
+   (`expiresAt`). Not urgent; the records are small but accumulate
+   forever.
+
+## Branding, settled 16 October 2026
+
+Three palettes were in circulation. The letterheads-and-covers artifact
+(7 Oct) and `docs/innovation-consult-brand.md` (from the 9 Aug canvas)
+agree exactly: **`#13244A` / `#C9A227` / `#7B1E30` / `#F4EFE2`** is the
+canonical corporate identity. The EC OS product tokens
+(`#1A2246` / `#B7913F` / `#7E1F2E` / `#F7F4EE`) are a **separate
+namespace and stay as they are**. The corporate landing page carried a
+third set that matched neither; it was drift and has been corrected.
+
+## Where the reasoning lives
+
+| | |
+|---|---|
+| `.claude/skills/ecos-build-discipline/SKILL.md` | the thirteen working rules |
+| `docs/design-decision-and-change-log.md` | every decision, by session, with what it cost |
+| `docs/deploy-credentials-request.md` | the three deploy routes, exact IAM roles |
+| `docs/running-locally.md` | emulators, seed, claims, signed-in local run |
+| `docs/national-delimitation-baseline.md` | the proclaimed baseline per province |
+| `docs/innovation-consult-brand.md` | corporate identity, and why it is separate |
+| `docs/unverified-source-documents.md` | what has not been verified against a primary source |
+| `docs/historic-assets-review-2026-10-17.md` | three historic assets reviewed; what was carried and what must not be |
