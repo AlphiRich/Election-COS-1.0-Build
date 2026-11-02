@@ -2,11 +2,16 @@
   "hosting": {
     "site": "electioncos-site",
     "public": "public",
-    "ignore": ["**/.*"],
+    "ignore": [
+      "**/.*"
+    ],
     "rewrites": [
       {
         "source": "**",
-        "run": { "serviceId": "ecos-site", "region": "africa-south1" }
+        "run": {
+          "serviceId": "ecos-site",
+          "region": "europe-west1"
+        }
       }
     ]
   }

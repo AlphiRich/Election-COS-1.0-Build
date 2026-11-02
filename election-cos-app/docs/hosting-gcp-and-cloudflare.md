@@ -20,7 +20,7 @@ npm ci && npm run build:site && npm run check:site-budget
 docker build -f site-hosting/gcp/Dockerfile -t REGION-docker.pkg.dev/PROJECT/REPO/ecos-site:1 .
 docker push REGION-docker.pkg.dev/PROJECT/REPO/ecos-site:1
 gcloud run deploy ecos-site --image REGION-docker.pkg.dev/PROJECT/REPO/ecos-site:1 \
-  --region africa-south1 --allow-unauthenticated --port 8080
+  --region europe-west1 --allow-unauthenticated --port 8080
 ```
 
 Then map `electioncos.co.za` to the service in the Cloud Run console and point DNS at it. Check that domain mapping is offered in your chosen region; if not, put a load balancer in front.
@@ -43,7 +43,7 @@ Cloud Run's built-in domain mapping is offered in ten regions and `africa-south1
 
 Connect the domain once: Firebase console → Hosting → `electioncos-site` → Add custom domain → `electioncos.co.za`. Add the records it gives in Cloudflare as **DNS only** (grey cloud) until the certificate is issued. This supersedes the note in `.firebaserc` that the apex is served from Cloudflare.
 
-**Not verified:** Firebase's documentation does not list which Cloud Run regions Hosting rewrites support. If `africa-south1` is not supported, the "Deploy Firebase Hosting front" step fails with that message and the Cloud Run service is unaffected; the alternative is a global external Application Load Balancer, which has a standing monthly charge.
+**Region (decided 2 Nov 2026):** the public site runs on Cloud Run in `europe-west1`, not `africa-south1`. Firebase Hosting cannot forward to Cloud Run in `africa-south1` (HTTP 400, "Cloud Run region `africa-south1` is not supported"), and the site holds no personal data. The image repository stays in `africa-south1`. The application and its data stay in `africa-south1`. The earlier `ecos-site` service in `africa-south1` is unused and can be deleted in the console.
 
 **Cloud Storage alone is not enough:** a bucket can serve the files but cannot set the security headers or the single-page fallback for the site's own routes without a load balancer in front of it, which carries a standing charge. Cloud Run with this container avoids that. Check current Cloud Run pricing and free allowance in your own console before relying on it being free.
 
