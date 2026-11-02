@@ -54,4 +54,17 @@ describe('Scenario Runner page', () => {
     expect(el.querySelector('[role="alert"]')?.textContent).toMatch(/draws must be/);
     expect(el.textContent).not.toContain('Seats across');
   });
+  it('offers swings only for parties on the 2026 list, and says who cannot be modelled', async () => {
+    const el = await mount();
+    const labels = [...el.querySelectorAll('label')].map((l) => l.textContent ?? '');
+    for (const id of ['ANC', 'DA', 'EFF', 'PA', 'VFP']) {
+      expect(labels.some((t) => t.startsWith(`${id} swing`))).toBe(true);
+    }
+    for (const id of ['ABC', 'ATM', 'BLF', 'F4SD']) {
+      expect(labels.some((t) => t.startsWith(`${id} swing`))).toBe(false);
+    }
+    expect(el.textContent).toContain('Umkhonto Wesizwe Party');
+    expect(el.textContent).toContain('Abantu Batho Congress');
+    expect(el.textContent).toContain('not yet confirmed');
+  });
 });

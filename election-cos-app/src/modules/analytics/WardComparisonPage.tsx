@@ -60,6 +60,8 @@ import {
 import { majorityPosition, projectCouncil, seatChange, type Swing } from './wardScenario';
 import { summarizeSentiment } from './sentimentSummary';
 import { scenarioInputs } from './scenarioPolicy';
+import { contestingIds2021, displayNameFor } from './nw405Parties2026';
+import { PartyListNotice } from './PartyListNotice';
 
 /** Polling day, as proclaimed. */
 const ELECTION_DATE = new Date('2026-11-04T00:00:00Z');
@@ -76,7 +78,9 @@ const ELECTION_DATE = new Date('2026-11-04T00:00:00Z');
  */
 const counterWardCode = (wardNumber: number) => `NW405-W${wardNumber}`;
 
-const PARTIES = NW405_2021_EXAMPLE.parties.filter((p) => p.votes >= 2_000);
+const PARTIES = NW405_2021_EXAMPLE.parties.filter(
+  (p) => p.votes >= 2_000 && contestingIds2021().has(p.id),
+);
 
 const pts = (n: number) => `${n >= 0 ? '' : '−'}${Math.abs(n).toFixed(1)}`;
 const int = (n: number) => n.toLocaleString('en-ZA');
@@ -215,6 +219,10 @@ export function WardComparisonPage() {
         </div>
 
         <div className="mt-4">
+          <PartyListNotice />
+        </div>
+
+        <div className="mt-4">
           <SectionLabel as="h3">Inputs in force</SectionLabel>
           <ul className="mt-1 space-y-1 text-body-md font-body">
             {inputs.map((i) => (
@@ -257,7 +265,7 @@ export function WardComparisonPage() {
                 <tr key={party.id}>
                   <Td>
                     {party.id}
-                    <span className="text-slate"> · {party.name}</span>
+                    <span className="text-slate"> · {displayNameFor(party.id, party.name)}</span>
                   </Td>
                   <Td numeric>{party.from}</Td>
                   <Td numeric>{detail?.wardSeatsWon ?? 0}</Td>

@@ -20,6 +20,8 @@ import {
   Th,
 } from '@/components/ui';
 import { NW405_2021_EXAMPLE } from './nw405Example';
+import { contestingIds2021 } from './nw405Parties2026';
+import { PartyListNotice } from './PartyListNotice';
 import {
   MAX_DRAWS,
   MIN_DRAWS,
@@ -30,7 +32,9 @@ import {
   type RunnerSpec,
 } from './scenarioRunner';
 
-const PARTIES = NW405_2021_EXAMPLE.parties.filter((p) => p.votes >= 2_000);
+const PARTIES = NW405_2021_EXAMPLE.parties.filter(
+  (p) => p.votes >= 2_000 && contestingIds2021().has(p.id),
+);
 const pct = (f: number) => `${(f * 100).toFixed(1)}%`;
 
 export function ScenarioRunnerPage() {
@@ -72,6 +76,10 @@ export function ScenarioRunnerPage() {
         {RUNNER_CAVEAT} Every draw goes through the same Schedule 1 calculation as{' '}
         <Link to="/analytics/ward-comparison">Ward Comparison</Link>. Same seed, same answer.
       </BasisNote>
+
+      <Card>
+        <PartyListNotice />
+      </Card>
 
       <Card>
         <SectionLabel as="h2">Your assumptions</SectionLabel>

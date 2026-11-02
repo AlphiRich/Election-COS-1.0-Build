@@ -5581,3 +5581,4 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | Notice wording | `POLL_NOTICE_VERSION` placeholder | Pending attorney |
 | Multi-provider sign-in | `src/auth/authProviders.ts` (+9), `firebaseAuth.ts` `signInWithProvider` (+3), `SignInPage.tsx` | Built; only Google enabled by default; others need Firebase console + Meta/Microsoft/Apple app setup; popup flow not browser-tested (needs live providers) |
 | Short video explainers | `src/site/explainerVideos.ts` (+8), `pages/SiteWatch.tsx` (+4), `/watch`, War Room card, CSP frame-src | Built; **no videos recorded** (all ids null); browser-verified; Claude Design canvas CL73bwZMvuXgHcTxz7htGY |
+| Party list 2026 (NW405) | `src/modules/analytics/nw405Parties2026.ts` (+7), `PartyListNotice.tsx`, runner + comparison filters (+1 test) | Built; list unconfirmed by a named person; 15 entrants not modelled (no 2021 baseline) |
