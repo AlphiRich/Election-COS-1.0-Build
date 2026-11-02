@@ -7,6 +7,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
+import { IEC_LINK } from '../officialSources';
 import { byAudience, embedUrl, fmtSeconds, type Explainer } from '../explainerVideos';
 
 function Player({ e }: { e: Explainer }) {
@@ -153,6 +154,14 @@ export function SiteWatch() {
           Videos are hosted on YouTube and load only after you press play, so visiting this page
           sends nothing to YouTube. Captions are on by default. Videos use invented wards and
           invented data, and say so.
+        </p>
+        <p className="mb-0 mt-3 max-w-[50em] text-site-caption text-slate">
+          Seen something online about the elections that does not look right? Check it or report it
+          at{' '}
+          <a href={IEC_LINK.real411Elections} target="_blank" rel="noopener noreferrer">
+            Real411
+          </a>
+          , the disinformation reporting service the Electoral Commission points to.
         </p>
       </SiteSection>
     </>

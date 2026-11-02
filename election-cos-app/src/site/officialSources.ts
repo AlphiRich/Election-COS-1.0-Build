@@ -240,6 +240,12 @@ export const OFFICIAL_GROUPS: OfficialGroup[] = [
         about: 'How to request information from the Commission.',
       },
       {
+        label: 'Real411: elections page',
+        url: 'https://real411.org.za/elections',
+        about:
+          'Real411\u2019s own page on the 2026 elections: what counts as digital disinformation and an electoral offence, the Commission\u2019s Framework of Co-operation, and a guide for political parties.',
+      },
+      {
         label: 'Report disinformation to Real411',
         url: 'https://real411.org.za/complaints/submit',
         about: 'The web form the Commission points to. Complaints cannot be anonymous.',
@@ -267,6 +273,7 @@ export const IEC_LINK = {
   lgeDashboard: 'https://results.elections.org.za/dashboards/lge',
   disinformation: `${E}/Elections-And-Results/Report-Election-Disinformation`,
   real411: 'https://real411.org.za/complaints/submit',
+  real411Elections: 'https://real411.org.za/elections',
   fraud: `${E}/Voter/Report-Electoral-Fraud`,
   seatsExplainer:
     'https://www.elections.org.za/content/Documents/Voter-education/Continuous-Voter-Education/How-Council-seats-are-calculated/',

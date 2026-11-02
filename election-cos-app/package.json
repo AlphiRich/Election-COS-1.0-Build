@@ -30,7 +30,8 @@
     "test:functions": "npm --prefix functions run test",
     "typecheck:functions": "npm --prefix functions run build",
     "test:watch": "vitest",
-    "typecheck": "tsc -b --noEmit"
+    "typecheck": "tsc -b --noEmit",
+    "render:explainers": "node scripts/render-explainers.mjs"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.59.0",

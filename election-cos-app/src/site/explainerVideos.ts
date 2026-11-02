@@ -63,7 +63,7 @@ export const EXPLAINERS: Explainer[] = [
     id: 'roles',
     audience: 'parties',
     title: 'Seven roles, each sees only its own ground',
-    seconds: 10,
+    seconds: 12,
     readIt:
       'A ward lead sees a ward. A canvasser sees a voting district. The refusal is made by the database rules, not only by the screen.',
     youtubeId: null,
@@ -81,7 +81,7 @@ export const EXPLAINERS: Explainer[] = [
     id: 'capture-consent',
     audience: 'parties',
     title: 'Capture with consent',
-    seconds: 10,
+    seconds: 11,
     readIt:
       'The canvasser types the person’s name back before the record button works, so a mis-tap cannot create consent. A refusal stores nothing.',
     youtubeId: null,
@@ -90,7 +90,7 @@ export const EXPLAINERS: Explainer[] = [
     id: 'offline',
     audience: 'parties',
     title: 'Offline in a dead zone',
-    seconds: 10,
+    seconds: 15,
     readIt:
       'Work is kept on the phone and sent when signal returns. The screen shows what is still waiting. Clearing the browser’s data removes anything not yet sent, and the app says so.',
     youtubeId: null,
@@ -99,7 +99,7 @@ export const EXPLAINERS: Explainer[] = [
     id: 'funding-30-day',
     audience: 'parties',
     title: 'Funding line and the 30-day clock',
-    seconds: 10,
+    seconds: 14,
     readIt:
       'A donor’s payments are added up against the R200,000 disclosure line (Government Gazette 53182, under court challenge). A person’s request about their own data is tracked against a 30-day target.',
     youtubeId: null,

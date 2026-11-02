@@ -60,4 +60,10 @@ describe('the /watch page', () => {
       first.youtubeId = prev;
     }
   });
+  it('points to Real411 for checking or reporting election disinformation', async () => {
+    const el = await mount();
+    const link = [...el.querySelectorAll('a')].find((a) => a.textContent === 'Real411')!;
+    expect(link.getAttribute('href')).toBe('https://real411.org.za/elections');
+    expect(link.getAttribute('rel')).toContain('noopener');
+  });
 });
