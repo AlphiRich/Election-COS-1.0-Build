@@ -199,7 +199,7 @@ export function SiteCompliance() {
           </ul>
           <p className="m-0 text-site-sm">
             Information Officer: {INFORMATION_OFFICER} ·{' '}
-            <a href="mailto:legal@innovationconsult.co.za">legal@innovationconsult.co.za</a>
+            <a href="mailto:legal@electioncos.co.za">legal@electioncos.co.za</a>
           </p>
         </SiteCard>
       </SiteSection>

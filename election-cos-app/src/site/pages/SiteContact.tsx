@@ -37,6 +37,7 @@ import {
   whatsAppHref,
 } from '../siteContent';
 import { Eyebrow, SiteCard, SiteSection, WhatsAppIcon } from '../SiteChrome';
+import whatsAppQr from '../assets/whatsapp-qr.svg';
 import {
   enquiryConfig,
   enquiryPayload,
@@ -146,7 +147,7 @@ export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'de
                   </p>
                   <p className="m-0">
                     To reach somebody now, use WhatsApp or email{' '}
-                    <a href={`mailto:${SITE.mailboxes[0]}`}>{SITE.mailboxes[0]}</a>.
+                    <a href={`mailto:${SITE.mailboxes[0].address}`}>{SITE.mailboxes[0].address}</a>.
                   </p>
                 </>
               )}
@@ -323,8 +324,16 @@ export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'de
           <article className="flex flex-col gap-3 rounded-[10px] bg-ink p-8 text-paper">
             <h2 className="m-0 font-site-display text-site-h4">Faster: message us</h2>
             <p className="m-0 text-line">
-              WhatsApp reaches a person directly during working hours.
+              {SITE.whatsApp.role}: <strong>WhatsApp {SITE.whatsApp.display}</strong>. It reaches a person
+              directly during working hours.
             </p>
+            <img
+              src={whatsAppQr}
+              alt={`QR code for WhatsApp ${SITE.whatsApp.display}, the ${SITE.whatsApp.role.toLowerCase()}`}
+              width={144}
+              height={144}
+              className="rounded bg-paper p-1.5"
+            />
             <a href={whatsAppHref('Election Campaign OS enquiry')} className="site-btn-primary mt-auto self-start">
               <WhatsAppIcon />
               Talk to us on WhatsApp
@@ -333,17 +342,13 @@ export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'de
 
           <SiteCard className="flex flex-col gap-2 p-8">
             <h2 className="m-0 font-site-display text-site-h5">By email</h2>
-            {SITE.mailboxes.map((box) =>
-              box.startsWith('[') ? (
-                <span key={box} className="text-site-sm text-slate">
-                  {box}
-                </span>
-              ) : (
-                <a key={box} href={`mailto:${box}`} className="text-site-base">
-                  {box}
-                </a>
-              ),
-            )}
+            {SITE.mailboxes.map((box) => (
+              <p key={box.address} className="m-0 text-site-base">
+                <a href={`mailto:${box.address}`}>{box.address}</a>
+                <br />
+                <span className="text-site-sm text-slate">{box.purpose}</span>
+              </p>
+            ))}
           </SiteCard>
 
           <SiteCard className="flex flex-col gap-2 p-8">

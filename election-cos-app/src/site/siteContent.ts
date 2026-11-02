@@ -52,14 +52,28 @@ export const SITE = {
   registration: 'Reg. 2007/021390/07',
   /** Postal, not street: the company takes post at a box. */
   address: 'P.O. Box 2590, Potchefstroom, 2520',
-  /** The one WhatsApp number for enquiries. `whatsAppHref` is built from `e164`. */
-  whatsApp: { display: '082 449 7310', e164: '27824497310' },
+  /**
+   * The one WhatsApp number: the company's customer-care and sales line. `whatsAppHref` is built from `e164`.
+   * The QR code beside it (`assets/whatsapp-qr.svg`) encodes `https://wa.me/<e164>`; a test pins the file.
+   */
+  whatsApp: {
+    display: '082 449 7310',
+    e164: '27824497310',
+    role: 'Customer care and sales line',
+  },
   bbbee: '[B-BBEE STATUTORY COMPLIANCE NOTE]',
+  /**
+   * The company's addresses on electioncos.co.za (owner, 2 Nov 2026). Seven, in this order. `noreply` only sends;
+   * nobody reads replies to it, and the page says so.
+   */
   mailboxes: [
-    'info@innovationconsult.co.za',
-    'techsupport@innovationconsult.co.za',
-    'legal@innovationconsult.co.za',
-    '[FOURTH MAILBOX]',
+    { address: 'info@electioncos.co.za', purpose: 'General enquiries' },
+    { address: 'sales@electioncos.co.za', purpose: 'Sales and demonstrations' },
+    { address: 'techsupport@electioncos.co.za', purpose: 'Technical support' },
+    { address: 'accounts@electioncos.co.za', purpose: 'Accounts and billing' },
+    { address: 'legal@electioncos.co.za', purpose: 'Legal, privacy and POPIA' },
+    { address: 'admin@electioncos.co.za', purpose: 'Administration' },
+    { address: 'noreply@electioncos.co.za', purpose: 'Sends notices only; replies are not read' },
   ],
 } as const;
 

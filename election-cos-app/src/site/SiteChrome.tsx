@@ -37,6 +37,7 @@
 import type { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SITE, SITE_NAV, whatsAppHref } from './siteContent';
+import whatsAppQr from './assets/whatsapp-qr.svg';
 import { AdConsentWithdrawLink } from './ads/ConsentBanner';
 import { VotingRibbon } from './VotingRibbon';
 
@@ -158,17 +159,20 @@ export function SiteFooter({
         <div className="flex flex-col gap-1.5">
           <span className="font-semibold text-paper">Contact</span>
           <a href={whatsAppHref('Election Campaign OS enquiry')} className="text-line">
-            WhatsApp enquiries: {SITE.whatsApp.display}
+            {SITE.whatsApp.role}: WhatsApp {SITE.whatsApp.display}
           </a>
-          {SITE.mailboxes.map((box) =>
-            box.startsWith('[') ? (
-              <span key={box}>{box}</span>
-            ) : (
-              <a key={box} href={`mailto:${box}`} className="text-line">
-                {box}
-              </a>
-            ),
-          )}
+          <img
+            src={whatsAppQr}
+            alt={`QR code for WhatsApp ${SITE.whatsApp.display}, the ${SITE.whatsApp.role.toLowerCase()}`}
+            width={112}
+            height={112}
+            className="rounded bg-paper p-1"
+          />
+          {SITE.mailboxes.map((box) => (
+            <a key={box.address} href={`mailto:${box.address}`} className="text-line">
+              {box.address}
+            </a>
+          ))}
         </div>
 
         <div className="flex flex-col gap-1.5">

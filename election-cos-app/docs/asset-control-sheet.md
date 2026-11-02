@@ -5596,3 +5596,6 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | Explainer videos (hosted) | `site-assets/videos/` (10 MP4, 10 VTT, 10 JPG, 6.6 MB) | Rendered from `video-src/explainers`; silent; served from the site; guard in `explainerVideos.test.ts` |
 | GCP hosting config | `site-hosting/gcp/` | nginx tested; Docker image and deploy not run |
 | Hosting notes | `docs/hosting-gcp-and-cloudflare.md` | GCP and Cloudflare, with the unconfirmed points stated |
+| Company addresses | `src/site/siteContent.ts` `SITE.mailboxes` | Seven on electioncos.co.za (owner, 2 Nov 2026); noreply sends only |
+| WhatsApp QR | `src/site/assets/whatsapp-qr.svg` | Decoded to https://wa.me/27824497310; SHA-256 pinned; footer and /contact; labelled customer care and sales line |
+| Google Ads 251-650-7539 | not wired | Customer ID, not a publisher ID; owner actions in the change log |

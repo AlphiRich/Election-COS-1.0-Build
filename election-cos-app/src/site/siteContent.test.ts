@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 /**
  * Election Campaign OS — the public site's claims
  *
@@ -147,7 +148,6 @@ describe('what the site will not do', () => {
       'claims · T-06 reference': CLAIM_ROWS[5].ref,
       'information officer': INFORMATION_OFFICER,
       'B-BBEE note': SITE.bbbee,
-      'fourth mailbox': SITE.mailboxes[3],
       'consent wording version': CONSENT_VERSION,
     };
 
@@ -156,6 +156,33 @@ describe('what the site will not do', () => {
     }
   });
 
+  it('has exactly the seven company addresses on electioncos.co.za, each with a purpose, and no other domain', () => {
+    expect(SITE.mailboxes.map((m) => m.address)).toEqual([
+      'info@electioncos.co.za',
+      'sales@electioncos.co.za',
+      'techsupport@electioncos.co.za',
+      'accounts@electioncos.co.za',
+      'legal@electioncos.co.za',
+      'admin@electioncos.co.za',
+      'noreply@electioncos.co.za',
+    ]);
+    for (const m of SITE.mailboxes) {
+      expect(m.purpose.length).toBeGreaterThan(5);
+      expect(m.address).not.toMatch(PLACEHOLDER_RE);
+    }
+    expect(SITE.mailboxes.find((m) => m.address.startsWith('noreply'))!.purpose).toMatch(/not read/);
+  });
+  it('names the WhatsApp number as the customer-care and sales line, and pins the QR code that dials it', () => {
+    expect(SITE.whatsApp.role).toBe('Customer care and sales line');
+    const svg = readFileSync(path.resolve(__dirname, 'assets/whatsapp-qr.svg'));
+    // Decoded on 2 Nov 2026 (jsQR over a rendered copy) to https://wa.me/27824497310. Changing the file, or the
+    // number, must fail here until the new code has been decoded and checked again.
+    expect(createHash('sha256').update(svg).digest('hex')).toBe(
+      'eb77754fb51b582635fd7bcc6c55e384247cdc67175d27d48b0088c6b2cd3814',
+    );
+    expect(SITE.whatsApp.e164).toBe('27824497310');
+    expect(svg.toString()).not.toMatch(/<metadata|c2pa/i);
+  });
   it('gives a postal address and one WhatsApp number, and builds every enquiry link from it', () => {
     expect(SITE.address).toBe('P.O. Box 2590, Potchefstroom, 2520');
     expect(SITE.address).not.toMatch(PLACEHOLDER_RE);
