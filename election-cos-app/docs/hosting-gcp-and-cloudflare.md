@@ -48,3 +48,13 @@ To use it: `npm run build:site && npx wrangler deploy --config wrangler.site.jso
 ## Recommendation
 
 Whichever you choose, the site is the same `dist-site`. Cloudflare static assets is the lowest-cost route for the website on the evidence above. GCP Cloud Run is the route if the site must sit with the rest of your Google estate. The application's functions need Firebase Blaze either way.
+
+## Billing configuration
+
+- **Blaze is required** for the application's 2nd-gen Cloud Functions. The public site (`dist-site`) needs no billing on Cloudflare static assets.
+- `scripts/setup-billing-budget.sh` links `electioncos1-0` to your billing account and creates a budget with alerts at R500, R1,000, R1,800 and R2,000 (25, 50, 90 and 100 per cent of R2,000), matching `docs/phase-0-infra-plan.md`. Run it once: `BILLING_ACCOUNT=XXXXXX-XXXXXX-XXXXXX scripts/setup-billing-budget.sh`. It has not been run; it needs your billing account id and a signed-in `gcloud`.
+- A budget alert only emails. It does not stop spending. The in-app hard stop is `functions/src/costGuard.ts` (R500 a month for paid sends unless the founder records an approval).
+
+## Adverts on the public site
+
+Adverts are built in (`src/site/ads/`) and stay off until all three of `VITE_AD_CLIENT_ID`, `VITE_AD_SLOT_ID` and `VITE_AD_CATEGORY_BLOCKS_CONFIRMED=true` are set at `npm run build:site` time. They show only on explainer pages and only after consent. The site CSP and the nginx copy now allow Google's ad hosts by exact name (no wildcard, no `unsafe-*`). Set the variables in the build environment for whichever host you use; do not add an ad script to `site.html` by hand, which would bypass the consent gate.
