@@ -37,11 +37,13 @@ The workflow never touches the application, Firebase Hosting, Firestore or Funct
 
 ### Custom domain on Cloud Run
 
-Cloud Run's built-in domain mapping is offered in ten regions and `africa-south1` is not one of them; Google also describes it as preview and not recommended for production ([Mapping custom domains](https://docs.cloud.google.com/run/docs/mapping-custom-domains)). Choose one:
+Cloud Run's built-in domain mapping is offered in ten regions and `africa-south1` is not one of them; Google also describes it as preview and not recommended for production ([Mapping custom domains](https://docs.cloud.google.com/run/docs/mapping-custom-domains)).
 
-- **Firebase Hosting in front (lowest cost):** add a second Hosting site on `electioncos1-0` whose only rule rewrites `**` to the `ecos-site` service, and connect the domain to that site. Free tier applies. Keep it a separate site so the application's Hosting config is not changed.
-- **Global external Application Load Balancer (Google's recommendation):** serverless NEG to `ecos-site`, Google-managed certificate. Most control (Cloud CDN, Cloud Armor), but it has a standing monthly charge; check current pricing in your console.
-- **Leave it on the `run.app` URL** until after the election.
+**Chosen (2 Nov 2026): a separate Firebase Hosting site in front.** `site-hosting/firebase/firebase.json` defines site `electioncos-site`, whose only rule rewrites `**` to the `ecos-site` Cloud Run service; its `public/` folder is deliberately empty so every request reaches the container and its headers. The deploy workflow releases it after Cloud Run and checks `https://electioncos-site.web.app/` returns 200 with the CSP header. It is a different site and a different config file from the application's (`firebase.json`, target `app`), so neither deploy can release to the other. The setup script creates the site.
+
+Connect the domain once: Firebase console → Hosting → `electioncos-site` → Add custom domain → `electioncos.co.za`. Add the records it gives in Cloudflare as **DNS only** (grey cloud) until the certificate is issued. This supersedes the note in `.firebaserc` that the apex is served from Cloudflare.
+
+**Not verified:** Firebase's documentation does not list which Cloud Run regions Hosting rewrites support. If `africa-south1` is not supported, the "Deploy Firebase Hosting front" step fails with that message and the Cloud Run service is unaffected; the alternative is a global external Application Load Balancer, which has a standing monthly charge.
 
 **Cloud Storage alone is not enough:** a bucket can serve the files but cannot set the security headers or the single-page fallback for the site's own routes without a load balancer in front of it, which carries a standing charge. Cloud Run with this container avoids that. Check current Cloud Run pricing and free allowance in your own console before relying on it being free.
 
