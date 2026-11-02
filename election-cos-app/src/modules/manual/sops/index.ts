@@ -1,7 +1,8 @@
 /**
  * Election Campaign OS — the SOP register
  *
- * SOP-01 through SOP-12 are written — the whole intended structure. An
+ * SOP-01 through SOP-16 are written (SOP-13 to 16 added 2 Nov 2026 with the reference data, polls and
+ * scenario tools). An
  * SOP is declared in `PLANNED_SOPS` with the area, audience and gating it
  * will carry, and moves into `SOPS` when it is written and not before: a
  * stub that printed as a heading with nothing under it would be worse
@@ -27,6 +28,12 @@ import { DATA_SUBJECT_REQUEST_SOP } from './dataSubjectRequestSop';
 import { DONATIONS_SOP } from './donationsSop';
 import { PR_LIST_SOP } from './prListSop';
 import { PERMISSIONS_SOP } from './permissionsSop';
+import {
+  CANDIDATE_LIST_SOP,
+  POLLS_SOP,
+  SCENARIO_RUNNER_SOP,
+  VOTER_STATISTICS_SOP,
+} from './referenceDataSops';
 
 export const SOPS: Sop[] = [
   CANVASSER_SOP,
@@ -41,6 +48,10 @@ export const SOPS: Sop[] = [
   DONATIONS_SOP,
   PR_LIST_SOP,
   PERMISSIONS_SOP,
+  CANDIDATE_LIST_SOP,
+  VOTER_STATISTICS_SOP,
+  POLLS_SOP,
+  SCENARIO_RUNNER_SOP,
 ];
 
 export interface PlannedSop {

@@ -1562,7 +1562,7 @@ describe('SOP-12 describes roles, permissions and the subscription honestly', ()
 });
 
 /**
- * The manual is complete at twelve. This is the guard that the register
+ * The manual is complete at sixteen (twelve at first issue; 13 to 16 added with the reference data). This is the guard that the register
  * says so rather than quietly printing a shorter list.
  */
 describe('the finished manual', () => {
@@ -1581,6 +1581,10 @@ describe('the finished manual', () => {
       'SOP-10',
       'SOP-11',
       'SOP-12',
+      'SOP-13',
+      'SOP-14',
+      'SOP-15',
+      'SOP-16',
     ]);
   });
 

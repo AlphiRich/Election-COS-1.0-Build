@@ -25,6 +25,9 @@ import { ThresholdAnalyzerPage } from '@/modules/analytics/ThresholdAnalyzerPage
 import { ScheduledReportsPage } from '@/modules/analytics/ScheduledReportsPage';
 import { BuildReviewPage } from '@/modules/analytics/BuildReviewPage';
 import { WardComparisonPage } from '@/modules/analytics/WardComparisonPage';
+import { CandidateListPage } from '@/modules/reference/CandidateListPage';
+import { VdLocatorPage } from '@/modules/reference/VdLocatorPage';
+import { VoterStatisticsPage } from '@/modules/reference/VoterStatisticsPage';
 import { PollsPage } from '@/modules/polls/PollsPage';
 import { ScenarioRunnerPage } from '@/modules/analytics/ScenarioRunnerPage';
 import { SettingsPage } from '@/modules/settings/SettingsPage';
@@ -70,6 +73,9 @@ export const router = createBrowserRouter([
           { path: 'ward-comparison', element: <WardComparisonPage /> },
           { path: 'scenario-runner', element: <ScenarioRunnerPage /> },
           { path: 'polls', element: <PollsPage /> },
+          { path: 'candidate-list', element: <CandidateListPage /> },
+          { path: 'vd-locator', element: <VdLocatorPage /> },
+          { path: 'voter-statistics', element: <VoterStatisticsPage /> },
           { path: 'build-review', element: <BuildReviewPage /> },
         ],
       },

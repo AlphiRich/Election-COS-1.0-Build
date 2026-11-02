@@ -96,6 +96,17 @@ export function WarRoomPage() {
       <PageHeader slug="/war-room" title="War Room" />
 
       <Card>
+        <SectionLabel as="h2">Reference data</SectionLabel>
+        <p className="text-body-md font-body mt-1">
+          <Link to="/analytics/candidate-list">Candidates on the Commission&rsquo;s list</Link> ·{' '}
+          <Link to="/analytics/vd-locator">Voting-district locator</Link> ·{' '}
+          <Link to="/analytics/voter-statistics">Voter statistics by ward and age</Link> ·{' '}
+          <Link to="/analytics/polls">Voter sentiment polls</Link> ·{' '}
+          <Link to="/analytics/scenario-runner">Scenario runner</Link>
+        </p>
+      </Card>
+
+      <Card>
         <SectionLabel as="h2">Start here: short videos</SectionLabel>
         <p className="text-body-md font-body mt-1">
           Each one makes a single point in ten to thirty seconds, with the words underneath if you would
