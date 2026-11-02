@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "site": "electioncos-site",
+    "public": "public",
+    "ignore": ["**/.*"],
+    "rewrites": [
+      {
+        "source": "**",
+        "run": { "serviceId": "ecos-site", "region": "africa-south1" }
+      }
+    ]
+  }
+}

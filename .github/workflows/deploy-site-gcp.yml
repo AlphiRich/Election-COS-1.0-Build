@@ -2,8 +2,10 @@ name: Deploy public site (Cloud Run)
 
 # Builds dist-site, packs it into the nginx container in
 # election-cos-app/site-hosting/gcp, and deploys it to Cloud Run in
-# africa-south1. The public website only: the application, Firestore,
-# Functions and Firebase Hosting are not touched (that is deploy-ecos.yml).
+# africa-south1, then releases the separate Firebase Hosting site
+# `electioncos-site` that fronts it (for the custom domain). The public website
+# only: the application, its Hosting site, Firestore and Functions are not
+# touched (that is deploy-ecos.yml).
 #
 # Sign-in is keyless (Workload Identity Federation): no service-account key
 # is stored in this repository. Run election-cos-app/scripts/setup-gcp-site.sh
@@ -98,15 +100,35 @@ jobs:
             || { echo "::error::$URL/ is missing its Content-Security-Policy header"; exit 1; }
           echo "Site is up at $URL"
 
+      # The second Hosting site (electioncos-site) fronts the Cloud Run
+      # service so the custom domain can be connected to it; Cloud Run domain
+      # mapping is not offered in africa-south1. The config file names that
+      # site explicitly, so this cannot release to the application's site.
+      - name: Deploy Firebase Hosting front (electioncos-site)
+        run: |
+          npx firebase deploy --only hosting \
+            --config site-hosting/firebase/firebase.json \
+            --project "$PROJECT" --non-interactive
+
+      - name: Smoke test through Firebase Hosting
+        run: |
+          FRONT="https://electioncos-site.web.app"
+          echo "FRONT=$FRONT" >> "$GITHUB_ENV"
+          code="$(curl -s -o /dev/null -w '%{http_code}' "$FRONT/")"
+          [ "$code" = "200" ] || { echo "::error::$FRONT/ returned $code"; exit 1; }
+          curl -sI "$FRONT/" | grep -qi '^content-security-policy:' \
+            || { echo "::error::$FRONT/ is missing its Content-Security-Policy header (not passed through from Cloud Run)"; exit 1; }
+          echo "Front is up at $FRONT"
+
       - name: What went live
         if: success()
         run: |
           {
             echo "### Public site deployed"
             echo ""
-            echo "Live at: $URL"
+            echo "Public front: $FRONT (connect electioncos.co.za to this site)"
+            echo ""
+            echo "Cloud Run origin: $URL"
             echo ""
             echo "Image: \`$IMAGE:$GITHUB_SHA\`"
-            echo ""
-            echo "Custom domain: Cloud Run domain mapping is not offered in africa-south1. See docs/hosting-gcp-and-cloudflare.md, *Custom domain on Cloud Run*."
           } >> "$GITHUB_STEP_SUMMARY"
