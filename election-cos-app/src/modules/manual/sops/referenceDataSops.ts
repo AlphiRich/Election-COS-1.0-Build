@@ -70,19 +70,20 @@ export const VOTER_STATISTICS_SOP: Sop = {
     {
       heading: 'Where the numbers come from',
       body: [
-        'They are counts taken from the Commission’s certified voters’ roll for JB Marks (edition LGE2026-CERT-20260807): 131,963 verified voters and 52,176 rejected entries across 106 voting districts and 34 wards. Every district’s count was checked against the Commission’s own printed total for that district, and none differed.',
-        'The roll itself is never in this application. Only counts are. Age is read from the date of birth that opens the masked identity number and put into six bands: 18 to 29, 30 to 39, 40 to 49, 50 to 59, 60 to 69 and 70 and over, on polling day.',
+        'Registered voters are the gazetted baseline for JB Marks: 122,059, from the Electoral Commission’s Circular 1 of 2025, split by ward and voting district in the delimitation seed. That is the only voter count the application shows.',
+        'The age mix is a percentage read from the Commission’s certified voters’ roll (edition LGE2026-CERT-20260807), as the share of voters in each band on polling day. No count from the roll is kept. The roll itself is never in this application. Age is read from the date of birth that opens the masked identity number and put into six bands: 18 to 29, 30 to 39, 40 to 49, 50 to 59, 60 to 69 and 70 and over.',
       ],
     },
     {
-      heading: 'Two numbers for registered voters',
+      heading: 'Reading the figures',
       body: [
-        'The roll says 131,963. The ward and district seed built from the delimitation gazette says 122,059. They are different documents made at different times and they are not reconciled here. For a split voting district the seed figure is the ward’s portion, which will differ from the roll’s count for the district.',
+        'A voting district shared between wards is listed once for each ward, with that ward’s portion of the registered voters. The portions add up to the ward total and the ward totals add up to 122,059.',
+        'A few districts have no age mix. They have no matching entry in the roll, or too few people to show. The page says so; it never fills the gap with an estimate.',
       ],
       steps: [
-        'Say which document a figure comes from every time you quote it.',
-        'Do not average them and do not pick the larger for effect.',
-        'If the difference matters for a decision, take it to whoever holds the Commission’s own figure.',
+        'Quote registered voters as 122,059 for the municipality and say it is the gazetted baseline.',
+        'Quote an age figure as a percentage of voters, never as a head count.',
+        'Do not apply a percentage to a different total to get a head count; the percentage describes the roll’s age-placed entries, not the registered total.',
       ],
     },
     {

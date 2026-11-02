@@ -19,108 +19,81 @@ import {
   Th,
 } from '@/components/ui';
 import { BarChart, type Bar } from './BarChart';
-import {
-  AGE_BANDS,
-  VD_REFERENCE,
-  VD_ROWS,
-  WARD_ROWS,
-  bandShare,
-  seedGap,
-  sumBand,
-} from './vdReference';
+import { AGE_BANDS, REGISTERED_TOTAL, VD_REFERENCE, VD_ROWS, WARD_ROWS, type AgeMix } from './vdReference';
 
 const n = (v: number) => v.toLocaleString('en-ZA');
-const pct = (f: number) => `${(f * 100).toFixed(0)}%`;
+const mixBars = (m: AgeMix | null): Bar[] =>
+  AGE_BANDS.map((b) => {
+    const v = m?.[b] ?? null;
+    return { label: b, value: v, shown: v === null ? '' : `${v.toFixed(0)}%` };
+  });
 
 export function VoterStatisticsPage() {
   const [ward, setWard] = useState<number>(WARD_ROWS[0]?.wardNumber ?? 1);
   const rank = useMemo(
     () =>
-      WARD_ROWS.map((w) => ({ w, s: bandShare(w, '18-29') }))
+      WARD_ROWS.map((w) => ({ w, s: w.ageMix?.['18-29'] ?? null }))
         .sort((a, b) => (b.s ?? -1) - (a.s ?? -1))
         .map<Bar>(({ w, s }) => ({
           label: `Ward ${w.wardNumber}`,
-          value: s === null ? null : Math.round(s * 1000) / 10,
-          shown: s === null ? '' : pct(s),
-          detail: `${n(w.verified)} verified voters`,
+          value: s,
+          shown: s === null ? '' : `${s.toFixed(0)}%`,
+          detail: `${n(w.registered)} registered voters`,
         })),
     [],
   );
-  const municipality: Bar[] = AGE_BANDS.map((b) => {
-    const v = sumBand(WARD_ROWS, b);
-    return { label: b, value: v, shown: v === null ? '' : n(v) };
-  });
   const sel = WARD_ROWS.find((w) => w.wardNumber === ward)!;
-  const wardBars: Bar[] = AGE_BANDS.map((b) => ({
-    label: b,
-    value: sel.ageBands[b],
-    shown: sel.ageBands[b] === null ? '' : n(sel.ageBands[b] as number),
-  }));
   const vds = VD_ROWS.filter((r) => r.wardNumber === ward);
-  const seedTotal = VD_ROWS.reduce((s, r) => s + (r.registeredSeed ?? 0), 0);
 
   return (
     <div className="space-y-6">
       <PageHeader slug="/analytics/voter-statistics" title="Voter statistics" />
       <BasisNote>
-        Counts from the Electoral Commission&rsquo;s certified voters&rsquo; roll for JB Marks
-        (edition {VD_REFERENCE.rollEdition}), by ward and age on {VD_REFERENCE.ageAt}.{' '}
-        {VD_REFERENCE.ageBandsNote} No name, address or ID number is held here. See{' '}
+        Registered voters are the gazetted baseline for JB Marks: {n(REGISTERED_TOTAL)} (Electoral
+        Commission Circular 1 of 2025), split by ward and voting district in the delimitation
+        seed. The age mix is a percentage read from the certified roll (edition{' '}
+        {VD_REFERENCE.rollEdition}) on {VD_REFERENCE.ageAt}. {VD_REFERENCE.ageBandsNote} No name,
+        address or ID number is held here. See{' '}
         <Link to="/analytics/vd-locator">the voting-district locator</Link>.
       </BasisNote>
 
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:grid-cols-3">
         <StatTile
-          label="Verified voters (roll)"
-          value={n(VD_REFERENCE.totals.verified)}
-          sub="certified roll"
+          label="Registered voters"
+          value={n(REGISTERED_TOTAL)}
+          sub="gazetted baseline"
           emphasis
-        />
-        <StatTile
-          label="Rejected entries"
-          value={n(VD_REFERENCE.totals.rejected)}
-          sub="on the roll's rejected list"
         />
         <StatTile label="Wards" value={WARD_ROWS.length} sub="proclaimed 7 Aug 2026" />
         <StatTile
           label="Voting districts"
           value={new Set(VD_ROWS.map((r) => r.vdCode)).size}
-          sub={`${VD_REFERENCE.reconciliation.vdsNotMatchingCommissionTotals} differ from the Commission's printed totals`}
+          sub={`${VD_ROWS.length} rows, one per ward a district serves`}
         />
       </div>
 
       <Card>
-        <SectionLabel as="h2">Two numbers for registered voters</SectionLabel>
-        <p className="text-body-md font-body mt-1">
-          The certified roll holds <strong>{n(VD_REFERENCE.totals.verified)}</strong> verified
-          voters. The seed built from the delimitation gazette holds <strong>{n(seedTotal)}</strong>{' '}
-          registered voters for the same districts. They are different documents and are not
-          reconciled here; quote whichever you can cite, and say which (SOP-14).
-        </p>
-      </Card>
-
-      <Card>
         <SectionLabel as="h2">Age profile, whole municipality</SectionLabel>
         <BarChart
-          title="Verified voters by age band"
-          bars={municipality}
+          title="Age mix, whole municipality"
+          bars={mixBars(VD_REFERENCE.municipalityAgeMix)}
           orientation="column"
-          valueLabel="Verified voters"
-          caption="Verified voters by age band on polling day, whole municipality."
+          valueLabel="Share of voters (%)"
+          caption="Percent of voters whose age could be read from the roll, by age band on polling day."
         />
       </Card>
 
       <Card>
         <SectionLabel as="h2">Which wards are youngest</SectionLabel>
         <p className="text-body-md font-body text-slate mt-1">
-          Share of each ward&rsquo;s verified voters aged 18 to 29, highest first.
+          Share of each ward&rsquo;s voters aged 18 to 29, highest first.
         </p>
         <BarChart
           title="Share aged 18 to 29, by ward"
           bars={rank}
           orientation="row"
           valueLabel="Share aged 18 to 29 (%)"
-          caption="Share of verified voters aged 18 to 29, by ward."
+          caption="Percent of voters aged 18 to 29, by ward."
         />
       </Card>
 
@@ -137,24 +110,20 @@ export function VoterStatisticsPage() {
             </select>
           )}
         </Field>
-        <p className="text-body-md font-body mt-2">
-          {n(sel.verified)} verified voters, {n(sel.rejected)} rejected entries.
-        </p>
+        <p className="text-body-md font-body mt-2">{n(sel.registered)} registered voters.</p>
         <BarChart
-          title={`Ward ${ward}: verified voters by age band`}
-          bars={wardBars}
+          title={`Ward ${ward}: age mix`}
+          bars={mixBars(sel.ageMix)}
           orientation="column"
-          valueLabel="Verified voters"
-          caption={`Verified voters by age band, ward ${ward}.`}
+          valueLabel="Share of voters (%)"
+          caption={`Percent of voters by age band, ward ${ward}.`}
         />
         <Table caption={`Voting districts in ward ${ward}.`}>
           <thead>
             <tr>
               <Th>Station</Th>
               <Th>VD</Th>
-              <Th numeric>Verified (roll)</Th>
-              <Th numeric>Registered (seed)</Th>
-              <Th numeric>Seed minus roll</Th>
+              <Th numeric>Registered voters</Th>
             </tr>
           </thead>
           <tbody>
@@ -162,9 +131,7 @@ export function VoterStatisticsPage() {
               <tr key={r.vdCode}>
                 <Td>{r.station}</Td>
                 <Td numeric>{r.vdCode}</Td>
-                <Td numeric>{n(r.verified)}</Td>
-                <Td numeric>{r.registeredSeed === null ? 'none' : n(r.registeredSeed)}</Td>
-                <Td numeric>{seedGap(r) === null ? '' : n(seedGap(r) as number)}</Td>
+                <Td numeric>{n(r.registered)}</Td>
               </tr>
             ))}
           </tbody>

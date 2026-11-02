@@ -14,9 +14,8 @@ import {
   VD_REFERENCE,
   VD_ROWS,
   WARD_ROWS,
-  bandShare,
+  REGISTERED_TOTAL,
   searchVds,
-  sumBand,
 } from './vdReference';
 
 describe('age from a masked ID (polling day 4 Nov 2026)', () => {
@@ -80,15 +79,23 @@ describe('small-cell suppression', () => {
 });
 
 describe('the NW405 voting-district reference', () => {
-  it('has 34 wards and 106 voting districts, and the totals add up', () => {
+  it('has 34 wards and 135 voting-district rows, and registered voters add up to 122,059 at every level', () => {
     expect(WARD_ROWS).toHaveLength(34);
-    expect(VD_ROWS).toHaveLength(106);
-    expect(VD_ROWS.reduce((s, r) => s + r.verified, 0)).toBe(VD_REFERENCE.totals.verified);
-    expect(WARD_ROWS.reduce((s, w) => s + w.verified, 0)).toBe(VD_REFERENCE.totals.verified);
-    expect(VD_REFERENCE.totals.verified).toBe(131963);
-    expect(VD_REFERENCE.totals.rejected).toBe(52176);
+    expect(VD_ROWS).toHaveLength(135);
+    expect(REGISTERED_TOTAL).toBe(122059);
+    expect(VD_ROWS.reduce((s, r) => s + r.registered, 0)).toBe(122059);
+    expect(WARD_ROWS.reduce((s, w) => s + w.registered, 0)).toBe(122059);
+    for (const w of WARD_ROWS) {
+      expect(VD_ROWS.filter((r) => r.wardNumber === w.wardNumber).reduce((s, r) => s + r.registered, 0)).toBe(w.registered);
+    }
   });
-  it('agrees with the Commission’s printed total for every district it compared', () => {
+  it('carries no roll count: the 131,963 figure and every verified/rejected count are gone', () => {
+    const text = JSON.stringify(raw);
+    expect(text).not.toContain('131963');
+    expect(text).not.toContain('52176');
+    for (const k of ['"verified"', '"rejected"', '"ageUnplaced"', '"registeredSeed"']) expect(text).not.toContain(k);
+  });
+  it('agrees with the Commission’s printed total for every roll district it compared', () => {
     expect(VD_REFERENCE.reconciliation.vdsCompared).toBe(106);
     expect(VD_REFERENCE.reconciliation.vdsNotMatchingCommissionTotals).toBe(0);
   });
@@ -98,57 +105,30 @@ describe('the NW405 voting-district reference', () => {
     for (const k of ['idNumber', 'id_number', 'surname', 'fullName', 'full_names', 'address']) {
       expect(text, k).not.toContain(`"${k}`);
     }
-    const keys = new Set(Object.keys(VD_ROWS[0]));
-    expect([...keys].sort()).toEqual(
-      [
-        'ageBands',
-        'ageUnplaced',
-        'rejected',
-        'registeredSeed',
-        'station',
-        'vdCode',
-        'verified',
-        'wardCode',
-        'wardNumber',
-      ].sort(),
+    expect(Object.keys(VD_ROWS[0]).sort()).toEqual(
+      ['ageMix', 'registered', 'split', 'station', 'vdCode', 'wardCode', 'wardNumber'].sort(),
     );
   });
-  it('shows no cell under the minimum, and never exactly one hidden cell in a row', () => {
-    for (const r of [...VD_ROWS, ...WARD_ROWS]) {
-      const cells = AGE_BANDS.map((b) => r.ageBands[b]);
-      for (const c of cells) if (c !== null) expect(c).toBeGreaterThanOrEqual(MIN_CELL);
+  it('shows only percentages, never exactly one hidden cell in a row, and no group that could be under the minimum', () => {
+    const rows = [...VD_ROWS, ...WARD_ROWS].filter((r) => r.ageMix);
+    expect(rows.length).toBeGreaterThan(100);
+    for (const r of rows) {
+      const cells = AGE_BANDS.map((b) => r.ageMix![b]);
+      for (const c of cells) if (c !== null) { expect(c).toBeGreaterThan(0); expect(c).toBeLessThanOrEqual(100); }
       expect(cells.filter((c) => c === null).length).not.toBe(1);
+      const sum = cells.reduce<number>((t, c) => t + (c ?? 0), 0);
+      expect(sum).toBeLessThanOrEqual(100.5);
     }
   });
-  it('never claims more age-banded people than the row holds, and the gap is small when nothing is hidden', () => {
-    for (const r of VD_ROWS) {
-      const vis = AGE_BANDS.map((b) => r.ageBands[b]);
-      const sum = vis.reduce<number>((s, c) => s + (c ?? 0), 0);
-      expect(sum).toBeLessThanOrEqual(r.verified);
-      if (!vis.includes(null)) expect(r.verified - sum).toBeLessThan(MIN_CELL * 2);
-    }
-  });
-  it('sums a band across wards only when no ward hides it', () => {
-    const total = AGE_BANDS.reduce((s, b) => s + (sumBand(WARD_ROWS, b) ?? 0), 0);
-    expect(total).toBeGreaterThan(130000);
-    expect(total).toBeLessThanOrEqual(VD_REFERENCE.totals.verified);
-    expect(
-      sumBand([{ ageBands: { ...WARD_ROWS[0].ageBands, '18-29': null } }], '18-29'),
-    ).toBeNull();
-  });
-  it('computes a share only from complete rows', () => {
-    const w = WARD_ROWS[0];
-    const s = bandShare(w, '18-29')!;
-    expect(s).toBeGreaterThan(0);
-    expect(s).toBeLessThan(1);
-    expect(bandShare({ ageBands: { ...w.ageBands, '70+': null } }, '18-29')).toBeNull();
+  it('has an age mix for 104 of 135 rows and says null, not a guess, for the rest', () => {
+    expect(VD_ROWS.filter((r) => r.ageMix).length).toBe(VD_REFERENCE.totals.withAgeMix);
+    expect(VD_ROWS.filter((r) => !r.ageMix).length).toBe(135 - VD_REFERENCE.totals.withAgeMix);
   });
   it('finds stations by name, code and ward, all words required', () => {
     expect(searchVds('uniting reformed').length).toBeGreaterThan(0);
     expect(searchVds('86821094').every((r) => r.vdCode === '86821094')).toBe(true);
-    expect(searchVds('ward 1').every((r) => r.wardNumber === 1)).toBe(false); // "ward 1" also matches 10..19 by substring
     expect(searchVds('zzzz')).toEqual([]);
-    expect(searchVds('')).toHaveLength(106);
+    expect(searchVds('')).toHaveLength(135);
   });
 });
 

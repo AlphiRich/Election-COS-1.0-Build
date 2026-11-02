@@ -5586,6 +5586,6 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | Dependency audit | `npm audit fix` both packages | functions: criticals/highs cleared; app: 5 high remain in Firebase Node-side deps (not bundled), upgrade after polling |
 | Real411 elections page | `officialSources.ts` | Added; verified live 2 Nov |
 | NW405 candidate reference | `src/data/reference/nw405-candidates.json`, `candidateReference.ts`, `CandidateListPage.tsx` | 611 entries from the Commission 23 Oct dataset; confirmed by site owner 1 Nov; no ID fields |
-| NW405 voting-district reference | `src/data/reference/nw405-vd-reference.json`, `vdReference.ts`, `VdLocatorPage.tsx`, `VoterStatisticsPage.tsx`, `BarChart.tsx` | Aggregates only from the roll (131,963 verified); cells under 10 hidden; roll vs seed total disagreement surfaced, not reconciled |
+| NW405 voting-district reference | `src/data/reference/nw405-vd-reference.json`, `vdReference.ts`, `VdLocatorPage.tsx`, `VoterStatisticsPage.tsx`, `BarChart.tsx` | 135 rows, registered voters sum to 122,059 (owner decision 2 Nov); age mix as percentages from the roll, no roll counts; 104 of 135 rows have an age mix |
 | Reference generators | `scripts/build-reference-data.mjs`, `scripts/extract-reference-candidates.mjs`, `scripts/lib/ageBands.mjs` | Roll never committed |
 | SOP-13 to SOP-16 | `src/modules/manual/sops/referenceDataSops.ts` | Candidate list, VDs and statistics, polls, scenario runner |

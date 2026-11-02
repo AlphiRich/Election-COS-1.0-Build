@@ -1,13 +1,14 @@
 /**
  * Election Campaign OS — Voting-district locator (/analytics/vd-locator)
  *
- * Find a voting district by station name, VD code or ward. Counts only; the voters on the roll are never shown here.
+ * Find a voting district by station name, VD code or ward. Registered voters are the gazetted baseline (122,059 in
+ * total); the age mix is a percentage from the certified roll. No voter is ever shown here.
  */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BasisNote, Card, Field, PageHeader, SectionLabel, Table, Td, Th } from '@/components/ui';
 import { BarChart } from './BarChart';
-import { AGE_BANDS, VD_REFERENCE, VD_ROWS, searchVds, seedGap, type VdRow } from './vdReference';
+import { AGE_BANDS, REGISTERED_TOTAL, VD_REFERENCE, VD_ROWS, searchVds, type VdRow } from './vdReference';
 
 const n = (v: number) => v.toLocaleString('en-ZA');
 const SHOW = 40;
@@ -21,10 +22,10 @@ export function VdLocatorPage() {
     <div className="space-y-6">
       <PageHeader slug="/analytics/vd-locator" title="Voting-district locator" />
       <BasisNote>
-        {VD_ROWS.length} voting districts in JB Marks from the certified roll (edition{' '}
-        {VD_REFERENCE.rollEdition}). Station names are as the Commission prints them. For the age
-        profile of the whole municipality see{' '}
-        <Link to="/analytics/voter-statistics">voter statistics</Link>.
+        {VD_ROWS.length} voting-district rows in JB Marks, {n(REGISTERED_TOTAL)} registered voters
+        in all (the gazetted baseline). Station names are as the Commission prints them. A district
+        shared between wards is listed once per ward, with that ward&rsquo;s portion. For the age
+        profile see <Link to="/analytics/voter-statistics">voter statistics</Link>.
       </BasisNote>
 
       <Card>
@@ -47,8 +48,7 @@ export function VdLocatorPage() {
               <Th>Station</Th>
               <Th>Ward</Th>
               <Th>VD</Th>
-              <Th numeric>Verified (roll)</Th>
-              <Th numeric>Registered (seed)</Th>
+              <Th numeric>Registered voters</Th>
               <Th>
                 <span className="sr-only">Open</span>
               </Th>
@@ -60,8 +60,7 @@ export function VdLocatorPage() {
                 <Td>{r.station}</Td>
                 <Td>{r.wardNumber}</Td>
                 <Td numeric>{r.vdCode}</Td>
-                <Td numeric>{n(r.verified)}</Td>
-                <Td numeric>{r.registeredSeed === null ? 'none' : n(r.registeredSeed)}</Td>
+                <Td numeric>{n(r.registered)}</Td>
                 <Td>
                   <button
                     type="button"
@@ -83,28 +82,26 @@ export function VdLocatorPage() {
           <SectionLabel as="h2">{picked.station}</SectionLabel>
           <p className="text-body-md font-body mt-1">
             Ward {picked.wardNumber} · VD <span className="font-mono">{picked.vdCode}</span> ·{' '}
-            {n(picked.verified)} verified voters, {n(picked.rejected)} rejected entries.
-            {picked.registeredSeed !== null && seedGap(picked) !== 0 && (
-              <>
-                {' '}
-                The seed lists {n(picked.registeredSeed)} registered here,{' '}
-                {n(Math.abs(seedGap(picked) as number))}{' '}
-                {(seedGap(picked) as number) > 0 ? 'more' : 'fewer'} than the roll. They are
-                different documents.
-              </>
-            )}
+            {n(picked.registered)} registered voters
+            {picked.split ? ' (this ward’s portion of a shared district)' : ''}.
           </p>
-          <BarChart
-            title="Verified voters by age band"
-            bars={AGE_BANDS.map((b) => ({
-              label: b,
-              value: picked.ageBands[b],
-              shown: picked.ageBands[b] === null ? '' : n(picked.ageBands[b] as number),
-            }))}
-            orientation="column"
-            valueLabel="Verified voters"
-            caption={`Verified voters by age band at ${picked.station}.`}
-          />
+          {picked.ageMix ? (
+            <BarChart
+              title="Age mix"
+              bars={AGE_BANDS.map((b) => {
+                const v = picked.ageMix?.[b] ?? null;
+                return { label: b, value: v, shown: v === null ? '' : `${v.toFixed(0)}%` };
+              })}
+              orientation="column"
+              valueLabel="Share of voters (%)"
+              caption={`Age mix at ${picked.station}, percent of voters whose age could be read from the roll (${VD_REFERENCE.ageAt}).`}
+            />
+          ) : (
+            <p className="text-body-md font-body text-slate mt-2">
+              Age mix not available for this district: it has no matching entry in the certified
+              roll, or too few people to show.
+            </p>
+          )}
         </Card>
       )}
     </div>

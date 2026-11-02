@@ -74,46 +74,62 @@ const seedVd = new Map();
 for (const w of seed) for (const v of w.votingDistricts) seedVd.set(key(w.ward.id.replace('NW405-W', '640050').padStart(8, '0'), v.vdCode), v);
 
 const wardNo = (code) => +String(code).slice(-3);
-const list = [...agg.values()].map((s) => {
-  const seedRow = [...seed].flatMap((w) => w.votingDistricts).find((v) => v.vdCode === s.vd && v.wardCode === `NW405-W${wardNo(s.ward)}`);
-  return {
-    wardCode: `NW405-W${wardNo(s.ward)}`,
-    wardNumber: wardNo(s.ward),
-    vdCode: s.vd,
-    station: s.station,
-    registeredSeed: seedRow?.registeredVoters ?? null,
-    verified: s.verified,
-    rejected: s.rejected,
-    ageBands: suppress(s.bands),
-    ageUnplaced: s.unplaced >= MIN_CELL ? s.unplaced : null,
-  };
-}).sort((a, b) => a.wardNumber - b.wardNumber || a.vdCode.localeCompare(b.vdCode));
 
-// reconcile with the Commission's printed totals, per voting district (a split VD is summed across wards)
+// REGISTERED VOTERS come from the seed (gazette baseline, 122,059 for NW405) and are the only voter count
+// the application shows. The roll contributes the AGE MIX only, as a percentage of a row's age-banded
+// entries; no roll count (verified, rejected, or banded) is written to the output.
+const rollByWardVd = new Map();
+for (const s of agg.values()) rollByWardVd.set(`NW405-W${wardNo(s.ward)}|${s.vd}`, s);
+
+const share = (bands, total) => Object.fromEntries(BANDS.map((b) => [b, bands[b] === null || !total ? null : Math.round((bands[b] / total) * 1000) / 10]));
+const mix = (raw) => {
+  const total = BANDS.reduce((t, b) => t + raw[b], 0);
+  if (total < MIN_CELL) return null;
+  return share(suppress(raw), total);
+};
+
+const wards = {};
+const list = [];
+for (const w of seed) {
+  const code = w.ward.wardCode;
+  const no = +code.replace('NW405-W', '');
+  const raw = Object.fromEntries(BANDS.map((b) => [b, 0]));
+  for (const v of w.votingDistricts) {
+    const roll = rollByWardVd.get(`${code}|${v.vdCode}`);
+    if (roll) for (const b of BANDS) raw[b] += roll.bands[b];
+    list.push({ wardCode: code, wardNumber: no, vdCode: v.vdCode, station: v.name, registered: v.registeredVoters, split: !!v._split, ageMix: roll ? mix(roll.bands) : null });
+  }
+  wards[code] = { wardNumber: no, registered: w.ward.registeredVoters, ageMix: mix(raw) };
+}
+list.sort((a, b) => a.wardNumber - b.wardNumber || a.vdCode.localeCompare(b.vdCode));
+
+// municipality age mix, from all banded roll entries (a percentage; the count is not kept)
+const all = Object.fromEntries(BANDS.map((b) => [b, 0]));
+for (const s of agg.values()) for (const b of BANDS) all[b] += s.bands[b];
+
+// reconcile the roll with the Commission's printed totals per voting district (checked here, not shipped as a count)
 const byVd = new Map();
-for (const r of list) { const t = byVd.get(r.vdCode) ?? { v: 0, j: 0 }; t.v += r.verified; t.j += r.rejected; byVd.set(r.vdCode, t); }
+for (const s of agg.values()) { const t = byVd.get(s.vd) ?? { v: 0, j: 0 }; t.v += s.verified; t.j += s.rejected; byVd.set(s.vd, t); }
 let mismatches = 0;
 for (const [vd, t] of byVd) { const d = declared.get(vd); if (!d || d.verified !== t.v || d.rejected !== t.j) mismatches++; }
 
-const wards = {};
-for (const r of list) {
-  const w = (wards[r.wardCode] ??= { wardNumber: r.wardNumber, verified: 0, rejected: 0, bands: Object.fromEntries(BANDS.map((b) => [b, 0])) });
-  w.verified += r.verified; w.rejected += r.rejected;
-}
-for (const s of agg.values()) { const w = wards[`NW405-W${wardNo(s.ward)}`]; for (const b of BANDS) w.bands[b] += s.bands[b]; }
-for (const w of Object.values(wards)) w.ageBands = suppress(w.bands), delete w.bands;
+const registeredTotal = list.reduce((t, r) => t + r.registered, 0);
+const wardTotal = Object.values(wards).reduce((t, w) => t + w.registered, 0);
+if (registeredTotal !== wardTotal) throw new Error(`seed VD total ${registeredTotal} != ward total ${wardTotal}`);
 
 const out = {
   municipalityCode: 'NW405',
-  generatedFrom: 'IEC LGE 2026 certified voters roll for NW405 (parsed), aggregated; no personal data retained',
+  registeredSource: 'Delimitation seed (gazetted baseline); equals IEC Circular 1 of 2025, Annexure A',
+  ageSource: 'IEC LGE 2026 certified voters roll for NW405 (parsed), reduced to percentages; no personal data and no roll count retained',
   rollEdition: 'LGE2026-CERT-20260807',
   ageAt: '2026-11-04',
   minCell: MIN_CELL,
-  ageBandsNote: 'Age is read from the masked ID number. Sex cannot be derived. Cells under 10 are hidden, with a second cell hidden where one alone could be recovered from the total.',
+  ageBandsNote: 'Age is read from the masked ID number and shown as a share of the entries that could be placed in a band. Sex cannot be derived. Groups under 10 people are hidden, with a second hidden where one alone could be recovered from the total.',
   reconciliation: { vdsCompared: byVd.size, vdsNotMatchingCommissionTotals: mismatches },
-  totals: { verified: list.reduce((s, r) => s + r.verified, 0), rejected: list.reduce((s, r) => s + r.rejected, 0), wardVdRows: list.length },
+  totals: { registered: registeredTotal, wards: Object.keys(wards).length, votingDistrictRows: list.length, withAgeMix: list.filter((r) => r.ageMix).length },
+  municipalityAgeMix: mix(all),
   wards,
   voterDistricts: list,
 };
 writeFileSync(OUT, JSON.stringify(out));
-console.log(JSON.stringify({ rows: list.length, ...out.totals, reconciliation: out.reconciliation, bytes: JSON.stringify(out).length }));
+console.log(JSON.stringify({ ...out.totals, reconciliation: out.reconciliation, bytes: JSON.stringify(out).length }));
