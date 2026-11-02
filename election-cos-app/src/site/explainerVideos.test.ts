@@ -1,3 +1,5 @@
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
   EXPLAINERS,
@@ -5,6 +7,7 @@ import {
   byAudience,
   embedUrl,
   fmtSeconds,
+  hostedUrls,
   isYoutubeId,
 } from './explainerVideos';
 
@@ -31,6 +34,30 @@ describe('the explainer registry', () => {
     for (const id of ['roles', 'command-view', 'capture-consent', 'offline', 'funding-30-day']) {
       expect(parties).toContain(id);
     }
+  });
+});
+
+describe('hosted videos', () => {
+  const dir = path.resolve(__dirname, '../../site-assets/videos');
+  it('every hosted explainer has its video, captions and poster, and the captions are WebVTT', () => {
+    for (const e of EXPLAINERS.filter((x) => x.hosted)) {
+      const u = hostedUrls(e.id);
+      for (const url of [u.video, u.captions, u.poster]) {
+        const f = path.join(dir, path.basename(url));
+        expect(existsSync(f), f).toBe(true);
+        expect(statSync(f).size, f).toBeGreaterThan(100);
+      }
+      expect(readFileSync(path.join(dir, `${e.id}.vtt`), 'utf8').startsWith('WEBVTT')).toBe(true);
+      const mp4 = readFileSync(path.join(dir, `${e.id}.mp4`)).subarray(4, 8).toString('latin1');
+      expect(mp4, `${e.id} is an MP4`).toBe('ftyp');
+    }
+  });
+  it('serves every hosted file from this site, never another host', () => {
+    for (const e of EXPLAINERS) for (const url of Object.values(hostedUrls(e.id))) expect(url.startsWith('/videos/')).toBe(true);
+  });
+  it('has no stray file in the folder: every file belongs to a registered explainer', () => {
+    const ids = new Set(EXPLAINERS.map((e) => e.id));
+    for (const f of readdirSync(dir)) expect(ids.has(f.replace(/\.(mp4|vtt|jpg)$/, '')), f).toBe(true);
   });
 });
 

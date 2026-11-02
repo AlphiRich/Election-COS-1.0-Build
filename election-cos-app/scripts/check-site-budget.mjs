@@ -29,3 +29,14 @@ if (home > 500 * 1024) {
   console.error('FAIL home page exceeds 500 KB');
   process.exit(1);
 }
+
+// Structure guard: the public site must carry its headers and videos, and must not carry the application's service worker.
+const must = ['_headers', 'index.html', 'videos/roles.mp4', 'videos/roles.vtt', 'videos/roles.jpg'];
+const missing = must.filter((f) => !existsSync(path.join(DIR, f)));
+const stray = ['sw.js', 'manifest.webmanifest'].filter((f) => existsSync(path.join(DIR, f)));
+if (missing.length || stray.length) {
+  if (missing.length) console.error(`FAIL dist-site is missing: ${missing.join(', ')}`);
+  if (stray.length) console.error(`FAIL dist-site carries the application's ${stray.join(', ')}`);
+  process.exit(1);
+}
+console.log('structure ok: headers, index, videos present; no application service worker');

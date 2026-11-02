@@ -6,8 +6,8 @@
  * `readIt`, shown under the video, so nobody has to watch to know what it says and a screen reader
  * gets the same content.
  *
- * NO VIDEO IS FAKED. `youtubeId` is null until a video has actually been recorded and uploaded
- * to YouTube. A null id never produces a player; the page shows the text and says plainly that
+ * NO VIDEO IS FAKED. A video is `hosted` only when its files are in `site-assets/videos/` (a test checks);
+ * otherwise `youtubeId` is null until a video has actually been recorded and uploaded to YouTube. A null id never produces a player; the page shows the text and says plainly that
  * the video is not out yet. Videos live on YouTube so the static site stays light; the player
  * is loaded only AFTER a click, from youtube-nocookie.com, so visiting the page sends nothing to
  * YouTube (no cookie, no IP) before the person asks for the video.
@@ -27,7 +27,19 @@ export interface Explainer {
   readIt: string;
   /** 11-character YouTube video id, or null while no video exists. */
   youtubeId: string | null;
+  /**
+   * True when the finished video, its caption file and its poster are served from this site, at
+   * `/videos/<id>.mp4`, `.vtt` and `.jpg` (source: `site-assets/videos/`). Preferred over YouTube: nothing
+   * leaves the site. A test fails if a hosted explainer is missing any of the three files.
+   */
+  hosted: boolean;
 }
+
+export const hostedUrls = (id: string) => ({
+  video: `/videos/${id}.mp4`,
+  captions: `/videos/${id}.vtt`,
+  poster: `/videos/${id}.jpg`,
+});
 
 export const MAX_SECONDS = 60;
 
@@ -40,6 +52,7 @@ export const EXPLAINERS: Explainer[] = [
     readIt:
       'They must ask your permission before they record anything about you. You can say no. If you say no, nothing is stored, and there is no list of people who said no.',
     youtubeId: null,
+    hosted: true,
   },
   {
     id: 'poll-answer',
@@ -49,6 +62,7 @@ export const EXPLAINERS: Explainer[] = [
     readIt:
       'A poll asks for a choice and nothing else: no name, number or ID. Your answer is counted with others and is not linked to you. You can pick "Prefer not to say".',
     youtubeId: null,
+    hosted: true,
   },
   {
     id: 'seats-won',
@@ -58,6 +72,7 @@ export const EXPLAINERS: Explainer[] = [
     readIt:
       'Some seats are won in wards, the rest from the party vote. Schedule 1 of the Municipal Structures Act turns votes into seats. The calculator shows the working, with the law cited.',
     youtubeId: null,
+    hosted: true,
   },
   {
     id: 'roles',
@@ -67,6 +82,7 @@ export const EXPLAINERS: Explainer[] = [
     readIt:
       'A ward lead sees a ward. A canvasser sees a voting district. The refusal is made by the database rules, not only by the screen.',
     youtubeId: null,
+    hosted: true,
   },
   {
     id: 'command-view',
@@ -76,6 +92,7 @@ export const EXPLAINERS: Explainer[] = [
     readIt:
       'People recorded with consent, doors worked, incidents open. Counts only. Nothing on it names a voter.',
     youtubeId: null,
+    hosted: true,
   },
   {
     id: 'capture-consent',
@@ -85,6 +102,7 @@ export const EXPLAINERS: Explainer[] = [
     readIt:
       'The canvasser types the person’s name back before the record button works, so a mis-tap cannot create consent. A refusal stores nothing.',
     youtubeId: null,
+    hosted: true,
   },
   {
     id: 'offline',
@@ -94,6 +112,7 @@ export const EXPLAINERS: Explainer[] = [
     readIt:
       'Work is kept on the phone and sent when signal returns. The screen shows what is still waiting. Clearing the browser’s data removes anything not yet sent, and the app says so.',
     youtubeId: null,
+    hosted: true,
   },
   {
     id: 'funding-30-day',
@@ -103,6 +122,7 @@ export const EXPLAINERS: Explainer[] = [
     readIt:
       'A donor’s payments are added up against the R200,000 disclosure line (Government Gazette 53182, under court challenge). A person’s request about their own data is tracked against a 30-day target.',
     youtubeId: null,
+    hosted: true,
   },
   {
     id: 'sentiment-polls',
@@ -112,6 +132,7 @@ export const EXPLAINERS: Explainer[] = [
     readIt:
       'Answers come from people who chose to reply to a link. They are not a random sample, so there is no margin of error and no forecast. Groups under five answers are hidden.',
     youtubeId: null,
+    hosted: true,
   },
   {
     id: 'scenario-runner',
@@ -121,6 +142,7 @@ export const EXPLAINERS: Explainer[] = [
     readIt:
       'You set the swing and how unsure you are. The software repeats the seat calculation across that range and shows which assumption matters most. It is not a prediction.',
     youtubeId: null,
+    hosted: true,
   },
 ];
 

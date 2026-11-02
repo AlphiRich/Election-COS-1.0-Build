@@ -5593,3 +5593,6 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | Drill-down | `src/modules/drilldown/` | 2021 ward result joined to the 2026 baseline by ward number, labelled by vintage; 34 wards sum to 122,059 |
 | SOP-17, SOP-18 | `src/modules/manual/sops/referenceDataSops.ts` | Analyst; drill-down |
 | Design bundle (source) | `AlphiRich/Election-COS1.0_v2` (read-only) | ECOS design system and kits; not copied into this repo |
+| Explainer videos (hosted) | `site-assets/videos/` (10 MP4, 10 VTT, 10 JPG, 6.6 MB) | Rendered from `video-src/explainers`; silent; served from the site; guard in `explainerVideos.test.ts` |
+| GCP hosting config | `site-hosting/gcp/` | nginx tested; Docker image and deploy not run |
+| Hosting notes | `docs/hosting-gcp-and-cloudflare.md` | GCP and Cloudflare, with the unconfirmed points stated |

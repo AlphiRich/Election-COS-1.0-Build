@@ -1,17 +1,36 @@
 /**
  * Election Campaign OS — public site, short video explainers (`/watch`).
  *
- * Read explainerVideos.ts first. A video plays only after a click, from youtube-nocookie.com; until
- * then the page contacts nothing. A explainer with no recorded video shows its words and says so.
+ * Read explainerVideos.ts first. A hosted video is served from this site and downloads only when played
+ * (`preload="none"`). A YouTube video plays only after a click, from youtube-nocookie.com. A explainer with no recorded video shows its words and says so.
  */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
 import { IEC_LINK } from '../officialSources';
-import { byAudience, embedUrl, fmtSeconds, type Explainer } from '../explainerVideos';
+import { byAudience, embedUrl, fmtSeconds, hostedUrls, type Explainer } from '../explainerVideos';
 
 function Player({ e }: { e: Explainer }) {
   const [playing, setPlaying] = useState(false);
+  if (e.hosted) {
+    const u = hostedUrls(e.id);
+    return (
+      <div className="aspect-video w-full overflow-hidden rounded-t-[10px] bg-ink">
+        <video
+          controls
+          playsInline
+          preload="none"
+          poster={u.poster}
+          aria-label={e.title}
+          className="h-full w-full"
+        >
+          <source src={u.video} type="video/mp4" />
+          <track kind="captions" src={u.captions} srcLang="en" label="English" default />
+          The video cannot play in this browser. The words are below.
+        </video>
+      </div>
+    );
+  }
   const src = embedUrl(e.youtubeId);
   if (playing && src) {
     return (
@@ -151,8 +170,8 @@ export function SiteWatch() {
           ))}
         </div>
         <p className="mb-0 mt-6 max-w-[50em] text-site-caption text-slate">
-          Videos are hosted on YouTube and load only after you press play, so visiting this page
-          sends nothing to YouTube. Captions are on by default. Videos use invented wards and
+          Videos are served from this site and download only when you press play, so visiting this page
+          sends nothing to anyone else. Captions are on by default. Videos use invented wards and
           invented data, and say so.
         </p>
         <p className="mb-0 mt-3 max-w-[50em] text-site-caption text-slate">

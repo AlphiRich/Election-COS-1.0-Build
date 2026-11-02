@@ -22,12 +22,31 @@ async function mount() {
 }
 
 describe('the /watch page', () => {
-  it('shows every explainer’s words, and with no video recorded builds no player and no iframe', async () => {
+  it('shows every explainer’s words, with a hosted video that downloads nothing until played and has captions', async () => {
     const el = await mount();
     for (const e of EXPLAINERS) expect(el.textContent).toContain(e.title);
     expect(el.querySelectorAll('iframe')).toHaveLength(0);
-    expect(el.querySelectorAll('button[aria-label^="Play"]')).toHaveLength(0);
-    expect(el.textContent).toContain('Video not recorded yet');
+    const videos = [...el.querySelectorAll('video')];
+    expect(videos).toHaveLength(EXPLAINERS.length);
+    for (const v of videos) {
+      expect(v.getAttribute('preload')).toBe('none');
+      expect(v.getAttribute('poster')).toMatch(/^\/videos\/[a-z0-9-]+\.jpg$/);
+      expect(v.querySelector('source')!.getAttribute('src')).toMatch(/^\/videos\/[a-z0-9-]+\.mp4$/);
+      expect(v.querySelector('track[kind="captions"]')!.getAttribute('src')).toMatch(/\.vtt$/);
+    }
+    expect(el.textContent).not.toContain('Video not recorded yet');
+  });
+  it('with no video hosted and none on YouTube, builds no player and says so', async () => {
+    const mod = await import('../explainerVideos');
+    const first = mod.EXPLAINERS[0];
+    first.hosted = false;
+    try {
+      const el = await mount();
+      expect(el.textContent).toContain('Video not recorded yet');
+      expect(el.querySelectorAll('video')).toHaveLength(EXPLAINERS.length - 1);
+    } finally {
+      first.hosted = true;
+    }
   });
   it('contacts nothing on load', async () => {
     const f = vi.spyOn(globalThis, 'fetch');
@@ -45,6 +64,7 @@ describe('the /watch page', () => {
     const first = mod.EXPLAINERS[0];
     const prev = first.youtubeId;
     first.youtubeId = 'dQw4w9WgXcQ';
+    first.hosted = false;
     try {
       const el = await mount();
       expect(el.querySelectorAll('iframe')).toHaveLength(0); // facade first
@@ -58,6 +78,7 @@ describe('the /watch page', () => {
       );
     } finally {
       first.youtubeId = prev;
+      first.hosted = true;
     }
   });
   it('points to Real411 for checking or reporting election disinformation', async () => {
