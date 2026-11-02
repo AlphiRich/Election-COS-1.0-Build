@@ -21,7 +21,8 @@
 set -euo pipefail
 
 PROJECT="${PROJECT:-electioncos1-0}"
-REGION="${REGION:-africa-south1}"
+REGION="${REGION:-africa-south1}"   # image repository location
+RUN_REGION="${RUN_REGION:-europe-west1}"   # Cloud Run service location (Firebase front needs a supported region)
 AR_REPO="${AR_REPO:-ecos}"
 GITHUB_REPO="${GITHUB_REPO:-AlphiRich/Election-COS-1.0-Build}"
 POOL="${POOL:-github}"

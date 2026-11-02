@@ -27,7 +27,11 @@ concurrency:
 
 env:
   PROJECT: electioncos1-0
-  REGION: africa-south1
+  # Where the Cloud Run service runs. Firebase Hosting can only forward to Cloud
+  # Run in a supported region, and africa-south1 is not one of them.
+  RUN_REGION: europe-west1
+  # Where the image repository is stored (unchanged).
+  AR_LOCATION: africa-south1
   SERVICE: ecos-site
   IMAGE: africa-south1-docker.pkg.dev/electioncos1-0/ecos/ecos-site
   RUNTIME_SA: ecos-site-runtime@electioncos1-0.iam.gserviceaccount.com
@@ -73,7 +77,7 @@ jobs:
 
       - name: Build and push image
         run: |
-          gcloud auth configure-docker "$REGION-docker.pkg.dev" --quiet
+          gcloud auth configure-docker "$AR_LOCATION-docker.pkg.dev" --quiet
           docker build -f site-hosting/gcp/Dockerfile -t "$IMAGE:$GITHUB_SHA" .
           docker push "$IMAGE:$GITHUB_SHA"
 
@@ -82,7 +86,7 @@ jobs:
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy "$SERVICE" \
-            --project "$PROJECT" --region "$REGION" \
+            --project "$PROJECT" --region "$RUN_REGION" \
             --image "$IMAGE:$GITHUB_SHA" \
             --service-account "$RUNTIME_SA" \
             --allow-unauthenticated --port 8080 \
@@ -92,7 +96,7 @@ jobs:
 
       - name: Smoke test
         run: |
-          URL="$(gcloud run services describe "$SERVICE" --project "$PROJECT" --region "$REGION" --format='value(status.url)')"
+          URL="$(gcloud run services describe "$SERVICE" --project "$PROJECT" --region "$RUN_REGION" --format='value(status.url)')"
           echo "URL=$URL" >> "$GITHUB_ENV"
           code="$(curl -s -o /dev/null -w '%{http_code}' "$URL/")"
           [ "$code" = "200" ] || { echo "::error::$URL/ returned $code"; exit 1; }
