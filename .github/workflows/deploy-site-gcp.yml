@@ -1,0 +1,112 @@
+name: Deploy public site (Cloud Run)
+
+# Builds dist-site, packs it into the nginx container in
+# election-cos-app/site-hosting/gcp, and deploys it to Cloud Run in
+# africa-south1. The public website only: the application, Firestore,
+# Functions and Firebase Hosting are not touched (that is deploy-ecos.yml).
+#
+# Sign-in is keyless (Workload Identity Federation): no service-account key
+# is stored in this repository. Run election-cos-app/scripts/setup-gcp-site.sh
+# once in Cloud Shell before the first run.
+#
+# Manual only. Adverts stay off unless the three VITE_AD_* Actions variables
+# are all set; see docs/hosting-gcp-and-cloudflare.md.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # for the keyless Google sign-in
+
+concurrency:
+  group: deploy-site-gcp
+  cancel-in-progress: false
+
+env:
+  PROJECT: electioncos1-0
+  REGION: africa-south1
+  SERVICE: ecos-site
+  IMAGE: africa-south1-docker.pkg.dev/electioncos1-0/ecos/ecos-site
+  RUNTIME_SA: ecos-site-runtime@electioncos1-0.iam.gserviceaccount.com
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: election-cos-app
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: election-cos-app/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Build site
+        env:
+          VITE_AD_CLIENT_ID: ${{ vars.VITE_AD_CLIENT_ID }}
+          VITE_AD_SLOT_ID: ${{ vars.VITE_AD_SLOT_ID }}
+          VITE_AD_CATEGORY_BLOCKS_CONFIRMED: ${{ vars.VITE_AD_CATEGORY_BLOCKS_CONFIRMED }}
+        run: npm run build:site && npm run check:site-budget
+
+      # The site's own tests include the nginx/_headers parity check and the
+      # unsafe-source guard, so a container with drifted headers never ships.
+      - name: Site tests
+        run: npm run check:headers && npx vitest run src/site
+
+      - name: Sign in to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER || 'projects/960903975002/locations/global/workloadIdentityPools/github/providers/github-oidc' }}
+          service_account: ${{ vars.GCP_SITE_DEPLOYER || 'ecos-site-deployer@electioncos1-0.iam.gserviceaccount.com' }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Build and push image
+        run: |
+          gcloud auth configure-docker "$REGION-docker.pkg.dev" --quiet
+          docker build -f site-hosting/gcp/Dockerfile -t "$IMAGE:$GITHUB_SHA" .
+          docker push "$IMAGE:$GITHUB_SHA"
+
+      # Small and capped: a static site needs little, and max-instances bounds
+      # the bill if the site is hammered. Scales to zero when idle.
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy "$SERVICE" \
+            --project "$PROJECT" --region "$REGION" \
+            --image "$IMAGE:$GITHUB_SHA" \
+            --service-account "$RUNTIME_SA" \
+            --allow-unauthenticated --port 8080 \
+            --cpu 1 --memory 256Mi --concurrency 80 \
+            --min-instances 0 --max-instances 4 \
+            --quiet
+
+      - name: Smoke test
+        run: |
+          URL="$(gcloud run services describe "$SERVICE" --project "$PROJECT" --region "$REGION" --format='value(status.url)')"
+          echo "URL=$URL" >> "$GITHUB_ENV"
+          code="$(curl -s -o /dev/null -w '%{http_code}' "$URL/")"
+          [ "$code" = "200" ] || { echo "::error::$URL/ returned $code"; exit 1; }
+          curl -sI "$URL/" | grep -qi '^content-security-policy:' \
+            || { echo "::error::$URL/ is missing its Content-Security-Policy header"; exit 1; }
+          echo "Site is up at $URL"
+
+      - name: What went live
+        if: success()
+        run: |
+          {
+            echo "### Public site deployed"
+            echo ""
+            echo "Live at: $URL"
+            echo ""
+            echo "Image: \`$IMAGE:$GITHUB_SHA\`"
+            echo ""
+            echo "Custom domain: Cloud Run domain mapping is not offered in africa-south1. See docs/hosting-gcp-and-cloudflare.md, *Custom domain on Cloud Run*."
+          } >> "$GITHUB_STEP_SUMMARY"

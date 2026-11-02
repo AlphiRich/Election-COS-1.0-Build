@@ -26,7 +26,22 @@ gcloud run deploy ecos-site --image REGION-docker.pkg.dev/PROJECT/REPO/ecos-site
 Then map `electioncos.co.za` to the service in the Cloud Run console and point DNS at it. Check that domain mapping is offered in your chosen region; if not, put a load balancer in front.
 
 **Tested here:** `nginx.conf` passes `nginx -t` and served `dist-site` correctly on nginx 1.24: client routes fall back to `index.html`, videos return `video/mp4` and honour range requests, captions are `text/vtt`, the headers are present, a missing asset is a 404. A Chromium run at 390 and 1280 px showed no console errors, no failed requests and no sideways scroll on four pages.
-**Not tested here:** the Docker image build (this machine has no Docker daemon) and any Cloud Run deploy. The Dockerfile is five lines; run the build once before relying on it.
+**Docker image tested 2 Nov 2026:** built from this Dockerfile and run locally. `/` and a client route return the page; a video returns `206 video/mp4` for a range request; captions are `text/vtt`; `/assets/*` carries the one-year immutable cache header; a missing asset is a 404; all five security headers are present. The 23 site test files (176 tests) pass. **Not tested here:** the Cloud Run deploy itself (no Google credential in the build environment).
+
+### Deploying it (GitHub Actions, keyless)
+
+1. Once, in Cloud Shell on `electioncos1-0`: `bash election-cos-app/scripts/setup-gcp-site.sh`. It enables the APIs, creates the `ecos` image repository in `africa-south1`, a deployer and a runtime service account, and a Workload Identity Federation provider that only this repository can use. No key is created or stored. Billing must already be linked.
+2. GitHub → Actions → **Deploy public site (Cloud Run)** → Run workflow. It builds `dist-site`, runs the site tests and the header check, builds and pushes the image, deploys `ecos-site` (0 to 4 instances, 256 MiB), then checks the live URL returns 200 with its CSP header. The URL is in the run summary.
+
+The workflow never touches the application, Firebase Hosting, Firestore or Functions.
+
+### Custom domain on Cloud Run
+
+Cloud Run's built-in domain mapping is offered in ten regions and `africa-south1` is not one of them; Google also describes it as preview and not recommended for production ([Mapping custom domains](https://docs.cloud.google.com/run/docs/mapping-custom-domains)). Choose one:
+
+- **Firebase Hosting in front (lowest cost):** add a second Hosting site on `electioncos1-0` whose only rule rewrites `**` to the `ecos-site` service, and connect the domain to that site. Free tier applies. Keep it a separate site so the application's Hosting config is not changed.
+- **Global external Application Load Balancer (Google's recommendation):** serverless NEG to `ecos-site`, Google-managed certificate. Most control (Cloud CDN, Cloud Armor), but it has a standing monthly charge; check current pricing in your console.
+- **Leave it on the `run.app` URL** until after the election.
 
 **Cloud Storage alone is not enough:** a bucket can serve the files but cannot set the security headers or the single-page fallback for the site's own routes without a load balancer in front of it, which carries a standing charge. Cloud Run with this container avoids that. Check current Cloud Run pricing and free allowance in your own console before relying on it being free.
 
