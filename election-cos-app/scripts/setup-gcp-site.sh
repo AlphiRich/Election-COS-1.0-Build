@@ -73,6 +73,10 @@ gcloud iam service-accounts add-iam-policy-binding "$RUNTIME_EMAIL" \
 # site-hosting/firebase/firebase.json, which can only target $SITE_ID.
 gcloud projects add-iam-policy-binding "$PROJECT" --condition=None \
   --member="serviceAccount:$DEPLOYER_EMAIL" --role=roles/firebasehosting.admin >/dev/null
+# The Firebase CLI checks that the Hosting API is enabled before deploying;
+# without this it fails with "Permission denied to get service".
+gcloud projects add-iam-policy-binding "$PROJECT" --condition=None \
+  --member="serviceAccount:$DEPLOYER_EMAIL" --role=roles/serviceusage.serviceUsageConsumer >/dev/null
 
 say "Firebase Hosting site $SITE_ID (separate from the application's site)"
 TOKEN="$(gcloud auth print-access-token)"
