@@ -5589,3 +5589,7 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | NW405 voting-district reference | `src/data/reference/nw405-vd-reference.json`, `vdReference.ts`, `VdLocatorPage.tsx`, `VoterStatisticsPage.tsx`, `BarChart.tsx` | 135 rows, registered voters sum to 122,059 (owner decision 2 Nov); age mix as percentages from the roll, no roll counts; 104 of 135 rows have an age mix |
 | Reference generators | `scripts/build-reference-data.mjs`, `scripts/extract-reference-candidates.mjs`, `scripts/lib/ageBands.mjs` | Roll never committed |
 | SOP-13 to SOP-16 | `src/modules/manual/sops/referenceDataSops.ts` | Candidate list, VDs and statistics, polls, scenario runner |
+| War Room data analyst | `src/modules/analyst/` (`analystEngine.ts`, `AnalystPage.tsx`) | In-browser, deterministic, no upload and no model; PII columns removed before profiling; 3 question types |
+| Drill-down | `src/modules/drilldown/` | 2021 ward result joined to the 2026 baseline by ward number, labelled by vintage; 34 wards sum to 122,059 |
+| SOP-17, SOP-18 | `src/modules/manual/sops/referenceDataSops.ts` | Analyst; drill-down |
+| Design bundle (source) | `AlphiRich/Election-COS1.0_v2` (read-only) | ECOS design system and kits; not copied into this repo |

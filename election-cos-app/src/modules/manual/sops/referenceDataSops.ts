@@ -195,3 +195,76 @@ export const SCENARIO_RUNNER_SOP: Sop = {
     },
   ],
 };
+
+export const ANALYST_SOP: Sop = {
+  number: 'SOP-17',
+  title: 'The data analyst',
+  area: 'WAR_ROOM',
+  roles: ['party-hq-admin', 'municipal-team-lead', 'ward-lead'],
+  requiresAnyCapability: ['analytics.view'],
+  purpose:
+    'How to ask a question of a spreadsheet you hold, what the analyst can and cannot answer, and how it keeps personal information out.',
+  sections: [
+    {
+      heading: 'What it does',
+      body: [
+        'You give it a CSV file, or paste CSV text, and ask one of three kinds of question: a summary of the data, the top groups by a number, or anything unusual (outliers, duplicate rows, mostly empty columns).',
+        'The file is read inside your browser tab. It is not uploaded, and no AI model writes the answer. Every figure is counted, summed or ranked from your rows, and each report says how. That is slower to write than a model’s prose and it means a report can be checked by repeating the sum.',
+      ],
+    },
+    {
+      heading: 'Personal information',
+      body: [
+        'Before anything is read, the analyst looks at each column. A column whose values look like ID numbers or phone numbers is removed and cannot be put back. A column whose name looks personal, such as a surname or an address, is removed unless you tick that it is not about people.',
+      ],
+      warnings: [
+        'Ticking “not about people” is your statement, recorded on the report. Do not tick it for a column that holds names of voters, volunteers or donors.',
+        'Do not use the analyst on the certified voters’ roll or on any list of named people. This build does not hold the roll.',
+      ],
+    },
+    {
+      heading: 'What it cannot do',
+      body: [
+        'It does not forecast, fit a model, or explain causes. “Who will win ward 7?” is outside it and the analyst says so. Outliers are prompts to look, not proof of an error. If you stage several files, only the first is analysed and joins are not done.',
+      ],
+      steps: [
+        'Say which file and which question a figure came from whenever you quote it.',
+        'Keep what you need: runs are held in the tab only and disappear when it is closed.',
+      ],
+    },
+  ],
+};
+
+export const DRILL_DOWN_SOP: Sop = {
+  number: 'SOP-18',
+  title: 'Drill-down by ward and voting district',
+  area: 'WAR_ROOM',
+  roles: ['party-hq-admin', 'municipal-team-lead', 'ward-lead'],
+  requiresAnyCapability: ['analytics.view'],
+  purpose:
+    'How to read the ward table without treating a 2021 margin as a 2026 prediction.',
+  sections: [
+    {
+      heading: 'Two vintages on one page',
+      body: [
+        'The result in each row is the 2021 ward ballot on the 2021 wards: who won, who came second, and by how many points. The registered voters are the 2026 baseline, 122,059 in all. Wards are matched by their Commission number. A ward with the same number may not have the same boundary, so the match is a statement, not a fact.',
+        'The 2021 record keeps only the winner and runner-up for each ward, so a ward is shown as a two-party contest. Votes for other parties, about one in nine, are not broken down.',
+      ],
+    },
+    {
+      heading: 'Close wards',
+      body: [
+        'A ward is marked “close” when its 2021 margin is under the number of points you set (5 to start). Swing to flip is half the margin: the two-party swing that would have changed the 2021 result. Both are facts about a past result.',
+      ],
+      warnings: [
+        'Do not describe a close ward as likely to change hands. The page has no model that could say that. To test an assumption, use the scenario runner and say that it is an assumption.',
+      ],
+    },
+    {
+      heading: 'Voting districts',
+      body: [
+        'Opening a ward lists its voting districts with registered voters and shows the ward’s age mix as percentages (SOP-14). 2021 results are not held per voting district, so none are shown.',
+      ],
+    },
+  ],
+};

@@ -30,6 +30,8 @@ import { VdLocatorPage } from '@/modules/reference/VdLocatorPage';
 import { VoterStatisticsPage } from '@/modules/reference/VoterStatisticsPage';
 import { PollsPage } from '@/modules/polls/PollsPage';
 import { ScenarioRunnerPage } from '@/modules/analytics/ScenarioRunnerPage';
+import { AnalystPage } from '@/modules/analyst/AnalystPage';
+import { DrillDownPage } from '@/modules/drilldown/DrillDownPage';
 import { SettingsPage } from '@/modules/settings/SettingsPage';
 import { MunicipalityConfigPage } from '@/modules/settings/MunicipalityConfigPage';
 import { PermissionsPage } from '@/modules/settings/PermissionsPage';
@@ -72,6 +74,8 @@ export const router = createBrowserRouter([
           { path: 'scheduled-reports', element: <ScheduledReportsPage /> },
           { path: 'ward-comparison', element: <WardComparisonPage /> },
           { path: 'scenario-runner', element: <ScenarioRunnerPage /> },
+          { path: 'analyst', element: <AnalystPage /> },
+          { path: 'drill-down', element: <DrillDownPage /> },
           { path: 'polls', element: <PollsPage /> },
           { path: 'candidate-list', element: <CandidateListPage /> },
           { path: 'vd-locator', element: <VdLocatorPage /> },

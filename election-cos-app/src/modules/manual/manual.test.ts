@@ -1585,6 +1585,8 @@ describe('the finished manual', () => {
       'SOP-14',
       'SOP-15',
       'SOP-16',
+      'SOP-17',
+      'SOP-18',
     ]);
   });
 
