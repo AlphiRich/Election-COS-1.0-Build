@@ -1,0 +1,79 @@
+async function submitPoll(partySelection) {
+  const container = document.querySelector('.ecos-fields');
+  
+  // 1. Immediate visual feedback replacing the ballot tiles
+  container.innerHTML = `
+    <div class="ecos-notice ecos-notice--success" role="status">
+      <i data-lucide="circle-check" data-s="15"></i>
+      <span>Vote logged for ${partySelection}. Calculating live council projection...</span>
+    </div>
+  `;
+  if (typeof ecosIcons === 'function') ecosIcons();
+
+  try {
+    // 2. Transmit to the PR Coalition Engine (wraps electoral_generator.py)
+    const response = await fetch('/api/forecast/simulate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        municipality: 'NW405',
+        vote: partySelection,
+        timestamp: new Date().toISOString()
+      })
+    });
+    
+    if (!response.ok) throw new Error('Engine unreachable');
+    const forecastData = await response.json();
+    
+    // 3. Render the Seat Calculation Explainer and Results
+    renderForecastingDashboard(forecastData);
+  } catch (error) {
+    container.innerHTML += `
+      <div class="ecos-notice ecos-notice--attention" style="margin-top: 12px;">
+        <i data-lucide="triangle-alert" data-s="15"></i>
+        <div><b>Connection Error</b><br>Forecasting engine is currently processing high volumes.</div>
+      </div>
+    `;
+    if (typeof ecosIcons === 'function') ecosIcons();
+  }
+}
+
+function renderForecastingDashboard(data) {
+  const dashboard = document.createElement('div');
+  dashboard.className = 'ecos-card';
+  dashboard.style.marginTop = '24px';
+  
+  // Sort parties by total seats descending
+  const sortedParties = data.parties.sort((a, b) => b.total_seats - a.total_seats);
+  
+  const partyRows = sortedParties.map(p => `
+    <div class="ecos-inset__row">
+      <span>${p.name}</span>
+      <span class="ecos-badge ${p.overhang ? 'ecos-badge--attention' : 'ecos-badge--teal'}">
+        <span class="ecos-badge__dot"></span>${p.total_seats} Seats ${p.overhang ? '(Overhang)' : ''}
+      </span>
+    </div>
+  `).join('');
+
+  dashboard.innerHTML = `
+    <h3 class="ecos-card__title">Live Council Projection</h3>
+    <p class="ecos-card__caption">JB Marks (NW405) — ${data.total_valid_votes.toLocaleString()} Votes Modeled</p>
+    
+    <div class="ecos-stat" style="margin: 16px 0;">
+      <div class="ecos-label-caps" style="color:var(--text-muted)">Majority Threshold</div>
+      <div style="font:700 32px/40px var(--font-display)">${data.majority_threshold} / ${data.actual_council_size}</div>
+      <div class="ecos-card__caption">Required for executive control</div>
+    </div>
+
+    <div class="ecos-inset">${partyRows}</div>
+    
+    <div style="margin-top: 16px;">
+      <button class="ecos-btn ecos-btn--secondary ecos-btn--block" type="button" onclick="window.location.href='/coalition-builder'">
+        <i data-lucide="layout-dashboard" data-s="14"></i>Open Coalition Simulator
+      </button>
+    </div>
+  `;
+  
+  document.querySelector('.ecos-fields').appendChild(dashboard);
+  if (typeof ecosIcons === 'function') ecosIcons();
+}
