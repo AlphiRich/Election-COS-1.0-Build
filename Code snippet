@@ -1,0 +1,35 @@
+// ============================================================================
+// Electoral Data & IEC Integration Surfaces
+// ============================================================================
+
+model EcosKnowledgeHub {
+  document_id      String   @id // Unique hash: iec-src-[sha256]
+  hub_id           String   @default("ecos-iec-knowledge")
+  source_portal    String   // e.g., 'api', 'results', 'media'
+  source_url       String
+  title            String
+  published_at     DateTime
+  ingested_at      DateTime @default(now())
+  
+  // JSON blocks for flexible IEC payload mapping
+  electoral_event  Json     // { event_id, event_type, year }
+  geographic_scope Json     // { level, province_id, municipality_id, ward_id }
+  content          Json     // { text_summary, structured_data, raw_payload_ref }
+  
+  tags             String[]
+
+  @@index([hub_id, source_portal])
+  @@index([ingested_at])
+}
+
+model AuditLog {
+  id               String   @id @default(uuid())
+  action           String   // e.g., 'IEC_API_HARVEST'
+  details          String
+  timestamp        DateTime @default(now())
+  severity         String   @default("INFO")
+  complianceStatus String?
+
+  @@index([action])
+  @@index([timestamp])
+}
