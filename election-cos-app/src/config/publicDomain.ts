@@ -93,9 +93,9 @@ export const SUPERSEDED_DOMAINS = [
 ] as const;
 
 /**
- * The corporate domain, which is a different thing and stays where it is.
- * Innovation Consult publishes from `innovationconsult.co.za`; the
+ * The corporate domain, which is a different thing and moves to.
+ * Election COS 1.0 publishes from `electioncos.co.za`; the
  * product is served from `APP_DOMAIN`. Same separation as the two colour
  * palettes — see docs/innovation-consult-brand.md.
  */
-export const CORPORATE_DOMAIN = 'innovationconsult.co.za';
+export const CORPORATE_DOMAIN = 'electioncos.co.za';
