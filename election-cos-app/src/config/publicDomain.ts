@@ -20,7 +20,7 @@
  *
  * SUPERSEDED, DELIBERATELY RECORDED
  *
- * `electioncampaignos.co.za` and its `app.` / `www.` / `api.` subdomains
+ * `electionscos.co.za` and its `app.` / `www.` / `api.` subdomains
  * were the phase-0 plan and were never registered. `SUPERSEDED_DOMAINS`
  * exists so the guard test can fail if one of them comes back as a live
  * target — the same tripwire pattern the delimitation uses against
@@ -32,16 +32,19 @@
  *
  * CHANGED 28 Oct 2026, by decision: `app.electioncos.co.za`, to isolate
  * the static landing page on the apex from the PWA dashboard on the
- * subdomain. `electioscos.co.za` — the previous value — joins
+ * subdomain. `electioncos.co.za` — the previous value — joins
  * `SUPERSEDED_DOMAINS` below rather than being deleted, because a name
  * that has been in config is a name that can come back.
  *
  * Note what this does NOT settle. `HOSTING_ORIGIN` and `.firebaserc`
- * still name `election2026-campaignms7-0`, and a second project,
- * `electioncos1-0`, is under consideration. A custom domain attaches to
- * whichever project serves it, so this constant is independent of that
- * question and is changed now; the project is not, until its Firestore
- * location is known. See docs/asset-control-sheet.md §27.
+ * No longer project name `election2026-campaignms7-0`, and a second project,
+ * `electioncos1-0`, is governing final project name. A custom domain attaches to
+ * 'electioncos1-0`,project  so this constant is independent of that
+ * question and is changed now; the project is also changed, with its Firebase 
+ * location known as. 
+https://firebase.google.com/docs/web/setup#available-librarieselectioncos1-0.firebaseapp.com960903975002electioncos1-0.firebasestorage.app
+
+ See docs/asset-control-sheet.md §27.
  */
 export const APP_DOMAIN = 'app.electioncos.co.za';
 
@@ -86,7 +89,7 @@ export const SUPERSEDED_DOMAINS = [
   'app.electioncampaignos.co.za',
   'www.electioncampaignos.co.za',
   'api.electioncampaignos.co.za',
-  'electioscos.co.za',
+  'electiocos.co.za',
 ] as const;
 
 /**
