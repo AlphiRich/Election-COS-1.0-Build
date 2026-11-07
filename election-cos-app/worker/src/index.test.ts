@@ -85,16 +85,27 @@ function fakeGoogle() {
     'fetch',
     vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
       const url = String(input);
-      if (url.includes('securetoken@system.gserviceaccount.com'))
+      const parsedUrl = new URL(url);
+      if (
+        parsedUrl.hostname === 'www.googleapis.com' &&
+        parsedUrl.pathname ===
+          '/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com'
+      )
         return Response.json({ keys: [{ ...jwk, kid: 'k1', alg: 'RS256', use: 'sig' }] });
-      if (url.includes('oauth2.googleapis.com/token'))
+      if (
+        parsedUrl.hostname === 'oauth2.googleapis.com' &&
+        parsedUrl.pathname === '/token'
+      )
         return Response.json({ access_token: 'at', expires_in: 3600 });
-      if (url.includes('identitytoolkit.googleapis.com')) {
+      if (
+        parsedUrl.hostname === 'identitytoolkit.googleapis.com' &&
+        parsedUrl.pathname.endsWith('/accounts:update')
+      ) {
         const b = JSON.parse(String(init?.body));
         claimsSet.push({ localId: b.localId, attrs: JSON.parse(b.customAttributes) });
         return Response.json({});
       }
-      if (url.includes('firestore.googleapis.com')) {
+      if (parsedUrl.hostname === 'firestore.googleapis.com') {
         const path = url.split('/documents/')[1]!.split('?')[0]!;
         if (init?.method === 'PATCH' || init?.method === 'POST') {
           if (init.method === 'PATCH' && path in docs) return new Response('{}', { status: 409 });
