@@ -1,7 +1,7 @@
 #Innovation_Consult_ElectionCOS_1.0_Build
 
 Innovation Consult (Pty) Ltd — public-facing front end and the Election
-Campaign OS build.
+Campaign OS 1.0 build.
 
 > **Note on this file.** Until 16 October 2026 this README carried a
 > pasted copy of the entire corporate landing page — 235 lines of HTML,
