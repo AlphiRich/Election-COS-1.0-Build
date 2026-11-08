@@ -3248,3 +3248,25 @@ callables against a live project, and an actual SMS.
 the skill's navy/teal differs from the shipped ink/blue). The Staff-SSO / Personas / Guest tabs of the
 template were not rebuilt; the existing provider buttons and the new email-link form carry the same
 function.
+
+### Session 54 (cont.) — marketing collateral built from the five supplied documents (8 Nov 2026)
+
+**Arrived:** Marketing Asset Architecture, Marketing & Implementation Strategy, the Google Ads dual-funnel blueprint, the voters'-roll ingestion README (IC-ECOS-DATA-2026-02) and the Drive index of the legal repository.
+
+**Built** (`npm`-free, re-runnable: `npx vite-node scripts/build-marketing.ts`, `scripts/build-playbook.ts`; output in `marketing/`): 14 ad banners (BOFU 1200x628, 1080x1080, 300x250, 728x90; TOFU 1200x628, 1080x1080, 1080x1920; two copy lines each), the A3 Field Canvasser Toolkit poster (PDF and PNG), three transparent 1920x1080 lower-thirds, the 4-page A4 Ward Candidate Playbook (DOCX and PDF, page count checked), and the dual-funnel figure (`dual-funnel.html`). Colours, fonts, the R1,800 price, the entity and the WhatsApp number are read from `tokens.ts`, `public/fonts` and `siteContent.ts`, not retyped. The hub's marketing tab already held the manifest, scripts and Canva prompts; this adds the rendered pieces. The newsletter generator the manifest points to (a Python script) is superseded by the newsletter already built into the app.
+
+**Where the documents disagree with the build, and what was done:**
+1. **"Paid for by" name.** The manifest says "Innovation Consult (Pty) Ltd". The settled legal name (29 Oct) is Just Be Trading 10 (Pty) Ltd t/a Innovation Consult, Reg. 2007/021390/07. Assets use `SITE.entity`. A disclosure with the wrong legal name is worse than none: owner to confirm.
+2. **Price.** The Google Ads blueprint says R2,900 for a single ward; the manifest, strategy and the site say R1,800. R1,800 used (the site's figure, checked against the paper).
+3. **"Start Free Trial".** The manifest's BOFU CTA. **The product has no free trial anywhere** (only a demo request). Rendered as specified because the offer is the owner's to define, but it must not run until a trial exists or the CTA is changed (one constant, `CTA_BOFU`). A free-trial claim that is not honoured is a Consumer Protection Act exposure.
+4. **2026 urgency.** Polling day was 4 Nov 2026. The BOFU copy ("Manage your ward legally") still reads, but any "before the election" framing is spent; the next local election is 2031. 2029 is national/provincial, which is the TOFU audience's horizon.
+5. **Poster QR.** The manifest asks for the WhatsApp Polling Engine QR. No polling number exists (delivery is not configured). The poster carries the real sales-line QR (`wa.me/27824497310`), labelled as such, not a polling QR.
+6. **Palette.** The strategy's "paper #DCD6C8" is the product's `line` token; the manifest's paper (#F7F4EE) is the product's `paper`. The manifest was followed. The design-system skill's palette was not applied (not requested).
+7. **Playbook claims.** Only shipped behaviour is described (consent capture, scoped accounts, counts-only polling, PPFA aggregation). The SMS sign-in step is not mentioned: it is not live. Page 4 says it is not legal advice and states no legal conclusion.
+
+**Not built, and why:**
+- **Video and audio.** No voice-over, Amapiano underscore or screen recordings: no audio tooling or licensed track here, and AI-voice/synthetic-media disclosure is an owner/platform decision. The script, storyboard and voice profile are already in the hub.
+- **Google Ads campaigns, election-ads verification, Canva Brand Kit lock, CRM and offline-conversion import.** All need the owner's accounts, identity documents and credentials (same blocker as the earlier Ads request). Nothing was submitted.
+- **Voters'-roll ingestion (the README).** Already decided in session 50 (reviewed, adapted to the tenant structure, no roll data ever supplied); the same hard rules apply and the same open POPIA items (lawful basis, retention, attorney review). Polling day has passed. Nothing changed.
+- **The Drive legal repository.** Six documents drafted elsewhere. Not reproduced here (legal drafting is the attorney's). **Flag for the attorney:** the index describes an architecture this build does not have (AWS af-south-1, Node/Express/Prisma/PostgreSQL RLS, a 02:00 48-hour unconsented-voter purge daemon, Redis/BullMQ). This build is Firebase/Firestore in africa-south1. A privacy policy that describes the wrong system is a misstatement. It also uses `@innovationconsult.co.za` addresses where the product's own are `@electioncos.co.za` (the 8 Nov decision).
+

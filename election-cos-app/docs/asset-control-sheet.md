@@ -5605,3 +5605,4 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | Master hub | `src/modules/hub/` | Master application built in; 16 recorded changes |
 | Master stack (source) | `election_campaign_os_master_application.html` (two identical copies) | Not copied into the repo |
 | Second sign-in factor | `functions/src/secondFactor*.ts`, `src/auth/SecondFactor*.ts(x)`, `firestore.rules` `mfaOK()`, `tools/rules-check/mfa-rules.mjs` | Email, then SMS code above canvasser; fails closed until an SMS provider exists |
+| Marketing collateral | `scripts/build-marketing.ts`, `scripts/build-playbook.ts`, `marketing/` | 14 banners, A3 poster, lower-thirds, 4-page playbook, dual-funnel figure; CTA 'Start Free Trial' not yet true |
