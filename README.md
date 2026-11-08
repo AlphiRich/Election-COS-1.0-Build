@@ -76,7 +76,7 @@ field operations, built against `IC-ECOS-BUILD-2026-V2`.
 
 ```bash
 cd election-cos-app
-npm install && npm ci --prefix functions
+npm install & npm ci --prefix functions
 npm run check:all     # lint, typecheck, token guards, tests
 npm run build
 npm run preflight     # prints the deploy gate state; never deploys
