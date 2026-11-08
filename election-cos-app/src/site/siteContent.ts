@@ -63,16 +63,16 @@ export const SITE = {
   },
   bbbee: '[B-BBEE STATUTORY COMPLIANCE NOTE]',
   /**
-   * The company's addresses on electioncos.co.za (owner, 2 Nov 2026). Seven, in this order. `noreply` only sends;
+   * The company's addresses on electioncos.co.za (owner, 2 Nov 2026; `accounts@` replaced by `cto@` and the order changed 8 Nov 2026). Seven, in this order. `noreply` only sends;
    * nobody reads replies to it, and the page says so.
    */
   mailboxes: [
-    { address: 'info@electioncos.co.za', purpose: 'General enquiries' },
-    { address: 'sales@electioncos.co.za', purpose: 'Sales and demonstrations' },
-    { address: 'techsupport@electioncos.co.za', purpose: 'Technical support' },
-    { address: 'accounts@electioncos.co.za', purpose: 'Accounts and billing' },
-    { address: 'legal@electioncos.co.za', purpose: 'Legal, privacy and POPIA' },
     { address: 'admin@electioncos.co.za', purpose: 'Administration' },
+    { address: 'info@electioncos.co.za', purpose: 'General enquiries' },
+    { address: 'legal@electioncos.co.za', purpose: 'Legal, privacy and POPIA' },
+    { address: 'sales@electioncos.co.za', purpose: 'Sales, demonstrations, billing and accounts' },
+    { address: 'techsupport@electioncos.co.za', purpose: 'Technical support' },
+    { address: 'cto@electioncos.co.za', purpose: 'Tech and platform enquiries: tech architecture, build security, pull requests and any other tech or code-stack matter' },
     { address: 'noreply@electioncos.co.za', purpose: 'Sends notices only; replies are not read' },
   ],
 } as const;

@@ -268,3 +268,73 @@ export const DRILL_DOWN_SOP: Sop = {
     },
   ],
 };
+
+export const LGE2026_SOP: Sop = {
+  number: 'SOP-19',
+  title: 'The 2026 results, and the models that start from them',
+  area: 'WAR_ROOM',
+  roles: ['party-hq-admin', 'municipal-team-lead', 'ward-lead'],
+  requiresAnyCapability: ['analytics.view'],
+  purpose:
+    'How to read the Commission’s 4 November 2026 results for the North West in the application, and how the scenario runner, the coalition tool and the swing figures use them.',
+  sections: [
+    {
+      heading: 'Where the figures come from',
+      body: [
+        'They are the Electoral Commission’s own published result files for the 18 North West local municipalities (402 wards), reduced to counts. Seats are Schedule 1 applied to those counts, and they agree with the Commission’s own Seat Calculation Detail report for every one of the 18, including the four municipalities where a party won more ward seats than its entitlement (Mafikeng, Ditsobotla, Ramotshere Moiloa and Greater Taung).',
+        'Where the Commission’s municipality files and its province-wide file differ (three voting districts in Rustenburg, changed late on 7 November), the later municipality file is used and the difference is recorded with the data.',
+      ],
+    },
+    {
+      heading: 'Turnout and the registered figure',
+      body: [
+        'Turnout is shown per ballot: the votes cast on that ballot (valid plus spoilt) divided by the voters the Commission lists as registered. The two ballots are never added together. The registered figure here is the Commission’s own for the election, which for JB Marks is higher than the gazetted baseline of 122,059 used elsewhere in the application; dividing by the gazetted figure would overstate turnout.',
+      ],
+    },
+    {
+      heading: 'District councils',
+      body: [
+        'A district council’s directly elected seats are voted on through the 40% ballot in each local municipality, so a district’s votes are the sum over its members. Its seats are allocated under Schedule 2, which this build does not implement, so only votes are shown for districts.',
+      ],
+    },
+    {
+      heading: 'The models',
+      body: [
+        'The scenario runner starts from the certified 2026 result of the municipality you choose. A zero swing returns the Commission’s own council exactly. The runner is a sensitivity instrument over the swings and spreads you set; it is not a forecast.',
+        'The swing table for JB Marks shows what actually moved between 2021 and 2026 on the same definition of a party’s vote. It is one election pair. The ward-level spreads can be copied into the runner as a starting point, and you may change them.',
+      ],
+      warnings: [
+        'Do not describe a close ward as likely to change hands, or the 2021 to 2026 swing as what will happen next. Both are descriptions of past results.',
+        'Independents are published merged into one row per voting district. A ward they lead is counted as one independent win; it cannot be said to belong to a single named candidate.',
+      ],
+    },
+  ],
+};
+
+export const MASTER_HUB_SOP: Sop = {
+  number: 'SOP-20',
+  title: 'The master command and media hub',
+  area: 'WAR_ROOM',
+  roles: ['party-hq-admin', 'municipal-team-lead'],
+  requiresAnyCapability: ['analytics.view'],
+  purpose:
+    'How to use the hub’s six sections, and how to read the places where it differs from the master code stack it was built from.',
+  sections: [
+    {
+      heading: 'The six sections',
+      body: [
+        'Strategy and funnel (the 2026 and 2029 campaigns, channel targets, the roadmap); media and campaign assets (the asset catalogue, voice profile, Canva prompt, teleprompter, and the daily ground intelligence newsletter); the 32-agent code stack with an offline outbox simulator; the Schedule 1 seat calculator; the legal and statutory vault with a funding threshold check; and the DNS and deployment gate with the build discipline checklist.',
+      ],
+    },
+    {
+      heading: 'What differs from the master stack',
+      body: [
+        'Every difference is listed on the hub under “What was changed from the master stack, and why”. In short: invented performance and forecast numbers were replaced by labelled targets or by certified results; the funding lines are the gazetted R200,000 and R30 million; legal documents show their real status (none is published); the checklist shows what enforces each rule instead of a pass count; and the agent catalogue says what implements each responsibility in this build, which runs on Firebase rather than AWS.',
+      ],
+      warnings: [
+        'The marketing targets are not results. No campaign has run. Replace them with measured figures once one has.',
+        'The DNS tab compares the specified records with a snapshot taken on 8 November 2026. Do not replace the SPF record with “v=spf1 -all”: that would stop the company mailboxes sending.',
+      ],
+    },
+  ],
+};

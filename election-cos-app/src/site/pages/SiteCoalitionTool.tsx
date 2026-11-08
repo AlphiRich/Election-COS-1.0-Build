@@ -5,13 +5,15 @@
  * Arithmetic only: which groups of parties pass half the seats. It does
  * not know any real agreement, does not say which coalition is likely or
  * lawful, and carries no party's current seat count. It starts from the
- * 2021 JB Marks result, labelled as history, so that the page has real
- * numbers on it and none invented.
+ * certified 2026 result of any North West local municipality (JB Marks first), with
+ * the 2021 JB Marks result kept as history, so the page has real numbers on it and
+ * none invented.
  */
 import { useMemo, useState } from 'react';
 import { Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
 import { allocateSeats } from '@/modules/analytics/seatCalculator';
 import { NW405_2021_EXAMPLE } from '@/modules/analytics/nw405Example';
+import seats2026 from '@/data/lge2026/nw-seats-2026.json';
 import {
   majorityThreshold,
   minimalMajorities,
@@ -19,7 +21,19 @@ import {
   type SeatHolder,
 } from '../tools/coalition';
 
-function exampleHolders(): SeatHolder[] {
+interface Council2026 {
+  name: string;
+  totalSeats: number;
+  holders: Array<{ id: string; name: string; seats: number }>;
+}
+const COUNCILS = seats2026.municipalities as unknown as Record<string, Council2026>;
+const CODES = Object.keys(COUNCILS).sort();
+const HISTORY = 'NW405-2021';
+
+function exampleHolders(code: string = 'NW405'): SeatHolder[] {
+  if (code !== HISTORY) {
+    return COUNCILS[code].holders.map((h) => ({ id: h.id, name: h.name, seats: h.seats }));
+  }
   const r = allocateSeats({
     totalSeats: NW405_2021_EXAMPLE.totalSeats,
     totalValidVotes: NW405_2021_EXAMPLE.totalValidVotes,
@@ -31,7 +45,8 @@ function exampleHolders(): SeatHolder[] {
 }
 
 export function SiteCoalitionTool() {
-  const [holders, setHolders] = useState<SeatHolder[]>(exampleHolders);
+  const [code, setCode] = useState('NW405');
+  const [holders, setHolders] = useState<SeatHolder[]>(() => exampleHolders('NW405'));
   const [chosen, setChosen] = useState<Set<string>>(new Set());
 
   const total = holders.reduce((n, h) => n + h.seats, 0);
@@ -40,7 +55,8 @@ export function SiteCoalitionTool() {
   const reached = total > 0 && held >= need;
   const sets = useMemo(() => minimalMajorities(holders), [holders]);
   const name = (id: string) => holders.find((h) => h.id === id)?.name ?? id;
-  const isExample = JSON.stringify(holders) === JSON.stringify(exampleHolders());
+  const isExample = JSON.stringify(holders) === JSON.stringify(exampleHolders(code));
+  const label = code === HISTORY ? 'JB Marks council, 2021' : `${COUNCILS[code].name} council, 2026`;
 
   const toggle = (id: string) =>
     setChosen((c) => {
@@ -74,11 +90,33 @@ export function SiteCoalitionTool() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,340px),1fr))] gap-6">
           <SiteCard className="flex min-w-0 flex-col gap-4 p-6">
             <h2 className="m-0 font-site-display text-site-h5">
-              {isExample ? 'Worked example: JB Marks council, 2021' : 'Your seat numbers'}
+              {isExample ? `Worked example: ${label}` : 'Your seat numbers'}
             </h2>
+            <label className="flex flex-col gap-1 text-site-caption text-slate" htmlFor="co-council">
+              Council
+              <select
+                id="co-council"
+                className="site-field min-h-[44px]"
+                value={code}
+                onChange={(e) => {
+                  setCode(e.target.value);
+                  setHolders(exampleHolders(e.target.value));
+                  setChosen(new Set());
+                }}
+              >
+                {CODES.map((c) => (
+                  <option key={c} value={c}>
+                    {c} {COUNCILS[c].name}, 2026
+                  </option>
+                ))}
+                <option value={HISTORY}>NW405 JB Marks, 2021 (history)</option>
+              </select>
+            </label>
             <p className="m-0 text-site-caption text-slate">
               {isExample
-                ? 'Seats as allocated from the real 2021 result, on 2021 boundaries. History, not a forecast.'
+                ? code === HISTORY
+                  ? 'Seats as allocated from the real 2021 result, on 2021 boundaries. History, not a forecast.'
+                  : 'Seats as allocated by the Commission from the 4 November 2026 result. Independents are shown as one group; in a real council each decides separately.'
                 : 'Your own figures. Nothing here is a real result.'}
             </p>
             <fieldset className="m-0 flex min-w-0 flex-col gap-2 border-0 p-0">
@@ -118,11 +156,11 @@ export function SiteCoalitionTool() {
               type="button"
               className="site-btn-outline-ink self-start"
               onClick={() => {
-                setHolders(exampleHolders());
+                setHolders(exampleHolders(code));
                 setChosen(new Set());
               }}
             >
-              Reset to the 2021 example
+              Reset to the {code === HISTORY ? '2021' : '2026'} result
             </button>
           </SiteCard>
 
@@ -187,8 +225,8 @@ export function SiteCoalitionTool() {
         <p className="m-0 max-w-[48em] text-site-caption text-slate">
           Counting seats is not the whole story. Which decisions need a simple majority, what counts
           as a quorum, and how a mayor is elected are set by law and by the council’s own rules, and
-          this tool does not model them. Source for the example: the Electoral Commission’s seat
-          calculation report for JB Marks, 2021.
+          this tool does not model them. Source for the examples: the Electoral Commission’s Seat Calculation
+          Detail reports for the 2026 local government elections, and for JB Marks, 2021.
         </p>
       </SiteSection>
     </>

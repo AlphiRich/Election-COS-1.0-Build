@@ -18,6 +18,10 @@ export interface SessionContext {
   geoScope: GeoScope;
   wardScope?: string;
   vdScope?: string;
+  /** Token claim `mfaRequired`, stamped by the server. Absent means required (fail closed). */
+  mfaRequired?: boolean;
+  /** Epoch seconds until which a passed second factor holds (token claim `mfaUntil`). */
+  mfaUntil?: number;
 }
 
 export interface PageRequest {

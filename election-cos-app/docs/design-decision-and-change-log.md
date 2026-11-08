@@ -3163,3 +3163,115 @@ Owner instruction (2 Nov 2026): the candidate list, voting-district locator and 
 - **Not done: publishing.** The session still has no Google Cloud, Firebase or Cloudflare credential (`gcloud` has no account; no `GOOGLE_APPLICATION_CREDENTIALS` or `FIREBASE_TOKEN`), so nothing was deployed. The rebuilt `dist-site` and `dist` are in the delivered zips.
 - **Not done: Google Ads.** `251-650-7539` has the format of a Google Ads customer (advertiser) ID. The site's advertising is switched on only by an AdSense publisher ID (`ca-pub-` and digits, `VITE_AD_CLIENT_ID`) together with the owner's statement that the political, election, government, religion and gambling categories are blocked (`VITE_AD_CATEGORY_BLOCKS_CONFIRMED=true`). A customer ID does not satisfy the first and cannot be turned into it; the second is a statement about the ad console only the account holder can make. Neither was set, and no advertising code was added. Conversion or remarketing tags (an `AW-` id) would also have to load only after consent, per the site's no-tracking-before-consent rule. Owner actions: supply the publisher ID, apply and confirm the category blocks, and check Google's election-ads rules for South Africa before any ad runs.
 - **Not changed:** the legal drafts (`docs/legal-drafts/*.docx`) were not edited; if they name a contact address, update them with the attorney.
+
+### Session 54 — LGE 2026 results ingested; models re-based on them; the master application built into the app (8 Nov 2026)
+
+**Owner instruction:** (1) make the build contain the identical functions and features of the attached master code stack (`election_campaign_os_master_application.html`, the two copies are byte-identical; `iec_etl_pipeline.py`; the daily newsletter; the design protocol), not picking and choosing, "mutatis mutandis"; (2) update the simulation, coalition simulation and forecasting models in line with the Electoral Commission's LGE 2026 results, ingesting NW405 and all North West local and district councils; (3) "Run a PR to extract IEC Results".
+
+**Ingest record (iec-data-ingestion).**
+- **What arrived.** The Commission's results site (`results.elections.org.za`) was reachable this session (the skill records it as blocked; it is not now). Its Municipal election results form for 2026 (event EEID1887) offers a "Downloadable detailed results" CSV and a "Seat Calculation Detail" PDF/XLS per municipality. All 18 North West local municipalities were fetched: 120,350 data rows, SHA-256 and byte count of each in `src/data/lge2026/manifest.json` and in `tools/source-acquisition/sources.json` (36 new CONFIRMED rows, each carrying a `fetched` record). The owner also supplied `NW405.csv` (byte-identical to the fetched file, same SHA-256) and `NW.csv` (the province-wide file, generated 7 Nov 18:44).
+- **Decision: accepted**, as aggregates only (`nw-results.json`, 452 KB; no person is in these files). Station names, ward and voting-district codes and counts.
+- **Cross-check of the two sources.** The province file and the municipality files agree on 17 of 18 municipalities. They differ in Rustenburg (NW373) for three voting districts (86992329, 86992891, 87020692): the municipality file was generated at 23:56 on 7 Nov, later than the province file (18:44), so the municipality file is used and the difference is recorded in the manifest.
+- **Districts.** There is no district file. A district's directly elected seats are voted on through the "DC 40%" ballot in each local municipality, so DC37 to DC40 are the sums over their members. Their seats are Schedule 2, which the build does not implement (the engine refuses category C), so districts carry votes only.
+- **Independents.** The Commission prints one merged "INDEPENDENT" row per voting district. A ward they lead is counted as one independent win and flagged; it cannot be attributed to a named candidate.
+- **Reconciliation, 18 of 18.** `tools/lge2026/extract-seat-calculation.py` reads the Commission's own Seat Calculation Detail reports (each refused unless party votes add to A, Q recomputes, party seats add to the council's size, and the ward-seat table follows the seat table). `lge2026Results.test.ts` requires the build's Schedule 1 engine to reproduce each one: A, quota, every party's seats, and the ward/list split. A second, independent implementation, the Python ETL below, reproduces the same 18.
+
+**An engine defect found by that reconciliation, and fixed.** Sixteen municipalities matched at once; two did not (NW372 Madibeng, NW393 Mamusa). Cause: the engine recalculated the quota ("excessive seats", Item 16) when a party's ward seats were EQUAL to its entitlement. The Commission recalculates only when ward seats EXCEED the entitlement: in NW393 the ANC holds 7 ward seats on an entitlement of 7, and in NW372 Al Jama-ah holds 1 on 1, and both are calculated on the ordinary quota. Fixed in `seatCalculator.ts` (a party at equality takes no list seat, as before, and nobody's quota is recalculated). The four 2026 overhang cases (NW383, NW384, NW385, NW394) already matched. The registered statute excerpt reads "equal to, or greater than" for the no-list-seat rule; the recalculation trigger is the Commission's practice and is the evidence used. The Act's text on this is for the attorney. Injection proof: changing `>` back to `>=` fails 3 tests.
+
+**Registered voters, and a conflict with the owner's 2 Nov instruction.** The Commission's result files print the registered voters per voting district. For JB Marks they sum to 131,963, the same figure as the verified entries on the certified roll, and the owner instructed on 2 Nov that 122,059 be applied and 131,963 dropped. For turnout the Commission's figure is the right denominator: valid PR votes 69,048 and spoilt 1,107 give 53.2% against it, but 57.5% against 122,059, which overstates. The results page therefore shows the Commission's registered figure, labelled, and says the gazetted 122,059 is older. The age-mix and voter-statistics pages keep 122,059 as instructed. **Owner decision needed:** whether the results page should hide the registered figure and show only counts.
+
+**Models re-based on 2026.**
+- `analytics/baselines.ts`: a `Baseline` (2026 result of any of the 18 municipalities, or JB Marks 2021). `wardScenario`, `scenarioRunner` and the Scenario Runner page take a baseline; the default in code is still 2021 (the older tests pin it) and the page starts from 2026. A zero swing reproduces the Commission's council exactly for all 18 (tested).
+- The public coalition tool shows the certified 2026 council of any of the 18 (a 15 KB seats file, `nw-seats-2026.json`, which a test requires to equal the engine's output), with 2021 JB Marks kept as history.
+- Forecasting: `swing2021to2026.ts` describes what moved in JB Marks (ANC 48.2% to 33.2% of party votes, DA 25.5% to 31.8%, ActionSA 0 to 7.9%; valid PR votes 50,733 to 69,048) and the ward-level mean and spread, shown beside the runner's fields and copyable by the person. It is one election pair, described and not modelled; nothing is a probability.
+- JB Marks 2026 council, reconciled with the Commission: ANC 22, DA 21, VF+ 6, ActionSA 5, EFF 5, BAAGI 3, ACDP 1, Concerned Potchefstroom Residents 1; quota 2,069; A 138,568; no party holds a majority (34 needed).
+
+**ETL.** `electoral/iec_etl_pipeline.py` is the supplied script adapted, each change forced by a fact: the supplied script could not read the real format (one row per party, ballot and voting district), imported `Party` and `allocate_seats` that `electoral_generator.py` does not define, used placeholder council sizes with a fallback of 50 (now read from the proclaimed register; an unknown municipality is skipped, never given a size), and raised on a blank cell before its own `notna` test. Standard library only (no pandas here). Tests: `electoral/test_iec_etl_pipeline.py` (10; run `python3 -I electoral/test_iec_etl_pipeline.py`; set `ECOS_LGE2026_RAW` to the folder of the 18 CSVs to run the 18-of-18 reconciliation, which passes).
+
+**The master application, built in.** `/analytics/hub` (`src/modules/hub/`): the six sections with every function (funnel toggle, asset filter and mock-ups, teleprompter with timer, Canva prompt copy, agent search, outbox simulator over the real state machine, Schedule 1 calculator, legal vault, funding checker, DNS table, discipline checklist), plus the newsletter (`groundIntelligence.ts`: IEC registration notice with the 32810 SMS check, the Item 12 formula as the statute has it, and a ward/voting-district sentiment table with groups under 5 hidden). 32 agents catalogued with what implements each. **Every place the stack's content could not be carried over as written is listed on the hub and in `hubData.ts` (`CHANGES_FROM_MASTER`, 16 rows)**, among them: the stack's flip-risk probabilities, 2026 turnout "forecasts", R80k and R15M funding lines with invented section numbers, "PUBLISHED & ACTIVE" legal documents, "13/13 PASSED", the 18-agents-called-32 count, R16.40 volunteer cost, the AWS and PostgreSQL topology, and SPF "-all".
+- **DNS, observed 8 Nov 2026** (Cloudflare DNS-over-HTTPS): name servers holly and damian; apex A 104.21.79.234 and 172.67.149.237 (as specified); **`app.` resolves to Cloudflare's proxy (172.67.149.237) and answers `server: cloudflare`, i.e. proxied, not the DNS-only record the stack specifies**; **SPF is `v=spf1 ip4:169.239.218.67 include:_spf.tld-mx.com ~all`** with MX `mx1.tld-mx.com`, so replacing it with `-all` as the stack says would stop the seven company mailboxes sending. Neither was changed; both are on the DNS tab.
+- **Not adopted from the attachments:** the design protocol (`gemini-code-...md`) restates tokens the build already implements (colours, type, 12-column grid, 48 px targets); no change was needed.
+
+**Also fixed.** The shared `Table` wrapper now has `relative`: a hidden ("sr-only") "Open" header cell escaped the wrapper's overflow clip and made pages 683 px wide on a 390 px phone (found by driving the new results page in a browser; the VD locator and drill-down had the same defect).
+
+**Gate and checks.** `npm run check:all` green (1,603 app, 171 functions); Python 10 tests. Browser check of the hub, the results page and the scenario runner at 390 and 1280 px: 0 console errors, 0 overflow after the fix. Injection proofs: Item 16 trigger (3 fail), quota formula (5 fail), newsletter suppression (1 fail); a fourth, adding independents' ward votes to A, changes nothing because independents are never on the PR list, so that condition is redundant, not a missing guard.
+
+**Not done.** The hub's marketing numbers are targets, not results (no campaign has run). Schedule 2 (districts) is not implemented. Turnout is charted for two elections (2021, 2026) although the registry holds the 2016 and 2011 NW VD files; they were not ingested in this pass. Nothing is deployed (no credential). SOP-19 and SOP-20 added.
+
+### Session 54 (cont.) — corporate domain and product mail, decided by the owner (8 Nov 2026)
+
+- **Decision (owner):** the corporate domain is `innovationconsult.co.za`. The application and its landing page and website have their own dedicated domain, `electioncos.co.za`. The application's email addresses are specific to that domain and are not Innovation Consult's.
+- **Applied:** `CORPORATE_DOMAIN` is back to `innovationconsult.co.za` (a 7 Nov commit on `main` had set it to the product's domain, which broke 6 tests in `estate.test.ts` and `publicDomain.test.ts`; those pass again). `PRODUCT_MAIL_DOMAIN` is new and equals `SITE_DOMAIN`. The seven company mailboxes were already on `electioncos.co.za` (2 Nov).
+- **Checked:** nothing in the application, functions, scripts or worker names a mailbox on the corporate domain, and the application sends no mail to one (enquiries are stored as records; no mail is sent). The corporate domain still appears, correctly, as the company's website link (footer, About page, document letterhead, enquiry origin allowlist). `docs/innovation-consult-brand.md` keeps `info@innovationconsult.co.za` because it is Innovation Consult's own letterhead, not the product's.
+- **Guard:** `src/config/productMail.test.ts` fails if a product mailbox is off the product domain or if any source file names a mailbox on the corporate domain. Injection: changing `info@electioncos.co.za` to the corporate domain fails it; reverted.
+
+### Session 54 (cont.) — sign-in: email first, then an SMS code for every role above canvasser (8 Nov 2026)
+
+**Owner instruction.** Sign-in is an email login followed by a one-time code to the user's number as
+second verification, for any tier above volunteer / canvasser. (Read from the Election-COS sign-in
+template: Staff SSO tiles, "Send sign-in link" by email, POPIA line.)
+
+**Decisions.**
+1. **Not Firebase's built-in SMS MFA.** It writes the phone number into the Auth record, which §4.3
+   forbids (phone is a FORBIDDEN Auth field), and it needs Identity Platform billing. The code goes to the
+   number already on the staff profile in Firestore (africa-south1). The person cannot choose the
+   destination: a stolen staff email is not enough without the handset the administrator recorded.
+2. **Exempt tier = `canvasser` only** (the volunteer role). The six roles above it (party-hq-admin,
+   municipal-team-lead, ward-lead, vd-captain, compliance-officer, finance-officer) owe the code. An
+   unknown or missing role owes it too (fail closed).
+3. **Enforced on the server, not by hiding a screen.** `resolveCapabilities` stamps `mfaRequired` on the
+   token; `verifySecondFactorCode` stamps `mfaUntil` (12 hours); `firestore.rules` `tenantOK()` (the gate
+   every tenant collection passes) now requires `mfaOK()`. Rules name no role (the existing
+   `roleModel` test forbids it, and caught my first draft doing exactly that). A role, scope or number
+   change rewrites the claims and drops `mfaUntil`, so it forces a fresh code.
+4. **Reuses the reviewed OTP primitives** (scrypt-hashed code, constant-time compare, 5 attempts, cooldown,
+   attempts-on-the-challenge). Code lifetime 5 min. Cost guard applies (price has no default).
+5. **Email-link sign-in** added beside the four provider buttons (opt-in `VITE_AUTH_EMAIL_LINK=true`,
+   set in the git-ignored `.env.production.local`).
+
+**Proved.** 12 server tests, 5 client tests. `firestore.rules` run against the real Firestore emulator
+(`tools/rules-check/mfa-rules.mjs`): canvasser allowed; ward-lead denied without the code, allowed with a
+live one, denied when it has expired; a token with no claim denied; wrong tenant denied. Injection: with
+`mfaOK()` removed four cases failed open; with its default flipped to `false` the "no claim" case failed
+open. Both reverted.
+
+**NOT done, and why it matters.** No SMS provider exists on this project, so `requestSecondFactorCode`
+fails closed (`unconfiguredSms`). **Until a provider is wired and the rules are deployed together, every
+role above canvasser would be locked out of data.** Owner decisions needed: (a) the SMS provider (one
+function to replace, `functions/src/secondFactorCallables.ts`), plus its credential in environment
+secrets and `SMS_COST_CENTS_PER_MESSAGE`; (b) every staff profile above canvasser needs a mobile number;
+(c) a break-glass path for the first administrator (none built: seeding that account's number is a
+console step); (d) Email-link must be switched on in the Firebase console. Not verified end to end: the
+callables against a live project, and an actual SMS.
+
+**Not changed.** The app's palette was not re-themed to the design-system skill's tokens (not requested;
+the skill's navy/teal differs from the shipped ink/blue). The Staff-SSO / Personas / Guest tabs of the
+template were not rebuilt; the existing provider buttons and the new email-link form carry the same
+function.
+
+### Session 54 (cont.) — marketing collateral built from the five supplied documents (8 Nov 2026)
+
+**Arrived:** Marketing Asset Architecture, Marketing & Implementation Strategy, the Google Ads dual-funnel blueprint, the voters'-roll ingestion README (IC-ECOS-DATA-2026-02) and the Drive index of the legal repository.
+
+**Built** (`npm`-free, re-runnable: `npx vite-node scripts/build-marketing.ts`, `scripts/build-playbook.ts`; output in `marketing/`): 14 ad banners (BOFU 1200x628, 1080x1080, 300x250, 728x90; TOFU 1200x628, 1080x1080, 1080x1920; two copy lines each), the A3 Field Canvasser Toolkit poster (PDF and PNG), three transparent 1920x1080 lower-thirds, the 4-page A4 Ward Candidate Playbook (DOCX and PDF, page count checked), and the dual-funnel figure (`dual-funnel.html`). Colours, fonts, the R1,800 price, the entity and the WhatsApp number are read from `tokens.ts`, `public/fonts` and `siteContent.ts`, not retyped. The hub's marketing tab already held the manifest, scripts and Canva prompts; this adds the rendered pieces. The newsletter generator the manifest points to (a Python script) is superseded by the newsletter already built into the app.
+
+**Where the documents disagree with the build, and what was done:**
+1. **"Paid for by" name.** The manifest says "Innovation Consult (Pty) Ltd". The settled legal name (29 Oct) is Just Be Trading 10 (Pty) Ltd t/a Innovation Consult, Reg. 2007/021390/07. Assets use `SITE.entity`. A disclosure with the wrong legal name is worse than none: owner to confirm.
+2. **Price.** The Google Ads blueprint says R2,900 for a single ward; the manifest, strategy and the site say R1,800. R1,800 used (the site's figure, checked against the paper).
+3. **"Start Free Trial".** The manifest's BOFU CTA. **The product has no free trial anywhere** (only a demo request). Rendered as specified because the offer is the owner's to define, but it must not run until a trial exists or the CTA is changed (one constant, `CTA_BOFU`). A free-trial claim that is not honoured is a Consumer Protection Act exposure.
+4. **2026 urgency.** Polling day was 4 Nov 2026. The BOFU copy ("Manage your ward legally") still reads, but any "before the election" framing is spent; the next local election is 2031. 2029 is national/provincial, which is the TOFU audience's horizon.
+5. **Poster QR.** The manifest asks for the WhatsApp Polling Engine QR. No polling number exists (delivery is not configured). The poster carries the real sales-line QR (`wa.me/27824497310`), labelled as such, not a polling QR.
+6. **Palette.** The strategy's "paper #DCD6C8" is the product's `line` token; the manifest's paper (#F7F4EE) is the product's `paper`. The manifest was followed. The design-system skill's palette was not applied (not requested).
+7. **Playbook claims.** Only shipped behaviour is described (consent capture, scoped accounts, counts-only polling, PPFA aggregation). The SMS sign-in step is not mentioned: it is not live. Page 4 says it is not legal advice and states no legal conclusion.
+
+**Not built, and why:**
+- **Video and audio.** No voice-over, Amapiano underscore or screen recordings: no audio tooling or licensed track here, and AI-voice/synthetic-media disclosure is an owner/platform decision. The script, storyboard and voice profile are already in the hub.
+- **Google Ads campaigns, election-ads verification, Canva Brand Kit lock, CRM and offline-conversion import.** All need the owner's accounts, identity documents and credentials (same blocker as the earlier Ads request). Nothing was submitted.
+- **Voters'-roll ingestion (the README).** Already decided in session 50 (reviewed, adapted to the tenant structure, no roll data ever supplied); the same hard rules apply and the same open POPIA items (lawful basis, retention, attorney review). Polling day has passed. Nothing changed.
+- **The Drive legal repository.** Six documents drafted elsewhere. Not reproduced here (legal drafting is the attorney's). **Flag for the attorney:** the index describes an architecture this build does not have (AWS af-south-1, Node/Express/Prisma/PostgreSQL RLS, a 02:00 48-hour unconsented-voter purge daemon, Redis/BullMQ). This build is Firebase/Firestore in africa-south1. A privacy policy that describes the wrong system is a misstatement. It also uses `@innovationconsult.co.za` addresses where the product's own are `@electioncos.co.za` (the 8 Nov decision).
+
+### Session 54 (cont.) — mailbox list changed by the owner (8 Nov 2026)
+**Owner instruction:** the seven addresses are admin@, info@, legal@, sales@, techsupport@, cto@ and noreply@ (all `@electioncos.co.za`), in that order. **`accounts@` is gone; `cto@` is new.** `SITE.mailboxes` and its test updated; the `productMail` guard (no corporate-domain mailboxes) still holds. The purpose line for `cto@` was confirmed by the owner (8 Nov): tech and platform enquiries, including tech architecture, build security, PRs and any other tech or code-stack related or interrelated matter. **Nothing now receives billing or accounts mail**; say where those enquiries should go. The mailboxes themselves (created at the provider, IMAP, DNS) are not something this build can do.
+
+
+**Billing and accounts (owner, 8 Nov 2026):** directed to `sales@`; its purpose line now reads "Sales, demonstrations, billing and accounts". The owner has three mailboxes left to create on cPanel and may instead add a dedicated address later: that is a one-line change in `SITE.mailboxes` plus its test.

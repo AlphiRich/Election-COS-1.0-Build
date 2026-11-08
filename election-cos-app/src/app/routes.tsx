@@ -32,6 +32,8 @@ import { PollsPage } from '@/modules/polls/PollsPage';
 import { ScenarioRunnerPage } from '@/modules/analytics/ScenarioRunnerPage';
 import { AnalystPage } from '@/modules/analyst/AnalystPage';
 import { DrillDownPage } from '@/modules/drilldown/DrillDownPage';
+import { HubPage } from '@/modules/hub/HubPage';
+import { Lge2026ResultsPage } from '@/modules/lge2026/Lge2026ResultsPage';
 import { SettingsPage } from '@/modules/settings/SettingsPage';
 import { MunicipalityConfigPage } from '@/modules/settings/MunicipalityConfigPage';
 import { PermissionsPage } from '@/modules/settings/PermissionsPage';
@@ -76,6 +78,8 @@ export const router = createBrowserRouter([
           { path: 'scenario-runner', element: <ScenarioRunnerPage /> },
           { path: 'analyst', element: <AnalystPage /> },
           { path: 'drill-down', element: <DrillDownPage /> },
+          { path: 'hub', element: <HubPage /> },
+          { path: 'lge-2026-results', element: <Lge2026ResultsPage /> },
           { path: 'polls', element: <PollsPage /> },
           { path: 'candidate-list', element: <CandidateListPage /> },
           { path: 'vd-locator', element: <VdLocatorPage /> },

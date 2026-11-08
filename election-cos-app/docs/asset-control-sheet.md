@@ -5599,3 +5599,10 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | Company addresses | `src/site/siteContent.ts` `SITE.mailboxes` | Seven on electioncos.co.za (owner, 2 Nov 2026); noreply sends only |
 | WhatsApp QR | `src/site/assets/whatsapp-qr.svg` | Decoded to https://wa.me/27824497310; SHA-256 pinned; footer and /contact; labelled customer care and sales line |
 | Google Ads 251-650-7539 | not wired | Customer ID, not a publisher ID; owner actions in the change log |
+| LGE 2026 NW results | `src/data/lge2026/{nw-results,manifest,seat-calculation-iec,nw-seats-2026}.json`, `modules/lge2026/` | Commission's files, 18 municipalities, counts only; SHA-256 in manifest and registry; Schedule 1 reconciled 18 of 18 |
+| LGE 2026 ETL | `electoral/iec_etl_pipeline.py`, `electoral/test_iec_etl_pipeline.py`, `scripts/build-lge2026-results.mjs`, `tools/lge2026/extract-seat-calculation.py` | Adapted from the supplied script; see the change log |
+| Baselines and swing | `modules/analytics/baselines.ts`, `swing2021to2026.ts` | Scenario runner and coalition tool start from 2026 |
+| Master hub | `src/modules/hub/` | Master application built in; 16 recorded changes |
+| Master stack (source) | `election_campaign_os_master_application.html` (two identical copies) | Not copied into the repo |
+| Second sign-in factor | `functions/src/secondFactor*.ts`, `src/auth/SecondFactor*.ts(x)`, `firestore.rules` `mfaOK()`, `tools/rules-check/mfa-rules.mjs` | Email, then SMS code above canvasser; fails closed until an SMS provider exists |
+| Marketing collateral | `scripts/build-marketing.ts`, `scripts/build-playbook.ts`, `marketing/` | 14 banners, A3 poster, lower-thirds, 4-page playbook, dual-funnel figure; CTA 'Start Free Trial' not yet true |

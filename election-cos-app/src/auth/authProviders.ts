@@ -65,3 +65,8 @@ export function signInErrorMessage(code: string | undefined): string | null {
       return 'Sign-in failed. Try again, or contact your administrator if this keeps happening.';
   }
 }
+
+/** Email-link sign-in is opt-in like the providers: it must first be switched on in the Firebase console. */
+export function emailLinkEnabled(raw: string | undefined): boolean {
+  return (raw ?? '').trim().toLowerCase() === 'true';
+}

@@ -18,7 +18,7 @@ bounded responsibility, not a service.
 | 8 | SOFT_DELETE | soft-delete in every repository; hard delete denied by rules | built |
 | 9 | LWW_RECONCILIATION | `functions/src/syncMerge.ts` | built; needs Blaze to run |
 | 10 | DOCUMENT_VAULT | Cloud Storage + `storage.rules`; `functions/src/documentVault.ts` envelope encryption (AES-256-GCM, per-document key, wrapped under a supplied KEK, context bound); refuses with no key | built (primitive); not wired to uploads; KEK decision open |
-| 11 | SIMULATION_ORCHESTRATOR | `scenarioRunner.ts` + `/analytics/scenario-runner`: seeded Monte Carlo over the user's stated swing/turnout distributions, through the one Schedule 1 calculation; sensitivity (tornado); sampling error on every frequency | built (assumption-driven, not forecasting) |
+| 11 | SIMULATION_ORCHESTRATOR | `scenarioRunner.ts` + `/analytics/scenario-runner`: seeded Monte Carlo over the user's stated swing and turnout distributions, through the one Schedule 1 calculation, from the certified 2026 result of any of the 18 North West local municipalities (or JB Marks 2021). Runs in the browser, not on worker threads | built (browser, seeded, reproducible) |
 | 12 | RLS_SESSION_GUARDIAN | `firestore.rules` (tenant, capability, ward + station scope); 15 emulator cases for the roll | built |
 | 13 | POPIA_CONSENT_TRIGGER | voters cannot be written without `popiaConsentGiven`. **No 48-hour hard purge**: the audit rates it critical; quarantine then human release is the design | gate built; quarantine and named-person release built as pure functions (`functions/src/consentQuarantine.ts`), not exported or scheduled; no purge by design |
 | 14 | INDEX_HEALTH | not applicable to Firestore (indexes are declared) | n/a |
@@ -33,8 +33,13 @@ bounded responsibility, not a service.
 | 23 | CAMPAIGN_DIRECTOR | none | not built |
 | 24 | COMPLIANCE_WAR_ROOM | war-room counters (`warRoomCounters.ts`) read from the counters document with an honest empty state; the triggers need the Firebase paid plan to run | built; needs Blaze |
 | 25 | SCENARIO_POLICY | `scenarioPolicy.ts`: every input labelled sourced (with a citation) or assumption; a swing can never be sourced; shown on the Ward Comparison screen | built |
-| 26 | BASELINE_LOADER | 2021 NW405 ward results pinned to the superseded delimitation (`wardResults2021.ts`) | built for NW405 |
-| 27–32 (MONTE_CARLO part built; the rest not) | TURNOUT_ELASTICITY, PARTY_SUPPORT, WARD_SWING, MK_ENTRY, COALITION_POST, MONTE_CARLO | `wardScenario.ts` is a deterministic swing tool the user sets. No Monte Carlo, no entrant model, no hung-council frequency: **no data or method behind them** (the 68.5 % figure is unsourced) | not built |
+| 26 | BASELINE_LOADER | `baselines.ts`: the certified 2026 result of all 18 North West local municipalities (`modules/lge2026`, reconciled with the Commission's own seat calculations, 18 of 18) and JB Marks 2021 on its superseded delimitation (`wardResults2021.ts`) | built for the North West (2026); 2021 for NW405 only |
+| 27 | TURNOUT_ELASTICITY | turnout mean and spread are inputs the person sets; the observed 2021 to 2026 change for JB Marks is shown beside them. No elasticity is estimated | partial |
+| 28 | PARTY_SUPPORT | per-party swing and spread set by the person; the observed 2021 to 2026 swing by party is shown (`swing2021to2026.ts`) | partial |
+| 29 | WARD_SWING | `wardScenario.ts` deterministic swing on certified ward results, with the observed ward-level 2021 to 2026 mean and spread | built |
+| 30 | MK_ENTRY | MK has a certified 2026 result (1.2% in JB Marks) so can be given a swing; no entrant model | partial |
+| 31 | COALITION_POST | `/tools/how-coalitions-work` on the certified 2026 councils; arithmetic only | built (arithmetic) |
+| 32 | MONTE_CARLO | see 11 | built |
 
 ## The three listings
 - **4.1 `fn_calculate_schedule1_quotas`** — the supplied version allocated 65 of 67 seats on the 2021 result (no floor, no

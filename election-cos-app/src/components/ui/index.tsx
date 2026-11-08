@@ -360,9 +360,14 @@ export function BasisNote({ children }: { children: ReactNode }) {
  *    rewraps on a phone stops being a table; one that scrolls sideways is
  *    still readable, and the first column stays put.
  */
+/*
+ * `relative` on the wrapper is load-bearing: an `sr-only` header cell ("Open") is absolutely positioned, and without a positioned
+ * ancestor it escapes this wrapper's overflow clip and widens the whole page (found 8 Nov 2026: the results page was 683 px wide
+ * on a 390 px phone, from one hidden "Open" label in the last column).
+ */
 export function Table({ children, caption }: { children: ReactNode; caption?: string }) {
   return (
-    <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+    <div className="relative overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
       <table className="w-full border-collapse text-body-md">
         {caption && <caption className="sr-only">{caption}</caption>}
         {children}

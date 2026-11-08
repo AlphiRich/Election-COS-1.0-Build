@@ -24,9 +24,19 @@
  * cannot ship. `signInPage.test.ts` asserts that.
  */
 import { useState } from 'react';
-import { signInWithEmail, signInWithProvider, signUpWithEmail } from './firebaseAuth';
+import { useEffect } from 'react';
+import {
+  completeEmailLink,
+  openedFromEmailLink,
+  rememberedEmail,
+  sendEmailLink,
+  signInWithEmail,
+  signInWithProvider,
+  signUpWithEmail,
+} from './firebaseAuth';
 import {
   PROVIDER_LABEL,
+  emailLinkEnabled,
   enabledProviders,
   signInErrorMessage,
   type ProviderId,
@@ -37,12 +47,46 @@ import { Button, DataLine, Field } from '@/components/ui';
 import { NAV_FOOTER_LINE, PRODUCT_NAME } from '@/lib/legalText';
 
 const PROVIDERS = enabledProviders(import.meta.env.VITE_AUTH_PROVIDERS as string | undefined);
+const EMAIL_LINK = emailLinkEnabled(import.meta.env.VITE_AUTH_EMAIL_LINK as string | undefined);
 
 export function SignInPage() {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [linkEmail, setLinkEmail] = useState('');
+  const [linkSent, setLinkSent] = useState(false);
+  // Opened from the emailed link: finish on this browser, asking for the email only if it was not remembered.
+  const [returning] = useState(() => EMAIL_LINK && openedFromEmailLink());
+
+  async function handleSendLink() {
+    setPending(true);
+    setError(null);
+    try {
+      await sendEmailLink(linkEmail.trim());
+      setLinkSent(true);
+    } catch {
+      setError('The sign-in link could not be sent. Check the address and try again.');
+    }
+    setPending(false);
+  }
+
+  async function handleCompleteLink(address: string) {
+    setPending(true);
+    setError(null);
+    try {
+      await completeEmailLink(address.trim());
+    } catch {
+      setPending(false);
+      setError('That sign-in link is not valid any more. Request a new one.');
+    }
+  }
+
+  useEffect(() => {
+    const remembered = returning ? rememberedEmail() : null;
+    if (remembered) void handleCompleteLink(remembered);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once, on arrival from the link
+  }, []);
 
   async function handleEmulatorSignIn() {
     setPending(true);
@@ -86,7 +130,8 @@ export function SignInPage() {
           {/* IC-ECOS-NAMING-2026-V1 §2.3 fixes this header string exactly. */}
           <h1 className="text-headline-md font-display text-ink">Sign in to {PRODUCT_NAME}</h1>
           <p className="text-body-md font-body text-slate mt-2">
-            Choose how you sign in. Use the same method each time.
+            Choose how you sign in. Use the same method each time. Every role above canvasser then
+            confirms with a code sent by SMS to the mobile number on its staff profile.
           </p>
         </div>
 
@@ -105,7 +150,40 @@ export function SignInPage() {
           ))}
         </div>
 
-        {error && <p className="text-body-md font-body text-maroon">{error}</p>}
+        {EMAIL_LINK && (
+          <div className="border-t border-ink/10 pt-5 space-y-3">
+            <p className="text-label-caps font-display uppercase text-slate">Email link</p>
+            {linkSent ? (
+              <p role="status" className="text-body-md font-body text-ink">
+                Check your inbox. We sent a sign-in link to {linkEmail}. Open it on this device.
+              </p>
+            ) : (
+              <>
+                <Field label={returning ? 'Confirm your email' : 'Email'}>
+                  {(props) => (
+                    <input
+                      {...props}
+                      type="email"
+                      autoComplete="email"
+                      value={linkEmail}
+                      onChange={(e) => setLinkEmail(e.target.value)}
+                    />
+                  )}
+                </Field>
+                <Button
+                  variant="secondary"
+                  className="w-full"
+                  disabled={pending || linkEmail.trim() === ''}
+                  onClick={() => void (returning ? handleCompleteLink(linkEmail) : handleSendLink())}
+                >
+                  {returning ? 'Finish signing in' : 'Send sign-in link'}
+                </Button>
+              </>
+            )}
+          </div>
+        )}
+
+        {error && <p role="alert" className="text-body-md font-body text-maroon">{error}</p>}
 
         <p className="text-body-md font-body text-slate">
           Signing in doesn't grant access on its own — an administrator still has to assign you a

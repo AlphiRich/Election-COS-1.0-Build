@@ -30,6 +30,8 @@ import { useEffect, useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useAuthState } from '@/auth/useSession';
 import { SignInPage } from '@/auth/SignInPage';
+import { SecondFactorStep } from '@/auth/SecondFactorStep';
+import { secondFactorSatisfied } from '@/auth/secondFactor';
 import { signOut } from '@/auth/firebaseAuth';
 import { NAV_FOOTER_LINE, PRODUCT_NAME_SHORT } from '@/lib/legalText';
 import { useEntitlements } from '@/auth/useEntitlements';
@@ -71,6 +73,12 @@ export function Shell() {
 
   if (status === 'signed-out') {
     return <SignInPage />;
+  }
+
+  // Email sign-in is done; every role above the canvasser still owes the SMS code. The data
+  // is withheld server-side regardless (firestore.rules mfaOK()); this is how they pass it.
+  if (status === 'signed-in' && session && !secondFactorSatisfied(session)) {
+    return <SecondFactorStep email={user?.email} />;
   }
 
   if (status === 'signed-in' && !session) {

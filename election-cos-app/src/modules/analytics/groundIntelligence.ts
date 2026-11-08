@@ -36,10 +36,19 @@ export const CATEGORY_LABEL: Record<Incident['category'], string> = {
 };
 
 export const SEAT_EXPLAINER =
-  'Seat allocation depends on the applicable statutory method, verified election inputs, ward ' +
-  'results and any required remainder or overhang treatment. This report does not calculate ' +
-  'official seat allocations. Confirm the governing rules and figures with the IEC or a qualified ' +
-  'adviser before relying on a calculation.';
+  'A local council has ward seats, won by the most votes in each ward, and party-list seats. Under ' +
+  'Schedule 1 of the Municipal Structures Act the quota is Q = (A / (B - C)) + 1, fractions disregarded, ' +
+  'where A is the valid votes cast for parties on the party and ward ballots, B is the number of seats in ' +
+  'the council and C is the number of independent ward councillors elected. Each party\'s votes divided by ' +
+  'Q give its seats; surplus seats go to the highest remainders; and a party\'s ward seats are deducted from ' +
+  'its entitlement to leave its list seats. This report does not calculate official seat allocations: the ' +
+  'Electoral Commission publishes them after every election.';
+
+/** Voter education notice carried from the supplied newsletter. SMS to 32810 is the Commission's own registration check. */
+export const VOTER_EDUCATION_NOTICE =
+  'To vote in a local government election you must be registered on the certified voters\' roll for your ' +
+  'voting district. Check your registration status at elections.org.za or by SMS of your ID number to 32810 ' +
+  '(SMS charges may apply). Information here follows the Electoral Commission\'s published guidance.';
 
 export const COMPLIANCE_NOTICE =
   'Check current IEC requirements and applicable privacy obligations before distribution. Use only ' +
@@ -51,6 +60,16 @@ export interface WardSignals {
   wardCode: string;
   shown: Array<{ category: string; count: number }>;
   suppressedCells: number;
+}
+
+/** One ward and voting district's doorstep sentiment, when a source for it exists. */
+export interface SentimentRow {
+  ward: string;
+  vd: string;
+  /** Average on a 1 to 5 scale. */
+  avg: number;
+  issue: string;
+  polled: number;
 }
 
 export interface GroundIntelligence {
@@ -87,6 +106,25 @@ export function buildGroundIntelligence(
   return { period, generatedAt: now.toISOString(), wards, incidentsConsidered: considered };
 }
 
+/**
+ * The ward and voting-district sentiment table from the supplied newsletter. A row built on fewer than MIN_CELL people shows
+ * neither its average nor its issue (the supplied preview showed averages for 1 and 2 people, which identifies them). This build
+ * holds sentiment tenant-wide only and polls are anonymous, so today no rows are passed and the section says so.
+ */
+export function sentimentTableHtml(rows: SentimentRow[]): string {
+  if (!rows.length) {
+    return '<section class="card"><p class="eyebrow">SENTIMENT AND ISSUES BY WARD AND VOTING DISTRICT</p><p>No sentiment by ward or voting district is held: the application keeps sentiment for the whole tenant only, and polls are anonymous and carry no ward. This section fills only when a consented, ward-level source exists.</p></section>';
+  }
+  const body = rows
+    .map((r) =>
+      r.polled < MIN_CELL
+        ? `<tr><td>${esc(r.ward)}</td><td>${esc(r.vd)}</td><td colspan="3">Hidden: fewer than ${MIN_CELL} people</td></tr>`
+        : `<tr><td>${esc(r.ward)}</td><td>${esc(r.vd)}</td><td>${r.avg.toFixed(1)} / 5.0</td><td>${esc(r.issue)}</td><td>${r.polled}</td></tr>`,
+    )
+    .join('');
+  return `<section class="card"><p class="eyebrow">SENTIMENT AND ISSUES BY WARD AND VOTING DISTRICT</p><table><thead><tr><th>Ward</th><th>VD</th><th>Average sentiment</th><th>Primary issue</th><th>Polled</th></tr></thead><tbody>${body}</tbody></table></section>`;
+}
+
 const esc = (s: string) =>
   s.replace(
     /[&<>"']/g,
@@ -94,7 +132,7 @@ const esc = (s: string) =>
   );
 
 /** A self-contained HTML document: no scripts, no external requests. */
-export function groundIntelligenceHtml(g: GroundIntelligence): string {
+export function groundIntelligenceHtml(g: GroundIntelligence, sentiment: SentimentRow[] = []): string {
   const cards = g.wards.length
     ? g.wards
         .map(
@@ -119,6 +157,8 @@ export function groundIntelligenceHtml(g: GroundIntelligence): string {
 <header><p class="eyebrow">GROUND INTELLIGENCE</p><h1>Daily Ground Intelligence</h1><p>Reporting period: ${esc(g.period)}</p></header>
 <h2>Aggregated field signals</h2>
 ${cards}
+${sentimentTableHtml(sentiment)}
+<aside class="notice"><strong>Voter education notice</strong><br>${esc(VOTER_EDUCATION_NOTICE)}</aside>
 <section class="card"><p class="eyebrow">SEAT CALCULATION EXPLAINER</p><h2>From votes to representation</h2><p>${esc(SEAT_EXPLAINER)}</p></section>
 <aside class="notice"><strong>Compliance and data notice</strong><br>${esc(COMPLIANCE_NOTICE)}</aside>
 <footer>Generated ${esc(g.generatedAt)} in the browser. No email is sent and no data is transmitted.</footer>
