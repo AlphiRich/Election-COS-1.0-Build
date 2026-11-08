@@ -6,7 +6,7 @@
   "description": "Election Campaign OS \u2014 application shell (election-cos-app). IC-ECOS-BUILD-2026-V2.",
   "scripts": {
     "build": "tsc -b && vite build && node scripts/build-sw.mjs",
-    "build:site": "vite build --config vite.site.config.ts && vite-node scripts/publish-candidates-cli.ts && cp site-hosting/_headers dist-site/_headers && cp -r site-assets/videos dist-site/videos && rm -f dist-site/sw.js dist-site/manifest.webmanifest",
+    "build:site": "vite build --config vite.site.config.ts && vite-node scripts/publish-candidates-cli.ts && node scripts/finish-site-build.mjs",
     "check:site-budget": "node scripts/check-site-budget.mjs",
     "check:all": "npm run lint && npm run typecheck && npm run check:hex && npm run check:type-scale && npm run check:headers && npm run check:fonts && npm run typecheck:functions && npm run test && npm run test:functions",
     "check:fonts": "node tools/fonts/vendor-fonts.mjs --check",

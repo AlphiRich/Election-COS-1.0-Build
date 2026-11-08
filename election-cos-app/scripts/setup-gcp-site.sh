@@ -11,7 +11,7 @@
 #   - Service account `ecos-site-deployer`  (what GitHub Actions acts as)
 #   - Service account `ecos-site-runtime`   (what the container runs as; no roles)
 #   - Workload Identity pool `github` + provider `github-oidc`, restricted to
-#     this one repository, so GitHub signs in WITHOUT a stored key.
+#     this one repository AND its main branch, so GitHub signs in WITHOUT a stored key.
 #   - A SECOND Firebase Hosting site, `electioncos-site`, which fronts the
 #     Cloud Run service and is where electioncos.co.za is connected.
 #
@@ -24,7 +24,12 @@ PROJECT="${PROJECT:-electioncos1-0}"
 REGION="${REGION:-africa-south1}"   # image repository location
 RUN_REGION="${RUN_REGION:-europe-west1}"   # Cloud Run service location (Firebase front needs a supported region)
 AR_REPO="${AR_REPO:-ecos}"
+# The canonical repository name. innovation_consult_front is the same repository under its old name
+# (GitHub redirects it); Google matches the name in GitHub's token, which is this one.
 GITHUB_REPO="${GITHUB_REPO:-AlphiRich/Election-COS-1.0-Build}"
+# Only workflows running from this branch may act as the deployer.
+DEPLOY_REF="${DEPLOY_REF:-refs/heads/main}"
+CONDITION="assertion.repository=='$GITHUB_REPO' && assertion.ref=='$DEPLOY_REF'"
 POOL="${POOL:-github}"
 PROVIDER="${PROVIDER:-github-oidc}"
 SITE_ID="${SITE_ID:-electioncos-site}"
@@ -98,15 +103,20 @@ say "Workload Identity Federation (keyless GitHub sign-in)"
 gcloud iam workload-identity-pools describe "$POOL" --location=global >/dev/null 2>&1 \
   || gcloud iam workload-identity-pools create "$POOL" --location=global \
        --display-name="GitHub Actions"
-gcloud iam workload-identity-pools providers describe "$PROVIDER" --location=global \
-  --workload-identity-pool="$POOL" >/dev/null 2>&1 \
-  || gcloud iam workload-identity-pools providers create-oidc "$PROVIDER" --location=global \
-       --workload-identity-pool="$POOL" --display-name="GitHub OIDC" \
-       --issuer-uri="https://token.actions.githubusercontent.com" \
-       --attribute-mapping="google.subject=assertion.sub,attribute.repository=assertion.repository,attribute.ref=assertion.ref" \
-       --attribute-condition="assertion.repository=='$GITHUB_REPO'"
+if gcloud iam workload-identity-pools providers describe "$PROVIDER" --location=global \
+     --workload-identity-pool="$POOL" >/dev/null 2>&1; then
+  # Already exists: re-apply the condition so an earlier, looser one (repository only) is tightened.
+  gcloud iam workload-identity-pools providers update-oidc "$PROVIDER" --location=global \
+    --workload-identity-pool="$POOL" --attribute-condition="$CONDITION" >/dev/null
+else
+  gcloud iam workload-identity-pools providers create-oidc "$PROVIDER" --location=global \
+    --workload-identity-pool="$POOL" --display-name="GitHub OIDC" \
+    --issuer-uri="https://token.actions.githubusercontent.com" \
+    --attribute-mapping="google.subject=assertion.sub,attribute.repository=assertion.repository,attribute.ref=assertion.ref" \
+    --attribute-condition="$CONDITION"
+fi
 
-# Only this repository may act as the deployer.
+# Only this repository (and, by the provider condition, only its main branch) may act as the deployer.
 gcloud iam service-accounts add-iam-policy-binding "$DEPLOYER_EMAIL" \
   --role=roles/iam.workloadIdentityUser \
   --member="principalSet://iam.googleapis.com/projects/$PROJECT_NUMBER/locations/global/workloadIdentityPools/$POOL/attribute.repository/$GITHUB_REPO" >/dev/null
