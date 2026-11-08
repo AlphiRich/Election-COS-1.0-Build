@@ -1,0 +1,173 @@
+{
+ "eventId": "EEID1887",
+ "event": "Local Government Elections 2026",
+ "publisher": "Electoral Commission of South Africa",
+ "urlPattern": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/<CODE>.csv",
+ "files": [
+  {
+   "code": "NW371",
+   "sha256": "f875e9af6a69b0a9f3407932986e7d9d19618adc71c3c459621c382b6b206d8b",
+   "bytes": 1441829,
+   "rows": 10323,
+   "generatedFrom": "2026-11-07T13:13:48",
+   "generatedTo": "2026-11-07T13:13:48"
+  },
+  {
+   "code": "NW372",
+   "sha256": "db84194fae4884184f2a8d5c991e890b31c30fbee3e47bde7b1caf0fdb2a8a48",
+   "bytes": 2449030,
+   "rows": 17529,
+   "generatedFrom": "2026-11-07T01:46:32",
+   "generatedTo": "2026-11-07T01:46:32"
+  },
+  {
+   "code": "NW373",
+   "sha256": "2676083d646cb7bdba22b133ceffbb6048d131a10ee27b47c28f6052a4b215c6",
+   "bytes": 2577060,
+   "rows": 18111,
+   "generatedFrom": "2026-11-07T23:56:10",
+   "generatedTo": "2026-11-07T23:56:10"
+  },
+  {
+   "code": "NW374",
+   "sha256": "c96ed746887646093a9095e20cf3526c26e855073c0c09d00ff27407209906fe",
+   "bytes": 272884,
+   "rows": 1893,
+   "generatedFrom": "2026-11-05T17:00:52",
+   "generatedTo": "2026-11-05T17:00:52"
+  },
+  {
+   "code": "NW375",
+   "sha256": "6860e2943b0a6bfb93c606bae572ede8dba1278704d70c6a59b1ffc5d670bc01",
+   "bytes": 1782947,
+   "rows": 12580,
+   "generatedFrom": "2026-11-07T13:13:48",
+   "generatedTo": "2026-11-07T13:13:48"
+  },
+  {
+   "code": "NW381",
+   "sha256": "30f5bf9ae9fcc7ccab9e0e3ff43c2dae7339de912484292cf496e0eca245e644",
+   "bytes": 508589,
+   "rows": 3724,
+   "generatedFrom": "2026-11-06T14:24:30",
+   "generatedTo": "2026-11-06T14:24:30"
+  },
+  {
+   "code": "NW382",
+   "sha256": "f57adc26db39e7ffddd7cf048c9f77de2a725fa4b62cc238c3fbab477c66b36b",
+   "bytes": 525844,
+   "rows": 3828,
+   "generatedFrom": "2026-11-06T15:47:09",
+   "generatedTo": "2026-11-06T15:47:09"
+  },
+  {
+   "code": "NW383",
+   "sha256": "661d1fd49e67df65215a511ef0cd3307c9cb317dccd643337c941c58d87754a2",
+   "bytes": 1134016,
+   "rows": 8135,
+   "generatedFrom": "2026-11-06T18:23:49",
+   "generatedTo": "2026-11-06T18:23:49"
+  },
+  {
+   "code": "NW384",
+   "sha256": "0d5cce2ed2d42deb721a00f23371654b67442983ee75d1186f713957871178f3",
+   "bytes": 997362,
+   "rows": 7173,
+   "generatedFrom": "2026-11-07T18:44:54",
+   "generatedTo": "2026-11-07T18:44:54"
+  },
+  {
+   "code": "NW385",
+   "sha256": "ecfb814b657ba3a963e0c5801887cbba6ec42b0e9b6218da07adeb779a1272cd",
+   "bytes": 965909,
+   "rows": 6465,
+   "generatedFrom": "2026-11-06T18:23:44",
+   "generatedTo": "2026-11-06T18:23:44"
+  },
+  {
+   "code": "NW392",
+   "sha256": "9c27852af585b7e05f88077a7076d7dcf5cad78eb99fb8a05577cc06d13014c6",
+   "bytes": 279037,
+   "rows": 2030,
+   "generatedFrom": "2026-11-06T11:18:05",
+   "generatedTo": "2026-11-06T11:18:05"
+  },
+  {
+   "code": "NW393",
+   "sha256": "bc893727f11ab8b51b43321577b1212965dd49fc379fc0a9d96365519be287e9",
+   "bytes": 146498,
+   "rows": 1070,
+   "generatedFrom": "2026-11-05T16:48:27",
+   "generatedTo": "2026-11-05T16:48:27"
+  },
+  {
+   "code": "NW394",
+   "sha256": "04a0088df89e349539472a992b2d78b872557d5524771270cf62fda00a66f90c",
+   "bytes": 1081174,
+   "rows": 7318,
+   "generatedFrom": "2026-11-06T13:39:11",
+   "generatedTo": "2026-11-06T13:39:11"
+  },
+  {
+   "code": "NW396",
+   "sha256": "1e60155f30a35d7465fcc7a649a5a4757a5ee7fe67ea62d6c9d6c68f41c4b65c",
+   "bytes": 138582,
+   "rows": 962,
+   "generatedFrom": "2026-11-05T20:10:11",
+   "generatedTo": "2026-11-05T20:10:11"
+  },
+  {
+   "code": "NW397",
+   "sha256": "883ba3d022583b2884e4e79a6b107736be86ef22fe1141e6df00c9ebfbc14640",
+   "bytes": 622167,
+   "rows": 4282,
+   "generatedFrom": "2026-11-05T20:10:11",
+   "generatedTo": "2026-11-05T20:10:11"
+  },
+  {
+   "code": "NW403",
+   "sha256": "414359fdd0e993b6e72fd69b597fa783980c69e7d46646e1acf05e25421cd13a",
+   "bytes": 1067976,
+   "rows": 7535,
+   "generatedFrom": "2026-11-07T13:45:54",
+   "generatedTo": "2026-11-07T13:45:54"
+  },
+  {
+   "code": "NW404",
+   "sha256": "3868512e9a881eb1cc93a671710fe63810f409c69a64fa7a743a2b00689a08e2",
+   "bytes": 253887,
+   "rows": 1754,
+   "generatedFrom": "2026-11-06T16:48:04",
+   "generatedTo": "2026-11-06T16:48:04"
+  },
+  {
+   "code": "NW405",
+   "sha256": "8349fafac0de8678ac36c8d2b1004712c4807e4a3bf2922afd1ba605e81473e3",
+   "bytes": 781428,
+   "rows": 5638,
+   "generatedFrom": "2026-11-06T15:47:10",
+   "generatedTo": "2026-11-06T15:47:10"
+  }
+ ],
+ "crosscheck": {
+  "provinceFile": {
+   "sha256": "766e71b75eac8b7bcc142a05e3448446ff8a93e052422951b75f7cf44b66c573",
+   "bytes": 16976381,
+   "rows": 120150,
+   "generated": [
+    "2026-11-07"
+   ]
+  },
+  "rows": 120150,
+  "onlyInProvince": 0,
+  "onlyInMunicipalityFiles": 200,
+  "differing": 72,
+  "differingMunicipalities": {
+   "NW373": [
+    "86992329",
+    "87020692"
+   ]
+  },
+  "note": "Municipality files are the later snapshot where they differ: they carry the latest DateGenerated. Differences are listed by voting district."
+ }
+}

@@ -1,0 +1,3308 @@
+{
+ "source": "Electoral Commission of South Africa, Seat Calculation Detail, Local Government Elections 2026 (EEID1887), North West",
+ "urlPattern": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/<CODE>.pdf",
+ "municipalities": {
+  "NW371": {
+   "code": "NW371",
+   "excessiveCase": false,
+   "Q": 2013,
+   "A": 100639,
+   "totalSeats": 50,
+   "independentWardSeats": 0,
+   "noPrListWardSeats": 0,
+   "excessiveVotes": 0,
+   "excessiveSeats": 0,
+   "rows": [
+    {
+     "votes": 12870,
+     "round1": 6,
+     "round2": 1,
+     "seats": 7,
+     "wardSeats": 0,
+     "prSeats": 7
+    },
+    {
+     "votes": 139,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 180,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1489,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 57007,
+     "round1": 28,
+     "round2": 1,
+     "seats": 29,
+     "wardSeats": 25,
+     "prSeats": 4
+    },
+    {
+     "votes": 366,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 422,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 357,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 307,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 458,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 240,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 36,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 8820,
+     "round1": 4,
+     "round2": 1,
+     "seats": 5,
+     "wardSeats": 0,
+     "prSeats": 5
+    },
+    {
+     "votes": 177,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 10504,
+     "round1": 5,
+     "round2": 0,
+     "seats": 5,
+     "wardSeats": 0,
+     "prSeats": 5
+    },
+    {
+     "votes": 523,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 75,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 28,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 29,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 69,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 627,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 2379,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 32,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 2769,
+     "round1": 1,
+     "round2": 1,
+     "seats": 2,
+     "wardSeats": 0,
+     "prSeats": 2
+    },
+    {
+     "votes": 163,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 573,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    }
+   ],
+   "partySeatsTotal": 50
+  },
+  "NW372": {
+   "code": "NW372",
+   "excessiveCase": false,
+   "Q": 2999,
+   "A": 242845,
+   "totalSeats": 82,
+   "independentWardSeats": 1,
+   "noPrListWardSeats": 0,
+   "excessiveVotes": 0,
+   "excessiveSeats": 0,
+   "rows": [
+    {
+     "votes": 15327,
+     "round1": 5,
+     "round2": 0,
+     "seats": 5,
+     "wardSeats": 0,
+     "prSeats": 5
+    },
+    {
+     "votes": 216,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1752,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 414,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 101631,
+     "round1": 33,
+     "round2": 1,
+     "seats": 34,
+     "wardSeats": 29,
+     "prSeats": 5
+    },
+    {
+     "votes": 750,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 445,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 453,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1995,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 1,
+     "prSeats": 0
+    },
+    {
+     "votes": 860,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 224,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 580,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 3135,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 36639,
+     "round1": 12,
+     "round2": 0,
+     "seats": 12,
+     "wardSeats": 5,
+     "prSeats": 7
+    },
+    {
+     "votes": 237,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 38373,
+     "round1": 12,
+     "round2": 1,
+     "seats": 13,
+     "wardSeats": 3,
+     "prSeats": 10
+    },
+    {
+     "votes": 194,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 181,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 813,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 227,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 2503,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 92,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 91,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 66,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 2149,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 425,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 11260,
+     "round1": 3,
+     "round2": 1,
+     "seats": 4,
+     "wardSeats": 1,
+     "prSeats": 3
+    },
+    {
+     "votes": 110,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 766,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 3537,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 1090,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 247,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 206,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 15857,
+     "round1": 5,
+     "round2": 1,
+     "seats": 6,
+     "wardSeats": 1,
+     "prSeats": 5
+    }
+   ],
+   "partySeatsTotal": 81
+  },
+  "NW373": {
+   "code": "NW373",
+   "excessiveCase": false,
+   "Q": 3085,
+   "A": 277592,
+   "totalSeats": 90,
+   "independentWardSeats": 0,
+   "noPrListWardSeats": 0,
+   "excessiveVotes": 0,
+   "excessiveSeats": 0,
+   "rows": [
+    {
+     "votes": 17452,
+     "round1": 5,
+     "round2": 1,
+     "seats": 6,
+     "wardSeats": 0,
+     "prSeats": 6
+    },
+    {
+     "votes": 183,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 731,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 63,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 431,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 613,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 933,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 107864,
+     "round1": 34,
+     "round2": 1,
+     "seats": 35,
+     "wardSeats": 35,
+     "prSeats": 0
+    },
+    {
+     "votes": 457,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1536,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 567,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 220,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 207,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 416,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 2450,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 1015,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 525,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 156,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 377,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 40404,
+     "round1": 13,
+     "round2": 0,
+     "seats": 13,
+     "wardSeats": 7,
+     "prSeats": 6
+    },
+    {
+     "votes": 140,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 37382,
+     "round1": 12,
+     "round2": 0,
+     "seats": 12,
+     "wardSeats": 1,
+     "prSeats": 11
+    },
+    {
+     "votes": 255,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 173,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 8260,
+     "round1": 2,
+     "round2": 1,
+     "seats": 3,
+     "wardSeats": 0,
+     "prSeats": 3
+    },
+    {
+     "votes": 3964,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 3184,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 738,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1467,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 4423,
+     "round1": 1,
+     "round2": 1,
+     "seats": 2,
+     "wardSeats": 0,
+     "prSeats": 2
+    },
+    {
+     "votes": 7174,
+     "round1": 2,
+     "round2": 0,
+     "seats": 2,
+     "wardSeats": 1,
+     "prSeats": 1
+    },
+    {
+     "votes": 150,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 13216,
+     "round1": 4,
+     "round2": 0,
+     "seats": 4,
+     "wardSeats": 0,
+     "prSeats": 4
+    },
+    {
+     "votes": 250,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1563,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 8688,
+     "round1": 2,
+     "round2": 1,
+     "seats": 3,
+     "wardSeats": 1,
+     "prSeats": 2
+    },
+    {
+     "votes": 408,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 549,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 9008,
+     "round1": 2,
+     "round2": 1,
+     "seats": 3,
+     "wardSeats": 0,
+     "prSeats": 3
+    }
+   ],
+   "partySeatsTotal": 90
+  },
+  "NW374": {
+   "code": "NW374",
+   "excessiveCase": false,
+   "Q": 1924,
+   "A": 25006,
+   "totalSeats": 13,
+   "independentWardSeats": 0,
+   "noPrListWardSeats": 0,
+   "excessiveVotes": 0,
+   "excessiveSeats": 0,
+   "rows": [
+    {
+     "votes": 1084,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 10840,
+     "round1": 5,
+     "round2": 1,
+     "seats": 6,
+     "wardSeats": 6,
+     "prSeats": 0
+    },
+    {
+     "votes": 71,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 53,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 166,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 2050,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 1483,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 737,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 345,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 26,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 18,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 10,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 8,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 3918,
+     "round1": 2,
+     "round2": 0,
+     "seats": 2,
+     "wardSeats": 1,
+     "prSeats": 1
+    },
+    {
+     "votes": 609,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 3588,
+     "round1": 1,
+     "round2": 1,
+     "seats": 2,
+     "wardSeats": 0,
+     "prSeats": 2
+    }
+   ],
+   "partySeatsTotal": 13
+  },
+  "NW375": {
+   "code": "NW375",
+   "excessiveCase": false,
+   "Q": 1651,
+   "A": 112210,
+   "totalSeats": 69,
+   "independentWardSeats": 1,
+   "noPrListWardSeats": 0,
+   "excessiveVotes": 0,
+   "excessiveSeats": 0,
+   "rows": [
+    {
+     "votes": 4263,
+     "round1": 2,
+     "round2": 1,
+     "seats": 3,
+     "wardSeats": 0,
+     "prSeats": 3
+    },
+    {
+     "votes": 1263,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 345,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 58396,
+     "round1": 35,
+     "round2": 0,
+     "seats": 35,
+     "wardSeats": 33,
+     "prSeats": 2
+    },
+    {
+     "votes": 1066,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 447,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 230,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 737,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 243,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 483,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 140,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 431,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 926,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 7062,
+     "round1": 4,
+     "round2": 0,
+     "seats": 4,
+     "wardSeats": 0,
+     "prSeats": 4
+    },
+    {
+     "votes": 147,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 18261,
+     "round1": 11,
+     "round2": 0,
+     "seats": 11,
+     "wardSeats": 1,
+     "prSeats": 10
+    },
+    {
+     "votes": 1261,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 373,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1875,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 1929,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 6732,
+     "round1": 4,
+     "round2": 0,
+     "seats": 4,
+     "wardSeats": 0,
+     "prSeats": 4
+    },
+    {
+     "votes": 93,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 744,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 3250,
+     "round1": 1,
+     "round2": 1,
+     "seats": 2,
+     "wardSeats": 0,
+     "prSeats": 2
+    },
+    {
+     "votes": 401,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1112,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    }
+   ],
+   "partySeatsTotal": 68
+  },
+  "NW381": {
+   "code": "NW381",
+   "excessiveCase": false,
+   "Q": 1853,
+   "A": 50028,
+   "totalSeats": 27,
+   "independentWardSeats": 0,
+   "noPrListWardSeats": 0,
+   "excessiveVotes": 0,
+   "excessiveSeats": 0,
+   "rows": [
+    {
+     "votes": 2864,
+     "round1": 1,
+     "round2": 1,
+     "seats": 2,
+     "wardSeats": 0,
+     "prSeats": 2
+    },
+    {
+     "votes": 28072,
+     "round1": 15,
+     "round2": 0,
+     "seats": 15,
+     "wardSeats": 14,
+     "prSeats": 1
+    },
+    {
+     "votes": 1065,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 92,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 687,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 526,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 165,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 3388,
+     "round1": 1,
+     "round2": 1,
+     "seats": 2,
+     "wardSeats": 0,
+     "prSeats": 2
+    },
+    {
+     "votes": 4521,
+     "round1": 2,
+     "round2": 0,
+     "seats": 2,
+     "wardSeats": 0,
+     "prSeats": 2
+    },
+    {
+     "votes": 40,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 146,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1188,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 4020,
+     "round1": 2,
+     "round2": 0,
+     "seats": 2,
+     "wardSeats": 0,
+     "prSeats": 2
+    },
+    {
+     "votes": 2243,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 1011,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    }
+   ],
+   "partySeatsTotal": 27
+  },
+  "NW382": {
+   "code": "NW382",
+   "excessiveCase": false,
+   "Q": 1762,
+   "A": 49316,
+   "totalSeats": 28,
+   "independentWardSeats": 0,
+   "noPrListWardSeats": 0,
+   "excessiveVotes": 0,
+   "excessiveSeats": 0,
+   "rows": [
+    {
+     "votes": 2548,
+     "round1": 1,
+     "round2": 1,
+     "seats": 2,
+     "wardSeats": 0,
+     "prSeats": 2
+    },
+    {
+     "votes": 27884,
+     "round1": 15,
+     "round2": 1,
+     "seats": 16,
+     "wardSeats": 14,
+     "prSeats": 2
+    },
+    {
+     "votes": 124,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 605,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 220,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 97,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 7237,
+     "round1": 4,
+     "round2": 0,
+     "seats": 4,
+     "wardSeats": 0,
+     "prSeats": 4
+    },
+    {
+     "votes": 4341,
+     "round1": 2,
+     "round2": 1,
+     "seats": 3,
+     "wardSeats": 0,
+     "prSeats": 3
+    },
+    {
+     "votes": 237,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 2518,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 1867,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 203,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1435,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    }
+   ],
+   "partySeatsTotal": 28
+  },
+  "NW383": {
+   "code": "NW383",
+   "excessiveCase": true,
+   "Q": 2061,
+   "A": 134298,
+   "totalSeats": 70,
+   "independentWardSeats": 0,
+   "noPrListWardSeats": 0,
+   "excessiveVotes": 60134,
+   "excessiveSeats": 34,
+   "rows": [
+    {
+     "votes": 11671,
+     "round1": 5,
+     "round2": 1,
+     "seats": 6,
+     "wardSeats": 0,
+     "prSeats": 6
+    },
+    {
+     "votes": 943,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 1158,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 60134,
+     "round1": 34,
+     "round2": 0,
+     "seats": 34,
+     "wardSeats": 34,
+     "prSeats": 0
+    },
+    {
+     "votes": 470,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 252,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1696,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 2648,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 1201,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 1492,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 15143,
+     "round1": 7,
+     "round2": 0,
+     "seats": 7,
+     "wardSeats": 0,
+     "prSeats": 7
+    },
+    {
+     "votes": 19086,
+     "round1": 9,
+     "round2": 0,
+     "seats": 9,
+     "wardSeats": 1,
+     "prSeats": 8
+    },
+    {
+     "votes": 128,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 669,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 559,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 101,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 2853,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 118,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 3062,
+     "round1": 1,
+     "round2": 1,
+     "seats": 2,
+     "wardSeats": 0,
+     "prSeats": 2
+    },
+    {
+     "votes": 6558,
+     "round1": 3,
+     "round2": 0,
+     "seats": 3,
+     "wardSeats": 0,
+     "prSeats": 3
+    },
+    {
+     "votes": 222,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 2882,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 1252,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    }
+   ],
+   "partySeatsTotal": 70
+  },
+  "NW384": {
+   "code": "NW384",
+   "excessiveCase": true,
+   "Q": 2343,
+   "A": 81359,
+   "totalSeats": 39,
+   "independentWardSeats": 0,
+   "noPrListWardSeats": 0,
+   "excessiveVotes": 32159,
+   "excessiveSeats": 18,
+   "rows": [
+    {
+     "votes": 3136,
+     "round1": 1,
+     "round2": 1,
+     "seats": 2,
+     "wardSeats": 0,
+     "prSeats": 2
+    },
+    {
+     "votes": 449,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 303,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 32159,
+     "round1": 18,
+     "round2": 0,
+     "seats": 18,
+     "wardSeats": 18,
+     "prSeats": 0
+    },
+    {
+     "votes": 490,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 156,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 235,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1070,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 589,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 105,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 430,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 12121,
+     "round1": 5,
+     "round2": 0,
+     "seats": 5,
+     "wardSeats": 2,
+     "prSeats": 3
+    },
+    {
+     "votes": 8199,
+     "round1": 3,
+     "round2": 1,
+     "seats": 4,
+     "wardSeats": 0,
+     "prSeats": 4
+    },
+    {
+     "votes": 67,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 168,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 2754,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 73,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 493,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 639,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 4059,
+     "round1": 1,
+     "round2": 1,
+     "seats": 2,
+     "wardSeats": 0,
+     "prSeats": 2
+    },
+    {
+     "votes": 4999,
+     "round1": 2,
+     "round2": 0,
+     "seats": 2,
+     "wardSeats": 0,
+     "prSeats": 2
+    },
+    {
+     "votes": 120,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 2302,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 3578,
+     "round1": 1,
+     "round2": 1,
+     "seats": 2,
+     "wardSeats": 0,
+     "prSeats": 2
+    },
+    {
+     "votes": 137,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 185,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 2343,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    }
+   ],
+   "partySeatsTotal": 39
+  },
+  "NW385": {
+   "code": "NW385",
+   "excessiveCase": true,
+   "Q": 2165,
+   "A": 72984,
+   "totalSeats": 37,
+   "independentWardSeats": 0,
+   "noPrListWardSeats": 0,
+   "excessiveVotes": 31854,
+   "excessiveSeats": 18,
+   "rows": [
+    {
+     "votes": 13321,
+     "round1": 6,
+     "round2": 0,
+     "seats": 6,
+     "wardSeats": 1,
+     "prSeats": 5
+    },
+    {
+     "votes": 112,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 5903,
+     "round1": 2,
+     "round2": 1,
+     "seats": 3,
+     "wardSeats": 0,
+     "prSeats": 3
+    },
+    {
+     "votes": 31854,
+     "round1": 18,
+     "round2": 0,
+     "seats": 18,
+     "wardSeats": 18,
+     "prSeats": 0
+    },
+    {
+     "votes": 267,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 306,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 463,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 4134,
+     "round1": 1,
+     "round2": 1,
+     "seats": 2,
+     "wardSeats": 0,
+     "prSeats": 2
+    },
+    {
+     "votes": 7114,
+     "round1": 3,
+     "round2": 0,
+     "seats": 3,
+     "wardSeats": 0,
+     "prSeats": 3
+    },
+    {
+     "votes": 589,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 145,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 962,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 182,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1126,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 1703,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 1142,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 1562,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 2099,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    }
+   ],
+   "partySeatsTotal": 37
+  },
+  "NW392": {
+   "code": "NW392",
+   "excessiveCase": false,
+   "Q": 1903,
+   "A": 34248,
+   "totalSeats": 18,
+   "independentWardSeats": 0,
+   "noPrListWardSeats": 0,
+   "excessiveVotes": 0,
+   "excessiveSeats": 0,
+   "rows": [
+    {
+     "votes": 864,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 74,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 278,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 16979,
+     "round1": 8,
+     "round2": 1,
+     "seats": 9,
+     "wardSeats": 8,
+     "prSeats": 1
+    },
+    {
+     "votes": 136,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 887,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 2687,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 5334,
+     "round1": 2,
+     "round2": 1,
+     "seats": 3,
+     "wardSeats": 1,
+     "prSeats": 2
+    },
+    {
+     "votes": 2316,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 135,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1027,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 745,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 631,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 374,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 131,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1650,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    }
+   ],
+   "partySeatsTotal": 18
+  },
+  "NW393": {
+   "code": "NW393",
+   "excessiveCase": false,
+   "Q": 1993,
+   "A": 31875,
+   "totalSeats": 16,
+   "independentWardSeats": 0,
+   "noPrListWardSeats": 0,
+   "excessiveVotes": 0,
+   "excessiveSeats": 0,
+   "rows": [
+    {
+     "votes": 1548,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 14497,
+     "round1": 7,
+     "round2": 0,
+     "seats": 7,
+     "wardSeats": 7,
+     "prSeats": 0
+    },
+    {
+     "votes": 1224,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 70,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1155,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 5183,
+     "round1": 2,
+     "round2": 1,
+     "seats": 3,
+     "wardSeats": 0,
+     "prSeats": 3
+    },
+    {
+     "votes": 807,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 3072,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 52,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 99,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1112,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 386,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 2670,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 1,
+     "prSeats": 0
+    }
+   ],
+   "partySeatsTotal": 16
+  },
+  "NW394": {
+   "code": "NW394",
+   "excessiveCase": true,
+   "Q": 2357,
+   "A": 101343,
+   "totalSeats": 47,
+   "independentWardSeats": 0,
+   "noPrListWardSeats": 0,
+   "excessiveVotes": 47150,
+   "excessiveSeats": 24,
+   "rows": [
+    {
+     "votes": 8285,
+     "round1": 3,
+     "round2": 1,
+     "seats": 4,
+     "wardSeats": 0,
+     "prSeats": 4
+    },
+    {
+     "votes": 87,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1793,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 569,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1716,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 1245,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 696,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 47150,
+     "round1": 24,
+     "round2": 0,
+     "seats": 24,
+     "wardSeats": 24,
+     "prSeats": 0
+    },
+    {
+     "votes": 221,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1533,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 90,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 7319,
+     "round1": 3,
+     "round2": 0,
+     "seats": 3,
+     "wardSeats": 0,
+     "prSeats": 3
+    },
+    {
+     "votes": 17287,
+     "round1": 7,
+     "round2": 0,
+     "seats": 7,
+     "wardSeats": 0,
+     "prSeats": 7
+    },
+    {
+     "votes": 518,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 74,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1572,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 7864,
+     "round1": 3,
+     "round2": 0,
+     "seats": 3,
+     "wardSeats": 0,
+     "prSeats": 3
+    },
+    {
+     "votes": 1148,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 1076,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 714,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 386,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    }
+   ],
+   "partySeatsTotal": 47
+  },
+  "NW396": {
+   "code": "NW396",
+   "excessiveCase": false,
+   "Q": 2290,
+   "A": 32046,
+   "totalSeats": 14,
+   "independentWardSeats": 0,
+   "noPrListWardSeats": 0,
+   "excessiveVotes": 0,
+   "excessiveSeats": 0,
+   "rows": [
+    {
+     "votes": 1532,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 2539,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 11210,
+     "round1": 4,
+     "round2": 1,
+     "seats": 5,
+     "wardSeats": 2,
+     "prSeats": 3
+    },
+    {
+     "votes": 77,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 2623,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 1,
+     "prSeats": 0
+    },
+    {
+     "votes": 10559,
+     "round1": 4,
+     "round2": 1,
+     "seats": 5,
+     "wardSeats": 4,
+     "prSeats": 1
+    },
+    {
+     "votes": 373,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 366,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 275,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 284,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 255,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1953,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    }
+   ],
+   "partySeatsTotal": 14
+  },
+  "NW397": {
+   "code": "NW397",
+   "excessiveCase": false,
+   "Q": 1803,
+   "A": 52271,
+   "totalSeats": 29,
+   "independentWardSeats": 0,
+   "noPrListWardSeats": 0,
+   "excessiveVotes": 0,
+   "excessiveSeats": 0,
+   "rows": [
+    {
+     "votes": 1301,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 116,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 193,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 200,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 33226,
+     "round1": 18,
+     "round2": 1,
+     "seats": 19,
+     "wardSeats": 15,
+     "prSeats": 4
+    },
+    {
+     "votes": 429,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 314,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 3338,
+     "round1": 1,
+     "round2": 1,
+     "seats": 2,
+     "wardSeats": 0,
+     "prSeats": 2
+    },
+    {
+     "votes": 4448,
+     "round1": 2,
+     "round2": 1,
+     "seats": 3,
+     "wardSeats": 0,
+     "prSeats": 3
+    },
+    {
+     "votes": 171,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 139,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1994,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 3510,
+     "round1": 1,
+     "round2": 1,
+     "seats": 2,
+     "wardSeats": 0,
+     "prSeats": 2
+    },
+    {
+     "votes": 694,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 406,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1792,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    }
+   ],
+   "partySeatsTotal": 29
+  },
+  "NW403": {
+   "code": "NW403",
+   "excessiveCase": false,
+   "Q": 2447,
+   "A": 188399,
+   "totalSeats": 77,
+   "independentWardSeats": 0,
+   "noPrListWardSeats": 0,
+   "excessiveVotes": 0,
+   "excessiveSeats": 0,
+   "rows": [
+    {
+     "votes": 6097,
+     "round1": 2,
+     "round2": 1,
+     "seats": 3,
+     "wardSeats": 0,
+     "prSeats": 3
+    },
+    {
+     "votes": 574,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 409,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 78199,
+     "round1": 31,
+     "round2": 1,
+     "seats": 32,
+     "wardSeats": 30,
+     "prSeats": 2
+    },
+    {
+     "votes": 411,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 630,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1080,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 219,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 49595,
+     "round1": 20,
+     "round2": 0,
+     "seats": 20,
+     "wardSeats": 8,
+     "prSeats": 12
+    },
+    {
+     "votes": 15095,
+     "round1": 6,
+     "round2": 0,
+     "seats": 6,
+     "wardSeats": 0,
+     "prSeats": 6
+    },
+    {
+     "votes": 214,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 224,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 378,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 3196,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 447,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 2797,
+     "round1": 1,
+     "round2": 0,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 949,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 6412,
+     "round1": 2,
+     "round2": 1,
+     "seats": 3,
+     "wardSeats": 0,
+     "prSeats": 3
+    },
+    {
+     "votes": 5435,
+     "round1": 2,
+     "round2": 0,
+     "seats": 2,
+     "wardSeats": 0,
+     "prSeats": 2
+    },
+    {
+     "votes": 1403,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 171,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 14464,
+     "round1": 5,
+     "round2": 1,
+     "seats": 6,
+     "wardSeats": 1,
+     "prSeats": 5
+    }
+   ],
+   "partySeatsTotal": 77
+  },
+  "NW404": {
+   "code": "NW404",
+   "excessiveCase": false,
+   "Q": 1996,
+   "A": 43896,
+   "totalSeats": 22,
+   "independentWardSeats": 0,
+   "noPrListWardSeats": 0,
+   "excessiveVotes": 0,
+   "excessiveSeats": 0,
+   "rows": [
+    {
+     "votes": 1182,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 23797,
+     "round1": 11,
+     "round2": 1,
+     "seats": 12,
+     "wardSeats": 10,
+     "prSeats": 2
+    },
+    {
+     "votes": 194,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 128,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1088,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 5015,
+     "round1": 2,
+     "round2": 1,
+     "seats": 3,
+     "wardSeats": 1,
+     "prSeats": 2
+    },
+    {
+     "votes": 8366,
+     "round1": 4,
+     "round2": 0,
+     "seats": 4,
+     "wardSeats": 0,
+     "prSeats": 4
+    },
+    {
+     "votes": 380,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 109,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 238,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 94,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 906,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1319,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 77,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1003,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    }
+   ],
+   "partySeatsTotal": 22
+  },
+  "NW405": {
+   "code": "NW405",
+   "excessiveCase": false,
+   "Q": 2069,
+   "A": 138568,
+   "totalSeats": 67,
+   "independentWardSeats": 0,
+   "noPrListWardSeats": 0,
+   "excessiveVotes": 0,
+   "excessiveSeats": 0,
+   "rows": [
+    {
+     "votes": 10919,
+     "round1": 5,
+     "round2": 0,
+     "seats": 5,
+     "wardSeats": 0,
+     "prSeats": 5
+    },
+    {
+     "votes": 850,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 453,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 45941,
+     "round1": 22,
+     "round2": 0,
+     "seats": 22,
+     "wardSeats": 22,
+     "prSeats": 0
+    },
+    {
+     "votes": 277,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 142,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 6313,
+     "round1": 3,
+     "round2": 0,
+     "seats": 3,
+     "wardSeats": 0,
+     "prSeats": 3
+    },
+    {
+     "votes": 272,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 894,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 196,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 44042,
+     "round1": 21,
+     "round2": 0,
+     "seats": 21,
+     "wardSeats": 12,
+     "prSeats": 9
+    },
+    {
+     "votes": 10073,
+     "round1": 4,
+     "round2": 1,
+     "seats": 5,
+     "wardSeats": 0,
+     "prSeats": 5
+    },
+    {
+     "votes": 88,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1659,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 50,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 434,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 1338,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 1618,
+     "round1": 0,
+     "round2": 1,
+     "seats": 1,
+     "wardSeats": 0,
+     "prSeats": 1
+    },
+    {
+     "votes": 130,
+     "round1": 0,
+     "round2": 0,
+     "seats": 0,
+     "wardSeats": 0,
+     "prSeats": 0
+    },
+    {
+     "votes": 12879,
+     "round1": 6,
+     "round2": 0,
+     "seats": 6,
+     "wardSeats": 0,
+     "prSeats": 6
+    }
+   ],
+   "partySeatsTotal": 67
+  }
+ },
+ "files": {
+  "NW371": {
+   "sha256": "7c9e1f805d24c84269cbc706382e99a1ba18ed8cf8b353b5993a846884bdc0eb",
+   "bytes": 108485
+  },
+  "NW372": {
+   "sha256": "73fb4eb915ad299a5d426ccf803a7b2f9888866084328d8f8a9c388973a7418b",
+   "bytes": 112199
+  },
+  "NW373": {
+   "sha256": "f161f6386f2ac23cb9cb767a95567fd7efa72d3ceed327f2c7276ef52d1a7a76",
+   "bytes": 115704
+  },
+  "NW374": {
+   "sha256": "2d07a72e08e080101eac8dd21af4e2338798f9033b168450dde8245f02434009",
+   "bytes": 19589
+  },
+  "NW375": {
+   "sha256": "058f6131fe57904d62129fc9069ce07c54bccb0e5e5414e64ff2ed4fc23890d1",
+   "bytes": 108467
+  },
+  "NW381": {
+   "sha256": "5c79b567c9f5acfb84e4c4c2c8b20f6542223162eeaf7a9e898b61256c7bf21e",
+   "bytes": 102516
+  },
+  "NW382": {
+   "sha256": "65acd1537fb758566fac66f7199c972839e353380a414400ffb47cf8f027cb98",
+   "bytes": 101686
+  },
+  "NW383": {
+   "sha256": "8b663fe46a1926c7ed5b696d985a0586c561b59313211aba6fd10d9c23c30562",
+   "bytes": 107669
+  },
+  "NW384": {
+   "sha256": "8eb994179606ba7f770c376ea2397e47e01e4d4b4ae2b2caff9b8b2ba5024616",
+   "bytes": 109365
+  },
+  "NW385": {
+   "sha256": "6c014be8c2b7f42fcd646fc5c260b3e98492f29cc028d8aca3da6bdf1deb4b03",
+   "bytes": 104524
+  },
+  "NW392": {
+   "sha256": "c6f8be5be955cc6fac5e1d71c1e4fe8cdf7263a57676b620a7535c6ade68ddf9",
+   "bytes": 19719
+  },
+  "NW393": {
+   "sha256": "d07dddba937cafaadadc52677da41ebc01f4067ded4835f83527197ceb679054",
+   "bytes": 101798
+  },
+  "NW394": {
+   "sha256": "5bdd397cd40936aeace9fcf705c3a71921af6826f8df25b34c252c11aec2662b",
+   "bytes": 106436
+  },
+  "NW396": {
+   "sha256": "5fcdae2a5d8af93d2cbd2773c952762cffd68b12a87f2974c62dc79d370bef3b",
+   "bytes": 16219
+  },
+  "NW397": {
+   "sha256": "61acf020b59ff71e00a5011990ee20e7a0749334931ebbed191e1fb215d298b6",
+   "bytes": 102933
+  },
+  "NW403": {
+   "sha256": "660bfdf63f718b06a6c94c86fb83c5486be086c320be410495775ad215aa998d",
+   "bytes": 106889
+  },
+  "NW404": {
+   "sha256": "2925c39f2e2a64c5fdc088163b12436c9f78ee3d25407df93e7eddf10f1d6fc6",
+   "bytes": 102533
+  },
+  "NW405": {
+   "sha256": "ef664e005415ce8863b8c599a75019225882d9410d16fa25eb2d765e65b9f4c2",
+   "bytes": 105352
+  }
+ }
+}

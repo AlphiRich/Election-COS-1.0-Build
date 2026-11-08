@@ -93,7 +93,7 @@ export interface PartyResult {
   prSeats: number; // never negative
   /** Ward seats beyond the seats this party is entitled to (informational for an excessive party). */
   overhangSeats: number;
-  /** Item 16(1): ward seats equal to or greater than its Item 13 entitlement, so no list seats. */
+  /** Item 16: more ward seats than its Item 13 entitlement, so no list seats and the quota is recalculated. Equality is not excess. */
   excessive: boolean;
   totalSeats: number; // wardSeatsWon + prSeats
 }
@@ -201,10 +201,16 @@ export function allocateSeats(input: SeatAllocationInput): SeatAllocationResult 
   const surplusSeats = totalSeats - reservedSeats - work.reduce((n, p) => n + p.entitlement, 0);
   let unawarded = awardSurpluses(work, Math.max(0, surplusSeats));
 
-  // ---- Item 16(1): ward seats equal to or greater than the Item 13 entitlement ------------------
+  // ---- Item 16: ward seats BEYOND the Item 13 entitlement -----------------------------------------
   // (A party with no ward seats is never "excessive": 0 is not a seat obtained.)
+  // EQUALITY IS NOT EXCESS. A party whose ward seats equal its entitlement takes no list seat (its list
+  // seats are entitlement minus ward seats, which is nil) and nobody's quota is recalculated. Found 8 Nov 2026
+  // against the Commission's own LGE 2026 reports: NW393 (ANC 7 ward seats on an entitlement of 7) and NW372
+  // (Al Jama-ah 1 on 1) are both calculated on the ordinary quota. The recalculation below runs only for a
+  // party with MORE ward seats than its entitlement, which is what the Commission's four 2026 overhang cases
+  // (NW383, NW384, NW385, NW394) have. The Act's text is for the attorney; the Commission's practice is the evidence.
   const excessive = work.filter(
-    (p) => p.wardSeatsWon > 0 && p.wardSeatsWon >= p.entitlement + p.remSeats,
+    (p) => p.wardSeatsWon > 0 && p.wardSeatsWon > p.entitlement + p.remSeats,
   );
   const excessiveIds = new Set(excessive.map((p) => p.id));
 
