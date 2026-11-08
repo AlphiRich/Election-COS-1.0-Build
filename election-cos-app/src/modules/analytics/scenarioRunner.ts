@@ -28,7 +28,7 @@ import {
   type CouncilProjection,
   type Swing,
 } from './wardScenario';
-import { NW405_2021_EXAMPLE } from './nw405Example';
+import { BASELINE_NW405_2021, type Baseline } from './baselines';
 
 export const MAX_DRAWS = 20_000;
 export const MIN_DRAWS = 200;
@@ -49,6 +49,8 @@ export interface RunnerSpec {
   zeroSum?: boolean;
   draws: number;
   seed: number;
+  /** The certified result the swings are measured from. Defaults to JB Marks 2021; the app passes the 2026 result. */
+  baseline?: Baseline;
 }
 
 export class RunnerSpecError extends Error {}
@@ -110,7 +112,7 @@ export interface PartySummary {
   p50: number;
   p95: number;
   max: number;
-  /** Seats under the certified 2021 result, for reference. */
+  /** Seats under the baseline result (2021 or 2026, whichever the run used), for reference. Named for the first baseline. */
   seats2021: number;
 }
 
@@ -142,7 +144,7 @@ export function sampleSwing(spec: RunnerSpec, u: () => number): Swing {
 }
 
 function sampleTurnout(spec: RunnerSpec, u: () => number): number {
-  const mean = spec.turnoutMean ?? NW405_2021_EXAMPLE.totalValidVotes;
+  const mean = spec.turnoutMean ?? (spec.baseline ?? BASELINE_NW405_2021).totalValidVotes;
   const sd = spec.turnoutSd ?? 0;
   return Math.max(1000, Math.round(mean + sd * normal(u)));
 }
@@ -161,6 +163,7 @@ export function runScenarios(spec: RunnerSpec): RunnerResult {
     const proj = projectCouncil({
       swing: sampleSwing(spec, u),
       projectedValidVotes: sampleTurnout(spec, u),
+      baseline: spec.baseline,
     });
     baseline ??= proj;
     for (const p of proj.allocation.parties) (seats[p.id] ??= []).push(p.totalSeats);
@@ -231,7 +234,7 @@ export interface SensitivityRow {
  */
 export function sensitivity(spec: RunnerSpec, target: string): SensitivityRow[] {
   const seatsFor = (swing: Swing) =>
-    projectCouncil({ swing, projectedValidVotes: spec.turnoutMean }).allocation.parties.find(
+    projectCouncil({ swing, projectedValidVotes: spec.turnoutMean, baseline: spec.baseline }).allocation.parties.find(
       (p) => p.id === target,
     )?.totalSeats ?? 0;
   const rows: SensitivityRow[] = [];

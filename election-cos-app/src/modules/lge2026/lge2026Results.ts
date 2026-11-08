@@ -251,3 +251,30 @@ export const prShares = (code: string): Array<{ name: string; pct: number; votes
   const t = sum(m.parties.pr);
   return m.parties.pr.map(([name, votes]) => ({ name, votes, pct: (votes / t) * 100 }));
 };
+
+export interface CouncilHolder {
+  id: string;
+  name: string;
+  seats: number;
+  wardSeats: number;
+}
+
+/**
+ * Who holds the council's seats after Schedule 1: every party with a seat, then independents and parties with no PR list
+ * (their ward seats are outside the list allocation). The seats add up to the council's size. Independents are shown as one
+ * holder because the Commission publishes them merged; in a real council each decides separately.
+ */
+export function councilHolders(code: string): CouncilHolder[] {
+  const alloc = seatAllocation2026(code);
+  const input = seatInput(code);
+  const out: CouncilHolder[] = alloc.parties
+    .filter((p) => p.totalSeats > 0)
+    .map((p) => ({ id: p.id, name: p.name, seats: p.totalSeats, wardSeats: p.wardSeatsWon }));
+  if (input.independentWardSeats > 0) {
+    out.push({ id: 'IND', name: 'Independent ward councillors', seats: input.independentWardSeats, wardSeats: input.independentWardSeats });
+  }
+  const wins = new Map<string, number>();
+  for (const w of wardOutcomes(code)) if (input.noListParties.includes(w.winner)) wins.set(w.winner, (wins.get(w.winner) ?? 0) + 1);
+  for (const [name, seats] of wins) out.push({ id: partyId(name), name: partyLabel(name), seats, wardSeats: seats });
+  return out.sort((a, b) => b.seats - a.seats || a.name.localeCompare(b.name));
+}

@@ -19,9 +19,10 @@ import {
   Td,
   Th,
 } from '@/components/ui';
-import { NW405_2021_EXAMPLE } from './nw405Example';
-import { contestingIds2021 } from './nw405Parties2026';
+import { baselineFor, type Baseline } from './baselines';
+import { MUNICIPALITY_CODES, municipality } from '@/modules/lge2026/lge2026Results';
 import { PartyListNotice } from './PartyListNotice';
+import { SWING_CAVEAT, municipalSwing, wardSwing } from './swing2021to2026';
 import {
   MAX_DRAWS,
   MIN_DRAWS,
@@ -32,26 +33,37 @@ import {
   type RunnerSpec,
 } from './scenarioRunner';
 
-const PARTIES = NW405_2021_EXAMPLE.parties.filter(
-  (p) => p.votes >= 2_000 && contestingIds2021().has(p.id),
-);
+/** The parties a swing can be set for: those with at least 2% of the baseline's party votes, largest first, at most ten. */
+const modelled = (b: Baseline) =>
+  [...b.parties]
+    .filter((p) => p.votes / b.totalValidVotes >= 0.02)
+    .sort((a, c) => c.votes - a.votes)
+    .slice(0, 10);
 const pct = (f: number) => `${(f * 100).toFixed(1)}%`;
 
 export function ScenarioRunnerPage() {
+  const [code, setCode] = useState('NW405');
+  const [year, setYear] = useState<2021 | 2026>(2026);
+  const baseline = useMemo(() => baselineFor(code, code === 'NW405' ? year : 2026), [code, year]);
+  const PARTIES = useMemo(() => modelled(baseline), [baseline]);
   const [mean, setMean] = useState<Record<string, number>>({});
   const [sd, setSd] = useState<Record<string, number>>({});
-  const [turnoutMean, setTurnoutMean] = useState<number>(NW405_2021_EXAMPLE.totalValidVotes);
+  const [turnoutOverride, setTurnoutOverride] = useState<number | null>(null);
+  const turnoutMean = turnoutOverride ?? baseline.totalValidVotes;
+  const setTurnoutMean = (v: number) => setTurnoutOverride(v);
   const [turnoutSd, setTurnoutSd] = useState(0);
   const [zeroSum, setZeroSum] = useState(true);
   const [draws, setDraws] = useState(2000);
   const [seed, setSeed] = useState(1);
-  const [target, setTarget] = useState(PARTIES[0]?.id ?? '');
+  const [targetPick, setTargetPick] = useState('');
+  const target = PARTIES.some((p) => p.id === targetPick) ? targetPick : (PARTIES[0]?.id ?? '');
+  const setTarget = setTargetPick;
   const [result, setResult] = useState<RunnerResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const spec: RunnerSpec = useMemo(
-    () => ({ swingMean: mean, swingSd: sd, turnoutMean, turnoutSd, zeroSum, draws, seed }),
-    [mean, sd, turnoutMean, turnoutSd, zeroSum, draws, seed],
+    () => ({ swingMean: mean, swingSd: sd, turnoutMean, turnoutSd, zeroSum, draws, seed, baseline }),
+    [mean, sd, turnoutMean, turnoutSd, zeroSum, draws, seed, baseline],
   );
   const sens = useMemo(() => (result ? sensitivity(result.spec, target) : []), [result, target]);
 
@@ -78,8 +90,120 @@ export function ScenarioRunnerPage() {
       </BasisNote>
 
       <Card>
-        <PartyListNotice />
+        <SectionLabel as="h2">Starting point</SectionLabel>
+        <div className="grid gap-3 sm:grid-cols-2 mt-2">
+          <Field label="Municipality">
+            {(props) => (
+              <select
+                {...props}
+                value={code}
+                onChange={(e) => {
+                  setCode(e.target.value);
+                  setMean({});
+                  setSd({});
+                  setTurnoutOverride(null);
+                  setResult(null);
+                }}
+              >
+                {MUNICIPALITY_CODES.map((c) => (
+                  <option key={c} value={c}>
+                    {c} {municipality(c).name}
+                  </option>
+                ))}
+              </select>
+            )}
+          </Field>
+          <Field label="Certified result to start from" hint="Only JB Marks has a 2021 ward result in this build.">
+            {(props) => (
+              <select
+                {...props}
+                value={code === 'NW405' ? year : 2026}
+                disabled={code !== 'NW405'}
+                onChange={(e) => {
+                  setYear(Number(e.target.value) as 2021 | 2026);
+                  setMean({});
+                  setSd({});
+                  setTurnoutOverride(null);
+                  setResult(null);
+                }}
+              >
+                <option value={2026}>2026 (certified)</option>
+                <option value={2021}>2021 (superseded delimitation)</option>
+              </select>
+            )}
+          </Field>
+        </div>
+        <p className="text-body-md font-body text-slate mt-2">
+          {baseline.label}: {baseline.totalSeats} council seats, {baseline.results.wards.length} wards,{' '}
+          {baseline.totalValidVotes.toLocaleString('en-ZA')} valid votes on the Commission&rsquo;s own definition
+          (PR plus ward votes for parties on the PR list).
+        </p>
       </Card>
+
+      <Card>
+        {baseline.year === 2021 ? (
+          <PartyListNotice />
+        ) : (
+          <p className="text-body-md font-body">
+            Swings can be set for every party with at least 2% of the 2026 party votes in this municipality (largest first,
+            at most ten). A swing here is a change from the certified 2026 result, for a later contest. Parties below 2%
+            keep their 2026 votes and move only with the renormalisation. Where independents lead a ward, the Commission
+            publishes them merged into one row, so the ward is modelled as that row against the runner-up.
+          </p>
+        )}
+      </Card>
+
+      {baseline.code === 'NW405' && baseline.year === 2026 && (
+        <Card>
+          <SectionLabel as="h2">What moved between 2021 and 2026 in JB Marks</SectionLabel>
+          <Table caption="Share of the party votes (PR plus ward, parties on the PR list) in 2021 and 2026, and the change in points.">
+            <thead>
+              <tr>
+                <Th>Party</Th>
+                <Th numeric>2021 %</Th>
+                <Th numeric>2026 %</Th>
+                <Th numeric>Change (pts)</Th>
+              </tr>
+            </thead>
+            <tbody>
+              {municipalSwing()
+                .slice(0, 8)
+                .map((r) => (
+                  <tr key={r.id}>
+                    <Td>{r.name}</Td>
+                    <Td numeric>{r.share2021.toFixed(1)}</Td>
+                    <Td numeric>{r.share2026.toFixed(1)}</Td>
+                    <Td numeric>{`${r.swing > 0 ? '+' : ''}${r.swing.toFixed(1)}`}</Td>
+                  </tr>
+                ))}
+            </tbody>
+          </Table>
+          <p className="text-caption font-body text-slate mt-2">{SWING_CAVEAT}</p>
+          <div className="mt-3 space-y-1 text-body-md font-body">
+            {wardSwing(['ANC', 'DA', 'EFF', 'VFP']).map((w) => (
+              <p key={w.id}>
+                {w.id}: across the {w.wards} wards where it finished first or second in 2021, its ward share moved by{' '}
+                {w.mean.toFixed(1)} points on average, with a spread of {w.sd.toFixed(1)} points between wards.
+              </p>
+            ))}
+          </div>
+          <Button
+            variant="ghost"
+            onClick={() =>
+              setSd((p) => ({
+                ...p,
+                ...Object.fromEntries(
+                  wardSwing(['ANC', 'DA', 'EFF', 'VFP'])
+                    .filter((w) => PARTIES.some((x) => x.id === w.id))
+                    .map((w) => [w.id, Math.round(w.sd * 2) / 2]),
+                ),
+              }))
+            }
+          >
+            Use these spreads as my starting spreads
+          </Button>
+        </Card>
+      )}
 
       <Card>
         <SectionLabel as="h2">Your assumptions</SectionLabel>
@@ -182,11 +306,11 @@ export function ScenarioRunnerPage() {
               Seats across {result.draws.toLocaleString('en-ZA')} draws
             </SectionLabel>
             <p className="text-caption font-body text-slate mt-1">{result.caveat}</p>
-            <Table caption="Council seats per party across the draws, against the certified 2021 council.">
+            <Table caption={`Council seats per party across the draws, against the certified ${baseline.year} council.`}>
               <thead>
                 <tr>
                   <Th>Party</Th>
-                  <Th numeric>2021</Th>
+                  <Th numeric>{baseline.year}</Th>
                   <Th numeric>5th</Th>
                   <Th numeric>Median</Th>
                   <Th numeric>95th</Th>

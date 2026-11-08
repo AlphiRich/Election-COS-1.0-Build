@@ -1,10 +1,12 @@
 import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import seatIec from '@/data/lge2026/seat-calculation-iec.json';
+import seatsFile from '@/data/lge2026/nw-seats-2026.json';
 import { delimitationFor } from '@/modules/reference/municipalRegister';
 import {
   DISTRICT_CODES,
   LGE2026,
+  councilHolders,
   LGE2026_MANIFEST,
   MUNICIPALITY_CODES,
   district,
@@ -127,5 +129,25 @@ describe('ward outcomes', () => {
     expect(partyId('AFRICAN NATIONAL CONGRESS')).toBe('ANC');
     expect(partyId('VRYHEIDSFRONT PLUS | FREEDOM FRONT PLUS')).toBe('VFP');
     expect(createHash('sha256').update(partyId('SAVE DITSOBOTLA MOVEMENT')).digest('hex')).toHaveLength(64);
+  });
+});
+
+describe('council holders and the compact seats file', () => {
+  it('every council’s holders add up to its size, in all 18', () => {
+    for (const c of MUNICIPALITY_CODES) {
+      expect(councilHolders(c).reduce((s, h) => s + h.seats, 0), c).toBe(delimitationFor(c)!.councillors);
+    }
+  });
+  it('JB Marks 2026 is ANC 22, DA 21, VF+ 6 (the Commission’s own figures), with no majority', () => {
+    const h = councilHolders('NW405');
+    expect(h.slice(0, 3).map((x) => [x.id, x.seats])).toEqual([['ANC', 22], ['DA', 21], ['VFP', 6]]);
+    expect(h[0].seats).toBeLessThan(34);
+  });
+  it('the public site’s seats file is exactly what the engine computes (run scripts/build-lge2026-seats.ts if this fails)', () => {
+    const f = (seatsFile as unknown as { municipalities: Record<string, { totalSeats: number; holders: unknown }> }).municipalities;
+    for (const c of MUNICIPALITY_CODES) {
+      expect(f[c].holders, c).toEqual(JSON.parse(JSON.stringify(councilHolders(c))));
+      expect(f[c].totalSeats).toBe(delimitationFor(c)!.councillors);
+    }
   });
 });

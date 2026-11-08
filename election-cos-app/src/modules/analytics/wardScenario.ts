@@ -40,9 +40,8 @@
  * full party vote is in `nw405Example.ts`.
  */
 import { allocateSeats, type SeatAllocationResult } from './seatCalculator';
-import { NW405_2021_EXAMPLE, NW405_2021_DELIMITATION } from './nw405Example';
+import { BASELINE_NW405_2021, type Baseline } from './baselines';
 import {
-  NW405_WARD_RESULTS_2021,
   marginPoints,
   runnerUpShare,
   swingToFlip,
@@ -155,8 +154,7 @@ export function projectWard(ward: WardResult2021, swing: Swing): WardProjection 
  * turnout. Renormalising is what keeps the result a distribution; without
  * it an unbalanced swing would quietly change the number of votes cast.
  */
-export function projectPrVotes(swing: Swing, projectedValidVotes: number): Array<{ id: string; name: string; votes: number }> {
-  const base = NW405_2021_EXAMPLE;
+export function projectPrVotes(swing: Swing, projectedValidVotes: number, base: Pick<Baseline, 'parties' | 'totalValidVotes'> = BASELINE_NW405_2021): Array<{ id: string; name: string; votes: number }> {
   const shares = base.parties.map((party) => ({
     id: party.id,
     name: party.name,
@@ -182,6 +180,8 @@ export interface ScenarioInput {
    */
   projectedValidVotes?: number;
   results?: WardResults2021;
+  /** The certified result the scenario departs from. Defaults to JB Marks 2021, which the older tests pin; the app uses 2026. */
+  baseline?: Baseline;
 }
 
 /**
@@ -193,23 +193,30 @@ export interface ScenarioInput {
  * through `allocateSeats` rather than adding seats up by hand.
  */
 export function projectCouncil(input: ScenarioInput): CouncilProjection {
-  const results = input.results ?? NW405_WARD_RESULTS_2021;
-  const projectedValidVotes = input.projectedValidVotes ?? NW405_2021_EXAMPLE.totalValidVotes;
+  const base = input.baseline ?? BASELINE_NW405_2021;
+  const results = input.results ?? base.results;
+  const projectedValidVotes = input.projectedValidVotes ?? base.totalValidVotes;
 
   const wards = results.wards.map((ward) => projectWard(ward, input.swing));
 
   const wardSeats: Record<string, number> = {};
-  for (const party of NW405_2021_EXAMPLE.parties) wardSeats[party.id] = 0;
-  for (const ward of wards) wardSeats[ward.projectedWinner] = (wardSeats[ward.projectedWinner] ?? 0) + 1;
+  for (const party of base.parties) wardSeats[party.id] = 0;
+  let independentWardSeats = base.independentId ? 0 : results.independentWardSeats;
+  let noPRListWardSeats = 0;
+  for (const ward of wards) {
+    if (base.independentId && ward.projectedWinner === base.independentId) independentWardSeats++;
+    else if (base.noListIds.includes(ward.projectedWinner)) noPRListWardSeats++;
+    else wardSeats[ward.projectedWinner] = (wardSeats[ward.projectedWinner] ?? 0) + 1;
+  }
 
-  const prVotes = projectPrVotes(input.swing, projectedValidVotes);
+  const prVotes = projectPrVotes(input.swing, projectedValidVotes, base);
 
   const allocation = allocateSeats({
     totalValidVotes: projectedValidVotes,
-    totalSeats: NW405_2021_EXAMPLE.totalSeats,
-    independentWardSeats: results.independentWardSeats,
-    noPRListWardSeats: 0,
-    delimitationId: NW405_2021_DELIMITATION,
+    totalSeats: base.totalSeats,
+    independentWardSeats,
+    noPRListWardSeats,
+    delimitationId: base.delimitationId,
     parties: prVotes.map((party) => ({
       id: party.id,
       name: party.name,
@@ -225,7 +232,14 @@ export function projectCouncil(input: ScenarioInput): CouncilProjection {
     flipped: wards.filter((w) => w.flips),
     netSwing: Object.values(input.swing).reduce((sum, v) => sum + v, 0),
     unmodelledWardVotes: results.votesNotInTopTwo,
-    baseline: allocateSeats({ ...NW405_2021_EXAMPLE, delimitationId: NW405_2021_DELIMITATION }),
+    baseline: allocateSeats({
+      totalValidVotes: base.totalValidVotes,
+      totalSeats: base.totalSeats,
+      independentWardSeats: base.independentWardSeats,
+      noPRListWardSeats: base.noPRListWardSeats,
+      parties: base.parties,
+      delimitationId: base.delimitationId,
+    }),
   };
 }
 

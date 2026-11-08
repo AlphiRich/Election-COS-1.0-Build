@@ -103,6 +103,7 @@ export function WarRoomPage() {
           <Link to="/analytics/voter-statistics">Voter statistics by ward and age</Link> ·{' '}
           <Link to="/analytics/polls">Voter sentiment polls</Link> ·{' '}
           <Link to="/analytics/scenario-runner">Scenario runner</Link> ·{' '}
+          <Link to="/analytics/lge-2026-results">2026 election results, North West</Link> ·{' '}
           <Link to="/analytics/drill-down">Drill-down by ward and voting district</Link> ·{' '}
           <Link to="/analytics/analyst">Data analyst</Link>
         </p>
