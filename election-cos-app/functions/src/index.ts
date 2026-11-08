@@ -7,6 +7,7 @@ export { resolveCapabilities } from './resolveCapabilities';
 export { sync } from './sync';
 export { unmaskCandidateIdNumber } from './unmaskCandidateIdNumber';
 export { requestMembershipOtp, verifyMembershipOtp } from './membershipOtpCallables';
+export { requestSecondFactorCode, verifySecondFactorCode } from './secondFactorCallables';
 export { sweepRgaNotices } from './rgaNoticeScheduled';
 export {
   maintainVoterCounters,

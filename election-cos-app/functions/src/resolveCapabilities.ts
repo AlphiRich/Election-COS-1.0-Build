@@ -38,6 +38,7 @@ import { getAuth } from 'firebase-admin/auth';
 import { initializeApp, getApps } from 'firebase-admin/app';
 import { REGION } from './region';
 import { seedRole } from './seedRoles';
+import { requiresSecondFactor } from './secondFactor';
 
 if (!getApps().length) initializeApp();
 
@@ -86,6 +87,8 @@ export const resolveCapabilities = onDocumentWritten(
     await getAuth().setCustomUserClaims(uid, {
       tenantId,
       roleId: after.roleId,
+      // Rewriting the claims object drops any `mfaUntil`: a changed role, scope or number must re-verify.
+      mfaRequired: requiresSecondFactor(after.roleId),
       caps,
       geoScope: role.geoScope,
       wardScope: after.wardScope,

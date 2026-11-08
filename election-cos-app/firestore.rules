@@ -15,8 +15,18 @@ service cloud.firestore {
 
     // ---- shared helpers -----------------------------------------------
 
+    // Second sign-in factor (functions/src/secondFactor.ts). The server decides
+    // which roles owe the SMS code and stamps `mfaRequired` on the token when it
+    // resolves the role (rules never name a role). `verifySecondFactorCode` then
+    // stamps `mfaUntil` (epoch seconds), which lapses after 12h. Fail-closed: a
+    // token with no `mfaRequired` claim is treated as requiring the code.
+    function mfaOK() {
+      return request.auth.token.get('mfaRequired', true) == false
+        || request.auth.token.get('mfaUntil', 0) > request.time.toMillis() / 1000;
+    }
+
     function tenantOK(tid) {
-      return request.auth != null && request.auth.token.tenantId == tid;
+      return request.auth != null && request.auth.token.tenantId == tid && mfaOK();
     }
 
     function cap(c) {

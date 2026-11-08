@@ -28,6 +28,9 @@ import {
   createUserWithEmailAndPassword,
   FacebookAuthProvider,
   GoogleAuthProvider,
+  isSignInWithEmailLink,
+  sendSignInLinkToEmail,
+  signInWithEmailLink,
   OAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -143,6 +146,53 @@ export async function signInWithProvider(id: ProviderId): Promise<User> {
   if (credential.user.displayName || credential.user.photoURL) {
     await updateProfile(credential.user, { displayName: null, photoURL: null });
   }
+  return credential.user;
+}
+
+/**
+ * Email-link sign-in (the design's "Send sign-in link"): no password to forget or leak. The link
+ * returns to this app's own sign-in address and is completed on the same browser with the same
+ * email. The Auth record still holds uid + email only.
+ */
+const EMAIL_KEY = 'ecos.emailForSignIn';
+
+export async function sendEmailLink(email: string): Promise<void> {
+  assertMinimalAuthPayload({ email });
+  await sendSignInLinkToEmail(getFirebaseAuth(), email, {
+    url: `${window.location.origin}/`,
+    handleCodeInApp: true,
+  });
+  try {
+    window.localStorage.setItem(EMAIL_KEY, email);
+  } catch {
+    /* private mode: the person is asked for the email again on return */
+  }
+}
+
+export function openedFromEmailLink(href: string = window.location.href): boolean {
+  try {
+    return isSignInWithEmailLink(getFirebaseAuth(), href);
+  } catch {
+    return false;
+  }
+}
+
+export function rememberedEmail(): string | null {
+  try {
+    return window.localStorage.getItem(EMAIL_KEY);
+  } catch {
+    return null;
+  }
+}
+
+export async function completeEmailLink(email: string, href: string = window.location.href): Promise<User> {
+  const credential = await signInWithEmailLink(getFirebaseAuth(), email, href);
+  try {
+    window.localStorage.removeItem(EMAIL_KEY);
+  } catch {
+    /* nothing to clear */
+  }
+  window.history.replaceState({}, '', window.location.pathname); // drop the one-time link from the URL bar
   return credential.user;
 }
 

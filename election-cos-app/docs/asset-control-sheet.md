@@ -5604,3 +5604,4 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | Baselines and swing | `modules/analytics/baselines.ts`, `swing2021to2026.ts` | Scenario runner and coalition tool start from 2026 |
 | Master hub | `src/modules/hub/` | Master application built in; 16 recorded changes |
 | Master stack (source) | `election_campaign_os_master_application.html` (two identical copies) | Not copied into the repo |
+| Second sign-in factor | `functions/src/secondFactor*.ts`, `src/auth/SecondFactor*.ts(x)`, `firestore.rules` `mfaOK()`, `tools/rules-check/mfa-rules.mjs` | Email, then SMS code above canvasser; fails closed until an SMS provider exists |

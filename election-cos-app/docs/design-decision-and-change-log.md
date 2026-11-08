@@ -3204,3 +3204,47 @@ Owner instruction (2 Nov 2026): the candidate list, voting-district locator and 
 - **Applied:** `CORPORATE_DOMAIN` is back to `innovationconsult.co.za` (a 7 Nov commit on `main` had set it to the product's domain, which broke 6 tests in `estate.test.ts` and `publicDomain.test.ts`; those pass again). `PRODUCT_MAIL_DOMAIN` is new and equals `SITE_DOMAIN`. The seven company mailboxes were already on `electioncos.co.za` (2 Nov).
 - **Checked:** nothing in the application, functions, scripts or worker names a mailbox on the corporate domain, and the application sends no mail to one (enquiries are stored as records; no mail is sent). The corporate domain still appears, correctly, as the company's website link (footer, About page, document letterhead, enquiry origin allowlist). `docs/innovation-consult-brand.md` keeps `info@innovationconsult.co.za` because it is Innovation Consult's own letterhead, not the product's.
 - **Guard:** `src/config/productMail.test.ts` fails if a product mailbox is off the product domain or if any source file names a mailbox on the corporate domain. Injection: changing `info@electioncos.co.za` to the corporate domain fails it; reverted.
+
+### Session 54 (cont.) — sign-in: email first, then an SMS code for every role above canvasser (8 Nov 2026)
+
+**Owner instruction.** Sign-in is an email login followed by a one-time code to the user's number as
+second verification, for any tier above volunteer / canvasser. (Read from the Election-COS sign-in
+template: Staff SSO tiles, "Send sign-in link" by email, POPIA line.)
+
+**Decisions.**
+1. **Not Firebase's built-in SMS MFA.** It writes the phone number into the Auth record, which §4.3
+   forbids (phone is a FORBIDDEN Auth field), and it needs Identity Platform billing. The code goes to the
+   number already on the staff profile in Firestore (africa-south1). The person cannot choose the
+   destination: a stolen staff email is not enough without the handset the administrator recorded.
+2. **Exempt tier = `canvasser` only** (the volunteer role). The six roles above it (party-hq-admin,
+   municipal-team-lead, ward-lead, vd-captain, compliance-officer, finance-officer) owe the code. An
+   unknown or missing role owes it too (fail closed).
+3. **Enforced on the server, not by hiding a screen.** `resolveCapabilities` stamps `mfaRequired` on the
+   token; `verifySecondFactorCode` stamps `mfaUntil` (12 hours); `firestore.rules` `tenantOK()` (the gate
+   every tenant collection passes) now requires `mfaOK()`. Rules name no role (the existing
+   `roleModel` test forbids it, and caught my first draft doing exactly that). A role, scope or number
+   change rewrites the claims and drops `mfaUntil`, so it forces a fresh code.
+4. **Reuses the reviewed OTP primitives** (scrypt-hashed code, constant-time compare, 5 attempts, cooldown,
+   attempts-on-the-challenge). Code lifetime 5 min. Cost guard applies (price has no default).
+5. **Email-link sign-in** added beside the four provider buttons (opt-in `VITE_AUTH_EMAIL_LINK=true`,
+   set in the git-ignored `.env.production.local`).
+
+**Proved.** 12 server tests, 5 client tests. `firestore.rules` run against the real Firestore emulator
+(`tools/rules-check/mfa-rules.mjs`): canvasser allowed; ward-lead denied without the code, allowed with a
+live one, denied when it has expired; a token with no claim denied; wrong tenant denied. Injection: with
+`mfaOK()` removed four cases failed open; with its default flipped to `false` the "no claim" case failed
+open. Both reverted.
+
+**NOT done, and why it matters.** No SMS provider exists on this project, so `requestSecondFactorCode`
+fails closed (`unconfiguredSms`). **Until a provider is wired and the rules are deployed together, every
+role above canvasser would be locked out of data.** Owner decisions needed: (a) the SMS provider (one
+function to replace, `functions/src/secondFactorCallables.ts`), plus its credential in environment
+secrets and `SMS_COST_CENTS_PER_MESSAGE`; (b) every staff profile above canvasser needs a mobile number;
+(c) a break-glass path for the first administrator (none built: seeding that account's number is a
+console step); (d) Email-link must be switched on in the Firebase console. Not verified end to end: the
+callables against a live project, and an actual SMS.
+
+**Not changed.** The app's palette was not re-themed to the design-system skill's tokens (not requested;
+the skill's navy/teal differs from the shipped ink/blue). The Staff-SSO / Personas / Guest tabs of the
+template were not rebuilt; the existing provider buttons and the new email-link form carry the same
+function.

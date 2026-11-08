@@ -37,6 +37,8 @@ function claimsToSession(user: User, claims: Record<string, unknown>): SessionCo
     geoScope,
     wardScope: claims.wardScope as string | undefined,
     vdScope: claims.vdScope as string | undefined,
+    mfaRequired: typeof claims.mfaRequired === 'boolean' ? claims.mfaRequired : undefined,
+    mfaUntil: typeof claims.mfaUntil === 'number' ? claims.mfaUntil : undefined,
   };
 }
 
