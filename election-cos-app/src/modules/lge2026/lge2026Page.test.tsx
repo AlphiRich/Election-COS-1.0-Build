@@ -21,7 +21,7 @@ describe('LGE 2026 results page', () => {
     expect(el.textContent).toMatch(/67/);
     expect(el.textContent).toContain('never added together');
     expect(el.textContent).toMatch(/Schedule 2[\s\S]*not implement/);
-    expect(el.textContent).toMatch(/\b2[\s ]069\b/); // the Commission's quota for NW405
+    expect(el.textContent).toMatch(/\b2[\s\u00a0]069\b/); // the Commission's quota for NW405
   });
   it('opens a ward’s voting districts for JB Marks', async () => {
     const el = await mount();

@@ -1,7 +1,7 @@
 /**
  * Election Campaign OS — the SOP register
  *
- * SOP-01 through SOP-18 are written (SOP-13 to 16 added 2 Nov 2026 with the reference data, polls and
+ * SOP-01 through SOP-20 are written (SOP-13 to 16 added 2 Nov 2026 with the reference data, polls and
  * scenario tools). An
  * SOP is declared in `PLANNED_SOPS` with the area, audience and gating it
  * will carry, and moves into `SOPS` when it is written and not before: a
@@ -32,6 +32,8 @@ import {
   ANALYST_SOP,
   CANDIDATE_LIST_SOP,
   DRILL_DOWN_SOP,
+  LGE2026_SOP,
+  MASTER_HUB_SOP,
   POLLS_SOP,
   SCENARIO_RUNNER_SOP,
   VOTER_STATISTICS_SOP,
@@ -56,6 +58,8 @@ export const SOPS: Sop[] = [
   SCENARIO_RUNNER_SOP,
   ANALYST_SOP,
   DRILL_DOWN_SOP,
+  LGE2026_SOP,
+  MASTER_HUB_SOP,
 ];
 
 export interface PlannedSop {

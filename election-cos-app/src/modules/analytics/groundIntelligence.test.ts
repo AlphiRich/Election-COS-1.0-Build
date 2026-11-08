@@ -4,6 +4,8 @@ import {
   COMPLIANCE_NOTICE,
   MIN_CELL,
   SEAT_EXPLAINER,
+  VOTER_EDUCATION_NOTICE,
+  sentimentTableHtml,
   buildGroundIntelligence,
   groundIntelligenceHtml,
 } from './groundIntelligence';
@@ -64,3 +66,29 @@ describe('daily ground intelligence', () => {
     );
   });
 });
+
+describe('what the supplied newsletter added', () => {
+  it('states the Item 12 formula as the statute has it, and still calculates nothing', () => {
+    expect(SEAT_EXPLAINER).toContain('Q = (A / (B - C)) + 1');
+    expect(SEAT_EXPLAINER).not.toMatch(/Total Council Seats\)/);
+    expect(SEAT_EXPLAINER).toMatch(/does not calculate/);
+  });
+  it('carries the Commission’s registration check', () => {
+    expect(VOTER_EDUCATION_NOTICE).toContain('32810');
+    expect(VOTER_EDUCATION_NOTICE).toContain('elections.org.za');
+  });
+  it('hides the average and issue of any row built on fewer than 5 people, and never prints the small count', () => {
+    const html = sentimentTableHtml([
+      { ward: 'NW405-W07', vd: '86750011', avg: 2, issue: 'Water Infrastructure', polled: 2 },
+      { ward: 'NW405-W08', vd: '86750012', avg: 3.4, issue: 'Roads', polled: 12 },
+    ]);
+    expect(html).toContain('Hidden: fewer than 5 people');
+    expect(html).not.toContain('Water Infrastructure');
+    expect(html).toContain('3.4 / 5.0');
+    expect(html).toContain('Roads');
+  });
+  it('says plainly when there is no ward-level source', () => {
+    expect(sentimentTableHtml([])).toContain('No sentiment by ward or voting district is held');
+  });
+});
+

@@ -644,6 +644,780 @@
         "sha256": "a64f66d65008944c71c0adbc96d93ec11021801539c9db2f04311fd33fd57bb5",
         "bytes": 4669755
       }
+    },
+    {
+      "id": "iec-lge2026-nw371-party-results",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW371_LGE2026_Downloadable_Party_Results.csv",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/NW371.csv",
+      "status": "CONFIRMED",
+      "note": "The Commission's 'Downloadable Party Results' for NW371 Moretele, Local Government Elections 2026 (event EEID1887): one row per party, ballot (Ward, PR, DC 40%) and voting district. FETCHED BY THIS BUILD on 2026-11-08 (the link comes from the Commission's own Municipal election results download form). 1,441,829 bytes, 10,323 data rows, generated 2026-11-07T13:13:48 to 2026-11-07T13:13:48. Reduced to counts by scripts/build-lge2026-results.mjs; reconciled with the Commission's own Seat Calculation Detail report for the same municipality (lge2026Results.test.ts).",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "f875e9af6a69b0a9f3407932986e7d9d19618adc71c3c459621c382b6b206d8b",
+        "bytes": 1441829
+      },
+      "expect": {
+        "content_type": [
+          "text/csv",
+          "application/octet-stream",
+          "application/vnd.ms-excel"
+        ],
+        "min_bytes": 50000,
+        "reject_html": true,
+        "min_rows": 10318
+      }
+    },
+    {
+      "id": "iec-lge2026-nw372-party-results",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW372_LGE2026_Downloadable_Party_Results.csv",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/NW372.csv",
+      "status": "CONFIRMED",
+      "note": "The Commission's 'Downloadable Party Results' for NW372 Madibeng, Local Government Elections 2026 (event EEID1887): one row per party, ballot (Ward, PR, DC 40%) and voting district. FETCHED BY THIS BUILD on 2026-11-08 (the link comes from the Commission's own Municipal election results download form). 2,449,030 bytes, 17,529 data rows, generated 2026-11-07T01:46:32 to 2026-11-07T01:46:32. Reduced to counts by scripts/build-lge2026-results.mjs; reconciled with the Commission's own Seat Calculation Detail report for the same municipality (lge2026Results.test.ts).",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "db84194fae4884184f2a8d5c991e890b31c30fbee3e47bde7b1caf0fdb2a8a48",
+        "bytes": 2449030
+      },
+      "expect": {
+        "content_type": [
+          "text/csv",
+          "application/octet-stream",
+          "application/vnd.ms-excel"
+        ],
+        "min_bytes": 50000,
+        "reject_html": true,
+        "min_rows": 17524
+      }
+    },
+    {
+      "id": "iec-lge2026-nw373-party-results",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW373_LGE2026_Downloadable_Party_Results.csv",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/NW373.csv",
+      "status": "CONFIRMED",
+      "note": "The Commission's 'Downloadable Party Results' for NW373 Rustenburg, Local Government Elections 2026 (event EEID1887): one row per party, ballot (Ward, PR, DC 40%) and voting district. FETCHED BY THIS BUILD on 2026-11-08 (the link comes from the Commission's own Municipal election results download form). 2,577,060 bytes, 18,111 data rows, generated 2026-11-07T23:56:10 to 2026-11-07T23:56:10. Reduced to counts by scripts/build-lge2026-results.mjs; reconciled with the Commission's own Seat Calculation Detail report for the same municipality (lge2026Results.test.ts).",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "2676083d646cb7bdba22b133ceffbb6048d131a10ee27b47c28f6052a4b215c6",
+        "bytes": 2577060
+      },
+      "expect": {
+        "content_type": [
+          "text/csv",
+          "application/octet-stream",
+          "application/vnd.ms-excel"
+        ],
+        "min_bytes": 50000,
+        "reject_html": true,
+        "min_rows": 18106
+      }
+    },
+    {
+      "id": "iec-lge2026-nw374-party-results",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW374_LGE2026_Downloadable_Party_Results.csv",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/NW374.csv",
+      "status": "CONFIRMED",
+      "note": "The Commission's 'Downloadable Party Results' for NW374 Kgetlengrivier, Local Government Elections 2026 (event EEID1887): one row per party, ballot (Ward, PR, DC 40%) and voting district. FETCHED BY THIS BUILD on 2026-11-08 (the link comes from the Commission's own Municipal election results download form). 272,884 bytes, 1,893 data rows, generated 2026-11-05T17:00:52 to 2026-11-05T17:00:52. Reduced to counts by scripts/build-lge2026-results.mjs; reconciled with the Commission's own Seat Calculation Detail report for the same municipality (lge2026Results.test.ts).",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "c96ed746887646093a9095e20cf3526c26e855073c0c09d00ff27407209906fe",
+        "bytes": 272884
+      },
+      "expect": {
+        "content_type": [
+          "text/csv",
+          "application/octet-stream",
+          "application/vnd.ms-excel"
+        ],
+        "min_bytes": 50000,
+        "reject_html": true,
+        "min_rows": 1888
+      }
+    },
+    {
+      "id": "iec-lge2026-nw375-party-results",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW375_LGE2026_Downloadable_Party_Results.csv",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/NW375.csv",
+      "status": "CONFIRMED",
+      "note": "The Commission's 'Downloadable Party Results' for NW375 Moses Kotane, Local Government Elections 2026 (event EEID1887): one row per party, ballot (Ward, PR, DC 40%) and voting district. FETCHED BY THIS BUILD on 2026-11-08 (the link comes from the Commission's own Municipal election results download form). 1,782,947 bytes, 12,580 data rows, generated 2026-11-07T13:13:48 to 2026-11-07T13:13:48. Reduced to counts by scripts/build-lge2026-results.mjs; reconciled with the Commission's own Seat Calculation Detail report for the same municipality (lge2026Results.test.ts).",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "6860e2943b0a6bfb93c606bae572ede8dba1278704d70c6a59b1ffc5d670bc01",
+        "bytes": 1782947
+      },
+      "expect": {
+        "content_type": [
+          "text/csv",
+          "application/octet-stream",
+          "application/vnd.ms-excel"
+        ],
+        "min_bytes": 50000,
+        "reject_html": true,
+        "min_rows": 12575
+      }
+    },
+    {
+      "id": "iec-lge2026-nw381-party-results",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW381_LGE2026_Downloadable_Party_Results.csv",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/NW381.csv",
+      "status": "CONFIRMED",
+      "note": "The Commission's 'Downloadable Party Results' for NW381 Ratlou, Local Government Elections 2026 (event EEID1887): one row per party, ballot (Ward, PR, DC 40%) and voting district. FETCHED BY THIS BUILD on 2026-11-08 (the link comes from the Commission's own Municipal election results download form). 508,589 bytes, 3,724 data rows, generated 2026-11-06T14:24:30 to 2026-11-06T14:24:30. Reduced to counts by scripts/build-lge2026-results.mjs; reconciled with the Commission's own Seat Calculation Detail report for the same municipality (lge2026Results.test.ts).",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "30f5bf9ae9fcc7ccab9e0e3ff43c2dae7339de912484292cf496e0eca245e644",
+        "bytes": 508589
+      },
+      "expect": {
+        "content_type": [
+          "text/csv",
+          "application/octet-stream",
+          "application/vnd.ms-excel"
+        ],
+        "min_bytes": 50000,
+        "reject_html": true,
+        "min_rows": 3719
+      }
+    },
+    {
+      "id": "iec-lge2026-nw382-party-results",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW382_LGE2026_Downloadable_Party_Results.csv",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/NW382.csv",
+      "status": "CONFIRMED",
+      "note": "The Commission's 'Downloadable Party Results' for NW382 Tswaing, Local Government Elections 2026 (event EEID1887): one row per party, ballot (Ward, PR, DC 40%) and voting district. FETCHED BY THIS BUILD on 2026-11-08 (the link comes from the Commission's own Municipal election results download form). 525,844 bytes, 3,828 data rows, generated 2026-11-06T15:47:09 to 2026-11-06T15:47:09. Reduced to counts by scripts/build-lge2026-results.mjs; reconciled with the Commission's own Seat Calculation Detail report for the same municipality (lge2026Results.test.ts).",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "f57adc26db39e7ffddd7cf048c9f77de2a725fa4b62cc238c3fbab477c66b36b",
+        "bytes": 525844
+      },
+      "expect": {
+        "content_type": [
+          "text/csv",
+          "application/octet-stream",
+          "application/vnd.ms-excel"
+        ],
+        "min_bytes": 50000,
+        "reject_html": true,
+        "min_rows": 3823
+      }
+    },
+    {
+      "id": "iec-lge2026-nw383-party-results",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW383_LGE2026_Downloadable_Party_Results.csv",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/NW383.csv",
+      "status": "CONFIRMED",
+      "note": "The Commission's 'Downloadable Party Results' for NW383 Mafikeng, Local Government Elections 2026 (event EEID1887): one row per party, ballot (Ward, PR, DC 40%) and voting district. FETCHED BY THIS BUILD on 2026-11-08 (the link comes from the Commission's own Municipal election results download form). 1,134,016 bytes, 8,135 data rows, generated 2026-11-06T18:23:49 to 2026-11-06T18:23:49. Reduced to counts by scripts/build-lge2026-results.mjs; reconciled with the Commission's own Seat Calculation Detail report for the same municipality (lge2026Results.test.ts).",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "661d1fd49e67df65215a511ef0cd3307c9cb317dccd643337c941c58d87754a2",
+        "bytes": 1134016
+      },
+      "expect": {
+        "content_type": [
+          "text/csv",
+          "application/octet-stream",
+          "application/vnd.ms-excel"
+        ],
+        "min_bytes": 50000,
+        "reject_html": true,
+        "min_rows": 8130
+      }
+    },
+    {
+      "id": "iec-lge2026-nw384-party-results",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW384_LGE2026_Downloadable_Party_Results.csv",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/NW384.csv",
+      "status": "CONFIRMED",
+      "note": "The Commission's 'Downloadable Party Results' for NW384 Ditsobotla, Local Government Elections 2026 (event EEID1887): one row per party, ballot (Ward, PR, DC 40%) and voting district. FETCHED BY THIS BUILD on 2026-11-08 (the link comes from the Commission's own Municipal election results download form). 997,362 bytes, 7,173 data rows, generated 2026-11-07T18:44:54 to 2026-11-07T18:44:54. Reduced to counts by scripts/build-lge2026-results.mjs; reconciled with the Commission's own Seat Calculation Detail report for the same municipality (lge2026Results.test.ts).",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "0d5cce2ed2d42deb721a00f23371654b67442983ee75d1186f713957871178f3",
+        "bytes": 997362
+      },
+      "expect": {
+        "content_type": [
+          "text/csv",
+          "application/octet-stream",
+          "application/vnd.ms-excel"
+        ],
+        "min_bytes": 50000,
+        "reject_html": true,
+        "min_rows": 7168
+      }
+    },
+    {
+      "id": "iec-lge2026-nw385-party-results",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW385_LGE2026_Downloadable_Party_Results.csv",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/NW385.csv",
+      "status": "CONFIRMED",
+      "note": "The Commission's 'Downloadable Party Results' for NW385 Ramotshere Moiloa, Local Government Elections 2026 (event EEID1887): one row per party, ballot (Ward, PR, DC 40%) and voting district. FETCHED BY THIS BUILD on 2026-11-08 (the link comes from the Commission's own Municipal election results download form). 965,909 bytes, 6,465 data rows, generated 2026-11-06T18:23:44 to 2026-11-06T18:23:44. Reduced to counts by scripts/build-lge2026-results.mjs; reconciled with the Commission's own Seat Calculation Detail report for the same municipality (lge2026Results.test.ts).",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "ecfb814b657ba3a963e0c5801887cbba6ec42b0e9b6218da07adeb779a1272cd",
+        "bytes": 965909
+      },
+      "expect": {
+        "content_type": [
+          "text/csv",
+          "application/octet-stream",
+          "application/vnd.ms-excel"
+        ],
+        "min_bytes": 50000,
+        "reject_html": true,
+        "min_rows": 6460
+      }
+    },
+    {
+      "id": "iec-lge2026-nw392-party-results",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW392_LGE2026_Downloadable_Party_Results.csv",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/NW392.csv",
+      "status": "CONFIRMED",
+      "note": "The Commission's 'Downloadable Party Results' for NW392 Naledi, Local Government Elections 2026 (event EEID1887): one row per party, ballot (Ward, PR, DC 40%) and voting district. FETCHED BY THIS BUILD on 2026-11-08 (the link comes from the Commission's own Municipal election results download form). 279,037 bytes, 2,030 data rows, generated 2026-11-06T11:18:05 to 2026-11-06T11:18:05. Reduced to counts by scripts/build-lge2026-results.mjs; reconciled with the Commission's own Seat Calculation Detail report for the same municipality (lge2026Results.test.ts).",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "9c27852af585b7e05f88077a7076d7dcf5cad78eb99fb8a05577cc06d13014c6",
+        "bytes": 279037
+      },
+      "expect": {
+        "content_type": [
+          "text/csv",
+          "application/octet-stream",
+          "application/vnd.ms-excel"
+        ],
+        "min_bytes": 50000,
+        "reject_html": true,
+        "min_rows": 2025
+      }
+    },
+    {
+      "id": "iec-lge2026-nw393-party-results",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW393_LGE2026_Downloadable_Party_Results.csv",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/NW393.csv",
+      "status": "CONFIRMED",
+      "note": "The Commission's 'Downloadable Party Results' for NW393 Mamusa, Local Government Elections 2026 (event EEID1887): one row per party, ballot (Ward, PR, DC 40%) and voting district. FETCHED BY THIS BUILD on 2026-11-08 (the link comes from the Commission's own Municipal election results download form). 146,498 bytes, 1,070 data rows, generated 2026-11-05T16:48:27 to 2026-11-05T16:48:27. Reduced to counts by scripts/build-lge2026-results.mjs; reconciled with the Commission's own Seat Calculation Detail report for the same municipality (lge2026Results.test.ts).",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "bc893727f11ab8b51b43321577b1212965dd49fc379fc0a9d96365519be287e9",
+        "bytes": 146498
+      },
+      "expect": {
+        "content_type": [
+          "text/csv",
+          "application/octet-stream",
+          "application/vnd.ms-excel"
+        ],
+        "min_bytes": 50000,
+        "reject_html": true,
+        "min_rows": 1065
+      }
+    },
+    {
+      "id": "iec-lge2026-nw394-party-results",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW394_LGE2026_Downloadable_Party_Results.csv",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/NW394.csv",
+      "status": "CONFIRMED",
+      "note": "The Commission's 'Downloadable Party Results' for NW394 Greater Taung, Local Government Elections 2026 (event EEID1887): one row per party, ballot (Ward, PR, DC 40%) and voting district. FETCHED BY THIS BUILD on 2026-11-08 (the link comes from the Commission's own Municipal election results download form). 1,081,174 bytes, 7,318 data rows, generated 2026-11-06T13:39:11 to 2026-11-06T13:39:11. Reduced to counts by scripts/build-lge2026-results.mjs; reconciled with the Commission's own Seat Calculation Detail report for the same municipality (lge2026Results.test.ts).",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "04a0088df89e349539472a992b2d78b872557d5524771270cf62fda00a66f90c",
+        "bytes": 1081174
+      },
+      "expect": {
+        "content_type": [
+          "text/csv",
+          "application/octet-stream",
+          "application/vnd.ms-excel"
+        ],
+        "min_bytes": 50000,
+        "reject_html": true,
+        "min_rows": 7313
+      }
+    },
+    {
+      "id": "iec-lge2026-nw396-party-results",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW396_LGE2026_Downloadable_Party_Results.csv",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/NW396.csv",
+      "status": "CONFIRMED",
+      "note": "The Commission's 'Downloadable Party Results' for NW396 Lekwa-Teemane, Local Government Elections 2026 (event EEID1887): one row per party, ballot (Ward, PR, DC 40%) and voting district. FETCHED BY THIS BUILD on 2026-11-08 (the link comes from the Commission's own Municipal election results download form). 138,582 bytes, 962 data rows, generated 2026-11-05T20:10:11 to 2026-11-05T20:10:11. Reduced to counts by scripts/build-lge2026-results.mjs; reconciled with the Commission's own Seat Calculation Detail report for the same municipality (lge2026Results.test.ts).",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "1e60155f30a35d7465fcc7a649a5a4757a5ee7fe67ea62d6c9d6c68f41c4b65c",
+        "bytes": 138582
+      },
+      "expect": {
+        "content_type": [
+          "text/csv",
+          "application/octet-stream",
+          "application/vnd.ms-excel"
+        ],
+        "min_bytes": 50000,
+        "reject_html": true,
+        "min_rows": 957
+      }
+    },
+    {
+      "id": "iec-lge2026-nw397-party-results",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW397_LGE2026_Downloadable_Party_Results.csv",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/NW397.csv",
+      "status": "CONFIRMED",
+      "note": "The Commission's 'Downloadable Party Results' for NW397 Kagisano-Molopo, Local Government Elections 2026 (event EEID1887): one row per party, ballot (Ward, PR, DC 40%) and voting district. FETCHED BY THIS BUILD on 2026-11-08 (the link comes from the Commission's own Municipal election results download form). 622,167 bytes, 4,282 data rows, generated 2026-11-05T20:10:11 to 2026-11-05T20:10:11. Reduced to counts by scripts/build-lge2026-results.mjs; reconciled with the Commission's own Seat Calculation Detail report for the same municipality (lge2026Results.test.ts).",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "883ba3d022583b2884e4e79a6b107736be86ef22fe1141e6df00c9ebfbc14640",
+        "bytes": 622167
+      },
+      "expect": {
+        "content_type": [
+          "text/csv",
+          "application/octet-stream",
+          "application/vnd.ms-excel"
+        ],
+        "min_bytes": 50000,
+        "reject_html": true,
+        "min_rows": 4277
+      }
+    },
+    {
+      "id": "iec-lge2026-nw403-party-results",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW403_LGE2026_Downloadable_Party_Results.csv",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/NW403.csv",
+      "status": "CONFIRMED",
+      "note": "The Commission's 'Downloadable Party Results' for NW403 Matlosana, Local Government Elections 2026 (event EEID1887): one row per party, ballot (Ward, PR, DC 40%) and voting district. FETCHED BY THIS BUILD on 2026-11-08 (the link comes from the Commission's own Municipal election results download form). 1,067,976 bytes, 7,535 data rows, generated 2026-11-07T13:45:54 to 2026-11-07T13:45:54. Reduced to counts by scripts/build-lge2026-results.mjs; reconciled with the Commission's own Seat Calculation Detail report for the same municipality (lge2026Results.test.ts).",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "414359fdd0e993b6e72fd69b597fa783980c69e7d46646e1acf05e25421cd13a",
+        "bytes": 1067976
+      },
+      "expect": {
+        "content_type": [
+          "text/csv",
+          "application/octet-stream",
+          "application/vnd.ms-excel"
+        ],
+        "min_bytes": 50000,
+        "reject_html": true,
+        "min_rows": 7530
+      }
+    },
+    {
+      "id": "iec-lge2026-nw404-party-results",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW404_LGE2026_Downloadable_Party_Results.csv",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/NW404.csv",
+      "status": "CONFIRMED",
+      "note": "The Commission's 'Downloadable Party Results' for NW404 Maquassi Hills, Local Government Elections 2026 (event EEID1887): one row per party, ballot (Ward, PR, DC 40%) and voting district. FETCHED BY THIS BUILD on 2026-11-08 (the link comes from the Commission's own Municipal election results download form). 253,887 bytes, 1,754 data rows, generated 2026-11-06T16:48:04 to 2026-11-06T16:48:04. Reduced to counts by scripts/build-lge2026-results.mjs; reconciled with the Commission's own Seat Calculation Detail report for the same municipality (lge2026Results.test.ts).",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "3868512e9a881eb1cc93a671710fe63810f409c69a64fa7a743a2b00689a08e2",
+        "bytes": 253887
+      },
+      "expect": {
+        "content_type": [
+          "text/csv",
+          "application/octet-stream",
+          "application/vnd.ms-excel"
+        ],
+        "min_bytes": 50000,
+        "reject_html": true,
+        "min_rows": 1749
+      }
+    },
+    {
+      "id": "iec-lge2026-nw405-party-results",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW405_LGE2026_Downloadable_Party_Results.csv",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/NW/NW405.csv",
+      "status": "CONFIRMED",
+      "note": "The Commission's 'Downloadable Party Results' for NW405 JB Marks, Local Government Elections 2026 (event EEID1887): one row per party, ballot (Ward, PR, DC 40%) and voting district. FETCHED BY THIS BUILD on 2026-11-08 (the link comes from the Commission's own Municipal election results download form). 781,428 bytes, 5,638 data rows, generated 2026-11-06T15:47:10 to 2026-11-06T15:47:10. Reduced to counts by scripts/build-lge2026-results.mjs; reconciled with the Commission's own Seat Calculation Detail report for the same municipality (lge2026Results.test.ts).",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "8349fafac0de8678ac36c8d2b1004712c4807e4a3bf2922afd1ba605e81473e3",
+        "bytes": 781428
+      },
+      "expect": {
+        "content_type": [
+          "text/csv",
+          "application/octet-stream",
+          "application/vnd.ms-excel"
+        ],
+        "min_bytes": 50000,
+        "reject_html": true,
+        "min_rows": 5633
+      }
+    },
+    {
+      "id": "iec-lge2026-nw371-seat-calculation",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW371_LGE2026_Seat_Calculation_Detail.pdf",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/NW371.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's own 'Seat Calculation Detail' for NW371 Moretele, Local Government Elections 2026. FETCHED BY THIS BUILD on 2026-11-08. 108,485 bytes. Read by tools/lge2026/extract-seat-calculation.py (pdftotext), which refuses a report whose party votes do not add to A, whose quota does not recompute, or whose party seats do not add to the council's size. This is the target the build's Schedule 1 engine is reconciled against, 18 of 18.",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "7c9e1f805d24c84269cbc706382e99a1ba18ed8cf8b353b5993a846884bdc0eb",
+        "bytes": 108485
+      },
+      "expect": {
+        "content_type": "application/pdf",
+        "min_bytes": 10000,
+        "magic": "pdf"
+      }
+    },
+    {
+      "id": "iec-lge2026-nw372-seat-calculation",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW372_LGE2026_Seat_Calculation_Detail.pdf",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/NW372.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's own 'Seat Calculation Detail' for NW372 Madibeng, Local Government Elections 2026. FETCHED BY THIS BUILD on 2026-11-08. 112,199 bytes. Read by tools/lge2026/extract-seat-calculation.py (pdftotext), which refuses a report whose party votes do not add to A, whose quota does not recompute, or whose party seats do not add to the council's size. This is the target the build's Schedule 1 engine is reconciled against, 18 of 18.",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "73fb4eb915ad299a5d426ccf803a7b2f9888866084328d8f8a9c388973a7418b",
+        "bytes": 112199
+      },
+      "expect": {
+        "content_type": "application/pdf",
+        "min_bytes": 10000,
+        "magic": "pdf"
+      }
+    },
+    {
+      "id": "iec-lge2026-nw373-seat-calculation",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW373_LGE2026_Seat_Calculation_Detail.pdf",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/NW373.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's own 'Seat Calculation Detail' for NW373 Rustenburg, Local Government Elections 2026. FETCHED BY THIS BUILD on 2026-11-08. 115,704 bytes. Read by tools/lge2026/extract-seat-calculation.py (pdftotext), which refuses a report whose party votes do not add to A, whose quota does not recompute, or whose party seats do not add to the council's size. This is the target the build's Schedule 1 engine is reconciled against, 18 of 18.",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "f161f6386f2ac23cb9cb767a95567fd7efa72d3ceed327f2c7276ef52d1a7a76",
+        "bytes": 115704
+      },
+      "expect": {
+        "content_type": "application/pdf",
+        "min_bytes": 10000,
+        "magic": "pdf"
+      }
+    },
+    {
+      "id": "iec-lge2026-nw374-seat-calculation",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW374_LGE2026_Seat_Calculation_Detail.pdf",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/NW374.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's own 'Seat Calculation Detail' for NW374 Kgetlengrivier, Local Government Elections 2026. FETCHED BY THIS BUILD on 2026-11-08. 19,589 bytes. Read by tools/lge2026/extract-seat-calculation.py (pdftotext), which refuses a report whose party votes do not add to A, whose quota does not recompute, or whose party seats do not add to the council's size. This is the target the build's Schedule 1 engine is reconciled against, 18 of 18.",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "2d07a72e08e080101eac8dd21af4e2338798f9033b168450dde8245f02434009",
+        "bytes": 19589
+      },
+      "expect": {
+        "content_type": "application/pdf",
+        "min_bytes": 10000,
+        "magic": "pdf"
+      }
+    },
+    {
+      "id": "iec-lge2026-nw375-seat-calculation",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW375_LGE2026_Seat_Calculation_Detail.pdf",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/NW375.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's own 'Seat Calculation Detail' for NW375 Moses Kotane, Local Government Elections 2026. FETCHED BY THIS BUILD on 2026-11-08. 108,467 bytes. Read by tools/lge2026/extract-seat-calculation.py (pdftotext), which refuses a report whose party votes do not add to A, whose quota does not recompute, or whose party seats do not add to the council's size. This is the target the build's Schedule 1 engine is reconciled against, 18 of 18.",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "058f6131fe57904d62129fc9069ce07c54bccb0e5e5414e64ff2ed4fc23890d1",
+        "bytes": 108467
+      },
+      "expect": {
+        "content_type": "application/pdf",
+        "min_bytes": 10000,
+        "magic": "pdf"
+      }
+    },
+    {
+      "id": "iec-lge2026-nw381-seat-calculation",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW381_LGE2026_Seat_Calculation_Detail.pdf",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/NW381.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's own 'Seat Calculation Detail' for NW381 Ratlou, Local Government Elections 2026. FETCHED BY THIS BUILD on 2026-11-08. 102,516 bytes. Read by tools/lge2026/extract-seat-calculation.py (pdftotext), which refuses a report whose party votes do not add to A, whose quota does not recompute, or whose party seats do not add to the council's size. This is the target the build's Schedule 1 engine is reconciled against, 18 of 18.",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "5c79b567c9f5acfb84e4c4c2c8b20f6542223162eeaf7a9e898b61256c7bf21e",
+        "bytes": 102516
+      },
+      "expect": {
+        "content_type": "application/pdf",
+        "min_bytes": 10000,
+        "magic": "pdf"
+      }
+    },
+    {
+      "id": "iec-lge2026-nw382-seat-calculation",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW382_LGE2026_Seat_Calculation_Detail.pdf",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/NW382.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's own 'Seat Calculation Detail' for NW382 Tswaing, Local Government Elections 2026. FETCHED BY THIS BUILD on 2026-11-08. 101,686 bytes. Read by tools/lge2026/extract-seat-calculation.py (pdftotext), which refuses a report whose party votes do not add to A, whose quota does not recompute, or whose party seats do not add to the council's size. This is the target the build's Schedule 1 engine is reconciled against, 18 of 18.",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "65acd1537fb758566fac66f7199c972839e353380a414400ffb47cf8f027cb98",
+        "bytes": 101686
+      },
+      "expect": {
+        "content_type": "application/pdf",
+        "min_bytes": 10000,
+        "magic": "pdf"
+      }
+    },
+    {
+      "id": "iec-lge2026-nw383-seat-calculation",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW383_LGE2026_Seat_Calculation_Detail.pdf",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/NW383.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's own 'Seat Calculation Detail' for NW383 Mafikeng, Local Government Elections 2026. FETCHED BY THIS BUILD on 2026-11-08. 107,669 bytes. Read by tools/lge2026/extract-seat-calculation.py (pdftotext), which refuses a report whose party votes do not add to A, whose quota does not recompute, or whose party seats do not add to the council's size. This is the target the build's Schedule 1 engine is reconciled against, 18 of 18.",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "8b663fe46a1926c7ed5b696d985a0586c561b59313211aba6fd10d9c23c30562",
+        "bytes": 107669
+      },
+      "expect": {
+        "content_type": "application/pdf",
+        "min_bytes": 10000,
+        "magic": "pdf"
+      }
+    },
+    {
+      "id": "iec-lge2026-nw384-seat-calculation",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW384_LGE2026_Seat_Calculation_Detail.pdf",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/NW384.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's own 'Seat Calculation Detail' for NW384 Ditsobotla, Local Government Elections 2026. FETCHED BY THIS BUILD on 2026-11-08. 109,365 bytes. Read by tools/lge2026/extract-seat-calculation.py (pdftotext), which refuses a report whose party votes do not add to A, whose quota does not recompute, or whose party seats do not add to the council's size. This is the target the build's Schedule 1 engine is reconciled against, 18 of 18.",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "8eb994179606ba7f770c376ea2397e47e01e4d4b4ae2b2caff9b8b2ba5024616",
+        "bytes": 109365
+      },
+      "expect": {
+        "content_type": "application/pdf",
+        "min_bytes": 10000,
+        "magic": "pdf"
+      }
+    },
+    {
+      "id": "iec-lge2026-nw385-seat-calculation",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW385_LGE2026_Seat_Calculation_Detail.pdf",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/NW385.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's own 'Seat Calculation Detail' for NW385 Ramotshere Moiloa, Local Government Elections 2026. FETCHED BY THIS BUILD on 2026-11-08. 104,524 bytes. Read by tools/lge2026/extract-seat-calculation.py (pdftotext), which refuses a report whose party votes do not add to A, whose quota does not recompute, or whose party seats do not add to the council's size. This is the target the build's Schedule 1 engine is reconciled against, 18 of 18.",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "6c014be8c2b7f42fcd646fc5c260b3e98492f29cc028d8aca3da6bdf1deb4b03",
+        "bytes": 104524
+      },
+      "expect": {
+        "content_type": "application/pdf",
+        "min_bytes": 10000,
+        "magic": "pdf"
+      }
+    },
+    {
+      "id": "iec-lge2026-nw392-seat-calculation",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW392_LGE2026_Seat_Calculation_Detail.pdf",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/NW392.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's own 'Seat Calculation Detail' for NW392 Naledi, Local Government Elections 2026. FETCHED BY THIS BUILD on 2026-11-08. 19,719 bytes. Read by tools/lge2026/extract-seat-calculation.py (pdftotext), which refuses a report whose party votes do not add to A, whose quota does not recompute, or whose party seats do not add to the council's size. This is the target the build's Schedule 1 engine is reconciled against, 18 of 18.",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "c6f8be5be955cc6fac5e1d71c1e4fe8cdf7263a57676b620a7535c6ade68ddf9",
+        "bytes": 19719
+      },
+      "expect": {
+        "content_type": "application/pdf",
+        "min_bytes": 10000,
+        "magic": "pdf"
+      }
+    },
+    {
+      "id": "iec-lge2026-nw393-seat-calculation",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW393_LGE2026_Seat_Calculation_Detail.pdf",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/NW393.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's own 'Seat Calculation Detail' for NW393 Mamusa, Local Government Elections 2026. FETCHED BY THIS BUILD on 2026-11-08. 101,798 bytes. Read by tools/lge2026/extract-seat-calculation.py (pdftotext), which refuses a report whose party votes do not add to A, whose quota does not recompute, or whose party seats do not add to the council's size. This is the target the build's Schedule 1 engine is reconciled against, 18 of 18.",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "d07dddba937cafaadadc52677da41ebc01f4067ded4835f83527197ceb679054",
+        "bytes": 101798
+      },
+      "expect": {
+        "content_type": "application/pdf",
+        "min_bytes": 10000,
+        "magic": "pdf"
+      }
+    },
+    {
+      "id": "iec-lge2026-nw394-seat-calculation",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW394_LGE2026_Seat_Calculation_Detail.pdf",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/NW394.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's own 'Seat Calculation Detail' for NW394 Greater Taung, Local Government Elections 2026. FETCHED BY THIS BUILD on 2026-11-08. 106,436 bytes. Read by tools/lge2026/extract-seat-calculation.py (pdftotext), which refuses a report whose party votes do not add to A, whose quota does not recompute, or whose party seats do not add to the council's size. This is the target the build's Schedule 1 engine is reconciled against, 18 of 18.",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "5bdd397cd40936aeace9fcf705c3a71921af6826f8df25b34c252c11aec2662b",
+        "bytes": 106436
+      },
+      "expect": {
+        "content_type": "application/pdf",
+        "min_bytes": 10000,
+        "magic": "pdf"
+      }
+    },
+    {
+      "id": "iec-lge2026-nw396-seat-calculation",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW396_LGE2026_Seat_Calculation_Detail.pdf",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/NW396.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's own 'Seat Calculation Detail' for NW396 Lekwa-Teemane, Local Government Elections 2026. FETCHED BY THIS BUILD on 2026-11-08. 16,219 bytes. Read by tools/lge2026/extract-seat-calculation.py (pdftotext), which refuses a report whose party votes do not add to A, whose quota does not recompute, or whose party seats do not add to the council's size. This is the target the build's Schedule 1 engine is reconciled against, 18 of 18.",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "5fcdae2a5d8af93d2cbd2773c952762cffd68b12a87f2974c62dc79d370bef3b",
+        "bytes": 16219
+      },
+      "expect": {
+        "content_type": "application/pdf",
+        "min_bytes": 10000,
+        "magic": "pdf"
+      }
+    },
+    {
+      "id": "iec-lge2026-nw397-seat-calculation",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW397_LGE2026_Seat_Calculation_Detail.pdf",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/NW397.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's own 'Seat Calculation Detail' for NW397 Kagisano-Molopo, Local Government Elections 2026. FETCHED BY THIS BUILD on 2026-11-08. 102,933 bytes. Read by tools/lge2026/extract-seat-calculation.py (pdftotext), which refuses a report whose party votes do not add to A, whose quota does not recompute, or whose party seats do not add to the council's size. This is the target the build's Schedule 1 engine is reconciled against, 18 of 18.",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "61acf020b59ff71e00a5011990ee20e7a0749334931ebbed191e1fb215d298b6",
+        "bytes": 102933
+      },
+      "expect": {
+        "content_type": "application/pdf",
+        "min_bytes": 10000,
+        "magic": "pdf"
+      }
+    },
+    {
+      "id": "iec-lge2026-nw403-seat-calculation",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW403_LGE2026_Seat_Calculation_Detail.pdf",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/NW403.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's own 'Seat Calculation Detail' for NW403 Matlosana, Local Government Elections 2026. FETCHED BY THIS BUILD on 2026-11-08. 106,889 bytes. Read by tools/lge2026/extract-seat-calculation.py (pdftotext), which refuses a report whose party votes do not add to A, whose quota does not recompute, or whose party seats do not add to the council's size. This is the target the build's Schedule 1 engine is reconciled against, 18 of 18.",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "660bfdf63f718b06a6c94c86fb83c5486be086c320be410495775ad215aa998d",
+        "bytes": 106889
+      },
+      "expect": {
+        "content_type": "application/pdf",
+        "min_bytes": 10000,
+        "magic": "pdf"
+      }
+    },
+    {
+      "id": "iec-lge2026-nw404-seat-calculation",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW404_LGE2026_Seat_Calculation_Detail.pdf",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/NW404.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's own 'Seat Calculation Detail' for NW404 Maquassi Hills, Local Government Elections 2026. FETCHED BY THIS BUILD on 2026-11-08. 102,533 bytes. Read by tools/lge2026/extract-seat-calculation.py (pdftotext), which refuses a report whose party votes do not add to A, whose quota does not recompute, or whose party seats do not add to the council's size. This is the target the build's Schedule 1 engine is reconciled against, 18 of 18.",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "2925c39f2e2a64c5fdc088163b12436c9f78ee3d25407df93e7eddf10f1d6fc6",
+        "bytes": 102533
+      },
+      "expect": {
+        "content_type": "application/pdf",
+        "min_bytes": 10000,
+        "magic": "pdf"
+      }
+    },
+    {
+      "id": "iec-lge2026-nw405-seat-calculation",
+      "province": "NW",
+      "category": "IEC_Results",
+      "filename": "NW405_LGE2026_Seat_Calculation_Detail.pdf",
+      "url": "https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/NW405.pdf",
+      "status": "CONFIRMED",
+      "note": "The Commission's own 'Seat Calculation Detail' for NW405 JB Marks, Local Government Elections 2026. FETCHED BY THIS BUILD on 2026-11-08. 105,352 bytes. Read by tools/lge2026/extract-seat-calculation.py (pdftotext), which refuses a report whose party votes do not add to A, whose quota does not recompute, or whose party seats do not add to the council's size. This is the target the build's Schedule 1 engine is reconciled against, 18 of 18.",
+      "fetched": {
+        "on": "2026-11-08",
+        "sha256": "ef664e005415ce8863b8c599a75019225882d9410d16fa25eb2d765e65b9f4c2",
+        "bytes": 105352
+      },
+      "expect": {
+        "content_type": "application/pdf",
+        "min_bytes": 10000,
+        "magic": "pdf"
+      }
     }
   ]
 }
