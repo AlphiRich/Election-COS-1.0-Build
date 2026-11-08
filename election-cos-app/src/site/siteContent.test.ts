@@ -158,12 +158,12 @@ describe('what the site will not do', () => {
 
   it('has exactly the seven company addresses on electioncos.co.za, each with a purpose, and no other domain', () => {
     expect(SITE.mailboxes.map((m) => m.address)).toEqual([
+      'admin@electioncos.co.za',
       'info@electioncos.co.za',
+      'legal@electioncos.co.za',
       'sales@electioncos.co.za',
       'techsupport@electioncos.co.za',
-      'accounts@electioncos.co.za',
-      'legal@electioncos.co.za',
-      'admin@electioncos.co.za',
+      'cto@electioncos.co.za',
       'noreply@electioncos.co.za',
     ]);
     for (const m of SITE.mailboxes) {
