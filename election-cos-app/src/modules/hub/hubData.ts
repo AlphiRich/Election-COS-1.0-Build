@@ -25,7 +25,7 @@ export const CHANGES_FROM_MASTER: Array<{ where: string; master: string; here: s
   { where: 'Metric: volunteer cost', master: 'R16.40 per volunteer per cycle (activity-based micro-transactions)', here: 'Shown as not set', why: 'No activity-based schedule is adopted in this build and the figure has no source.' },
   { where: 'Copy', master: '"predictive seat modeling"', here: '"seat scenario modelling"', why: 'The product says its scenarios are not forecasts.' },
   { where: 'Poster mock-up', master: 'A grey box standing in for the QR code', here: 'The real WhatsApp QR (decoded to wa.me/27824497310)', why: 'The build already has the verified code.' },
-  { where: 'Footer', master: 'Dead links; information officer legal@innovationconsult.co.za', here: 'Links to the real pages; legal@electioncos.co.za', why: 'The company addresses moved to electioncos.co.za on 2 Nov 2026.' },
+  { where: 'Footer', master: 'Dead links; information officer on the corporate domain', here: 'Links to the real pages; legal@electioncos.co.za', why: 'The company addresses moved to electioncos.co.za on 2 Nov 2026.' },
 ];
 
 export interface Funnel {

@@ -93,9 +93,16 @@ export const SUPERSEDED_DOMAINS = [
 ] as const;
 
 /**
- * The corporate domain, which is a different thing and moves to.
- * Election COS 1.0 publishes from `electioncos.co.za`; the
- * product is served from `APP_DOMAIN`. Same separation as the two colour
- * palettes — see docs/innovation-consult-brand.md.
+ * The corporate domain: Innovation Consult's own, a different thing from the product's.
+ *
+ * DECIDED 8 Nov 2026 by the owner: `innovationconsult.co.za` is the company's corporate domain; the application and its
+ * landing page and website have their own dedicated domain, `electioncos.co.za` (`SITE_DOMAIN`, with the application on
+ * `APP_DOMAIN`). The product's company mailboxes are on `SITE_DOMAIN` too (`SITE.mailboxes`), and nothing the application
+ * sends or publishes uses an Innovation Consult address (`productMail.test.ts` fails if one appears). A commit on 7 Nov set this
+ * constant to the product's domain; that was reverted, and it had broken `estate.test.ts` and `publicDomain.test.ts`.
+ * Same separation as the two colour palettes: see docs/innovation-consult-brand.md.
  */
-export const CORPORATE_DOMAIN = 'electioncos.co.za';
+export const CORPORATE_DOMAIN = 'innovationconsult.co.za';
+
+/** The domain the product's own mailboxes are on. The corporate domain is never used for them. */
+export const PRODUCT_MAIL_DOMAIN = SITE_DOMAIN;
