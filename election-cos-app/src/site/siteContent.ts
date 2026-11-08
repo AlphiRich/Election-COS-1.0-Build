@@ -70,7 +70,7 @@ export const SITE = {
     { address: 'admin@electioncos.co.za', purpose: 'Administration' },
     { address: 'info@electioncos.co.za', purpose: 'General enquiries' },
     { address: 'legal@electioncos.co.za', purpose: 'Legal, privacy and POPIA' },
-    { address: 'sales@electioncos.co.za', purpose: 'Sales and demonstrations' },
+    { address: 'sales@electioncos.co.za', purpose: 'Sales, demonstrations, billing and accounts' },
     { address: 'techsupport@electioncos.co.za', purpose: 'Technical support' },
     { address: 'cto@electioncos.co.za', purpose: 'Tech and platform enquiries: tech architecture, build security, pull requests and any other tech or code-stack matter' },
     { address: 'noreply@electioncos.co.za', purpose: 'Sends notices only; replies are not read' },

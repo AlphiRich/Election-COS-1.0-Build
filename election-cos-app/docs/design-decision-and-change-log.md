@@ -3273,3 +3273,5 @@ function.
 ### Session 54 (cont.) — mailbox list changed by the owner (8 Nov 2026)
 **Owner instruction:** the seven addresses are admin@, info@, legal@, sales@, techsupport@, cto@ and noreply@ (all `@electioncos.co.za`), in that order. **`accounts@` is gone; `cto@` is new.** `SITE.mailboxes` and its test updated; the `productMail` guard (no corporate-domain mailboxes) still holds. The purpose line for `cto@` was confirmed by the owner (8 Nov): tech and platform enquiries, including tech architecture, build security, PRs and any other tech or code-stack related or interrelated matter. **Nothing now receives billing or accounts mail**; say where those enquiries should go. The mailboxes themselves (created at the provider, IMAP, DNS) are not something this build can do.
 
+
+**Billing and accounts (owner, 8 Nov 2026):** directed to `sales@`; its purpose line now reads "Sales, demonstrations, billing and accounts". The owner has three mailboxes left to create on cPanel and may instead add a dedicated address later: that is a one-line change in `SITE.mailboxes` plus its test.
