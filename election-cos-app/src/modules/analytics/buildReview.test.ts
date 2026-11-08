@@ -30,7 +30,7 @@ describe('the master-build dashboard, checked against this build', () => {
 
   it('finds the address categories do not sum to the stated total', () => {
     expect(row('address-points').status).toBe('UNRECONCILED');
-    expect(row('address-points').note).toMatch(/1,175 short/);
+    expect(row('address-points').note).toMatch(/1[, \u00a0]175 short/);
   });
 
   it('rejects the other dashboards’ third registered-voter figure, fractional quota and superseded PPFA bands', () => {

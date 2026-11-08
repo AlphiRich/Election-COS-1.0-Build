@@ -23,7 +23,7 @@ import { SEED_ROLES } from './seedRoles';
 import { MIRROR_PATH, renderRoleMirror } from './seedRolesMirror';
 
 const REPO = path.resolve(__dirname, '..', '..');
-const onDisk = () => readFileSync(path.join(REPO, MIRROR_PATH), 'utf-8');
+const onDisk = () => readFileSync(path.join(REPO, MIRROR_PATH), 'utf-8').replace(/\r\n/g, '\n');
 
 describe('the server’s copy of the role table', () => {
   it('is exactly what the generator produces — run `npm run gen:roles`', () => {
