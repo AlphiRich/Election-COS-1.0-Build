@@ -131,10 +131,18 @@ const WEB_VARS = [
   'VITE_FIREBASE_MESSAGING_SENDER_ID',
   'VITE_FIREBASE_APP_ID',
 ];
-const envFile = existsSync(path.join(ROOT, '.env')) ? read('.env') : '';
+// A production build (`vite build`) reads .env.production.local before .env, so the preflight reads them in the
+// same order. Reading only .env reported a correctly configured machine as having no web config.
+const envFiles = ['.env.production.local', '.env.production', '.env.local', '.env']
+  .filter((f) => existsSync(path.join(ROOT, f)))
+  .map((f) => read(f));
 const readVar = (key) => {
   if (process.env[key]) return process.env[key];
-  return new RegExp(`^${key}=(.+)$`, 'm').exec(envFile)?.[1]?.trim() ?? '';
+  for (const body of envFiles) {
+    const v = new RegExp(`^${key}=(.+)$`, 'm').exec(body)?.[1]?.trim();
+    if (v) return v;
+  }
+  return '';
 };
 const missingWeb = WEB_VARS.filter((key) => readVar(key) === '');
 
@@ -413,6 +421,8 @@ try {
     const tsc = spawnSync('npx', ['--no-install', 'tsc', '--noEmit', '-p', dir], {
       cwd: ROOT,
       encoding: 'utf8',
+      // npx is npx.cmd on Windows, which spawnSync cannot start without a shell (status null).
+      shell: process.platform === 'win32',
     });
     if (tsc.status !== 0) {
       const first = `${tsc.stdout ?? ''}${tsc.stderr ?? ''}`

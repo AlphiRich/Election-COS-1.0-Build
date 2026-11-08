@@ -4,7 +4,7 @@
   "version": "1.0.0-dev",
   "description": "Election Campaign OS — Cloud Functions 2nd gen, africa-south1. IC-ECOS-BUILD-2026-V2 §0 rule 1.",
   "type": "commonjs",
-  "engines": { "node": "20" },
+  "engines": { "node": "22" },
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
