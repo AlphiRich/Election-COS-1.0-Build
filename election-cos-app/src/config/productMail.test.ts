@@ -14,6 +14,10 @@ function* walk(dir: string): Generator<string> {
   }
 }
 
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 describe('the product’s mail is on the product’s domain, never the corporate one', () => {
   it('the corporate domain is Innovation Consult’s and the product has its own', () => {
     expect(CORPORATE_DOMAIN).toBe('innovationconsult.co.za');
@@ -26,7 +30,7 @@ describe('the product’s mail is on the product’s domain, never the corporate
   });
   it('no source file (app, functions, scripts, site) names a mailbox on the corporate domain', () => {
     const offenders: string[] = [];
-    const re = new RegExp(`[A-Za-z0-9._%+-]+@${CORPORATE_DOMAIN.replace(/\./g, '\\.')}`, 'i');
+    const re = new RegExp(`[A-Za-z0-9._%+-]+@${escapeRegExp(CORPORATE_DOMAIN)}`, 'i');
     for (const base of [path.join(ROOT, 'src'), path.join(ROOT, 'functions/src'), path.join(ROOT, 'scripts'), path.join(ROOT, 'worker')]) {
       try { statSync(base); } catch { continue; }
       for (const f of walk(base)) {
