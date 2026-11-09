@@ -17,7 +17,7 @@ const ALPHABET = 'abcdefghijkmnpqrstuvwxyz23456789';
 /** 12 random characters from a 32-letter alphabet: 60 bits, not guessable, safe in a URL. */
 function newPublicId(): string {
   const bytes = crypto.getRandomValues(new Uint8Array(12));
-  return [...bytes].map((b) => ALPHABET[b % ALPHABET.length]).join('');
+  return [...bytes].map((b) => ALPHABET[b & (ALPHABET.length - 1)]).join('');
 }
 
 function fromFirestore(id: string, d: Record<string, unknown>): PollDefinition {
