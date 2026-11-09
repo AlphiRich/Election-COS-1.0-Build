@@ -34,6 +34,7 @@ import { AnalystPage } from '@/modules/analyst/AnalystPage';
 import { DrillDownPage } from '@/modules/drilldown/DrillDownPage';
 import { HubPage } from '@/modules/hub/HubPage';
 import { Lge2026ResultsPage } from '@/modules/lge2026/Lge2026ResultsPage';
+import { PartyProfilePage } from '@/modules/lge2026/PartyProfilePage';
 import { SettingsPage } from '@/modules/settings/SettingsPage';
 import { MunicipalityConfigPage } from '@/modules/settings/MunicipalityConfigPage';
 import { PermissionsPage } from '@/modules/settings/PermissionsPage';
@@ -80,6 +81,7 @@ export const router = createBrowserRouter([
           { path: 'drill-down', element: <DrillDownPage /> },
           { path: 'hub', element: <HubPage /> },
           { path: 'lge-2026-results', element: <Lge2026ResultsPage /> },
+          { path: 'lge-2026-party', element: <PartyProfilePage /> },
           { path: 'polls', element: <PollsPage /> },
           { path: 'candidate-list', element: <CandidateListPage /> },
           { path: 'vd-locator', element: <VdLocatorPage /> },

@@ -5606,3 +5606,5 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | Master stack (source) | `election_campaign_os_master_application.html` (two identical copies) | Not copied into the repo |
 | Second sign-in factor | `functions/src/secondFactor*.ts`, `src/auth/SecondFactor*.ts(x)`, `firestore.rules` `mfaOK()`, `tools/rules-check/mfa-rules.mjs` | Email, then SMS code above canvasser; fails closed until an SMS provider exists |
 | Marketing collateral | `scripts/build-marketing.ts`, `scripts/build-playbook.ts`, `marketing/` | 14 banners, A3 poster, lower-thirds, 4-page playbook, dual-funnel figure; CTA 'Start Free Trial' not yet true |
+| Party candidates and result | `src/modules/lge2026/partyProfile.ts`, `PartyProfilePage.tsx`, `PartyCharts.tsx`, `tools/candidates/verify-party-list.py`, `reports/actionsa-nw405.html` | IEC 23 Oct list joined to LGE 2026 results; ActionSA PR list is one name against 5 seats (unresolved, see change log) |
+

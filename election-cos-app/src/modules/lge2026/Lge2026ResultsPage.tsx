@@ -87,6 +87,10 @@ export function Lge2026ResultsPage() {
         of 2025) is older, and dividing by it would overstate turnout.
       </p>
 
+      <p className="text-body-md font-body text-slate">
+        Candidates and results together, by party: <Link to="/analytics/lge-2026-party">party candidates and result</Link>.
+      </p>
+
       <Card>
         <SectionLabel as="h2">Council seats</SectionLabel>
         <Table caption={`Seats after Schedule 1: quota ${n(alloc.quota)}${alloc.newQuota ? `, recalculated to ${n(alloc.newQuota)} under Item 16 because a party won more ward seats than its entitlement` : ''}.`}>
