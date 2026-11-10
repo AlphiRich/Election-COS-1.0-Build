@@ -24,7 +24,7 @@ export function SitePackages() {
         </h1>
         <p className="m-0 max-w-[36em] text-site-lead">
           The same modules and terms for every party and every independent. Pilot prices on record,
-          excluding VAT at the prevailing statutory rate.
+          the full amount payable: no VAT is charged.
         </p>
       </SiteSection>
 

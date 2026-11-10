@@ -19,6 +19,7 @@ import {
   REFERENCE_FIGURES,
   REFERENCE_FOOTNOTE,
   SEASON,
+  VAT_NOTE,
   whatsAppHref,
 } from '../siteContent';
 import { CtaBand, Eyebrow, SiteCard, SiteSection, StatusBadge, WhatsAppIcon } from '../SiteChrome';
@@ -221,7 +222,7 @@ export function SiteForCampaigns() {
       <CtaBand
         headingId="cta-h"
         heading={hero.band}
-        note="Excluding VAT at the prevailing statutory rate. Pilot price on record."
+        note={`${VAT_NOTE} Pilot price on record.`}
       >
         <a href={whatsAppHref('Casework Tracker enquiry')} className="site-btn-primary">
           Talk to us

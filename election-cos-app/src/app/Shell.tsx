@@ -39,6 +39,7 @@ import { useQuery } from '@tanstack/react-query';
 import { dal } from '@/dal';
 import { Button, Card, DataLine, SectionLabel } from '@/components/ui';
 import { SyncStatus } from './SyncStatus';
+import { BrandMark } from '@/components/BrandMark';
 import { PRIMARY_NAV, navItemAccess } from './nav';
 
 export function Shell() {
@@ -166,11 +167,14 @@ export function Shell() {
 
       {/* Phone: a bar, and the nav behind it. */}
       <header className="md:hidden sticky top-0 z-30 flex items-center justify-between gap-3 bg-ink px-4 py-3 text-paper">
-        <span className="min-w-0">
-          <span className="font-display text-headline-md tracking-wide block">{PRODUCT_NAME_SHORT}</span>
-          {municipality && (
-            <span className="block truncate text-data-mono font-mono text-paper/60">{municipality}</span>
-          )}
+        <span className="flex min-w-0 items-center gap-3">
+          <BrandMark size={32} />
+          <span className="min-w-0">
+            <span className="font-display text-headline-md tracking-wide block">{PRODUCT_NAME_SHORT}</span>
+            {municipality && (
+              <span className="block truncate text-data-mono font-mono text-paper/60">{municipality}</span>
+            )}
+          </span>
         </span>
         <div className="flex items-center gap-3">
           <SyncStatus compact />
@@ -209,9 +213,12 @@ export function Shell() {
          * Tenant.displayName that would supply a real name lives in the V2
          * Postgres store, which is unbuilt.
          */}
-        <div className="mb-6">
-          <p className="font-display text-headline-md tracking-wide">{PRODUCT_NAME_SHORT}</p>
-          {municipality && <DataLine className="text-paper/60 mt-0.5">{municipality}</DataLine>}
+        <div className="mb-6 flex items-center gap-3">
+          <BrandMark size={36} />
+          <div className="min-w-0">
+            <p className="font-display text-headline-md tracking-wide">{PRODUCT_NAME_SHORT}</p>
+            {municipality && <DataLine className="text-paper/60 mt-0.5">{municipality}</DataLine>}
+          </div>
         </div>
         {navList}
         {navFooter}

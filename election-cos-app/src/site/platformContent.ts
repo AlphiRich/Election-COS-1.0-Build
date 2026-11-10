@@ -56,7 +56,7 @@ export const LEGAL_PAGES: Record<
     lead: 'The terms for using this website.',
     facts: [
       'This website is information. It is not legal advice, and the tools on it are illustrative.',
-      'Prices are published and exclude VAT at the prevailing statutory rate.',
+      'Prices are published and are the full amount payable: no VAT is charged, as Innovation Consult is not registered for VAT.',
       'The PPFA Governance and Disclosure Add-on is priced after a scoping consultation with our engineering team.',
     ],
     pending: 'The binding terms of use and the customer terms are pending attorney sign-off.',
