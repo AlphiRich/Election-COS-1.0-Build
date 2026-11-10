@@ -41,7 +41,7 @@ import type { Sop } from '../manualModel';
 
 export const PR_LIST_SOP: Sop = {
   number: 'SOP-11',
-  title: 'Preparing a PR candidate list',
+  title: 'Preparing a PR Candidate List',
   area: 'ADMINISTRATION',
   roles: ['party-hq-admin'],
   requiresAnyCapability: ['team.manage'],
@@ -51,7 +51,7 @@ export const PR_LIST_SOP: Sop = {
     'you, which rule governs a party list rather than a ward nomination, and why nothing here is a filing.',
   sections: [
     {
-      heading: 'Two different things, governed differently',
+      heading: 'Two Different Things, Governed Differently',
       body: [
         'A party list is a list of candidates in order of preference, submitted by the party. Seats won proportionally are filled from the top of it down. That is what this procedure is about.',
         'A ward candidate is an individual nominated to stand in one ward. It is a separate process with separate paperwork, and none of the list checks apply to it.',
@@ -68,7 +68,7 @@ export const PR_LIST_SOP: Sop = {
       ],
     },
     {
-      heading: 'Capturing a candidate',
+      heading: 'Capturing a Candidate',
       body: [
         'Settings → Candidates & party list. Each candidate needs a name as it must appear, a list position if they are on the party list, a declared gender, and an identity number.',
       ],
@@ -86,7 +86,7 @@ export const PR_LIST_SOP: Sop = {
       ],
     },
     {
-      heading: 'What the check tells you, and what stops an export',
+      heading: 'What the Check Tells You, and What Stops an Export',
       body: [
         'The list is checked continuously as you work. Some findings stop the export; others are shown and do not.',
       ],
@@ -104,7 +104,7 @@ export const PR_LIST_SOP: Sop = {
       ],
     },
     {
-      heading: 'The gender position, and why it never blocks',
+      heading: 'The Gender Position, and Why It Never Blocks',
       body: [
         'The Act asks a party to seek to ensure that half its candidates are women and that candidates of each sex are evenly distributed through the list. That wording matters: it is a standard to aim at, not a threshold to pass.',
         GENDER_BASIS,
@@ -120,7 +120,7 @@ export const PR_LIST_SOP: Sop = {
       ],
     },
     {
-      heading: 'Producing the document',
+      heading: 'Producing the Document',
       body: [
         'The export is a PDF of the checked list: candidates in order with masked identity numbers, the outstanding warnings, and the provisions the list was checked against.',
         PR_LIST_EXPORT_BASIS,
@@ -137,7 +137,7 @@ export const PR_LIST_SOP: Sop = {
       ],
     },
     {
-      heading: 'Lists published by the Commission are not a source for this',
+      heading: 'Lists Published by the Commission Are Not a Source for This',
       body: [
         'Once nominations close, the Commission publishes the candidate lists for every party. Those documents are useful for knowing who you are standing against. They are not a way to populate this screen, and one supplied to this build was examined and rejected as a seed source.',
         'The reasons were specific and are worth knowing before anybody tries it again: the column that looked like a ward number was a position within each party\'s own list, so no candidate in it could be placed in a ward; the party-list order had been replaced by a row counter, so the order of preference — the thing that decides who takes a seat — was gone; and around a fifth of the rows were duplicates.',

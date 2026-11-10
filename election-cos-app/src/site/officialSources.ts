@@ -45,7 +45,7 @@ export const OFFICIAL_HOSTS = [
 export const OFFICIAL_GROUPS: OfficialGroup[] = [
   {
     id: 'processes',
-    title: 'Key processes and roleplayers',
+    title: 'Key Processes and Roleplayers',
     links: [
       {
         label: 'Voting',
@@ -69,22 +69,22 @@ export const OFFICIAL_GROUPS: OfficialGroup[] = [
         about: 'Who may observe an election.',
       },
       {
-        label: 'Party agents',
+        label: 'Party Agents',
         url: `${E}/Elections-And-Results/Party-Agents`,
         about: 'What a party agent may and may not do at a voting station.',
       },
       {
-        label: 'About voting districts and stations',
+        label: 'About Voting Districts and Stations',
         url: `${E}/Voters-Roll/About-voting-districts-and-stations`,
         about: 'How voting districts and voting stations relate.',
       },
       {
-        label: 'Report election disinformation',
+        label: 'Report Election Disinformation',
         url: `${E}/Elections-And-Results/Report-Election-Disinformation`,
         about: 'Disinformation is reported to Real411, not to the Commission directly.',
       },
       {
-        label: 'Report electoral fraud',
+        label: 'Report Electoral Fraud',
         url: `${E}/Voter/Report-Electoral-Fraud`,
         about: 'Where to report suspected electoral fraud.',
       },
@@ -92,35 +92,35 @@ export const OFFICIAL_GROUPS: OfficialGroup[] = [
   },
   {
     id: 'voters',
-    title: 'For voters',
+    title: 'For Voters',
     links: [
       {
-        label: 'Find my voting station',
+        label: 'Find My Voting Station',
         url: 'https://maps.elections.org.za/vsfinder/',
         about: 'The Commission’s own voting station finder.',
       },
       {
-        label: 'Voting stations list, LGE 2026',
+        label: 'Voting Stations List, LGE 2026',
         url: `${E}/Elections-And-Results/Voting-Stations-LGE-2026`,
         about: 'The published list of voting stations for this election.',
       },
       {
-        label: 'How to vote',
+        label: 'How to Vote',
         url: `${E}/Voter/How-To-Vote`,
         about: 'Step-by-step voting guidance.',
       },
       {
-        label: 'Voter information',
+        label: 'Voter Information',
         url: `${E}/Voter/Voter-Information`,
         about: 'Registration status, special votes and more.',
       },
       {
-        label: 'Who is my ward councillor',
+        label: 'Who Is My Ward Councillor',
         url: `${E}/Voter/Who-Is-My-Ward-Councillor`,
         about: 'Current ward councillors, not the 2026 candidates.',
       },
       {
-        label: 'Voter education',
+        label: 'Voter Education',
         url: `${E}/Voter/Voter-Education`,
         about: 'Voter-education material.',
       },
@@ -130,17 +130,17 @@ export const OFFICIAL_GROUPS: OfficialGroup[] = [
         about: 'The Commission’s online courses. Needs a login.',
       },
       {
-        label: 'About the voters’ roll',
+        label: 'About the Voters’ Roll',
         url: `${E}/Voters-Roll/About-Voters-Roll`,
         about: 'What the roll is and how it is kept.',
       },
       {
-        label: 'Voters’ roll FAQ',
+        label: 'Voters’ Roll FAQ',
         url: `${E}/FAQ/Voters-Roll`,
         about: 'Common questions about the roll.',
       },
       {
-        label: 'How council seats are calculated',
+        label: 'How Council Seats Are Calculated',
         url: 'https://www.elections.org.za/content/Documents/Voter-education/Continuous-Voter-Education/How-Council-seats-are-calculated/',
         about: 'The Commission’s own explainer for council seats.',
       },
@@ -148,10 +148,10 @@ export const OFFICIAL_GROUPS: OfficialGroup[] = [
   },
   {
     id: 'candidates',
-    title: 'Candidates and parties',
+    title: 'Candidates and Parties',
     links: [
       {
-        label: 'Certified candidate lists, LGE 2026',
+        label: 'Certified Candidate Lists, LGE 2026',
         url: `${E}/Parties-And-Candidates/Candidate-Lists-LGE-2026`,
         about: 'Supplementary certified lists, one PDF per province, dated 23 October 2026.',
       },
@@ -162,23 +162,23 @@ export const OFFICIAL_GROUPS: OfficialGroup[] = [
           'Who the Code binds, what it requires and forbids, and what happens if it is broken.',
       },
       {
-        label: 'Party liaison committees',
+        label: 'Party Liaison Committees',
         url: `${E}/Parties-And-Candidates/Party-Liaison-Committees`,
         about: 'How parties and the Commission liaise.',
       },
       {
-        label: 'Political party and candidate forms',
+        label: 'Political Party and Candidate Forms',
         url: `${E}/Downloads/Documents-Forms`,
         about:
           'Forms library. Folders open by script, with municipal forms under “For Parties and Candidates (Municipal Elections)”.',
       },
       {
-        label: 'Laws and regulations',
+        label: 'Laws and Regulations',
         url: `${E}/Downloads/Documents-Laws-And-Regulations`,
         about: 'Acts and regulations, including the Electoral Court rules.',
       },
       {
-        label: 'Document library',
+        label: 'Document Library',
         url: `${E}/Downloads/Document-Library`,
         about: 'All of the Commission’s published documents.',
       },
@@ -186,35 +186,35 @@ export const OFFICIAL_GROUPS: OfficialGroup[] = [
   },
   {
     id: 'results',
-    title: 'Results and statistics',
+    title: 'Results and Statistics',
     links: [
       {
-        label: 'Election results',
+        label: 'Election Results',
         url: 'https://results.elections.org.za/',
         about: 'The Commission’s results site.',
       },
       {
-        label: 'Municipal local government elections dashboard',
+        label: 'Municipal Local Government Elections Dashboard',
         url: 'https://results.elections.org.za/dashboards/lge',
         about: 'The Commission’s live municipal dashboard.',
       },
       {
-        label: 'Voters’ roll and statistics',
+        label: 'Voters’ Roll and Statistics',
         url: `${E}/StatsData/Voter-Registration-Statistics`,
         about: 'Registration statistics.',
       },
       {
-        label: 'Ward councillor statistics',
+        label: 'Ward Councillor Statistics',
         url: `${E}/StatsData/List-Of-Current-Ward-Councillors`,
         about: 'Lists of current ward councillors.',
       },
       {
-        label: 'Atlas of results',
+        label: 'Atlas of Results',
         url: 'https://atlas.elections.org.za/atlas/',
         about: 'Maps of past results.',
       },
       {
-        label: '2011 Census maps',
+        label: '2011 Census Maps',
         url: `${E}/Voters-Roll/Census-2011-maps`,
         about: 'Census maps linked to voting districts.',
       },
@@ -222,7 +222,7 @@ export const OFFICIAL_GROUPS: OfficialGroup[] = [
   },
   {
     id: 'contact',
-    title: 'Contact and information',
+    title: 'Contact and Information',
     links: [
       {
         label: 'Contact the Electoral Commission',
@@ -230,23 +230,23 @@ export const OFFICIAL_GROUPS: OfficialGroup[] = [
         about: 'Contact details.',
       },
       {
-        label: 'Find local offices',
+        label: 'Find Local Offices',
         url: `${E}/About-Us/Find-IEC-Local-Offices`,
         about: 'Where the local offices are.',
       },
       {
-        label: 'Access to information (PAIA)',
+        label: 'Access to Information (PAIA)',
         url: `${E}/Information-Centre/Access-to-Information-PAIA`,
         about: 'How to request information from the Commission.',
       },
       {
-        label: 'Real411: elections page',
+        label: 'Real411: Elections Page',
         url: 'https://real411.org.za/elections',
         about:
           'Real411\u2019s own page on the 2026 elections: what counts as digital disinformation and an electoral offence, the Commission\u2019s Framework of Co-operation, and a guide for political parties.',
       },
       {
-        label: 'Report disinformation to Real411',
+        label: 'Report Disinformation to Real411',
         url: 'https://real411.org.za/complaints/submit',
         about: 'The web form the Commission points to. Complaints cannot be anonymous.',
       },

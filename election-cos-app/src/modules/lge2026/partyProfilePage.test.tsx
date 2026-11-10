@@ -25,7 +25,7 @@ describe('Party candidates and result page', () => {
   it('opens on ActionSA in JB Marks with the process, the one-name list, and the unnamed-seats warning', async () => {
     const el = await mount();
     const t = plain(el.textContent);
-    expect(t).toContain('How this list was obtained and checked');
+    expect(t).toContain('How This List Was Obtained and Checked');
     expect(t).toContain('same SHA-256');
     expect(t).toContain('35 in the ingest, 35 in the reference file, 0 differences');
     expect(t).toContain('XOLILE DAVID KHAM');

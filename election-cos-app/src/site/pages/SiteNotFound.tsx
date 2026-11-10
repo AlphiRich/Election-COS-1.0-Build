@@ -17,12 +17,12 @@ export function SiteNotFound() {
     <>
       <PageIntro
         eyebrow="404"
-        title="That page is not here."
+        title="That Page Is Not Here."
         lead="It may have moved, or the address may be mistyped."
       />
       <SiteSection className="pb-[88px]">
         <Link to="/" className="site-btn-primary">
-          Back to the home page
+          Back to the Home Page
         </Link>
       </SiteSection>
     </>

@@ -40,7 +40,7 @@ export function ConsentBanner({
   return (
     <div
       role="region"
-      aria-label="Advertising consent"
+      aria-label="Advertising Consent"
       className="sticky bottom-0 z-40 border-t border-line bg-ink text-paper"
     >
       <div className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-4 px-6 py-4">
@@ -79,7 +79,7 @@ export function AdConsentWithdrawLink({ onWithdraw }: { onWithdraw: () => void }
       onClick={onWithdraw}
       className="self-start bg-transparent p-0 text-left text-site-sm text-line underline"
     >
-      Advert preferences
+      Advert Preferences
     </button>
   );
 }

@@ -20,7 +20,7 @@ export function SitePackages() {
       <SiteSection className="flex flex-col gap-4 pb-12 pt-[88px]">
         <Eyebrow>Packages</Eyebrow>
         <h1 className="m-0 font-site-display text-site-h3 md:text-site-display">
-          One price list, published for everyone.
+          One Price List, Published for Everyone.
         </h1>
         <p className="m-0 max-w-[36em] text-site-lead">
           The same modules and terms for every party and every independent. Pilot prices on record,
@@ -31,7 +31,7 @@ export function SitePackages() {
       {/* ----------------------------------------------------- the list */}
       <SiteSection labelledBy="pk-h" className="pb-[72px]">
         <h2 id="pk-h" className="sr-only">
-          Five buyer packages
+          Five Buyer Packages
         </h2>
         <div className="overflow-x-auto rounded-[10px] border border-line bg-white">
           <table className="w-full min-w-[820px] border-collapse">
@@ -44,7 +44,7 @@ export function SitePackages() {
                   Package
                 </th>
                 <th scope="col" className="px-6 py-4">
-                  Price on record
+                  Price on Record
                 </th>
                 <th scope="col" className="px-6 py-4">
                   <span className="sr-only">Action</span>
@@ -70,7 +70,7 @@ export function SitePackages() {
                       to={p.href}
                       className="site-btn-outline-ink min-h-[44px] whitespace-nowrap px-[18px]"
                     >
-                      Talk to us
+                      Talk to Us
                     </Link>
                   </td>
                 </tr>
@@ -87,9 +87,9 @@ export function SitePackages() {
       {/* ------------------------------------------------- tool + help */}
       <SiteSection className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-5 pb-[88px]">
         <SiteCard className="flex flex-col gap-3 p-8">
-          <Eyebrow>Free tool</Eyebrow>
+          <Eyebrow>Free Tool</Eyebrow>
           <h2 id="tool-h" className="m-0 font-site-display text-site-h4">
-            Party-funding threshold checker
+            Party-Funding Threshold Checker
           </h2>
           <p className="m-0">
             Check a donation against the disclosure line. It runs in your browser: nothing you type
@@ -97,17 +97,17 @@ export function SitePackages() {
           </p>
           <p className="m-0 text-site-caption text-slate">Illustrative, not legal advice.</p>
           <Link to="/tools/party-funding-checker" className="mt-2 self-start font-semibold">
-            Open the checker →
+            Open the Checker →
           </Link>
         </SiteCard>
 
         <article className="flex flex-col gap-3 rounded-[10px] bg-ink p-8 text-paper">
-          <h2 className="m-0 font-site-display text-site-h4">Not sure which package fits?</h2>
+          <h2 className="m-0 font-site-display text-site-h4">Not Sure Which Package Fits?</h2>
           <p className="m-0 text-line">
             Tell us your role and wards. We reply within one working day.
           </p>
           <Link to="/contact" className="site-btn-primary mt-auto self-start">
-            Send an enquiry
+            Send an Enquiry
           </Link>
         </article>
       </SiteSection>

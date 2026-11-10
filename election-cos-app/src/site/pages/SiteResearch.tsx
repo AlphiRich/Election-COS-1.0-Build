@@ -20,17 +20,17 @@ import { Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
 
 const PAIN_POINTS = [
   {
-    title: 'Keeping funding inside the law',
+    title: 'Keeping Funding Inside the Law',
     body: 'Donor totals that must be added up across payments, a disclosure line that moved, and a quarterly return somebody has to sign.',
     interest: 'report:party-funding-compliance',
   },
   {
-    title: 'Following a resident’s complaint through to the municipality',
+    title: 'Following a Resident’s Complaint Through to the Municipality',
     body: 'Complaints raised at the door that never reach the right department, and a councillor’s office with no record of what was asked or when.',
     interest: 'report:casework-follow-through',
   },
   {
-    title: 'Running a canvass without breaking POPIA',
+    title: 'Running a Canvass Without Breaking POPIA',
     body: 'Consent, the voters’ roll, volunteers working offline, and what you may and may not keep about a person.',
     interest: 'report:canvassing-and-popia',
   },
@@ -42,7 +42,7 @@ export function SiteResearch() {
       <SiteSection className="flex flex-col gap-4 pb-10 pt-[88px]">
         <Eyebrow>Research</Eyebrow>
         <h1 className="m-0 font-site-display text-site-h3 md:text-site-h1">
-          Research on the problems you actually have
+          Research on the Problems You Actually Have
         </h1>
         <p className="m-0 max-w-[36em] text-site-lead">
           Plain-language analysis, with sources and a date on every page. Where we have not
@@ -52,7 +52,7 @@ export function SiteResearch() {
 
       <SiteSection labelledBy="rs-pub" className="flex flex-col gap-6 pb-12">
         <h2 id="rs-pub" className="m-0 font-site-display text-site-h4">
-          Published now
+          Published Now
         </h2>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-5">
           {EXPLAINERS.map((e) => (
@@ -71,7 +71,7 @@ export function SiteResearch() {
 
       <SiteSection labelledBy="rs-cmn" className="flex flex-col gap-6 pb-[88px]">
         <h2 id="rs-cmn" className="m-0 font-site-display text-site-h4">
-          Commission a report on your pain point
+          Commission a Report on Your Pain Point
         </h2>
         <p className="m-0 max-w-[40em] text-site-base">
           Tell us the problem and your wards. We reply within one working day to scope it. A report
@@ -87,7 +87,7 @@ export function SiteResearch() {
                 to={`/contact?interest=${encodeURIComponent(p.interest)}`}
                 className="site-btn-outline-ink mt-auto self-start"
               >
-                Ask for this report
+                Ask for This Report
               </Link>
             </SiteCard>
           ))}

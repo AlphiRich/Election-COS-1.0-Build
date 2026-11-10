@@ -26,7 +26,7 @@ export function SiteCouncil({ hasConsent }: { hasConsent: boolean }) {
   if (!c) {
     return (
       <SiteSection className="pb-[88px] pt-[88px]">
-        <h1 className="m-0 font-site-display text-site-h3">Council not found</h1>
+        <h1 className="m-0 font-site-display text-site-h3">Council Not Found</h1>
         <p className="mt-3 text-site-base">
           There is no metro or local council with the code “{code}”. <Link to={TRACKER_PATH} className="font-semibold text-teal">See every council</Link>.
         </p>
@@ -78,7 +78,7 @@ function Council({ c, hasConsent }: { c: CouncilSeats; hasConsent: boolean }) {
       <SiteSection labelledBy="seats-h" className="pb-8">
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,360px),1fr))] gap-6">
           <SiteCard className="flex min-w-0 flex-col gap-4 p-6">
-            <h2 id="seats-h" className="m-0 font-site-display text-site-h5">The council’s {c.councillors} seats</h2>
+            <h2 id="seats-h" className="m-0 font-site-display text-site-h5">The Council’s {c.councillors} Seats</h2>
             <Hemicycle title={`${c.name} council chamber`} councillors={c.councillors} holders={c.holders.map((h) => ({ id: h.id, name: h.name, value: h.seats }))} />
             <table className="w-full border-collapse text-left text-site-sm">
               <thead>
@@ -109,7 +109,7 @@ function Council({ c, hasConsent }: { c: CouncilSeats; hasConsent: boolean }) {
           </SiteCard>
 
           <SiteCard className="flex min-w-0 flex-col gap-4 p-6">
-            <h2 className="m-0 font-site-display text-site-h5">{c.hung ? 'Groups that pass half' : 'Majority'}</h2>
+            <h2 className="m-0 font-site-display text-site-h5">{c.hung ? 'Groups That Pass Half' : 'Majority'}</h2>
             {c.hung ? (
               <>
                 <p className="m-0 text-site-sm">
@@ -152,11 +152,11 @@ function Council({ c, hasConsent }: { c: CouncilSeats; hasConsent: boolean }) {
 
       <SiteSection labelledBy="split-h" className="pb-8">
         <SiteCard className="p-6">
-          <h2 id="split-h" className="sr-only">Ward and list seats</h2>
+          <h2 id="split-h" className="sr-only">Ward and List Seats</h2>
           <BarList
-            title="How each party won its seats: wards and party lists"
+            title="How Each Party Won Its Seats: Wards and Party Lists"
             unit="Party"
-            series={['Ward seats', 'List (PR) seats']}
+            series={['Ward Seats', 'List (PR) Seats']}
             stacked
             rows={c.holders.filter((h) => h.id !== 'TIED').slice(0, 12).map((h) => ({ id: h.id, name: h.name, values: [h.wardSeats, h.seats - h.wardSeats], emblem: true }))}
             note="Ward seats are won candidate by candidate; list seats top each party up to its share of the votes (Schedule 1)."
@@ -169,7 +169,7 @@ function Council({ c, hasConsent }: { c: CouncilSeats; hasConsent: boolean }) {
       {vacant > 0 && people && (
         <SiteSection labelledBy="vacant-h" className="pb-8">
           <SiteCard className="flex max-w-[860px] flex-col gap-2 border-roadmap p-6">
-            <h2 id="vacant-h" className="m-0 font-site-display text-site-h5">{vacant} list {vacant === 1 ? 'seat is' : 'seats are'} waiting for candidates</h2>
+            <h2 id="vacant-h" className="m-0 font-site-display text-site-h5">{vacant} List {vacant === 1 ? 'Seat Is' : 'Seats Are'} Waiting for Candidates</h2>
             <p className="m-0 text-site-sm">
               {people.vacant.map((v) => `${partyLabel(v.party)} won ${v.listSeats} list seats and has ${v.filled} ${v.filled === 1 ? 'candidate' : 'candidates'} on its list`).join('; ')}.
               The Commission marks this “Potential Forfeiture”: the party must submit a supplementary list, or the seat may be
@@ -181,7 +181,7 @@ function Council({ c, hasConsent }: { c: CouncilSeats; hasConsent: boolean }) {
 
       <SiteSection labelledBy="wards-h" className="pb-8">
         <div className="flex flex-col gap-4">
-          <h2 id="wards-h" className="m-0 font-site-display text-site-h4">Ward councillors-elect</h2>
+          <h2 id="wards-h" className="m-0 font-site-display text-site-h4">Ward Councillors-Elect</h2>
           {!people ? (
             <p className="m-0 text-site-sm">Loading councillors…</p>
           ) : (
@@ -190,7 +190,7 @@ function Council({ c, hasConsent }: { c: CouncilSeats; hasConsent: boolean }) {
                 <thead>
                   <tr className="border-b border-line bg-paper text-site-caption text-slate">
                     <th scope="col" className="px-4 py-3 font-semibold">Ward</th>
-                    <th scope="col" className="px-4 py-3 font-semibold">Councillor-elect</th>
+                    <th scope="col" className="px-4 py-3 font-semibold">Councillor-Elect</th>
                     <th scope="col" className="px-4 py-3 font-semibold">Party</th>
                     <th scope="col" className="px-4 py-3 text-right font-semibold">Margin</th>
                   </tr>
@@ -222,7 +222,7 @@ function Council({ c, hasConsent }: { c: CouncilSeats; hasConsent: boolean }) {
       {people && people.pr.length > 0 && (
         <SiteSection labelledBy="pr-h" className="pb-8">
           <div className="flex flex-col gap-3">
-            <h2 id="pr-h" className="m-0 font-site-display text-site-h4">Councillors-elect from party lists</h2>
+            <h2 id="pr-h" className="m-0 font-site-display text-site-h4">Councillors-Elect From Party Lists</h2>
             <p className="m-0 max-w-[48em] text-site-sm text-slate">
               Each party’s list seats are filled from its certified list in order, skipping candidates who won a ward. This
               follows the list order the Commission certified; it becomes final when the Commission declares the councillors.
@@ -271,10 +271,10 @@ function Simulator({ c }: { c: CouncilSeats }) {
   return (
     <SiteSection labelledBy="sim-h" className="pb-8">
       <SiteCard className="flex flex-col gap-4 p-6">
-        <h2 id="sim-h" className="m-0 font-site-display text-site-h5">Try a coalition</h2>
+        <h2 id="sim-h" className="m-0 font-site-display text-site-h5">Try a Coalition</h2>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-6">
           <fieldset className="m-0 flex min-w-0 flex-col gap-1 border-0 p-0">
-            <legend className="mb-2 text-site-sm font-semibold">Choose parties</legend>
+            <legend className="mb-2 text-site-sm font-semibold">Choose Parties</legend>
             {parties.map((p) => (
               <label key={p.id} className="flex min-h-[44px] items-center gap-3">
                 <input

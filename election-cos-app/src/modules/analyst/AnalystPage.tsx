@@ -109,7 +109,7 @@ export function AnalystPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader slug="/analytics/analyst" title="Data analyst" />
+      <PageHeader slug="/analytics/analyst" title="Data Analyst" />
       <BasisNote>
         Ask a question of a CSV. The file is read in this browser tab and is not uploaded anywhere, and no
         AI model writes the answer: every figure is counted or summed from your rows, and the page says
@@ -119,17 +119,17 @@ export function AnalystPage() {
 
       <Card>
         <SectionLabel as="h2">1. Data</SectionLabel>
-        <Field label="CSV file" hint={`Up to ${MAX_BYTES / 1048576} MB each. Stays on this device.`}>
+        <Field label="CSV File" hint={`Up to ${MAX_BYTES / 1048576} MB each. Stays on this device.`}>
           {(props) => (
             <input {...props} type="file" accept=".csv,text/csv" multiple onChange={(e) => void onFiles(e.target.files)} />
           )}
         </Field>
-        <Field label="Or paste CSV text" hint="First row is the header.">
+        <Field label="Or Paste CSV Text" hint="First row is the header.">
           {(props) => <textarea {...props} rows={4} value={pasted} onChange={(e) => setPasted(e.target.value)} />}
         </Field>
         <div className="mt-2">
           <Button variant="ghost" disabled={!pasted.trim()} onClick={onPaste}>
-            Add pasted data
+            Add Pasted Data
           </Button>
         </div>
         {error && (
@@ -156,7 +156,7 @@ export function AnalystPage() {
 
       {screens.length > 0 && (
         <Card>
-          <SectionLabel as="h2">Personal information check</SectionLabel>
+          <SectionLabel as="h2">Personal Information Check</SectionLabel>
           <div role="alert">
             {screens.map((s) => {
               const key = `${s.file}::${s.column}`;
@@ -195,7 +195,7 @@ export function AnalystPage() {
       )}
 
       <Card>
-        <SectionLabel as="h2">2. Your question</SectionLabel>
+        <SectionLabel as="h2">2. Your Question</SectionLabel>
         <Field label="Question">
           {(props) => <textarea {...props} rows={3} value={question} onChange={(e) => setQuestion(e.target.value)} />}
         </Field>
@@ -208,7 +208,7 @@ export function AnalystPage() {
         </div>
         {(numeric.length > 1 || groupable.length > 1) && (
           <div className="grid gap-3 sm:grid-cols-2 mt-3">
-            <Field label="Total this number (segments)">
+            <Field label="Total This Number (Segments)">
               {(props) => (
                 <select {...props} value={measure} onChange={(e) => setMeasure(e.target.value)}>
                   <option value="">First numeric column</option>
@@ -218,7 +218,7 @@ export function AnalystPage() {
                 </select>
               )}
             </Field>
-            <Field label="Group by (segments)">
+            <Field label="Group by (Segments)">
               {(props) => (
                 <select {...props} value={dimension} onChange={(e) => setDimension(e.target.value)}>
                   <option value="">First suitable text column</option>
@@ -232,7 +232,7 @@ export function AnalystPage() {
         )}
         <div className="flex flex-wrap items-center gap-3 mt-3">
           <Button disabled={!canRun} onClick={run}>
-            Run analysis
+            Run Analysis
           </Button>
           <span className="text-body-md font-body text-slate">
             {!cleaned.length ? 'Add a CSV first.' : !question.trim() ? 'Write a question.' : 'Runs here, on this device.'}
@@ -298,7 +298,7 @@ export function AnalystPage() {
               </UiTable>
             </div>
           )}
-          <SectionLabel as="h3">How this was done</SectionLabel>
+          <SectionLabel as="h3">How This Was Done</SectionLabel>
           <p className="text-body-md font-body">{report.methodology}</p>
           <SectionLabel as="h3">Limits</SectionLabel>
           <ul className="list-disc pl-5 text-body-md font-body">
@@ -315,7 +315,7 @@ export function AnalystPage() {
 
       {runs.length > 0 && (
         <Card>
-          <SectionLabel as="h2">This session&rsquo;s runs</SectionLabel>
+          <SectionLabel as="h2">This session&rsquo;s Runs</SectionLabel>
           <p className="text-body-md font-body text-slate">
             Kept in this tab only. Closing or reloading the page clears them.
           </p>

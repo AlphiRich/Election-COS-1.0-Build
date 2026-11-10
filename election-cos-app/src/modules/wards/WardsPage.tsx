@@ -94,14 +94,14 @@ export function WardsPage() {
             </>
           }
         />
-        <StatTile label="Voting districts" value={totals.vdCount} />
-        <StatTile emphasis label="Registered voters" value={totals.registeredVoters.toLocaleString('en-ZA')} />
+        <StatTile label="Voting Districts" value={totals.vdCount} />
+        <StatTile emphasis label="Registered Voters" value={totals.registeredVoters.toLocaleString('en-ZA')} />
       </div>
 
       {reconciliation && reconciliation.issues.length > 0 && (
         <Card className="space-y-2">
           <SectionLabel as="h2">
-            Seed check {reconciliation.reconciled ? '· consistent' : '· needs attention'}
+            Seed Check {reconciliation.reconciled ? '· consistent' : '· needs attention'}
           </SectionLabel>
           <ul className="space-y-2">
             {reconciliation.issues.map((seedIssue) => (
@@ -151,7 +151,7 @@ export function WardsPage() {
       {sizes.wardCount > 0 && sizes.mean > 0 && (
         <div className="bg-white border border-ink/10 rounded-lg p-4 space-y-2">
           <div className="flex items-baseline justify-between gap-3 flex-wrap">
-            <h2 className="text-label-caps font-display uppercase text-slate">Ward size against the average</h2>
+            <h2 className="text-label-caps font-display uppercase text-slate">Ward Size Against the Average</h2>
             <p className="text-data-mono font-mono text-slate">
               {Math.round(sizes.mean).toLocaleString('en-ZA')} registered voters per ward ·{' '}
               {sizes.wards[0].registeredVoters.toLocaleString('en-ZA')} to{' '}

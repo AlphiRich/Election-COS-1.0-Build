@@ -138,16 +138,16 @@ export function ScheduledReportsPage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <StatTile
               emphasis
-              label="Net sentiment index"
+              label="Net Sentiment Index"
               value={`${summary.netSentimentIndex > 0 ? '+' : ''}${summary.netSentimentIndex}`}
             />
             <StatTile label="Support" value={`${summary.supportPct}%`} />
             <StatTile label="Opposition" value={`${summary.oppositionPct}%`} />
-            <StatTile label="Total voters captured" value={summary.totalVoters.toLocaleString('en-ZA')} />
+            <StatTile label="Total Voters Captured" value={summary.totalVoters.toLocaleString('en-ZA')} />
           </div>
 
           <Card className="space-y-3">
-            <SectionLabel as="h2">Breakdown by tier</SectionLabel>
+            <SectionLabel as="h2">Breakdown by Tier</SectionLabel>
             <div className="flex flex-wrap gap-2">
               {SENTIMENT_ORDER.map((tier) => (
                 <span

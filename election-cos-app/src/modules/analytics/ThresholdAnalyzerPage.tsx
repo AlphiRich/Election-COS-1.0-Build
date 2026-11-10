@@ -45,7 +45,7 @@ export function ThresholdAnalyzerPage() {
       <Card className="space-y-4">
         {/* Was a bare <label> wrapping the input: nothing associated. */}
         <div className="max-w-xs">
-          <Field label="Total valid votes">
+          <Field label="Total Valid Votes">
             {(props) => (
               <input
                 {...props}

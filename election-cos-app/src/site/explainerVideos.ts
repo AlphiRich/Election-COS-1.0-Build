@@ -47,7 +47,7 @@ export const EXPLAINERS: Explainer[] = [
   {
     id: 'canvasser-knocks',
     audience: 'voters',
-    title: 'When a canvasser knocks',
+    title: 'When a Canvasser Knocks',
     seconds: 20,
     readIt:
       'They must ask your permission before they record anything about you. You can say no. If you say no, nothing is stored, and there is no list of people who said no.',
@@ -57,7 +57,7 @@ export const EXPLAINERS: Explainer[] = [
   {
     id: 'poll-answer',
     audience: 'voters',
-    title: 'Your answer to a poll',
+    title: 'Your Answer to a Poll',
     seconds: 20,
     readIt:
       'A poll asks for a choice and nothing else: no name, number or ID. Your answer is counted with others and is not linked to you. You can pick "Prefer not to say".',
@@ -67,7 +67,7 @@ export const EXPLAINERS: Explainer[] = [
   {
     id: 'seats-won',
     audience: 'voters',
-    title: 'How seats are won',
+    title: 'How Seats Are Won',
     seconds: 30,
     readIt:
       'Some seats are won in wards, the rest from the party vote. Schedule 1 of the Municipal Structures Act turns votes into seats. The calculator shows the working, with the law cited.',
@@ -77,7 +77,7 @@ export const EXPLAINERS: Explainer[] = [
   {
     id: 'roles',
     audience: 'parties',
-    title: 'Seven roles, each sees only its own ground',
+    title: 'Seven Roles, Each Sees Only Its Own Ground',
     seconds: 12,
     readIt:
       'A ward lead sees a ward. A canvasser sees a voting district. The refusal is made by the database rules, not only by the screen.',
@@ -87,7 +87,7 @@ export const EXPLAINERS: Explainer[] = [
   {
     id: 'command-view',
     audience: 'parties',
-    title: 'One view of the campaign',
+    title: 'One View of the Campaign',
     seconds: 10,
     readIt:
       'People recorded with consent, doors worked, incidents open. Counts only. Nothing on it names a voter.',
@@ -97,7 +97,7 @@ export const EXPLAINERS: Explainer[] = [
   {
     id: 'capture-consent',
     audience: 'parties',
-    title: 'Capture with consent',
+    title: 'Capture With Consent',
     seconds: 11,
     readIt:
       'The canvasser types the person’s name back before the record button works, so a mis-tap cannot create consent. A refusal stores nothing.',
@@ -107,7 +107,7 @@ export const EXPLAINERS: Explainer[] = [
   {
     id: 'offline',
     audience: 'parties',
-    title: 'Offline in a dead zone',
+    title: 'Offline in a Dead Zone',
     seconds: 15,
     readIt:
       'Work is kept on the phone and sent when signal returns. The screen shows what is still waiting. Clearing the browser’s data removes anything not yet sent, and the app says so.',
@@ -117,7 +117,7 @@ export const EXPLAINERS: Explainer[] = [
   {
     id: 'funding-30-day',
     audience: 'parties',
-    title: 'Funding line and the 30-day clock',
+    title: 'Funding Line and the 30-Day Clock',
     seconds: 14,
     readIt:
       'A donor’s payments are added up against the R200,000 disclosure line (Government Gazette 53182, under court challenge). A person’s request about their own data is tracked against a 30-day target.',
@@ -127,7 +127,7 @@ export const EXPLAINERS: Explainer[] = [
   {
     id: 'sentiment-polls',
     audience: 'parties',
-    title: 'Sentiment polls: what they can and cannot tell you',
+    title: 'Sentiment Polls: What They Can and Cannot Tell You',
     seconds: 30,
     readIt:
       'Answers come from people who chose to reply to a link. They are not a random sample, so there is no margin of error and no forecast. Groups under five answers are hidden.',
@@ -137,7 +137,7 @@ export const EXPLAINERS: Explainer[] = [
   {
     id: 'scenario-runner',
     audience: 'parties',
-    title: 'The scenario runner: your assumptions, run many times',
+    title: 'The Scenario Runner: Your Assumptions, Run Many Times',
     seconds: 30,
     readIt:
       'You set the swing and how unsure you are. The software repeats the seat calculation across that range and shows which assumption matters most. It is not a prediction.',

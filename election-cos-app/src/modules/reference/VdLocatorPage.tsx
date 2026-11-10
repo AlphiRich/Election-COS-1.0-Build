@@ -20,7 +20,7 @@ export function VdLocatorPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader slug="/analytics/vd-locator" title="Voting-district locator" />
+      <PageHeader slug="/analytics/vd-locator" title="Voting-District Locator" />
       <BasisNote>
         {VD_ROWS.length} voting-district rows in JB Marks, {n(REGISTERED_TOTAL)} registered voters
         in all (the gazetted baseline). Station names are as the Commission prints them. A district
@@ -30,7 +30,7 @@ export function VdLocatorPage() {
 
       <Card>
         <Field
-          label="Search by station, VD code or ward"
+          label="Search by Station, VD Code or Ward"
           hint="For example: church, 86821094, ward 7."
         >
           {(props) => (
@@ -87,7 +87,7 @@ export function VdLocatorPage() {
           </p>
           {picked.ageMix ? (
             <BarChart
-              title="Age mix"
+              title="Age Mix"
               bars={AGE_BANDS.map((b) => {
                 const v = picked.ageMix?.[b] ?? null;
                 return { label: b, value: v, shown: v === null ? '' : `${v.toFixed(0)}%` };

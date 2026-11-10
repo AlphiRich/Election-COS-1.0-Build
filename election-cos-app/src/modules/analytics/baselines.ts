@@ -41,7 +41,7 @@ export interface Baseline {
 
 export const BASELINE_NW405_2021: Baseline = {
   id: 'NW405-2021',
-  label: 'JB Marks, 2021 (superseded delimitation)',
+  label: 'JB Marks, 2021 (Superseded Delimitation)',
   code: 'NW405',
   year: 2021,
   delimitationId: NW405_2021_DELIMITATION,

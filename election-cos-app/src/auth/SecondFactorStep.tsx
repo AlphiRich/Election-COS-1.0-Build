@@ -50,7 +50,7 @@ export function SecondFactorStep({
     <div className="min-h-screen flex items-center justify-center bg-paper px-4">
       <Card className="w-full max-w-sm space-y-5 p-8">
         <div>
-          <h1 className="text-headline-md font-display text-ink">Verify it&rsquo;s you</h1>
+          <h1 className="text-headline-md font-display text-ink">Verify It&rsquo;s You</h1>
           <p className="text-body-md font-body text-slate mt-2">
             {email ? `${email} is signed in. ` : ''}Your role needs a second step: a 6-digit code sent by SMS
             to the mobile number on your staff profile.
@@ -73,7 +73,7 @@ export function SecondFactorStep({
               Code sent to <span className="font-mono text-data-mono text-ink">{challenge.masked}</span>. It is valid
               for 5 minutes.
             </p>
-            <Field label="6-digit code" mono>
+            <Field label="6-Digit Code" mono>
               {(props) => (
                 <input
                   {...props}
@@ -101,7 +101,7 @@ export function SecondFactorStep({
         )}
 
         <Button variant="ghost" onClick={onSignOut}>
-          Sign out
+          Sign Out
         </Button>
         <DataLine className="text-center text-slate/60">{NAV_FOOTER_LINE}</DataLine>
       </Card>

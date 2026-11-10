@@ -61,9 +61,9 @@ export function CandidateListPage() {
           sub="ward and party list"
           emphasis
         />
-        <StatTile label="Ward candidates" value={CANDIDATES.counts.ward} sub="34 wards" />
+        <StatTile label="Ward Candidates" value={CANDIDATES.counts.ward} sub="34 wards" />
         <StatTile
-          label="Party-list candidates"
+          label="Party-List Candidates"
           value={CANDIDATES.counts.pr}
           sub="proportional lists"
         />
@@ -71,7 +71,7 @@ export function CandidateListPage() {
       </div>
 
       <Card>
-        <SectionLabel as="h2">Parties contesting</SectionLabel>
+        <SectionLabel as="h2">Parties Contesting</SectionLabel>
         <Table caption="Parties on the 2026 candidate list for JB Marks, with how many ward and party-list candidates each fielded.">
           <thead>
             <tr>
@@ -93,7 +93,7 @@ export function CandidateListPage() {
       </Card>
 
       <Card>
-        <SectionLabel as="h2">Find a candidate</SectionLabel>
+        <SectionLabel as="h2">Find a Candidate</SectionLabel>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 mt-3">
           <Field label="Ballot">
             {(props) => (
@@ -136,7 +136,7 @@ export function CandidateListPage() {
               </select>
             )}
           </Field>
-          <Field label="Name contains">
+          <Field label="Name Contains">
             {(props) => (
               <input
                 {...props}

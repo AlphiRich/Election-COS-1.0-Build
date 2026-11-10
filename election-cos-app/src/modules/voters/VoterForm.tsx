@@ -265,7 +265,7 @@ export function VoterForm({ ctx, voter, defaultHouseholdId, onDone, onCancel }: 
       </section>
 
       <section className="space-y-2 border-l-4 border-gold bg-paper p-4">
-        <h3 className="text-label-caps font-display uppercase text-ink">POPIA compliance</h3>
+        <h3 className="text-label-caps font-display uppercase text-ink">POPIA Compliance</h3>
         <p className="text-body-md font-body text-slate">
           Confirm the voter has given consent for their information to be recorded, per POPIA. Writes are rejected
           server-side without this — see firestore.rules.

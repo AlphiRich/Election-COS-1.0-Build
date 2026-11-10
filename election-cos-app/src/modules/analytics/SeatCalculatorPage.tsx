@@ -76,7 +76,7 @@ export function SeatCalculatorPage() {
           the screen a campaign uses to model its own council. */}
       <Card className="space-y-4">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <Field label="Total seats">
+          <Field label="Total Seats">
             {(props) => (
               <input
                 {...props}
@@ -87,7 +87,7 @@ export function SeatCalculatorPage() {
               />
             )}
           </Field>
-          <Field label="Total valid votes">
+          <Field label="Total Valid Votes">
             {(props) => (
               <input
                 {...props}
@@ -98,7 +98,7 @@ export function SeatCalculatorPage() {
               />
             )}
           </Field>
-          <Field label="Independent ward seats">
+          <Field label="Independent Ward Seats">
             {(props) => (
               <input
                 {...props}
@@ -109,7 +109,7 @@ export function SeatCalculatorPage() {
               />
             )}
           </Field>
-          <Field label="No-PR-list ward seats">
+          <Field label="No-PR-List Ward Seats">
             {(props) => (
               <input
                 {...props}
@@ -133,8 +133,8 @@ export function SeatCalculatorPage() {
         <>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <StatTile label="Quota" value={result.data.quota.toLocaleString('en-ZA')} />
-            <StatTile label="Council size (final)" value={result.data.councilSizeFinal} />
-            <StatTile emphasis label="Seats allocated" value={result.data.totalSeatsAllocated} />
+            <StatTile label="Council Size (Final)" value={result.data.councilSizeFinal} />
+            <StatTile emphasis label="Seats Allocated" value={result.data.totalSeatsAllocated} />
             {/*
              * Hand-rolled, and staying that way: this tile goes maroon
              * when seats are tied and unresolved, and StatTile has one
@@ -155,7 +155,7 @@ export function SeatCalculatorPage() {
           {result.data.excessiveParties.length > 0 && (
             <div className="bg-white border-l-4 border-gold rounded p-4 space-y-1">
               <h2 className="text-label-caps font-display uppercase text-ink">
-                Excessive seats (Schedule 1, item 16)
+                Excessive Seats (Schedule 1, Item 16)
               </h2>
               <p className="text-body-md font-body text-ink">
                 {result.data.excessiveParties.join(', ')} won ward seats equal to or above its
@@ -177,7 +177,7 @@ export function SeatCalculatorPage() {
                   kept as markup rather than adding a third tone for one
                   call site. */}
               <h2 className="text-label-caps font-display uppercase text-maroon">
-                Level on surplus and votes: the Act is silent
+                Level on Surplus and Votes: The Act Is Silent
               </h2>
               {result.data.tieFlags.map((tie, i) => (
                 <p key={i} className="text-body-md font-body text-ink">
@@ -241,7 +241,7 @@ export function SeatCalculatorPage() {
           </Table>
 
           <Card className="space-y-2">
-            <SectionLabel as="h2">Coalition builder</SectionLabel>
+            <SectionLabel as="h2">Coalition Builder</SectionLabel>
             <p className="text-display-lg-mobile font-display text-ink">
               {coalitionSeats} <span className="text-body-md font-body text-slate">/ {majorityThreshold} for a majority</span>
             </p>

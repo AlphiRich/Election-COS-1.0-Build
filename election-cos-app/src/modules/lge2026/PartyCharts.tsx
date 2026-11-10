@@ -225,7 +225,7 @@ export function ListDepthChart({
         <svg
           viewBox={`0 0 ${W} ${H}`}
           role="img"
-          aria-label="List seats won against names on the published PR list, by party"
+          aria-label="List Seats Won Against Names on the Published PR List, by Party"
           style={{
             width: "100%",
             minWidth: 560,
@@ -298,8 +298,8 @@ export function ListDepthChart({
       </div>
       <Legend
         items={[
-          { colour: C.ink, label: "List seats won" },
-          { colour: C.gold, label: "Eligible names on the published PR list" },
+          { colour: C.ink, label: "List Seats Won" },
+          { colour: C.gold, label: "Eligible Names on the Published PR List" },
         ]}
       />
     </figure>

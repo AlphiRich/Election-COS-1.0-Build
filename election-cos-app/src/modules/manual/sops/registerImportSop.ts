@@ -21,7 +21,7 @@ import type { Sop } from '../manualModel';
 
 export const REGISTER_IMPORT_SOP: Sop = {
   number: 'SOP-04',
-  title: 'Importing an existing membership register',
+  title: 'Importing an Existing Membership Register',
   area: 'ONBOARDING',
   roles: ['municipal-team-lead'],
   requiresAnyCapability: ['voters.edit'],
@@ -31,7 +31,7 @@ export const REGISTER_IMPORT_SOP: Sop = {
     'and how to read the plan before anything is written.',
   sections: [
     {
-      heading: 'Before the file, the consent',
+      heading: 'Before the File, the Consent',
       body: [
         'This platform will not create a voter record without consent recorded against it. That is enforced by the database itself, not by the form, and it holds for an import exactly as it holds at a door.',
         'At a door the canvasser is the evidence: they were there, they asked, and the record carries their name and the time. A spreadsheet has neither. So a bulk import asks you to declare, once, for the whole file: how these people consented, when, and where that consent can be found.',
@@ -50,7 +50,7 @@ export const REGISTER_IMPORT_SOP: Sop = {
       ],
     },
     {
-      heading: 'What the file needs',
+      heading: 'What the File Needs',
       body: [
         'A CSV, with a header row. Column order does not matter and the spelling is forgiving — first name, surname and contact number are read from the usual English and Afrikaans headings.',
         'Three columns are worth adding before you import rather than after: the voting district, the ward, and the street address. What they are for is below.',
@@ -63,7 +63,7 @@ export const REGISTER_IMPORT_SOP: Sop = {
       ],
     },
     {
-      heading: 'Why a row can be refused for its voting district',
+      heading: 'Why a Row Can Be Refused for Its Voting District',
       body: [
         'Every voter belongs to a voting district and a ward, and the ward is what decides who may see the record. The import will not guess either.',
         'A row is placed only into a voting district already loaded for this tenant. If the register covers ground you have not seeded — a neighbouring municipality, an old boundary — those rows are refused by code, with the code named, rather than quietly placed somewhere plausible.',
@@ -74,7 +74,7 @@ export const REGISTER_IMPORT_SOP: Sop = {
       ],
     },
     {
-      heading: 'The people with no address',
+      heading: 'The People With No Address',
       body: [
         'A membership register often has names and phone numbers and nothing else. Those people are still real and their consent is still good, so they import — into a holding record whose address line says, in words, that no address was supplied and which import created it.',
         'No street is invented for them. A fabricated address is a canvasser sent to a door that is not there.',
@@ -84,7 +84,7 @@ export const REGISTER_IMPORT_SOP: Sop = {
       ],
     },
     {
-      heading: 'Read the plan before you write anything',
+      heading: 'Read the Plan Before You Write Anything',
       body: [
         'Choosing a file does not import it. The platform reads it, works out what it would do, and shows you: rows read, rows ready, rows refused with a reason each, and how many new doors would be created.',
         'This is the moment to act on the refusals. Afterwards, "412 of 437 imported" is a sentence nobody can do anything with.',
@@ -101,7 +101,7 @@ export const REGISTER_IMPORT_SOP: Sop = {
       ],
     },
     {
-      heading: 'Who can do this, and why it is one role',
+      heading: 'Who Can Do This, and Why It Is One Role',
       body: [
         'An import needs two permissions at once: the permission to write voter records, and the permission to read the ward and voting-district table it places them into. Exactly one role holds both — Municipal Team Lead.',
         'Neither half is an accident. A Party HQ Admin can configure the tenant, add people and set permissions, and is deliberately kept off the voter roll, so the person who controls access is not also the person who can quietly put four hundred records on it. A Ward Lead, VD Captain or Canvasser can edit voters within their own ground but does not hold the municipality-wide reference table an import reads to place rows.',

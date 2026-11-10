@@ -27,7 +27,7 @@ export function PartyProfilePage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader slug="/analytics/lge-2026-party" title="Party candidates and result" />
+      <PageHeader slug="/analytics/lge-2026-party" title="Party Candidates and Result" />
 
       <Card>
         <div className="grid gap-3 sm:grid-cols-2">
@@ -57,7 +57,7 @@ export function PartyProfilePage() {
       </Card>
 
       <Card tone="accent">
-        <SectionLabel as="h2">How this list was obtained and checked</SectionLabel>
+        <SectionLabel as="h2">How This List Was Obtained and Checked</SectionLabel>
         <ol className="mt-2 list-decimal space-y-1 pl-5 text-body-md font-body text-ink">
           <li>The Commission publishes certified candidate lists as PDFs by province. This is the North West list of 23 Oct 2026, &ldquo;as supplemented&rdquo; after the Constitutional Court order in CCT 282/26 ({n(LIST_PROVENANCE.bytes)} bytes).</li>
           <li>It was fetched from the Commission&rsquo;s site on {LIST_PROVENANCE.fetchedOn} and again on 9 Nov 2026; both copies have the same SHA-256, <span className="font-mono text-data-mono">{LIST_PROVENANCE.sha256.slice(0, 16)}…</span></li>
@@ -72,10 +72,10 @@ export function PartyProfilePage() {
       </Card>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <StatTile label="Candidate entries" value={n(P.candidates)} sub={`${P.wardCandidates.length} ward · ${P.prList.length} list · ${P.distinctPeople} people`} emphasis />
+        <StatTile label="Candidate Entries" value={n(P.candidates)} sub={`${P.wardCandidates.length} ward · ${P.prList.length} list · ${P.distinctPeople} people`} emphasis />
         <StatTile label="Seats" value={n(P.seats.total)} sub={`${P.seats.ward} ward · ${P.seats.pr} list`} />
-        <StatTile label="PR ballot" value={`${p1(P.ballots.pr.sharePct)}%`} sub={`${n(P.ballots.pr.votes)} votes`} />
-        <StatTile label="Ward ballot" value={`${p1(P.ballots.ward.sharePct)}%`} sub={`${n(P.ballots.ward.votes)} votes`} />
+        <StatTile label="PR Ballot" value={`${p1(P.ballots.pr.sharePct)}%`} sub={`${n(P.ballots.pr.votes)} votes`} />
+        <StatTile label="Ward Ballot" value={`${p1(P.ballots.ward.sharePct)}%`} sub={`${n(P.ballots.ward.votes)} votes`} />
       </div>
 
       <Card>
@@ -120,7 +120,7 @@ export function PartyProfilePage() {
       </Card>
 
       <Card>
-        <SectionLabel as="h2">Ward candidates and ward results</SectionLabel>
+        <SectionLabel as="h2">Ward Candidates and Ward Results</SectionLabel>
         <Table caption={`${P.label} ward candidates with the votes they polled and the ward leader.`}>
           <thead>
             <tr>
@@ -153,22 +153,22 @@ export function PartyProfilePage() {
       </Card>
 
       <Card>
-        <SectionLabel as="h2">Share of the ward vote, by ward</SectionLabel>
+        <SectionLabel as="h2">Share of the Ward Vote, by Ward</SectionLabel>
         <WardShareChart wards={P.wardCandidates} title={`${P.label}: share of the valid ward vote in each ward, coloured by finishing position`} />
       </Card>
       <Card>
-        <SectionLabel as="h2">Wards by finishing position</SectionLabel>
+        <SectionLabel as="h2">Wards by Finishing Position</SectionLabel>
         <div className="max-w-md">
           <PositionChart positions={P.wardPositions} total={P.wardCandidates.length} />
         </div>
       </Card>
       <Card>
-        <SectionLabel as="h2">List seats against names on the list</SectionLabel>
+        <SectionLabel as="h2">List Seats Against Names on the List</SectionLabel>
         <ListDepthChart rows={P.peers} highlight={P.party} />
       </Card>
 
       <Card tone="accent">
-        <SectionLabel as="h2">Analytical insights</SectionLabel>
+        <SectionLabel as="h2">Analytical Insights</SectionLabel>
         <ul className="mt-2 list-disc space-y-2 pl-5 text-body-md font-body text-ink">
           {insights.map((f) => (
             <li key={f}>{f}</li>

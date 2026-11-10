@@ -27,7 +27,7 @@ import type { Sop } from '../manualModel';
 
 export const WARD_ROUND_SOP: Sop = {
   number: 'SOP-05',
-  title: 'Running a ward round and reading coverage',
+  title: 'Running a Ward Round and Reading Coverage',
   area: 'FIELD',
   roles: ['ward-lead', 'vd-captain'],
   requiresAnyCapability: ['voters.view'],
@@ -37,7 +37,7 @@ export const WARD_ROUND_SOP: Sop = {
     'is done rather than merely that nobody has recorded it.',
   sections: [
     {
-      heading: 'What a round is, here',
+      heading: 'What a Round Is, Here',
       body: [
         'A round is not a list you hand out. Every door carries its own state, and the platform offers the ones that are due — so two canvassers working the same street do not knock on the same gate a minute apart, and a door that was refused is never offered to anybody again.',
         'Open Voters → Work a round and enter your ward code. You will see your own ground: a ward lead gets the ward, a VD captain gets their voting district. That narrowing is done by the database, not by the page, so there is nothing to configure and nothing to get wrong.',
@@ -47,7 +47,7 @@ export const WARD_ROUND_SOP: Sop = {
       ],
     },
     {
-      heading: 'Which doors come up, and when they come back',
+      heading: 'Which Doors Come Up, and When They Come Back',
       body: [
         'The queue offers the doors that are due, oldest attempt first, so a round sweeps evenly instead of returning to the same few streets.',
       ],
@@ -69,7 +69,7 @@ export const WARD_ROUND_SOP: Sop = {
       ],
     },
     {
-      heading: 'Closing a door out is the whole of the record',
+      heading: 'Closing a Door Out Is the Whole of the Record',
       body: [
         'A canvasser records one of four outcomes at each door, and that is what moves the door out of the queue. A round where nobody records anything looks exactly like a round nobody worked.',
       ],
@@ -82,7 +82,7 @@ export const WARD_ROUND_SOP: Sop = {
       ],
     },
     {
-      heading: 'What the coverage figure counts',
+      heading: 'What the Coverage Figure Counts',
       body: [
         'Coverage is the doors worked at least once, out of the doors that can be worked. "Worked" means somebody went and recorded an outcome — contacted, no answer, could not reach — not that somebody was persuaded.',
         'Households who asked not to be contacted again are taken out of the denominator, not counted as outstanding. A ward reported as 80% covered when the missing 20% asked not to be visited would misrepresent both the work and those households, and it would push a team to keep knocking to close a gap that is not a gap.',
@@ -93,7 +93,7 @@ export const WARD_ROUND_SOP: Sop = {
       ],
     },
     {
-      heading: 'Reading the round against the ward',
+      heading: 'Reading the Round Against the Ward',
       body: [
         'The page shows every door by state, which is the honest version of the coverage percentage: the same information without the arithmetic, so you can see what it is made of.',
       ],
@@ -108,7 +108,7 @@ export const WARD_ROUND_SOP: Sop = {
       ],
     },
     {
-      heading: 'What this does not tell you',
+      heading: 'What This Does Not Tell You',
       body: [
         'The queue knows which doors have been worked. It does not know whether the people behind them are registered to vote, whether they are on the roll for this voting district, or whether they will turn out. None of that is in this product, and coverage should never be reported as though it were.',
       ],

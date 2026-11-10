@@ -27,23 +27,23 @@ export function SiteResults() {
   return (
     <>
       <PageIntro
-        eyebrow="Local government elections 2026"
-        title="Certified results"
+        eyebrow="Local Government Elections 2026"
+        title="Certified Results"
         lead={`Every metro and local council elected on 4 November 2026: ${s.councils} councils, ${nf.format(all.reduce((n, c) => n + c.councillors, 0))} seats and ${nf.format(all.reduce((n, c) => n + c.wards, 0))} wards. ${s.hung} councils have no party with a majority.`}
       >
         <p className="m-0 flex flex-wrap gap-3">
           <Link to={TRACKER_PATH} className="site-btn-primary">Coalition Tracker</Link>
-          <Link to={MY_WARD_PATH} className="site-btn-outline-ink">Your ward councillor</Link>
+          <Link to={MY_WARD_PATH} className="site-btn-outline-ink">Your Ward Councillor</Link>
         </p>
       </PageIntro>
 
       <SiteSection labelledBy="nat-h" className="pb-8">
-        <h2 id="nat-h" className="sr-only">National figures</h2>
+        <h2 id="nat-h" className="sr-only">National Figures</h2>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,200px),1fr))] gap-4">
-          <StatTile value={s.councils} label="Metro and local councils" />
-          <StatTile value={s.hung} label="With no majority" />
-          <StatTile value={s.majority} label="With a majority" />
-          <StatTile value={nf.format(registered)} label="Registered voters">in the councils’ voting districts</StatTile>
+          <StatTile value={s.councils} label="Metro and Local Councils" />
+          <StatTile value={s.hung} label="With No Majority" />
+          <StatTile value={s.majority} label="With a Majority" />
+          <StatTile value={nf.format(registered)} label="Registered Voters">in the councils’ voting districts</StatTile>
         </div>
       </SiteSection>
 
@@ -52,13 +52,13 @@ export function SiteResults() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,360px),1fr))] gap-5">
           <div className="rounded-[10px] border border-line bg-white p-5">
             <StatusSplit
-              title="Councils with and without a majority, by province"
+              title="Councils With and Without a Majority, by Province"
               rows={PROVINCE_CODES.map((p) => ({ id: p, name: provinceName(p), hung: s.byProvince[p].hung, majority: s.byProvince[p].councils - s.byProvince[p].hung }))}
             />
           </div>
           <div className="rounded-[10px] border border-line bg-white p-5">
             <BarList
-              title="Council seats won across the country"
+              title="Council Seats Won Across the Country"
               unit="Party"
               series={['Seats']}
               format={(v) => nf.format(v)}
@@ -69,14 +69,14 @@ export function SiteResults() {
       </SiteSection>
 
       <SiteSection labelledBy="prov-h" className="pb-8">
-        <h2 id="prov-h" className="m-0 mb-4 font-site-display text-site-h4">By province</h2>
+        <h2 id="prov-h" className="m-0 mb-4 font-site-display text-site-h4">By Province</h2>
         <div className="overflow-x-auto rounded-[10px] border border-line bg-white">
           <table className="w-full min-w-[520px] border-collapse text-left text-site-sm">
             <thead>
               <tr className="border-b border-line bg-paper text-site-caption text-slate">
                 <th scope="col" className="px-4 py-3 font-semibold">Province</th>
                 <th scope="col" className="px-4 py-3 text-right font-semibold">Councils</th>
-                <th scope="col" className="px-4 py-3 text-right font-semibold">No majority</th>
+                <th scope="col" className="px-4 py-3 text-right font-semibold">No Majority</th>
                 <th scope="col" className="px-4 py-3 text-right font-semibold">Majority</th>
               </tr>
             </thead>

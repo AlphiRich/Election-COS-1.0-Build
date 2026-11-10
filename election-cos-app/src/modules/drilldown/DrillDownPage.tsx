@@ -44,7 +44,7 @@ export function DrillDownPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader slug="/analytics/drill-down" title="Drill-down: municipality, ward, voting district" />
+      <PageHeader slug="/analytics/drill-down" title="Drill-Down: Municipality, Ward, Voting District" />
       <BasisNote>
         JB Marks (NW405). Results are the <strong>2021</strong> ward ballot on the 2021 wards; registered voters are the{' '}
         <strong>2026</strong> baseline. {WARD_CORRESPONDENCE_CAVEAT} 2021 only records the winner and the runner-up in
@@ -53,13 +53,13 @@ export function DrillDownPage() {
       </BasisNote>
 
       <div className="grid gap-3 sm:grid-cols-3">
-        <StatTile label="Registered voters" value={n(REGISTERED_TOTAL)} sub="gazetted baseline" emphasis />
+        <StatTile label="Registered Voters" value={n(REGISTERED_TOTAL)} sub="gazetted baseline" emphasis />
         <StatTile label="Wards" value={rows.length} sub="34 ward seats" />
-        <StatTile label="Close wards" value={close} sub={`2021 margin under ${threshold} points`} />
+        <StatTile label="Close Wards" value={close} sub={`2021 margin under ${threshold} points`} />
       </div>
 
       <Card>
-        <SectionLabel as="h2">Ward seats won in 2021</SectionLabel>
+        <SectionLabel as="h2">Ward Seats Won in 2021</SectionLabel>
         <ul className="mt-2 flex flex-wrap gap-2">
           {seatsWon2021().map(([name, seats]) => (
             <li key={name}>
@@ -85,7 +85,7 @@ export function DrillDownPage() {
               </select>
             )}
           </Field>
-          <Field label="Call a ward close if the 2021 margin is under (points)" hint="A display filter you set. It is not a forecast.">
+          <Field label="Call a Ward Close If the 2021 Margin Is Under (Points)" hint="A display filter you set. It is not a forecast.">
             {(props) => (
               <input {...props} type="number" min={0} max={100} step={0.5} value={threshold} onChange={(e) => setThreshold(Math.max(0, Number(e.target.value) || 0))} />
             )}

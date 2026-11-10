@@ -50,7 +50,7 @@ describe('Master hub', () => {
     const f = vi.spyOn(globalThis, 'fetch');
     const el = await mount();
     await click(tab(el, 'Media & Campaign Assets'));
-    await click(button(el, 'Generate preview'));
+    await click(button(el, 'Generate Preview'));
     const frame = el.querySelector('iframe')!;
     expect(frame.getAttribute('sandbox')).toBe('');
     expect(frame.getAttribute('srcdoc')).toContain('32810');
@@ -114,7 +114,7 @@ describe('timers', () => {
   it('the outbox simulator walks PENDING, IN_FLIGHT, APPLIED through the real state machine', async () => {
     const el = await mount();
     await click(tab(el, '32-Agent Code Stack'));
-    await click(button(el, 'Simulate field canvass sync'));
+    await click(button(el, 'Simulate Field Canvass Sync'));
     await act(async () => { vi.advanceTimersByTime(2000); });
     const log = el.querySelector('[data-testid="outbox-log"]')!.textContent!;
     expect(log).toContain('PENDING');

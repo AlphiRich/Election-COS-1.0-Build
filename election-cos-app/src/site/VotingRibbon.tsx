@@ -57,7 +57,7 @@ export function VotingRibbon() {
         {special && <p className="m-0 w-full font-semibold sm:order-last">{special}</p>}
         <p className="m-0 flex flex-wrap gap-x-4">
           <Link to="/election-day" className="font-semibold text-ink underline">
-            Election day guide
+            Election Day Guide
           </Link>
           <Link to="/results" className="font-semibold text-ink underline">
             Results

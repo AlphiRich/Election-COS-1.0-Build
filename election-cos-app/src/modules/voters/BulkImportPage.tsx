@@ -82,7 +82,7 @@ export function BulkImportPage() {
   if (!session) {
     return (
       <Card className="max-w-lg">
-        <PageHeader slug="/voters/import" title="Import a register" />
+        <PageHeader slug="/voters/import" title="Import a Register" />
         <p className="mt-3 text-body-md font-body text-slate">
           No active session — see BUILD-STATUS.md (no live Firebase project provisioned yet).
         </p>
@@ -126,7 +126,7 @@ export function BulkImportPage() {
 
   return (
     <div className="space-y-6 max-w-3xl">
-      <PageHeader slug="/voters/import" title="Import a register" />
+      <PageHeader slug="/voters/import" title="Import a Register" />
 
       {/*
        * Five bare <label> wrappers before this, none of them associated —
@@ -135,13 +135,13 @@ export function BulkImportPage() {
        * not a form somebody can be held to.
        */}
       <Card className="space-y-3">
-        <SectionLabel as="h2">Consent declaration</SectionLabel>
+        <SectionLabel as="h2">Consent Declaration</SectionLabel>
         <BasisNote>
           Every person on this list needs a lawful basis that could be produced if it were ever questioned. A
           spreadsheet has no doorstep and no canvasser, so this declaration is the evidence.
         </BasisNote>
 
-        <Field label="How they consented">
+        <Field label="How They Consented">
           {(props) => (
             <select {...props} value={method} onChange={(e) => setMethod(e.target.value as BulkConsentMethod)}>
               {(Object.keys(METHOD_LABEL) as BulkConsentMethod[]).map((key) => (
@@ -165,7 +165,7 @@ export function BulkImportPage() {
             )}
           </Field>
           <Field
-            label="Default voting district"
+            label="Default Voting District"
             mono
             hint="Used for rows with no VD column."
           >
@@ -175,7 +175,7 @@ export function BulkImportPage() {
           </Field>
         </div>
 
-        <Field label="Where that consent is recorded">
+        <Field label="Where That Consent Is Recorded">
           {(props) => (
             <input
               {...props}
@@ -190,7 +190,7 @@ export function BulkImportPage() {
       </Card>
 
       <Card className="space-y-3">
-        <SectionLabel as="h2">The file</SectionLabel>
+        <SectionLabel as="h2">The File</SectionLabel>
         {votingDistricts.length === 0 && (
           <p className="text-body-md font-body text-maroon">
             No voting districts are loaded for this tenant yet, so there is nowhere to put anybody. Seed the wards
@@ -215,7 +215,7 @@ export function BulkImportPage() {
          * A guard that passes on a cosmetic change is the defect this
          * project spends most of its time avoiding.
          */}
-        <Field label="Register file (CSV)">
+        <Field label="Register File (CSV)">
           {({ id, 'aria-describedby': describedBy }) => (
             <input
               id={id}
@@ -240,7 +240,7 @@ export function BulkImportPage() {
 
       {plan && (
         <Card tone="accent" className="space-y-3">
-          <SectionLabel as="h2">The plan — nothing has been written</SectionLabel>
+          <SectionLabel as="h2">The Plan — Nothing Has Been Written</SectionLabel>
 
           {plan.fileErrors.map((error) => (
             <p key={error} className="text-body-md font-body text-maroon">
@@ -249,10 +249,10 @@ export function BulkImportPage() {
           ))}
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <StatTile label="Rows read" value={plan.totalRows} />
+            <StatTile label="Rows Read" value={plan.totalRows} />
             <StatTile label="Ready" value={plan.ready.length} />
             <StatTile label="Rejected" value={plan.rejected.length} />
-            <StatTile label="New doors" value={plan.households.length} />
+            <StatTile label="New Doors" value={plan.households.length} />
           </div>
 
           {plan.withoutAddress > 0 && (

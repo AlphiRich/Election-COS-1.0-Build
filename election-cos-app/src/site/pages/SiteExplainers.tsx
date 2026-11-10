@@ -31,14 +31,14 @@ export function SiteExplainers() {
       <SiteSection className="flex flex-col gap-4 pb-10 pt-[88px]">
         <Eyebrow>Explainers</Eyebrow>
         <h1 className="m-0 font-site-display text-site-h3 md:text-site-h1">
-          How the rules actually work
+          How the Rules Actually Work
         </h1>
         <p className="m-0 max-w-[36em] text-site-lead">{EXPLAINERS_INTRO}</p>
       </SiteSection>
 
       <SiteSection labelledBy="ex-h" className="pb-[88px]">
         <h2 id="ex-h" className="sr-only">
-          Explainer articles
+          Explainer Articles
         </h2>
         <ul className="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-5 p-0">
           {EXPLAINERS.map((e) => (
@@ -68,9 +68,9 @@ export function SiteExplainer({ hasConsent }: { hasConsent: boolean }) {
   if (!explainer) {
     return (
       <SiteSection className="flex flex-col gap-4 py-[88px]">
-        <h1 className="m-0 font-site-display text-site-h3">We don&rsquo;t have that explainer</h1>
+        <h1 className="m-0 font-site-display text-site-h3">We Don&rsquo;t Have That Explainer</h1>
         <p className="m-0 text-site-lead">
-          <Link to="/explainers">See the ones we do have.</Link>
+          <Link to="/explainers">See the Ones We Do Have.</Link>
         </p>
       </SiteSection>
     );
@@ -110,7 +110,7 @@ export function SiteExplainer({ hasConsent }: { hasConsent: boolean }) {
       </SiteCard>
 
       <p className="m-0">
-        <Link to="/explainers">← All explainers</Link>
+        <Link to="/explainers">← All Explainers</Link>
       </p>
     </SiteSection>
   );

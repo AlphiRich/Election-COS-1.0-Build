@@ -18,7 +18,7 @@ import type { Sop } from '../manualModel';
 
 export const CANVASSER_SOP: Sop = {
   number: 'SOP-01',
-  title: 'Canvassing a voting district',
+  title: 'Canvassing a Voting District',
   area: 'FIELD',
   roles: ['canvasser', 'vd-captain'],
   purpose:
@@ -27,7 +27,7 @@ export const CANVASSER_SOP: Sop = {
     'next person can use.',
   sections: [
     {
-      heading: 'Before you leave',
+      heading: 'Before You Leave',
       steps: [
         'Open the app while you still have signal. The round you are about to work is downloaded to the phone — once you are out of coverage nothing new arrives.',
         'Check the queue shows the voting district you have actually been assigned. You will not be shown doors outside it; if the district is wrong, stop and tell your VD Captain rather than working the wrong streets.',
@@ -39,7 +39,7 @@ export const CANVASSER_SOP: Sop = {
       ],
     },
     {
-      heading: 'Read the access note before you open the gate',
+      heading: 'Read the Access Note Before You Open the Gate',
       body: [
         'Every household card can carry an access note written by whoever worked that door last. It is the first thing to read and it is there for your safety, not for record-keeping.',
         'The note lists hazards — a dog on the property, a locked gate, poor lighting, difficult access, an access code needed, or a hostile reception previously reported — and may carry a short instruction about how to approach.',
@@ -51,7 +51,7 @@ export const CANVASSER_SOP: Sop = {
       ],
     },
     {
-      heading: 'Writing an access note for the next canvasser',
+      heading: 'Writing an Access Note for the Next Canvasser',
       body: [
         SAFETY_NOTE_BASIS,
         'Write about the property and the approach: "dog loose in the front yard", "knock at the side gate, front bell does not work", "no lighting past the driveway". The next person needs to know what to do.',
@@ -63,7 +63,7 @@ export const CANVASSER_SOP: Sop = {
       ],
     },
     {
-      heading: 'At the door: consent before anything is recorded',
+      heading: 'At the Door: Consent Before Anything Is Recorded',
       steps: [
         'Introduce yourself and say which campaign you are from.',
         'Explain what you would like to record and why, before you record it.',
@@ -78,7 +78,7 @@ export const CANVASSER_SOP: Sop = {
       ],
     },
     {
-      heading: 'Closing the door out',
+      heading: 'Closing the Door Out',
       body: [
         'Every door ends in one of six states, and the state you leave decides whether the next round offers it to someone again.',
       ],
@@ -95,7 +95,7 @@ export const CANVASSER_SOP: Sop = {
       ],
     },
     {
-      heading: 'Coming back into signal',
+      heading: 'Coming Back Into Signal',
       body: [
         'When the phone finds a network, work already logged is sent up in the background. Keep the app open until it reports that the queue is clear.',
         'Nothing you logged is lost by going out of coverage. It is lost by clearing site data, or by a phone that is wiped before the queue drains.',

@@ -285,7 +285,7 @@ function scheduleBlocks(): Block[] {
   );
   for (const open of OPEN_QUESTIONS) {
     blocks.push({ kind: 'para', text: open.question });
-    blocks.push({ kind: 'field', label: 'Interim position', value: open.interimPosition });
+    blocks.push({ kind: 'field', label: 'Interim Position', value: open.interimPosition });
     blocks.push({ kind: 'rule' });
   }
 

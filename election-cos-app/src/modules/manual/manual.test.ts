@@ -268,7 +268,7 @@ describe('SOP-01 describes what the code actually does', () => {
   });
 
   it('covers every hazard category in the section about reading the note', () => {
-    const section = CANVASSER_SOP.sections.find((s) => s.heading.includes('access note before'));
+    const section = CANVASSER_SOP.sections.find((s) => s.heading.toLowerCase().includes('access note before'));
     const body = (section?.body ?? []).join(' ').toLowerCase();
     for (const hazard of HAZARD_ORDER.filter((h) => h !== 'OTHER')) {
       expect(body, hazard).toContain(HAZARD_PROSE[hazard]);
@@ -286,7 +286,7 @@ describe('SOP-01 describes what the code actually does', () => {
     // improvising at a gate, which is how the overclaim was written in the
     // first place. The answer comes from the module that owns the erasure
     // position, so the two cannot drift apart.
-    const consent = JSON.stringify(CANVASSER_SOP.sections.find((s) => s.heading.includes('consent')));
+    const consent = JSON.stringify(CANVASSER_SOP.sections.find((s) => s.heading.toLowerCase().includes('consent')));
     expect(consent).toContain(DOORSTEP_ERASURE_ANSWER);
     expect(DOORSTEP_ERASURE_ANSWER).toMatch(/taken out of the app/i);
     expect(DOORSTEP_ERASURE_ANSWER).toMatch(/logged and answered/i);
@@ -308,7 +308,7 @@ describe('SOP-01 describes what the code actually does', () => {
   });
 
   it('tells the canvasser consent comes before capture, not after', () => {
-    const consent = CANVASSER_SOP.sections.find((s) => s.heading.includes('consent'));
+    const consent = CANVASSER_SOP.sections.find((s) => s.heading.toLowerCase().includes('consent'));
     expect(consent?.steps?.[3]).toMatch(/^Only if they agree/);
     expect(JSON.stringify(consent)).toMatch(/refuses to save a voter record without consent/i);
   });
@@ -351,8 +351,8 @@ describe('the printed manual', () => {
 
   it('prints the safety section a canvasser needs', () => {
     const text = printed(buildManualPdf(manual, meta));
-    expect(text).toContain('Read the access note before you open the gate');
-    expect(text).toContain('Writing an access note for the next canvasser');
+    expect(text).toContain('Read the Access Note Before You Open the Gate');
+    expect(text).toContain('Writing an Access Note for the Next Canvasser');
   });
 
   it('lists what is not in this copy rather than omitting it silently', () => {
@@ -447,7 +447,7 @@ describe('SOP-02 describes the setup path that actually exists', () => {
       WARD: 'one ward',
       VD: 'one voting district',
     };
-    const section = TENANT_SETUP_SOP.sections.find((s) => s.heading.includes('Choosing the role'));
+    const section = TENANT_SETUP_SOP.sections.find((s) => s.heading.toLowerCase().includes('choosing the role'));
     const listed = (section?.steps ?? []).join('\n');
     expect(section?.steps).toHaveLength(SEED_ROLES.length);
     for (const role of SEED_ROLES) {
@@ -471,7 +471,7 @@ describe('SOP-02 describes the setup path that actually exists', () => {
   });
 
   it('warns about the silent failure the provisioning rules exist to prevent', () => {
-    const section = TENANT_SETUP_SOP.sections.find((s) => s.heading.includes('give them their ground'));
+    const section = TENANT_SETUP_SOP.sections.find((s) => s.heading.toLowerCase().includes('give them their ground'));
     const warnings = (section?.warnings ?? []).join(' ');
     expect(warnings).toMatch(/empty application/i);
     // The SOP may only promise a refusal the code actually performs.
@@ -497,7 +497,7 @@ describe('SOP-02 describes the setup path that actually exists', () => {
 
   it('describes each role with capabilities the role actually has, and lacks', () => {
     const caps = (id: string) => SEED_ROLES.find((r) => r.id === id)!.defaultCaps;
-    const listed = (TENANT_SETUP_SOP.sections.find((s) => s.heading.includes('Choosing the role'))?.steps ?? []).join('\n');
+    const listed = (TENANT_SETUP_SOP.sections.find((s) => s.heading.toLowerCase().includes('choosing the role'))?.steps ?? []).join('\n');
 
     // "reads everything — but deliberately cannot edit a voter record or a donation"
     expect(listed).toMatch(/Party HQ Admin[^\n]*cannot edit a voter record or a donation/);
@@ -521,7 +521,7 @@ describe('SOP-02 describes the setup path that actually exists', () => {
   });
 
   it('states the separation of duties the role table keeps, and that an override can break it', () => {
-    const section = TENANT_SETUP_SOP.sections.find((s) => s.heading.includes('not quite right'));
+    const section = TENANT_SETUP_SOP.sections.find((s) => s.heading.toLowerCase().includes('not quite right'));
     const warnings = (section?.warnings ?? []).join(' ');
     expect(warnings).toMatch(/disclosure thresholds/i);
     // The claim is the three-way concentration rule roleModel.test.ts
@@ -544,7 +544,7 @@ describe('SOP-02 describes the setup path that actually exists', () => {
   });
 
   it('does not claim deactivation reaches a device that is already offline', () => {
-    const section = TENANT_SETUP_SOP.sections.find((s) => s.heading.includes('someone leaves'));
+    const section = TENANT_SETUP_SOP.sections.find((s) => s.heading.toLowerCase().includes('someone leaves'));
     const warnings = (section?.warnings ?? []).join(' ');
     expect(warnings).toMatch(/not a remote wipe/i);
     expect(warnings).toMatch(/already offline/i);
@@ -574,7 +574,7 @@ describe('SOP-03 describes the seeding path that actually exists', () => {
   });
 
   it('says only the HQ admin can change wards, which is what the roles say', () => {
-    const section = WARD_SEEDING_SOP.sections.find((s) => s.heading.includes('Who can do which part'));
+    const section = WARD_SEEDING_SOP.sections.find((s) => s.heading.toLowerCase().includes('who can do which part'));
     expect((section?.body ?? []).join(' ')).toMatch(/Municipal Team Lead can see everything[^.]*change none/i);
     const editors = SEED_ROLES.filter((r) => r.defaultCaps.includes('wards.edit')).map((r) => r.id);
     expect(editors).toEqual(['party-hq-admin']);
@@ -644,7 +644,7 @@ describe('SOP-03 describes the seeding path that actually exists', () => {
       for (const vd of entry.votingDistricts) perCode.set(vd.vdCode, (perCode.get(vd.vdCode) ?? 0) + 1);
     }
     const splitCount = [...perCode.values()].filter((n) => n > 1).length;
-    const section = WARD_SEEDING_SOP.sections.find((s) => s.heading.includes('two wards'));
+    const section = WARD_SEEDING_SOP.sections.find((s) => s.heading.toLowerCase().includes('two wards'));
     const body = (section?.body ?? []).join(' ');
     expect(body).toContain(`${splitCount} of ${perCode.size} station codes are split`);
     // The SOP calls that "a quarter of them". Hold the prose to the maths.
@@ -653,12 +653,12 @@ describe('SOP-03 describes the seeding path that actually exists', () => {
   });
 
   it('warns that a re-seed strips a ward lead of their scope', () => {
-    const section = WARD_SEEDING_SOP.sections.find((s) => s.heading.includes('demarcation changes'));
+    const section = WARD_SEEDING_SOP.sections.find((s) => s.heading.toLowerCase().includes('demarcation changes'));
     expect((section?.warnings ?? []).join(' ')).toMatch(/renumbered leaves that person seeing nothing/i);
   });
 
   it('refuses to call a clean check a correct ward list', () => {
-    const section = WARD_SEEDING_SOP.sections.find((s) => s.heading.includes('before anyone works it'));
+    const section = WARD_SEEDING_SOP.sections.find((s) => s.heading.toLowerCase().includes('before anyone works it'));
     expect((section?.warnings ?? []).join(' ')).toMatch(/not a statement that your ward list is correct/i);
   });
 
@@ -716,7 +716,7 @@ describe('SOP-04 describes the import that actually exists', () => {
   });
 
   it('promises a refusal for a split district, and the planner delivers it', () => {
-    const warnings = (REGISTER_IMPORT_SOP.sections.find((s) => s.heading.includes('refused for its voting district'))?.warnings ?? []).join(' ');
+    const warnings = (REGISTER_IMPORT_SOP.sections.find((s) => s.heading.toLowerCase().includes('refused for its voting district'))?.warnings ?? []).join(' ');
     expect(warnings).toMatch(/does not say which ward/i);
     const result = planImport({ rows: [person({ vdCode: 'SPLIT' })], consent: CONSENT, votingDistricts: VDS });
     expect(result.ready).toHaveLength(0);
@@ -760,7 +760,7 @@ describe('SOP-04 describes the import that actually exists', () => {
   });
 
   it('says the duplicate check errs towards holding a name back', () => {
-    const warnings = (REGISTER_IMPORT_SOP.sections.find((s) => s.heading.includes('before you write anything'))?.warnings ?? []).join(' ');
+    const warnings = (REGISTER_IMPORT_SOP.sections.find((s) => s.heading.toLowerCase().includes('before you write anything'))?.warnings ?? []).join(' ');
     expect(warnings).toMatch(/errs towards holding a name back/i);
     expect(warnings).toMatch(/the rest is masked/i);
   });
@@ -808,7 +808,7 @@ describe('SOP-05 describes the round that actually exists', () => {
   });
 
   it('lists the outcomes a canvasser can actually record', () => {
-    const section = WARD_ROUND_SOP.sections.find((s) => s.heading.includes('Closing a door out'))!;
+    const section = WARD_ROUND_SOP.sections.find((s) => s.heading.toLowerCase().includes('closing a door out'))!;
     // Named explicitly rather than derived from CONTACT_STATUS_LABEL. The
     // SOP builds its list from that map, so comparing against the same
     // derivation compares the map to itself — deleting a label passed this
@@ -842,7 +842,7 @@ describe('SOP-05 describes the round that actually exists', () => {
   });
 
   it('states the coverage definition the code computes, refusals excluded', () => {
-    const body = (WARD_ROUND_SOP.sections.find((s) => s.heading.includes('coverage figure counts'))?.body ?? []).join(' ');
+    const body = (WARD_ROUND_SOP.sections.find((s) => s.heading.toLowerCase().includes('coverage figure counts'))?.body ?? []).join(' ');
     expect(body).toMatch(/taken out of the denominator/i);
 
     // Four doors, one refused. Two worked. If refusals counted, coverage
@@ -875,7 +875,7 @@ describe('SOP-05 describes the round that actually exists', () => {
   });
 
   it('calls the cool-offs operational rather than legal, as the code does', () => {
-    const warnings = (WARD_ROUND_SOP.sections.find((s) => s.heading.includes('when they come back'))?.warnings ?? []).join(' ');
+    const warnings = (WARD_ROUND_SOP.sections.find((s) => s.heading.toLowerCase().includes('when they come back'))?.warnings ?? []).join(' ');
     expect(warnings).toMatch(/not legal ones/i);
     expect(warnings).toMatch(/Nothing in law says/i);
   });
@@ -940,7 +940,7 @@ describe('SOP-06 describes the incident path that actually exists', () => {
   });
 
   it('lists every distinct step with the permission the model requires', () => {
-    const section = INCIDENT_SOP.sections.find((s) => s.heading.includes('Who does which step'))!;
+    const section = INCIDENT_SOP.sections.find((s) => s.heading.toLowerCase().includes('who does which step'))!;
     const listed = (section.steps ?? []).join('\n');
     for (const transition of INCIDENT_TRANSITIONS) {
       expect(listed, transition.label).toContain(transition.label);
@@ -1117,7 +1117,7 @@ describe('SOP-08 describes the war room honestly', () => {
   });
 
   it('lists every door state the counters actually carry', () => {
-    const section = WAR_ROOM_SOP.sections.find((s) => s.heading.includes('Doors by state'))!;
+    const section = WAR_ROOM_SOP.sections.find((s) => s.heading.toLowerCase().includes('doors by state'))!;
     expect(section.steps).toEqual(Object.values(CONTACT_STATUS_LABEL));
   });
 
@@ -1129,7 +1129,7 @@ describe('SOP-08 describes the war room honestly', () => {
   it('defines open incidents the way the workflow module does', () => {
     const open = STATUS_ORDER.filter(isOpen);
     expect(open).toEqual(['LOGGED', 'TRIAGED', 'ESCALATED', 'REFERRED']);
-    const body = (WAR_ROOM_SOP.sections.find((s) => s.heading === 'Open incidents')?.body ?? []).join(' ');
+    const body = (WAR_ROOM_SOP.sections.find((s) => s.heading === 'Open Incidents')?.body ?? []).join(' ');
     for (const status of open) {
       expect(body.toLowerCase(), status).toContain(STATUS_LABEL[status].toLowerCase());
     }

@@ -22,7 +22,7 @@ const SUB_VIEWS = [
   },
   {
     to: '/settings/candidates',
-    label: 'Candidates & party list',
+    label: 'Candidates & Party List',
     description: 'Capture candidates and check a PR list before it is submitted. Files nothing.',
   },
   {
@@ -32,7 +32,7 @@ const SUB_VIEWS = [
   },
   {
     to: '/settings/audit',
-    label: 'Audit log',
+    label: 'Audit Log',
     description: 'Acts the platform recorded — unmasking, exports, threshold changes. Read-only, and says what it is not.',
   },
 ] as const;

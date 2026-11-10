@@ -60,7 +60,7 @@ export function describeCountdown(
   const remaining = Number.isFinite(hours) ? formatRemaining(hours) : '';
 
   if (!Number.isFinite(hours)) {
-    return { label: 'No date', tone: 'slate', remaining, stage: null, needsAction: false,
+    return { label: 'No Date', tone: 'slate', remaining, stage: null, needsAction: false,
       detail: 'This gathering has no valid start time, so no countdown can be given.' };
   }
   if (hours <= 0) {
@@ -68,23 +68,23 @@ export function describeCountdown(
       detail: 'The start time has passed. This is a record, not an alert.' };
   }
   if (noticeStatus === 'LODGED') {
-    return { label: 'Notice recorded', tone: 'green', remaining, stage: null, needsAction: false,
+    return { label: 'Notice Recorded', tone: 'green', remaining, stage: null, needsAction: false,
       detail: 'The convener has recorded that notice was lodged. That is their statement; it does not show the responsible officer received or accepted it.' };
   }
 
   const stage = stageFor(hours);
   switch (stage) {
     case 'PROHIBITION_RISK':
-      return { label: 'Under 48 hours', tone: 'maroon', remaining, stage, needsAction: true,
+      return { label: 'Under 48 Hours', tone: 'maroon', remaining, stage, needsAction: true,
         detail: 'No notice recorded. Notice given under 48 hours before a gathering may be prohibited by the responsible officer (statute).' };
     case 'URGENT':
-      return { label: 'Notice overdue', tone: 'gold', remaining, stage, needsAction: true,
+      return { label: 'Notice Overdue', tone: 'gold', remaining, stage, needsAction: true,
         detail: 'No notice recorded and the seven-day point has passed. The 48-hour prohibition point is next. The 72-hour warning is house policy, not a statutory deadline.' };
     case 'NOTICE_DUE':
-      return { label: 'Notice due', tone: 'gold', remaining, stage, needsAction: true,
+      return { label: 'Notice Due', tone: 'gold', remaining, stage, needsAction: true,
         detail: 'No notice recorded. Written notice is due not later than seven days before the gathering (statute).' };
     default:
-      return { label: 'Not yet due', tone: 'slate', remaining, stage: null, needsAction: false,
+      return { label: 'Not Yet Due', tone: 'slate', remaining, stage: null, needsAction: false,
         detail: 'More than seven days to go. Notice is not yet late.' };
   }
 }

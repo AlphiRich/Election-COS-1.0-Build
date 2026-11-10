@@ -38,7 +38,7 @@ export const LEGAL_PAGES: Record<
   { title: string; lead: string; facts: string[]; pending: string }
 > = {
   privacy: {
-    title: 'Privacy notice',
+    title: 'Privacy Notice',
     lead: 'What this website does with personal information today.',
     facts: [
       'The enquiry form asks for your name, role, ward or municipality, and a way to reach you. It asks for nothing else.',
@@ -52,7 +52,7 @@ export const LEGAL_PAGES: Record<
       'The full privacy notice, with the Information Officer’s details, is pending attorney sign-off.',
   },
   terms: {
-    title: 'Terms of use',
+    title: 'Terms of Use',
     lead: 'The terms for using this website.',
     facts: [
       'This website is information. It is not legal advice, and the tools on it are illustrative.',
@@ -62,7 +62,7 @@ export const LEGAL_PAGES: Record<
     pending: 'The binding terms of use and the customer terms are pending attorney sign-off.',
   },
   cookies: {
-    title: 'Cookie notice',
+    title: 'Cookie Notice',
     lead: 'What is stored in your browser.',
     facts: [
       'Nothing optional is stored before you choose.',

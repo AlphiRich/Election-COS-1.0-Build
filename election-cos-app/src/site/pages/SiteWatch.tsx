@@ -97,7 +97,7 @@ function CaseJourney() {
   return (
     <SiteCard className="flex flex-col gap-4 p-7">
       <h2 className="m-0 font-site-display text-site-h5">
-        Animation: a case from the doorstep to resolved
+        Animation: A Case From the Doorstep to Resolved
       </h2>
       <p className="m-0 text-site-caption text-slate">
         Plays by itself, with no sound and no video file. It stops moving if your device is set to
@@ -124,9 +124,9 @@ export function SiteWatch() {
   return (
     <>
       <SiteSection className="flex flex-col gap-4 pb-6 pt-[88px]">
-        <Eyebrow>Short explainers</Eyebrow>
+        <Eyebrow>Short Explainers</Eyebrow>
         <h1 className="m-0 font-site-display text-site-h3 md:text-site-display">
-          Watch it in ten seconds. Read it if you prefer.
+          Watch It in Ten Seconds. Read It If You Prefer.
         </h1>
         <p className="m-0 max-w-[36em] text-site-lead">
           Each video makes one point, with the words on screen and captions on. Under every video
@@ -134,13 +134,13 @@ export function SiteWatch() {
         </p>
         <p className="m-0 flex flex-wrap gap-3">
           <a href="#voters" className="site-btn-outline-ink min-h-[44px] px-[18px]">
-            For voters
+            For Voters
           </a>
           <a href="#parties" className="site-btn-outline-ink min-h-[44px] px-[18px]">
-            For parties and campaigns
+            For Parties and Campaigns
           </a>
           <Link to="/tutorial" className="site-btn-outline-ink min-h-[44px] px-[18px]">
-            The 60-second tour, as text
+            The 60-Second Tour, as Text
           </Link>
         </p>
       </SiteSection>
@@ -151,7 +151,7 @@ export function SiteWatch() {
 
       <SiteSection id="voters" labelledBy="w-voters" className="pb-12">
         <h2 id="w-voters" className="mb-5 mt-0 font-site-display text-site-h4">
-          For voters
+          For Voters
         </h2>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,340px),1fr))] gap-5">
           {byAudience('voters').map((e) => (
@@ -162,7 +162,7 @@ export function SiteWatch() {
 
       <SiteSection id="parties" labelledBy="w-parties" className="pb-[72px]">
         <h2 id="w-parties" className="mb-5 mt-0 font-site-display text-site-h4">
-          For parties and campaigns
+          For Parties and Campaigns
         </h2>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,340px),1fr))] gap-5">
           {byAudience('parties').map((e) => (

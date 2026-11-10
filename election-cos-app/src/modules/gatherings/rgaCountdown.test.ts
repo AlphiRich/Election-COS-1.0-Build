@@ -53,7 +53,7 @@ describe('what a ward lead is told', () => {
   it('a recorded notice needs no action, and does not claim acceptance', () => {
     const c = describeCountdown(at(10), 'LODGED', NOW);
     expect(c.needsAction).toBe(false);
-    expect(c.label).toBe('Notice recorded');
+    expect(c.label).toBe('Notice Recorded');
     expect(c.detail).toMatch(/does not show the responsible officer received or accepted/);
   });
 
@@ -73,7 +73,7 @@ describe('what a ward lead is told', () => {
   });
 
   it('an unreadable date is stated, not guessed', () => {
-    expect(describeCountdown('not a date', 'NOT_LODGED', NOW)).toMatchObject({ label: 'No date', needsAction: false });
+    expect(describeCountdown('not a date', 'NOT_LODGED', NOW)).toMatchObject({ label: 'No Date', needsAction: false });
   });
 
   it('never calls anything lawful or compliant', () => {

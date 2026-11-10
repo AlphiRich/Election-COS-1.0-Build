@@ -95,12 +95,12 @@ export function SitePoll() {
         <Eyebrow>Poll</Eyebrow>
         {!CONFIG ? (
           <SiteCard className="p-8">
-            <h1 className="m-0 font-site-display text-site-h4">Polling is not switched on yet.</h1>
+            <h1 className="m-0 font-site-display text-site-h4">Polling Is Not Switched on Yet.</h1>
             <p className="mb-0">Nothing you do on this page is sent anywhere.</p>
           </SiteCard>
         ) : loadError ? (
           <SiteCard className="p-8">
-            <h1 className="m-0 font-site-display text-site-h4">This poll is not available.</h1>
+            <h1 className="m-0 font-site-display text-site-h4">This Poll Is Not Available.</h1>
             <p className="mb-0">{loadError}</p>
           </SiteCard>
         ) : !poll ? (
@@ -108,13 +108,13 @@ export function SitePoll() {
         ) : done ? (
           <SiteCard className="p-8">
             <h1 className="m-0 font-site-display text-site-h4">
-              Thank you. Your answer is counted.
+              Thank You. Your Answer Is Counted.
             </h1>
             <p className="mb-0">It is anonymous: nothing links it to you.</p>
           </SiteCard>
         ) : !poll.open ? (
           <SiteCard className="p-8">
-            <h1 className="m-0 font-site-display text-site-h4">This poll is closed.</h1>
+            <h1 className="m-0 font-site-display text-site-h4">This Poll Is Closed.</h1>
           </SiteCard>
         ) : (
           <SiteCard className="p-8">
@@ -124,7 +124,7 @@ export function SitePoll() {
                 Run by {poll.organiser}. Election Campaign OS does not take a side in any poll.
               </p>
               <fieldset className="m-0 flex flex-col gap-2 border-0 p-0">
-                <legend className="sr-only">Your answer</legend>
+                <legend className="sr-only">Your Answer</legend>
                 {[...poll.options, 'UNDECIDED', 'PREFER_NOT_TO_SAY'].map((o) => (
                   <label key={o} className="flex min-h-[44px] items-center gap-3">
                     <input

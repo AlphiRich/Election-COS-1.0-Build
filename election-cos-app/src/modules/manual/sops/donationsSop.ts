@@ -41,7 +41,7 @@ import type { Sop } from '../manualModel';
 
 export const DONATIONS_SOP: Sop = {
   number: 'SOP-10',
-  title: 'Recording donations and disclosure thresholds',
+  title: 'Recording Donations and Disclosure Thresholds',
   area: 'FUNDING',
   roles: ['finance-officer'],
   requiresModule: 'ppfa-disclosure',
@@ -52,7 +52,7 @@ export const DONATIONS_SOP: Sop = {
     'are and are not, and which questions about the Political Party Funding Act this product does not answer.',
   sections: [
     {
-      heading: 'What this module is for, and what it is not',
+      heading: 'What This Module Is for, and What It Is Not',
       body: [
         'It is a record of money received: who gave, how much, when, whether it was cash or in kind, and whether your campaign has disclosed it. That record is the thing an auditor, the Electoral Commission or a court would ask to see, and it is the reason every figure in it is held as whole cents and nothing is ever deleted.',
         'It is not a filing system. Nothing here submits anything to anybody. It does not know your filing deadline, it does not produce a return, and marking a donation disclosed records what your campaign did — it does not do it.',
@@ -62,7 +62,7 @@ export const DONATIONS_SOP: Sop = {
       ],
     },
     {
-      heading: 'The governing figures come from your configuration, not from this manual',
+      heading: 'The Governing Figures Come From Your Configuration, Not From This Manual',
       body: [
         'Every threshold on your screens is read from your tenant\'s PPFA configuration, which carries an effective date and a source citation and is never edited in place — a new figure is a new entry, so the old one stays as evidence of what governed at the time.',
         `The defaults this build seeds are taken from ${PPFA_GAZETTE_CITATION}. If the figures on your screen differ, your campaign changed them, and the citation beside them says on what basis.`,
@@ -73,7 +73,7 @@ export const DONATIONS_SOP: Sop = {
       ],
     },
     {
-      heading: 'Capturing a donor',
+      heading: 'Capturing a Donor',
       body: [
         'A donation is always attached to a donor record, even an anonymous one — an anonymous collection at a rally is captured as an anonymous donor with a reference label, so the money has somewhere to sit rather than being left out of the register.',
       ],
@@ -88,7 +88,7 @@ export const DONATIONS_SOP: Sop = {
       ],
     },
     {
-      heading: 'Recording a donation',
+      heading: 'Recording a Donation',
       body: [
         'Amounts are typed in Rand and stored as whole cents. That is not a detail: a rounding error on a statutory threshold is a compliance failure, and floating-point money is how one happens.',
         'The financial year and quarter are worked out from the date received and your configured financial-year start month, and stored on the record. They are what the register groups by.',
@@ -105,7 +105,7 @@ export const DONATIONS_SOP: Sop = {
       ],
     },
     {
-      heading: 'Reading the disclosure register',
+      heading: 'Reading the Disclosure Register',
       body: [
         'The register is one view of one financial year, across every donor: what came in, who from, what has reached the threshold, and what has not been marked disclosed.',
         'Donors are listed largest first, with their cumulative total and their largest single donation side by side. Both are shown on purpose — see the next section.',
@@ -122,7 +122,7 @@ export const DONATIONS_SOP: Sop = {
       ],
     },
     {
-      heading: 'The question this product does not answer',
+      heading: 'The Question This Product Does Not Answer',
       body: [
         'Whether the disclosure threshold applies to each donation on its own or to everything a donor gave in the year is not settled here, and it changes who appears on the register.',
         RULE_BASIS.CUMULATIVE_PER_DONOR_PER_YEAR,
@@ -136,7 +136,7 @@ export const DONATIONS_SOP: Sop = {
       ],
     },
     {
-      heading: 'Marking a donation disclosed',
+      heading: 'Marking a Donation Disclosed',
       body: [
         'Marking disclosed records that your campaign disclosed this donation, and stores the reference the Electoral Commission gave you. It is a record of an act performed elsewhere.',
       ],
@@ -151,7 +151,7 @@ export const DONATIONS_SOP: Sop = {
       ],
     },
     {
-      heading: 'Who else can see this',
+      heading: 'Who Else Can See This',
       body: [
         'Funding is gated on its own permissions and on your subscription carrying the disclosure module. A ward lead, a canvasser and a VD captain hold none of them and see none of this.',
         'Two other roles reach part of it, and the split is deliberate. The Compliance Officer can edit the donor ledger, because a POPIA correction over a donor record cannot be actioned otherwise — but cannot set thresholds and cannot export. The Party HQ Administrator can set thresholds but cannot edit the ledger. You are the only role that does both.',

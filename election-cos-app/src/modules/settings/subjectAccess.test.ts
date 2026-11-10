@@ -150,10 +150,10 @@ describe('subject access response', () => {
   it('lists the four collections that cannot be searched by name', () => {
     const labels = UNSEARCHED_SOURCES.map((s) => s.label);
     expect(labels).toEqual([
-      'Donation and donor records',
-      'Candidate records',
-      'Staff and volunteer records',
-      'Incidents and casework',
+      'Donation and Donor Records',
+      'Candidate Records',
+      'Staff and Volunteer Records',
+      'Incidents and Casework',
     ]);
   });
 

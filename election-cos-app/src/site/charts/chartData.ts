@@ -13,7 +13,7 @@ export interface Slice {
 }
 
 /** The largest six keep their own slot; the rest become one "Other" slice, so a seventh hue is never invented. */
-export function foldOther(slices: Slice[], max = MAX_SERIES, otherName = 'Other parties'): Slice[] {
+export function foldOther(slices: Slice[], max = MAX_SERIES, otherName = 'Other Parties'): Slice[] {
   const sorted = [...slices].sort((a, b) => b.value - a.value);
   if (sorted.length <= max + 1) return sorted;
   const rest = sorted.slice(max);

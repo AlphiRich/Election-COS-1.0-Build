@@ -121,15 +121,15 @@ export function SiteSeatModel() {
   return (
     <>
       <PageIntro
-        eyebrow="For parties and campaign teams"
-        title="Seat allocation model"
+        eyebrow="For Parties and Campaign Teams"
+        title="Seat Allocation Model"
         lead="Enter proportional-ballot votes and ward wins for a municipality and see how the seats fall. Council size and wards come from the proclaimed delimitation, not from a guess."
       />
 
       <SiteSection className="pb-4">
         <div
           role="tablist"
-          aria-label="Model sections"
+          aria-label="Model Sections"
           className="flex max-w-[760px] gap-1 rounded-[10px] border border-line bg-white p-1"
         >
           {TABS.map((t) => (
@@ -168,7 +168,7 @@ export function SiteSeatModel() {
             <SiteCard className="flex flex-col gap-3 p-6">
               <h2 className="m-0 font-site-display text-site-h5">Municipality</h2>
               <label htmlFor="sm-search" className="font-semibold">
-                Search municipalities
+                Search Municipalities
               </label>
               <input
                 id="sm-search"
@@ -186,7 +186,7 @@ export function SiteSeatModel() {
                 }}
               />
               <label htmlFor="sm-pick" className="font-semibold">
-                Municipality ({matches.length} with wards)
+                Municipality ({matches.length} With Wards)
               </label>
               <select
                 id="sm-pick"
@@ -234,12 +234,12 @@ export function SiteSeatModel() {
 
             <SiteCard className="flex flex-col gap-3 p-6">
               <h2 className="m-0 font-site-display text-site-h5">
-                Wards not won by a listed party
+                Wards Not Won by a Listed Party
               </h2>
               <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,220px),1fr))] gap-4">
                 <div className="flex flex-col gap-1">
                   <label htmlFor="sm-c" className="font-semibold">
-                    Independent ward seats
+                    Independent Ward Seats
                   </label>
                   <input
                     id="sm-c"
@@ -251,7 +251,7 @@ export function SiteSeatModel() {
                 </div>
                 <div className="flex flex-col gap-1">
                   <label htmlFor="sm-d" className="font-semibold">
-                    Ward seats won by parties with no PR list
+                    Ward Seats Won by Parties With No PR List
                   </label>
                   <input
                     id="sm-d"
@@ -276,7 +276,7 @@ export function SiteSeatModel() {
               </p>
               <div className="flex flex-wrap gap-3">
                 <label htmlFor="sm-file" className="site-btn-outline-ink cursor-pointer">
-                  Choose a CSV file
+                  Choose a CSV File
                 </label>
                 <input
                   id="sm-file"
@@ -300,7 +300,7 @@ export function SiteSeatModel() {
                     setCsvErrors([]);
                   }}
                 >
-                  Load the 2021 JB Marks example
+                  Load the 2021 JB Marks Example
                 </button>
               </div>
               <div role="status" aria-live="polite">
@@ -324,7 +324,7 @@ export function SiteSeatModel() {
             className="flex flex-col gap-4"
           >
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2 className="m-0 font-site-display text-site-h5">Contesting parties</h2>
+              <h2 className="m-0 font-site-display text-site-h5">Contesting Parties</h2>
               <button
                 type="button"
                 className="site-btn-primary"
@@ -335,14 +335,14 @@ export function SiteSeatModel() {
                   ])
                 }
               >
-                Add a party
+                Add a Party
               </button>
             </div>
             {rows.map((r, i) => (
               <SiteCard key={r.id} className="flex flex-col gap-3 border-l-[6px] border-l-ink p-4">
                 <div className="flex items-center gap-2">
                   <label htmlFor={`sm-n-${i}`} className="sr-only">
-                    Party {i + 1} name
+                    Party {i + 1} Name
                   </label>
                   <input
                     id={`sm-n-${i}`}
@@ -365,7 +365,7 @@ export function SiteSeatModel() {
                       htmlFor={`sm-pr-${i}`}
                       className="text-site-caption font-semibold text-slate"
                     >
-                      PR ballot votes
+                      PR Ballot Votes
                     </label>
                     <input
                       id={`sm-pr-${i}`}
@@ -380,7 +380,7 @@ export function SiteSeatModel() {
                       htmlFor={`sm-w-${i}`}
                       className="text-site-caption font-semibold text-slate"
                     >
-                      Ward seats won
+                      Ward Seats Won
                     </label>
                     <input
                       id={`sm-w-${i}`}
@@ -417,14 +417,14 @@ export function SiteSeatModel() {
               {out && (
                 <>
                   <dl className="m-0 grid grid-cols-[repeat(auto-fit,minmax(min(100%,150px),1fr))] gap-3">
-                    <Metric label="Council seats" value={String(out.result.councilSizeFinal)} />
-                    <Metric label="Quota (votes a seat)" value={nf.format(out.result.quota)} />
+                    <Metric label="Council Seats" value={String(out.result.councilSizeFinal)} />
+                    <Metric label="Quota (Votes a Seat)" value={nf.format(out.result.quota)} />
                     <Metric
                       label="Ward / PR"
                       value={`${out.council.wards} / ${out.council.prSeats}`}
                     />
-                    <Metric label="PR votes ÷ roll" value={`${out.turnoutPercent}%`} />
-                    <Metric label="More than half" value={`${out.majority} seats`} />
+                    <Metric label="PR Votes ÷ Roll" value={`${out.turnoutPercent}%`} />
+                    <Metric label="More Than Half" value={`${out.majority} seats`} />
                   </dl>
                   {out.findings.map((f) => (
                     <p
@@ -436,14 +436,14 @@ export function SiteSeatModel() {
                   ))}
                   <div className="relative overflow-x-auto rounded-[10px] border border-line bg-white">
                     <table className="w-full min-w-[520px] border-collapse text-site-sm">
-                      <caption className="sr-only">Seats by party</caption>
+                      <caption className="sr-only">Seats by Party</caption>
                       <thead>
                         <tr className="border-b border-line text-left">
                           <th scope="col" className="px-3 py-2">
                             Party
                           </th>
                           <th scope="col" className="px-3 py-2 text-right">
-                            PR votes
+                            PR Votes
                           </th>
                           <th scope="col" className="px-3 py-2 text-right">
                             Entitled
@@ -505,7 +505,7 @@ export function SiteSeatModel() {
             {out && (
               <>
                 <SiteCard className="flex flex-col gap-3 p-6">
-                  <h2 className="m-0 font-site-display text-site-h5">Seats by party</h2>
+                  <h2 className="m-0 font-site-display text-site-h5">Seats by Party</h2>
                   <p className="m-0 flex flex-wrap gap-x-5 gap-y-1 text-site-caption text-slate">
                     <span>
                       <span
@@ -567,7 +567,7 @@ export function SiteSeatModel() {
 
                 <SiteCard className="flex flex-col gap-3 p-6">
                   <h2 className="m-0 font-site-display text-site-h5">
-                    Share of votes and share of seats
+                    Share of Votes and Share of Seats
                   </h2>
                   <p className="m-0 flex flex-wrap gap-x-5 gap-y-1 text-site-caption text-slate">
                     <span>

@@ -18,7 +18,7 @@ export function StationSearch({ idPrefix = 'station' }: { idPrefix?: string }) {
   return (
     <div className="flex flex-col gap-4">
       <label htmlFor={`${idPrefix}-q`} className="font-semibold">
-        Ward number or station name
+        Ward Number or Station Name
       </label>
       <input
         id={`${idPrefix}-q`}

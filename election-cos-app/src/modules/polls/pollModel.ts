@@ -212,7 +212,7 @@ export function shareLinks(siteOrigin: string, publicId: string, text: string) {
   ];
 }
 export const PASTE_ONLY: Array<{ channel: Channel; label: string }> = [
-  { channel: 'instagram', label: 'Instagram (paste into bio or story)' },
-  { channel: 'tiktok', label: 'TikTok (paste into bio)' },
-  { channel: 'youtube', label: 'YouTube (paste into description)' },
+  { channel: 'instagram', label: 'Instagram (Paste Into Bio or Story)' },
+  { channel: 'tiktok', label: 'TikTok (Paste Into Bio)' },
+  { channel: 'youtube', label: 'YouTube (Paste Into Description)' },
 ];

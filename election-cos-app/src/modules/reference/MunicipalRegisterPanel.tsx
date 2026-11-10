@@ -70,7 +70,7 @@ export function MunicipalRegisterPanel(props: MunicipalRegisterPanelProps) {
     >
       <div className="flex items-baseline justify-between gap-3 flex-wrap">
         <h2 className="text-label-caps font-display uppercase text-slate">
-          Proclaimed delimitation{check.alignedToBaseline ? ' · aligned' : ' · does not match'}
+          Proclaimed Delimitation{check.alignedToBaseline ? ' · aligned' : ' · does not match'}
         </h2>
         <p className="text-data-mono font-mono text-slate">
           {DELIMITATION_VERSION.electoralEvent} · {baseline ? `${baseline.code} ${baseline.name}` : code}

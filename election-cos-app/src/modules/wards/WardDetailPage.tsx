@@ -46,7 +46,7 @@ export function WardDetailPage() {
     <div className="space-y-6 max-w-3xl">
       <div>
         <Link to="/wards" className="text-body-md font-body text-teal hover:underline">
-          ← All wards
+          ← All Wards
         </Link>
       </div>
 

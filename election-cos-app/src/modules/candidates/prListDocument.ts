@@ -85,8 +85,8 @@ export function prListDocument(result: PrListCheckResult, meta: PrListDocumentMe
     { kind: 'heading', level: 1, text: 'This list' },
     { kind: 'field', label: 'Party', value: meta.partyName },
     { kind: 'field', label: 'Municipality', value: meta.municipalityName },
-    { kind: 'field', label: 'Candidates on the list', value: String(result.ordered.length) },
-    { kind: 'field', label: 'Cap applied', value: String(result.maxListLength) },
+    { kind: 'field', label: 'Candidates on the List', value: String(result.ordered.length) },
+    { kind: 'field', label: 'Cap Applied', value: String(result.maxListLength) },
     { kind: 'field', label: 'Prepared by', value: meta.preparedByName },
     { kind: 'field', label: 'Prepared on', value: meta.preparedAt },
 
@@ -120,8 +120,8 @@ export function prListDocument(result: PrListCheckResult, meta: PrListDocumentMe
     { kind: 'heading', level: 1, text: 'What was checked, and against what' },
     { kind: 'field', label: 'Submission', value: PR_LIST_CITATIONS.submission },
     { kind: 'field', label: 'Certification', value: PR_LIST_CITATIONS.certification },
-    { kind: 'field', label: 'Removal of a candidate', value: PR_LIST_CITATIONS.removal },
-    { kind: 'field', label: 'List composition', value: PR_LIST_CITATIONS.composition },
+    { kind: 'field', label: 'Removal of a Candidate', value: PR_LIST_CITATIONS.removal },
+    { kind: 'field', label: 'List Composition', value: PR_LIST_CITATIONS.composition },
     { kind: 'para', text: LIST_LENGTH_BASIS },
     { kind: 'para', text: GENDER_BASIS },
     {
@@ -135,7 +135,7 @@ export function prListDocument(result: PrListCheckResult, meta: PrListDocumentMe
   );
 
   return {
-    title: 'Party list — candidates in order of preference',
+    title: 'Party List — Candidates in Order of Preference',
     subtitle: `${meta.partyName} · ${meta.municipalityName}`,
     meta: {
       organisation: meta.organisation,

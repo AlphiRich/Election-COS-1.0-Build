@@ -96,9 +96,9 @@ export function WarRoomPage() {
       <PageHeader slug="/war-room" title="War Room" />
 
       <Card>
-        <SectionLabel as="h2">Reference data</SectionLabel>
+        <SectionLabel as="h2">Reference Data</SectionLabel>
         <p className="text-body-md font-body mt-1">
-          <Link to="/analytics/candidate-list">Candidates on the Commission&rsquo;s list</Link> ·{' '}
+          <Link to="/analytics/candidate-list">Candidates on the Commission&rsquo;s List</Link> ·{' '}
           <Link to="/analytics/vd-locator">Voting-district locator</Link> ·{' '}
           <Link to="/analytics/voter-statistics">Voter statistics by ward and age</Link> ·{' '}
           <Link to="/analytics/polls">Voter sentiment polls</Link> ·{' '}
@@ -111,7 +111,7 @@ export function WarRoomPage() {
       </Card>
 
       <Card>
-        <SectionLabel as="h2">Start here: short videos</SectionLabel>
+        <SectionLabel as="h2">Start Here: Short Videos</SectionLabel>
         <p className="text-body-md font-body mt-1">
           Each one makes a single point in ten to thirty seconds, with the words underneath if you would
           rather read.{' '}
@@ -137,7 +137,7 @@ export function WarRoomPage() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <StatTile
           emphasis
-          label="Voters captured"
+          label="Voters Captured"
           value={(counters?.totalVoters ?? 0).toLocaleString('en-ZA')}
           sub={
             rollSharePct !== null
@@ -146,12 +146,12 @@ export function WarRoomPage() {
           }
         />
         <StatTile
-          label="Doors worked"
+          label="Doors Worked"
           value={doorsWorked.toLocaleString('en-ZA')}
           sub={`from door records · ${(counters?.totalHouseholdsVisited ?? 0).toLocaleString('en-ZA')} self-reported`}
         />
         <StatTile
-          label="Wards seeded"
+          label="Wards Seeded"
           value={
             <>
               {wardsQuery.data?.length ?? 0}
@@ -172,13 +172,13 @@ export function WarRoomPage() {
         {/* isOpen() is the workflow module's own definition — the same
             one the incident list uses. It was duplicated inline here. */}
         <StatTile
-          label="Open incidents"
+          label="Open Incidents"
           value={STATUS_ORDER.filter(isOpen).reduce((sum, s) => sum + (counters?.incidentsByStatus[s] ?? 0), 0)}
         />
       </div>
 
       <Card className="space-y-3">
-        <SectionLabel as="h2">Doors by state</SectionLabel>
+        <SectionLabel as="h2">Doors by State</SectionLabel>
         <div className="flex flex-wrap gap-2">
           {(Object.keys(CONTACT_STATUS_LABEL) as (keyof typeof CONTACT_STATUS_LABEL)[]).map((status) => (
             <span
@@ -198,7 +198,7 @@ export function WarRoomPage() {
       </Card>
 
       <Card className="space-y-3">
-        <SectionLabel as="h2">Sentiment breakdown</SectionLabel>
+        <SectionLabel as="h2">Sentiment Breakdown</SectionLabel>
         <div className="flex flex-wrap gap-2">
           {SENTIMENT_ORDER.map((tier) => (
             <span
@@ -212,7 +212,7 @@ export function WarRoomPage() {
       </Card>
 
       <Card className="space-y-3">
-        <SectionLabel as="h2">Incidents by status</SectionLabel>
+        <SectionLabel as="h2">Incidents by Status</SectionLabel>
         <div className="flex flex-wrap gap-2">
           {STATUS_ORDER.map((s) => (
             <span

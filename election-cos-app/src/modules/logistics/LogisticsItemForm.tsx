@@ -58,7 +58,7 @@ export function LogisticsItemForm({ ctx, onDone, onCancel }: LogisticsItemFormPr
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 border border-gold/40 bg-paper p-4 rounded">
-      <h3 className="text-label-caps font-display uppercase text-ink">Request materials</h3>
+      <h3 className="text-label-caps font-display uppercase text-ink">Request Materials</h3>
       <p className="text-body-md font-body text-slate">
         Requests are routed to the Municipal Logistics Hub for approval.
       </p>

@@ -69,7 +69,7 @@ export function IncidentForm({ ctx, onDone, onCancel }: IncidentFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 border border-gold/40 bg-paper p-4 rounded">
-      <h3 className="text-label-caps font-display uppercase text-ink">Log incident</h3>
+      <h3 className="text-label-caps font-display uppercase text-ink">Log Incident</h3>
 
       {!vdCode && (
         <p className="text-body-md font-body text-maroon">

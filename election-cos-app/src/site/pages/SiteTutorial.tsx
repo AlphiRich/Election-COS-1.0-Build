@@ -18,9 +18,9 @@ export function SiteTutorial() {
   return (
     <>
       <SiteSection className="flex flex-col gap-4 pb-8 pt-[88px]">
-        <Eyebrow>The tour</Eyebrow>
+        <Eyebrow>The Tour</Eyebrow>
         <h1 className="m-0 font-site-display text-site-h3 md:text-site-h1">
-          Election Campaign OS in 60 seconds
+          Election Campaign OS in 60 Seconds
         </h1>
         <p className="m-0 max-w-[36em] text-site-lead">
           From the doorstep to the seat calculation, in six steps. Pick a chapter, or go in order.
@@ -32,7 +32,7 @@ export function SiteTutorial() {
         <h2 id="tour-h" className="sr-only">
           Chapters
         </h2>
-        <div role="tablist" aria-label="Tour chapters" className="flex flex-wrap gap-2">
+        <div role="tablist" aria-label="Tour Chapters" className="flex flex-wrap gap-2">
           {CHAPTERS.map((ch, n) => (
             <button
               key={ch.id}
@@ -52,7 +52,7 @@ export function SiteTutorial() {
         <div
           className="h-2 w-full overflow-hidden rounded bg-line"
           role="progressbar"
-          aria-label="Position in the tour"
+          aria-label="Position in the Tour"
           aria-valuemin={0}
           aria-valuemax={TOUR_SECONDS}
           aria-valuenow={c.end}
@@ -91,11 +91,11 @@ export function SiteTutorial() {
             </button>
             {i < CHAPTERS.length - 1 ? (
               <button type="button" className="site-btn-primary" onClick={() => setI(i + 1)}>
-                Next chapter
+                Next Chapter
               </button>
             ) : (
               <Link to="/book-a-demo" className="site-btn-primary">
-                Book a demo
+                Book a Demo
               </Link>
             )}
           </div>

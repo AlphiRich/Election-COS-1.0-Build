@@ -81,9 +81,9 @@ export function SiteSeatTool() {
     <>
       <SiteSection className="pb-8 pt-[88px]">
         <div className="flex max-w-[760px] flex-col gap-4">
-          <Eyebrow>Voter tool</Eyebrow>
+          <Eyebrow>Voter Tool</Eyebrow>
           <h1 className="m-0 font-site-display text-site-h3 md:text-site-h2">
-            How seats are calculated
+            How Seats Are Calculated
           </h1>
           <p className="m-0 text-site-lead">
             In a council with wards, some councillors win a ward and the rest are filled from party
@@ -96,7 +96,7 @@ export function SiteSeatTool() {
       <SiteSection labelledBy="how-h" className="pb-8">
         <div className="flex max-w-[760px] flex-col gap-4">
           <h2 id="how-h" className="m-0 font-site-display text-site-h4">
-            The steps
+            The Steps
           </h2>
           <ol className="m-0 flex list-decimal flex-col gap-2 pl-5 text-site-base">
             <li>
@@ -122,7 +122,7 @@ export function SiteSeatTool() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,340px),1fr))] gap-6">
           <SiteCard className="flex min-w-0 flex-col gap-4 p-6">
             <h2 id="calc-h" className="m-0 font-site-display text-site-h5">
-              {isExample ? 'Worked example: JB Marks, 2021' : 'Your numbers'}
+              {isExample ? 'Worked Example: JB Marks, 2021' : 'Your Numbers'}
             </h2>
             <p className="m-0 text-site-caption text-slate">
               {isExample
@@ -130,7 +130,7 @@ export function SiteSeatTool() {
                 : 'Your own figures. Nothing here is a real result.'}
             </p>
             <label htmlFor="seats" className="font-semibold">
-              Seats in the council
+              Seats in the Council
             </label>
             <input
               id="seats"
@@ -150,7 +150,7 @@ export function SiteSeatTool() {
                       Votes
                     </th>
                     <th scope="col" className="py-2">
-                      Ward seats won
+                      Ward Seats Won
                     </th>
                   </tr>
                 </thead>
@@ -159,7 +159,7 @@ export function SiteSeatTool() {
                     <tr key={r.id} className="border-b border-line">
                       <th scope="row" className="py-1.5 pr-2 text-left font-normal">
                         <label htmlFor={`name-${i}`} className="sr-only">
-                          Party {i + 1} name
+                          Party {i + 1} Name
                         </label>
                         <input
                           id={`name-${i}`}
@@ -170,7 +170,7 @@ export function SiteSeatTool() {
                       </th>
                       <td className="py-1.5 pr-2">
                         <label htmlFor={`votes-${i}`} className="sr-only">
-                          {r.name} votes
+                          {r.name} Votes
                         </label>
                         <input
                           id={`votes-${i}`}
@@ -182,7 +182,7 @@ export function SiteSeatTool() {
                       </td>
                       <td className="py-1.5">
                         <label htmlFor={`ward-${i}`} className="sr-only">
-                          {r.name} ward seats won
+                          {r.name} Ward Seats Won
                         </label>
                         <input
                           id={`ward-${i}`}
@@ -213,7 +213,7 @@ export function SiteSeatTool() {
                   ])
                 }
               >
-                Add a party
+                Add a Party
               </button>
               <button
                 type="button"
@@ -223,13 +223,13 @@ export function SiteSeatTool() {
                   setRows(EXAMPLE_ROWS);
                 }}
               >
-                Reset to the 2021 example
+                Reset to the 2021 Example
               </button>
             </div>
           </SiteCard>
 
           <SiteCard className="flex min-w-0 flex-col gap-4 p-6">
-            <h2 className="m-0 font-site-display text-site-h5">The result</h2>
+            <h2 className="m-0 font-site-display text-site-h5">The Result</h2>
             <div role="status" aria-live="polite" className="flex flex-col gap-3">
               {out.error && <p className="m-0 text-site-sm">{out.error}</p>}
               {d && (
@@ -242,7 +242,7 @@ export function SiteSeatTool() {
                   </p>
                   <div className="relative overflow-x-auto">
                     <table className="w-full min-w-[420px] border-collapse text-site-sm">
-                      <caption className="sr-only">Seats by party</caption>
+                      <caption className="sr-only">Seats by Party</caption>
                       <thead>
                         <tr className="border-b border-line text-left">
                           <th scope="col" className="py-2 pr-2">

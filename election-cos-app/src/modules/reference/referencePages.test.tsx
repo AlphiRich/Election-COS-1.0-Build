@@ -62,14 +62,14 @@ describe('Candidates page', () => {
   });
 });
 
-describe('Voting-district locator', () => {
+describe('Voting-District Locator', () => {
   it('finds a station by name and opens its detail with the registered voters and an age chart', async () => {
     const el = await mount(<VdLocatorPage />);
     await type(el.querySelector('input[type="search"]') as HTMLInputElement, 'uniting reformed');
     expect(el.textContent).toContain('UNITING REFORMED CHURCH IN SA');
     await click(el.querySelector('button[aria-label^="Show detail for UNITING"]')!);
     expect(el.textContent).toMatch(/1[\s\u00a0]352 registered voters/);
-    expect(el.textContent).toContain('Age mix');
+    expect(el.textContent).toContain('Age Mix');
     expect(el.textContent).not.toMatch(/131[\s\u00a0]?963/);
   });
   it('says plainly when nothing matches', async () => {
@@ -79,14 +79,14 @@ describe('Voting-district locator', () => {
   });
 });
 
-describe('Voter statistics', () => {
+describe('Voter Statistics', () => {
   it('shows 122,059 registered voters, no roll total, and the charts', async () => {
     const el = await mount(<VoterStatisticsPage />);
     expect(el.textContent).toMatch(/122[\s\u00a0]059/);
     expect(el.textContent).not.toMatch(/131[\s\u00a0]?963/);
     expect(el.textContent).not.toContain('Two numbers');
-    expect(el.textContent).toContain('Age mix, whole municipality');
-    expect(el.textContent).toContain('Share aged 18 to 29, by ward');
+    expect(el.textContent).toContain('Age Mix, Whole Municipality');
+    expect(el.textContent).toContain('Share Aged 18 to 29, by Ward');
     expect(el.textContent).toContain('Sex cannot be derived');
   });
   it('offers every chart as a table', async () => {

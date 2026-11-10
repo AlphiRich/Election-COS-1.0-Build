@@ -99,7 +99,7 @@ function PartyRowFields({
       {showWardSeats && (
         <div className="space-y-1">
           <label htmlFor={`${id}-ward`} className={FIELD_LABEL}>
-            Ward seats won
+            Ward Seats Won
           </label>
           <input
             id={`${id}-ward`}
@@ -182,7 +182,7 @@ export function PartyRowsEditor({ rows, onChange, showWardSeats }: PartyRowsEdit
         onClick={addRow}
         className="inline-flex min-h-11 items-center rounded border border-ink/20 px-3 text-label-caps font-display uppercase text-ink"
       >
-        + Add party
+        + Add Party
       </button>
     </div>
   );

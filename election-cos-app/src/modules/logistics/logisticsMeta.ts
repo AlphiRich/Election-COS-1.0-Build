@@ -8,7 +8,7 @@ import type { Tone } from '@/design/toneClasses';
 export const URGENCY_ORDER: LogisticsUrgency[] = ['ROUTINE', 'URGENT', 'IMMEDIATE'];
 
 export const URGENCY_META: Record<LogisticsUrgency, { label: string; tone: Tone }> = {
-  ROUTINE: { label: 'Routine (2–3 days)', tone: 'slate' },
+  ROUTINE: { label: 'Routine (2–3 Days)', tone: 'slate' },
   URGENT: { label: 'Urgent (24h)', tone: 'gold' },
   IMMEDIATE: { label: 'Immediate (GOTV)', tone: 'maroon' },
 };

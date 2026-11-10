@@ -61,14 +61,14 @@ export function SiteCandidates() {
   return (
     <>
       <PageIntro
-        eyebrow="Voter tool"
-        title="Know your ward candidates"
+        eyebrow="Voter Tool"
+        title="Know Your Ward Candidates"
         lead="Choose your municipality, then your ward, to see who is standing for ward councillor."
       />
       <SiteSection className="pb-8">
         <SiteCard className="flex max-w-[760px] flex-col gap-4 p-8">
           <label htmlFor="cand-search" className="font-semibold">
-            Search municipalities
+            Search Municipalities
           </label>
           <input
             id="cand-search"
@@ -80,7 +80,7 @@ export function SiteCandidates() {
             autoComplete="off"
           />
           <label htmlFor="cand-muni" className="font-semibold">
-            Municipality ({matches.length} shown)
+            Municipality ({matches.length} Shown)
           </label>
           <select
             id="cand-muni"
@@ -91,7 +91,7 @@ export function SiteCandidates() {
               setWard('');
             }}
           >
-            <option value="">Choose a municipality</option>
+            <option value="">Choose a Municipality</option>
             {matches.map((m) => (
               <option key={m.code} value={m.code}>
                 {m.name} · {m.province}
@@ -109,7 +109,7 @@ export function SiteCandidates() {
                 value={ward}
                 onChange={(e) => setWard(e.target.value)}
               >
-                <option value="">Choose a ward</option>
+                <option value="">Choose a Ward</option>
                 {Array.from({ length: council.wards }, (_, i) => i + 1).map((n) => (
                   <option key={n} value={n}>
                     Ward {n}

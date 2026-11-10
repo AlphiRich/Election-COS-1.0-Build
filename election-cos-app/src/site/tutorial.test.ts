@@ -25,7 +25,7 @@ describe('the 60-second tour', () => {
   it('lists every role the software has, taken from the role table, not retyped', () => {
     expect(ROLE_LINES).toHaveLength(SEED_ROLES.length);
     expect(ROLE_LINES.map((r) => r.label)).toEqual(SEED_ROLES.map((r) => r.label));
-    expect(copy).toContain('Seven roles');
+    expect(copy).toContain('Seven Roles');
     expect(SEED_ROLES).toHaveLength(7);
   });
 

@@ -1,7 +1,7 @@
 /**
  * Election Campaign OS — guards on the audit log screen's honesty
  *
- * A screen headed "Audit log" makes a claim by its title. A reader who
+ * A screen headed "Audit Log" makes a claim by its title. A reader who
  * has been shown one assumes the entries cannot have been altered —
  * that is what the word means outside software. This log is append-only
  * from the client and is not hash-chained, so the screen has to say the

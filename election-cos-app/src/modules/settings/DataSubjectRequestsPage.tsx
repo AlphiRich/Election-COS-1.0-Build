@@ -129,7 +129,7 @@ export function DataSubjectRequestsPage() {
               on the form that records a POPIA request. */}
           <Card tone="accent" className="space-y-4">
             <div className="grid grid-cols-2 gap-3">
-              <Field label="Subject type">
+              <Field label="Subject Type">
                 {(props) => (
                   <select
                     {...props}
@@ -144,7 +144,7 @@ export function DataSubjectRequestsPage() {
                   </select>
                 )}
               </Field>
-              <Field label="Request type">
+              <Field label="Request Type">
                 {(props) => (
                   <select
                     {...props}
@@ -161,7 +161,7 @@ export function DataSubjectRequestsPage() {
               </Field>
             </div>
 
-            <Field label="Requester name" required>
+            <Field label="Requester Name" required>
               {(props) => (
                 <input
                   {...props}
@@ -171,7 +171,7 @@ export function DataSubjectRequestsPage() {
                 />
               )}
             </Field>
-            <Field label="How they reached out" required hint="Phone, email, or in person.">
+            <Field label="How They Reached Out" required hint="Phone, email, or in person.">
               {(props) => (
                 <input
                   {...props}
@@ -288,7 +288,7 @@ export function DataSubjectRequestsPage() {
                     {/* Was placeholder-only: a placeholder is not a label,
                         it vanishes on the first keystroke, and this field
                         is the written reason a refusal is recorded on. */}
-                    <Field label="Reason for refusal">
+                    <Field label="Reason for Refusal">
                       {(props) => (
                         <input
                           {...props}

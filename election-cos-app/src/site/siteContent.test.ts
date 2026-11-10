@@ -58,8 +58,8 @@ describe('the reference figures on the home page', () => {
     const rows = seed.reduce((n, w) => n + w.votingDistricts.length, 0);
 
     expect(rows).toBeGreaterThan(distinct.size);
-    expect(figure('Voting stations')).toBe(String(distinct.size));
-    expect(figure('Voting stations')).toBe('108');
+    expect(figure('Voting Stations')).toBe(String(distinct.size));
+    expect(figure('Voting Stations')).toBe('108');
   });
 
   it('states the registered-voter total the seed sums to', () => {
@@ -68,8 +68,8 @@ describe('the reference figures on the home page', () => {
     // locale comparison here tests the separator rather than the figure
     // — and the separator is a typographic choice, not a claim.
     const total = seed.reduce((n, w) => n + w.ward.registeredVoters, 0);
-    expect(Number(figure('Registered voters').replace(/\D/g, ''))).toBe(total);
-    expect(figure('Registered voters')).toBe('122,059');
+    expect(Number(figure('Registered Voters').replace(/\D/g, ''))).toBe(total);
+    expect(figure('Registered Voters')).toBe('122,059');
   });
 
   it('names the gazette those figures reconcile to', () => {
@@ -241,7 +241,7 @@ describe('the one published price list', () => {
     // "One published price list" is the fourth line of the neutrality
     // pledge. This is that line, checkable.
     const independent = PACKAGES.find((p) => p.buyer.includes('Independent'))!;
-    const smallParty = PACKAGES.find((p) => p.buyer.includes('Small party'))!;
+    const smallParty = PACKAGES.find((p) => p.buyer.includes('Small Party'))!;
     expect(independent.price).toBe(smallParty.price);
     expect(independent.price).toBe('R1,800');
   });

@@ -15,7 +15,7 @@ export function PartyListNotice() {
   const entrants = entrantsWithout2021();
   return (
     <details className="text-body-md font-body">
-      <summary className="cursor-pointer font-semibold">Which parties can be modelled</summary>
+      <summary className="cursor-pointer font-semibold">Which Parties Can Be Modelled</summary>
       <div className="mt-2 space-y-2">
         <p>
           Swings can be set for the five parties that both contested 2021 and are on the 2026 list.

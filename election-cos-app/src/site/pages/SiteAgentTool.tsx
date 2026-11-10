@@ -77,15 +77,15 @@ export function SiteAgentTool() {
   return (
     <>
       <PageIntro
-        eyebrow="For party agents"
-        title="Station log for party agents"
+        eyebrow="For Party Agents"
+        title="Station Log for Party Agents"
         lead="Keep a clean record at your voting station: voters seen each hour, incidents, objections, and the count. It stays in this browser and has no place for a voter’s name or ID number."
       />
 
       <SiteSection labelledBy="rules-h" className="pb-8">
         <SiteCard className="flex max-w-[900px] flex-col gap-3 p-6">
           <h2 id="rules-h" className="m-0 font-site-display text-site-h5">
-            What the Act lets you do
+            What the Act Lets You Do
           </h2>
           <ul className="m-0 flex list-disc flex-col gap-1.5 pl-5 text-site-sm">
             <li>
@@ -127,7 +127,7 @@ export function SiteAgentTool() {
       <SiteSection labelledBy="iec-h" className="pb-8">
         <SiteCard className="flex max-w-[900px] flex-col gap-3 p-6">
           <h2 id="iec-h" className="m-0 font-site-display text-site-h5">
-            What the Electoral Commission says about party agents
+            What the Electoral Commission Says About Party Agents
           </h2>
           <ul className="m-0 flex list-disc flex-col gap-1.5 pl-5 text-site-sm">
             {PARTY_AGENT_RULES_IEC.map((r) => (
@@ -165,7 +165,7 @@ export function SiteAgentTool() {
               Station
             </h2>
             <label htmlFor="ag-station" className="font-semibold">
-              Station name or code
+              Station Name or Code
             </label>
             <input
               id="ag-station"
@@ -176,7 +176,7 @@ export function SiteAgentTool() {
             <div className="grid grid-cols-2 gap-3">
               <div className="flex flex-col gap-1">
                 <label htmlFor="ag-open" className="font-semibold">
-                  Opened at
+                  Opened At
                 </label>
                 <div className="flex gap-2">
                   <input
@@ -190,7 +190,7 @@ export function SiteAgentTool() {
                     type="button"
                     className="site-btn-outline-ink px-3"
                     onClick={() => set({ opened: nowHm() })}
-                    aria-label="Set opening time to now"
+                    aria-label="Set Opening Time to Now"
                   >
                     Now
                   </button>
@@ -198,7 +198,7 @@ export function SiteAgentTool() {
               </div>
               <div className="flex flex-col gap-1">
                 <label htmlFor="ag-close" className="font-semibold">
-                  Closed at
+                  Closed At
                 </label>
                 <div className="flex gap-2">
                   <input
@@ -212,7 +212,7 @@ export function SiteAgentTool() {
                     type="button"
                     className="site-btn-outline-ink px-3"
                     onClick={() => set({ closed: nowHm() })}
-                    aria-label="Set closing time to now"
+                    aria-label="Set Closing Time to Now"
                   >
                     Now
                   </button>
@@ -220,14 +220,14 @@ export function SiteAgentTool() {
               </div>
             </div>
             <label htmlFor="ag-obj" className="font-semibold">
-              Objections you lodged in writing
+              Objections You Lodged in Writing
             </label>
             <div className="flex items-center gap-3">
               <button
                 type="button"
                 className="site-btn-outline-ink px-4"
                 onClick={() => set({ objections: Math.max(0, log.objections - 1) })}
-                aria-label="One fewer objection"
+                aria-label="One Fewer Objection"
               >
                 −
               </button>
@@ -238,7 +238,7 @@ export function SiteAgentTool() {
                 type="button"
                 className="site-btn-outline-ink px-4"
                 onClick={() => set({ objections: log.objections + 1 })}
-                aria-label="One more objection"
+                aria-label="One More Objection"
               >
                 +
               </button>
@@ -246,7 +246,7 @@ export function SiteAgentTool() {
           </SiteCard>
 
           <SiteCard className="flex min-w-0 flex-col gap-3 p-6">
-            <h2 className="m-0 font-site-display text-site-h5">Voters seen each hour: {total}</h2>
+            <h2 className="m-0 font-site-display text-site-h5">Voters Seen Each Hour: {total}</h2>
             <p className="m-0 text-site-caption text-slate">
               Tap + for each voter you see go in. Counts only. Never names.
             </p>
@@ -291,10 +291,10 @@ export function SiteAgentTool() {
       <SiteSection labelledBy="inc-h" className="pb-8">
         <SiteCard className="flex max-w-[900px] flex-col gap-3 p-6">
           <h2 id="inc-h" className="m-0 font-site-display text-site-h5">
-            Incidents and irregularities
+            Incidents and Irregularities
           </h2>
           <label htmlFor="ag-note" className="font-semibold">
-            What happened (no names or ID numbers)
+            What Happened (No Names or ID Numbers)
           </label>
           <div className="flex flex-wrap gap-2">
             <input
@@ -313,7 +313,7 @@ export function SiteAgentTool() {
                 }
               }}
             >
-              Add to log
+              Add to Log
             </button>
           </div>
           {log.incidents.length > 0 && (
@@ -335,7 +335,7 @@ export function SiteAgentTool() {
       <SiteSection labelledBy="cnt-h" className="pb-8">
         <SiteCard className="flex max-w-[900px] flex-col gap-3 p-6">
           <h2 id="cnt-h" className="m-0 font-site-display text-site-h5">
-            The count
+            The Count
           </h2>
           <p className="m-0 text-site-sm text-slate">
             Copy the figures from the result as it is announced, one ballot at a time. Rejected
@@ -359,7 +359,7 @@ export function SiteAgentTool() {
             </div>
             <div className="flex flex-col gap-1">
               <label htmlFor="ag-counted" className="font-semibold">
-                Ballot papers counted
+                Ballot Papers Counted
               </label>
               <input
                 id="ag-counted"
@@ -401,7 +401,7 @@ export function SiteAgentTool() {
                 }
               />
               <label className="sr-only" htmlFor={`ag-v-${i}`}>
-                Votes for party {i + 1}
+                Votes for Party {i + 1}
               </label>
               <input
                 id={`ag-v-${i}`}
@@ -424,7 +424,7 @@ export function SiteAgentTool() {
             className="site-btn-outline-ink self-start"
             onClick={() => setCount({ lines: [...log.count.lines, { party: '', votes: '' }] })}
           >
-            Add a party line
+            Add a Party Line
           </button>
           <div
             role="status"
@@ -456,7 +456,7 @@ export function SiteAgentTool() {
       <SiteSection className="pb-10">
         <div className="flex flex-wrap items-center gap-3">
           <button type="button" className="site-btn-primary" onClick={copy}>
-            Copy log as CSV
+            Copy Log as CSV
           </button>
           <button
             type="button"
@@ -466,7 +466,7 @@ export function SiteAgentTool() {
               setCopied(false);
             }}
           >
-            Clear the log
+            Clear the Log
           </button>
           <span role="status" aria-live="polite" className="text-site-sm">
             {copied ? 'Copied. Paste into a spreadsheet.' : ''}

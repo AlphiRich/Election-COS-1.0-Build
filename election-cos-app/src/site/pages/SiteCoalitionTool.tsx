@@ -49,7 +49,7 @@ export function SiteCoalitionTool() {
   const sets = useMemo(() => smallMajorities(holders, total), [holders, total]);
   const name = (id: string) => holders.find((h) => h.id === id)?.name ?? id;
   const isExample = JSON.stringify(holders) === JSON.stringify(exampleHolders(code));
-  const label = code === HISTORY ? 'JB Marks council, 2021' : `${COUNCILS[code].name} council, 2026`;
+  const label = code === HISTORY ? 'JB Marks Council, 2021' : `${COUNCILS[code].name} Council, 2026`;
 
   const toggle = (id: string) =>
     setChosen((c) => {
@@ -63,9 +63,9 @@ export function SiteCoalitionTool() {
     <>
       <SiteSection className="pb-8 pt-[88px]">
         <div className="flex max-w-[760px] flex-col gap-4">
-          <Eyebrow>Voter tool</Eyebrow>
+          <Eyebrow>Voter Tool</Eyebrow>
           <h1 className="m-0 font-site-display text-site-h3 md:text-site-h2">
-            How coalitions work
+            How Coalitions Work
           </h1>
           <p className="m-0 text-site-lead">
             When no party holds more than half of a council’s seats, parties can agree to work
@@ -83,7 +83,7 @@ export function SiteCoalitionTool() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,340px),1fr))] gap-6">
           <SiteCard className="flex min-w-0 flex-col gap-4 p-6">
             <h2 className="m-0 font-site-display text-site-h5">
-              {isExample ? `Worked example: ${label}` : 'Your seat numbers'}
+              {isExample ? `Worked Example: ${label}` : 'Your Seat Numbers'}
             </h2>
             <label className="flex flex-col gap-1 text-site-caption text-slate" htmlFor="co-council">
               Council
@@ -113,7 +113,7 @@ export function SiteCoalitionTool() {
                 : 'Your own figures. Nothing here is a real result.'}
             </p>
             <fieldset className="m-0 flex min-w-0 flex-col gap-2 border-0 p-0">
-              <legend className="mb-2 font-semibold">Choose the parties to combine</legend>
+              <legend className="mb-2 font-semibold">Choose the Parties to Combine</legend>
               {holders.map((h, i) => (
                 <div key={h.id} className="flex min-h-[48px] items-center gap-3">
                   <input
@@ -127,7 +127,7 @@ export function SiteCoalitionTool() {
                     <PartyMark id={h.id} name={h.name} size={28} />
                   </label>
                   <label htmlFor={`seats-${i}`} className="sr-only">
-                    {h.name} seats
+                    {h.name} Seats
                   </label>
                   <input
                     id={`seats-${i}`}
@@ -153,12 +153,12 @@ export function SiteCoalitionTool() {
                 setChosen(new Set());
               }}
             >
-              Reset to the {code === HISTORY ? '2021' : '2026'} result
+              Reset to the {code === HISTORY ? '2021' : '2026'} Result
             </button>
           </SiteCard>
 
           <SiteCard className="flex min-w-0 flex-col gap-4 p-6">
-            <h2 className="m-0 font-site-display text-site-h5">Do they pass half?</h2>
+            <h2 className="m-0 font-site-display text-site-h5">Do They Pass Half?</h2>
             <div role="status" aria-live="polite" className="flex flex-col gap-3">
               <p className="m-0 font-mono text-site-h3 font-medium">
                 {held} of {total}
@@ -188,7 +188,7 @@ export function SiteCoalitionTool() {
               </p>
             </div>
 
-            <h3 className="m-0 mt-2 font-semibold">Smallest groups that pass half</h3>
+            <h3 className="m-0 mt-2 font-semibold">Smallest Groups That Pass Half</h3>
             {sets.length === 0 ? (
               <p className="m-0 text-site-sm">No group of four or fewer of these parties passes half.</p>
             ) : (
