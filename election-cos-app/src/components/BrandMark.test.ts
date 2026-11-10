@@ -15,9 +15,8 @@ const PUBLIC = path.resolve(__dirname, '..', '..', 'public');
 describe('brand mark', () => {
   it('public/icon.svg is the mark (re-run npm run build:icons after changing it)', () => {
     // Line endings normalised: a Windows checkout may hold the file as CRLF.
-    expect(readFileSync(path.join(PUBLIC, 'icon.svg'), 'utf8').replace(/
-/g, '
-')).toBe(BRAND_MARK_SVG);
+    const onDisk = readFileSync(path.join(PUBLIC, 'icon.svg'), 'utf8').replace(/\r\n/g, '\n');
+    expect(onDisk).toBe(BRAND_MARK_SVG);
   });
 
   it('is the ballot box and node network, not the retired ballot-cross square', () => {
