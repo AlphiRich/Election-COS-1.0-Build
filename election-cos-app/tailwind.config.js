@@ -27,6 +27,13 @@ export default {
         // Public-site border/rule. Borders only, never text — 1.5:1 on
         // paper. See src/design/tokens.ts for why the site needs its own.
         line: '#DCD6C8',
+        // Chart series in fixed order (see src/design/tokens.ts): identity, never party branding.
+        'viz-1': '#2a78d6',
+        'viz-2': '#eb6834',
+        'viz-3': '#1baf7a',
+        'viz-4': '#eda100',
+        'viz-5': '#e87ba4',
+        'viz-6': '#008300',
       },
       // The case-journey animation on /watch: each step lights gold in turn.
       keyframes: {

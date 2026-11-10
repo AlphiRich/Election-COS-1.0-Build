@@ -11,6 +11,7 @@ import { SiteCard, SiteSection } from '../SiteChrome';
 import { PageIntro, SourceNote } from './pageParts';
 import { StatusPill } from './resultsParts';
 import { Emblem, PartyMark } from './PartyMark';
+import { BarList, type BarRow } from '../charts/Charts';
 import { nf, provinceName, titleCase } from '../tools/resultsFormat';
 import { councilPath, TRACKER_PATH } from '../resultsPaths';
 import { AdSlot } from '../ads/AdSlot';
@@ -157,18 +158,13 @@ export function SiteMyWard({ hasConsent }: { hasConsent: boolean }) {
               {!wardResult ? (
                 <p className="m-0 text-site-sm">{results ? `Ward ${ward} is not in ${c.name}’s results.` : 'Loading…'}</p>
               ) : (
-                <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,220px),1fr))] gap-5">
-                  <div className="flex min-w-0 flex-col gap-2">
-                    <h3 className="m-0 text-site-sm font-semibold">Ward ballot (the candidate)</h3>
-                    <VoteBars parties={wardResult.parties} valid={wardResult.valid} />
-                  </div>
-                  {wardResult.pr && (
-                    <div className="flex min-w-0 flex-col gap-2">
-                      <h3 className="m-0 text-site-sm font-semibold">PR ballot (the party)</h3>
-                      <VoteBars parties={wardResult.pr.parties} valid={wardResult.pr.valid} />
-                    </div>
-                  )}
-                </div>
+                <BarList
+                  title={`Ward ${ward}: share of the vote on each ballot`}
+                  unit="Party"
+                  series={['Ward ballot (candidate)', 'PR ballot (party)']}
+                  format={(v) => `${v}%`}
+                  rows={ballotRows(wardResult.parties, wardResult.valid, wardResult.pr?.parties ?? [], wardResult.pr?.valid ?? 0)}
+                />
               )}
               <p className="m-0 text-site-caption text-slate">
                 Shares of the valid votes cast in this ward on each ballot. The PR ballot is counted across the whole municipality
@@ -264,25 +260,14 @@ export function SiteMyWard({ hasConsent }: { hasConsent: boolean }) {
   );
 }
 
-function VoteBars({ parties, valid }: { parties: PartyVotes; valid: number }) {
-  return (
-    <ul className="m-0 flex list-none flex-col gap-2 p-0">
-      {parties.slice(0, 8).map(([p, v]) => {
-        const pct = Math.round((v / valid) * 1000) / 10;
-        return (
-          <li key={p}>
-            <div className="flex justify-between gap-3 text-site-sm">
-              <PartyMark id={partyIdOf(p)} name={p === 'INDEPENDENT' ? 'Independent candidates' : partyLabel(p)} size={22} />
-              <span className="font-mono">
-                {nf.format(v)} · {pct}%
-              </span>
-            </div>
-            <div className="h-2 w-full rounded-full bg-paper">
-              <div className="h-2 rounded-full bg-ink" style={{ width: `${pct}%` }} />
-            </div>
-          </li>
-        );
-      })}
-    </ul>
-  );
+/** The parties that matter in the ward on either ballot (top eight by their better share), as percentages of each ballot. */
+function ballotRows(ward: PartyVotes, wardValid: number, pr: PartyVotes, prValid: number): BarRow[] {
+  const pct = (v: number, of: number) => (of ? Math.round((v / of) * 1000) / 10 : 0);
+  const w = new Map(ward), p = new Map(pr);
+  const names = [...new Set([...ward.map(([n]) => n), ...pr.map(([n]) => n)])];
+  return names
+    .map((n) => ({ n, a: pct(w.get(n) ?? 0, wardValid), b: pct(p.get(n) ?? 0, prValid) }))
+    .sort((x, y) => Math.max(y.a, y.b) - Math.max(x.a, x.b))
+    .slice(0, 8)
+    .map(({ n, a, b }) => ({ id: partyIdOf(n), name: n === 'INDEPENDENT' ? 'Independent candidates' : partyLabel(n), values: [a, b], emblem: true }));
 }

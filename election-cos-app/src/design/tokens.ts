@@ -44,6 +44,18 @@ export const tokens = {
      * it is 1.5:1 on paper and fails every contrast rule for type.
      */
     line: '#DCD6C8',
+    /**
+     * Chart series, in fixed order: identity in a chart, never a party's brand colour (a party is named by its emblem and
+     * label beside the mark). Validated as a categorical set against the white chart card: lightness band, chroma, CVD
+     * separation (worst adjacent ΔE 9.1) and normal-vision floor (19.6) all pass; slots 3, 4 and 5 are under 3:1 on white,
+     * so every chart carries direct labels and a table view. Beyond six series, the rest fold into "Other" (slate).
+     */
+    'viz-1': '#2a78d6',
+    'viz-2': '#eb6834',
+    'viz-3': '#1baf7a',
+    'viz-4': '#eda100',
+    'viz-5': '#e87ba4',
+    'viz-6': '#008300',
   },
   font: {
     display: '"Archivo Narrow", sans-serif',

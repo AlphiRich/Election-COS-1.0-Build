@@ -36,7 +36,13 @@ describe('the app palette matches the supplied design system', () => {
   }
 
   it('records the one colour the app has that the design system forbids (a red), so it cannot be forgotten', () => {
-    const extra = Object.keys(tokens.color).filter((k) => !pairs.some(([a]) => a === k));
+    const extra = Object.keys(tokens.color).filter((k) => !pairs.some(([a]) => a === k) && !k.startsWith('viz-'));
     expect(extra).toEqual(['maroon']);
+  });
+
+  it('keeps the chart series separate from the brand: six validated slots, used only for chart identity', () => {
+    // Added 10 Nov 2026 for the results charts. They are not brand colours and are never used for text or chrome; see the
+    // comment on them in tokens.ts for the palette validation.
+    expect(Object.keys(tokens.color).filter((k) => k.startsWith('viz-'))).toEqual(['viz-1', 'viz-2', 'viz-3', 'viz-4', 'viz-5', 'viz-6']);
   });
 });

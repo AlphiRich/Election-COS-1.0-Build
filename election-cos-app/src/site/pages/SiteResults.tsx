@@ -16,7 +16,8 @@ import { PageIntro, SourceNote } from './pageParts';
 import { SeatBar, StatTile, StatusPill } from './resultsParts';
 import { nf, provinceName } from '../tools/resultsFormat';
 import { councilPath, MY_WARD_PATH, TRACKER_PATH } from '../resultsPaths';
-import { COUNCIL_CODES, NATIONAL_SEATS, PROVINCE_CODES, council, nationalSummary } from '@/modules/lge2026/nationalResults';
+import { COUNCIL_CODES, NATIONAL_SEATS, PROVINCE_CODES, council, nationalPartyTotals, nationalSummary } from '@/modules/lge2026/nationalResults';
+import { BarList, StatusSplit } from '../charts/Charts';
 
 export function SiteResults() {
   const s = nationalSummary();
@@ -43,6 +44,27 @@ export function SiteResults() {
           <StatTile value={s.hung} label="With no majority" />
           <StatTile value={s.majority} label="With a majority" />
           <StatTile value={nf.format(registered)} label="Registered voters">in the councils’ voting districts</StatTile>
+        </div>
+      </SiteSection>
+
+      <SiteSection labelledBy="charts-h" className="pb-8">
+        <h2 id="charts-h" className="sr-only">Charts</h2>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,360px),1fr))] gap-5">
+          <div className="rounded-[10px] border border-line bg-white p-5">
+            <StatusSplit
+              title="Councils with and without a majority, by province"
+              rows={PROVINCE_CODES.map((p) => ({ id: p, name: provinceName(p), hung: s.byProvince[p].hung, majority: s.byProvince[p].councils - s.byProvince[p].hung }))}
+            />
+          </div>
+          <div className="rounded-[10px] border border-line bg-white p-5">
+            <BarList
+              title="Council seats won across the country"
+              unit="Party"
+              series={['Seats']}
+              format={(v) => nf.format(v)}
+              rows={nationalPartyTotals().slice(0, 10).map((t) => ({ id: t.id, name: t.name, values: [t.seats], emblem: true }))}
+            />
+          </div>
         </div>
       </SiteSection>
 

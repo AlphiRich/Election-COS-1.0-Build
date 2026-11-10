@@ -9,8 +9,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
 import { SourceNote } from './pageParts';
-import { IecStatusNote, SeatBar, StatusPill } from './resultsParts';
+import { IecStatusNote, StatusPill } from './resultsParts';
 import { Emblem, PartyMark } from './PartyMark';
+import { BarList, Hemicycle } from '../charts/Charts';
 import { kindOf, nf, provinceName, titleCase } from '../tools/resultsFormat';
 import { TRACKER_PATH, myWardPath } from '../resultsPaths';
 import { majorityThreshold } from '../tools/coalition';
@@ -78,7 +79,7 @@ function Council({ c, hasConsent }: { c: CouncilSeats; hasConsent: boolean }) {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,360px),1fr))] gap-6">
           <SiteCard className="flex min-w-0 flex-col gap-4 p-6">
             <h2 id="seats-h" className="m-0 font-site-display text-site-h5">The council’s {c.councillors} seats</h2>
-            <SeatBar holders={c.holders} councillors={c.councillors} label={`${c.name} council`} />
+            <Hemicycle title={`${c.name} council chamber`} councillors={c.councillors} holders={c.holders.map((h) => ({ id: h.id, name: h.name, value: h.seats }))} />
             <table className="w-full border-collapse text-left text-site-sm">
               <thead>
                 <tr className="border-b border-line text-site-caption text-slate">
@@ -147,6 +148,20 @@ function Council({ c, hasConsent }: { c: CouncilSeats; hasConsent: boolean }) {
             <p className="m-0 text-site-caption text-slate">Seat arithmetic only. It does not say which parties will agree, or what any agreement says.</p>
           </SiteCard>
         </div>
+      </SiteSection>
+
+      <SiteSection labelledBy="split-h" className="pb-8">
+        <SiteCard className="p-6">
+          <h2 id="split-h" className="sr-only">Ward and list seats</h2>
+          <BarList
+            title="How each party won its seats: wards and party lists"
+            unit="Party"
+            series={['Ward seats', 'List (PR) seats']}
+            stacked
+            rows={c.holders.filter((h) => h.id !== 'TIED').slice(0, 12).map((h) => ({ id: h.id, name: h.name, values: [h.wardSeats, h.seats - h.wardSeats], emblem: true }))}
+            note="Ward seats are won candidate by candidate; list seats top each party up to its share of the votes (Schedule 1)."
+          />
+        </SiteCard>
       </SiteSection>
 
       <Simulator c={c} />
