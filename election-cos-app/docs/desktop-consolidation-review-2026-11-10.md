@@ -1,6 +1,7 @@
 # Desktop consolidation review — 10 Nov 2026
 
-A sweep of every folder, zip and loose file on the owner's Desktop for
+A sweep of every folder, zip and loose file on the owner's Desktop (and,
+in §8, the Downloads and Documents folders) for
 Election Campaign OS material. It decides, item by item, what to **keep**
 (the repository is already its home), **merge** (bring into the repository
 now), **integrate** (port into the app, feature by feature), **deprecate**
@@ -119,6 +120,7 @@ public site).
 | `ECOS1…/09_voter_services.sql`, `10_special_vote_plc.sql` | **Deprecate as code, keep as spec** | Postgres DDL, but the voter-services and special-vote rules are useful requirements for Firestore collections |
 | `ECOS1…/electoral_generator.py` + `test_electoral_engine.py` (1 Nov) | **Merge** into `electoral/` | Not the repo's version. The repo has the 20 Oct NW405-only engine; this is a general rewrite (any municipality, input validation, deterministic tie-break by lot, an extreme-overhang scenario). Its tests pass. Reconcile the two into one engine, and check both against the TypeScript `seatCalculator.ts`, which stays the source of truth for the app |
 | `ECOS1…/voter_sentiment_engine.py` + test (30 Oct) | **Merge** into `electoral/` | Not in the repo. Privacy-conscious ground-intelligence newsletter: a strict non-identifying CSV schema, consent column, small-group suppression. Tests pass. Pure Python, no database |
+| `ECOS1…/cloudflare-hardening.sh` (2 Nov) | **Merge** into `site-hosting/` | Cloudflare zone hardening via the API (needs curl and jq). Not in the repo. Reads the API token from the environment; keep it that way |
 | `28 Oct 2026/gemini-code-*.{ts,py,yaml,txt}` (10 snippets) | **Deprecate** | Chat fragments; anything useful is already in the build |
 | `check-no-hex.mjs` (28 Oct) | **Keep (already merged)** | `scripts/check-no-hex.mjs` |
 | Loose `animations-v3.jsx`, `explainer-*.jsx`, `explainers-data.js`, `tweaks-panel.jsx`, `*.html` explainer stubs, `index (1).mp4`, `LandingPage.tsx` | **Deprecate** | Explainer and video sources are in `video-src/explainers/`; the landing page is superseded |
@@ -195,9 +197,92 @@ unfinished browser download and can be deleted.
 - `db/schedule1_quota.sql` is documentation of the formula, not a database;
   move it to `research_notes/` so nothing reads it as a schema.
 
+## 8. Downloads and Documents (verified 10 Nov)
+
+Every ECOS file in `C:\Users\OEM\Downloads` and `C:\Users\OEM\Documents` was
+hashed and compared with the Desktop copies and the repository.
+
+### Downloads is a git repository — remove its `.git` only
+
+`Downloads/.git` was initialised on 8 Nov with `origin` set to
+`AlphiRich/Election-COS-1.0-Build`, and its single commit ("feat: integrate
+live PR forecasting edge worker and ward 10 geospatial data") contains the
+**whole Downloads folder**: the tax submission, the `04_Personal_&_Private`
+zips, installers, and the NW405 voters'-roll PDFs.
+
+**It was never pushed.** There are no remote-tracking refs, and GitHub has no
+record of the commit. But one `git push` from that folder would send personal
+and voters'-roll data to the ECOS repository (only the >100 MB files would be
+refused). Recommended: delete `Downloads/.git` only. Every file in Downloads
+stays where it is.
+
+### Secure
+
+| File | Issue |
+|---|---|
+| `NW405-20261003T172322Z-1-001.adding` (42 MB) | A Google Drive export of the NW405 voters' roll: per-ward, per-VD PDFs. POPIA personal information. Move it to the same restricted location as the other roll data |
+| `caldav-info@electioncos.co.za.mobileconfig` | Signed mail/calendar profile for `info@electioncos.co.za`; may embed the account password. Delete after installing it |
+
+### ECOS files in Downloads
+
+| File | Verdict | Reason |
+|---|---|---|
+| `municipal_structures_act_calculator.md` (8 Nov, never committed) | **Merge** into `research_notes/` as a reference implementation | A statute-literal Python version of Schedule 1, Items 12, 13 and 16. It agrees with the app: the Act's Item 12 has no D term, and the app's `B − C − D` is the IEC report's form, with D = 0 in practice. It surfaces Item 16 overhang as a warning, as the app does |
+| `iec_etl_pipeline.py` (121 lines) | **Deprecate** | The original that the repo's `electoral/iec_etl_pipeline.py` (238 lines) was adapted from, to the real IEC CSV format |
+| `voter_sentiment_engine.py` (Downloads, 10 KB), `gemini-code-1794075102487.py` | **Deprecate** | A PostgreSQL/SQLAlchemy + FastAPI version. The **Desktop** `voter_sentiment_engine.py` (§4) is the privacy-conscious one to merge; polling itself is already in the app (`polls` module, WhatsApp webhook) |
+| `voter_services_sql.sql`, `special_vote_confirmation_sql.sql` | **Deprecate as code, keep as spec** | Slightly different copies of `09_voter_services.sql` / `10_special_vote_plc.sql` (§4). PostgreSQL DDL |
+| `electioncos1.0_29Oct2026.zip` | **Deprecate** | Another AI Studio-era snapshot (`MASTER_CODE_STACK.md`, PostgreSQL throughout) |
+| `ecos-architecture-blueprint-claude-code.md` (27 Oct) | **Deprecate** | Older architecture brief; mentions PostgreSQL 10× and AWS 5×. Superseded by `BUILD-STATUS.md` |
+| `election_campaign_os_master_application.html` (+ identical `…html2.html`) | **Deprecate** | Prototype; PostgreSQL 12× and AWS 9× in its stack panels. Its content is in the Hub |
+| `Election Campaign OS 1.0.html`, `screen_rebuilds.html` | **Deprecate** | Earlier copies of the 28 Oct prototypes |
+| `website_technical_and_design_architecture_white_paper.md` | **Merge** into `docs/` | Markdown of the 28 Oct white paper; Firebase-consistent |
+| `dns_architecture_deployment_audit.md` | **Merge** (this one, not the 28 Oct copy) | Newer revision with the observed Cloudflare records |
+| `the_dual_funnel_playbook.md`, `bridging_the_gap.md` | **Merge** into `marketing/` | Google Ads strategy, alongside `from_ward_level_win.md` |
+| `Election-COS_Daily_Intelligence_Newsletter.html` | **Keep as a reference** | Sample output of the newsletter the Desktop sentiment engine produces |
+| `Code Review — Public-Site Deploy (PRs #24–26).docx` | **Merge** into `docs/` | Review record for merged PRs |
+| `cloudflare_hardening.md` | **Deprecate** | An earlier draft of `ECOS1…/cloudflare-hardening.sh` (§4), which adds dependency checks |
+| `gemini-code-1794075185622.md` | **Deprecate** | An earlier draft of `design_system_protocol.md` |
+| `SKILL.md`, `SKILL (1).md` | **Keep (already installed)** | The `ecos-demarcation-baseline-config` and `ecos-rbac-config` Claude skills |
+| `from_ward_level_win.md`, `election_cos_marketing_strategy.md`, `workspace_status_check.py` | Duplicates | Byte-identical to Desktop copies |
+| Other `gemini-code-*.py/.ts`, `Untitled-2.py`, `vite.config.ts.rej`, `firebase-v1.zip` (only an `.mcp.json`) | **Deprecate** | Fragments and leftovers |
+
+### A product decision to settle before anything else is built
+
+`deprecated_models_guide.md`, `skill_specification_architecture_pivot.md`,
+`citizen_voter_schema_live_test_pivot.md` and `advertising_engine_schema.md`
+(7 Nov) describe a **pivot**: away from parties as tenants and toward a
+citizen "public square" with an ad-serving API matched to voters' issue
+preferences. The repository is built the other way round: a campaign
+operating system for parties, with tenant isolation in `firestore.rules`,
+consent-gated voter records, and no ad targeting of individual voters (the
+public site's ads are non-personalised, after consent).
+
+Profiling individual voters' issue preferences for ad targeting would also
+need its own POPIA basis (special personal information: political
+opinions). These four documents are **held, not merged**, until that
+direction is decided.
+
+### Documents folder
+
+| Item | Verdict |
+|---|---|
+| `Documents/GitHub/Claude` (`AlphiRich/Claude`, one commit adding `.firebaserc`) | **Deprecate** — the same empty repository as §2 |
+| `Documents/GitHub/.github` (`AlphiRich/.github`: code of conduct, security policy, workflow scanning) | **Keep** — the account's community-health repository, not ECOS-specific |
+| `IC Signatures/`, `Domains/`, `Outlook Files/`, `invoice_3884537.pdf` | Out of ECOS scope |
+
+### Not ECOS in Downloads
+
+Installers (Antigravity, Claude, Git, GitHub Desktop, Copilot, LM Studio,
+Bionic, Gemini, Cloudflare WARP, firebase-tools ×2) can be deleted once
+installed. Two `Unconfirmed *.crdownload` files (1.9 GB, 164 MB) are
+unfinished downloads. The national budget (MTEF/ENE/HRBP) files, IC
+accounting agent specs, `IC Website Deploy/`, the tax review and the
+19 Oct Drive zips (duplicates of the Desktop zips) are outside ECOS.
+
 ## Suggested order
 
-1. Secure (§1): revoke the keys and the token today.
+1. Secure (§1, §8): revoke the keys and the token today; delete
+   `Downloads/.git`; move all voters'-roll data to one restricted location.
 2. Merge `chore/consolidate`, then the doc imports (§5 "Merge"), the two
    Python engines (§4) and the repo cleanup (§7).
 3. Port the voters-roll Firestore pipeline (§4).
