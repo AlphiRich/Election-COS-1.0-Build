@@ -99,4 +99,10 @@ const out = {
 };
 writeFileSync(path.join(DIR, 'seats-2026.json'), JSON.stringify(out));
 const all = Object.values(councils);
+// A few bytes for the home page, which loads eagerly and must not carry the full table. nationalResults.test.ts checks it.
+const metros = all.filter((c) => c.category === 'A');
+writeFileSync(
+  path.join(DIR, 'summary-2026.json'),
+  JSON.stringify({ retrieved, councils: all.length, hung: all.filter((c) => c.hung).length, metros: metros.length, metrosHung: metros.filter((c) => c.hung).length }),
+);
 console.log(`wrote ${all.length} councils: ${all.filter((c) => c.hung).length} hung; ` + `iec ${JSON.stringify(Object.fromEntries(['reconciled', 'laterCount', 'incomplete', 'notPublished'].map((s) => [s, all.filter((c) => c.iec === s).length])))}`);

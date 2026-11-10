@@ -55,6 +55,7 @@
  */
 
 import { resolveAdClientId, resolveAdSlotId } from './adConfig';
+import { COUNCIL_AD_CODES } from './councilAdPages';
 
 /** Bumped when the wording changes; a stored consent below this is void. */
 export const AD_CONSENT_VERSION = 2;
@@ -94,6 +95,15 @@ export const AD_ELIGIBLE_PATHS: readonly string[] = [
   // A free public tool with a written answer and sources. Added 31 Oct
   // 2026 when the site became useful to the public, not only to buyers.
   '/tools/party-funding-checker',
+  // The certified 2026 results pages. Added 10 Nov 2026 by the owner's
+  // decision to fund the site from advertising after the election. Counts and
+  // names of elected office-bearers only; no form, no personal information
+  // collected. The political categories below stay blocked, so no party's
+  // advert sits beside a council's seats.
+  '/coalitions',
+  '/my-ward',
+  // Lower case: normalisePath lower-cases before matching.
+  ...COUNCIL_AD_CODES.map((c) => `/councils/${c.toLowerCase()}`),
 ];
 
 /**

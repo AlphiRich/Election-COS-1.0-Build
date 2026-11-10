@@ -43,6 +43,8 @@ export interface NationalCouncil extends CouncilBallots {
   registered: number;
   ballots: Record<'ward' | 'pr' | 'dc40', { valid: number; spoilt: number }>;
   parties: Record<'ward' | 'pr' | 'dc40', PartyVotes>;
+  /** Ward by ward, with the PR (party) ballot as cast in the ward alongside the ward ballot. */
+  wardResults: Array<CouncilBallots['wardResults'][number] & { pr?: { valid: number; spoilt: number; parties: PartyVotes } }>;
   /** Wards where a voting district has PR results but no ward-ballot result in the Commission's file. */
   wardBallotGaps?: Array<{ wardId: string; wardNumber: number; votingDistrictsWithoutWardResult: number; registeredNotInWard: number }>;
 }

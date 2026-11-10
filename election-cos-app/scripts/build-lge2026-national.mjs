@@ -78,7 +78,7 @@ for (const code of expected) {
   manifest.files.push({ code, province: prov, sha256: sha(buf), bytes: buf.length, rows: rows.length, generatedFrom: stamps[0], generatedTo: stamps[stamps.length - 1] });
 
   const m = { code, name: rows[0].Municipality.slice(code.length + 3), category: reg.category, district: reg.category === 'B' ? districtOf(code) : null, councillors: reg.councillors, wards: 0, votingDistricts: 0, registered: 0, ballots: {}, parties: { ward: {}, pr: {}, dc40: {} }, onPrList: [], wardResults: [] };
-  const wardMap = new Map(); const vdSeen = new Map(); const spoilSeen = new Map();
+  const wardMap = new Map(); const vdSeen = new Map(); const spoilSeen = new Map(); const prByWard = new Map();
   for (const r of rows) {
     const b = BALLOT[r.BallotType]; if (!b) throw new Error(`${code}: unknown ballot "${r.BallotType}"`);
     const wardId = r.Ward.replace(/^Ward /, ''); if (!/^\d{8}$/.test(wardId)) throw new Error(`${code}: bad ward "${r.Ward}"`);
@@ -100,8 +100,15 @@ for (const code of expected) {
       w.valid += votes; w.parties[r.PartyName] = (w.parties[r.PartyName] ?? 0) + votes;
       wardMap.set(wardId, w);
     }
+    // The PR (party) ballot as cast in this ward. PR seats are council-wide, but how a ward voted on the party ballot is
+    // what a resident compares with the council's list seats.
+    if (b === 'pr') {
+      const x = prByWard.get(wardId) ?? { valid: 0, spoilt: 0, parties: {} };
+      x.valid += votes; x.parties[r.PartyName] = (x.parties[r.PartyName] ?? 0) + votes;
+      prByWard.set(wardId, x);
+    }
   }
-  for (const [k, s] of spoilSeen) { const [wid, , b] = k.split('|'); if (b === 'ward') wardMap.get(wid).spoilt += s; }
+  for (const [k, s] of spoilSeen) { const [wid, , b] = k.split('|'); if (b === 'ward') wardMap.get(wid).spoilt += s; else if (b === 'pr' && prByWard.has(wid)) prByWard.get(wid).spoilt += s; }
   // A voting district with PR rows but no ward-ballot rows: the ward's result in this file is short (KZN216 ward 13 on
   // 10 Nov 2026). Recorded on the ward, so no page presents that ward's leader as final.
   const wardBallotVds = new Set(rows.filter((r) => r.BallotType === 'Ward').map((r) => `${r.Ward.replace(/^Ward /, '')}|${r.VotingDistrict}`));
@@ -111,7 +118,7 @@ for (const code of expected) {
   m.wards = wardMap.size; m.votingDistricts = vdSeen.size;
   m.registered = [...vdSeen.values()].reduce((s, v) => s + v, 0);
   if (m.wards !== reg.wards) problems.push(`${code}: ${m.wards} wards in the results, ${reg.wards} in the register`);
-  m.wardResults = [...wardMap.values()].sort((a, b) => a.wardNumber - b.wardNumber).map((w) => ({ wardId: w.wardId, wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, spoilt: w.spoilt, parties: Object.entries(w.parties).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])) }));
+  m.wardResults = [...wardMap.values()].sort((a, b) => a.wardNumber - b.wardNumber).map((w) => ({ wardId: w.wardId, wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, spoilt: w.spoilt, parties: Object.entries(w.parties).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])), ...(prByWard.has(w.wardId) ? { pr: { valid: prByWard.get(w.wardId).valid, spoilt: prByWard.get(w.wardId).spoilt, parties: Object.entries(prByWard.get(w.wardId).parties).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])) } } : {}) }));
   for (const b of ['ward', 'pr', 'dc40']) m.parties[b] = Object.entries(m.parties[b]).filter(([, v]) => v > 0).sort((a, c) => c[1] - a[1] || a[0].localeCompare(c[0]));
   m.onPrList.sort();
   if (reg.category === 'A') delete m.parties.dc40;

@@ -18,6 +18,8 @@ import { EXPLAINERS } from '../explainers';
 import { FUNDING_CHECKER_PATH } from './SiteFundingChecker';
 import { COALITION_PATH, COUNCIL_PATH, DETAILS_PATH, SEATS_PATH } from './SiteVoterTools';
 import { Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
+import { MY_WARD_PATH, TRACKER_PATH } from '../resultsPaths';
+import SUMMARY from '@/data/lge2026/national/summary-2026.json';
 
 const IEC_URL = 'https://www.elections.org.za';
 
@@ -40,23 +42,24 @@ export function SiteHome() {
     <>
       <section className="border-t border-teal bg-ink text-paper">
         <div className="mx-auto flex max-w-[1200px] flex-col gap-6 px-6 pb-[88px] pt-[80px]">
-          <Eyebrow tone="gold">Municipal elections · polling day 4 November 2026</Eyebrow>
+          <Eyebrow tone="gold">Local government elections 2026 · certified results</Eyebrow>
           <h1 className="m-0 max-w-[16em] font-site-display text-site-h3 md:text-site-hero">
-            The rules of the election, in plain language.
+            {SUMMARY.hung} of {SUMMARY.councils} councils have no majority.
           </h1>
           <p className="m-0 max-w-[36em] text-site-lead text-line">
-            How a council is made up, what parties may be given, and what the law says about your
-            personal details. Free to read, with the source beside every figure.
+            Including {SUMMARY.metrosHung} of the {SUMMARY.metros} metros. See who holds the seats in your council, which
+            parties together pass half, and who your ward councillor-elect is. From the Electoral Commission’s certified
+            results, with the source beside every figure.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
-            <Link to="/tools" className="site-btn-primary">
-              Open the voter tools
+            <Link to={TRACKER_PATH} className="site-btn-primary">
+              Open the Coalition Tracker
             </Link>
-            <Link to="/explainers" className="site-btn-outline-paper">
-              Read the explainers
+            <Link to={MY_WARD_PATH} className="site-btn-outline-paper">
+              Find your ward councillor
             </Link>
-            <Link to="/tutorial" className="site-btn-outline-paper">
-              See the 60-second tour
+            <Link to="/explainers/how-a-council-is-made-up" className="site-btn-outline-paper">
+              How a council is made up
             </Link>
           </div>
         </div>

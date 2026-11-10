@@ -1,157 +1,107 @@
 /**
  * Election Campaign OS — public site, results (`/results`)
  *
- * The Electoral Commission declares results. This page links to it first,
- * and below that shows a figures board that reads `/results/feed.json`,
- * written by `scripts/results-bot.ts` only when the feed validates. The
- * page rechecks the file every 30 minutes while it is open.
+ * The certified 2026 local government election results, on this site: how many councils in each province have a
+ * majority, the metros, and the way into every council and ward. Read from the certified seat table
+ * (src/data/lge2026/national/seats-2026.json), built from the Electoral Commission's own result files and checked against
+ * its seat calculations. The Commission is cited as the source, not sent to as the destination.
  *
- * With no feed it says so and shows no numbers. It never fills the board
- * with anything it computed, projected or remembered, and it labels
- * everything on the board unofficial.
+ * Results night (4-7 November) used a live feed board fed by scripts/results-bot.ts; with the results certified, the
+ * board has nothing left to show and this page reads the certified figures instead. The bot and its feed validator are
+ * kept for by-elections.
  */
-import { useCallback, useEffect, useState } from 'react';
-import { SiteCard, SiteSection } from '../SiteChrome';
+import { Link } from 'react-router-dom';
+import { SiteSection } from '../SiteChrome';
 import { PageIntro, SourceNote } from './pageParts';
-import { IEC_LINK } from '../officialSources';
-import { lookupMunicipality } from '@/modules/reference/municipalRegister';
-import { shares, validateFeed, type ResultsFeed } from '../tools/resultsFeed';
-
-const EVERY_MS = 30 * 60 * 1000;
-const nf = new Intl.NumberFormat('en-ZA');
-const BALLOT: Record<string, string> = {
-  PR: 'Proportional ballot',
-  WARD: 'Ward ballot',
-  DISTRICT: 'District ballot',
-};
-
-type Load =
-  | { state: 'loading' }
-  | { state: 'none' }
-  | { state: 'invalid' }
-  | { state: 'ok'; feed: ResultsFeed; checkedAt: number };
+import { SeatBar, StatTile, StatusPill } from './resultsParts';
+import { nf, provinceName } from '../tools/resultsFormat';
+import { councilPath, MY_WARD_PATH, TRACKER_PATH } from '../resultsPaths';
+import { COUNCIL_CODES, NATIONAL_SEATS, PROVINCE_CODES, council, nationalSummary } from '@/modules/lge2026/nationalResults';
 
 export function SiteResults() {
-  const [load, setLoad] = useState<Load>({ state: 'loading' });
-
-  const check = useCallback(async () => {
-    try {
-      const res = await fetch('/results/feed.json', { cache: 'no-store' });
-      if (!res.ok) return setLoad({ state: 'none' });
-      const check = validateFeed(await res.json());
-      setLoad(
-        check.ok ? { state: 'ok', feed: check.feed, checkedAt: Date.now() } : { state: 'invalid' },
-      );
-    } catch {
-      setLoad({ state: 'none' });
-    }
-  }, []);
-
-  useEffect(() => {
-    void check();
-    const id = window.setInterval(() => void check(), EVERY_MS);
-    return () => window.clearInterval(id);
-  }, [check]);
-
+  const s = nationalSummary();
+  const all = COUNCIL_CODES.map(council);
+  const metros = all.filter((c) => c.category === 'A');
+  const registered = all.reduce((n, c) => n + c.registered, 0);
   return (
     <>
       <PageIntro
-        eyebrow="Results"
-        title="Election results"
-        lead="Official results are declared by the Electoral Commission. Start there. The board below shows figures only when a checked feed is available."
+        eyebrow="Local government elections 2026"
+        title="Certified results"
+        lead={`Every metro and local council elected on 4 November 2026: ${s.councils} councils, ${nf.format(all.reduce((n, c) => n + c.councillors, 0))} seats and ${nf.format(all.reduce((n, c) => n + c.wards, 0))} wards. ${s.hung} councils have no party with a majority.`}
       >
-        <p className="m-0">
-          <a href={IEC_LINK.lgeDashboard} className="site-btn-primary">
-            Municipal results dashboard
-          </a>
-          <a href={IEC_LINK.results} className="site-btn-outline-ink ml-3">
-            Results site
-          </a>
+        <p className="m-0 flex flex-wrap gap-3">
+          <Link to={TRACKER_PATH} className="site-btn-primary">Coalition Tracker</Link>
+          <Link to={MY_WARD_PATH} className="site-btn-outline-ink">Your ward councillor</Link>
         </p>
       </PageIntro>
 
-      <SiteSection labelledBy="board-h" className="pb-10">
-        <div className="flex max-w-[900px] flex-col gap-5">
-          <h2 id="board-h" className="m-0 font-site-display text-site-h4">
-            Figures board (unofficial)
-          </h2>
-          <div role="status" aria-live="polite" className="flex flex-col gap-4">
-            {load.state === 'loading' && <p className="m-0 text-site-sm">Checking for figures…</p>}
-            {load.state === 'none' && (
-              <SiteCard className="p-6">
-                <p className="m-0 font-semibold">No figures yet</p>
-                <p className="mb-0 mt-1 text-site-sm">
-                  Nothing is shown because no checked feed has been published. This page makes no
-                  estimates. Use the Electoral Commission’s results above.
-                </p>
-              </SiteCard>
-            )}
-            {load.state === 'invalid' && (
-              <SiteCard className="p-6">
-                <p className="m-0 font-semibold">The latest feed failed its checks</p>
-                <p className="mb-0 mt-1 text-site-sm">
-                  The file did not pass validation, so none of it is shown. Use the Electoral
-                  Commission’s results above.
-                </p>
-              </SiteCard>
-            )}
-            {load.state === 'ok' && (
-              <>
-                <p className="m-0 text-site-sm text-slate">
-                  Figures from {load.feed.source}, produced{' '}
-                  {new Date(load.feed.generatedAt).toLocaleString('en-ZA')}. This page rechecks
-                  every 30 minutes. Unofficial.
-                </p>
-                <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,340px),1fr))] gap-5">
-                  {load.feed.municipalities.map((m) => (
-                    <SiteCard
-                      key={`${m.code}/${m.ballot}`}
-                      className="flex min-w-0 flex-col gap-3 p-6"
-                    >
-                      <h3 className="m-0 font-site-display text-site-h5">
-                        {lookupMunicipality(m.code)?.name} · {BALLOT[m.ballot]}
-                      </h3>
-                      <p className="m-0 text-site-caption text-slate">
-                        {m.votingDistrictsReported} of {m.votingDistrictsTotal} voting districts
-                        counted
-                      </p>
-                      <ul className="m-0 flex list-none flex-col gap-2 p-0">
-                        {shares(m.parties).map((p) => (
-                          <li key={p.name}>
-                            <div className="flex justify-between gap-3 text-site-sm">
-                              <span className="min-w-0 truncate">{p.name}</span>
-                              <span className="font-mono">
-                                {nf.format(p.votes)} · {p.percent}%
-                              </span>
-                            </div>
-                            <div className="h-2 w-full rounded-full bg-paper">
-                              <div
-                                className="h-2 rounded-full bg-ink"
-                                style={{ width: `${p.percent}%` }}
-                              />
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </SiteCard>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-          <button
-            type="button"
-            className="site-btn-outline-ink self-start"
-            onClick={() => void check()}
-          >
-            Check again now
-          </button>
+      <SiteSection labelledBy="nat-h" className="pb-8">
+        <h2 id="nat-h" className="sr-only">National figures</h2>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,200px),1fr))] gap-4">
+          <StatTile value={s.councils} label="Metro and local councils" />
+          <StatTile value={s.hung} label="With no majority" />
+          <StatTile value={s.majority} label="With a majority" />
+          <StatTile value={nf.format(registered)} label="Registered voters">in the councils’ voting districts</StatTile>
         </div>
       </SiteSection>
 
+      <SiteSection labelledBy="prov-h" className="pb-8">
+        <h2 id="prov-h" className="m-0 mb-4 font-site-display text-site-h4">By province</h2>
+        <div className="overflow-x-auto rounded-[10px] border border-line bg-white">
+          <table className="w-full min-w-[520px] border-collapse text-left text-site-sm">
+            <thead>
+              <tr className="border-b border-line bg-paper text-site-caption text-slate">
+                <th scope="col" className="px-4 py-3 font-semibold">Province</th>
+                <th scope="col" className="px-4 py-3 text-right font-semibold">Councils</th>
+                <th scope="col" className="px-4 py-3 text-right font-semibold">No majority</th>
+                <th scope="col" className="px-4 py-3 text-right font-semibold">Majority</th>
+              </tr>
+            </thead>
+            <tbody>
+              {PROVINCE_CODES.map((p) => {
+                const b = s.byProvince[p];
+                return (
+                  <tr key={p} className="border-b border-line last:border-b-0">
+                    <th scope="row" className="px-4 py-3 font-normal">{provinceName(p)}</th>
+                    <td className="px-4 py-3 text-right font-mono">{b.councils}</td>
+                    <td className="px-4 py-3 text-right font-mono">{b.hung}</td>
+                    <td className="px-4 py-3 text-right font-mono">{b.councils - b.hung}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </SiteSection>
+
+      <SiteSection labelledBy="metro-h" className="pb-8">
+        <h2 id="metro-h" className="m-0 mb-4 font-site-display text-site-h4">Metros</h2>
+        <ul className="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-4 p-0">
+          {metros.map((m) => (
+            <li key={m.code} className="flex flex-col gap-2 rounded-[10px] border border-line bg-white p-5">
+              <div className="flex items-center justify-between gap-3">
+                <Link to={councilPath(m.code)} className="font-site-display text-site-h5 text-ink">{m.name}</Link>
+                <StatusPill hung={m.hung} />
+              </div>
+              <SeatBar holders={m.holders} councillors={m.councillors} label={m.name} />
+              <p className="m-0 text-site-sm">
+                {m.holders
+                  .slice(0, 4)
+                  .map((h) => `${h.name} ${h.seats}`)
+                  .join(' · ')}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </SiteSection>
+
       <SourceNote>
-        Percentages are each party’s share of the votes counted so far on that ballot. They are not
-        seats and not a forecast. A party’s share can change a lot as more districts report.
+        Source: the Electoral Commission of South Africa, certified results of the 2026 local government elections (event
+        EEID1887), one file per council, and its Seat Calculation Detail reports; retrieved {NATIONAL_SEATS.retrieved}.
+        Seats are calculated under Schedule 1 of the Municipal Structures Act and match the Commission’s reports for{' '}
+        {all.filter((c) => c.iec === 'reconciled').length} of {all.length} councils; each council’s page says how its figure is
+        confirmed. District councils are elected under Schedule 2 and are not shown here.
       </SourceNote>
     </>
   );

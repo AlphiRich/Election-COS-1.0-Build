@@ -72,8 +72,8 @@ describe('Master hub', () => {
     await click(tab(el, 'Schedule 1 Seat Calculator'));
     expect(plain(el.querySelector('[data-testid="quota-result"]')!.textContent)).toBe('2 069');
     const ranges = [...el.querySelectorAll('input[type="range"]')] as HTMLInputElement[];
-    await setRange(ranges[1], '5'); // C = 5: 138568 / 62 + 1
-    expect(plain(el.querySelector('[data-testid="quota-result"]')!.textContent)).toBe('2 235');
+    await setRange(ranges[1], '5'); // C = 5: 138579 / 62 + 1 (A as re-issued on 8 Nov 2026)
+    expect(plain(el.querySelector('[data-testid="quota-result"]')!.textContent)).toBe('2 236');
     expect(el.textContent).toContain('JB Marks 2026');
   });
   it('shows the funding position without ever calling it lawful, and the legal documents with their real status', async () => {

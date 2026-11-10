@@ -38,6 +38,9 @@ describe('what was ingested', () => {
     for (const m of councils) {
       for (const b of ['ward', 'pr'] as const) expect(m.parties[b].reduce((s, [, v]) => s + v, 0), `${m.code} ${b}`).toBe(m.ballots[b].valid);
       expect(m.wardResults.reduce((s, w) => s + w.valid, 0), m.code).toBe(m.ballots.ward.valid);
+      // The PR ballot as cast ward by ward adds up to the council's PR ballot.
+      expect(m.wardResults.reduce((s, w) => s + (w.pr?.valid ?? 0), 0), `${m.code} PR by ward`).toBe(m.ballots.pr.valid);
+      for (const w of m.wardResults) if (w.pr) expect(w.pr.parties.reduce((s, [, v]) => s + v, 0), `${m.code}/${w.wardNumber} PR`).toBe(w.pr.valid);
       const notInWards = (m.wardBallotGaps ?? []).reduce((s, g) => s + g.registeredNotInWard, 0);
       expect(m.wardResults.reduce((s, w) => s + w.registered, 0) + notInWards, m.code).toBe(m.registered);
     }
@@ -113,6 +116,11 @@ describe('the compact national seat table', () => {
       expect(c.majority).toBe(majorityOf(c.councillors));
       expect(c.hung, code).toBe(Math.max(...c.holders.map((h) => h.seats)) < c.majority);
     }
+  });
+  it('the home page’s small summary file agrees with the seat table', () => {
+    const s = nationalSummary();
+    const metros = COUNCIL_CODES.map(council).filter((c) => c.category === 'A');
+    expect(read('summary-2026.json')).toEqual({ retrieved: NATIONAL_SEATS.retrieved, councils: s.councils, hung: s.hung, metros: metros.length, metrosHung: metros.filter((c) => c.hung).length });
   });
   it('summarises the country: 139 of 213 councils hung, 11 of 18 in the North West, 7 of 8 metros', () => {
     const s = nationalSummary();

@@ -25,6 +25,30 @@ The number of hung councils nationally is not known until the other eight
 provinces are loaded. The North West rate (61 %) suggests it is well over
 100 of the 214 councils with wards. The dashboard will state the real figure.
 
+### Update, 10 Nov: built (branch `feat/national-results`)
+
+- **National results loaded.** All 213 contested metro and local councils
+  (FS164 was not contested in 2026), 4,485 wards, 44 districts.
+  **139 of 213 councils have no majority, including 7 of the 8 metros**
+  (Cape Town is the exception).
+- **Seats checked against the Commission.** 208 councils reproduce the
+  Commission's Seat Calculation Detail report party by party. Three
+  (Matjhabeng, Ray Nkonyeni, Msunduzi) show the report's seats, which come
+  from a slightly later count than the downloadable file; King Sabata
+  Dalindyebo's report leaves 9 seats unallocated; Mnquma's is not
+  published (its ward 7 is tied). Every exact tie in the country is
+  recorded with the Commission's decision, never broken by the build.
+- **Councillors-elect named.** 4,482 ward councillors (3 wards explained
+  instead), and 3,257 PR councillors from the certified lists.
+- **1,083 PR seats in 145 councils are vacant**, because the party won
+  more list seats than it has candidates (EFF 395, MK 284, ActionSA 197,
+  SACP 66, UDM 47). The Commission flags these "(PF) Potential
+  Forfeiture" in exactly the same councils. This is a live story for the
+  coalition weeks.
+- **Live on the site:** `/coalitions` (tracker), `/councils/<code>` (every
+  council, with a simulator), `/my-ward`, and `/results` (no longer sends
+  readers to the IEC). The home page leads with the national figure.
+
 ## 2. The product
 
 One data platform, three surfaces, all reading the same certified dataset.
@@ -134,6 +158,35 @@ adverts loses the neutrality that makes it trusted, and trust is the product.
 The existing casework tracker, field diary, incidents and polls modules are
 the starting points; nothing needs to be thrown away.
 
+### The service-delivery index: measured against the state's own records
+
+Citizens' reports on their own are opinion. The index becomes credible, and
+worth paying for, when each ward's and council's reports are set beside what
+the municipality planned, budgeted and spent, and what government's own
+monitors say. The benchmarks, all public:
+
+| Benchmark | What it gives the index | Source |
+|---|---|---|
+| **Vulekamali** | National and provincial budgets and spending, including conditional grants to municipalities (for example the Municipal Infrastructure Grant): what was allocated against what was spent | National Treasury budget data portal, vulekamali.gov.za |
+| **Municipal Money** | Each municipality's own budget and spending, cash position, capital spend and audit outcome, from its returns to Treasury | National Treasury, municipalmoney.gov.za |
+| **IDP** (Integrated Development Plan) | What the council committed to do in each ward and when, and the key performance indicators it set itself | Each municipality, Municipal Systems Act ss 25–26; adopted IDP and annual reviews |
+| **SDF** (Spatial Development Framework) | Where the council said development and infrastructure would go, so a ward's reports can be read against what was planned for it | Each municipality, SPLUMA ss 20–21 |
+| **SDBIP and annual report** | Quarterly targets and the council's own report on whether it met them | MFMA ss 53, 121; Municipal Systems Act s 46 |
+| **Provincial and national monitoring** | Independent findings on each municipality: audit outcomes, municipalities under intervention, performance monitoring | Auditor-General (MFMA audit outcomes), provincial CoGTA departments (s 139 interventions), the Department of Planning, Monitoring and Evaluation, Statistics South Africa (non-financial census of municipalities; household surveys) |
+
+How it fits together:
+
+- **Per ward:** citizens' reports (consented, aggregated, small groups
+  suppressed) against the IDP projects and SDF plans for that ward.
+- **Per council:** the scorecard sets those reports beside Municipal Money
+  spending, Vulekamali grant spending, SDBIP targets met, and the
+  Auditor-General's outcome.
+- **Over the term:** the same measures each quarter, so a councillor's term
+  becomes a record by 2029.
+
+Everything published is aggregate and de-identified (POPIA s 6), and every
+figure keeps the source beside it, as the results pages do now.
+
 ## 6. Build plan — starting now
 
 Councils must hold their first sitting soon after the results are declared
@@ -157,9 +210,11 @@ about a week if items 1–3 go first.
 
 ## 7. Decisions needed from the owner
 
-1. **Go on items 0–3** (national data and the tracker) now?
-2. **Ads on results pages**: approve extending the allowlist, and set the
-   AdSense publisher id and blocked categories.
+1. ~~**Go on items 0–3** (national data and the tracker) now?~~ Done 10 Nov.
+2. **Ads on results pages**: the allowlist now includes `/coalitions`,
+   `/my-ward` and the 213 council pages. Still needed from the owner: the
+   AdSense publisher id and slot id, and confirmation that the blocked
+   categories are set in the AdSense account.
 3. **The 7 Nov citizen/ad-targeting pivot**: recommend not building
    individual political targeting (POPIA s 26). Contextual ads and
    aggregated insight earn without it.

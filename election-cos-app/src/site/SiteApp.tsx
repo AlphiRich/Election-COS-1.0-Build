@@ -121,6 +121,12 @@ const SiteNotFound = lazy(() =>
 const SiteSignIn = lazy(() =>
   import('./pages/SiteSignIn').then((m) => ({ default: m.SiteSignIn })),
 );
+const SiteCoalitionTracker = lazy(() =>
+  import('./pages/SiteCoalitionTracker').then((m) => ({ default: m.SiteCoalitionTracker })),
+);
+const SiteCouncil = lazy(() => import('./pages/SiteCouncil').then((m) => ({ default: m.SiteCouncil })));
+const SiteMyWard = lazy(() => import('./pages/SiteMyWard').then((m) => ({ default: m.SiteMyWard })));
+import { COUNCIL_ROUTE, MY_WARD_PATH, TRACKER_PATH } from './resultsPaths';
 import { ConsentBanner } from './ads/ConsentBanner';
 import { AD_CLIENT_ID } from './ads/adPolicy';
 import {
@@ -217,6 +223,9 @@ export function SiteApp() {
           <Route path="/code-of-conduct" element={<SiteCodeOfConduct />} />
           <Route path="/election-day" element={<SiteElectionDay />} />
           <Route path="/results" element={<SiteResults />} />
+          <Route path={TRACKER_PATH} element={<SiteCoalitionTracker hasConsent={consented} />} />
+          <Route path={COUNCIL_ROUTE} element={<SiteCouncil hasConsent={consented} />} />
+          <Route path={MY_WARD_PATH} element={<SiteMyWard hasConsent={consented} />} />
           <Route path="/tools/party-manifestos" element={<SiteManifestos />} />
           <Route path="/tools/know-your-candidates" element={<SiteCandidates />} />
           <Route path="/for-campaigns/voters-in-your-area" element={<SiteAreaStats />} />
