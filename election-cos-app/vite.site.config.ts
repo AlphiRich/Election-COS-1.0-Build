@@ -14,7 +14,7 @@ import { defineConfig, loadEnv, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import { renameSync } from 'node:fs';
 import path from 'node:path';
-import { adsTxtFor, resolveAdClientId } from './src/site/ads/adConfig';
+import { adsTxtFor, adsenseAccountMetaFor, resolvePublisherId } from './src/site/ads/adConfig';
 
 /**
  * The entry is `site.html` in the source tree so it cannot be confused
@@ -35,25 +35,28 @@ function entryAsIndex(outDir: string): Plugin {
 const OUT_DIR = path.resolve(__dirname, 'dist-site');
 
 /**
- * `/ads.txt`, emitted only when advertising is configured. Same two-variable
- * rule as the client (see src/site/ads/adConfig.ts), so the site never
- * publishes a seller declaration for inventory it is not selling.
+ * `/ads.txt` and the `google-adsense-account` tag, emitted when a publisher
+ * id is set. Neither loads anything; they are what AdSense's site review
+ * looks for. Serving adverts still needs the confirmation as well (see
+ * resolveAdClientId in src/site/ads/adConfig.ts).
  */
-function adsTxt(mode: string): Plugin {
+function adsenseDeclarations(mode: string): Plugin {
+  const publisherId = () => resolvePublisherId(loadEnv(mode, __dirname, 'VITE_').VITE_AD_CLIENT_ID);
   return {
-    name: 'ecos-site-ads-txt',
+    name: 'ecos-site-adsense-declarations',
+    transformIndexHtml(html) {
+      const meta = adsenseAccountMetaFor(publisherId());
+      return meta ? html.replace('</head>', `    ${meta}\n  </head>`) : html;
+    },
     generateBundle() {
-      const env = loadEnv(mode, __dirname, 'VITE_');
-      const body = adsTxtFor(
-        resolveAdClientId(env.VITE_AD_CLIENT_ID, env.VITE_AD_CATEGORY_BLOCKS_CONFIRMED),
-      );
+      const body = adsTxtFor(publisherId());
       if (body) this.emitFile({ type: 'asset', fileName: 'ads.txt', source: body });
     },
   };
 }
 
 export default defineConfig(({ mode }) => ({
-  plugins: [react(), entryAsIndex(OUT_DIR), adsTxt(mode)],
+  plugins: [react(), entryAsIndex(OUT_DIR), adsenseDeclarations(mode)],
   resolve: {
     alias: { '@': path.resolve(__dirname, 'src') },
   },
