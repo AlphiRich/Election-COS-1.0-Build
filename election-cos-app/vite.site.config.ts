@@ -55,8 +55,24 @@ function adsenseDeclarations(mode: string): Plugin {
   };
 }
 
+/**
+ * `/robots.txt` for the public site only (the application's build never gets
+ * one). Without it the server's single-page fallback answered `/robots.txt`
+ * with index.html, and Cloudflare's managed robots.txt, which is put in front
+ * of whatever the origin returns, ended in a page of HTML. Cloudflare still
+ * adds its AI-crawler rules ahead of this; search and ad crawlers are allowed.
+ */
+function robotsTxt(): Plugin {
+  return {
+    name: 'ecos-site-robots-txt',
+    generateBundle() {
+      this.emitFile({ type: 'asset', fileName: 'robots.txt', source: 'User-agent: *\nAllow: /\n' });
+    },
+  };
+}
+
 export default defineConfig(({ mode }) => ({
-  plugins: [react(), entryAsIndex(OUT_DIR), adsenseDeclarations(mode)],
+  plugins: [react(), entryAsIndex(OUT_DIR), adsenseDeclarations(mode), robotsTxt()],
   resolve: {
     alias: { '@': path.resolve(__dirname, 'src') },
   },
