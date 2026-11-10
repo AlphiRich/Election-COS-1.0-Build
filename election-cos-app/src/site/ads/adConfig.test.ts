@@ -6,10 +6,10 @@
  *  - dropping the confirmation check → "an id with no confirmation stays off" fails.
  *  - loosening the id pattern        → "refuses anything that is not a publisher id" fails.
  *  - banner probing with a dummy id  → "does not ask for consent to adverts that cannot be served" fails.
- *  - emitting ads.txt unconditionally → "no ads.txt until configured" fails.
+ *  - emitting ads.txt unconditionally → "no ads.txt without a publisher id" fails.
  */
 import { describe, expect, it } from 'vitest';
-import { adsTxtFor, resolveAdClientId, resolveAdSlotId } from './adConfig';
+import { adsTxtFor, adsenseAccountMetaFor, resolveAdClientId, resolveAdSlotId, resolvePublisherId } from './adConfig';
 import { AD_CLIENT_ID, AD_SLOT_ID, AD_ELIGIBLE_PATHS, AD_FORBIDDEN_PATHS, shouldAskConsent } from './adPolicy';
 
 const GOOD = 'ca-pub-1234567890123456';
@@ -73,8 +73,24 @@ describe('the ad unit is a numeric id from the console, not a name', () => {
 });
 
 describe('ads.txt', () => {
-  it('no ads.txt until configured', () => {
+  it('no ads.txt without a publisher id', () => {
     expect(adsTxtFor(null)).toBeNull();
+    expect(adsTxtFor(resolvePublisherId(undefined))).toBeNull();
+    expect(adsTxtFor(resolvePublisherId('pub-1234567890123456'))).toBeNull();
+  });
+
+  it('is published from the id alone, so the AdSense review can find it before the blocks can be set', () => {
+    // AdSense opens its blocking controls only after it approves the site,
+    // and approves the site only once it finds ads.txt. The confirmation
+    // still gates serving: the same id with no confirmation serves nothing.
+    expect(adsTxtFor(resolvePublisherId(GOOD))).toBe('google.com, pub-1234567890123456, DIRECT, f08c47fec0942fa0\n');
+    expect(resolveAdClientId(GOOD, undefined)).toBeNull();
+  });
+
+  it('the verification tag carries only a well-formed id', () => {
+    expect(adsenseAccountMetaFor(resolvePublisherId(GOOD))).toBe('<meta name="google-adsense-account" content="ca-pub-1234567890123456" />');
+    expect(adsenseAccountMetaFor(resolvePublisherId(`${GOOD}"><script>`))).toBeNull();
+    expect(adsenseAccountMetaFor(null)).toBeNull();
   });
 
   it('declares exactly one DIRECT relationship, with the id Google expects', () => {

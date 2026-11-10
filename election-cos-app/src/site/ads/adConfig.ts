@@ -40,6 +40,27 @@ export function resolveAdClientId(
 }
 
 /**
+ * The publisher id on its own, for the two things that only DECLARE the
+ * account and load nothing: `/ads.txt` and the `google-adsense-account`
+ * verification tag.
+ *
+ * AdSense will not review a site until it can find one of those, and it
+ * does not open its blocking controls (where the political and election
+ * categories are blocked) until the site is approved. Requiring the
+ * confirmation for these too made the two wait on each other for ever.
+ * Serving adverts still needs `resolveAdClientId`, confirmation included.
+ */
+export function resolvePublisherId(clientId: string | undefined): string | null {
+  const v = clientId?.trim();
+  return v && PUBLISHER_ID.test(v) ? v : null;
+}
+
+/** The `<meta name="google-adsense-account">` tag, or `null` with no id. */
+export function adsenseAccountMetaFor(publisherId: string | null): string | null {
+  return publisherId ? `<meta name="google-adsense-account" content="${publisherId}" />` : null;
+}
+
+/**
  * The AdSense ad-unit id: a NUMERIC id created in the console, not a name.
  *
  * The first draft passed the explainer's slug ("party-funding-thresholds")
@@ -58,8 +79,10 @@ export function resolveAdSlotId(slotId: string | undefined): string | null {
  * it, serves less or nothing. `f08c47fec0942fa0` is Google's certification
  * authority id for the `DIRECT` relationship.
  *
- * `null` when advertising is not configured, so no `ads.txt` is emitted and
- * the site does not publish a claim to sell inventory it is not selling.
+ * `null` when no publisher id is set, so no `ads.txt` is emitted. With an id
+ * but no confirmation it is emitted while no advert is served: it names the
+ * one seller allowed to sell this site's inventory, which is true whether or
+ * not any is being sold yet, and it is what the AdSense site review needs.
  */
 export function adsTxtFor(clientId: string | null): string | null {
   if (!clientId) return null;
