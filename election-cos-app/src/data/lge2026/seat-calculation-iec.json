@@ -513,8 +513,8 @@
   "NW373": {
    "code": "NW373",
    "excessiveCase": false,
-   "Q": 3085,
-   "A": 277592,
+   "Q": 3088,
+   "A": 277898,
    "totalSeats": 90,
    "independentWardSeats": 0,
    "noPrListWardSeats": 0,
@@ -522,7 +522,7 @@
    "excessiveSeats": 0,
    "rows": [
     {
-     "votes": 17452,
+     "votes": 17454,
      "round1": 5,
      "round2": 1,
      "seats": 6,
@@ -578,15 +578,15 @@
      "prSeats": 0
     },
     {
-     "votes": 107864,
-     "round1": 34,
-     "round2": 1,
+     "votes": 108107,
+     "round1": 35,
+     "round2": 0,
      "seats": 35,
      "wardSeats": 35,
      "prSeats": 0
     },
     {
-     "votes": 457,
+     "votes": 458,
      "round1": 0,
      "round2": 0,
      "seats": 0,
@@ -674,7 +674,7 @@
      "prSeats": 0
     },
     {
-     "votes": 40404,
+     "votes": 40421,
      "round1": 13,
      "round2": 0,
      "seats": 13,
@@ -690,7 +690,7 @@
      "prSeats": 0
     },
     {
-     "votes": 37382,
+     "votes": 37407,
      "round1": 12,
      "round2": 0,
      "seats": 12,
@@ -754,7 +754,7 @@
      "prSeats": 1
     },
     {
-     "votes": 4423,
+     "votes": 4424,
      "round1": 1,
      "round2": 1,
      "seats": 2,
@@ -778,7 +778,7 @@
      "prSeats": 0
     },
     {
-     "votes": 13216,
+     "votes": 13228,
      "round1": 4,
      "round2": 0,
      "seats": 4,
@@ -794,7 +794,7 @@
      "prSeats": 0
     },
     {
-     "votes": 1563,
+     "votes": 1564,
      "round1": 0,
      "round2": 1,
      "seats": 1,
@@ -802,7 +802,7 @@
      "prSeats": 1
     },
     {
-     "votes": 8688,
+     "votes": 8690,
      "round1": 2,
      "round2": 1,
      "seats": 3,
@@ -818,7 +818,7 @@
      "prSeats": 0
     },
     {
-     "votes": 549,
+     "votes": 551,
      "round1": 0,
      "round2": 0,
      "seats": 0,
@@ -3060,7 +3060,7 @@
    "code": "NW405",
    "excessiveCase": false,
    "Q": 2069,
-   "A": 138568,
+   "A": 138579,
    "totalSeats": 67,
    "independentWardSeats": 0,
    "noPrListWardSeats": 0,
@@ -3076,7 +3076,7 @@
      "prSeats": 5
     },
     {
-     "votes": 850,
+     "votes": 855,
      "round1": 0,
      "round2": 1,
      "seats": 1,
@@ -3092,7 +3092,7 @@
      "prSeats": 0
     },
     {
-     "votes": 45941,
+     "votes": 45943,
      "round1": 22,
      "round2": 0,
      "seats": 22,
@@ -3188,7 +3188,7 @@
      "prSeats": 0
     },
     {
-     "votes": 434,
+     "votes": 436,
      "round1": 0,
      "round2": 0,
      "seats": 0,
@@ -3204,7 +3204,7 @@
      "prSeats": 1
     },
     {
-     "votes": 1618,
+     "votes": 1620,
      "round1": 0,
      "round2": 1,
      "seats": 1,
@@ -3241,8 +3241,8 @@
    "bytes": 112199
   },
   "NW373": {
-   "sha256": "f161f6386f2ac23cb9cb767a95567fd7efa72d3ceed327f2c7276ef52d1a7a76",
-   "bytes": 115704
+   "sha256": "db25a8f4705346529b351b2aaecc419ffa89840c18d860d9ae42899c7b7a31d9",
+   "bytes": 115709
   },
   "NW374": {
    "sha256": "2d07a72e08e080101eac8dd21af4e2338798f9033b168450dde8245f02434009",
@@ -3301,8 +3301,9 @@
    "bytes": 102533
   },
   "NW405": {
-   "sha256": "ef664e005415ce8863b8c599a75019225882d9410d16fa25eb2d765e65b9f4c2",
-   "bytes": 105352
+   "sha256": "f87243e605b259a3c5e1ad2be3afc11b234b719023231a5ad5346c03585d55ef",
+   "bytes": 105344
   }
- }
+ },
+ "notPublished": []
 }

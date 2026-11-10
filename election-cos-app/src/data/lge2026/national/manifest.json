@@ -1,0 +1,1927 @@
+{
+ "eventId": "EEID1887",
+ "event": "Local Government Elections 2026",
+ "publisher": "Electoral Commission of South Africa",
+ "urlPattern": "https://results.elections.org.za/home/LGEPublicReports/1887/Downloadable%20Party%20Results/<PROV>/<CODE>.csv",
+ "retrieved": "2026-11-10",
+ "files": [
+  {
+   "code": "BUF",
+   "province": "EC",
+   "sha256": "98855178a6e0451e3b0b690682713d0c7133545e4ad1e9e92f104953fc18d1de",
+   "bytes": 2858700,
+   "rows": 20203,
+   "generatedFrom": "2026-11-07T18:13:20",
+   "generatedTo": "2026-11-07T18:13:20"
+  },
+  {
+   "code": "CPT",
+   "province": "WP",
+   "sha256": "caeeb9c3bf61dccc5028421df6cb008e896a2cc286a29c16d1beb972a35d4164",
+   "bytes": 11806414,
+   "rows": 80470,
+   "generatedFrom": "2026-11-07T18:35:44",
+   "generatedTo": "2026-11-07T18:35:44"
+  },
+  {
+   "code": "EC101",
+   "province": "EC",
+   "sha256": "bd18a5f601d426c6ebc902a4087356ad6c0f02f8230f4906e245ff582216481f",
+   "bytes": 229440,
+   "rows": 1547,
+   "generatedFrom": "2026-11-05T11:54:27",
+   "generatedTo": "2026-11-05T11:54:27"
+  },
+  {
+   "code": "EC102",
+   "province": "EC",
+   "sha256": "940ac60b9da314c893b5593d3e67f696f0905f1b7d242324289c123e041ef676",
+   "bytes": 139795,
+   "rows": 955,
+   "generatedFrom": "2026-11-05T06:58:07",
+   "generatedTo": "2026-11-05T06:58:07"
+  },
+  {
+   "code": "EC104",
+   "province": "EC",
+   "sha256": "b94165b5419de87c6b10eef30ad5429af918cf4f5052e2c9bea42ad9123bea0c",
+   "bytes": 229794,
+   "rows": 1661,
+   "generatedFrom": "2026-11-05T12:29:49",
+   "generatedTo": "2026-11-05T12:29:49"
+  },
+  {
+   "code": "EC105",
+   "province": "EC",
+   "sha256": "d12bef4db7b3c03ac856f361439fb873178584fee544d87b5925738facaf1090",
+   "bytes": 191717,
+   "rows": 1387,
+   "generatedFrom": "2026-11-05T14:13:48",
+   "generatedTo": "2026-11-05T14:13:48"
+  },
+  {
+   "code": "EC106",
+   "province": "EC",
+   "sha256": "2128dc6856c040ceeaded7111445d239b58238692d245b3dd0b813d7d830b74b",
+   "bytes": 202869,
+   "rows": 1337,
+   "generatedFrom": "2026-11-05T08:44:31",
+   "generatedTo": "2026-11-05T08:44:31"
+  },
+  {
+   "code": "EC108",
+   "province": "EC",
+   "sha256": "821052e688feedd4621b635bd6796e6537c45aafb96fa38bb4ec857bd386a240",
+   "bytes": 274564,
+   "rows": 1989,
+   "generatedFrom": "2026-11-05T16:46:43",
+   "generatedTo": "2026-11-05T16:46:43"
+  },
+  {
+   "code": "EC109",
+   "province": "EC",
+   "sha256": "47ee2b9bd9e05b5883d3e354e5c12f753336101a2eba2fbf7969d947ea17c53d",
+   "bytes": 122445,
+   "rows": 862,
+   "generatedFrom": "2026-11-05T19:20:29",
+   "generatedTo": "2026-11-05T19:20:29"
+  },
+  {
+   "code": "EC121",
+   "province": "EC",
+   "sha256": "fcbd75a05e036d760c9fa389ae2ae002e3598f5f9c2190cceb79028b505a8ae9",
+   "bytes": 2321258,
+   "rows": 16003,
+   "generatedFrom": "2026-11-06T20:32:01",
+   "generatedTo": "2026-11-06T20:32:01"
+  },
+  {
+   "code": "EC122",
+   "province": "EC",
+   "sha256": "523e7a37caa4cbe843de5e4fd016ea429be4bc02cd6920f0fcbd3f2cb0b3a3dd",
+   "bytes": 2094560,
+   "rows": 14565,
+   "generatedFrom": "2026-11-06T15:02:58",
+   "generatedTo": "2026-11-06T15:02:58"
+  },
+  {
+   "code": "EC123",
+   "province": "EC",
+   "sha256": "ceb1fdd464bfda22fdcbd0a4f5fdc01e90aec23897133692e3dbded7d981f672",
+   "bytes": 254412,
+   "rows": 1825,
+   "generatedFrom": "2026-11-05T09:43:23",
+   "generatedTo": "2026-11-05T09:43:23"
+  },
+  {
+   "code": "EC124",
+   "province": "EC",
+   "sha256": "733f4ee18307989e787d11668858412f53e70de25ff7066221cb8b7f65afec83",
+   "bytes": 549233,
+   "rows": 3933,
+   "generatedFrom": "2026-11-05T20:34:01",
+   "generatedTo": "2026-11-05T20:34:01"
+  },
+  {
+   "code": "EC126",
+   "province": "EC",
+   "sha256": "6a8ccf0114569e43726601343cab910fd09379c8b5ea2a72de1a7e44c803326e",
+   "bytes": 520156,
+   "rows": 3583,
+   "generatedFrom": "2026-11-05T17:58:32",
+   "generatedTo": "2026-11-05T17:58:32"
+  },
+  {
+   "code": "EC129",
+   "province": "EC",
+   "sha256": "0984d4aa5da611ed1f149a1508fe0f88c96513937e16342ede9ff1cfacdc2c8a",
+   "bytes": 996401,
+   "rows": 6775,
+   "generatedFrom": "2026-11-06T00:03:39",
+   "generatedTo": "2026-11-06T00:03:39"
+  },
+  {
+   "code": "EC131",
+   "province": "EC",
+   "sha256": "057161c94b97a36d131a563036edf45e910fdfdb6fc68c561d1208996504139f",
+   "bytes": 188834,
+   "rows": 1276,
+   "generatedFrom": "2026-11-05T14:13:48",
+   "generatedTo": "2026-11-05T14:13:48"
+  },
+  {
+   "code": "EC135",
+   "province": "EC",
+   "sha256": "a1f22ac6e8bde641ddd6781cf1c2d6e44851adfd6b735deb4e4548957511b3c1",
+   "bytes": 1245362,
+   "rows": 8252,
+   "generatedFrom": "2026-11-06T18:15:29",
+   "generatedTo": "2026-11-06T18:15:29"
+  },
+  {
+   "code": "EC136",
+   "province": "EC",
+   "sha256": "92e2b609fc302ee5c51b175fc99ea3420e7d8137d794c5180348ac88d6b1fa70",
+   "bytes": 1031224,
+   "rows": 7224,
+   "generatedFrom": "2026-11-06T23:00:10",
+   "generatedTo": "2026-11-06T23:00:10"
+  },
+  {
+   "code": "EC137",
+   "province": "EC",
+   "sha256": "9d151fd74b0378cdae48d94c54d95c6df487c649700fbe93e86c2a18b140d511",
+   "bytes": 1063686,
+   "rows": 7178,
+   "generatedFrom": "2026-11-07T18:13:20",
+   "generatedTo": "2026-11-07T18:13:20"
+  },
+  {
+   "code": "EC138",
+   "province": "EC",
+   "sha256": "201d7bbb9aedf1c3d956a1ed50232ffa940f01daa58447a6f8c94eddce0c4e03",
+   "bytes": 387753,
+   "rows": 2678,
+   "generatedFrom": "2026-11-05T14:46:19",
+   "generatedTo": "2026-11-05T14:46:19"
+  },
+  {
+   "code": "EC139",
+   "province": "EC",
+   "sha256": "d2257da078f7da49857e20d89184761a2d40e43de79bacd5a2af3e7ad30f6119",
+   "bytes": 1404742,
+   "rows": 9623,
+   "generatedFrom": "2026-11-06T21:18:45",
+   "generatedTo": "2026-11-06T21:18:45"
+  },
+  {
+   "code": "EC141",
+   "province": "EC",
+   "sha256": "39ab7238a394439c970613ba5fd20ffdf8c5016183e450281847e40878c0822a",
+   "bytes": 869990,
+   "rows": 5933,
+   "generatedFrom": "2026-11-06T12:19:51",
+   "generatedTo": "2026-11-06T12:19:51"
+  },
+  {
+   "code": "EC142",
+   "province": "EC",
+   "sha256": "2182f299010fe2126e197d8bb78fb72642b5d422d3852f903757b0411546a28f",
+   "bytes": 576299,
+   "rows": 4045,
+   "generatedFrom": "2026-11-06T00:03:39",
+   "generatedTo": "2026-11-06T00:03:39"
+  },
+  {
+   "code": "EC145",
+   "province": "EC",
+   "sha256": "e5c4a87676cb23fb1315dfa6413caded906a09dcac074ff2e471c77520b7f747",
+   "bytes": 186130,
+   "rows": 1303,
+   "generatedFrom": "2026-11-05T14:46:20",
+   "generatedTo": "2026-11-05T14:46:20"
+  },
+  {
+   "code": "EC153",
+   "province": "EC",
+   "sha256": "4fee720083f62a9831ce421c207cc35daf481bed66984cb298e1e7bbbf8f610a",
+   "bytes": 1956870,
+   "rows": 13115,
+   "generatedFrom": "2026-11-07T00:31:47",
+   "generatedTo": "2026-11-07T00:31:47"
+  },
+  {
+   "code": "EC154",
+   "province": "EC",
+   "sha256": "cab23b843cd88a85840e3933bc92eda3bc6e045b0b708caf9b112608f7531baf",
+   "bytes": 1001798,
+   "rows": 6710,
+   "generatedFrom": "2026-11-06T19:06:14",
+   "generatedTo": "2026-11-06T19:06:14"
+  },
+  {
+   "code": "EC155",
+   "province": "EC",
+   "sha256": "f36d1110e09c31f64c6afd33963bf36849153e8b1375e04112b6a7588167e306",
+   "bytes": 1463409,
+   "rows": 9954,
+   "generatedFrom": "2026-11-06T20:22:58",
+   "generatedTo": "2026-11-06T20:22:58"
+  },
+  {
+   "code": "EC156",
+   "province": "EC",
+   "sha256": "1476ffad2b314802c85d7e701e50dee6b5167a45983f754a484715fb0c7036e7",
+   "bytes": 1267105,
+   "rows": 8317,
+   "generatedFrom": "2026-11-07T18:33:39",
+   "generatedTo": "2026-11-07T18:33:39"
+  },
+  {
+   "code": "EC157",
+   "province": "EC",
+   "sha256": "d238cc174810b539d82246174dcc411ce15ef7c7dc1ca97116048442d276616a",
+   "bytes": 3418785,
+   "rows": 21394,
+   "generatedFrom": "2026-11-08T17:29:40",
+   "generatedTo": "2026-11-08T17:29:40"
+  },
+  {
+   "code": "EC441",
+   "province": "EC",
+   "sha256": "64f272eaf2350e33a03a2569836bc1d4da044ebf5228f848ea3b223061385008",
+   "bytes": 1103310,
+   "rows": 7802,
+   "generatedFrom": "2026-11-06T16:46:50",
+   "generatedTo": "2026-11-06T16:46:50"
+  },
+  {
+   "code": "EC442",
+   "province": "EC",
+   "sha256": "a4e05767635b8a280211fc1ac7cbfdf41ee3a4fd89f53f326a0fcafa5683e513",
+   "bytes": 1536821,
+   "rows": 10605,
+   "generatedFrom": "2026-11-06T08:58:59",
+   "generatedTo": "2026-11-06T08:58:59"
+  },
+  {
+   "code": "EC443",
+   "province": "EC",
+   "sha256": "22e24b1655aa3f6c673ec7ccbf7432fca412417d02308dfd03e975926ccf232b",
+   "bytes": 2276906,
+   "rows": 14159,
+   "generatedFrom": "2026-11-06T16:59:31",
+   "generatedTo": "2026-11-06T16:59:31"
+  },
+  {
+   "code": "EC444",
+   "province": "EC",
+   "sha256": "9db009c7a12c3bd3579b90393fe090107126229aee55873d74297576c81c5347",
+   "bytes": 738539,
+   "rows": 5020,
+   "generatedFrom": "2026-11-06T00:03:39",
+   "generatedTo": "2026-11-06T00:03:39"
+  },
+  {
+   "code": "EKU",
+   "province": "GP",
+   "sha256": "561f9ce0ee4ae3c50863aed0487dc4eb02c163c2f73039e7ccd85623f6df1b88",
+   "bytes": 11226046,
+   "rows": 82164,
+   "generatedFrom": "2026-11-07T23:13:22",
+   "generatedTo": "2026-11-07T23:13:22"
+  },
+  {
+   "code": "ETH",
+   "province": "KN",
+   "sha256": "09d99673a671107a0acac9bc55d9930cb1cb921671a6eefb59fa6bcb3f10d927",
+   "bytes": 15056470,
+   "rows": 107570,
+   "generatedFrom": "2026-11-08T20:41:24",
+   "generatedTo": "2026-11-08T20:41:24"
+  },
+  {
+   "code": "FS161",
+   "province": "FS",
+   "sha256": "6c4ede0e1577de0be1fc173e0301dd3c5d2aae1e10b85ed66c26b8e8c8d82b9e",
+   "bytes": 84621,
+   "rows": 600,
+   "generatedFrom": "2026-11-05T11:18:06",
+   "generatedTo": "2026-11-05T11:18:06"
+  },
+  {
+   "code": "FS162",
+   "province": "FS",
+   "sha256": "17ab219e275883f04dbb545d2c24d5bf84227988ff259de5ed4b3b05fcfdc0fb",
+   "bytes": 162844,
+   "rows": 1190,
+   "generatedFrom": "2026-11-05T12:42:28",
+   "generatedTo": "2026-11-05T12:42:28"
+  },
+  {
+   "code": "FS163",
+   "province": "FS",
+   "sha256": "3584f1cccdc777d4abe9c2aa06e185f1cb48c77b99e48ef4de4f247f10c345d6",
+   "bytes": 129027,
+   "rows": 966,
+   "generatedFrom": "2026-11-05T14:45:45",
+   "generatedTo": "2026-11-05T14:45:45"
+  },
+  {
+   "code": "FS181",
+   "province": "FS",
+   "sha256": "2e23b88a143cf2e825bbd718f7a889e60cb571b489e04a45df6ba9894c0f1a46",
+   "bytes": 282258,
+   "rows": 2039,
+   "generatedFrom": "2026-11-05T14:13:48",
+   "generatedTo": "2026-11-05T14:13:48"
+  },
+  {
+   "code": "FS182",
+   "province": "FS",
+   "sha256": "f6e924b6e2308dc3553db60ef47390343370cc42b90656789d727f1ca7959607",
+   "bytes": 159420,
+   "rows": 1191,
+   "generatedFrom": "2026-11-05T14:13:48",
+   "generatedTo": "2026-11-05T14:13:48"
+  },
+  {
+   "code": "FS183",
+   "province": "FS",
+   "sha256": "4e4a5c43b9cdb1ae56edcdb332495d19eae3646ee9545df1e1eb1e1431e05ddc",
+   "bytes": 248364,
+   "rows": 1781,
+   "generatedFrom": "2026-11-06T08:59:00",
+   "generatedTo": "2026-11-06T08:59:00"
+  },
+  {
+   "code": "FS184",
+   "province": "FS",
+   "sha256": "8496b20ee45f1db74e744a7fd35aa2d36d1dd559de3da44576a79c7ddb6abc90",
+   "bytes": 1957511,
+   "rows": 14003,
+   "generatedFrom": "2026-11-09T09:56:20",
+   "generatedTo": "2026-11-09T09:56:20"
+  },
+  {
+   "code": "FS185",
+   "province": "FS",
+   "sha256": "1d12c53c55d40e75eca64a53e16ee0b785bebe1083cb9a2f757aa326dd9666d5",
+   "bytes": 271124,
+   "rows": 2003,
+   "generatedFrom": "2026-11-05T19:46:19",
+   "generatedTo": "2026-11-05T19:46:19"
+  },
+  {
+   "code": "FS191",
+   "province": "FS",
+   "sha256": "ca7ee749862decfd1b64f165975d06c8eb8b83588d4ad17b7c8711d99af280e7",
+   "bytes": 646561,
+   "rows": 4750,
+   "generatedFrom": "2026-11-06T01:03:14",
+   "generatedTo": "2026-11-06T01:03:14"
+  },
+  {
+   "code": "FS192",
+   "province": "FS",
+   "sha256": "56d588e8bbb589b098adbbc0a140092ed857f53c59c779060e11b4474b807345",
+   "bytes": 748546,
+   "rows": 5306,
+   "generatedFrom": "2026-11-05T20:34:01",
+   "generatedTo": "2026-11-05T20:34:01"
+  },
+  {
+   "code": "FS193",
+   "province": "FS",
+   "sha256": "2a256a8ce070868cd807ba9f037641bf3772491ddc328bff86a08d36b60df468",
+   "bytes": 449945,
+   "rows": 3209,
+   "generatedFrom": "2026-11-05T23:04:53",
+   "generatedTo": "2026-11-05T23:04:53"
+  },
+  {
+   "code": "FS194",
+   "province": "FS",
+   "sha256": "8f65e3d22982f6a94f24330040f3cabb54fdbc17faf461c58bc75b1652bb5454",
+   "bytes": 2969940,
+   "rows": 20233,
+   "generatedFrom": "2026-11-07T21:28:59",
+   "generatedTo": "2026-11-07T21:28:59"
+  },
+  {
+   "code": "FS195",
+   "province": "FS",
+   "sha256": "aceb7c952b158f12490e14cea482328932e7fbc21a505f86ff2bf24e48498f6b",
+   "bytes": 345712,
+   "rows": 2471,
+   "generatedFrom": "2026-11-05T13:47:11",
+   "generatedTo": "2026-11-05T13:47:11"
+  },
+  {
+   "code": "FS196",
+   "province": "FS",
+   "sha256": "c4be1782827982d740964108f21509beac6093dd831b771e133288ad7100d505",
+   "bytes": 346431,
+   "rows": 2472,
+   "generatedFrom": "2026-11-06T11:00:21",
+   "generatedTo": "2026-11-06T11:00:21"
+  },
+  {
+   "code": "FS201",
+   "province": "FS",
+   "sha256": "a7383415aaa67de1b59c4b6298cbab35f8b0f87b4df38f5a4c21e9688f074a5b",
+   "bytes": 826421,
+   "rows": 6039,
+   "generatedFrom": "2026-11-06T01:29:32",
+   "generatedTo": "2026-11-06T01:29:32"
+  },
+  {
+   "code": "FS203",
+   "province": "FS",
+   "sha256": "eba9c2e31f859ec1122e454941a7c06067349be97cdd0ea6c8111a63a4bf2bce",
+   "bytes": 379614,
+   "rows": 2744,
+   "generatedFrom": "2026-11-06T01:03:14",
+   "generatedTo": "2026-11-06T01:03:14"
+  },
+  {
+   "code": "FS204",
+   "province": "FS",
+   "sha256": "b9623a217acc656cddac6e926f33949947b43dc3c7ecf804b0c297f1ad37e136",
+   "bytes": 1027908,
+   "rows": 7090,
+   "generatedFrom": "2026-11-06T19:47:40",
+   "generatedTo": "2026-11-06T19:47:40"
+  },
+  {
+   "code": "FS205",
+   "province": "FS",
+   "sha256": "15814d62ad40f556976235f7ae0e0963b2ff88b5665580392fdc6499674ba2a3",
+   "bytes": 226592,
+   "rows": 1695,
+   "generatedFrom": "2026-11-05T20:06:18",
+   "generatedTo": "2026-11-05T20:06:18"
+  },
+  {
+   "code": "GT421",
+   "province": "GP",
+   "sha256": "be8e3e3733015fb62cb72fa5fb9be2f3a8e2e627b6da31493aaa0f1c1ed9b356",
+   "bytes": 2504921,
+   "rows": 18256,
+   "generatedFrom": "2026-11-08T18:44:51",
+   "generatedTo": "2026-11-08T18:44:51"
+  },
+  {
+   "code": "GT422",
+   "province": "GP",
+   "sha256": "996d9336ed2f918e54419dc4f8fbdd5f516ec4def62d27b4c62aeeae5d173284",
+   "bytes": 369449,
+   "rows": 2760,
+   "generatedFrom": "2026-11-06T15:53:08",
+   "generatedTo": "2026-11-06T15:53:08"
+  },
+  {
+   "code": "GT423",
+   "province": "GP",
+   "sha256": "0697acb5712c1b7d21ace2cf6b246a890aba0cdc8784cbe16a48d91eb28f7946",
+   "bytes": 433798,
+   "rows": 3210,
+   "generatedFrom": "2026-11-07T00:31:47",
+   "generatedTo": "2026-11-07T00:31:47"
+  },
+  {
+   "code": "GT481",
+   "province": "GP",
+   "sha256": "8914566b276a7302a11f1e44f1cba8519035e9e881bf13b2966cad832f9a839b",
+   "bytes": 1076958,
+   "rows": 7671,
+   "generatedFrom": "2026-11-06T20:22:58",
+   "generatedTo": "2026-11-06T20:22:58"
+  },
+  {
+   "code": "GT484",
+   "province": "GP",
+   "sha256": "742fc5774e6df81a32e7c7d773da319e3174ffc6defb672c94a1d5d3b0bf9759",
+   "bytes": 730966,
+   "rows": 5098,
+   "generatedFrom": "2026-11-06T10:27:19",
+   "generatedTo": "2026-11-06T10:27:19"
+  },
+  {
+   "code": "GT485",
+   "province": "GP",
+   "sha256": "495942283f348da3ad21f934b813574f0a0221a40ede4c5f53eb91d513f50d32",
+   "bytes": 915493,
+   "rows": 6430,
+   "generatedFrom": "2026-11-06T16:05:52",
+   "generatedTo": "2026-11-06T16:05:52"
+  },
+  {
+   "code": "JHB",
+   "province": "GP",
+   "sha256": "9f90a812d05d5cf47fd2d62630c78a2cbdebe2467e33b6063751a794153c8f6a",
+   "bytes": 16708299,
+   "rows": 114964,
+   "generatedFrom": "2026-11-08T19:43:14",
+   "generatedTo": "2026-11-08T19:43:14"
+  },
+  {
+   "code": "KZN212",
+   "province": "KN",
+   "sha256": "f5d6eb4c1049d7a79f009258c1e100c952adc6add19256d22ebda5b1e6b37054",
+   "bytes": 706324,
+   "rows": 5098,
+   "generatedFrom": "2026-11-06T03:25:57",
+   "generatedTo": "2026-11-06T03:25:57"
+  },
+  {
+   "code": "KZN213",
+   "province": "KN",
+   "sha256": "252e30ea71bba1c778fca19b0cc2b30767c1e338bbcc873f072a2d763e201b8e",
+   "bytes": 718886,
+   "rows": 5110,
+   "generatedFrom": "2026-11-06T16:46:50",
+   "generatedTo": "2026-11-06T16:46:50"
+  },
+  {
+   "code": "KZN214",
+   "province": "KN",
+   "sha256": "edc35441d2c16aa7dacea153daca614e92d2eb849f6bd4dcb988c7687953bd22",
+   "bytes": 387055,
+   "rows": 2677,
+   "generatedFrom": "2026-11-05T21:05:27",
+   "generatedTo": "2026-11-05T21:05:27"
+  },
+  {
+   "code": "KZN216",
+   "province": "KN",
+   "sha256": "477daab4966c713b4472ad5aa5eeee6d579f64da27afe373f9644f407acb602d",
+   "bytes": 1507164,
+   "rows": 10368,
+   "generatedFrom": "2026-11-08T18:30:35",
+   "generatedTo": "2026-11-08T18:30:35"
+  },
+  {
+   "code": "KZN221",
+   "province": "KN",
+   "sha256": "d04d425b1372e50f786cdf2c2d391e48bff506bb9d2ab939c1b515268930ca1d",
+   "bytes": 484990,
+   "rows": 3446,
+   "generatedFrom": "2026-11-06T03:55:11",
+   "generatedTo": "2026-11-06T03:55:11"
+  },
+  {
+   "code": "KZN222",
+   "province": "KN",
+   "sha256": "65d1f87ade12b971936778d0d67c3a02aaffbbbbfda304cb9c99f32fa607633f",
+   "bytes": 430456,
+   "rows": 3068,
+   "generatedFrom": "2026-11-06T15:55:21",
+   "generatedTo": "2026-11-06T15:55:21"
+  },
+  {
+   "code": "KZN223",
+   "province": "KN",
+   "sha256": "ca042ce9504c0b5597f33b34217237409134a8a9f577115b7afb4e1a2b943cc5",
+   "bytes": 189667,
+   "rows": 1350,
+   "generatedFrom": "2026-11-05T14:29:56",
+   "generatedTo": "2026-11-05T14:29:56"
+  },
+  {
+   "code": "KZN224",
+   "province": "KN",
+   "sha256": "c62c535bb25f8883a52dac30524ad5b84fae4e37ac26074bf0ee4b4650644d76",
+   "bytes": 236016,
+   "rows": 1681,
+   "generatedFrom": "2026-11-05T16:18:43",
+   "generatedTo": "2026-11-05T16:18:43"
+  },
+  {
+   "code": "KZN225",
+   "province": "KN",
+   "sha256": "71cfa8ae485f94f05c4f3255a933e82738d159503408c0b656eaef531770e820",
+   "bytes": 3196288,
+   "rows": 22842,
+   "generatedFrom": "2026-11-08T20:11:32",
+   "generatedTo": "2026-11-08T20:11:32"
+  },
+  {
+   "code": "KZN226",
+   "province": "KN",
+   "sha256": "8f84fa14855b78f0325e1b5f35d74d09aa672d79063d9b6a6841485bfea36ef2",
+   "bytes": 369671,
+   "rows": 2528,
+   "generatedFrom": "2026-11-05T16:18:43",
+   "generatedTo": "2026-11-05T16:18:43"
+  },
+  {
+   "code": "KZN227",
+   "province": "KN",
+   "sha256": "f2dac71db62d0cb0acb5fa2b3ba92d4825e757be3d0eece226ad8cf93f00b33f",
+   "bytes": 313642,
+   "rows": 2215,
+   "generatedFrom": "2026-11-05T13:00:20",
+   "generatedTo": "2026-11-05T13:00:20"
+  },
+  {
+   "code": "KZN235",
+   "province": "KN",
+   "sha256": "f9c3dd019bea95162b795f92285c5970b0505a5a7c410c29c2030bb4f8366c40",
+   "bytes": 774965,
+   "rows": 5276,
+   "generatedFrom": "2026-11-06T15:55:22",
+   "generatedTo": "2026-11-06T15:55:22"
+  },
+  {
+   "code": "KZN237",
+   "province": "KN",
+   "sha256": "568ca7803d800164a982d3d3a1a3dcdb4c4e1d3e54ed0b3b8ef9971bf080d86d",
+   "bytes": 989741,
+   "rows": 6426,
+   "generatedFrom": "2026-11-06T12:20:19",
+   "generatedTo": "2026-11-06T12:20:19"
+  },
+  {
+   "code": "KZN238",
+   "province": "KN",
+   "sha256": "6d209f83ce2b6b81aef17238cc5e532b31e45bfc9d56df7e7135f019ffc948e0",
+   "bytes": 1454949,
+   "rows": 9823,
+   "generatedFrom": "2026-11-07T00:30:03",
+   "generatedTo": "2026-11-07T00:30:03"
+  },
+  {
+   "code": "KZN241",
+   "province": "KN",
+   "sha256": "122267fc2bd3dfaee5a09d1f3e226b1bd92e52156aa031ad494ed68dddcf3dec",
+   "bytes": 171903,
+   "rows": 1195,
+   "generatedFrom": "2026-11-05T11:15:14",
+   "generatedTo": "2026-11-05T11:15:14"
+  },
+  {
+   "code": "KZN242",
+   "province": "KN",
+   "sha256": "e9518af1ab6167bb12002cf88d42dc580a2d9c286e068536d6be9546f0796602",
+   "bytes": 797265,
+   "rows": 5740,
+   "generatedFrom": "2026-11-06T13:34:08",
+   "generatedTo": "2026-11-06T13:34:08"
+  },
+  {
+   "code": "KZN244",
+   "province": "KN",
+   "sha256": "3f832bfd56a62ef7f42c3169011d1f83d0e10415f04be5d9768da7308d4a9eaf",
+   "bytes": 791808,
+   "rows": 5630,
+   "generatedFrom": "2026-11-06T20:15:55",
+   "generatedTo": "2026-11-06T20:15:55"
+  },
+  {
+   "code": "KZN245",
+   "province": "KN",
+   "sha256": "b8d1f2c4bf35f16718bad92c4429401c128e15f0343c5c09a96e19baa3bd191f",
+   "bytes": 552954,
+   "rows": 3950,
+   "generatedFrom": "2026-11-06T11:51:32",
+   "generatedTo": "2026-11-06T11:51:32"
+  },
+  {
+   "code": "KZN252",
+   "province": "KN",
+   "sha256": "62979a2a268b2007e4cad36c774623166318a573fae7c12b38f4569d951100a3",
+   "bytes": 1653327,
+   "rows": 11421,
+   "generatedFrom": "2026-11-07T01:16:48",
+   "generatedTo": "2026-11-07T01:16:48"
+  },
+  {
+   "code": "KZN253",
+   "province": "KN",
+   "sha256": "683c61cab4a401661c3a856d12ebab5b5003a36470615c949872b2acac10448e",
+   "bytes": 263725,
+   "rows": 1822,
+   "generatedFrom": "2026-11-05T12:12:42",
+   "generatedTo": "2026-11-05T12:12:42"
+  },
+  {
+   "code": "KZN254",
+   "province": "KN",
+   "sha256": "c318c103db6113a989d1eb55eb2ff49a821ed6bb65e2ba1b465f501c7adaa6f3",
+   "bytes": 700816,
+   "rows": 4907,
+   "generatedFrom": "2026-11-06T12:02:40",
+   "generatedTo": "2026-11-06T12:02:40"
+  },
+  {
+   "code": "KZN261",
+   "province": "KN",
+   "sha256": "baa881fe9832c8d0b9672a6f539dfaa838bf0d7cad6cca16dcc03bc8cce5d3cc",
+   "bytes": 487438,
+   "rows": 3461,
+   "generatedFrom": "2026-11-06T16:07:12",
+   "generatedTo": "2026-11-06T16:07:12"
+  },
+  {
+   "code": "KZN262",
+   "province": "KN",
+   "sha256": "d01c60098ffff1cc6e37eb43f93b81e863f42b41b8093d8f22c9ba69865ec9d2",
+   "bytes": 675271,
+   "rows": 4731,
+   "generatedFrom": "2026-11-07T13:14:50",
+   "generatedTo": "2026-11-07T13:14:50"
+  },
+  {
+   "code": "KZN263",
+   "province": "KN",
+   "sha256": "1b7acabca2745d7e19000a1972a5b6dbd04e96c213b8a1d24ab33daaa166a898",
+   "bytes": 995437,
+   "rows": 6979,
+   "generatedFrom": "2026-11-06T20:15:55",
+   "generatedTo": "2026-11-06T20:15:55"
+  },
+  {
+   "code": "KZN265",
+   "province": "KN",
+   "sha256": "e70dc638e6fdefead4cf0a46fea8924e3b1f8abdab83d54fecdde64c33c32c35",
+   "bytes": 844108,
+   "rows": 6005,
+   "generatedFrom": "2026-11-06T16:59:54",
+   "generatedTo": "2026-11-06T16:59:54"
+  },
+  {
+   "code": "KZN266",
+   "province": "KN",
+   "sha256": "ecba826961608ea6bf36b28c813e9fccf689a17a49a3683f47aa383dc9d835bf",
+   "bytes": 1003653,
+   "rows": 7235,
+   "generatedFrom": "2026-11-06T21:16:26",
+   "generatedTo": "2026-11-06T21:16:26"
+  },
+  {
+   "code": "KZN271",
+   "province": "KN",
+   "sha256": "4e4bfe9407fc7d85f9310eb8af4c8e05f31f174ee63c73f6133f194250dbc833",
+   "bytes": 948261,
+   "rows": 6288,
+   "generatedFrom": "2026-11-06T20:48:56",
+   "generatedTo": "2026-11-06T20:48:56"
+  },
+  {
+   "code": "KZN272",
+   "province": "KN",
+   "sha256": "361e71b32de650cbec564eaec1d6e2bb675dfbfc545cdd2ad788e93c52faf1f6",
+   "bytes": 1053845,
+   "rows": 7350,
+   "generatedFrom": "2026-11-07T00:46:52",
+   "generatedTo": "2026-11-07T00:46:52"
+  },
+  {
+   "code": "KZN275",
+   "province": "KN",
+   "sha256": "9460779ccbea7f4bb0bee7cb2eaccca774bdc444985df917b736b6d3575b9311",
+   "bytes": 1088011,
+   "rows": 7226,
+   "generatedFrom": "2026-11-07T04:41:34",
+   "generatedTo": "2026-11-07T04:41:34"
+  },
+  {
+   "code": "KZN276",
+   "province": "KN",
+   "sha256": "abc403a66c3ab5700e9567cb4576503ef5c5371db1172effe7b5d975d7a884f8",
+   "bytes": 640013,
+   "rows": 4237,
+   "generatedFrom": "2026-11-06T05:11:04",
+   "generatedTo": "2026-11-06T05:11:04"
+  },
+  {
+   "code": "KZN281",
+   "province": "KN",
+   "sha256": "2db032cb6091b312e84009f2aea438b55dca0a2dae3b0f7f94089407d4bfea6d",
+   "bytes": 513850,
+   "rows": 3662,
+   "generatedFrom": "2026-11-06T19:18:41",
+   "generatedTo": "2026-11-06T19:18:41"
+  },
+  {
+   "code": "KZN282",
+   "province": "KN",
+   "sha256": "a44f85ad713b8055beadfbd649f4459e76a264f49c539b0512cb94d50a0058ef",
+   "bytes": 1250272,
+   "rows": 8548,
+   "generatedFrom": "2026-11-06T22:46:45",
+   "generatedTo": "2026-11-06T22:46:45"
+  },
+  {
+   "code": "KZN284",
+   "province": "KN",
+   "sha256": "f831aa5d4768ffd3699f22bd646efb34ac8269c3f7f0a3f19780dac1c22101c9",
+   "bytes": 1124158,
+   "rows": 7882,
+   "generatedFrom": "2026-11-06T01:41:46",
+   "generatedTo": "2026-11-06T01:41:46"
+  },
+  {
+   "code": "KZN285",
+   "province": "KN",
+   "sha256": "74df366b7840182ad53cfee7aba430f9abc2ebdb87e2096eb2db4164703052c1",
+   "bytes": 460250,
+   "rows": 3214,
+   "generatedFrom": "2026-11-06T15:02:04",
+   "generatedTo": "2026-11-06T15:02:04"
+  },
+  {
+   "code": "KZN286",
+   "province": "KN",
+   "sha256": "360ac0e33ae1471ea900c8affe474176ab45d2842808e43e3ee3841f8e83bbd3",
+   "bytes": 498221,
+   "rows": 3538,
+   "generatedFrom": "2026-11-06T15:55:22",
+   "generatedTo": "2026-11-06T15:55:22"
+  },
+  {
+   "code": "KZN291",
+   "province": "KN",
+   "sha256": "94b09d4d772532b3c24600a996ee38870581c706799000bffde3abe1c6684663",
+   "bytes": 453804,
+   "rows": 3188,
+   "generatedFrom": "2026-11-05T19:46:37",
+   "generatedTo": "2026-11-05T19:46:37"
+  },
+  {
+   "code": "KZN292",
+   "province": "KN",
+   "sha256": "5b1e30378fa48f14e2691ca58c31f35279eac12c45635d372d09c0362ef02236",
+   "bytes": 754223,
+   "rows": 5309,
+   "generatedFrom": "2026-11-06T08:43:55",
+   "generatedTo": "2026-11-06T08:43:55"
+  },
+  {
+   "code": "KZN293",
+   "province": "KN",
+   "sha256": "edd86f2d81f2d507b3fe17c9192129a1545517d1975bce7cb3e763da221363bb",
+   "bytes": 671112,
+   "rows": 4827,
+   "generatedFrom": "2026-11-08T18:30:38",
+   "generatedTo": "2026-11-08T18:30:38"
+  },
+  {
+   "code": "KZN294",
+   "province": "KN",
+   "sha256": "cb35b2113033326c0bc2236d0266ab4ad2e9be2871d9365bd760e24b1fcb812b",
+   "bytes": 645764,
+   "rows": 4581,
+   "generatedFrom": "2026-11-05T21:34:15",
+   "generatedTo": "2026-11-05T21:34:15"
+  },
+  {
+   "code": "KZN433",
+   "province": "KN",
+   "sha256": "5227d317cc8d32d6bd12c7064a4a6188e331d288d54fdb251442d69ec5f91fa4",
+   "bytes": 255046,
+   "rows": 1717,
+   "generatedFrom": "2026-11-06T16:46:50",
+   "generatedTo": "2026-11-06T16:46:50"
+  },
+  {
+   "code": "KZN434",
+   "province": "KN",
+   "sha256": "256a7517a81f5f099b7e238c6f82b7bc682ed8b80478abc946b5bb78f08449b7",
+   "bytes": 473942,
+   "rows": 2932,
+   "generatedFrom": "2026-11-05T22:36:17",
+   "generatedTo": "2026-11-05T22:36:17"
+  },
+  {
+   "code": "KZN435",
+   "province": "KN",
+   "sha256": "3dc8407cedab553d28655846df06386b89a8e4d27b002989cc3cb640d1b58af5",
+   "bytes": 901203,
+   "rows": 6015,
+   "generatedFrom": "2026-11-05T22:05:04",
+   "generatedTo": "2026-11-05T22:05:04"
+  },
+  {
+   "code": "KZN436",
+   "province": "KN",
+   "sha256": "51a0822b2fd5e6e5393c23d00991cf322106b8102228b7a355b369cda0436e53",
+   "bytes": 438289,
+   "rows": 2750,
+   "generatedFrom": "2026-11-06T06:41:39",
+   "generatedTo": "2026-11-06T06:41:39"
+  },
+  {
+   "code": "LIM331",
+   "province": "NP",
+   "sha256": "ca661883989bed5146189de2efd4721e4f75cb0e12cc21a5370c8415143befc1",
+   "bytes": 1521552,
+   "rows": 10865,
+   "generatedFrom": "2026-11-06T20:48:56",
+   "generatedTo": "2026-11-06T20:48:56"
+  },
+  {
+   "code": "LIM332",
+   "province": "NP",
+   "sha256": "f5de09ae705191a8c2f2c9a7baccd41da018b7518e1ac6fbfcd7967ffd9f2400",
+   "bytes": 1617483,
+   "rows": 11360,
+   "generatedFrom": "2026-11-07T15:49:20",
+   "generatedTo": "2026-11-07T15:49:20"
+  },
+  {
+   "code": "LIM333",
+   "province": "NP",
+   "sha256": "a12ba5a77bf7e0915f13d8aa0d9991adb9a99d9c04516d38752eb284e56988a2",
+   "bytes": 2536083,
+   "rows": 17748,
+   "generatedFrom": "2026-11-07T20:13:52",
+   "generatedTo": "2026-11-07T20:13:52"
+  },
+  {
+   "code": "LIM334",
+   "province": "NP",
+   "sha256": "bf3490d231b3bca84148263036d60b492d97287202cd493ee62ae6eaeb8dbc18",
+   "bytes": 1035198,
+   "rows": 7340,
+   "generatedFrom": "2026-11-07T14:15:12",
+   "generatedTo": "2026-11-07T14:15:12"
+  },
+  {
+   "code": "LIM335",
+   "province": "NP",
+   "sha256": "55d1f76e16f9b49c23e0758df45ec81ddb872c0716df3c12ded6ea052825231c",
+   "bytes": 710319,
+   "rows": 5282,
+   "generatedFrom": "2026-11-05T16:47:17",
+   "generatedTo": "2026-11-05T16:47:17"
+  },
+  {
+   "code": "LIM341",
+   "province": "NP",
+   "sha256": "8c092ff20710da428b9ef37ad8aecfcd0b3b188f9f0aec8985540f9c164f46aa",
+   "bytes": 721861,
+   "rows": 5392,
+   "generatedFrom": "2026-11-06T15:55:22",
+   "generatedTo": "2026-11-06T15:55:22"
+  },
+  {
+   "code": "LIM343",
+   "province": "NP",
+   "sha256": "55fc93e8049411ecb325aa1e41a31a092611a30944ad87785874cfe8555cc6d8",
+   "bytes": 3027785,
+   "rows": 21971,
+   "generatedFrom": "2026-11-07T03:43:45",
+   "generatedTo": "2026-11-07T03:43:45"
+  },
+  {
+   "code": "LIM344",
+   "province": "NP",
+   "sha256": "2a19c9468f10e24f4a44fb1de5699a33e5f1e64b84dc8927e9d171eb8c391d9a",
+   "bytes": 2232440,
+   "rows": 16349,
+   "generatedFrom": "2026-11-07T00:30:03",
+   "generatedTo": "2026-11-07T00:30:03"
+  },
+  {
+   "code": "LIM345",
+   "province": "NP",
+   "sha256": "1c1bdadccaefaf0880c5b3130c50af9c17e582cb58ff18b6e0d2a7fbed63132f",
+   "bytes": 1991397,
+   "rows": 13842,
+   "generatedFrom": "2026-11-06T16:48:04",
+   "generatedTo": "2026-11-06T16:48:04"
+  },
+  {
+   "code": "LIM351",
+   "province": "NP",
+   "sha256": "b07a8e772780b8963d08865b5bbc8a4a49cec85c0e97eb36394cf13526d2dd2e",
+   "bytes": 1668666,
+   "rows": 12428,
+   "generatedFrom": "2026-11-06T19:01:57",
+   "generatedTo": "2026-11-06T19:01:57"
+  },
+  {
+   "code": "LIM353",
+   "province": "NP",
+   "sha256": "1e60cd8a7cf1392a8ce74775a7d78a04e42fb55b42500f5f19ffcdc667585b72",
+   "bytes": 1025152,
+   "rows": 7765,
+   "generatedFrom": "2026-11-06T14:18:44",
+   "generatedTo": "2026-11-06T14:18:44"
+  },
+  {
+   "code": "LIM354",
+   "province": "NP",
+   "sha256": "4a0d27715e6e4728bc08f7e7e26ab930c53a5087a9061f300ac9600ae5b713f6",
+   "bytes": 4388556,
+   "rows": 32278,
+   "generatedFrom": "2026-11-07T19:28:30",
+   "generatedTo": "2026-11-07T19:28:30"
+  },
+  {
+   "code": "LIM355",
+   "province": "NP",
+   "sha256": "0f6f500061b4893d3da9683b03ac9dfa735133ea5386895d1cae47e23271320b",
+   "bytes": 1769038,
+   "rows": 12671,
+   "generatedFrom": "2026-11-07T01:01:59",
+   "generatedTo": "2026-11-07T01:01:59"
+  },
+  {
+   "code": "LIM361",
+   "province": "NP",
+   "sha256": "945224f227b7a31da6d41ecdbaea51c436d57c89b240fef378750a8ac40d8340",
+   "bytes": 541072,
+   "rows": 3807,
+   "generatedFrom": "2026-11-07T22:44:10",
+   "generatedTo": "2026-11-07T22:44:10"
+  },
+  {
+   "code": "LIM362",
+   "province": "NP",
+   "sha256": "1d4d7666ffced9ffa82f8d6362e81b7dbb54f065663cc89b6472f51a61945b27",
+   "bytes": 795257,
+   "rows": 5863,
+   "generatedFrom": "2026-11-06T15:55:22",
+   "generatedTo": "2026-11-06T15:55:22"
+  },
+  {
+   "code": "LIM366",
+   "province": "NP",
+   "sha256": "9330eb87311b3eab6c7e19a1328e6fadf3425a952bef9dc4c98e9d79147da54e",
+   "bytes": 285119,
+   "rows": 2072,
+   "generatedFrom": "2026-11-06T00:06:36",
+   "generatedTo": "2026-11-06T00:06:36"
+  },
+  {
+   "code": "LIM367",
+   "province": "NP",
+   "sha256": "e3d6a41b09f18ef3e9fc4c2dc6542bd8df4862022974bbfcda340b99785844f6",
+   "bytes": 2493178,
+   "rows": 17995,
+   "generatedFrom": "2026-11-06T18:23:44",
+   "generatedTo": "2026-11-06T18:23:44"
+  },
+  {
+   "code": "LIM368",
+   "province": "NP",
+   "sha256": "aba2de02c17125d029aff02c91b4636fea00a0441692e173dd5321fca4d9abb4",
+   "bytes": 514396,
+   "rows": 3425,
+   "generatedFrom": "2026-11-07T02:59:12",
+   "generatedTo": "2026-11-07T02:59:12"
+  },
+  {
+   "code": "LIM471",
+   "province": "NP",
+   "sha256": "fc1e0e27b07970b46261ee61925d78fd31dd0832578ae598746c8a3f048997a1",
+   "bytes": 990986,
+   "rows": 6842,
+   "generatedFrom": "2026-11-06T14:19:14",
+   "generatedTo": "2026-11-06T14:19:14"
+  },
+  {
+   "code": "LIM472",
+   "province": "NP",
+   "sha256": "11ef6ad7dc3c3bf37638f723f148c305345801cb2f079d1ef06e98ce31dd5ef2",
+   "bytes": 2382110,
+   "rows": 16220,
+   "generatedFrom": "2026-11-07T03:43:45",
+   "generatedTo": "2026-11-07T03:43:45"
+  },
+  {
+   "code": "LIM473",
+   "province": "NP",
+   "sha256": "7cf31131a04dfabdf57a409543e18517327a7c18626556d2b7d71a56cff2ffdd",
+   "bytes": 2762282,
+   "rows": 19314,
+   "generatedFrom": "2026-11-07T01:16:48",
+   "generatedTo": "2026-11-07T01:16:48"
+  },
+  {
+   "code": "LIM476",
+   "province": "NP",
+   "sha256": "b5dcaeddd5d7928e89543ea4c486991b10679b6a1843d89573f08bae6244b245",
+   "bytes": 4253861,
+   "rows": 29225,
+   "generatedFrom": "2026-11-07T04:41:38",
+   "generatedTo": "2026-11-07T04:41:38"
+  },
+  {
+   "code": "MAN",
+   "province": "FS",
+   "sha256": "7bf0f79ce21d6d7c7c287a1a1ccfa66b3370afb02be6138c70b26e00361420ff",
+   "bytes": 3252014,
+   "rows": 23728,
+   "generatedFrom": "2026-11-07T19:28:30",
+   "generatedTo": "2026-11-07T19:28:30"
+  },
+  {
+   "code": "MP301",
+   "province": "MP",
+   "sha256": "3dd68cf45b861416f48d1f19e2e7862984403c053a6244fc3c73713bab0aaedf",
+   "bytes": 1037998,
+   "rows": 6855,
+   "generatedFrom": "2026-11-06T01:29:32",
+   "generatedTo": "2026-11-06T01:29:32"
+  },
+  {
+   "code": "MP302",
+   "province": "MP",
+   "sha256": "774e2686a3f434401ddb21d1d4207e5bef12ba5f78bbc742e7e8fabec38e6f09",
+   "bytes": 548528,
+   "rows": 3917,
+   "generatedFrom": "2026-11-05T17:01:39",
+   "generatedTo": "2026-11-05T17:01:39"
+  },
+  {
+   "code": "MP303",
+   "province": "MP",
+   "sha256": "b84e9a3e1f4e8e5d070f89e41855ae5b0b3306b4cc790c42fdfa71ffad554177",
+   "bytes": 534841,
+   "rows": 3859,
+   "generatedFrom": "2026-11-06T10:15:56",
+   "generatedTo": "2026-11-06T10:15:56"
+  },
+  {
+   "code": "MP304",
+   "province": "MP",
+   "sha256": "06e03761cacc8855a1044865fd3c319f8c488afd0831b42956a3016f1e630a95",
+   "bytes": 290962,
+   "rows": 1924,
+   "generatedFrom": "2026-11-05T16:18:43",
+   "generatedTo": "2026-11-05T16:18:43"
+  },
+  {
+   "code": "MP305",
+   "province": "MP",
+   "sha256": "d2dee215a7480b9d86972e0c5713c5d35cd6c6fceb5893d2ca2fcb8e3ee06293",
+   "bytes": 314003,
+   "rows": 2287,
+   "generatedFrom": "2026-11-06T18:38:01",
+   "generatedTo": "2026-11-06T18:38:01"
+  },
+  {
+   "code": "MP306",
+   "province": "MP",
+   "sha256": "8413c29874f35e4f43f8b957078c84447fdc0f1057e02d51ba40b3f692e85204",
+   "bytes": 226957,
+   "rows": 1603,
+   "generatedFrom": "2026-11-05T12:27:25",
+   "generatedTo": "2026-11-05T12:27:25"
+  },
+  {
+   "code": "MP307",
+   "province": "MP",
+   "sha256": "1bbf08125f7eab2cf0c6037d77bcadc1ef060e471a343e3dacbcae3488b86631",
+   "bytes": 919832,
+   "rows": 6406,
+   "generatedFrom": "2026-11-07T01:01:59",
+   "generatedTo": "2026-11-07T01:01:59"
+  },
+  {
+   "code": "MP311",
+   "province": "MP",
+   "sha256": "98c344f2f8932bc13cc757f6b2b3b4b43b24436387b81a0d366ab5ae56e364e3",
+   "bytes": 274680,
+   "rows": 1897,
+   "generatedFrom": "2026-11-05T10:50:02",
+   "generatedTo": "2026-11-05T10:50:02"
+  },
+  {
+   "code": "MP312",
+   "province": "MP",
+   "sha256": "4dcf3151e055cab9c9f645d3e48de4a257246b543d22219c4fe1b5d6c0b0fa77",
+   "bytes": 1384616,
+   "rows": 9754,
+   "generatedFrom": "2026-11-06T21:32:28",
+   "generatedTo": "2026-11-06T21:32:28"
+  },
+  {
+   "code": "MP313",
+   "province": "MP",
+   "sha256": "e3a37b99939572ff8cb35cb73e116f19ee89545a359b06be33108e7f85f93ec2",
+   "bytes": 786870,
+   "rows": 5498,
+   "generatedFrom": "2026-11-07T19:01:03",
+   "generatedTo": "2026-11-07T19:01:03"
+  },
+  {
+   "code": "MP314",
+   "province": "MP",
+   "sha256": "04296248ecee1e4b8ef006515a5d216df4a5b8c9b540add78846485e8dda1335",
+   "bytes": 352305,
+   "rows": 2517,
+   "generatedFrom": "2026-11-05T16:00:30",
+   "generatedTo": "2026-11-05T16:00:30"
+  },
+  {
+   "code": "MP315",
+   "province": "MP",
+   "sha256": "1daa25a5f6637646a111aa375c1a6082d688715a3da0d8bd7268422f00a675c8",
+   "bytes": 1890561,
+   "rows": 12890,
+   "generatedFrom": "2026-11-06T21:32:28",
+   "generatedTo": "2026-11-06T21:32:28"
+  },
+  {
+   "code": "MP316",
+   "province": "MP",
+   "sha256": "ef539d4a968c10cb7820e914b14ff35119727542c5226911468bed14b1656f5a",
+   "bytes": 1580949,
+   "rows": 11034,
+   "generatedFrom": "2026-11-07T02:00:25",
+   "generatedTo": "2026-11-07T02:00:25"
+  },
+  {
+   "code": "MP321",
+   "province": "MP",
+   "sha256": "6c55b84a76d77ff22433f419f0c2fd0119b92593f32d5fcc04eabb617b4f2792",
+   "bytes": 380205,
+   "rows": 2671,
+   "generatedFrom": "2026-11-07T00:46:52",
+   "generatedTo": "2026-11-07T00:46:52"
+  },
+  {
+   "code": "MP324",
+   "province": "MP",
+   "sha256": "efbf289cb7176e34dfb86421553de1741402da1ee4792c256b9bd431aa514573",
+   "bytes": 1640408,
+   "rows": 11891,
+   "generatedFrom": "2026-11-07T06:26:09",
+   "generatedTo": "2026-11-07T06:26:09"
+  },
+  {
+   "code": "MP325",
+   "province": "MP",
+   "sha256": "30639be0f60b65d9598bfdee3929fa4cc4e1970356ed9aa5581d8af72587fdea",
+   "bytes": 3213687,
+   "rows": 22259,
+   "generatedFrom": "2026-11-06T19:01:57",
+   "generatedTo": "2026-11-06T19:01:57"
+  },
+  {
+   "code": "MP326",
+   "province": "MP",
+   "sha256": "16f86019bab2e305622ea33f561db8ed099f6e7d477958fd4e2e1644df512910",
+   "bytes": 2948455,
+   "rows": 20059,
+   "generatedFrom": "2026-11-08T15:26:54",
+   "generatedTo": "2026-11-08T15:26:54"
+  },
+  {
+   "code": "NC061",
+   "province": "NC",
+   "sha256": "80a9df1fa807c63739a621e01fe1b1978e71ccc9687c82879475aee055f8e11c",
+   "bytes": 36271,
+   "rows": 250,
+   "generatedFrom": "2026-11-05T10:31:54",
+   "generatedTo": "2026-11-05T10:31:54"
+  },
+  {
+   "code": "NC062",
+   "province": "NC",
+   "sha256": "b8eecff0173858c55fa8c718e9f02dd9ee6ba5dc5aeaa7a7deee783c36260619",
+   "bytes": 100275,
+   "rows": 713,
+   "generatedFrom": "2026-11-05T21:34:19",
+   "generatedTo": "2026-11-05T21:34:19"
+  },
+  {
+   "code": "NC064",
+   "province": "NC",
+   "sha256": "d2d9a8879b70c5a774dd1753d55d54f323ac84b7727d1c3cf5af52f09b1d1591",
+   "bytes": 70667,
+   "rows": 492,
+   "generatedFrom": "2026-11-05T05:19:47",
+   "generatedTo": "2026-11-05T05:19:47"
+  },
+  {
+   "code": "NC065",
+   "province": "NC",
+   "sha256": "4b8777a1d9917b97e87735015133c529a8c9190140b99a491d3221e874b832fa",
+   "bytes": 94119,
+   "rows": 713,
+   "generatedFrom": "2026-11-05T07:10:31",
+   "generatedTo": "2026-11-05T07:10:31"
+  },
+  {
+   "code": "NC066",
+   "province": "NC",
+   "sha256": "df1ee0560982b47ea453de9dc5a139784218e4efbc62e84a4d4599f00cb74e59",
+   "bytes": 86315,
+   "rows": 622,
+   "generatedFrom": "2026-11-05T10:17:50",
+   "generatedTo": "2026-11-05T10:17:50"
+  },
+  {
+   "code": "NC067",
+   "province": "NC",
+   "sha256": "0071964bc2a11b7e1177c35706ec29857b75bf39c8c43ee0c8fd10a48fab727a",
+   "bytes": 51249,
+   "rows": 370,
+   "generatedFrom": "2026-11-05T05:59:33",
+   "generatedTo": "2026-11-05T05:59:33"
+  },
+  {
+   "code": "NC071",
+   "province": "NC",
+   "sha256": "65cf8cbdc4b6cd22e8bdd10eb605287b321584116f835c6a5d0c6c9d7954382b",
+   "bytes": 76214,
+   "rows": 569,
+   "generatedFrom": "2026-11-05T06:56:59",
+   "generatedTo": "2026-11-05T06:56:59"
+  },
+  {
+   "code": "NC072",
+   "province": "NC",
+   "sha256": "ead53573b6418228729c9268d07874a081899e0533a85c8d09c10822cdf10bab",
+   "bytes": 86821,
+   "rows": 624,
+   "generatedFrom": "2026-11-05T08:45:11",
+   "generatedTo": "2026-11-05T08:45:11"
+  },
+  {
+   "code": "NC073",
+   "province": "NC",
+   "sha256": "a6b585d2091f401b451ae01462e4acaf32f09e2c9163e8054fca28b8904d693d",
+   "bytes": 104335,
+   "rows": 745,
+   "generatedFrom": "2026-11-05T13:00:23",
+   "generatedTo": "2026-11-05T13:00:23"
+  },
+  {
+   "code": "NC074",
+   "province": "NC",
+   "sha256": "90dd36d6d54ec46a0b5c9b9b236040c099c88f62b82c45792b666db900ff6c3e",
+   "bytes": 48334,
+   "rows": 354,
+   "generatedFrom": "2026-11-05T08:31:55",
+   "generatedTo": "2026-11-05T08:31:55"
+  },
+  {
+   "code": "NC075",
+   "province": "NC",
+   "sha256": "cb91d00948abbc8ba7da5ecedc6a690dcd470172b8763dd0fc0a326e9d50433d",
+   "bytes": 56571,
+   "rows": 396,
+   "generatedFrom": "2026-11-05T04:51:07",
+   "generatedTo": "2026-11-05T04:51:07"
+  },
+  {
+   "code": "NC076",
+   "province": "NC",
+   "sha256": "06fa9b1feb3ea6c85cbe2d564461ac1fb2fdf757743fbddfaf5ecf65d3875e7a",
+   "bytes": 63949,
+   "rows": 461,
+   "generatedFrom": "2026-11-05T06:56:59",
+   "generatedTo": "2026-11-05T06:56:59"
+  },
+  {
+   "code": "NC077",
+   "province": "NC",
+   "sha256": "482b1e1687a883a6fd5abc22a05017031108ac2d2d12d73787be3c55202aa9eb",
+   "bytes": 86633,
+   "rows": 630,
+   "generatedFrom": "2026-11-05T10:50:02",
+   "generatedTo": "2026-11-05T10:50:02"
+  },
+  {
+   "code": "NC078",
+   "province": "NC",
+   "sha256": "a2c097ce0a0c399a2020bbd5187b2dba9e7799a3c8aa187a77a019b6144fee6a",
+   "bytes": 103123,
+   "rows": 748,
+   "generatedFrom": "2026-11-06T21:32:28",
+   "generatedTo": "2026-11-06T21:32:28"
+  },
+  {
+   "code": "NC082",
+   "province": "NC",
+   "sha256": "19eba6ed4c5be9bea37f9286d45848a34c0e899628029e8ffa6965e483bc0939",
+   "bytes": 226597,
+   "rows": 1594,
+   "generatedFrom": "2026-11-05T23:05:15",
+   "generatedTo": "2026-11-05T23:05:15"
+  },
+  {
+   "code": "NC084",
+   "province": "NC",
+   "sha256": "e40baa2c294bd84418f5bf8eca9988c25669d2f0538a19174eea65b0f0ac4ab4",
+   "bytes": 68942,
+   "rows": 510,
+   "generatedFrom": "2026-11-05T07:25:26",
+   "generatedTo": "2026-11-05T07:25:26"
+  },
+  {
+   "code": "NC085",
+   "province": "NC",
+   "sha256": "ce851ca15622b857523037133a0a6581a0506f7e7668e23e7fca3d1b7bdb35a9",
+   "bytes": 129801,
+   "rows": 930,
+   "generatedFrom": "2026-11-05T14:30:00",
+   "generatedTo": "2026-11-05T14:30:00"
+  },
+  {
+   "code": "NC086",
+   "province": "NC",
+   "sha256": "736abe93909a129ae82f488a0a736415d6b9d4dcf612480d42aff2c14ce7fcca",
+   "bytes": 56337,
+   "rows": 396,
+   "generatedFrom": "2026-11-05T09:45:28",
+   "generatedTo": "2026-11-05T09:45:28"
+  },
+  {
+   "code": "NC087",
+   "province": "NC",
+   "sha256": "07c6f49ded63c7af2520a65a395bd98388f15891e771ab9ed23ab1098a8e4fe2",
+   "bytes": 310160,
+   "rows": 2163,
+   "generatedFrom": "2026-11-07T14:15:12",
+   "generatedTo": "2026-11-07T14:15:12"
+  },
+  {
+   "code": "NC091",
+   "province": "NC",
+   "sha256": "19ddc51da2a2949b2be92d1914f3fcf02da660f082b8a1d4c40eeb0fb79f5e5b",
+   "bytes": 753864,
+   "rows": 5195,
+   "generatedFrom": "2026-11-06T00:04:26",
+   "generatedTo": "2026-11-06T00:04:26"
+  },
+  {
+   "code": "NC092",
+   "province": "NC",
+   "sha256": "d26d8026668feccc870986a97cf39bb62835bbb495b7f6b9e963f667ea776968",
+   "bytes": 194418,
+   "rows": 1359,
+   "generatedFrom": "2026-11-05T11:15:15",
+   "generatedTo": "2026-11-05T11:15:15"
+  },
+  {
+   "code": "NC093",
+   "province": "NC",
+   "sha256": "cdc31e5a7e6be4369bb8fb4cee47e55bfe6db6f4d1ba6d562b3c40d9fd8444f9",
+   "bytes": 102865,
+   "rows": 720,
+   "generatedFrom": "2026-11-05T11:15:15",
+   "generatedTo": "2026-11-05T11:15:15"
+  },
+  {
+   "code": "NC094",
+   "province": "NC",
+   "sha256": "ace10c6cda39b6b8a4567e75fa529aa1e0a605683c2510dbcb278ee303d04fff",
+   "bytes": 248405,
+   "rows": 1768,
+   "generatedFrom": "2026-11-05T16:00:30",
+   "generatedTo": "2026-11-05T16:00:30"
+  },
+  {
+   "code": "NC451",
+   "province": "NC",
+   "sha256": "47085279ceb3bc3a6ad46955a32509975af14f50f2ef01e192965a12175aad3a",
+   "bytes": 512156,
+   "rows": 3489,
+   "generatedFrom": "2026-11-06T01:04:02",
+   "generatedTo": "2026-11-06T01:04:02"
+  },
+  {
+   "code": "NC452",
+   "province": "NC",
+   "sha256": "fb3dffb62d2a481c088efff96dd0a6f563266dc6baacce5387b355a843e03212",
+   "bytes": 331947,
+   "rows": 2220,
+   "generatedFrom": "2026-11-05T22:36:17",
+   "generatedTo": "2026-11-05T22:36:17"
+  },
+  {
+   "code": "NC453",
+   "province": "NC",
+   "sha256": "24fec9ab555539ea11a327a5d6eff2f963069c766e979c91bdf053cc4ceeeeb8",
+   "bytes": 102574,
+   "rows": 706,
+   "generatedFrom": "2026-11-06T12:20:19",
+   "generatedTo": "2026-11-06T12:20:19"
+  },
+  {
+   "code": "NMA",
+   "province": "EC",
+   "sha256": "de1c8c6d1b11b51db8246f0a14942e6ce6343f732f6ce01c4c5b3b3ce23e6095",
+   "bytes": 2786753,
+   "rows": 19089,
+   "generatedFrom": "2026-11-07T01:27:17",
+   "generatedTo": "2026-11-07T01:27:17"
+  },
+  {
+   "code": "NW371",
+   "province": "NW",
+   "sha256": "f875e9af6a69b0a9f3407932986e7d9d19618adc71c3c459621c382b6b206d8b",
+   "bytes": 1441829,
+   "rows": 10323,
+   "generatedFrom": "2026-11-07T13:13:48",
+   "generatedTo": "2026-11-07T13:13:48"
+  },
+  {
+   "code": "NW372",
+   "province": "NW",
+   "sha256": "db84194fae4884184f2a8d5c991e890b31c30fbee3e47bde7b1caf0fdb2a8a48",
+   "bytes": 2449030,
+   "rows": 17529,
+   "generatedFrom": "2026-11-07T01:46:32",
+   "generatedTo": "2026-11-07T01:46:32"
+  },
+  {
+   "code": "NW373",
+   "province": "NW",
+   "sha256": "397888a4fa552fa914354c88d8cece2e1cc3cf6d5cfc5b0b3a70498444533184",
+   "bytes": 2558979,
+   "rows": 18111,
+   "generatedFrom": "2026-11-08T15:56:04",
+   "generatedTo": "2026-11-08T15:56:04"
+  },
+  {
+   "code": "NW374",
+   "province": "NW",
+   "sha256": "c96ed746887646093a9095e20cf3526c26e855073c0c09d00ff27407209906fe",
+   "bytes": 272884,
+   "rows": 1893,
+   "generatedFrom": "2026-11-05T17:00:52",
+   "generatedTo": "2026-11-05T17:00:52"
+  },
+  {
+   "code": "NW375",
+   "province": "NW",
+   "sha256": "6860e2943b0a6bfb93c606bae572ede8dba1278704d70c6a59b1ffc5d670bc01",
+   "bytes": 1782947,
+   "rows": 12580,
+   "generatedFrom": "2026-11-07T13:13:48",
+   "generatedTo": "2026-11-07T13:13:48"
+  },
+  {
+   "code": "NW381",
+   "province": "NW",
+   "sha256": "30f5bf9ae9fcc7ccab9e0e3ff43c2dae7339de912484292cf496e0eca245e644",
+   "bytes": 508589,
+   "rows": 3724,
+   "generatedFrom": "2026-11-06T14:24:30",
+   "generatedTo": "2026-11-06T14:24:30"
+  },
+  {
+   "code": "NW382",
+   "province": "NW",
+   "sha256": "f57adc26db39e7ffddd7cf048c9f77de2a725fa4b62cc238c3fbab477c66b36b",
+   "bytes": 525844,
+   "rows": 3828,
+   "generatedFrom": "2026-11-06T15:47:09",
+   "generatedTo": "2026-11-06T15:47:09"
+  },
+  {
+   "code": "NW383",
+   "province": "NW",
+   "sha256": "661d1fd49e67df65215a511ef0cd3307c9cb317dccd643337c941c58d87754a2",
+   "bytes": 1134016,
+   "rows": 8135,
+   "generatedFrom": "2026-11-06T18:23:49",
+   "generatedTo": "2026-11-06T18:23:49"
+  },
+  {
+   "code": "NW384",
+   "province": "NW",
+   "sha256": "0d5cce2ed2d42deb721a00f23371654b67442983ee75d1186f713957871178f3",
+   "bytes": 997362,
+   "rows": 7173,
+   "generatedFrom": "2026-11-07T18:44:54",
+   "generatedTo": "2026-11-07T18:44:54"
+  },
+  {
+   "code": "NW385",
+   "province": "NW",
+   "sha256": "ecfb814b657ba3a963e0c5801887cbba6ec42b0e9b6218da07adeb779a1272cd",
+   "bytes": 965909,
+   "rows": 6465,
+   "generatedFrom": "2026-11-06T18:23:44",
+   "generatedTo": "2026-11-06T18:23:44"
+  },
+  {
+   "code": "NW392",
+   "province": "NW",
+   "sha256": "9c27852af585b7e05f88077a7076d7dcf5cad78eb99fb8a05577cc06d13014c6",
+   "bytes": 279037,
+   "rows": 2030,
+   "generatedFrom": "2026-11-06T11:18:05",
+   "generatedTo": "2026-11-06T11:18:05"
+  },
+  {
+   "code": "NW393",
+   "province": "NW",
+   "sha256": "bc893727f11ab8b51b43321577b1212965dd49fc379fc0a9d96365519be287e9",
+   "bytes": 146498,
+   "rows": 1070,
+   "generatedFrom": "2026-11-05T16:48:27",
+   "generatedTo": "2026-11-05T16:48:27"
+  },
+  {
+   "code": "NW394",
+   "province": "NW",
+   "sha256": "04a0088df89e349539472a992b2d78b872557d5524771270cf62fda00a66f90c",
+   "bytes": 1081174,
+   "rows": 7318,
+   "generatedFrom": "2026-11-06T13:39:11",
+   "generatedTo": "2026-11-06T13:39:11"
+  },
+  {
+   "code": "NW396",
+   "province": "NW",
+   "sha256": "1e60155f30a35d7465fcc7a649a5a4757a5ee7fe67ea62d6c9d6c68f41c4b65c",
+   "bytes": 138582,
+   "rows": 962,
+   "generatedFrom": "2026-11-05T20:10:11",
+   "generatedTo": "2026-11-05T20:10:11"
+  },
+  {
+   "code": "NW397",
+   "province": "NW",
+   "sha256": "883ba3d022583b2884e4e79a6b107736be86ef22fe1141e6df00c9ebfbc14640",
+   "bytes": 622167,
+   "rows": 4282,
+   "generatedFrom": "2026-11-05T20:10:11",
+   "generatedTo": "2026-11-05T20:10:11"
+  },
+  {
+   "code": "NW403",
+   "province": "NW",
+   "sha256": "414359fdd0e993b6e72fd69b597fa783980c69e7d46646e1acf05e25421cd13a",
+   "bytes": 1067976,
+   "rows": 7535,
+   "generatedFrom": "2026-11-07T13:45:54",
+   "generatedTo": "2026-11-07T13:45:54"
+  },
+  {
+   "code": "NW404",
+   "province": "NW",
+   "sha256": "3868512e9a881eb1cc93a671710fe63810f409c69a64fa7a743a2b00689a08e2",
+   "bytes": 253887,
+   "rows": 1754,
+   "generatedFrom": "2026-11-06T16:48:04",
+   "generatedTo": "2026-11-06T16:48:04"
+  },
+  {
+   "code": "NW405",
+   "province": "NW",
+   "sha256": "0e750ac1eff5f69ec989892f944e9fda986b548e09f73d49d09e8b24ef1a76a3",
+   "bytes": 781432,
+   "rows": 5638,
+   "generatedFrom": "2026-11-08T17:03:07",
+   "generatedTo": "2026-11-08T17:03:07"
+  },
+  {
+   "code": "TSH",
+   "province": "GP",
+   "sha256": "c1ce3959a836ae301035e1a73f17ad2fda5fcbf081f4ff160f4461886655d1f3",
+   "bytes": 14209775,
+   "rows": 99953,
+   "generatedFrom": "2026-11-08T00:11:05",
+   "generatedTo": "2026-11-08T00:11:05"
+  },
+  {
+   "code": "WC011",
+   "province": "WP",
+   "sha256": "c403a49bfa6ad1f64948637adfbd63ec62df7b84ecdf823f922620c505406fcc",
+   "bytes": 213059,
+   "rows": 1475,
+   "generatedFrom": "2026-11-05T10:31:06",
+   "generatedTo": "2026-11-05T10:31:06"
+  },
+  {
+   "code": "WC012",
+   "province": "WP",
+   "sha256": "5b6a7cd148cd45e9d2c02531ca07a4b80bf9125417ce2d69d7347b3dbd385b68",
+   "bytes": 154579,
+   "rows": 1061,
+   "generatedFrom": "2026-11-07T15:42:46",
+   "generatedTo": "2026-11-07T15:42:46"
+  },
+  {
+   "code": "WC013",
+   "province": "WP",
+   "sha256": "d70e59bfbc72976f653972f68ef767aa11f97ee0234e8240cc78ad2a3c1b891b",
+   "bytes": 138487,
+   "rows": 954,
+   "generatedFrom": "2026-11-05T15:19:51",
+   "generatedTo": "2026-11-05T15:19:51"
+  },
+  {
+   "code": "WC014",
+   "province": "WP",
+   "sha256": "04d43bfe10e7643e6cd5659173bdb6e1ae488d4a6ba78fc4bd1838099bd227a4",
+   "bytes": 203079,
+   "rows": 1344,
+   "generatedFrom": "2026-11-05T13:14:24",
+   "generatedTo": "2026-11-05T13:14:24"
+  },
+  {
+   "code": "WC015",
+   "province": "WP",
+   "sha256": "6c8749302ed753044d478f4f3e927b53226fc9b488f3540bf254574407dc197b",
+   "bytes": 234249,
+   "rows": 1595,
+   "generatedFrom": "2026-11-05T09:00:38",
+   "generatedTo": "2026-11-05T09:00:38"
+  },
+  {
+   "code": "WC022",
+   "province": "WP",
+   "sha256": "d4a50a109117d531132d6c445c05dc3f5ed0946ccff5e6595aef8ac9663b4668",
+   "bytes": 438657,
+   "rows": 3052,
+   "generatedFrom": "2026-11-05T12:59:46",
+   "generatedTo": "2026-11-05T12:59:46"
+  },
+  {
+   "code": "WC023",
+   "province": "WP",
+   "sha256": "320544062629951bd38d12b66a9f72b47eee8f7c06955d239101e6256027df9e",
+   "bytes": 775619,
+   "rows": 5326,
+   "generatedFrom": "2026-11-05T19:03:17",
+   "generatedTo": "2026-11-05T19:03:17"
+  },
+  {
+   "code": "WC024",
+   "province": "WP",
+   "sha256": "5ef10a33c55d3fc750a01bb977bf21d29686afe7334ee55e6e237039c3ba9c53",
+   "bytes": 480233,
+   "rows": 3231,
+   "generatedFrom": "2026-11-06T16:48:04",
+   "generatedTo": "2026-11-06T16:48:04"
+  },
+  {
+   "code": "WC025",
+   "province": "WP",
+   "sha256": "3367c0bedd84fea81c2a46269341f975a547ea17c0b144051993afcd8d00f123",
+   "bytes": 571380,
+   "rows": 3866,
+   "generatedFrom": "2026-11-07T17:41:01",
+   "generatedTo": "2026-11-07T17:41:01"
+  },
+  {
+   "code": "WC026",
+   "province": "WP",
+   "sha256": "52ae1047dcd9cc0510e77b41620428efc8ce11bbd22dd269cd67bd45b1640bb7",
+   "bytes": 353852,
+   "rows": 2473,
+   "generatedFrom": "2026-11-05T17:59:36",
+   "generatedTo": "2026-11-05T17:59:36"
+  },
+  {
+   "code": "WC031",
+   "province": "WP",
+   "sha256": "9e0ca212edfc002ad6b8669bd9849fb4110399e29d1776a70c258edc535fb1ba",
+   "bytes": 417437,
+   "rows": 2798,
+   "generatedFrom": "2026-11-05T22:38:38",
+   "generatedTo": "2026-11-05T22:38:38"
+  },
+  {
+   "code": "WC032",
+   "province": "WP",
+   "sha256": "85bcc2cf5b9263e5d114ff67f9c9c94738d8b2061c4c3711c3fa022be1903f95",
+   "bytes": 284444,
+   "rows": 1963,
+   "generatedFrom": "2026-11-06T11:18:05",
+   "generatedTo": "2026-11-06T11:18:05"
+  },
+  {
+   "code": "WC033",
+   "province": "WP",
+   "sha256": "12c82d60c3b9e77b0622a56d7da2481b9dac970099510bf54b278ce4c3a511c9",
+   "bytes": 114395,
+   "rows": 793,
+   "generatedFrom": "2026-11-05T12:14:47",
+   "generatedTo": "2026-11-05T12:14:47"
+  },
+  {
+   "code": "WC034",
+   "province": "WP",
+   "sha256": "b8d04e39585937c2476e4888b7c0b2c3b380a69834df3d86edac9d28232e9040",
+   "bytes": 86483,
+   "rows": 603,
+   "generatedFrom": "2026-11-05T10:52:02",
+   "generatedTo": "2026-11-05T10:52:02"
+  },
+  {
+   "code": "WC041",
+   "province": "WP",
+   "sha256": "a272adfbe08301a3ecb0a003fb4e15abf1239257c99532ec47bbb5fe40b9004b",
+   "bytes": 110192,
+   "rows": 777,
+   "generatedFrom": "2026-11-05T09:30:35",
+   "generatedTo": "2026-11-05T09:30:35"
+  },
+  {
+   "code": "WC042",
+   "province": "WP",
+   "sha256": "60ce9e0b79f9b695dd60bce8abf89bdd8d716b6c388e631c4acdcb26de4341b5",
+   "bytes": 204195,
+   "rows": 1419,
+   "generatedFrom": "2026-11-05T17:45:33",
+   "generatedTo": "2026-11-05T17:45:33"
+  },
+  {
+   "code": "WC043",
+   "province": "WP",
+   "sha256": "badf91ebca697a445195388d567b7c373ee0e7649e201909eb92d4f7d2b40800",
+   "bytes": 301339,
+   "rows": 2077,
+   "generatedFrom": "2026-11-06T10:13:22",
+   "generatedTo": "2026-11-06T10:13:22"
+  },
+  {
+   "code": "WC044",
+   "province": "WP",
+   "sha256": "dd0c7c0ef90da0e34507d9601462dd98472c3ee521b057564250e6fb3ae3449b",
+   "bytes": 567310,
+   "rows": 4047,
+   "generatedFrom": "2026-11-06T13:39:11",
+   "generatedTo": "2026-11-06T13:39:11"
+  },
+  {
+   "code": "WC045",
+   "province": "WP",
+   "sha256": "427ede019fb24979bc66c147e7f6960ec06b210767d663f94683702df2fc14c4",
+   "bytes": 386798,
+   "rows": 2688,
+   "generatedFrom": "2026-11-05T12:44:37",
+   "generatedTo": "2026-11-05T12:44:37"
+  },
+  {
+   "code": "WC047",
+   "province": "WP",
+   "sha256": "94886893dfd12353ac1a01c71a1ea88832c8631ceee73491313cca86497a78db",
+   "bytes": 175674,
+   "rows": 1246,
+   "generatedFrom": "2026-11-07T16:04:08",
+   "generatedTo": "2026-11-07T16:04:08"
+  },
+  {
+   "code": "WC048",
+   "province": "WP",
+   "sha256": "d617785558a79378af236b557580f0a192bd1960e92df4262dbd5ec164649cc5",
+   "bytes": 281923,
+   "rows": 2049,
+   "generatedFrom": "2026-11-05T17:00:52",
+   "generatedTo": "2026-11-05T17:00:52"
+  },
+  {
+   "code": "WC051",
+   "province": "WP",
+   "sha256": "a9c61a3bb7b3880e491afcf72b34df3e0f9fa1eb9d8148619f0dc4e2ce015f3a",
+   "bytes": 50619,
+   "rows": 360,
+   "generatedFrom": "2026-11-05T04:42:34",
+   "generatedTo": "2026-11-05T04:42:34"
+  },
+  {
+   "code": "WC052",
+   "province": "WP",
+   "sha256": "a3a3b50c2f4315a48eb4b95ada83b19c2aabcb9a5ab9ba83f92f1e943014d442",
+   "bytes": 47014,
+   "rows": 324,
+   "generatedFrom": "2026-11-05T06:42:37",
+   "generatedTo": "2026-11-05T06:42:37"
+  },
+  {
+   "code": "WC053",
+   "province": "WP",
+   "sha256": "83ec6e2b22b68eea40dddf81b582b622255356086405889d516c9f6915d56249",
+   "bytes": 174663,
+   "rows": 1191,
+   "generatedFrom": "2026-11-05T16:48:27",
+   "generatedTo": "2026-11-05T16:48:27"
+  }
+ ],
+ "wardCountDifferences": []
+}
