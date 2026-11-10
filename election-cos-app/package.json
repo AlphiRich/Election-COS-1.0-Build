@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0-dev",
   "type": "module",
-  "description": "Election Campaign OS \u2014 application shell (election-cos-app). IC-ECOS-BUILD-2026-V2.",
+  "description": "Election Campaign OS — application shell (election-cos-app). IC-ECOS-BUILD-2026-V2.",
   "scripts": {
     "build": "tsc -b && vite build && node scripts/build-sw.mjs",
     "build:site": "vite build --config vite.site.config.ts && vite-node scripts/publish-candidates-cli.ts && node scripts/finish-site-build.mjs",
@@ -61,6 +61,7 @@
     "tailwindcss": "^3.4.10",
     "typescript": "^5.5.4",
     "vite": "^5.4.3",
+    "vite-node": "^2.1.9",
     "vitest": "^4.1.11"
   }
 }
