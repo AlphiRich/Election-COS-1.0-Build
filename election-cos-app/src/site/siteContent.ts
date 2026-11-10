@@ -335,7 +335,7 @@ export const CASEWORK_FEATURES = [
 export const CASEWORK_FAQ = [
   {
     q: 'What does it cost?',
-    a: 'R2,500 per ward a month, excluding VAT. The same price for every party and every independent councillor.',
+    a: 'R2,500 per ward a month, the full price (no VAT is charged). The same price for every party and every independent councillor.',
   },
   { q: 'How does onboarding work?', a: '[ONBOARDING STEPS AND TIMELINE]' },
   { q: 'Who owns the case data?', a: '[DATA OWNERSHIP ANSWER, AS IN THE TERMS]' },
@@ -462,7 +462,12 @@ export const PACKAGES: Package[] = [
   },
 ];
 
-export const VAT_NOTE = 'All prices exclude VAT at the prevailing statutory rate.';
+/**
+ * Innovation Consult is below the SARS compulsory VAT registration threshold
+ * and not registered, so it may not charge VAT: the published price is the
+ * whole price. Change this line and the prices together on registration.
+ */
+export const VAT_NOTE = 'No VAT is charged: Innovation Consult is not registered for VAT, so the published price is the full price.';
 
 /* ---------------------------------------------------------- contact */
 

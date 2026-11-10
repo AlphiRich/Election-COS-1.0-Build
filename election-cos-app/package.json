@@ -7,6 +7,7 @@
   "scripts": {
     "build": "tsc -b && vite build && node scripts/build-sw.mjs",
     "build:site": "vite build --config vite.site.config.ts && vite-node scripts/publish-candidates-cli.ts && node scripts/finish-site-build.mjs",
+    "build:icons": "vite-node scripts/build-icons.ts",
     "check:site-budget": "node scripts/check-site-budget.mjs",
     "check:all": "npm run lint && npm run typecheck && npm run check:hex && npm run check:type-scale && npm run check:headers && npm run check:fonts && npm run typecheck:functions && npm run test && npm run test:functions",
     "check:fonts": "node tools/fonts/vendor-fonts.mjs --check",

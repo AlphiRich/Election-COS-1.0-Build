@@ -11,7 +11,7 @@
  * that softened it would be making a claim the product refuses to make.
  */
 import { Link } from 'react-router-dom';
-import { CASEWORK_FAQ, CASEWORK_FEATURES, CASE_STEPS, EXAMPLE_CASE } from '../siteContent';
+import { CASEWORK_FAQ, CASEWORK_FEATURES, CASE_STEPS, EXAMPLE_CASE, VAT_NOTE } from '../siteContent';
 import { CtaBand, Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
 
 function FeatureIcon({ kind }: { kind: 'offline' | 'shield' | 'lock' }) {
@@ -74,7 +74,7 @@ export function SiteCasework() {
             <span className="font-body text-site-lead font-normal">per ward a month</span>
           </p>
           <p className="m-0 text-site-caption text-slate">
-            Excluding VAT at the prevailing statutory rate.
+            {VAT_NOTE}
           </p>
           <div className="flex flex-wrap gap-3">
             <Link to="/contact" className="site-btn-primary">

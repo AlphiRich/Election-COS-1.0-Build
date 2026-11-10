@@ -45,6 +45,7 @@ import { GoogleIcon } from './GoogleIcon';
 import { usingEmulators } from '@/dal/adapters/firestore/client';
 import { Button, DataLine, Field } from '@/components/ui';
 import { NAV_FOOTER_LINE, PRODUCT_NAME } from '@/lib/legalText';
+import { BrandMark } from '@/components/BrandMark';
 
 const PROVIDERS = enabledProviders(import.meta.env.VITE_AUTH_PROVIDERS as string | undefined);
 const EMAIL_LINK = emailLinkEnabled(import.meta.env.VITE_AUTH_EMAIL_LINK as string | undefined);
@@ -127,6 +128,7 @@ export function SignInPage() {
     <div className="min-h-screen flex items-center justify-center bg-paper px-4">
       <div className="w-full max-w-sm bg-white border border-ink/10 rounded-lg p-8 space-y-6">
         <div>
+          <BrandMark size={48} className="mb-4" />
           {/* IC-ECOS-NAMING-2026-V1 §2.3 fixes this header string exactly. */}
           <h1 className="text-headline-md font-display text-ink">Sign in to {PRODUCT_NAME}</h1>
           <p className="text-body-md font-body text-slate mt-2">
