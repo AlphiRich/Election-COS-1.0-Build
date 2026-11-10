@@ -98,7 +98,7 @@ describe('this build, as shipped', () => {
     }
   });
 
-  it('asks on explainers, and only explainers, once configured', () => {
+  it('asks on every eligible page, and on no forbidden page, once configured', () => {
     for (const p of AD_ELIGIBLE_PATHS) expect(shouldAskConsent(p, GOOD), p).toBe(true);
     for (const p of AD_FORBIDDEN_PATHS) expect(shouldAskConsent(p, GOOD), p).toBe(false);
   });

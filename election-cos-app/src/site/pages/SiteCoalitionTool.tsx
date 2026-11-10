@@ -5,29 +5,22 @@
  * Arithmetic only: which groups of parties pass half the seats. It does
  * not know any real agreement, does not say which coalition is likely or
  * lawful, and carries no party's current seat count. It starts from the
- * certified 2026 result of any North West local municipality (JB Marks first), with
- * the 2021 JB Marks result kept as history, so the page has real numbers on it and
- * none invented.
+ * certified 2026 result of any metro or local council in the country (JB Marks first),
+ * with the 2021 JB Marks result kept as history, so the page has real numbers on it
+ * and none invented.
  */
 import { useMemo, useState } from 'react';
 import { Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
 import { allocateSeats } from '@/modules/analytics/seatCalculator';
 import { NW405_2021_EXAMPLE } from '@/modules/analytics/nw405Example';
-import seats2026 from '@/data/lge2026/nw-seats-2026.json';
-import {
-  majorityThreshold,
-  minimalMajorities,
-  seatsHeld,
-  type SeatHolder,
-} from '../tools/coalition';
+import { NATIONAL_SEATS } from '@/modules/lge2026/nationalResults';
+import { provinceName } from '../tools/resultsFormat';
+import { PartyMark } from './PartyMark';
+import { smallMajorities } from '../tools/tracker';
+import { majorityThreshold, seatsHeld, type SeatHolder } from '../tools/coalition';
 
-interface Council2026 {
-  name: string;
-  totalSeats: number;
-  holders: Array<{ id: string; name: string; seats: number }>;
-}
-const COUNCILS = seats2026.municipalities as unknown as Record<string, Council2026>;
-const CODES = Object.keys(COUNCILS).sort();
+const COUNCILS = NATIONAL_SEATS.councils;
+const CODES = Object.keys(COUNCILS).sort((a, b) => COUNCILS[a].province.localeCompare(COUNCILS[b].province) || COUNCILS[a].name.localeCompare(COUNCILS[b].name));
 const HISTORY = 'NW405-2021';
 
 function exampleHolders(code: string = 'NW405'): SeatHolder[] {
@@ -53,7 +46,7 @@ export function SiteCoalitionTool() {
   const need = majorityThreshold(total);
   const held = seatsHeld(holders, chosen);
   const reached = total > 0 && held >= need;
-  const sets = useMemo(() => minimalMajorities(holders), [holders]);
+  const sets = useMemo(() => smallMajorities(holders, total), [holders, total]);
   const name = (id: string) => holders.find((h) => h.id === id)?.name ?? id;
   const isExample = JSON.stringify(holders) === JSON.stringify(exampleHolders(code));
   const label = code === HISTORY ? 'JB Marks council, 2021' : `${COUNCILS[code].name} council, 2026`;
@@ -106,7 +99,7 @@ export function SiteCoalitionTool() {
               >
                 {CODES.map((c) => (
                   <option key={c} value={c}>
-                    {c} {COUNCILS[c].name}, 2026
+                    {COUNCILS[c].name} ({provinceName(COUNCILS[c].province)}), 2026
                   </option>
                 ))}
                 <option value={HISTORY}>NW405 JB Marks, 2021 (history)</option>
@@ -130,8 +123,8 @@ export function SiteCoalitionTool() {
                     checked={chosen.has(h.id)}
                     onChange={() => toggle(h.id)}
                   />
-                  <label htmlFor={`co-${i}`} className="min-w-0 flex-1 truncate">
-                    {h.name}
+                  <label htmlFor={`co-${i}`} className="min-w-0 flex-1">
+                    <PartyMark id={h.id} name={h.name} size={28} />
                   </label>
                   <label htmlFor={`seats-${i}`} className="sr-only">
                     {h.name} seats
@@ -196,10 +189,8 @@ export function SiteCoalitionTool() {
             </div>
 
             <h3 className="m-0 mt-2 font-semibold">Smallest groups that pass half</h3>
-            {sets === null ? (
-              <p className="m-0 text-site-sm">Too many parties to list the combinations here.</p>
-            ) : sets.length === 0 ? (
-              <p className="m-0 text-site-sm">No group of these parties passes half.</p>
+            {sets.length === 0 ? (
+              <p className="m-0 text-site-sm">No group of four or fewer of these parties passes half.</p>
             ) : (
               <ul className="m-0 flex list-none flex-col gap-1.5 p-0 text-site-sm">
                 {sets.slice(0, 12).map((s) => (
@@ -214,8 +205,8 @@ export function SiteCoalitionTool() {
               </ul>
             )}
             <p className="m-0 text-site-caption text-slate">
-              A group is listed only if every member is needed: take any one away and it drops to
-              half or below.
+              Groups of up to four parties. A group is listed only if every member is needed: take
+              any one away and it drops to half or below.
             </p>
           </SiteCard>
         </div>

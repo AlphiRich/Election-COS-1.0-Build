@@ -20,20 +20,23 @@
  */
 import raw from '@/data/lge2026/nw-results.json';
 import manifestRaw from '@/data/lge2026/manifest.json';
-import { allocateSeats, type PartyInput, type SeatAllocationResult } from '@/modules/analytics/seatCalculator';
+import type { SeatAllocationResult } from '@/modules/analytics/seatCalculator';
+import {
+  councilHoldersOf,
+  seatAllocationOf,
+  seatInputOf,
+  wardOutcomesOf,
+  type BallotKey,
+  type CouncilHolder,
+  type PartyVotes,
+  type SeatInput,
+  type WardOutcome,
+  type WardResult,
+} from './councilResults';
 import { delimitationFor } from '@/modules/reference/municipalRegister';
 
-export type PartyVotes = Array<[string, number]>;
-export type BallotKey = 'ward' | 'pr' | 'dc40';
-
-export interface WardResult {
-  wardId: string;
-  wardNumber: number;
-  registered: number;
-  valid: number;
-  spoilt: number;
-  parties: PartyVotes;
-}
+export { INDEPENDENT, partyId, partyLabel } from './councilResults';
+export type { BallotKey, CouncilHolder, PartyVotes, SeatInput, WardOutcome, WardResult } from './councilResults';
 export interface VdDetail {
   wardId: string;
   vd: string;
@@ -88,7 +91,6 @@ export interface Manifest {
 
 export const LGE2026 = raw as unknown as Data;
 export const LGE2026_MANIFEST = manifestRaw as unknown as Manifest;
-export const INDEPENDENT = 'INDEPENDENT';
 export const MUNICIPALITY_CODES = Object.keys(LGE2026.municipalities).sort();
 export const DISTRICT_CODES = Object.keys(LGE2026.districts).sort();
 
@@ -102,32 +104,6 @@ export const district = (code: string): DistrictResult => {
   if (!d) throw new Error(`No LGE 2026 district result for ${code}.`);
   return d;
 };
-
-/** Ids used elsewhere in the build; every other party gets a stable id from its name. */
-const KNOWN_IDS: Record<string, string> = {
-  'AFRICAN NATIONAL CONGRESS': 'ANC',
-  'DEMOCRATIC ALLIANCE': 'DA',
-  'ECONOMIC FREEDOM FIGHTERS': 'EFF',
-  'PATRIOTIC ALLIANCE': 'PA',
-  'VRYHEIDSFRONT PLUS | FREEDOM FRONT PLUS': 'VFP',
-  'UMKHONTO WESIZWE PARTY': 'MK',
-  'AFRICAN CHRISTIAN DEMOCRATIC PARTY': 'ACDP',
-  'AFRICAN TRANSFORMATION MOVEMENT': 'ATM',
-  'INKATHA FREEDOM PARTY': 'IFP',
-  'SOUTH AFRICAN COMMUNIST PARTY': 'SACP',
-  INDEPENDENT: 'IND',
-};
-export const partyId = (name: string): string =>
-  KNOWN_IDS[name] ?? name.toUpperCase().replace(/[^A-Z0-9]+/g, '_').replace(/^_|_$/g, '');
-const SMALL = new Set(['AND', 'OF', 'THE', 'FOR', 'A']);
-export const partyLabel = (name: string): string =>
-  name
-    .toLowerCase()
-    .split(/(\s+|\|)/)
-    .map((w, i) => (/^[a-z]/.test(w) && (i === 0 || !SMALL.has(w.toUpperCase())) ? w[0].toUpperCase() + w.slice(1) : w))
-    .join('')
-    .replace(/\bActionsa\b/, 'ActionSA')
-    .replace(/\bBaagi\b/, 'BAAGI');
 
 const sum = (xs: PartyVotes) => xs.reduce((s, [, v]) => s + v, 0);
 
@@ -147,103 +123,25 @@ export function turnout(code: string, ballot: BallotKey): Turnout {
   return { registered: m.registered, valid: b.valid, spoilt: b.spoilt, cast, pct: (cast / m.registered) * 100 };
 }
 
-export interface WardOutcome {
-  wardNumber: number;
-  wardId: string;
-  registered: number;
-  valid: number;
-  spoilt: number;
-  winner: string;
-  winnerVotes: number;
-  runnerUp: string | null;
-  runnerUpVotes: number;
-  /** Points of the ward's valid vote, first minus second. */
-  margin: number;
-  /** "INDEPENDENT" leads, but it is several independents merged into one row. */
-  independentLeads: boolean;
-}
-
 export function wardOutcomes(code: string): WardOutcome[] {
-  return municipality(code).wardResults.map((w) => {
-    const [first, second] = w.parties;
-    return {
-      wardNumber: w.wardNumber,
-      wardId: w.wardId,
-      registered: w.registered,
-      valid: w.valid,
-      spoilt: w.spoilt,
-      winner: first[0],
-      winnerVotes: first[1],
-      runnerUp: second ? second[0] : null,
-      runnerUpVotes: second ? second[1] : 0,
-      margin: ((first[1] - (second ? second[1] : 0)) / w.valid) * 100,
-      independentLeads: first[0] === INDEPENDENT,
-    };
-  });
+  return wardOutcomesOf(municipality(code));
 }
 
-export interface SeatInput {
-  code: string;
-  totalValidVotes: number;
-  totalSeats: number;
-  independentWardSeats: number;
-  noPRListWardSeats: number;
-  parties: PartyInput[];
-  /** Party names whose ward votes are outside A because they filed no PR list. */
-  noListParties: string[];
-  /** Wards where the merged INDEPENDENT row led (counted as independent wins, see the module header). */
-  independentLeadWards: number[];
+/** The council's size from the proclaimed register (throws if the code is not in it). */
+function councillors(code: string): number {
+  const base = delimitationFor(code);
+  if (!base) throw new Error(`${code} is not in the proclaimed register.`);
+  return base.councillors;
 }
 
 /** The inputs to Schedule 1 exactly as the 2021 reconciliation composes them, from the 2026 ballots. */
 export function seatInput(code: string): SeatInput {
-  const m = municipality(code);
-  const base = delimitationFor(code);
-  if (!base) throw new Error(`${code} is not in the proclaimed register.`);
-  const onPr = new Set(m.onPrList);
-  const votes = new Map<string, number>();
-  for (const [p, v] of m.parties.pr) votes.set(p, (votes.get(p) ?? 0) + v);
-  for (const [p, v] of m.parties.ward) if (p !== INDEPENDENT && onPr.has(p)) votes.set(p, (votes.get(p) ?? 0) + v);
-  const wins = new Map<string, number>();
-  const independentLeadWards: number[] = [];
-  let independentWardSeats = 0;
-  let noPRListWardSeats = 0;
-  const noList = new Set<string>();
-  for (const w of wardOutcomes(code)) {
-    if (w.winner === INDEPENDENT) {
-      independentWardSeats++;
-      independentLeadWards.push(w.wardNumber);
-    } else if (!onPr.has(w.winner)) {
-      noPRListWardSeats++;
-      noList.add(w.winner);
-    } else wins.set(w.winner, (wins.get(w.winner) ?? 0) + 1);
-  }
-  const parties: PartyInput[] = [...votes]
-    .filter(([p, v]) => v > 0 || (wins.get(p) ?? 0) > 0)
-    .map(([p, v]) => ({ id: partyId(p), name: partyLabel(p), votes: v, wardSeatsWon: wins.get(p) ?? 0 }));
-  return {
-    code,
-    totalValidVotes: parties.reduce((s, p) => s + p.votes, 0),
-    totalSeats: base.councillors,
-    independentWardSeats,
-    noPRListWardSeats,
-    parties,
-    noListParties: [...noList].sort(),
-    independentLeadWards,
-  };
+  return seatInputOf(municipality(code), councillors(code));
 }
 
 /** Schedule 1 over the 2026 ballots. Throws for a district council (Schedule 2, not implemented). */
 export function seatAllocation2026(code: string): SeatAllocationResult {
-  const i = seatInput(code);
-  return allocateSeats({
-    totalValidVotes: i.totalValidVotes,
-    totalSeats: i.totalSeats,
-    independentWardSeats: i.independentWardSeats,
-    noPRListWardSeats: i.noPRListWardSeats,
-    municipalityCode: code,
-    parties: i.parties,
-  });
+  return seatAllocationOf(municipality(code), councillors(code));
 }
 
 export const prShares = (code: string): Array<{ name: string; pct: number; votes: number }> => {
@@ -252,29 +150,7 @@ export const prShares = (code: string): Array<{ name: string; pct: number; votes
   return m.parties.pr.map(([name, votes]) => ({ name, votes, pct: (votes / t) * 100 }));
 };
 
-export interface CouncilHolder {
-  id: string;
-  name: string;
-  seats: number;
-  wardSeats: number;
-}
-
-/**
- * Who holds the council's seats after Schedule 1: every party with a seat, then independents and parties with no PR list
- * (their ward seats are outside the list allocation). The seats add up to the council's size. Independents are shown as one
- * holder because the Commission publishes them merged; in a real council each decides separately.
- */
+/** Who holds the council's seats after Schedule 1; see councilHoldersOf. */
 export function councilHolders(code: string): CouncilHolder[] {
-  const alloc = seatAllocation2026(code);
-  const input = seatInput(code);
-  const out: CouncilHolder[] = alloc.parties
-    .filter((p) => p.totalSeats > 0)
-    .map((p) => ({ id: p.id, name: p.name, seats: p.totalSeats, wardSeats: p.wardSeatsWon }));
-  if (input.independentWardSeats > 0) {
-    out.push({ id: 'IND', name: 'Independent ward councillors', seats: input.independentWardSeats, wardSeats: input.independentWardSeats });
-  }
-  const wins = new Map<string, number>();
-  for (const w of wardOutcomes(code)) if (input.noListParties.includes(w.winner)) wins.set(w.winner, (wins.get(w.winner) ?? 0) + 1);
-  for (const [name, seats] of wins) out.push({ id: partyId(name), name: partyLabel(name), seats, wardSeats: seats });
-  return out.sort((a, b) => b.seats - a.seats || a.name.localeCompare(b.name));
+  return councilHoldersOf(municipality(code), councillors(code));
 }

@@ -72,13 +72,13 @@ describe('consent gates every advert', () => {
   });
 });
 
-describe('explainer pages only', () => {
+describe('reviewed pages only', () => {
   it('never on a page that sells, explains limits, or collects', () => {
     /**
      * Consent is deliberately TRUE in every case here. A consented
-     * visitor on a non-explainer page must still be refused, or the
-     * policy is "ads after consent" rather than "ads on explainers
-     * after consent".
+     * visitor on a page nobody put on the list must still be refused, or
+     * the policy is "ads after consent" rather than "ads on reviewed
+     * pages after consent".
      */
     for (const p of AD_FORBIDDEN_PATHS) {
       const d = decide(p, true);
@@ -113,6 +113,8 @@ describe('explainer pages only', () => {
      */
     expect(decide('/explainers/something-nobody-reviewed', true).allowed).toBe(false);
     expect(decide('/explainers/party-funding-thresholds/extra', true).allowed).toBe(false);
+    expect(decide('/councils/jhb/extra', true).allowed).toBe(false);
+    expect(decide('/councils/', true).allowed).toBe(false);
   });
 
   it('lists exactly the explainers that exist, and no others', () => {
@@ -120,9 +122,7 @@ describe('explainer pages only', () => {
     // revenue, and an entry with no article is a path that would accept
     // an advert on a page that does not exist.
     const articlePaths = EXPLAINERS.map((e) => e.path).sort();
-    const eligibleArticles = AD_ELIGIBLE_PATHS.filter(
-      (p) => p !== '/explainers' && !p.startsWith('/tools/'),
-    ).sort();
+    const eligibleArticles = AD_ELIGIBLE_PATHS.filter((p) => p.startsWith('/explainers/')).sort();
     expect(eligibleArticles).toEqual(articlePaths);
   });
 

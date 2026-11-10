@@ -92,13 +92,15 @@ export interface NavItem {
   href: string;
 }
 
+// After 4 November 2026 the results lead; "Election day" moved to the footer's results links.
 export const SITE_NAV: NavItem[] = [
+  { label: 'Coalitions', href: '/coalitions' },
+  { label: 'My ward', href: '/my-ward' },
   { label: 'Tour', href: '/tutorial' },
   { label: 'Videos', href: '/watch' },
   { label: 'Research', href: '/research' },
   { label: 'Explainers', href: '/explainers' },
   { label: 'Voter tools', href: '/tools' },
-  { label: 'Election day', href: '/election-day' },
   { label: 'For campaigns', href: '/for-campaigns' },
   { label: 'Compliance', href: '/compliance' },
 ];

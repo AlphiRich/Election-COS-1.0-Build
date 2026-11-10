@@ -49,26 +49,31 @@ describe('what was ingested', () => {
   });
   it('turnout is per ballot, never the ballots added together', () => {
     const t = turnout('NW405', 'pr');
-    expect(t.cast).toBe(69048 + 1107);
+    expect(t.cast).toBe(69423 + 1108);
     expect(t.pct).toBeGreaterThan(50);
     expect(t.pct).toBeLessThan(60);
     for (const b of ['ward', 'pr', 'dc40'] as const) expect(turnout('NW405', b).pct).toBeLessThan(100);
   });
+  // The Commission re-issued NW405 (and NW373) on 8 Nov 2026: one voting district in ward 15 was corrected. These are
+  // the figures from the re-issued file (generated 2026-11-08T17:03:07); the 6 Nov file had PR 69,048 / 1,107.
   it('NW405 headline figures are pinned to the Commission’s file', () => {
     const m = municipality('NW405');
-    expect(m.ballots.pr).toEqual({ valid: 69048, spoilt: 1107 });
-    expect(m.ballots.ward).toEqual({ valid: 69520, spoilt: 1216 });
+    expect(m.ballots.pr).toEqual({ valid: 69423, spoilt: 1108 });
+    expect(m.ballots.ward).toEqual({ valid: 69156, spoilt: 1213 });
     expect(m.ballots.dc40).toEqual({ valid: 69304, spoilt: 1221 });
     expect(m.wards).toBe(34);
     expect(m.votingDistricts).toBe(106);
   });
-  it('records the one place the municipality files and the province-wide file disagree, and which is later', () => {
+  it('records where the municipality files and the province-wide file disagree, and that the municipality files are later', () => {
     const x = LGE2026_MANIFEST.crosscheck;
     expect(x.provinceFile!.rows).toBe(120150);
-    expect(Object.keys(x.differingMunicipalities)).toEqual(['NW373']);
+    // The province-wide file is of 7 Nov; NW373 and NW405 were re-issued on 8 Nov.
+    expect(Object.keys(x.differingMunicipalities).sort()).toEqual(['NW373', 'NW405']);
     expect(x.onlyInProvince).toBe(0);
-    const nw373 = LGE2026_MANIFEST.files.find((f) => f.code === 'NW373')!;
-    expect(nw373.generatedTo > '2026-11-07T18:44:54').toBe(true);
+    for (const code of ['NW373', 'NW405']) {
+      const f = LGE2026_MANIFEST.files.find((x) => x.code === code)!;
+      expect(f.generatedTo > '2026-11-07T23:59:59', code).toBe(true);
+    }
   });
   it('holds no personal data: only counts, station names and codes', () => {
     const text = JSON.stringify(LGE2026);

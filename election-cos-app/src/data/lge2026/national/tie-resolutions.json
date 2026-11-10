@@ -1,0 +1,39 @@
+{
+  "purpose": "Exact ties in the LGE 2026 results and how the Electoral Commission resolved them, read from its own Seat Calculation Detail reports. The seat engine never breaks a tie itself (seatCalculator.ts leaves the seat pending); a tie listed here as resolved is applied with its source, and a tie listed as unresolved stays undecided on every page.",
+  "event": "EEID1887",
+  "wards": [
+    {
+      "code": "MP313", "ward": 17, "wardId": "83103017", "votes": 966,
+      "tied": ["AFRICAN NATIONAL CONGRESS", "SOUTH AFRICAN COMMUNIST PARTY"],
+      "awardedTo": "SOUTH AFRICAN COMMUNIST PARTY",
+      "evidence": { "file": "Seat Calculation Detail/MP/MP313.pdf", "sha256": "bf2aa098fe97e3536c16cdd7e5decd50a41786a23c0f8b76d470fb188f6cd198", "shows": "SACP 1 ward seat; ANC 19 ward seats (the results file's ward leaders give ANC 20)" }
+    },
+    {
+      "code": "LIM334", "ward": 5, "wardId": "93304005", "votes": 630,
+      "tied": ["ACTIONSA", "AFRICAN NATIONAL CONGRESS"],
+      "awardedTo": "AFRICAN NATIONAL CONGRESS",
+      "evidence": { "file": "Seat Calculation Detail/NP/LIM334.pdf", "sha256": "47675678fb1526dc5a2fee8ae7f026f5f6d42fa88d37ec8dc26128e832b605a4", "shows": "ANC 17 ward seats; ActionSA 0" }
+    },
+    {
+      "code": "FS194", "ward": 14, "wardId": "41904014", "votes": 751,
+      "tied": ["AFRICAN CONTENT MOVEMENT", "AFRICAN NATIONAL CONGRESS"],
+      "awardedTo": "AFRICAN CONTENT MOVEMENT",
+      "evidence": { "file": "Seat Calculation Detail/FS/FS194.pdf", "sha256": "0eed8df1895120e9d87f22a23edd32578c2373ae247521cae5a7cbd0d2c56cc3", "shows": "the report's ward seats reconcile only with this ward given to the African Content Movement" }
+    },
+    {
+      "code": "EC122", "ward": 7, "wardId": "21202007", "votes": 366,
+      "tied": ["AFRICAN NATIONAL CONGRESS", "ECONOMIC FREEDOM FIGHTERS"],
+      "awardedTo": null,
+      "evidence": { "file": "Seat Calculation Detail/EC/EC122.pdf", "sha256": "cb70798683785bf4989347dc6f6c11882d91763b83ef2d0d4e4598c88d3e46bc", "shows": "\"No data available\" on 10 Nov 2026: the Commission has published no seat calculation for Mnquma" }
+    }
+  ],
+  "remainders": [
+    {
+      "code": "NC084", "seats": 1, "votes": 563,
+      "tied": ["ECONOMIC FREEDOM FIGHTERS", "PEOPLE'S MOVEMENT FOR CHANGE"],
+      "awardedTo": ["ECONOMIC FREEDOM FIGHTERS"],
+      "why": "Equal votes and equal surplus, so Item 13(2)(b) (highest votes) cannot separate them; the report ranks the EFF's remainder 3rd and the other 4th.",
+      "evidence": { "file": "Seat Calculation Detail/NC/NC084.pdf", "sha256": "adf82afa0cac74837647e69982cfaef87ec22d895dd41274296cd5ba49f31023", "shows": "563 votes: Round 2 1, total 1 (EFF); 563 votes: Round 2 0, total 0" }
+    }
+  ]
+}

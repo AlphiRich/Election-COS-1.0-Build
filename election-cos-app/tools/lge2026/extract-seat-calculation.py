@@ -23,12 +23,30 @@ ROW = re.compile(rf'({NUM})\s+{DEC}\s+(\d+)\s+{DEC}\s+(\d+)\s+(\d+)\s+(\d+)\s*$'
 WARDROW = re.compile(r'(\d+)\s+(\d+)\s+(\d+)\s*$')
 def n(s): return int(s.replace(',', ''))
 
-def text_of(pdf):
-    return subprocess.run(['pdftotext', '-layout', str(pdf), '-'], capture_output=True, text=True, check=True).stdout
+def text_of(pdf, engine='pdftotext'):
+    if engine == 'pymupdf':
+        # The xpdf build of pdftotext (Git for Windows) interleaves these tables' columns; PyMuPDF word positions do not.
+        # Words on one baseline form a line. Runs of spaces are collapsed so the labels below match.
+        import pymupdf
+        out = []
+        with pymupdf.open(str(pdf)) as doc:
+            for page in doc:
+                rows = {}
+                for x0, y0, x1, y1, w, *_ in page.get_text('words'):
+                    rows.setdefault(round((y0 + y1) / 2), []).append((x0, w))
+                out += [' '.join(w for _, w in sorted(rows[y])) for y in sorted(rows)]
+        return '\n'.join(out) + '\n'
+    # -enc UTF-8 and an explicit decode: Windows builds of poppler and Python default to Latin-1 / cp1252.
+    return subprocess.run(['pdftotext', '-layout', '-enc', 'UTF-8', str(pdf), '-'], capture_output=True, check=True).stdout.decode('utf-8')
+
+class NotPublished(Exception):
+    """The Commission's report exists but says "No data available" (EC122 on 10 Nov 2026)."""
+
 
 def parse(text, code):
     t = text.replace('\t', ' ')
     if not re.search(rf'Municipality:\s+{code}\b', t): raise ValueError(f'{code}: report is for another municipality')
+    if 'No data available' in t: raise NotPublished(code)
     def grab(label):
         m = re.search(label + rf'\s*\n?\s*({NUM})\b', t)
         if not m: raise ValueError(f'{code}: cannot find {label}')
@@ -46,7 +64,8 @@ def parse(text, code):
     else:
         total = grab(r'Total Seats Available in Municipality - \(B\)')
         indep = grab(r'Independent Ward Councillors Elected - \(C\)')
-        m = re.search(r'no PR List -\s*\n?\s*(\d+)', t)
+        # An asterisk can sit before the figure (EC157: 13 wards won by a party that filed no PR list there).
+        m = re.search(r'no PR List -\s*\n?\s*(?:\*\s*)?(\d+)', t)
         if not m: raise ValueError(f'{code}: cannot find D')
         nolist = n(m.group(1)); ex_votes = ex_seats = 0
         expected_q = a // (total - indep - nolist) + 1
@@ -62,12 +81,21 @@ def parse(text, code):
     if sum(r['votes'] for r in rows) != a: raise ValueError(f'{code}: party votes {sum(r["votes"] for r in rows)} do not add to A {a}')
     if q != expected_q: raise ValueError(f'{code}: Q {q} != recomputed {expected_q}')
     party_seats = sum(r['seats'] for r in rows)
-    if party_seats + indep + nolist != total: raise ValueError(f'{code}: party seats {party_seats} + independents {indep} + no-list {nolist} != {total}')
+    unallocated = total - (party_seats + indep + nolist)
+    # One shape of short report is recorded rather than refused: Round 2 (the remainder seats) is zero for every party, so
+    # the report allocates fewer seats than the council has (EC157 on 8 Nov 2026: 51 + 13 of 73). Any other shortfall is
+    # an extraction error.
+    incomplete = unallocated > 0 and all(r['round2'] == 0 for r in rows)
+    if unallocated != 0 and not incomplete:
+        raise ValueError(f'{code}: party seats {party_seats} + independents {indep} + no-list {nolist} != {total}')
     if len(ward_rows) < len(rows) or [w['seats'] for w in ward_rows[:len(rows)]] != [r['seats'] for r in rows]:
         raise ValueError(f'{code}: the ward-seat table ({len(ward_rows)} rows) does not follow the seat table ({len(rows)} rows)')
     for r, w in zip(rows, ward_rows): r['wardSeats'] = w['wardSeats']; r['prSeats'] = w['prSeats']
     return {'code': code, 'excessiveCase': excessive, 'Q': q, 'A': a, 'totalSeats': total, 'independentWardSeats': indep, 'noPrListWardSeats': nolist,
-            'excessiveVotes': ex_votes, 'excessiveSeats': ex_seats, 'rows': rows, 'partySeatsTotal': party_seats}
+            'excessiveVotes': ex_votes, 'excessiveSeats': ex_seats, 'rows': rows, 'partySeatsTotal': party_seats,
+            # "(PF) Potential Forfeiture - this party has fewer candidates than the seats allocated."
+            'potentialForfeiture': '(PF) Potential Forfeiture' in t,
+            **({'incomplete': True, 'unallocatedSeats': unallocated} if incomplete else {})}
 
 def self_test():
     sample = """Quota - (Q)                                                            2,069         Formula
@@ -90,13 +118,29 @@ ACTIONSA (PF)   67   34   33"""
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument('--pdf-dir'); ap.add_argument('--out'); ap.add_argument('--self-test', action='store_true')
+    ap.add_argument('--engine', choices=['pdftotext', 'pymupdf'], default='pdftotext',
+                    help='pdftotext needs poppler; use pymupdf where only the xpdf build is installed (Git for Windows)')
+    ap.add_argument('--all', action='store_true', help='every <CODE>.pdf in --pdf-dir (the whole country), not only the 18 North West councils')
     a = ap.parse_args()
     if a.self_test: self_test(); sys.exit(0)
-    out = {'source': 'Electoral Commission of South Africa, Seat Calculation Detail, Local Government Elections 2026 (EEID1887), North West',
-           'urlPattern': 'https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/NW/<CODE>.pdf', 'municipalities': {}, 'files': {}}
-    for code in CODES:
+    codes = sorted(p.stem for p in Path(a.pdf_dir).glob('*.pdf')) if a.all else CODES
+    scope = 'all provinces' if a.all else 'North West'
+    out = {'source': f'Electoral Commission of South Africa, Seat Calculation Detail, Local Government Elections 2026 (EEID1887), {scope}',
+           'urlPattern': 'https://results.elections.org.za/home/LGEPublicReports/1887/Seat%20Calculation%20Detail/' + ('<PROV>' if a.all else 'NW') + '/<CODE>.pdf',
+           'municipalities': {}, 'files': {}, 'notPublished': []}
+    failures = []
+    for code in codes:
         p = Path(a.pdf_dir) / f'{code}.pdf'
-        out['municipalities'][code] = parse(text_of(p), code)
+        try:
+            out['municipalities'][code] = parse(text_of(p, a.engine), code)
+        except NotPublished:
+            out['notPublished'].append(code)
+        except ValueError as e:
+            failures.append(str(e)); continue
         out['files'][code] = {'sha256': hashlib.sha256(p.read_bytes()).hexdigest(), 'bytes': p.stat().st_size}
+    if failures:
+        print(f'FAILED, nothing written ({len(failures)} of {len(codes)} reports do not close):')
+        for f in failures: print('  -', f)
+        sys.exit(1)
     Path(a.out).write_text(json.dumps(out, indent=1))
-    print(f'wrote {a.out}: {len(CODES)} reports, all close')
+    print(f'wrote {a.out}: {len(codes)} reports, all close')

@@ -1,0 +1,59 @@
+{
+  "purpose": "Where the 2026 election as the Electoral Commission ran it differs from IEC Circular 1 of 2025 Annexure A (March 2025). Applied on top of circular-1-2025-annexure-a.json by the candidate extractor and the national results build. Each correction names the Commission's own 2026 file that shows it.",
+  "event": "EEID1887",
+  "corrections": [
+    {
+      "code": "FS162",
+      "field": "wards, councillors",
+      "annexure": { "wards": 7, "councillors": 13 },
+      "as2026": { "wards": 9, "councillors": 17 },
+      "why": "Contested on its own with 9 wards and 17 seats. The Annexure's 7/13 was the split ahead of the proposed new FS164, which was not contested in 2026.",
+      "evidence": [
+        { "file": "Downloadable Party Results/FS/FS162.csv", "sha256": "17ab219e275883f04dbb545d2c24d5bf84227988ff259de5ed4b3b05fcfdc0fb", "shows": "9 distinct ward ids, 41602001..41602009" },
+        { "file": "Seat Calculation Detail/FS/FS162.pdf", "sha256": "736acb023242d19f1cdf2c69b89953aa531302d9ca4de185dc69c46064d44a2f", "shows": "Total Seats 9 ward + 8 PR = 17" }
+      ]
+    },
+    {
+      "code": "FS164",
+      "field": "contested",
+      "annexure": { "name": "FS164 -New", "wards": 5, "councillors": 10 },
+      "as2026": { "contested": false },
+      "why": "No results file and no seat calculation report for FS164 (both return 404), no FS164 rows in the 23 Oct 2026 certified candidate list, and FS162 was contested at its old size.",
+      "evidence": [
+        { "file": "Downloadable Party Results/FS/FS164.csv", "sha256": null, "shows": "HTTP 404 on 10 Nov 2026" },
+        { "file": "Supplementary list FS 23102026.pdf", "sha256": null, "shows": "municipalities FS161, FS162, FS163, DC16 only in the Xhariep district" }
+      ]
+    },
+    {
+      "code": "GT484",
+      "field": "wardNumberMax",
+      "annexure": { "wards": 25 },
+      "as2026": { "wards": 25, "wardNumberMax": 28 },
+      "why": "25 wards, but numbered with gaps up to 28.",
+      "evidence": [
+        { "file": "Downloadable Party Results/GP/GT484.csv", "sha256": "742fc5774e6df81a32e7c7d773da319e3174ffc6defb672c94a1d5d3b0bf9759", "shows": "25 distinct ward ids, highest 74804028" },
+        { "file": "Seat Calculation Detail/GP/GT484.pdf", "sha256": "28332e7d080deec158fe2336376ea16df940a3287353c52c855fafad44ee943e", "shows": "Total Seats 25 ward + 24 PR = 49" }
+      ]
+    },
+    {
+      "code": "KZN434",
+      "field": "nameAliases",
+      "annexure": { "name": "Johannes Phumani Phungula" },
+      "as2026": { "nameAliases": ["Johannes Phumani Pungula"] },
+      "why": "Spelling differs between the Annexure and the Commission's candidate list; same municipality code.",
+      "evidence": [
+        { "file": "Supplementary list KZN 23102026.pdf", "sha256": null, "shows": "KZN434 - Johannes Phumani Pungula" }
+      ]
+    },
+    {
+      "code": "DC8",
+      "field": "nameAliases",
+      "annexure": { "name": "SIYANDA" },
+      "as2026": { "nameAliases": ["Z.F. Mgcawu"] },
+      "why": "Siyanda District was renamed ZF Mgcawu District; the Annexure carries the old name.",
+      "evidence": [
+        { "file": "Supplementary list NC 23102026.pdf", "sha256": null, "shows": "DC8 - Z.F. Mgcawu" }
+      ]
+    }
+  ]
+}

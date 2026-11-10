@@ -21,7 +21,7 @@ describe('2026 baselines', () => {
   it('is built from the same ballots as the 2021 baseline: PR plus ward votes, independents outside A', () => {
     const b = baseline2026('NW405');
     expect(b.totalSeats).toBe(67);
-    expect(b.totalValidVotes).toBe(138568); // the Commission's A for JB Marks
+    expect(b.totalValidVotes).toBe(138579); // the Commission's A for JB Marks (re-issued 8 Nov 2026; was 138,568)
     expect(b.results.wards).toHaveLength(34);
     expect(baselineFor('NW405', 2021)).toBe(BASELINE_NW405_2021);
     expect(() => baselineFor('NW372', 2021)).toThrow(/Only JB Marks/);

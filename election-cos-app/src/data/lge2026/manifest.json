@@ -22,11 +22,11 @@
   },
   {
    "code": "NW373",
-   "sha256": "2676083d646cb7bdba22b133ceffbb6048d131a10ee27b47c28f6052a4b215c6",
-   "bytes": 2577060,
+   "sha256": "397888a4fa552fa914354c88d8cece2e1cc3cf6d5cfc5b0b3a70498444533184",
+   "bytes": 2558979,
    "rows": 18111,
-   "generatedFrom": "2026-11-07T23:56:10",
-   "generatedTo": "2026-11-07T23:56:10"
+   "generatedFrom": "2026-11-08T15:56:04",
+   "generatedTo": "2026-11-08T15:56:04"
   },
   {
    "code": "NW374",
@@ -142,11 +142,11 @@
   },
   {
    "code": "NW405",
-   "sha256": "8349fafac0de8678ac36c8d2b1004712c4807e4a3bf2922afd1ba605e81473e3",
-   "bytes": 781428,
+   "sha256": "0e750ac1eff5f69ec989892f944e9fda986b548e09f73d49d09e8b24ef1a76a3",
+   "bytes": 781432,
    "rows": 5638,
-   "generatedFrom": "2026-11-06T15:47:10",
-   "generatedTo": "2026-11-06T15:47:10"
+   "generatedFrom": "2026-11-08T17:03:07",
+   "generatedTo": "2026-11-08T17:03:07"
   }
  ],
  "crosscheck": {
@@ -161,11 +161,15 @@
   "rows": 120150,
   "onlyInProvince": 0,
   "onlyInMunicipalityFiles": 200,
-  "differing": 72,
+  "differing": 133,
   "differingMunicipalities": {
    "NW373": [
     "86992329",
+    "87020399",
     "87020692"
+   ],
+   "NW405": [
+    "86910037"
    ]
   },
   "note": "Municipality files are the later snapshot where they differ: they carry the latest DateGenerated. Differences are listed by voting district."

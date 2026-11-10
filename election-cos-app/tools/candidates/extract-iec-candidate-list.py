@@ -44,9 +44,17 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REGISTER = os.path.join(HERE, '..', '..', 'src', 'data', 'iec', 'circular-1-2025-annexure-a.json')
 
 
+CORRECTIONS = os.path.join(HERE, '..', '..', 'src', 'data', 'iec', 'register-corrections-2026.json')
+
+
 def load_register():
+    """The Annexure, with the 2026 corrections (each evidenced) applied on top."""
     with open(REGISTER, encoding='utf-8') as f:
-        return {m['code']: m for m in json.load(f)['municipalities']}
+        reg = {m['code']: dict(m) for m in json.load(f)['municipalities']}
+    with open(CORRECTIONS, encoding='utf-8') as f:
+        for c in json.load(f)['corrections']:
+            reg[c['code']].update(c['as2026'])
+    return reg
 
 
 # The first digit of a ward id is the province. Seen in the Commission's own
@@ -89,7 +97,7 @@ def check_and_build(rows, register, province='NW'):
         reg = register.get(r['code'])
         if not reg:
             errors.append(f"{r['code']} is not in the delimitation register"); continue
-        if reg['name'].lower() != r['mname'].lower():
+        if r['mname'].lower() not in [n.lower() for n in [reg['name'], *reg.get('nameAliases', [])]]:
             errors.append(f"{r['code']} is '{reg['name']}' in the delimitation, '{r['mname']}' in the list"); continue
         is_ward = len(r['order']) == 8
         e = dict(municipalityCode=r['code'], party=r['party'], fullName=r['fullName'], surname=r['surname'])
@@ -106,8 +114,9 @@ def check_and_build(rows, register, province='NW'):
             elif not r['order'].startswith(pre):
                 errors.append(f"{r['code']}: ward id {r['order']} does not start with {pre}"); continue
             w = int(r['order'][-3:])
-            if not (1 <= w <= reg['wards']):
-                errors.append(f"{r['code']}: ward {w} outside 1..{reg['wards']}"); continue
+            top = reg.get('wardNumberMax', reg['wards'])
+            if not (1 <= w <= top):
+                errors.append(f"{r['code']}: ward {w} outside 1..{top}"); continue
             e.update(kind='WARD', wardNumber=w)
             # "INDEPENDENT" is not a party: any number of independents may stand
             # in one ward. A real party fields at most one candidate per ward.
@@ -134,16 +143,47 @@ def check_and_build(rows, register, province='NW'):
     return entries, errors
 
 
-def build(pdf, province, url=None, fetched_on=None):
+def text_pymupdf(pdf):
+    """Rebuild the table's lines from PyMuPDF word positions.
+
+    The xpdf build of pdftotext (the one Git for Windows ships) drops the
+    "Ward \\ List Order" and ID cells on some rows of these lists; poppler does
+    not, and PyMuPDF does not. Words on one baseline form a line; a gap wider
+    than 4 points is a column break, written as two spaces, which is what
+    ROW expects between columns.
+    """
+    import pymupdf
+    lines = []
+    with pymupdf.open(pdf) as doc:
+        for page in doc:
+            rows = {}
+            for x0, y0, x1, y1, w, *_ in page.get_text('words'):
+                rows.setdefault(round((y0 + y1) / 2), []).append((x0, x1, w))
+            for y in sorted(rows):
+                line, px = '', None
+                for x0, x1, w in sorted(rows[y]):
+                    line = w if px is None else line + ('  ' if x0 - px > 4 else ' ') + w
+                    px = x1
+                lines.append(line)
+    return '\n'.join(lines) + '\n'
+
+
+def text_pdftotext(pdf):
+    with tempfile.NamedTemporaryFile(suffix='.txt', delete=False) as t:
+        out = t.name
+    # -enc UTF-8: Windows builds default to Latin-1 otherwise.
+    subprocess.run(['pdftotext', '-layout', '-enc', 'UTF-8', pdf, out], check=True)
+    text = open(out, encoding='utf-8').read(); os.unlink(out)
+    return text
+
+
+def build(pdf, province, url=None, fetched_on=None, engine='pdftotext'):
     with open(pdf, 'rb') as f:
         raw = f.read()
     if raw[:5] != b'%PDF-':
         return None, ['Not a PDF: the first bytes are not %PDF-.']
     sha = hashlib.sha256(raw).hexdigest()
-    with tempfile.NamedTemporaryFile(suffix='.txt', delete=False) as t:
-        out = t.name
-    subprocess.run(['pdftotext', '-layout', pdf, out], check=True)
-    text = open(out, encoding='utf-8').read(); os.unlink(out)
+    text = text_pymupdf(pdf) if engine == 'pymupdf' else text_pdftotext(pdf)
     title = ''
     try:
         info = subprocess.run(['pdfinfo', pdf], capture_output=True, text=True).stdout
@@ -227,12 +267,14 @@ if __name__ == '__main__':
     ap.add_argument('--self-test', action='store_true')
     ap.add_argument('--pdf'); ap.add_argument('--province'); ap.add_argument('--url')
     ap.add_argument('--fetched-on'); ap.add_argument('--out')
+    ap.add_argument('--engine', choices=['pdftotext', 'pymupdf'], default='pdftotext',
+                    help='pdftotext needs poppler; use pymupdf where only the xpdf build is installed (Git for Windows)')
     a = ap.parse_args()
     if a.self_test:
         self_test(); sys.exit(0)
     if not (a.pdf and a.province and a.out):
-        ap.error('--pdf, --province and --out are required'); 
-    doc, errors = build(a.pdf, a.province, a.url, a.fetched_on)
+        ap.error('--pdf, --province and --out are required');
+    doc, errors = build(a.pdf, a.province, a.url, a.fetched_on, a.engine)
     if errors:
         print(f'FAILED, nothing written ({len(errors)} problems):')
         for x in errors[:40]: print('  -', x)

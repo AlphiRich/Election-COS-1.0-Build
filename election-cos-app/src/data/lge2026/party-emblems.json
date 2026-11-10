@@ -1,0 +1,3205 @@
+{
+ "source": "Electoral Commission of South Africa, LGE 2026 results dashboard: party list and party images",
+ "listUrl": "https://results.elections.org.za/dashboards/lge/MapsJason/2026/PartyList.js",
+ "listSha256": "d64ef6b914945696fc804041ab6b43fdbe1fa1c299e222106be9e87e85eb1039",
+ "imageUrlPattern": "https://results.elections.org.za/dashboards/lge/Party_Images/<iecImage>",
+ "retrieved": "2026-11-10",
+ "emblems": {
+  "1860NIC CONGRESS": {
+   "file": "/party-emblems/1860nic_congress.png",
+   "iecImage": "1860NICCKZN435.PNG",
+   "abbreviation": "1860NICC",
+   "sha256": "c185e94868626fbdeb06e01a63645666fd65a3bb35e759ce57fac30c763ee0be"
+  },
+  "4TH GENERATION MOVEMENT": {
+   "file": "/party-emblems/4th_generation_movement.png",
+   "iecImage": "4TH GEN.PNG",
+   "abbreviation": "4TH GEN",
+   "sha256": "31a7340e781f42e1581061803025774892c50e797035db569140374b5d5fe742"
+  },
+  "A SHALL-X PARTY": {
+   "file": "/party-emblems/a_shall_x_party.png",
+   "iecImage": "SHALL-X.PNG",
+   "abbreviation": "SHALL-X",
+   "sha256": "6efec89cf3c56f86fe8f34a6e7aa4428cd84bdca8321009a538885c7d1365ee8"
+  },
+  "AARON": {
+   "file": "/party-emblems/aaron.png",
+   "iecImage": "AARON.PNG",
+   "abbreviation": "AARON",
+   "sha256": "925e186302ce6460c4489080895765e91bbccfd52f6c2863668e3b5536f62a07"
+  },
+  "ABAHLALI BASE MKHANYAKUDE MOVEMENT": {
+   "file": "/party-emblems/abahlali_base_mkhanyakude_movement.png",
+   "iecImage": "ABMMKZN271.PNG",
+   "abbreviation": "ABMM",
+   "sha256": "d320a51284e6ca5c6fb264acce38bc6f8e1bc66a96c9275ec84fc932b827781f"
+  },
+  "ABANTU BATHO CONGRESS": {
+   "file": "/party-emblems/abantu_batho_congress.png",
+   "iecImage": "ABC.PNG",
+   "abbreviation": "ABC",
+   "sha256": "30c30972aeeba7b3e990d7a78567b5bda99273bf3c1ca67d640f6e29233ac24f"
+  },
+  "ABANTU BEZWELETHU CONGRESS DEMOCRACY": {
+   "file": "/party-emblems/abantu_bezwelethu_congress_democracy.png",
+   "iecImage": "A.B.C.D..PNG",
+   "abbreviation": "A.B.C.D.",
+   "sha256": "ec270d993243db19cef6c09e675bb04626d1f2b8392c756fde12afc81a2a2c1a"
+  },
+  "ABANTU INTEGRITY MOVEMENT": {
+   "file": "/party-emblems/abantu_integrity_movement.png",
+   "iecImage": "AIMNMA.PNG",
+   "abbreviation": "AIM",
+   "sha256": "c132d509d652a3352513f2723d73c6a79f64086e020e64eb3eb61c71cf997c34"
+  },
+  "ABLE LEADERSHIP": {
+   "file": "/party-emblems/able_leadership.png",
+   "iecImage": "AL..PNG",
+   "abbreviation": "AL.",
+   "sha256": "c4d55ca4d2b725d6b0e9aac08d760956fa0b1e1e95a0e7e2ca553871f3679cba"
+  },
+  "ABORIGINAL GORILLA FIGHTERS": {
+   "file": "/party-emblems/aboriginal_gorilla_fighters.png",
+   "iecImage": "ABGF.PNG",
+   "abbreviation": "ABGF",
+   "sha256": "6e629c9a41b827395ed4f027ddb170a65283d4a1a8ad8529f29d8a474a0b8bff"
+  },
+  "ABORIGINAL WARRIORS 4 ECONOMIC HOPE!": {
+   "file": "/party-emblems/aboriginal_warriors_4_economic_hope.png",
+   "iecImage": "AWEH!.PNG",
+   "abbreviation": "AWEH!",
+   "sha256": "2ee3da7ccbd2befbd9f5f6679929821e200c0e8563f027274d12e7fbeb78cfaa"
+  },
+  "ABOVE MASSIVE CONSTITUENCY": {
+   "file": "/party-emblems/above_massive_constituency.png",
+   "iecImage": "ABMCDC44.PNG",
+   "abbreviation": "ABMC",
+   "sha256": "8feaec678c5c7460a4cd21cb24dde6c0661e2a46e27590d30843eb670f90c92a"
+  },
+  "ACTION ALLIANCE DEVELOPMENT PARTY": {
+   "file": "/party-emblems/action_alliance_development_party.png",
+   "iecImage": "AADP.PNG",
+   "abbreviation": "AADP",
+   "sha256": "b006364a63c68baf20e1fb3c8ffc6e42a9b4c0cd96d2066b037d996ce2927996"
+  },
+  "ACTION SAVE-BNM": {
+   "file": "/party-emblems/action_save_bnm.png",
+   "iecImage": "AS - BNM.PNG",
+   "abbreviation": "AS - BNM",
+   "sha256": "bcb64909527ae948a821470f9c922394ca764aaaf845de1c2654b9b582add522"
+  },
+  "ACTIONSA": {
+   "file": "/party-emblems/actionsa.png",
+   "iecImage": "ACTIONSA.PNG",
+   "abbreviation": "ACTIONSA",
+   "sha256": "bdc1db1e95a23bc194cc62dee29554fc0787302a8f0187f85848ceb3662de3cf"
+  },
+  "ACTIVE AFRICAN CHRISTIANS UNITED MOVEMENT": {
+   "file": "/party-emblems/active_african_christians_united_movement.png",
+   "iecImage": "AACUM.PNG",
+   "abbreviation": "AACUM",
+   "sha256": "3db5efe9a962b57e49d1b4aa9640c9315e3e276ee3c7409984dc20956dc03d4f"
+  },
+  "ACTIVE BUSINESS AND CIVIL SOCIETY PARTY": {
+   "file": "/party-emblems/active_business_and_civil_society_party.png",
+   "iecImage": "ABCSP.PNG",
+   "abbreviation": "ABCSP",
+   "sha256": "72f816691124400bcbfa15d33f4b789e5c85507fde27d488a101c33192d757fb"
+  },
+  "ACTIVE CITIZENRY TAUNG ASSOCIATION": {
+   "file": "/party-emblems/active_citizenry_taung_association.png",
+   "iecImage": "ACTA.PNG",
+   "abbreviation": "ACTA",
+   "sha256": "e498f8f645c232a64b6c0ec82e512c207236b121d17056d9b8f354c5a763fe36"
+  },
+  "ACTIVE CITIZENS COALITION": {
+   "file": "/party-emblems/active_citizens_coalition.png",
+   "iecImage": "ACC..PNG",
+   "abbreviation": "ACC.",
+   "sha256": "c5b25a0bab21fbe9738d6fa5261cab824af3f87fce00de976411729ec9095406",
+   "chosenFrom": [
+    "ACC.PNG",
+    "ACC..PNG"
+   ]
+  },
+  "ACTIVE CITIZENS OF SOUTH AFRICA": {
+   "file": "/party-emblems/active_citizens_of_south_africa.png",
+   "iecImage": "ACSA.PNG",
+   "abbreviation": "ACSA",
+   "sha256": "5c94e002f022b3159f2e741da4850b60066850e0a963f9b414b588770ccec04a"
+  },
+  "ACTIVE UNITED FRONT": {
+   "file": "/party-emblems/active_united_front.png",
+   "iecImage": "AUFWC047.PNG",
+   "abbreviation": "AUF",
+   "sha256": "19bc3cc2bc9efd981f8afde579ed343c8367b565295c3c995ecb7a5ade8adee3"
+  },
+  "ACTIVISTS FOR THE RESTORATION OF THE KAROO": {
+   "file": "/party-emblems/activists_for_the_restoration_of_the_karoo.png",
+   "iecImage": "ARK.PNG",
+   "abbreviation": "ARK",
+   "sha256": "c4d766ab4838628abb24c3c45f6aa92bd338d02887ea7d15215b095bdd621fe6"
+  },
+  "ACTIVISTS MOVEMENT OF SOUTH AFRICA": {
+   "file": "/party-emblems/activists_movement_of_south_africa.png",
+   "iecImage": "AMSA.PNG",
+   "abbreviation": "AMSA",
+   "sha256": "2324a27fc5f8e5ef02b536920fdb15a136940b7ce309c8a912153dfa2ad9d369"
+  },
+  "ADVIESKANTOOR": {
+   "file": "/party-emblems/advieskantoor.png",
+   "iecImage": "NO_ABBR1119.PNG",
+   "abbreviation": "ADVIESKANTOOR",
+   "sha256": "e9d671b716e5f5c47b81880b0755f59eb38da7b30f8a03868ed268373bf198cd"
+  },
+  "AFRICA PEOPLE COALITION PARTY": {
+   "file": "/party-emblems/africa_people_coalition_party.png",
+   "iecImage": "APCPARTY.PNG",
+   "abbreviation": "APCPARTY",
+   "sha256": "7aec6bdcafd170fe3683d5365fcdb60d966eef315cad14201d245c5da1fb23a8"
+  },
+  "AFRICA REDEMPTION DEMOCRACY": {
+   "file": "/party-emblems/africa_redemption_democracy.png",
+   "iecImage": "ARD.PNG",
+   "abbreviation": "ARD",
+   "sha256": "6577b6a360170571430ffcd9aa192d8bbb6e1d55c3b81de18d3c764394e7e264"
+  },
+  "AFRICA RESTORATION ALLIANCE": {
+   "file": "/party-emblems/africa_restoration_alliance.png",
+   "iecImage": "ARA.PNG",
+   "abbreviation": "ARA",
+   "sha256": "3faab31dda42b84a628bac0ce1cf8d7481c9ea0239a99cf213ffa3a115ef4c38"
+  },
+  "AFRICA'S NEW DAWN": {
+   "file": "/party-emblems/africa_s_new_dawn.png",
+   "iecImage": "ANDSA.PNG",
+   "abbreviation": "ANDSA",
+   "sha256": "566a5a256a5fc4d6b453634d879a32ac8e14b8a277d77b19eac45e7672f338fa"
+  },
+  "AFRICAN ALLIANCE CONGRESS": {
+   "file": "/party-emblems/african_alliance_congress.png",
+   "iecImage": "AAC.PNG",
+   "abbreviation": "AAC",
+   "sha256": "fc90f342e36407a879942f69ef73c7a8e4859a7233c0719d257c96012c2ed36f"
+  },
+  "AFRICAN CHRISTIAN DEMOCRATIC PARTY": {
+   "file": "/party-emblems/acdp.png",
+   "iecImage": "ACDP.PNG",
+   "abbreviation": "ACDP",
+   "sha256": "f4467deeb01b7987242f355c2a4f8648e314b2005a3ce019faab778862a74a46"
+  },
+  "AFRICAN CONGRESS FOR TRANSFORMATION": {
+   "file": "/party-emblems/african_congress_for_transformation.png",
+   "iecImage": "ACT.PNG",
+   "abbreviation": "ACT",
+   "sha256": "606afdd3accb84f3b9774f470ef9e4daf439a284abb972eb0fe44dd59b89b0d1"
+  },
+  "AFRICAN CONTENT MOVEMENT": {
+   "file": "/party-emblems/african_content_movement.png",
+   "iecImage": "ACM.PNG",
+   "abbreviation": "ACM",
+   "sha256": "3e5cc7806ef7d5c9c451b6bb79e142b855a257899eabc57424e9714d8a40be31"
+  },
+  "AFRICAN COVENANT": {
+   "file": "/party-emblems/african_covenant.png",
+   "iecImage": "ACO.PNG",
+   "abbreviation": "ACO",
+   "sha256": "79c7dce77669896dd40da74d9feec5e6ecd94124e727920e5f7e867325c9bfe8"
+  },
+  "AFRICAN CULTURAL IDENTITY MOVEMENT": {
+   "file": "/party-emblems/african_cultural_identity_movement.png",
+   "iecImage": "ACIM.PNG",
+   "abbreviation": "ACIM",
+   "sha256": "81e76c6715dda64423574e86ef9832c3ad3f1be22bda6a47cfae75dd7fc11bfe"
+  },
+  "AFRICAN DEMOCRATIC CHANGE": {
+   "file": "/party-emblems/african_democratic_change.png",
+   "iecImage": "ADEC.PNG",
+   "abbreviation": "ADEC",
+   "sha256": "70165c354b54a2e8415bc994ea0a0f8e6735c5c19e9045270fcf83d88e3debb5",
+   "chosenFrom": [
+    "ADCNP331.PNG",
+    "ADEC.PNG"
+   ]
+  },
+  "AFRICAN DEMOCRATICAL PARTY": {
+   "file": "/party-emblems/african_democratical_party.png",
+   "iecImage": "ADP.PNG",
+   "abbreviation": "ADP",
+   "sha256": "9357edbf50be035b207e0e2fdd982fc52c14706d7a368ed9a0745c4cde2a2608"
+  },
+  "AFRICAN DEMOCRATS": {
+   "file": "/party-emblems/african_democrats.png",
+   "iecImage": "A.D.PNG",
+   "abbreviation": "A.D",
+   "sha256": "3901f43d99fdb1daf380c3f56f8c446aa65ae0ac380532a49e1eda337a32cdab",
+   "chosenFrom": [
+    "AD+.PNG",
+    "A.D.PNG"
+   ]
+  },
+  "AFRICAN ECONOMIC FREEDOM": {
+   "file": "/party-emblems/african_economic_freedom.png",
+   "iecImage": "AEF.PNG",
+   "abbreviation": "AEF",
+   "sha256": "654b555d13ae126f0ea292ff3c28b4b21503f77f835d2edbf5d38686a7bc3404"
+  },
+  "AFRICAN ECONOMIC MOVEMENT": {
+   "file": "/party-emblems/african_economic_movement.png",
+   "iecImage": "AEM.PNG",
+   "abbreviation": "AEM",
+   "sha256": "fe4bac26c42bf7923cf9be379c2b53d7e654efff771f809823fac44607342fdb"
+  },
+  "AFRICAN ECONOMIC TRANSFORMERS": {
+   "file": "/party-emblems/african_economic_transformers.png",
+   "iecImage": "AET.PNG",
+   "abbreviation": "AET",
+   "sha256": "b19a1306a8f8191c070d8057ad650a41f89adea0700ed5b432edd876bab93b91"
+  },
+  "AFRICAN FORWARD CONGRESS": {
+   "file": "/party-emblems/african_forward_congress.png",
+   "iecImage": "NO_ABBR2115.PNG",
+   "abbreviation": "AFRICAN FORWARD CONGRESS",
+   "sha256": "6de59b9a8a3b10ddd34da4f2dd216b7a7de8923c9030eb0c8a6160d9b704d4cc"
+  },
+  "AFRICAN FREEDOM PARTY": {
+   "file": "/party-emblems/african_freedom_party.png",
+   "iecImage": "AFP.PNG",
+   "abbreviation": "AFP",
+   "sha256": "f2438a1dc9bfd1db4f71ac166c345feb33bea36df450ae99ff49630cd7d67878"
+  },
+  "AFRICAN HEART CONGRESS": {
+   "file": "/party-emblems/african_heart_congress.png",
+   "iecImage": "AHC.PNG",
+   "abbreviation": "AHC",
+   "sha256": "d6f7dc6095063eb360d80e4d43e3add23369306f5261307a6ae6c2e64ebf6c10"
+  },
+  "AFRICAN INDEPENDENT CONGRESS": {
+   "file": "/party-emblems/african_independent_congress.png",
+   "iecImage": "AIC.PNG",
+   "abbreviation": "AIC",
+   "sha256": "d2eb89669db5053c77f27334f7bc558c5b3e07ac151e841f6cd50381af8c75ac"
+  },
+  "AFRICAN INDEPENDENT NATIONAL DEMOCRATIC CAUCUS": {
+   "file": "/party-emblems/african_independent_national_democratic_caucus.png",
+   "iecImage": "AINDC.PNG",
+   "abbreviation": "AINDC",
+   "sha256": "1e7a92bd5d5f83add7a8f1ca4c207e09d48a697ba1bff9d69270f70fc5e10319"
+  },
+  "AFRICAN INDEPENDENT PEOPLE'S ORGANISATION": {
+   "file": "/party-emblems/african_independent_people_s_organisation.png",
+   "iecImage": "AIPOMP315.PNG",
+   "abbreviation": "AIPO",
+   "sha256": "3b557ad60b86683a3474ff4dd9ec42a7d446bfea4c77aac4c4d19b453a77fa5e"
+  },
+  "AFRICAN LABOUR CONVENTION": {
+   "file": "/party-emblems/african_labour_convention.png",
+   "iecImage": "ALC.PNG",
+   "abbreviation": "ALC",
+   "sha256": "f7884d3e2432f50bca8777570fbcbb4367a20ac0f70d8855f8355f51f7476a4f"
+  },
+  "AFRICAN LIBERATION ALLIANCE MOVEMENT": {
+   "file": "/party-emblems/african_liberation_alliance_movement.png",
+   "iecImage": "ALAM.PNG",
+   "abbreviation": "ALAM",
+   "sha256": "61aa2a9a6db8e4e50b7de2e3f2af738be6282243b94310078f1b051bdaa1f713"
+  },
+  "AFRICAN LIBERATION MOVEMENT": {
+   "file": "/party-emblems/african_liberation_movement.png",
+   "iecImage": "ALM.PNG",
+   "abbreviation": "ALM",
+   "sha256": "5c55b86b25fe1abe702a7993fd49c872c19e905cf74edec1dfb25558bc7800bb"
+  },
+  "AFRICAN MANTUNGWA COMMUNITY": {
+   "file": "/party-emblems/african_mantungwa_community.png",
+   "iecImage": "AC.PNG",
+   "abbreviation": "AC",
+   "sha256": "2226404dd53502d5e1b8ed75ef6eacc452d3bf9f44f55f40da50fa3f4d694092"
+  },
+  "AFRICAN MOVEMENT CONGRESS": {
+   "file": "/party-emblems/african_movement_congress.png",
+   "iecImage": "AMC.ROY..PNG",
+   "abbreviation": "AMC.ROY.",
+   "sha256": "204208d901b4775edd9b6e8b78c999d2ad1484313e36b0456a0a14b42cc16ad7"
+  },
+  "AFRICAN NATIONAL CONGRESS": {
+   "file": "/party-emblems/anc.png",
+   "iecImage": "ANC.PNG",
+   "abbreviation": "ANC",
+   "sha256": "7595b9779df2d73be5f4a385b4d1b38ce736f48a804105ddf38046f668bbd944"
+  },
+  "AFRICAN PEOPLE FIRST": {
+   "file": "/party-emblems/african_people_first.png",
+   "iecImage": "APF.PNG",
+   "abbreviation": "APF",
+   "sha256": "8b85071950302126e801e88c16ff6196c7d0832fac4a0083abf3a1b8d467ae00"
+  },
+  "AFRICAN PEOPLE'S CONVENTION": {
+   "file": "/party-emblems/african_people_s_convention.png",
+   "iecImage": "APC.PNG",
+   "abbreviation": "APC",
+   "sha256": "3ecf9893a5ab46802e4fb75d6654239e881ff5d98427a296c0f7343d818b1598"
+  },
+  "AFRICAN PEOPLE'S MOVEMENT": {
+   "file": "/party-emblems/african_people_s_movement.png",
+   "iecImage": "APEMO.PNG",
+   "abbreviation": "APEMO",
+   "sha256": "22876d30d001ca5d0e2311c55fd0c6a7d07d64e6882fbce0983a72e88b5d53b1"
+  },
+  "AFRICAN PEOPLE'S SOCIALIST PARTY": {
+   "file": "/party-emblems/african_people_s_socialist_party.png",
+   "iecImage": "APSP.PNG",
+   "abbreviation": "APSP",
+   "sha256": "4ec3860399fd5f9e0ce4e1f81d50767bc2ce0e5e8186dd771fcf283cdae44631"
+  },
+  "AFRICAN PEOPLES PROGRESSION": {
+   "file": "/party-emblems/african_peoples_progression.png",
+   "iecImage": "APPEIR.PNG",
+   "abbreviation": "APPEIR",
+   "sha256": "61128d5e29527acd95c86aa3c99a84e5e74a9d766afa66d14a1888018ed93934"
+  },
+  "AFRICAN RENAISSANCE UNITY": {
+   "file": "/party-emblems/african_renaissance_unity.png",
+   "iecImage": "ARU.PNG",
+   "abbreviation": "ARU",
+   "sha256": "a68862f4ee3fc4523669f75e156fe37f22144a86bc93097c3b922bd871a58319"
+  },
+  "AFRICAN RESTORATION MOVEMENT": {
+   "file": "/party-emblems/african_restoration_movement.png",
+   "iecImage": "ARM.JBS.PNG",
+   "abbreviation": "ARM.JBS",
+   "sha256": "349c069c2ba84b95dc3b0c18afa98d9341c5b7859fbff2e387f11a5c3e167681"
+  },
+  "AFRICAN REVOLUTIONARY COUNCIL": {
+   "file": "/party-emblems/african_revolutionary_council.png",
+   "iecImage": "ARC.PNG",
+   "abbreviation": "ARC",
+   "sha256": "9e900a0dd3cc4d39de66596413181960581ae93d768a3dbff3e49bc8db14aabc"
+  },
+  "AFRICAN RISING MOVEMENT": {
+   "file": "/party-emblems/african_rising_movement.png",
+   "iecImage": "AKANI.PNG",
+   "abbreviation": "AKANI",
+   "sha256": "39a3a02e54176b951994d4919884c16308593696cdfff44465cdd683952ae6c2"
+  },
+  "AFRICAN ROYAL RAINBOW CONGRESS": {
+   "file": "/party-emblems/african_royal_rainbow_congress.png",
+   "iecImage": "ARRC..PNG",
+   "abbreviation": "ARRC.",
+   "sha256": "5bb9b16b5f50a128a957e66a0270d1583413f8f442d8b1d86b46303c21beea45"
+  },
+  "AFRICAN SECURITY CONGRESS": {
+   "file": "/party-emblems/african_security_congress.png",
+   "iecImage": "ASC.PNG",
+   "abbreviation": "ASC",
+   "sha256": "8543442ea4d308fdf948643ca985681b0e6eaa489eb93304ed6ee15f50c601d6"
+  },
+  "AFRICAN SOLUTION": {
+   "file": "/party-emblems/african_solution.png",
+   "iecImage": "A.S.PNG",
+   "abbreviation": "A.S",
+   "sha256": "40d711a2320e2f93ada4e442ffabcb0fa5bf2fb0600fa03cf60030c20d867c0d"
+  },
+  "AFRICAN SPEAR MOVEMENT": {
+   "file": "/party-emblems/african_spear_movement.png",
+   "iecImage": "ASM.PNG",
+   "abbreviation": "ASM",
+   "sha256": "f260ec5215d343a79b61553081b53ee733a632bb4aa6554c2a43fa68edba2a2f",
+   "chosenFrom": [
+    "NO_ABBR1881.PNG",
+    "ASM.PNG"
+   ]
+  },
+  "AFRICAN TRADITIONAL CONGRES": {
+   "file": "/party-emblems/african_traditional_congres.png",
+   "iecImage": "A.T.C..PNG",
+   "abbreviation": "A.T.C.",
+   "sha256": "1dd3558dfa223892fb25e17a27234e871ac3053527e9743d7d192bb27052ee7a"
+  },
+  "AFRICAN TRANSFORMATION MOVEMENT": {
+   "file": "/party-emblems/atm.png",
+   "iecImage": "ATM.PNG",
+   "abbreviation": "ATM",
+   "sha256": "f1e319f96b385ba0005c0492b6ab136db3dcd7f01af5981a1c6566a2f5d2fe32"
+  },
+  "AFRICAN UNEMPLOYED CONGRESS": {
+   "file": "/party-emblems/african_unemployed_congress.png",
+   "iecImage": "AUC.PNG",
+   "abbreviation": "AUC",
+   "sha256": "7b78cb1608824c58a4fef7b6f04c3d88da4691e1f28078a17aadc76556084108"
+  },
+  "AFRICAN UNIFIED MOVEMENT": {
+   "file": "/party-emblems/african_unified_movement.png",
+   "iecImage": "AUM.PNG",
+   "abbreviation": "AUM",
+   "sha256": "f1b70b3694caed24e08bcc7b9ed4a074d643e2fa096ea0414f38bd8546a5a9b4"
+  },
+  "AFRICAN UNITED PARTY": {
+   "file": "/party-emblems/african_united_party.png",
+   "iecImage": "AUP.PNG",
+   "abbreviation": "AUP",
+   "sha256": "81f806887bb71fd0293bbca48a589dcd472fbe9e18e860ca0d82b78ea1a18b38"
+  },
+  "AFRICAN VOICE PROGRESSIVE PARTY": {
+   "file": "/party-emblems/african_voice_progressive_party.png",
+   "iecImage": "AVPP.PNG",
+   "abbreviation": "AVPP",
+   "sha256": "55fd51af6cf145c8ca63fb7f54d5c10384c7c79dffac004a92408c9e5339a561"
+  },
+  "AFRIKA MAYIBUYE MOVEMENT": {
+   "file": "/party-emblems/afrika_mayibuye_movement.png",
+   "iecImage": "MAYIBUYE.PNG",
+   "abbreviation": "MAYIBUYE",
+   "sha256": "e9a2fa9e1f9f91f665ed8472a00c71faa844c35865d9eaeb368fb3c256c80a94"
+  },
+  "AFRIKA UNITE CONGRESS": {
+   "file": "/party-emblems/afrika_unite_congress.png",
+   "iecImage": "MA AFRIKA.PNG",
+   "abbreviation": "MA AFRIKA",
+   "sha256": "59a3d83a22776a9a6c22789084a603a37479b5535b1eb273ae53d1197a2e0342"
+  },
+  "AFRIKAN ALLIANCE OF SOCIAL DEMOCRATS": {
+   "file": "/party-emblems/afrikan_alliance_of_social_democrats.png",
+   "iecImage": "AASD.PNG",
+   "abbreviation": "AASD",
+   "sha256": "d48b26ffe5eda7064d458e6b946972e6325a88d89948019c7a08d29c49dd8b72"
+  },
+  "AFRO NATIVES": {
+   "file": "/party-emblems/afro_natives.png",
+   "iecImage": "AFNA.PNG",
+   "abbreviation": "AFNA",
+   "sha256": "c3e5990efa3fe0194b40a7d60c9dc9e2acbc67aad534a06c6b9481dbe3609f7e"
+  },
+  "AGANG SOUTH AFRICA": {
+   "file": "/party-emblems/agang_south_africa.png",
+   "iecImage": "AGANG SA.PNG",
+   "abbreviation": "AGANG SA",
+   "sha256": "1668c4ac7229c6ea91cae098b8e13876dcb53d1fc87b5b64dd2cdaf18b6bc834"
+  },
+  "AGENDA TO CITIZENRY GOVERNORS": {
+   "file": "/party-emblems/agenda_to_citizenry_governors.png",
+   "iecImage": "ACG.PNG",
+   "abbreviation": "ACG",
+   "sha256": "d2f7a500ea6f949c1c03a6a50a7d69c7c5a98eb15c5dc95471bae2094b458d18"
+  },
+  "AHGAMAN": {
+   "file": "/party-emblems/ahgaman.png",
+   "iecImage": "AGM.PNG",
+   "abbreviation": "AGM",
+   "sha256": "8659c767dbae05a7d66f53848a47b9d860b0e2da027b8c6071a58f32ed66fc7e"
+  },
+  "AL JAMA-AH": {
+   "file": "/party-emblems/al_jama_ah.png",
+   "iecImage": "ALJAMA.PNG",
+   "abbreviation": "ALJAMA",
+   "sha256": "1acf7eb90fdba5ce3447a9cbd00dc0cc4ef8c00b4c9f072ab093b4cfdf18aa6f"
+  },
+  "ALL AFRICAN ALLIANCE MOVEMENT": {
+   "file": "/party-emblems/all_african_alliance_movement.png",
+   "iecImage": "AAAM.PNG",
+   "abbreviation": "AAAM",
+   "sha256": "692111de28d8b1ada7470e4174ebad8ead469af71e36840c8cb2285791fb5a5b"
+  },
+  "ALL AFRICAN ALLIED CONGRESS": {
+   "file": "/party-emblems/all_african_allied_congress.png",
+   "iecImage": "AAAC.PNG",
+   "abbreviation": "AAAC",
+   "sha256": "087a4959b1680cda52d0ed7678c5dda5135bba8067e54f124d19a556f61799a6"
+  },
+  "ALL AND CITIZENS": {
+   "file": "/party-emblems/all_and_citizens.png",
+   "iecImage": "AANDC.PNG",
+   "abbreviation": "AANDC",
+   "sha256": "102239e36c7e0b3e8dd7d6c957e92c69e643f9415daac0d8cf32fb10eae4d0c8"
+  },
+  "ALL CITIZENS PARTY": {
+   "file": "/party-emblems/all_citizens_party.png",
+   "iecImage": "ACP.PNG",
+   "abbreviation": "ACP",
+   "sha256": "85454b087b92e126a89e792a0eb594cd75d515b06b16f5f3379e25d9affa6959"
+  },
+  "ALL NATIVES OF SOUTH AFRICA": {
+   "file": "/party-emblems/all_natives_of_south_africa.png",
+   "iecImage": "ANOSA.PNG",
+   "abbreviation": "ANOSA",
+   "sha256": "d54f5ae34f3a624119aaadd95bf44ad57d307df790fe6affecbcb1abbbecf5b8"
+  },
+  "ALL UNEMPLOYMENT LABOUR ALLIANCE": {
+   "file": "/party-emblems/all_unemployment_labour_alliance.png",
+   "iecImage": "AULAFS194.PNG",
+   "abbreviation": "AULA",
+   "sha256": "946b614ef651ddd1290012ffba9c41d594baecbd7ae5352d825d45eb66115df1"
+  },
+  "ALLIANCE FOR A NEW SOUTH AFRICA": {
+   "file": "/party-emblems/alliance_for_a_new_south_africa.png",
+   "iecImage": "ANSA.PNG",
+   "abbreviation": "ANSA",
+   "sha256": "ab72fa1d05e75400d93e4bbe7f5292a4f3ee9c5f2c0f93572126a766b3a8e790"
+  },
+  "ALLIANCE FOR SOCIAL EQUITY": {
+   "file": "/party-emblems/alliance_for_social_equity.png",
+   "iecImage": "ASE.PNG",
+   "abbreviation": "ASE",
+   "sha256": "d637c6539c7377b945df4b484eacf7b2d0a071b4adbfddf070a618d04be82083"
+  },
+  "ALLIANCE OF CHANGE": {
+   "file": "/party-emblems/alliance_of_change.png",
+   "iecImage": "AOC.PNG",
+   "abbreviation": "AOC",
+   "sha256": "dc795315610f280f711cfff236e87a09f1230c2379b235d56bc9ba49398d3780"
+  },
+  "ALLIANCE OF CITIZENS FOR CHANGE": {
+   "file": "/party-emblems/alliance_of_citizens_for_change.png",
+   "iecImage": "A.C.C.PNG",
+   "abbreviation": "A.C.C.",
+   "sha256": "6b68f807ae0a6322d0c6b412bb75d2bebe9e93dfe06bd68c011c309cc9c47b5d"
+  },
+  "ALLIED INDEPENDENTS UMBRELLA": {
+   "file": "/party-emblems/allied_independents_umbrella.png",
+   "iecImage": "UMBRELLA.PNG",
+   "abbreviation": "UMBRELLA",
+   "sha256": "cc4a8e2c3611c65bedc6e9dc3be285bf2dd58278ec8b03b487e2c7b6ebaba350"
+  },
+  "ALTERNATIVE AFRICAN ALLEGIANCE": {
+   "file": "/party-emblems/alternative_african_allegiance.png",
+   "iecImage": "AAAJHB.PNG",
+   "abbreviation": "AAA",
+   "sha256": "71de8bcf2c2833924c983457ed2145ff6cb15beb55f8683a5f9c7b3cea2850dd"
+  },
+  "AMABOMVANE REVOLUTIONARY MOVEMENT": {
+   "file": "/party-emblems/amabomvane_revolutionary_movement.png",
+   "iecImage": "AMAMBO.PNG",
+   "abbreviation": "AMAMBO",
+   "sha256": "b728a281a19ef1306018ab47c6f40f8bb28a6660fa5d9cb86dc3e5acad0861bc"
+  },
+  "AMALGAMATED CONCERNED RESIDENTS ASSOCIATION": {
+   "file": "/party-emblems/amalgamated_concerned_residents_association.png",
+   "iecImage": "ACRA.PNG",
+   "abbreviation": "ACRA",
+   "sha256": "4a2ba83cdf61d55d812ad7d60c0565d9f1fad154dd494aa5cbff230af9ecd3db"
+  },
+  "AMALGAMATED NATIONAL FORUM": {
+   "file": "/party-emblems/amalgamated_national_forum.png",
+   "iecImage": "ANF.PNG",
+   "abbreviation": "ANF",
+   "sha256": "0fae9cc33f5b06e8a86dbb1937934847c7a7ebd9692c152462e625c8bc5a53f3"
+  },
+  "AMALGAMATED RAINBOW MOVEMENT": {
+   "file": "/party-emblems/amalgamated_rainbow_movement.png",
+   "iecImage": "ARM.PNG",
+   "abbreviation": "ARM",
+   "sha256": "06387dbc5eb5b4cb226264b0b04a5011778f81526d1576fb7438a2a0edd5f37b"
+  },
+  "AMALGAMATED STEVE TSHWETE.": {
+   "file": "/party-emblems/amalgamated_steve_tshwete.png",
+   "iecImage": "AST..PNG",
+   "abbreviation": "AST.",
+   "sha256": "ec6584f5975a7a7fe642f873237ef6d3cf976c199392292454a966bd1f24c8b8",
+   "chosenFrom": [
+    "",
+    "AST..PNG"
+   ]
+  },
+  "AMANDLA AWETHU MOVEMENT": {
+   "file": "/party-emblems/amandla_awethu_movement.png",
+   "iecImage": "AAM.PNG",
+   "abbreviation": "AAM",
+   "sha256": "12e432a3294746d20aa5c87268e6a3515fb69fd96dd324780b5d2244d575cd1d"
+  },
+  "AMANDLA MATLA PARTY": {
+   "file": "/party-emblems/amandla_matla_party.png",
+   "iecImage": "AMP.PNG",
+   "abbreviation": "AMP",
+   "sha256": "e3377f7e7eecfea5669bfc2f1f9a3b39c795ce43b0053496a026da8301ff58b3"
+  },
+  "ANSWER FOR COMMUNITY": {
+   "file": "/party-emblems/answer_for_community.png",
+   "iecImage": "AFCLIM472.PNG",
+   "abbreviation": "AFC",
+   "sha256": "fd319fcf5b79e9649edeaa2fc89f1615d7d32ae55f832e257ab1c96d5a94d390"
+  },
+  "ARISE AFRIKA ARISE INDEPENDENT CONGRESS": {
+   "file": "/party-emblems/arise_afrika_arise_independent_congress.png",
+   "iecImage": "AAAIC.PNG",
+   "abbreviation": "AAAIC",
+   "sha256": "e21b1bea1d30e65a3def3a96e79d0aaff67a5f70d46fbf4b25369313e995462a"
+  },
+  "ARONA": {
+   "file": "/party-emblems/arona.png",
+   "iecImage": "ARONA.PNG",
+   "abbreviation": "ARONA",
+   "sha256": "e26fd5a5f3fa55b124c695895d64f2f1d7393cebf114d89dc5ec4f44ba6be4d2"
+  },
+  "ARUSHA ECONOMIC COALITION": {
+   "file": "/party-emblems/arusha_economic_coalition.png",
+   "iecImage": "ARECO.PNG",
+   "abbreviation": "ARECO",
+   "sha256": "8b23ab66a63ddc10e4aa4192774a1a79baf3e11cb426f9f1a1a92602a7787eaa"
+  },
+  "ASIHLANGANENI CIVIC MOVEMENT": {
+   "file": "/party-emblems/asihlanganeni_civic_movement.png",
+   "iecImage": "ASCO.PNG",
+   "abbreviation": "ASCO",
+   "sha256": "109b9ffcbee4d427cb40cd2882a7f19d2c4df72de61a07cb46cad3283c37352e"
+  },
+  "ASSEGAAI INDEPENDENT MOVEMENT OF SOUTH AFRICA": {
+   "file": "/party-emblems/assegaai_independent_movement_of_south_africa.png",
+   "iecImage": "AIMSA.PNG",
+   "abbreviation": "AIMSA",
+   "sha256": "1f5ff03776e8b14ebbc007a06f4fc4e23ea08a93a34fb1e8ab27b21c9947c1fd"
+  },
+  "AVRIGHT POLITICAL MOVEMENT": {
+   "file": "/party-emblems/avright_political_movement.png",
+   "iecImage": "AVR.PNG",
+   "abbreviation": "AVR",
+   "sha256": "59b5c7f5abf5c410a848100178cacc78fb73f9629838923d92954b7a78c77d11"
+  },
+  "AZANIA PEACEFUL REVOLUTION": {
+   "file": "/party-emblems/azania_peaceful_revolution.png",
+   "iecImage": "AZANIA.PNG",
+   "abbreviation": "AZANIA",
+   "sha256": "b7fe4156ec8fbe66dc097d06e841d6c0f5b26218c3e8e05350d865952a5362db"
+  },
+  "AZANIA RESIDENT PARTY": {
+   "file": "/party-emblems/azania_resident_party.png",
+   "iecImage": "ARP..PNG",
+   "abbreviation": "ARP.",
+   "sha256": "61f83e6844374a51d232dd9ccaea0b7e5e40bd23023c36d1fbfe5a5b2d3a4fc5"
+  },
+  "AZANIAN GROUND FORCES": {
+   "file": "/party-emblems/azanian_ground_forces.png",
+   "iecImage": "AGF.PNG",
+   "abbreviation": "AGF",
+   "sha256": "fb5d8b88275d26dbeac9b751b18c3a7a02acab1c0c3e4f7ccf5a5b3fe486e8c4"
+  },
+  "AZANIAN INDEPENDENT COMMUNITY MOVEMENT": {
+   "file": "/party-emblems/azanian_independent_community_movement.png",
+   "iecImage": "AICMNW373.PNG",
+   "abbreviation": "AICM",
+   "sha256": "6dde02204330aefffd02b8481a40e3727cc471d9c8692c89d046bafc6c0e740e"
+  },
+  "AZANIAN PEOPLE'S ORGANISATION": {
+   "file": "/party-emblems/azanian_people_s_organisation.png",
+   "iecImage": "AZAPO.PNG",
+   "abbreviation": "AZAPO",
+   "sha256": "0a29641fe16f45c7ccbbfedd29e93f6de48cf3df25798f8232c93399fdeda9ec"
+  },
+  "BA-PHALABORWA COMMUNITY PARTY": {
+   "file": "/party-emblems/ba_phalaborwa_community_party.png",
+   "iecImage": "NO_ABBR2192.PNG",
+   "abbreviation": "BA-PHALABORWA COMMUNITY PARTY",
+   "sha256": "dd751ec7b604b5adcb4a1d9c3fdc1ccb1178dc04e850912581a2e05cd34506a9"
+  },
+  "BAAGI": {
+   "file": "/party-emblems/baagi.png",
+   "iecImage": "NO_ABBR2028.PNG",
+   "abbreviation": "BAAGI",
+   "sha256": "2326dc09542d0bbf6abba91780354379baa103649f1d81b24306a2241aed3767"
+  },
+  "BAAHI CIVIC MOVEMENT": {
+   "file": "/party-emblems/baahi_civic_movement.png",
+   "iecImage": "BCMT.PNG",
+   "abbreviation": "BCMT",
+   "sha256": "afd2e865c8068f74ca06b1acce666c8eaa6b892fe692af7e769b2015748714cd"
+  },
+  "BADIREDI BA SETŠHABA": {
+   "file": "/party-emblems/badiredi_ba_set_haba.png",
+   "iecImage": "BBS.PNG",
+   "abbreviation": "BBS",
+   "sha256": "6048c12ca9d726a4ed85ffc0589a46c7e10e115a9e5d0c59e365c72670ca758d"
+  },
+  "BAHLALI CIVIC ORGANIZATION": {
+   "file": "/party-emblems/bahlali_civic_organization.png",
+   "iecImage": "BCO.PNG",
+   "abbreviation": "BCO",
+   "sha256": "9025acdb1a4ea6789db45672a8982ab7c615f3f3fdfc1fd06f303761bdfa8fcf"
+  },
+  "BAKANANA PELE CAMPAIGN": {
+   "file": "/party-emblems/bakanana_pele_campaign.png",
+   "iecImage": "BAKANAPC.PNG",
+   "abbreviation": "BAKANAPC",
+   "sha256": "7c00f01be86566a86635bdc588957274aec7e49ed55fd77db5b598b8a6929af9"
+  },
+  "BAKGETHWA LIBERATION MOVEMENT": {
+   "file": "/party-emblems/bakgethwa_liberation_movement.png",
+   "iecImage": "BLM.PNG",
+   "abbreviation": "BLM",
+   "sha256": "b2ad93e2b421c6a74d89fe1a0a3c08e6a5f02a605d0e81f806bd2b2395590402"
+  },
+  "BAMMU CONGRESS": {
+   "file": "/party-emblems/bammu_congress.png",
+   "iecImage": "BAMMU.PNG",
+   "abbreviation": "BAMMU",
+   "sha256": "e9e370124ddbfeea592814fc8d3b4eb6e658f796984695ef21fd3cee2a5011ba"
+  },
+  "BANA BA MOBU": {
+   "file": "/party-emblems/bana_ba_mobu.png",
+   "iecImage": "BBM.PNG",
+   "abbreviation": "BBM",
+   "sha256": "f6d2f8004272013b20013b18233509215596c31d0abe6bd8da1591b04a488832"
+  },
+  "BARBERTON COMMUNITY PARTY": {
+   "file": "/party-emblems/barberton_community_party.png",
+   "iecImage": "BTCP.PNG",
+   "abbreviation": "BTCP",
+   "sha256": "91ebdd3aa6d3d93d1b19cefe33b8e3680291e7c38ea949e47824d58e5e55dc04"
+  },
+  "BATHO MOVEMENT": {
+   "file": "/party-emblems/batho_movement.png",
+   "iecImage": "BATHO.PNG",
+   "abbreviation": "BATHO",
+   "sha256": "47cfc94f5c6f57047322598fdd14af7b62a5d4a4ab2f7d798e83404c5da12a5b"
+  },
+  "BATHO PELE COMMUNITY ASSOCIATION": {
+   "file": "/party-emblems/batho_pele_community_association.png",
+   "iecImage": "BPCA.PNG",
+   "abbreviation": "BPCA",
+   "sha256": "7566247aef37fa480b4fcf90b8f151acc42bd2f523c84b3598456c40845e3476"
+  },
+  "BATHO PELE COMMUNITY SERVICE DELIVERY TSHWANE": {
+   "file": "/party-emblems/batho_pele_community_service_delivery_tshwane.png",
+   "iecImage": "BPCSDT.PNG",
+   "abbreviation": "BPCSDT",
+   "sha256": "cfb9aa4905cdd11ae1b5e90ab9d4f7b2d5412e3ee07aefb877441789c2dd2df1"
+  },
+  "BATHO PELE MOVEMENT": {
+   "file": "/party-emblems/batho_pele_movement.png",
+   "iecImage": "BPM.PNG",
+   "abbreviation": "BPM",
+   "sha256": "44443e9778d5b99cb4579e332e4dcaff3a5692181baa84cf3e946ea38b3b55ea"
+  },
+  "BATHOBOHLE POLITICAL PARTY": {
+   "file": "/party-emblems/bathobohle_political_party.png",
+   "iecImage": "BP.PNG",
+   "abbreviation": "BP",
+   "sha256": "482ba6969f00c46ac8a478f1825e2f5a23c52475aa84da6da9a09a1afe0b4310"
+  },
+  "BELA BELA ALLIANSIE": {
+   "file": "/party-emblems/bela_bela_alliansie.png",
+   "iecImage": "BBA.PNG",
+   "abbreviation": "BBA",
+   "sha256": "c442eb750b55d4a22dc1c0099b3c5fd194941b816e4ae8689bd1d28f81318d22"
+  },
+  "BELIEVERS VOICE PARTY": {
+   "file": "/party-emblems/believers_voice_party.png",
+   "iecImage": "BVP.PNG",
+   "abbreviation": "BVP",
+   "sha256": "c54fe9e25d391554d45c632ef3afe798ef865940d93619646b2e1e50a54a9ef7"
+  },
+  "BETTER RESIDENTS ASSOCIATION": {
+   "file": "/party-emblems/better_residents_association.png",
+   "iecImage": "BRA.PNG",
+   "abbreviation": "BRA",
+   "sha256": "6a3acc681efc817751adcbb0b0fc7155e601fff0ed1a9f49ba4bd8a83198cf4d"
+  },
+  "BETTER ZOLANI": {
+   "file": "/party-emblems/better_zolani.png",
+   "iecImage": "BZ.PNG",
+   "abbreviation": "BZ",
+   "sha256": "ab17b4f6bae7149cd2439bf109e4ec5cebc26babb60993cb28b98234790643fb"
+  },
+  "BLACK AND WHITE SOCIETY": {
+   "file": "/party-emblems/black_and_white_society.png",
+   "iecImage": "BAWS.PNG",
+   "abbreviation": "BAWS",
+   "sha256": "1f5d591c9f86da0cd7f8d38d4d76862f2954f31a0cf19f6f16c346920fa83b92"
+  },
+  "BOLSHEVIKS PARTY OF SOUTH AFRICA": {
+   "file": "/party-emblems/bolsheviks_party_of_south_africa.png",
+   "iecImage": "BPSA.PNG",
+   "abbreviation": "BPSA",
+   "sha256": "a86da1d768a686237290d116127ce095414dfbf4beccc940ef8d7ceede3c1d29"
+  },
+  "BOPA SECHABA COMMUNITY MOVEMENT": {
+   "file": "/party-emblems/bopa_sechaba_community_movement.png",
+   "iecImage": "BSCM.PNG",
+   "abbreviation": "BSCM",
+   "sha256": "132c44c980702d1f7d5be3fa2f74afd4c664a21bd95a443bdb73419058963109"
+  },
+  "BOPHUTHATSWANA CIVIL MOVEMENT": {
+   "file": "/party-emblems/bophuthatswana_civil_movement.png",
+   "iecImage": "NO_ABBR2052.PNG",
+   "abbreviation": "BOPHUTHATSWANA CIVIL MOVEMENT",
+   "sha256": "cb84f944c2f5d65884b3736b7de3605c11918ebd32d9085301da0e9f85f26beb"
+  },
+  "BORN TO WIN": {
+   "file": "/party-emblems/born_to_win.png",
+   "iecImage": "BTW.PNG",
+   "abbreviation": "BTW",
+   "sha256": "5c96343509d7b6573e00e6ab5201f2ae6c2fff61cc347d5dab4dc5f837091466"
+  },
+  "BOTLHALE PARTY": {
+   "file": "/party-emblems/botlhale_party.png",
+   "iecImage": "BLP.PNG",
+   "abbreviation": "BLP",
+   "sha256": "70c77e8c5f8d7ff051fc12c357d35798e3cbdd69d1a182c873220d4af1ef8d66"
+  },
+  "BREEDEVALLEI ONAFHANKLIK": {
+   "file": "/party-emblems/breedevallei_onafhanklik.png",
+   "iecImage": "BO.PNG",
+   "abbreviation": "BO",
+   "sha256": "5d51b000325ac0b03131c4458d99726a8691d39a8c6ce0121fb901e95f60a894"
+  },
+  "BRIDGTON CIVIC ASSOCIATION": {
+   "file": "/party-emblems/bridgton_civic_association.png",
+   "iecImage": "BCA.PNG",
+   "abbreviation": "BCA",
+   "sha256": "f36c6ce76e129989c20c9bc8a3e67cefa3884d99ba71d1af00edf26694cc16f7"
+  },
+  "BUILD A BETTER SOUTH AFRICA": {
+   "file": "/party-emblems/build_a_better_south_africa.png",
+   "iecImage": "BABSA.PNG",
+   "abbreviation": "BABSA",
+   "sha256": "b20ab7d08a91001280abcae852416ab75ed4bfca675bb38730e3a93a74e46b8c"
+  },
+  "BUILD ONE SOUTH AFRICA": {
+   "file": "/party-emblems/build_one_south_africa.png",
+   "iecImage": "BOSA.PNG",
+   "abbreviation": "BOSA",
+   "sha256": "99562ef8914f37d3356a5691165b9529278d19024005bc1c399741cbae90a393"
+  },
+  "BUMBANA MZANSI": {
+   "file": "/party-emblems/bumbana_mzansi.png",
+   "iecImage": "B.M..PNG",
+   "abbreviation": "B.M.",
+   "sha256": "f4ae62cf35a3255655103fe5268424514fc72a66353dd1d25f406eedfe18adfc"
+  },
+  "BUSHBUCKRIDGE LOCALS MOVEMENT": {
+   "file": "/party-emblems/bushbuckridge_locals_movement.png",
+   "iecImage": "BLOM.PNG",
+   "abbreviation": "BLOM",
+   "sha256": "718dade73b1552b4191be78730e2a9da4a43f9f9dfe8f6e84ed8b2eaa7944360"
+  },
+  "BUYISA COMMUNITY MOVEMENT": {
+   "file": "/party-emblems/buyisa_community_movement.png",
+   "iecImage": "BUYISA.PNG",
+   "abbreviation": "BUYISA",
+   "sha256": "d10b21c0db643942c6fe3571952714ffe7250348f32ff36ed2eb9de383f528f5",
+   "chosenFrom": [
+    "",
+    "BUYISA.PNG"
+   ]
+  },
+  "CAPE INDEPENDENCE PARTY / KAAPSE ONAFHANKLIKHEIDS PARTY": {
+   "file": "/party-emblems/cape_independence_party_kaapse_onafhanklikheids_party.png",
+   "iecImage": "CAPEXIT.PNG",
+   "abbreviation": "CAPEXIT",
+   "sha256": "3bfbfce074402ae9052c689822c4533e48a8dacd247a352669b37987624e2ae4"
+  },
+  "CAPE MUSLIM CONGRESS": {
+   "file": "/party-emblems/cape_muslim_congress.png",
+   "iecImage": "CMCCPT.PNG",
+   "abbreviation": "CMC",
+   "sha256": "296be9bc67b9dbf46d5e337b2b387897a4ceae54236da80f70580a1f0f7b8dd8"
+  },
+  "CEDERBERG FIRST RESIDENTS ASSOCIATION": {
+   "file": "/party-emblems/cederberg_first_residents_association.png",
+   "iecImage": "CEWC012.PNG",
+   "abbreviation": "CE",
+   "sha256": "f8f28bc1bc85b95bb2962ad8c3b36fca3c9694ae779347302fe09f776e83a8ed"
+  },
+  "CHANGE PARTY": {
+   "file": "/party-emblems/change_party.png",
+   "iecImage": "CHANGE.PNG",
+   "abbreviation": "CHANGE",
+   "sha256": "de9f43e480ac87641b243050c5970ed63638f92dd42d73f3853b3b2f2d7862a6"
+  },
+  "CHOOSE CX": {
+   "file": "/party-emblems/choose_cx.png",
+   "iecImage": "CCX.PNG",
+   "abbreviation": "CCX",
+   "sha256": "4c7336ee9d049bec83d26c3f3ff524ea5bafb3c1b013c67ee4baacf7d5580fa5"
+  },
+  "CHRIST KINGDOM PARTY": {
+   "file": "/party-emblems/christ_kingdom_party.png",
+   "iecImage": "CKP.PNG",
+   "abbreviation": "CKP",
+   "sha256": "a2d648871aeecae8f3bcc51845b30216cfa3dd9bdcdfb764410e2e72645dfabd"
+  },
+  "CIVIC INDEPENDENT": {
+   "file": "/party-emblems/civic_independent.png",
+   "iecImage": "CI.PNG",
+   "abbreviation": "CI",
+   "sha256": "a90c3865dde5644a98aa907a74deee761acc0ead94f2261659ebd8c9c293af3c"
+  },
+  "CIVIC MOVEMENT FOR PROGRESSIVE CITIZENS": {
+   "file": "/party-emblems/civic_movement_for_progressive_citizens.png",
+   "iecImage": "CMPC.PNG",
+   "abbreviation": "CMPC",
+   "sha256": "7b2acb34bbb181fdf6b3366bd0a50378756e1b8481fff438aa3104420664bba8"
+  },
+  "CIVIC WARRIORS": {
+   "file": "/party-emblems/civic_warriors.png",
+   "iecImage": "NO_ABBR1083.PNG",
+   "abbreviation": "CIVIC WARRIORS",
+   "sha256": "0dd155c0fb52cc238722baba93bd9f84d581f2cc3a82ea0b2765494ea3d2509c"
+  },
+  "COMBAT": {
+   "file": "/party-emblems/combat.png",
+   "iecImage": "COMBAT.PNG",
+   "abbreviation": "COMBAT",
+   "sha256": "b47ec44dd7084c73b4428e148104df1017f640aaaf8186af00d7150a072fd7ab"
+  },
+  "COMMUNITY ALLIANCE SA": {
+   "file": "/party-emblems/community_alliance_sa.png",
+   "iecImage": "CASA.PNG",
+   "abbreviation": "CASA",
+   "sha256": "d4b9102ddb388b8021b8ec2cdf6b000e1e366ee616cb02b961b3c32772066438"
+  },
+  "COMMUNITY FIRST ALLIANCE": {
+   "file": "/party-emblems/community_first_alliance.png",
+   "iecImage": "CFA.PNG",
+   "abbreviation": "CFA",
+   "sha256": "9343adbac574c73f9381edb7d3dfb9837d6b20a48defb4d2bdabe1bbb2a00b97"
+  },
+  "COMMUNITY FIRST MOVEMENT": {
+   "file": "/party-emblems/community_first_movement.png",
+   "iecImage": "CFM.PNG",
+   "abbreviation": "CFM",
+   "sha256": "4393bc271bd822b68cf199f7c53d0b75949b1df0033bde6a99c6c5423307198d"
+  },
+  "COMMUNITY FIRST PARTY": {
+   "file": "/party-emblems/community_first_party.png",
+   "iecImage": "PIKGRAAF.PNG",
+   "abbreviation": "PIKGRAAF",
+   "sha256": "907cf24c4412b526faf9171c439800782f531aac8a905da876e856685aa6a6c0",
+   "chosenFrom": [
+    "",
+    "PIKGRAAF.PNG"
+   ]
+  },
+  "COMMUNITY FREEDOM PARTY": {
+   "file": "/party-emblems/community_freedom_party.png",
+   "iecImage": "CFP.PNG",
+   "abbreviation": "CFP",
+   "sha256": "982ef17211ab2281931d179aa3587715a12ab0840f81a7d268f4774855989b06"
+  },
+  "COMMUNITY INDEPENDANT PARTY": {
+   "file": "/party-emblems/community_independant_party.png",
+   "iecImage": "C.I.P..PNG",
+   "abbreviation": "C.I.P.",
+   "sha256": "0a355c30dc41d6370e3498545bf28435d560e27e68dd3c401a8d9c8bf1f469d3"
+  },
+  "COMMUNITY PRIORITY MOVEMENT": {
+   "file": "/party-emblems/community_priority_movement.png",
+   "iecImage": "CPM.PNG",
+   "abbreviation": "CPM",
+   "sha256": "e3ce92a358322dcb9a0d582602a9b9aeb71efe1a73616fd56a651e7b86bd3ff0"
+  },
+  "COMMUNITY SERVICE ALLIANCE": {
+   "file": "/party-emblems/community_service_alliance.png",
+   "iecImage": "COMSA.PNG",
+   "abbreviation": "COMSA",
+   "sha256": "453f48794f2ac0609af4442915a6e2415070c6fd024328f00cb5443b81ff0621"
+  },
+  "CONCERN": {
+   "file": "/party-emblems/concern.png",
+   "iecImage": "CONCERNTSH.PNG",
+   "abbreviation": "CONCERN",
+   "sha256": "0538431d1ec22817e74337508be065e4024756448879c278073d2b19b9705af2"
+  },
+  "CONCERNED POTCHEFSTROOM RESIDENTS": {
+   "file": "/party-emblems/concerned_potchefstroom_residents.png",
+   "iecImage": "CPR.PNG",
+   "abbreviation": "CPR",
+   "sha256": "b223be5e8b25c33750776961fdc4c62d56e906ad67b452337c4edfb3806a7802"
+  },
+  "CONGREGATIONAL CHRISTIAN UNITY": {
+   "file": "/party-emblems/congregational_christian_unity.png",
+   "iecImage": "CCUKZN282.PNG",
+   "abbreviation": "CCU",
+   "sha256": "6ee99a8bfd672650ea4f0628413fb043f95ba2783ee1334cf36e00d27c784a40"
+  },
+  "CONGRESS OF MASILONYANA": {
+   "file": "/party-emblems/congress_of_masilonyana.png",
+   "iecImage": "COM.PNG",
+   "abbreviation": "COM",
+   "sha256": "c9b7d99b9d946bb4db2712575f3b0f0027570bc39aa3af3c28cf1b657cbebf37"
+  },
+  "CONGRESS OF THE PEOPLE": {
+   "file": "/party-emblems/congress_of_the_people.png",
+   "iecImage": "COPE.PNG",
+   "abbreviation": "COPE",
+   "sha256": "f36d1705920ea87e0cdcd02e386e070cab3222a7088edaa4bfed183b683add6e"
+  },
+  "DBOKKE": {
+   "file": "/party-emblems/dbokke.png",
+   "iecImage": "DBOKKE.PNG",
+   "abbreviation": "DBOKKE",
+   "sha256": "954631d7e87351453fdd44a11fb3ceb93bd51aa117e607b9f32b542cf486046c"
+  },
+  "DEFEND SA MOVEMENT": {
+   "file": "/party-emblems/defend_sa_movement.png",
+   "iecImage": "NO_ABBR3267.PNG",
+   "abbreviation": "DEFEND SA MOVEMENT",
+   "sha256": "78f6cfddbac9ba48f2a2b7a061af4ebf922a3b6ddc9152257408677dbec00f8b"
+  },
+  "DEFENDERS OF THE PEOPLE": {
+   "file": "/party-emblems/defenders_of_the_people.png",
+   "iecImage": "DOPLIM355.PNG",
+   "abbreviation": "DOP",
+   "sha256": "da546da724bf6582db55386ab94583f6c14d88bbd2787c16ca4861c988b13a4b"
+  },
+  "DEMOCRATIC ALLIANCE": {
+   "file": "/party-emblems/da.png",
+   "iecImage": "DA.PNG",
+   "abbreviation": "DA",
+   "sha256": "bc288db9a68380e5701eecd0e8331c45d416003637d6ecdbbcdd8cde83a0251b"
+  },
+  "DEMOCRATIC ASSOCIATION OF WITZENBERG INDEPENDENCE": {
+   "file": "/party-emblems/democratic_association_of_witzenberg_independence.png",
+   "iecImage": "DAWI.PNG",
+   "abbreviation": "DAWI",
+   "sha256": "f3b963bf804b90148f52b8cb70758ccabb7cbd951ecc4d1f12dfab59a9268f01"
+  },
+  "DEMOCRATIC COMMUNITY MOVEMENT": {
+   "file": "/party-emblems/democratic_community_movement.png",
+   "iecImage": "DCMMP325.PNG",
+   "abbreviation": "DCM",
+   "sha256": "f4b0abd0a18c4a7ea0ceeb4632c8466990b6e91d8cb4827d70b878306da7cad7"
+  },
+  "DEMOCRATIC LABOUR PARTY": {
+   "file": "/party-emblems/democratic_labour_party.png",
+   "iecImage": "DLP.PNG",
+   "abbreviation": "DLP",
+   "sha256": "2cd29b956a85039ceeee9a0599fc0f0e8d900566ce665ce9e471aec8057b8c87"
+  },
+  "DEMOCRATIC LIBERAL CONGRESS": {
+   "file": "/party-emblems/democratic_liberal_congress.png",
+   "iecImage": "DLC.PNG",
+   "abbreviation": "DLC",
+   "sha256": "29ae7c1d08a47b5ae7066214af9f32eeb2901874fe7f8c4551fc4d0fa3660d10"
+  },
+  "DEMOCRATIC MOVEMENT": {
+   "file": "/party-emblems/democratic_movement.png",
+   "iecImage": "DM.PNG",
+   "abbreviation": "DM",
+   "sha256": "99f9155d59eb07b3cc709b0130436d6215e40f3f1098d0737e94eebaa7be750a"
+  },
+  "DEMOCRATIC NEW CIVIC ASSOCIATION": {
+   "file": "/party-emblems/democratic_new_civic_association.png",
+   "iecImage": "DNCAWC024.PNG",
+   "abbreviation": "DNCA",
+   "sha256": "b7ee09c74570dffe1d5b59d2758f24eebe76f3f013244ca04a746fc7dfd96420"
+  },
+  "DEMOCRATIC PEOPLE'S ALTERNATIVE": {
+   "file": "/party-emblems/democratic_people_s_alternative.png",
+   "iecImage": "D.P.ACPT.PNG",
+   "abbreviation": "D.P.A",
+   "sha256": "41dc814f3defdee836e4a5c1709e5f9d721a983049304f335589817aa47d858a"
+  },
+  "DENNILTON RESIDENTS ASSOCIATION": {
+   "file": "/party-emblems/dennilton_residents_association.png",
+   "iecImage": "DRALIM472.PNG",
+   "abbreviation": "DRA",
+   "sha256": "58aa688824c65f046269e460aa747f0af304262d0adc50a582fba36981c87b43"
+  },
+  "DIENSLEWERINGS PARTY": {
+   "file": "/party-emblems/dienslewerings_party.png",
+   "iecImage": "DLRPWC031.PNG",
+   "abbreviation": "DLRP",
+   "sha256": "c15aade3e646a4f6e9ea64b319d9afdaff9613abfaee44ad10857a5df3a342a6"
+  },
+  "DIKGATLONG INDEPENDED FORUM": {
+   "file": "/party-emblems/dikgatlong_independed_forum.png",
+   "iecImage": "D.I.FNC092.PNG",
+   "abbreviation": "D.I.F",
+   "sha256": "fdf7d9711202585f1f8d2ddd66d7bc8bc67a8745d3666a16c3407563f1112eb7"
+  },
+  "DIKGATLONG RESIDENTS CONVENTION": {
+   "file": "/party-emblems/dikgatlong_residents_convention.png",
+   "iecImage": "DRC.PNG",
+   "abbreviation": "DRC",
+   "sha256": "e1ee544abba5e70c8d1a83f6c5eb480f43177aebccc2c5cfc845ca4489d475a8"
+  },
+  "DIKWANKWETLA PARTY OF SOUTH AFRICA": {
+   "file": "/party-emblems/dikwankwetla_party_of_south_africa.png",
+   "iecImage": "DPSA.PNG",
+   "abbreviation": "DPSA",
+   "sha256": "01151343abab7825a8f168513f3cd4eae42ad71dec5729e2bbf030f5b9bb82b6"
+  },
+  "DITIRELO BATHONG PARTY": {
+   "file": "/party-emblems/ditirelo_bathong_party.png",
+   "iecImage": "DBP.PNG",
+   "abbreviation": "DBP",
+   "sha256": "bcbaed0a960bb59421d7055406240881dfbe309419877494997c4430fdad0eaf"
+  },
+  "DITSHABA KOPANO RESIDENTS MOVEMENT": {
+   "file": "/party-emblems/ditshaba_kopano_residents_movement.png",
+   "iecImage": "DKRM.PNG",
+   "abbreviation": "DKRM",
+   "sha256": "c3a21034519dbc2d843099bdad28637e48acf158a91d1d6ebcb4d9e9321ece2b"
+  },
+  "ECONOMIC EMANCIPATION FORUM": {
+   "file": "/party-emblems/economic_emancipation_forum.png",
+   "iecImage": "ECOFORUM.PNG",
+   "abbreviation": "ECOFORUM",
+   "sha256": "77986fd9977fa9af49e255168956d71f27fe8efa6d300545257c36aec8300f5c"
+  },
+  "ECONOMIC FREEDOM FIGHTERS": {
+   "file": "/party-emblems/eff.png",
+   "iecImage": "EFF.PNG",
+   "abbreviation": "EFF",
+   "sha256": "6e3140d6c860dad8873fe95a247a3328a94a34cfac8c8bfa912dc4b1ce19bbf5"
+  },
+  "ECONOMIC LIBERATORS FORUM SOUTH AFRICA": {
+   "file": "/party-emblems/economic_liberators_forum_south_africa.png",
+   "iecImage": "ELF-SA.PNG",
+   "abbreviation": "ELF-SA",
+   "sha256": "0ed7f53d7fd2dd5a9845678f8c589b35f3ce9d0e7a7065ba003148f7ce679aa1"
+  },
+  "ECONOMIC REDRESS MOVEMENT": {
+   "file": "/party-emblems/economic_redress_movement.png",
+   "iecImage": "ERM.PNG",
+   "abbreviation": "ERM",
+   "sha256": "c553f14425307d766a6d9216d4a40c19dc1de327d20e525f557a011f598b629e"
+  },
+  "EDEN UNITED PEOPLE'S PARTY": {
+   "file": "/party-emblems/eden_united_people_s_party.png",
+   "iecImage": "EUPP.PNG",
+   "abbreviation": "EUPP",
+   "sha256": "db3bac2b5eae5e09e8f98ad08c4d0e983a2bbcbc366e9c1992b98c7d3517c0b0"
+  },
+  "EIGHTEEN TWELVE MOVEMENT": {
+   "file": "/party-emblems/eighteen_twelve_movement.png",
+   "iecImage": "E.T.M.PNG",
+   "abbreviation": "E.T.M",
+   "sha256": "c90699a99a4445729d67fd85aaef3c9aa1178fbf3192fc50867304e7013b3fa7"
+  },
+  "EKHETHU PEOPLES PARTY": {
+   "file": "/party-emblems/ekhethu_peoples_party.png",
+   "iecImage": "EKHETHU.PNG",
+   "abbreviation": "EKHETHU",
+   "sha256": "1c95cd3c68de70d3d88a0e95eb573806b7a9b684538908fdaf36216f9ebdd9a7"
+  },
+  "EMPATHY IN ACTION": {
+   "file": "/party-emblems/empathy_in_action.png",
+   "iecImage": "EIA.PNG",
+   "abbreviation": "EIA",
+   "sha256": "283ae47a806744e56d8d4526bcbdabfd5e7b38d99f20e5aeb528a847ecf709c6"
+  },
+  "ETHEKWINI RATEPAYERS POLITICAL MOVEMENT": {
+   "file": "/party-emblems/ethekwini_ratepayers_political_movement.png",
+   "iecImage": "ERPM.PNG",
+   "abbreviation": "ERPM",
+   "sha256": "7bf569687f7f58d5ce6aab5fe6cba4f6f106233b99d4ed23be2377b193d63740"
+  },
+  "ETHICAL LEADERS MOVEMENT": {
+   "file": "/party-emblems/ethical_leaders_movement.png",
+   "iecImage": "ELM.PNG",
+   "abbreviation": "ELM",
+   "sha256": "b9e00ea61874e41a49c27d9579c11343e4aaa5b73366c1cea742bc387357f5dd"
+  },
+  "FEDERAL PARTY SA": {
+   "file": "/party-emblems/federal_party_sa.png",
+   "iecImage": "FPSA.PNG",
+   "abbreviation": "FPSA",
+   "sha256": "e307ec9180117a323166b09be4e543b15a6829e1f99e15aaa369fb74e6d59fb5"
+  },
+  "FEZILE DABI CIVIC MOVEMENT": {
+   "file": "/party-emblems/fezile_dabi_civic_movement.png",
+   "iecImage": "FDCM.PNG",
+   "abbreviation": "FDCM",
+   "sha256": "cc0527d362bba8795c69dbd7be105ddf99c82b2b904579bcf5f396d5557abba3"
+  },
+  "FORUM FOR DEMOCRATS": {
+   "file": "/party-emblems/forum_for_democrats.png",
+   "iecImage": "FFD.PNG",
+   "abbreviation": "FFD",
+   "sha256": "eede58af4907960626b8f994826ec95c8e03406d680f3145b165bc90cb434004"
+  },
+  "FORUM FOR SOUTH AFRICA": {
+   "file": "/party-emblems/forum_for_south_africa.png",
+   "iecImage": "FORUM4SA.PNG",
+   "abbreviation": "FORUM4SA",
+   "sha256": "3ea699e8a0ae1525af091789c87c83873b31a86f51eb3fb6a028f32739145fd1"
+  },
+  "FREE DEMOCRATS": {
+   "file": "/party-emblems/free_democrats.png",
+   "iecImage": "FREE DEMS.PNG",
+   "abbreviation": "FREE DEMS",
+   "sha256": "36e5a4fbd1a3330c3ef1956ea63c0f729e402db59dfec3aaa628cebafe2f7aed"
+  },
+  "FREEDOM IN SOUTH AFRICA": {
+   "file": "/party-emblems/freedom_in_south_africa.png",
+   "iecImage": "FISA.PNG",
+   "abbreviation": "FISA",
+   "sha256": "9c74cfb0ba01d41794992069f6b2374068cb91c6a9e89b22163d623916fb42ed"
+  },
+  "GAMAGARA COMMUNITY FORUM": {
+   "file": "/party-emblems/gamagara_community_forum.png",
+   "iecImage": "GCFNC453.PNG",
+   "abbreviation": "GCF",
+   "sha256": "1b474ffa9c417dbe6c86faf3e579bc6242873a8026dca657eee016362009bfd5"
+  },
+  "GAP FIXERS OF SOUTH AFRICA": {
+   "file": "/party-emblems/gap_fixers_of_south_africa.png",
+   "iecImage": "GFSAKZN434.PNG",
+   "abbreviation": "GFSA",
+   "sha256": "a3b32bd55559cdaee4272b7fc6887b993be5e3734f789e30db37dc03722214d4"
+  },
+  "GAZA DEMOCRATIC FRONT": {
+   "file": "/party-emblems/gaza_democratic_front.png",
+   "iecImage": "GAZA.PNG",
+   "abbreviation": "GAZA",
+   "sha256": "ca93c5204c60ae94e227707eb744137f153db81e9cb06d8f88d3f57f3a88156c"
+  },
+  "GAZA NATIONAL CONGRESS": {
+   "file": "/party-emblems/gaza_national_congress.png",
+   "iecImage": "G.N.C..PNG",
+   "abbreviation": "G.N.C.",
+   "sha256": "609643c93ec945da240de6de491c75fc0681a0b11b8a430db2108fad553ee5f7"
+  },
+  "GAZANKULU LIBERATION CONGRESS": {
+   "file": "/party-emblems/gazankulu_liberation_congress.png",
+   "iecImage": "GLC.PNG",
+   "abbreviation": "GLC",
+   "sha256": "289a9854ae89023e18b06801eae2bdeed2471151c3912ef0be41ff87e0d1be84"
+  },
+  "GAZANKULU NATIONAL PARTY": {
+   "file": "/party-emblems/gazankulu_national_party.png",
+   "iecImage": "GAZANKUL.PNG",
+   "abbreviation": "GAZANKUL",
+   "sha256": "3db0803fa256eb79ed627321a015353a41fe84bfddace05a191601843fce9bb4"
+  },
+  "GODS JUSTICE AND DEVELOPMENT PARTY": {
+   "file": "/party-emblems/gods_justice_and_development_party.png",
+   "iecImage": "GJDP.PNG",
+   "abbreviation": "GJDP",
+   "sha256": "3c078b9d5ae140fad211f06e8877d29be3dd59456e38cda3f502db046963f438"
+  },
+  "GOOD": {
+   "file": "/party-emblems/good.png",
+   "iecImage": "GOOD.PNG",
+   "abbreviation": "GOOD",
+   "sha256": "3c95c5278aa8b2c77b23dece24beca30852d6e2d47c11434acaef011561c1487"
+  },
+  "GOVAN MBEKI MUNICIPALITY RATEPAYERS MOVEMENT": {
+   "file": "/party-emblems/govan_mbeki_municipality_ratepayers_movement.png",
+   "iecImage": "GMMRM.PNG",
+   "abbreviation": "GMMRM",
+   "sha256": "1457bac9a38855ba6931fa0bf1953116bd7a4bfb666343f158b457f22836383d"
+  },
+  "GREAT KEI COMMUNITY MOVEMENT": {
+   "file": "/party-emblems/great_kei_community_movement.png",
+   "iecImage": "GKCM.PNG",
+   "abbreviation": "GKCM",
+   "sha256": "bf56cf30ff11854d7b5aac0c37bb3d6c6aec161836cf641a47a1712b419dfff7"
+  },
+  "GREATER TSANTSABANE COMMUNITY FRONT": {
+   "file": "/party-emblems/greater_tsantsabane_community_front.png",
+   "iecImage": "GTCF.PNG",
+   "abbreviation": "GTCF",
+   "sha256": "c90cc4ea2a1bccbd8e42d6e611dd186532cc4d743e650073e8060d87eea72f49"
+  },
+  "HENDRINA UNITED COMMUNITY DEVELOPMENT": {
+   "file": "/party-emblems/hendrina_united_community_development.png",
+   "iecImage": "H.U.C.D.PNG",
+   "abbreviation": "H.U.C.D",
+   "sha256": "5922612157928fba846b266429387364ff2dc5cab66dad556c8453b6a9560663"
+  },
+  "HOFMEYR COMMUNITY DEVELOPMENT FORUM": {
+   "file": "/party-emblems/hofmeyr_community_development_forum.png",
+   "iecImage": "HCDF.PNG",
+   "abbreviation": "HCDF",
+   "sha256": "a08fd9105150d441bf0f8a49b9dde41a185082d3db737eee95b642a8bb825648"
+  },
+  "HOME OF INDEPENDENCE": {
+   "file": "/party-emblems/home_of_independence.png",
+   "iecImage": "H.O.I..PNG",
+   "abbreviation": "H.O.I.",
+   "sha256": "e4430eb778e706b0478407efdcf0defab65d78912412e7ad100470700efa4e35"
+  },
+  "HOPE FOR THE FUTURE": {
+   "file": "/party-emblems/hope_for_the_future.png",
+   "iecImage": "HFTFNC082.PNG",
+   "abbreviation": "HFTF",
+   "sha256": "b08abb5314be0730cc129d770ef28ade391da6fe073535b6061ec5ae9a9af378"
+  },
+  "HOPE OF RESIDENTS": {
+   "file": "/party-emblems/hope_of_residents.png",
+   "iecImage": "HOPE.PNG",
+   "abbreviation": "HOPE",
+   "sha256": "4aad0e7b7e26788cf19e33b1366a7df09b923cf782fd99c2ef35af58a3e51287"
+  },
+  "HOPEFUL LEADERS DEMOCRATS": {
+   "file": "/party-emblems/hopeful_leaders_democrats.png",
+   "iecImage": "HLD.PNG",
+   "abbreviation": "HLD",
+   "sha256": "fc80e59335c3abfdc19f7f701be2598838dbdf8df9c429e9cd20073cf1641f91"
+  },
+  "HUCONOMICS JUSTICE": {
+   "file": "/party-emblems/huconomics_justice.png",
+   "iecImage": "H.JGT485.PNG",
+   "abbreviation": "H.J",
+   "sha256": "770110cd2849ec55ff0b1839652d5eddfa58165edc30cf48bd2885be1a2f215c"
+  },
+  "IKHWEZI POLITICAL MOVEMENT": {
+   "file": "/party-emblems/ikhwezi_political_movement.png",
+   "iecImage": "IPMWC047.PNG",
+   "abbreviation": "IPM",
+   "sha256": "85cf1aa5b04468b6292676e7d07005d263c16a3f3f25333395d4779ae4b0cb34"
+  },
+  "ILISO LABANTU MOVEMENT FOR SOCIAL CHANGE": {
+   "file": "/party-emblems/iliso_labantu_movement_for_social_change.png",
+   "iecImage": "ILISO.PNG",
+   "abbreviation": "ILISO",
+   "sha256": "3aca798d73a824e5eed4dd1dd4d0243e8025fffae618d4b595c11eb3e340aeba"
+  },
+  "ILIZWE NATHI": {
+   "file": "/party-emblems/ilizwe_nathi.png",
+   "iecImage": "IN.PNG",
+   "abbreviation": "IN",
+   "sha256": "0482081332501eb81e67b48c4ca9e6304beb19c1297480e87000bb8b7460f5e3"
+  },
+  "IMPUQUKO EZWENILETHU": {
+   "file": "/party-emblems/impuquko_ezwenilethu.png",
+   "iecImage": "I.Q.Z.PNG",
+   "abbreviation": "I.Q.Z",
+   "sha256": "315903ea4a8b84996451cb9c58843f6166a8662c770268202873f22262b99add"
+  },
+  "IMSTAYING": {
+   "file": "/party-emblems/imstaying.png",
+   "iecImage": "IMS.PNG",
+   "abbreviation": "IMS",
+   "sha256": "c23c8d2ab90148e639bc849f1e7ebb4ddbf96d25315389ddc73652bc3bc2b58d"
+  },
+  "INDEPENDENT": {
+   "file": "/party-emblems/ind.png",
+   "iecImage": "INDEPENDENTS.PNG",
+   "abbreviation": "IND",
+   "sha256": "fda09d8abc4eeea3665b8c11828589b4a91b38deacd12ce0cd09203614c02ad3"
+  },
+  "INDEPENDENT ALLIANCE": {
+   "file": "/party-emblems/independent_alliance.png",
+   "iecImage": "IA.PNG",
+   "abbreviation": "IA",
+   "sha256": "f6745d871e67f2f739f1e88bfb75e8396416ed5f0936da8f792e98526699e1c6"
+  },
+  "INDEPENDENT CANDIDATES ALLIANCE": {
+   "file": "/party-emblems/independent_candidates_alliance.png",
+   "iecImage": "ICA.PNG",
+   "abbreviation": "ICA",
+   "sha256": "e4808f592be1f0db388fce0a45de6f97010c49495238fd2fccb63b94c1e9d432"
+  },
+  "INDEPENDENT CITIZENS MOVEMENT": {
+   "file": "/party-emblems/independent_citizens_movement.png",
+   "iecImage": "ICM.PNG",
+   "abbreviation": "ICM",
+   "sha256": "4f76ac86c9a1a0d6f642b8d62a2fd25b039b4829433fe6fdc0589a4bef8e27d7"
+  },
+  "INDEPENDENT CIVIC ORGANISATION OF SOUTH AFRICA": {
+   "file": "/party-emblems/independent_civic_organisation_of_south_africa.png",
+   "iecImage": "ICOSA.PNG",
+   "abbreviation": "ICOSA",
+   "sha256": "afa65cd0313cd4ba36cc8c00324bc34087804379858ac0e943fdfd3121851bb6"
+  },
+  "INDEPENDENT COMMUNITY FORUM": {
+   "file": "/party-emblems/independent_community_forum.png",
+   "iecImage": "ICF.PNG",
+   "abbreviation": "ICF",
+   "sha256": "8dd6f97779230740262854412fc6d52d7fcdac542498362334f87c360b47d388"
+  },
+  "INDEPENDENT COUNCILLORS": {
+   "file": "/party-emblems/independent_councillors.png",
+   "iecImage": "IND.PNG",
+   "abbreviation": "IND",
+   "sha256": "92528f90c8f11190136a53808af80bdc7f84a41da702eb354616d7b8e6710e8b",
+   "chosenFrom": [
+    "ICDC40.PNG",
+    "IND.PNG"
+   ]
+  },
+  "INDEPENDENT LEKWA PARTY": {
+   "file": "/party-emblems/independent_lekwa_party.png",
+   "iecImage": "ILP.PNG",
+   "abbreviation": "ILP",
+   "sha256": "f3dff2eaef11454fe18edb531b684bc62794d4ee7ca96e4118e538300cdfd01e"
+  },
+  "INDEPENDENT PARTY": {
+   "file": "/party-emblems/independent_party.png",
+   "iecImage": "IPNW372.PNG",
+   "abbreviation": "IP",
+   "sha256": "49b095481cf4ff6fe5767bc2304166d43284fdc74c9bfd4ade339e8bb2093305"
+  },
+  "INDEPENDENT PEOPLE'S PARTY": {
+   "file": "/party-emblems/independent_people_s_party.png",
+   "iecImage": "IPPETH.PNG",
+   "abbreviation": "IPP",
+   "sha256": "6bbf035bdffad23060ef78ff0b0d7a83f114b4ba93a1be369583be1a28603ddd"
+  },
+  "INDEPENDENT RATEPAYERS ASSOCIATION OF SA": {
+   "file": "/party-emblems/independent_ratepayers_association_of_sa.png",
+   "iecImage": "IRASA.PNG",
+   "abbreviation": "IRASA",
+   "sha256": "308248ec9894bf49d5c1a08deb746c4a56cefdc7f06a26aba747561506aa4328"
+  },
+  "INDEPENDENT RURAL PARTY": {
+   "file": "/party-emblems/independent_rural_party.png",
+   "iecImage": "IRP.PNG",
+   "abbreviation": "IRP",
+   "sha256": "abdf1b36680e74f2cdb7a583ea242935b515936c25f83ece9a95dde92e17b982"
+  },
+  "INDIAN CONGRESS PARTY": {
+   "file": "/party-emblems/indian_congress_party.png",
+   "iecImage": "INDIANCP.PNG",
+   "abbreviation": "INDIANCP",
+   "sha256": "885844c871d694db669b6c416432d42e4d2b872f658676d083a4a02dd527dd26"
+  },
+  "INKATHA FREEDOM PARTY": {
+   "file": "/party-emblems/ifp.png",
+   "iecImage": "IFP.PNG",
+   "abbreviation": "IFP",
+   "sha256": "87358d449a790c6d22fc7a95e430aa9b82c52f0c02b32685c309bd516cd45f19"
+  },
+  "INKULULEKO YABANTU MOVEMENT": {
+   "file": "/party-emblems/inkululeko_yabantu_movement.png",
+   "iecImage": "IYM.PNG",
+   "abbreviation": "IYM",
+   "sha256": "513ba3b87e94965b075eb571f4e821cd35fbe662f44bd610278e75afced8b4d0"
+  },
+  "INSIKA YESIZWE PARTY": {
+   "file": "/party-emblems/insika_yesizwe_party.png",
+   "iecImage": "ISP.PNG",
+   "abbreviation": "ISP",
+   "sha256": "c0666a3549a2126a6945f036714852891c398857ef02e2ce2571f71d13fc065c"
+  },
+  "INTERNATIONAL REVELATION CONGRESS": {
+   "file": "/party-emblems/international_revelation_congress.png",
+   "iecImage": "IRC.PNG",
+   "abbreviation": "IRC",
+   "sha256": "8e270c7b786cce6557fa3f8db6d468bfd7bb69f2a4e55d75e65f72caf62ec770"
+  },
+  "IZWE LETHU PARTY": {
+   "file": "/party-emblems/izwe_lethu_party.png",
+   "iecImage": "I.L.P.PNG",
+   "abbreviation": "I.L.P",
+   "sha256": "1057a3c62b030752584320706a0cec226b41eff2c449bc32cd6827aa179e68ab"
+  },
+  "JOHN TAOLO GAETSEWE RE IKEMETSE": {
+   "file": "/party-emblems/john_taolo_gaetsewe_re_ikemetse.png",
+   "iecImage": "JTGR.PNG",
+   "abbreviation": "JTGR",
+   "sha256": "ffcee8a95cc12f09fd01cee97d06fc7dcffeff6c4684df4a601253e72a1adec2"
+  },
+  "JOYA WEB3 COMMUNITY MOVEMENT": {
+   "file": "/party-emblems/joya_web3_community_movement.png",
+   "iecImage": "JOYA.PNG",
+   "abbreviation": "JOYA",
+   "sha256": "ea84bbc42eaa71191631a27a9a37a7e36cd770884da0dd67c347fc3535b6ffdb"
+  },
+  "JOZINI CONGRESS": {
+   "file": "/party-emblems/jozini_congress.png",
+   "iecImage": "JC.PNG",
+   "abbreviation": "JC",
+   "sha256": "d7357747a7602a204eabc775a9101ef7ba1551c252399629363498872020eec0"
+  },
+  "JUSTICE AND EMPLOYMENT PARTY": {
+   "file": "/party-emblems/justice_and_employment_party.png",
+   "iecImage": "JEP.PNG",
+   "abbreviation": "JEP",
+   "sha256": "565032bce56114376dcbd30f159dabd4867e58e294297e26ab2a649d0889ff33"
+  },
+  "KANNALAND INDEPENDENT PARTY": {
+   "file": "/party-emblems/kannaland_independent_party.png",
+   "iecImage": "NO_ABBR1624.PNG",
+   "abbreviation": "KANNALAND INDEPENDENT PARTY",
+   "sha256": "46435919011bc78e27dbc7c3cf3187808820aba2034592fa8c4513abd6557974"
+  },
+  "KAREEBERG CIVIC MOVEMENT": {
+   "file": "/party-emblems/kareeberg_civic_movement.png",
+   "iecImage": "KCMNC074.PNG",
+   "abbreviation": "KCM",
+   "sha256": "17567e8eb17c48bf3d0f896f5d71dd3e28cfb30309b6d2ce34ddfcfab364c6ac"
+  },
+  "KAROO DEMOCRATIC FORCE": {
+   "file": "/party-emblems/karoo_democratic_force.png",
+   "iecImage": "KDFWC053.PNG",
+   "abbreviation": "KDF",
+   "sha256": "fe0287e0f6a2798e082263a3417f7ff0b68ebfe00a13742649d12492717d31ba"
+  },
+  "KGETLENG PEOPLE'S FORUM": {
+   "file": "/party-emblems/kgetleng_people_s_forum.png",
+   "iecImage": "KPF.PNG",
+   "abbreviation": "KPF",
+   "sha256": "e4a5b3e0ee0613a61c9e3e9b51acb733cc2bf061971a34979114cb008e61bb0a"
+  },
+  "KHOI ABORIGINAL PARTY": {
+   "file": "/party-emblems/khoi_aboriginal_party.png",
+   "iecImage": "K.A.PDC3.PNG",
+   "abbreviation": "K.A.P",
+   "sha256": "21c531dbe0e084d88e9e25c02ad9601b9880c6d3c7aff6cb90d3004ce60db247"
+  },
+  "KHOI-SAN HEAVENLY PARTY": {
+   "file": "/party-emblems/khoi_san_heavenly_party.png",
+   "iecImage": "KSHPWC011.PNG",
+   "abbreviation": "KSHP",
+   "sha256": "0c62c549f6e4b944fb2972b7a9eaf3e8259d515f6812bc11fdcd7fb2bd354d41"
+  },
+  "KHOISAN REVOLUTION": {
+   "file": "/party-emblems/khoisan_revolution.png",
+   "iecImage": "KSR.PNG",
+   "abbreviation": "KSR",
+   "sha256": "dcfde04034635fe1d8556948c11f53748b94f268a58ee9dff0ccdd2ab0d79013"
+  },
+  "KIMBERLEY ACTION GROUP": {
+   "file": "/party-emblems/kimberley_action_group.png",
+   "iecImage": "KAG.PNG",
+   "abbreviation": "KAG",
+   "sha256": "f994b1680e35835b3327cabfd13735647fae1318c93c8a8b69ed029662d4b25f"
+  },
+  "KINGDOM AMBASSADORS MOVEMENT": {
+   "file": "/party-emblems/kingdom_ambassadors_movement.png",
+   "iecImage": "KAMDC20.PNG",
+   "abbreviation": "KAM",
+   "sha256": "58a5039892e4b15561b78e6f96d195bed3565a682908ffef18dfe11c6b933720"
+  },
+  "KINGDOM COVENANT DEMOCRATIC PARTY": {
+   "file": "/party-emblems/kingdom_covenant_democratic_party.png",
+   "iecImage": "KCDP.PNG",
+   "abbreviation": "KCDP",
+   "sha256": "ce0bddd27b42bb59c8731619b9680490dae590d73e8c747f98d98f7280f4e321"
+  },
+  "KNOW YOUR NEIGHBOUR": {
+   "file": "/party-emblems/know_your_neighbour.png",
+   "iecImage": "KYN.PNG",
+   "abbreviation": "KYN",
+   "sha256": "5093d7c530bc42d80b9fadcf9f4eb471fabbaf60970863dacb720d78a642b9ac"
+  },
+  "KNOW YOUR POWER": {
+   "file": "/party-emblems/know_your_power.png",
+   "iecImage": "KYP.PNG",
+   "abbreviation": "KYP",
+   "sha256": "87b48320b915b0da8affb3eea18d6a83b871fd0b85d48890c4be2c5b1d865038"
+  },
+  "KNYSNA CIVIC ALLIANCE": {
+   "file": "/party-emblems/knysna_civic_alliance.png",
+   "iecImage": "KCA.PNG",
+   "abbreviation": "KCA",
+   "sha256": "6b2a4250cb11a45a4a1996d6c54fa9494b91f10913251c65518a4da7f5a08583"
+  },
+  "KNYSNA FIRST": {
+   "file": "/party-emblems/knysna_first.png",
+   "iecImage": "KF.PNG",
+   "abbreviation": "KF",
+   "sha256": "d03c7a3c7e0cbb6ac34e055bb959dbb6d40855c29bc7e1c8ec7a4046a3005db2"
+  },
+  "KNYSNA INDEPENDENT MOVEMENT": {
+   "file": "/party-emblems/knysna_independent_movement.png",
+   "iecImage": "KIMWC048.PNG",
+   "abbreviation": "KIM",
+   "sha256": "6a1dded95dd8a3126c9095e2e423bce1a4b97364079266fe0b310f5debe2c31d"
+  },
+  "KOMANI PROGRESS ACTION": {
+   "file": "/party-emblems/komani_progress_action.png",
+   "iecImage": "KPA.PNG",
+   "abbreviation": "KPA",
+   "sha256": "a604da2c94a017447392ad94a6384bf1ff39c83893868c486ac5e0e72cc96e1b"
+  },
+  "KOPANO MOVEMENT": {
+   "file": "/party-emblems/kopano_movement.png",
+   "iecImage": "KOPANO.PNG",
+   "abbreviation": "KOPANO",
+   "sha256": "4c366c428ddefd9a6f6de609c7bbe619556d20709922427265a77317eda8fccc"
+  },
+  "KZN INDEPENDENCE": {
+   "file": "/party-emblems/kzn_independence.png",
+   "iecImage": "KZNI.PNG",
+   "abbreviation": "KZNI",
+   "sha256": "f2a94fd7e41e74c0dec6fd6fa28b9f5db33ed4a2e51fa14abeb5bc72726f2d6d"
+  },
+  "LABOUR PARTY OF SOUTH AFRICA": {
+   "file": "/party-emblems/labour_party_of_south_africa.png",
+   "iecImage": "LABOUR.PNG",
+   "abbreviation": "LABOUR",
+   "sha256": "037c61386dada1fea317113e22d925924d52e7c6dfbbfbc12f00d1903f761a08",
+   "chosenFrom": [
+    "L.P.PNG",
+    "LABOUR.PNG"
+   ]
+  },
+  "LAND PARTY": {
+   "file": "/party-emblems/land_party.png",
+   "iecImage": "LAND.PNG",
+   "abbreviation": "LAND",
+   "sha256": "b8eba9d20354a84e7427f10cb6385d9cd8c82260b01097fae4258d6ab18c0171"
+  },
+  "LANGEBERG FIRST": {
+   "file": "/party-emblems/langeberg_first.png",
+   "iecImage": "L1.PNG",
+   "abbreviation": "L1",
+   "sha256": "3e68ee70d0a08964efe1139ecc8f0608f2454f29afa4bd180982499378fc2f99"
+  },
+  "LANGEBERG RATEPAYERS ASSOCIATION": {
+   "file": "/party-emblems/langeberg_ratepayers_association.png",
+   "iecImage": "LARA.PNG",
+   "abbreviation": "LARA",
+   "sha256": "379eabbf971a523aa79efda5c49f41fd3ce2f62aa7d78c624d0adc18235ff9c1"
+  },
+  "LANGERBERG INDEPENDENT PARTY": {
+   "file": "/party-emblems/langerberg_independent_party.png",
+   "iecImage": "LIPWC026.PNG",
+   "abbreviation": "LIP",
+   "sha256": "995cebf41adad9b70a72825e11e9efce0a375054ebb7e48f21ba9b0a8217d303"
+  },
+  "LEKWA COMMUNITY FORUM": {
+   "file": "/party-emblems/lekwa_community_forum.png",
+   "iecImage": "LCFMP305.PNG",
+   "abbreviation": "LCF",
+   "sha256": "348042b6174cbd20569bfc3a006b441f56c5d65fc20fdd9421d1874d3603a0a2"
+  },
+  "LEKWA LIBERATION MOVEMENT": {
+   "file": "/party-emblems/lekwa_liberation_movement.png",
+   "iecImage": "LLM.PNG",
+   "abbreviation": "LLM",
+   "sha256": "ed2e9e1602b49968663aa080a738c597c9bbb291bc6cf4db20eb2ad904dd3a53"
+  },
+  "LEKWA TEEMANENG DEVELOPMENT PARTY": {
+   "file": "/party-emblems/lekwa_teemaneng_development_party.png",
+   "iecImage": "LTDP.PNG",
+   "abbreviation": "LTDP",
+   "sha256": "43e6f17ee88fb16f1371d24b94b417d8f6ae8a0a1eae63b870a1c8b326bca6ee"
+  },
+  "LEKWE BEPE KINGDOM PARTY": {
+   "file": "/party-emblems/lekwe_bepe_kingdom_party.png",
+   "iecImage": "LBKP.PNG",
+   "abbreviation": "LBKP",
+   "sha256": "f6fe53f8281620290d0778b16740477439ed0f7220bc53d7583d111bbfb0553e"
+  },
+  "LENTSWE LA SETJHABA": {
+   "file": "/party-emblems/lentswe_la_setjhaba.png",
+   "iecImage": "LENTSWE.PNG",
+   "abbreviation": "LENTSWE",
+   "sha256": "487a7daad8e723523b666f7448b08cc9105c4c602a4ab533d90073441d6585e8"
+  },
+  "LEPHALALE COMMUNITY ASSOCIATION": {
+   "file": "/party-emblems/lephalale_community_association.png",
+   "iecImage": "LECOMA.PNG",
+   "abbreviation": "LECOMA",
+   "sha256": "f71066defdbfd0908ccc1d01dcb7c92ce72022b705b7b87f3eb02d0f609075ca"
+  },
+  "LEPHALALE NEW GENERATION MOVEMENT": {
+   "file": "/party-emblems/lephalale_new_generation_movement.png",
+   "iecImage": "LNGM.PNG",
+   "abbreviation": "LNGM",
+   "sha256": "bc10ba9b6f2ed2f7cd3613a067909dcda59c63ea79f9e402732a2f75943eddc1"
+  },
+  "LEPHALALE PEOPLE’S PARTY": {
+   "file": "/party-emblems/lephalale_people_s_party.png",
+   "iecImage": "LPP.PNG",
+   "abbreviation": "LPP",
+   "sha256": "77124c452d2c4322de5739a2a047f73225e8ff3cac1f60b6ac74cd5b6f36adbc"
+  },
+  "LEPHALALE RESIDENTS PARTY": {
+   "file": "/party-emblems/lephalale_residents_party.png",
+   "iecImage": "L.R.PLIM362.PNG",
+   "abbreviation": "L.R.P",
+   "sha256": "90ac90d77f8af3a5153aff0498e293612e62e47bdd098523751615e6d2e74636"
+  },
+  "LEPHALALE UNITED MOVEMENT": {
+   "file": "/party-emblems/lephalale_united_movement.png",
+   "iecImage": "LUM.PNG",
+   "abbreviation": "LUM",
+   "sha256": "0e3d9d23fe19dfe3f9de0f5acfdb3b7bc53856ad81e3c769baf8648de7ba248d"
+  },
+  "LETHABONG SERVICE MOVEMENT": {
+   "file": "/party-emblems/lethabong_service_movement.png",
+   "iecImage": "L.S.M.PNG",
+   "abbreviation": "L.S.M",
+   "sha256": "4b760fbd1a963d3e7c5d99f3589ecfda3f02cf1e93de2fadb3fb5d685865e731"
+  },
+  "LIMPOPO INDEPENDENT MOVEMENT ALLIANCE": {
+   "file": "/party-emblems/limpopo_independent_movement_alliance.png",
+   "iecImage": "LIMA.PNG",
+   "abbreviation": "LIMA",
+   "sha256": "057692ef8118ddef983b1512018bfdccaa19444b560da9995474f1aed2ed9592"
+  },
+  "LIMPOPO RESIDENTS ASSOCIATION": {
+   "file": "/party-emblems/limpopo_residents_association.png",
+   "iecImage": "LIRALIM332.PNG",
+   "abbreviation": "LIRA",
+   "sha256": "d500f01a63f81edf1d6d04c569f61ce54dda6c268bede67c8a3963de652eff93"
+  },
+  "LOCAL ECONOMIC MOVEMENT": {
+   "file": "/party-emblems/local_economic_movement.png",
+   "iecImage": "L.E.M..PNG",
+   "abbreviation": "L.E.M.",
+   "sha256": "db9c9526650ddd0172aa7a8cda587e38f3a82e9331650d152ea9ca887ef1a2ae"
+  },
+  "MAFUBE FIRST": {
+   "file": "/party-emblems/mafube_first.png",
+   "iecImage": "MAF1ST.PNG",
+   "abbreviation": "MAF1ST",
+   "sha256": "30962012133ee3eb636b091e54e81a2df0ee0242ca07b46e6d221c4990425583",
+   "chosenFrom": [
+    "MAF1STDC20.PNG",
+    "MAF1ST.PNG"
+   ]
+  },
+  "MAGAENG": {
+   "file": "/party-emblems/magaeng.png",
+   "iecImage": "MAGAENG.PNG",
+   "abbreviation": "MAGAENG",
+   "sha256": "0d19de678a1891a2861f5db1ca7df1b2544b03cbfd0a96b2dd6a628985bc96c5",
+   "chosenFrom": [
+    "",
+    "MAGAENG.PNG"
+   ]
+  },
+  "MAGOSHI SWARANANG MOVEMENT": {
+   "file": "/party-emblems/magoshi_swaranang_movement.png",
+   "iecImage": "MSM.PNG",
+   "abbreviation": "MSM",
+   "sha256": "d65c573d465fe9905008fea4ec572d040ce8361ef769428216b6b65fddb5345f"
+  },
+  "MAHLO PEOPLE’S MOVEMENT": {
+   "file": "/party-emblems/mahlo_people_s_movement.png",
+   "iecImage": "NO_ABBR2144.PNG",
+   "abbreviation": "MAHLO PEOPLE’S MOVEMENT",
+   "sha256": "47b7722e30f4173cc60d283b231fc2d5b96552f8c13f147637a6f8d576121bd3"
+  },
+  "MAJUBA PROGRESSIVE MOVEMENT": {
+   "file": "/party-emblems/majuba_progressive_movement.png",
+   "iecImage": "MPM.PNG",
+   "abbreviation": "MPM",
+   "sha256": "24753a240be2b19dd8baa5921d45fd87090ea1cf7de59da0c1fc577054a4b651"
+  },
+  "MAKANA CITIZENS FRONT": {
+   "file": "/party-emblems/makana_citizens_front.png",
+   "iecImage": "MAKANAEC104.PNG",
+   "abbreviation": "MAKANA",
+   "sha256": "185b76f8ede1f2e2d1ea1990a5f6e93704376fba346d1780cb5e204c86bb557c"
+  },
+  "MAKANA UNITED CIVIC MOVEMENT": {
+   "file": "/party-emblems/makana_united_civic_movement.png",
+   "iecImage": "MUCM.PNG",
+   "abbreviation": "MUCM",
+   "sha256": "696cf24ce53b5954abb3369a67954d0dd055aaa430b17239d65bedf45b4e4a85"
+  },
+  "MALETSWAI CIVIC ASSOCIATION": {
+   "file": "/party-emblems/maletswai_civic_association.png",
+   "iecImage": "NO_ABBR926.PNG",
+   "abbreviation": "MALETSWAI CIVIC ASSOCIATION",
+   "sha256": "1a0c9220e2099f4507879205cf164f443c58bb8d92ef6856b5d8069fb92ebac7"
+  },
+  "MANGAUNG SEVEN PEOPLE'S VOICE": {
+   "file": "/party-emblems/mangaung_seven_people_s_voice.png",
+   "iecImage": "MSPV.PNG",
+   "abbreviation": "MSPV",
+   "sha256": "dd2ed6fa7e02ce6491b6f59cc104bc3ad96e04fed8728a82941a9daca242374f"
+  },
+  "MANTSOPA PEOPLE'S PARLIAMENT": {
+   "file": "/party-emblems/mantsopa_people_s_parliament.png",
+   "iecImage": "MNPP.PNG",
+   "abbreviation": "MNPP",
+   "sha256": "a0d84be59fa75622683d2a3092ac24017c56a51220da7985a818adacc2d7ad29"
+  },
+  "MAPSIXTEEN CIVIC MOVEMENT": {
+   "file": "/party-emblems/mapsixteen_civic_movement.png",
+   "iecImage": "MAP16FS194.PNG",
+   "abbreviation": "MAP16",
+   "sha256": "01fd5a4002bb9f1ff8b7c16db86b3ab7a21786cd54f1d5b26f263240a4561cff"
+  },
+  "MARULENG COMMUNITIES MOVEMENT": {
+   "file": "/party-emblems/maruleng_communities_movement.png",
+   "iecImage": "MCMPARTY.PNG",
+   "abbreviation": "MCMPARTY",
+   "sha256": "dc9b1cd7a558d1fcb9de50786960cf8339046a858db5bf936db030d5d2c45306"
+  },
+  "MASIGODUKE PEOPLES SOCIETY": {
+   "file": "/party-emblems/masigoduke_peoples_society.png",
+   "iecImage": "MPS.PNG",
+   "abbreviation": "MPS",
+   "sha256": "2087dd68674dc1322ee2c8da2850cd64296b06a6d3499d7eb5ba87e259ec14e0"
+  },
+  "MATLOSANA SERVICE DELIVERY MOVEMENT": {
+   "file": "/party-emblems/matlosana_service_delivery_movement.png",
+   "iecImage": "MSDM.PNG",
+   "abbreviation": "MSDM",
+   "sha256": "01906ff893ed9f80d24c6fbd9ca18dda8a480c563cc6319c13dac7ac45fe38a4"
+  },
+  "MAWUSA MOVEMENT PARTY": {
+   "file": "/party-emblems/mawusa_movement_party.png",
+   "iecImage": "MAWUSA.PNG",
+   "abbreviation": "MAWUSA",
+   "sha256": "e69991597fcea4021e0e4e9c049fe9669db727a640f78351e84d80be9da0c3f5"
+  },
+  "MAYIBUYE CIVIC MOVEMENT": {
+   "file": "/party-emblems/mayibuye_civic_movement.png",
+   "iecImage": "NO_ABBR2098.PNG",
+   "abbreviation": "MAYIBUYE CIVIC MOVEMENT",
+   "sha256": "bdce054a99f27e9cc6f08efae60db9d0782365572718a3a7def45df482241618"
+  },
+  "MBOMBELA YEBAHLALI RESIDENCE": {
+   "file": "/party-emblems/mbombela_yebahlali_residence.png",
+   "iecImage": "MYR.PNG",
+   "abbreviation": "MYR",
+   "sha256": "98270cf0777ff808d7e5a658629ce91c332f7578cde2469fc20ef16c0548e438"
+  },
+  "MERAFONG AGENTS OF CHANGE": {
+   "file": "/party-emblems/merafong_agents_of_change.png",
+   "iecImage": "MAOC.PNG",
+   "abbreviation": "MAOC",
+   "sha256": "3989293ad644f4aced45bf7b702be3b758d0d995c976f602ef01355e6be2397e"
+  },
+  "MERAFONG CIVIC ASSOCIATION": {
+   "file": "/party-emblems/merafong_civic_association.png",
+   "iecImage": "MECA.PNG",
+   "abbreviation": "MECA",
+   "sha256": "d664e7de7acab6bd353dc8eeeb9971939323385ad61c3dcb666e539daee4b833"
+  },
+  "METSIMAHOLO COMMUNITY ASSOCIATION": {
+   "file": "/party-emblems/metsimaholo_community_association.png",
+   "iecImage": "MCAFS204.PNG",
+   "abbreviation": "MCA",
+   "sha256": "2aa71b8355b17741cb642d9aa4bd4c1f368e7b7bbf188c1c68e1c366acd59cf4"
+  },
+  "METSIMAHOLO PROGRESSIVE PEOPLE FORUM": {
+   "file": "/party-emblems/metsimaholo_progressive_people_forum.png",
+   "iecImage": "MPPFFS204.PNG",
+   "abbreviation": "MPPF",
+   "sha256": "ae594a9b45af53fb6251af0a768d4455c5af8e19d17172f4cdda4ddee8c60edf"
+  },
+  "MIDDELBURG AND HENDRINA RESIDENTS FRONT": {
+   "file": "/party-emblems/middelburg_and_hendrina_residents_front.png",
+   "iecImage": "MHRFMP313.PNG",
+   "abbreviation": "MHRF",
+   "sha256": "4c8249c494f82f1572eb5838ff131e660f4874a6ddd1fae04c13e3eadf904ce0"
+  },
+  "MIGEU YA KASI": {
+   "file": "/party-emblems/migeu_ya_kasi.png",
+   "iecImage": "MIGEU.PNG",
+   "abbreviation": "MIGEU",
+   "sha256": "80f2f405d2746a04361e5c9e37d4d7980507a5613cb1177b66c913244477524a"
+  },
+  "MINORITIES OF SOUTH AFRICA": {
+   "file": "/party-emblems/minorities_of_south_africa.png",
+   "iecImage": "MOSA.PNG",
+   "abbreviation": "MOSA",
+   "sha256": "b32eb235ba1f1cacfa4eab722228091109c1114559c0a55973adc342c3d036a7"
+  },
+  "MINORITY FRONT": {
+   "file": "/party-emblems/minority_front.png",
+   "iecImage": "MF.PNG",
+   "abbreviation": "MF",
+   "sha256": "e882c289d84c99b193685f5c2362c96b8ebcf9c84bca081cb4122c996fe18981"
+  },
+  "MKHONTO ILEMBE PARTY": {
+   "file": "/party-emblems/mkhonto_ilembe_party.png",
+   "iecImage": "MLP.PNG",
+   "abbreviation": "MLP",
+   "sha256": "e15dec98e5313f4437061e565354f709ce945968d2856054c07518b0f9301bc4",
+   "chosenFrom": [
+    "M.L.PDC29.PNG",
+    "MLP.PNG"
+   ]
+  },
+  "MO-AFRICA PARTY": {
+   "file": "/party-emblems/mo_africa_party.png",
+   "iecImage": "NO_ABBR1911.PNG",
+   "abbreviation": "MO-AFRICA PARTY",
+   "sha256": "082886692823489a96290c621951c3316ee2297a160c241d6c90b1c2399d1fe3"
+  },
+  "MODIMOLLE - MOOKGOPHONG PARTY": {
+   "file": "/party-emblems/modimolle_mookgophong_party.png",
+   "iecImage": "MMPLIM368.PNG",
+   "abbreviation": "MMP",
+   "sha256": "39bd5123586795da3ea6a32516ef77b06578b6786570086220c015819fbc438c"
+  },
+  "MODIMOLLE MOOKGOPHONG VAALWATER ALMA ROADTAN PARTY": {
+   "file": "/party-emblems/modimolle_mookgophong_vaalwater_alma_roadtan_party.png",
+   "iecImage": "MMVAR.PNG",
+   "abbreviation": "MMVAR",
+   "sha256": "49dff54652d948d17ab65fd12a28bce7015df3388d9262999630556e15a47b52"
+  },
+  "MOLEMOLE INDEPENDENT VOICE": {
+   "file": "/party-emblems/molemole_independent_voice.png",
+   "iecImage": "MIV.PNG",
+   "abbreviation": "MIV",
+   "sha256": "ff68699210c0903fb4c0de91f62a0924156063fb6996116067e8290be780da8c"
+  },
+  "MOPANI RESIDENTS ASSOCIATION": {
+   "file": "/party-emblems/mopani_residents_association.png",
+   "iecImage": "NO_ABBR2191.PNG",
+   "abbreviation": "MOPANI RESIDENTS ASSOCIATION",
+   "sha256": "f5baac3727d4c58c329cae4edf1efb544b067536c8422fda7af54d6adad9663b"
+  },
+  "MOQHAKA COMMUNITY FORUM": {
+   "file": "/party-emblems/moqhaka_community_forum.png",
+   "iecImage": "NO_ABBR1494.PNG",
+   "abbreviation": "MOQHAKA COMMUNITY FORUM",
+   "sha256": "eade10f6256b6d56b94082a7596b2a8be6a191b8454a90736e86db85afd95737"
+  },
+  "MORETELE INDEPENDENT CIVIC ORGANIZATION": {
+   "file": "/party-emblems/moretele_independent_civic_organization.png",
+   "iecImage": "MICO.PNG",
+   "abbreviation": "MICO",
+   "sha256": "5f43ef11d84c181990f60c87d0437f9ccec287dcbf76ba443d8927c4fba7b16e"
+  },
+  "MORETELE PEOPLES PARTY": {
+   "file": "/party-emblems/moretele_peoples_party.png",
+   "iecImage": "MPPMP316.PNG",
+   "abbreviation": "MPP",
+   "sha256": "9baa095426bbc925695c15ef2a682c3dca74b82b1308c91fb16546249a3e216f"
+  },
+  "MOSHABI PARTY": {
+   "file": "/party-emblems/moshabi_party.png",
+   "iecImage": "MOSHABI.PNG",
+   "abbreviation": "MOSHABI",
+   "sha256": "eb08f7078894477447f2658d2e3bb3b55250de75b6a8eb3891e4e64eee1f65f1"
+  },
+  "MOUNT FLETCHER COMMUNITY VOICE": {
+   "file": "/party-emblems/mount_fletcher_community_voice.png",
+   "iecImage": "MFCV.PNG",
+   "abbreviation": "MFCV",
+   "sha256": "03fdec9887c345b8fbc372809f6289d9326927866c1b617f86c3507724693163"
+  },
+  "MOVE SA": {
+   "file": "/party-emblems/move_sa.png",
+   "iecImage": "MOVE.PNG",
+   "abbreviation": "MOVE",
+   "sha256": "fe8db4e79f8466f6fc6cf220e4d07244cf96815e4daa5add0ef850b1c92d6ddd"
+  },
+  "MOVEMENT DEMOCRATIC CONGRESS": {
+   "file": "/party-emblems/movement_democratic_congress.png",
+   "iecImage": "MDC.PNG",
+   "abbreviation": "MDC",
+   "sha256": "a8ff83d161c0cbaa31da6d1ebe705adf3235478eca73dfbb638f6ec107c61c3a"
+  },
+  "MOVEMENT FOR AFRICAN CONVENTION": {
+   "file": "/party-emblems/movement_for_african_convention.png",
+   "iecImage": "MAC.PNG",
+   "abbreviation": "MAC",
+   "sha256": "a6ba79a34892fccfa2187b60e03ac8e508443f8f72140dea677885c34d014e30"
+  },
+  "MOVEMENT FOR TOTAL LIBERATION": {
+   "file": "/party-emblems/movement_for_total_liberation.png",
+   "iecImage": "MTL.PNG",
+   "abbreviation": "MTL",
+   "sha256": "9d8d69d429242d8d72705a3ca34509a0634ba1991983f6ddf271e23a15317c7c"
+  },
+  "MOVEMENT OF RESIDENTS PARTY": {
+   "file": "/party-emblems/movement_of_residents_party.png",
+   "iecImage": "MRP.PNG",
+   "abbreviation": "MRP",
+   "sha256": "2c9787ab2781459b73e1164e4030cc762be3e86ff8d89d0e99e483f08d7b015b"
+  },
+  "MPUMALANGA PARTY": {
+   "file": "/party-emblems/mpumalanga_party.png",
+   "iecImage": "MPLIM472.PNG",
+   "abbreviation": "MP",
+   "sha256": "2b8c3cc6e7c6640eb7a244a3dd30fa30bbfb4913e66b3d56d29b465fd0f3cddc"
+  },
+  "MSUKALIGWA PEOPLE FIRST": {
+   "file": "/party-emblems/msukaligwa_people_first.png",
+   "iecImage": "MPF.PNG",
+   "abbreviation": "MPF",
+   "sha256": "72819831b54db57fad2a0185026bdfedba8bff426e60ddc1be1a35b77b5e5f97"
+  },
+  "MTHATHA RATEPAYERS AND RESIDENTS ASSOCIATION": {
+   "file": "/party-emblems/mthatha_ratepayers_and_residents_association.png",
+   "iecImage": "MRRAEC157.PNG",
+   "abbreviation": "MRRA",
+   "sha256": "29861e2f69e57c46cc477d181097920b2e1cc2251f9838063ad6877b0f28179c"
+  },
+  "MZANSI CHRISTIAN PARTY": {
+   "file": "/party-emblems/mzansi_christian_party.png",
+   "iecImage": "MCP.PNG",
+   "abbreviation": "MCP",
+   "sha256": "22fbcf56cc31fbd0b85cbdf2bb0f6737304de49fc151f85bda8990a0521e2847"
+  },
+  "MZANSI CITIZENS’ MOVEMENT": {
+   "file": "/party-emblems/mzansi_citizens_movement.png",
+   "iecImage": "MCM.PNG",
+   "abbreviation": "MCM",
+   "sha256": "e3af2746cddb32d4671a15f08aa065a518cc02f1183c8da31b3674ed9ea78e5a"
+  },
+  "NALA COMMUNITY FORUM": {
+   "file": "/party-emblems/nala_community_forum.png",
+   "iecImage": "N.C.FFS185.PNG",
+   "abbreviation": "N.C.F",
+   "sha256": "23e676a4a456ed6aeefd89f64cb86cd39549914538c93104344acd744402852a"
+  },
+  "NALA PROGRESSIVE MOVEMENT": {
+   "file": "/party-emblems/nala_progressive_movement.png",
+   "iecImage": "NPM.PNG",
+   "abbreviation": "NPM",
+   "sha256": "481e1ed0df9c1badb1e2995973e97d2896bcdcd918797a441130753c5d9e96be",
+   "chosenFrom": [
+    "NPMFS185.PNG",
+    "NPM.PNG"
+   ]
+  },
+  "NAMAKWA CIVIC MOVEMENT": {
+   "file": "/party-emblems/namakwa_civic_movement.png",
+   "iecImage": "NCMNC062.PNG",
+   "abbreviation": "NCM",
+   "sha256": "bebd77e3a5779945435106c4aee969f491c2146e18b1ee9e05e18a9f2ed41c5d"
+  },
+  "NATIONAL ALLIANCE": {
+   "file": "/party-emblems/national_alliance.png",
+   "iecImage": "NANMA.PNG",
+   "abbreviation": "NA",
+   "sha256": "3bfff92b7eaa87bd5946810144c212f1b52486290dce9404cd558e69843b7e4c",
+   "chosenFrom": [
+    "NA.PNG",
+    "N.A.PNG",
+    "NANMA.PNG"
+   ]
+  },
+  "NATIONAL COLOURED CONGRESS": {
+   "file": "/party-emblems/national_coloured_congress.png",
+   "iecImage": "CCCCPT.PNG",
+   "abbreviation": "CCC",
+   "sha256": "9fb74268bcaa95bf43432528fc1a70478e7cdaf1b59c1e3d75dee256ad53ca74"
+  },
+  "NATIONAL COMMUNIST CONGRESS": {
+   "file": "/party-emblems/national_communist_congress.png",
+   "iecImage": "NCC.PNG",
+   "abbreviation": "NCC",
+   "sha256": "38c73a5f176284e243de175b4405ca34028336bce013524825084975da9d44c5"
+  },
+  "NATIONAL COMMUNITY LIBERATION": {
+   "file": "/party-emblems/national_community_liberation.png",
+   "iecImage": "NACOL.PNG",
+   "abbreviation": "NACOL",
+   "sha256": "ddaec7f0792c5b8597de0d1af8bceee693063e49a616e6896b7d49803ee0d0cc"
+  },
+  "NATIONAL DEMOCRATIC CONVENTION": {
+   "file": "/party-emblems/national_democratic_convention.png",
+   "iecImage": "NADECO.PNG",
+   "abbreviation": "NADECO",
+   "sha256": "6c1933c99a40817e5f2c1cfa174b4766b8a308dcb5ec8de25500fd98112de344"
+  },
+  "NATIONAL DEMOCRATIC DIALOGUE": {
+   "file": "/party-emblems/national_democratic_dialogue.png",
+   "iecImage": "NDD.PNG",
+   "abbreviation": "NDD",
+   "sha256": "973bf28c69752adb2e2047954f32e26788e66d1b9a5b7b56d14da858c2869871"
+  },
+  "NATIONAL DIALOGUE FRONT": {
+   "file": "/party-emblems/national_dialogue_front.png",
+   "iecImage": "NDF.PNG",
+   "abbreviation": "NDF",
+   "sha256": "d3677048b3c6d6299d881ba155f07226f08714b0b8d57b8c1cf76a8efbad3344"
+  },
+  "NATIONAL ECONOMIC FIGHTERS": {
+   "file": "/party-emblems/national_economic_fighters.png",
+   "iecImage": "NEF.PNG",
+   "abbreviation": "NEF",
+   "sha256": "ca32837acd102fdabc7719138378fed4d7d35b99c9fe8813e73e0c27c913c152"
+  },
+  "NATIONAL ECONOMIC FREEDOM ALLIANCE": {
+   "file": "/party-emblems/national_economic_freedom_alliance.png",
+   "iecImage": "NEFA.PNG",
+   "abbreviation": "NEFA",
+   "sha256": "5bca44c671cb5d162726e06ef5796909e2b6c474e89dd6753bcb9a04665558f7"
+  },
+  "NATIONAL FREEDOM PARTY": {
+   "file": "/party-emblems/national_freedom_party.png",
+   "iecImage": "NFP.PNG",
+   "abbreviation": "NFP",
+   "sha256": "af10397b3ccf199d9494decff6bc74d5282ed04bd9cbf0081df09ec1405525ca"
+  },
+  "NATIONAL INDEPENDENT PARTY": {
+   "file": "/party-emblems/national_independent_party.png",
+   "iecImage": "NIP.PNG",
+   "abbreviation": "NIP",
+   "sha256": "3cb2ce2b96913cb228863727f9ae171563195a32f8f11cfc56680a6e9ea4281e"
+  },
+  "NATIONAL PEOPLE'S FRONT": {
+   "file": "/party-emblems/national_people_s_front.png",
+   "iecImage": "NAPF.PNG",
+   "abbreviation": "NAPF",
+   "sha256": "7003a8e75ae4e3e8ed92d73cf4e246da19a190cca894f577b34e74d288abe962"
+  },
+  "NATIONAL PEOPLES AMBASSADORS": {
+   "file": "/party-emblems/national_peoples_ambassadors.png",
+   "iecImage": "NPA.PNG",
+   "abbreviation": "NPA",
+   "sha256": "b1fcdbef8f2af8d144f87489749b8d2a2ff500a8c472daa62401aeb3c44d9f55"
+  },
+  "NATIONAL RESTORATION PARTY": {
+   "file": "/party-emblems/national_restoration_party.png",
+   "iecImage": "NRP.PNG",
+   "abbreviation": "NRP",
+   "sha256": "4bc12794689befdba3fa22eb8ccdb7d09257388e0a79c35c0068133317ed9fd2"
+  },
+  "NATIONAL SERVICE DELIVERY FORUM": {
+   "file": "/party-emblems/national_service_delivery_forum.png",
+   "iecImage": "NSDF.PNG",
+   "abbreviation": "NSDF",
+   "sha256": "7fa9241fe5d679e14cf6270aa88870ebb59386436f474fe8825539ed7b4288d2"
+  },
+  "NDLAMBE CITIZENS MOVEMENT": {
+   "file": "/party-emblems/ndlambe_citizens_movement.png",
+   "iecImage": "NO_ABBR2181.PNG",
+   "abbreviation": "NDLAMBE CITIZENS MOVEMENT",
+   "sha256": "70096d5026460807c8de450be8c0d1c61b7f63f5d92c31cbcc41573bbf20c067"
+  },
+  "NEW DEMOCRATIC PARTY/ NUWE DEMOKRATIESE PARTY": {
+   "file": "/party-emblems/new_democratic_party_nuwe_demokratiese_party.png",
+   "iecImage": "NDP.PNG",
+   "abbreviation": "NDP",
+   "sha256": "01f0687de6ff7672e75647406359cccd85e53cba9f7f44b31ed45735414a0556"
+  },
+  "NEW FORCE": {
+   "file": "/party-emblems/new_force.png",
+   "iecImage": "NFDC38.PNG",
+   "abbreviation": "NF",
+   "sha256": "7af19aaf1f7f0949a23ff9bb5f08b2940c836b573f502bcf3947bdd2ed2c8b1d",
+   "chosenFrom": [
+    "NF.PNG",
+    "NFDC38.PNG"
+   ]
+  },
+  "NEWCASTLE AND DISTRICT RESIDENTS FORUM": {
+   "file": "/party-emblems/newcastle_and_district_residents_forum.png",
+   "iecImage": "NDRF.PNG",
+   "abbreviation": "NDRF",
+   "sha256": "7270f7cd7b3eea830e954de79f04bba63f32b3637a15c28a6cc7cc069468196e"
+  },
+  "NEXT GENERATION GOVERNMENT": {
+   "file": "/party-emblems/next_generation_government.png",
+   "iecImage": "NGG.PNG",
+   "abbreviation": "NGG",
+   "sha256": "a7f4c2e4b0cf5d0ec9330570497267407cefc6e43c2ddc265af4f688ae73c9ec"
+  },
+  "NGCOBO YETHU CIVIC ORGANIZATION": {
+   "file": "/party-emblems/ngcobo_yethu_civic_organization.png",
+   "iecImage": "NYCO.PNG",
+   "abbreviation": "NYCO",
+   "sha256": "509db4ac9d83ad76738dd837ff3350b18c348d73fc328e2e2bfb4365328b34a0"
+  },
+  "NKETOANE COMMUNITY MOVEMENT": {
+   "file": "/party-emblems/nketoane_community_movement.png",
+   "iecImage": "NO_ABBR3217.PNG",
+   "abbreviation": "NKETOANE COMMUNITY MOVEMENT",
+   "sha256": "2cf22c2656dfc0462c4a8d7cfd3991a13429463e747d3819fc7015366b4fd39d"
+  },
+  "NO STRESS PARTY": {
+   "file": "/party-emblems/no_stress_party.png",
+   "iecImage": "NSPDC29.PNG",
+   "abbreviation": "NSP",
+   "sha256": "ee7db69c0a22c02fb5cbdd76066dc11ae9fd490f9355a82fcfbea030bc7e4541"
+  },
+  "NON ALIGNED CIVIC MOVEMENT": {
+   "file": "/party-emblems/non_aligned_civic_movement.png",
+   "iecImage": "NACM.PNG",
+   "abbreviation": "NACM",
+   "sha256": "e2823f77797530dc39dc3ac822d3badcd47d6d2ea53aef5542d44747869a1a20",
+   "chosenFrom": [
+    "",
+    "NACM.PNG"
+   ]
+  },
+  "NORTHERN CAPE COMMUNITIES MOVEMENT": {
+   "file": "/party-emblems/northern_cape_communities_movement.png",
+   "iecImage": "NCCM.PNG",
+   "abbreviation": "NCCM",
+   "sha256": "8e6da1e90250898f7d1c06069f24723606dc746b219af2b099a9cff5e1515f1b"
+  },
+  "NYONI PROGRESS PARTY": {
+   "file": "/party-emblems/nyoni_progress_party.png",
+   "iecImage": "NPP.PNG",
+   "abbreviation": "NPP",
+   "sha256": "09573da0678e5129a419501ccbcb3e77bede05411635551a621bd3712d6c6dda"
+  },
+  "ON THE MOVE": {
+   "file": "/party-emblems/on_the_move.png",
+   "iecImage": "OTM.PNG",
+   "abbreviation": "OTM",
+   "sha256": "f4682204c2fe1dd5e5ad0f1782b0ed96b25f7a93ba89a20bd998d5c0d3763d46"
+  },
+  "ONAFHANKLIK": {
+   "file": "/party-emblems/onafhanklik.png",
+   "iecImage": "NO_ABBR2051.PNG",
+   "abbreviation": "ONAFHANKLIK",
+   "sha256": "dfea9ee3d2729cf89b770e0091e812dfe71cc21de09fe7111d45c7440548c314"
+  },
+  "ONE LOVE ALLIANCE": {
+   "file": "/party-emblems/one_love_alliance.png",
+   "iecImage": "OLA.PNG",
+   "abbreviation": "OLA",
+   "sha256": "fd043560f57cd7e95a2339c1843d9e7ec25df998b176aad9b0848b26a1d42fe1"
+  },
+  "ONE MERAFONG ORGANISATION": {
+   "file": "/party-emblems/one_merafong_organisation.png",
+   "iecImage": "OMO.PNG",
+   "abbreviation": "OMO",
+   "sha256": "285ea240d85598648402639d6b85b96f7ebe198e2395b6d211352528421714f8"
+  },
+  "OPERATION DUDULA": {
+   "file": "/party-emblems/operation_dudula.png",
+   "iecImage": "O.D.PNG",
+   "abbreviation": "O.D",
+   "sha256": "fe06ea4a5f49c73de1417a4cdc1f3260a3aa51cb885941ad86ed56b8a1331f3b"
+  },
+  "ORDINARY PEOPLE CAMPAIGN": {
+   "file": "/party-emblems/ordinary_people_campaign.png",
+   "iecImage": "OPC.PNG",
+   "abbreviation": "OPC",
+   "sha256": "848aa015fc006b5945a5f0db924b8e112c3d1ba201323a1082e7a1619348d759"
+  },
+  "ORGANIC HUMANITY MOVEMENT": {
+   "file": "/party-emblems/organic_humanity_movement.png",
+   "iecImage": "OHM.PNG",
+   "abbreviation": "OHM",
+   "sha256": "ad0af2eb7d0827ac91395fa7f06c1db4ddd95097e21da42b762cd19562215fa0"
+  },
+  "ORGANISATION FOR DEMOCRACY AND FREEDOM": {
+   "file": "/party-emblems/organisation_for_democracy_and_freedom.png",
+   "iecImage": "ODF.PNG",
+   "abbreviation": "ODF",
+   "sha256": "719a83fefb67e548348030ad37ff6b84f47bcc1c6ba2dcf44ca32965f72b6ac9"
+  },
+  "OUDTSHOORN UNITED FRONT": {
+   "file": "/party-emblems/oudtshoorn_united_front.png",
+   "iecImage": "OUF.PNG",
+   "abbreviation": "OUF",
+   "sha256": "a7efff0cd1237899a264614156597f7fc82477436e7930b7fb7d0b447a5a27a7"
+  },
+  "OUR LAST HOPE": {
+   "file": "/party-emblems/our_last_hope.png",
+   "iecImage": "OLH.PNG",
+   "abbreviation": "OLH",
+   "sha256": "2fb70688c966d1df477cd38be7533b5ebe185370cf8ac7e3b0a0833eeeb45d24"
+  },
+  "PALMRIDGE COMMUNITY FORUM": {
+   "file": "/party-emblems/palmridge_community_forum.png",
+   "iecImage": "PALCOFEKU.PNG",
+   "abbreviation": "PALCOF",
+   "sha256": "2383ed5db3be8afc11f7cefc31139cb7d2581f048ce3cb217dff5823e0d01c72"
+  },
+  "PAN AFRICANIST CONGRESS OF AZANIA": {
+   "file": "/party-emblems/pan_africanist_congress_of_azania.png",
+   "iecImage": "PAC.PNG",
+   "abbreviation": "PAC",
+   "sha256": "7392cf603bda79c12dea4d29f2310e6d061349a00230df827d4187945c4052b2"
+  },
+  "PARTY OF ACTION": {
+   "file": "/party-emblems/party_of_action.png",
+   "iecImage": "POA.PNG",
+   "abbreviation": "POA",
+   "sha256": "8a3d82fdc7b35f92fcd12157842491b70d27bf6e1a9a05bde35a53fddffdf695"
+  },
+  "PATRIOTIC ALLIANCE": {
+   "file": "/party-emblems/pa.png",
+   "iecImage": "PA.PNG",
+   "abbreviation": "PA",
+   "sha256": "809ca55cdf3a3539f02f2968bb3d190b716243d487ba652ac3608033e46b9b9c"
+  },
+  "PATRIOTIC SOUTH AFRICANS": {
+   "file": "/party-emblems/patriotic_south_africans.png",
+   "iecImage": "PATSADC12.PNG",
+   "abbreviation": "PATSA",
+   "sha256": "16f26dd579b44396ddddad53afe8ae7ebc2ab7eaa4b0e5bf9cfd8d2e518fc018"
+  },
+  "PEOPLE OF JOBURG": {
+   "file": "/party-emblems/people_of_joburg.png",
+   "iecImage": "POJ.PNG",
+   "abbreviation": "POJ",
+   "sha256": "fd848b6a35d4ca45b079cb13b837dc78f22a9e099e01747ece91b5a7de85375e"
+  },
+  "PEOPLE'S CHOICE": {
+   "file": "/party-emblems/people_s_choice.png",
+   "iecImage": "NO_ABBR2129.PNG",
+   "abbreviation": "PEOPLE'S CHOICE",
+   "sha256": "764e93071913a1cccc7c718591e8292508061751ad232bb2f76785e145340466"
+  },
+  "PEOPLE'S CONSENT PARTY": {
+   "file": "/party-emblems/people_s_consent_party.png",
+   "iecImage": "PCP.PNG",
+   "abbreviation": "PCP",
+   "sha256": "6644363446cb4fb6d3e5e5be3f95a5bec19ba49c00bc06b7a4d8f36dc8e308f0"
+  },
+  "PEOPLE'S DEMOCRATIC MOVEMENT": {
+   "file": "/party-emblems/people_s_democratic_movement.png",
+   "iecImage": "PDM.PNG",
+   "abbreviation": "PDM",
+   "sha256": "b19bb17b5067b51833effff3434fc6d4342c0448239e176e66593e5ee997f8d5"
+  },
+  "PEOPLE'S FIRST UNITED": {
+   "file": "/party-emblems/people_s_first_united.png",
+   "iecImage": "PFU.PNG",
+   "abbreviation": "PFU",
+   "sha256": "cda7a6f345497c4d083032480f231fea81b34abf176f02c8e76269124572767d"
+  },
+  "PEOPLE'S FREEDOM PARTY": {
+   "file": "/party-emblems/people_s_freedom_party.png",
+   "iecImage": "PFP.PNG",
+   "abbreviation": "PFP",
+   "sha256": "6e2a52f24937b2ce643b385b89fe773b819decca009efa8713962eb21c5648e3"
+  },
+  "PEOPLE'S MANDATE PARTY": {
+   "file": "/party-emblems/people_s_mandate_party.png",
+   "iecImage": "PMP.PNG",
+   "abbreviation": "PMP",
+   "sha256": "ec553b0f96596e29baace25c65d6a61049b5a3b2ed083fe7e88453074153931d"
+  },
+  "PEOPLE'S MOVEMENT FOR CHANGE": {
+   "file": "/party-emblems/people_s_movement_for_change.png",
+   "iecImage": "PMC.PNG",
+   "abbreviation": "PMC",
+   "sha256": "c942af3c37c081e20efc3bf68cd799bf9da7bd0d45ddf5b09e45097bede1ce81"
+  },
+  "PEOPLE'S POWER": {
+   "file": "/party-emblems/people_s_power.png",
+   "iecImage": "P.P.PNG",
+   "abbreviation": "P.P",
+   "sha256": "942e0db2ae0968933a14347aabcbd1c24ecf83372390ccbbd8c02ccd6c4edccd"
+  },
+  "PEOPLE'S PROGRESSIVE PARTY": {
+   "file": "/party-emblems/people_s_progressive_party.png",
+   "iecImage": "PEOPLESA.PNG",
+   "abbreviation": "PEOPLESA",
+   "sha256": "451769ce8d23fa79502a74f4523e1194df01d8ddb925a2e47f82dbe818d0ed62",
+   "chosenFrom": [
+    "P.P.P..PNG",
+    "PEOPLESA.PNG"
+   ]
+  },
+  "PEOPLE'S REVOLUTIONARY MOVEMENT": {
+   "file": "/party-emblems/people_s_revolutionary_movement.png",
+   "iecImage": "PRM.PNG",
+   "abbreviation": "PRM",
+   "sha256": "86f395e4f5f4da2cbf8f7f936efb9809cc0b7362b851e23185547d1096244506"
+  },
+  "PEOPLE'S VOICE PARTY": {
+   "file": "/party-emblems/people_s_voice_party.png",
+   "iecImage": "PVP.PNG",
+   "abbreviation": "PVP",
+   "sha256": "7ada62d559a16a719c1d9f3a0e75691149d8558f79cec4ff7ddb1648b2e5f74b"
+  },
+  "PEOPLE’S POWER FREEDOM PARTY": {
+   "file": "/party-emblems/people_s_power_freedom_party.png",
+   "iecImage": "PPF.PNG",
+   "abbreviation": "PPF",
+   "sha256": "af08a3d30de7dd012cb9d3f7070314b62f9b8976b6127d30be328ee6ccb66a0f",
+   "chosenFrom": [
+    "PPF.PNG",
+    "",
+    "PPF.PNG"
+   ]
+  },
+  "PEP (POWER ECONOMY TO THE PEOPLE PARTY)": {
+   "file": "/party-emblems/pep_power_economy_to_the_people_party.png",
+   "iecImage": "PEP.PNG",
+   "abbreviation": "PEP",
+   "sha256": "79c678a3959edcc390ca68a2e819bfedce5477078a607bb05f3f4779127fa92d"
+  },
+  "PHAKAMA ADELAIDE MOVEMENT": {
+   "file": "/party-emblems/phakama_adelaide_movement.png",
+   "iecImage": "PAMO.PNG",
+   "abbreviation": "PAMO",
+   "sha256": "360d3e99d98a0274430ba84154acc81921a5c4b7604b5510c16f20174eb599e1"
+  },
+  "PHAKAMA EASTERN CAPE": {
+   "file": "/party-emblems/phakama_eastern_cape.png",
+   "iecImage": "PEC.PNG",
+   "abbreviation": "PEC",
+   "sha256": "c7c8cd81df068badd8b782bbbdbed5967b40aef85ba1f8c88d999944e0bbe411"
+  },
+  "PLAASLIKE BESORGDE INWONERS": {
+   "file": "/party-emblems/plaaslike_besorgde_inwoners.png",
+   "iecImage": "PBIWC044.PNG",
+   "abbreviation": "PBI",
+   "sha256": "a5408f8789634689bec3ed8d653ea0ab924bf63021ae59f265bd6e6c66bf23aa"
+  },
+  "PLETT DEMOCRATIC CONGRESS": {
+   "file": "/party-emblems/plett_democratic_congress.png",
+   "iecImage": "PDCWC047.PNG",
+   "abbreviation": "PDC",
+   "sha256": "a9c8df61ba5d7bcc2d9ddc80687f7f2e729b681217ccc792e3810fb162e0355e"
+  },
+  "POELANO REVELATION PARTY": {
+   "file": "/party-emblems/poelano_revelation_party.png",
+   "iecImage": "PRP.PNG",
+   "abbreviation": "PRP",
+   "sha256": "95c8e1e13983fadeeec46044c39178932f16d09540d7cd52e77f2e34a9a0c9fd"
+  },
+  "PONGOLA CIVIC FORUM": {
+   "file": "/party-emblems/pongola_civic_forum.png",
+   "iecImage": "PCF.PNG",
+   "abbreviation": "PCF",
+   "sha256": "a98a279921669c22d366494868f04cd7644210f03250c6381cf011b694334395"
+  },
+  "PONGOLA PEOPLE'S PARTY": {
+   "file": "/party-emblems/pongola_people_s_party.png",
+   "iecImage": "PPPKZN262.PNG",
+   "abbreviation": "PPP",
+   "sha256": "821e439b0fb6a19de57b5c87f69fd674207c6adedb71e6569ea02388e3e885ec"
+  },
+  "POSTOLA": {
+   "file": "/party-emblems/postola.png",
+   "iecImage": "P.PNG",
+   "abbreviation": "P",
+   "sha256": "11634424848f9288d3bb7512c45784588caf45d0ee4ffb273978d8e63322354f"
+  },
+  "PRO SOUTH AFRICA": {
+   "file": "/party-emblems/pro_south_africa.png",
+   "iecImage": "PRO SA.PNG",
+   "abbreviation": "PRO SA",
+   "sha256": "1985dabe57628736e15538ecf8f9a4672c1c0beb409a38db745e047ed275aaf1"
+  },
+  "PRO-POOR POLITICAL MOVEMENT": {
+   "file": "/party-emblems/pro_poor_political_movement.png",
+   "iecImage": "PPM.PNG",
+   "abbreviation": "PPM",
+   "sha256": "dddbf671fc579e27e0927ffbaa8052041201a7d137b33069016c9b6c555c2457"
+  },
+  "PROGRESSIVE CIVIC ORGANISATION": {
+   "file": "/party-emblems/progressive_civic_organisation.png",
+   "iecImage": "PCO.PNG",
+   "abbreviation": "PCO",
+   "sha256": "26e44264a0c6227fdbb53cbe0bdd07a618463aaedea77d15b0244e953045ecbd"
+  },
+  "PROGRESSIVE COMMUNITY ALLIANCE MOVEMENT": {
+   "file": "/party-emblems/progressive_community_alliance_movement.png",
+   "iecImage": "PCAM.PNG",
+   "abbreviation": "PCAM",
+   "sha256": "93cc7b996c1d09a9159f63e9b2b0d9774289a714eb71dbe8902a83100244350b"
+  },
+  "PROGRESSIVE COMMUNITY MOVEMENT": {
+   "file": "/party-emblems/progressive_community_movement.png",
+   "iecImage": "PCMDC12.PNG",
+   "abbreviation": "PCM",
+   "sha256": "2b3fa389b0f025ab07109d63f9640727c381a2613fe872641c71a58b09b97b4c"
+  },
+  "PROGRESSIVE TSHWANE ALLIANCE-PTA012": {
+   "file": "/party-emblems/progressive_tshwane_alliance_pta012.png",
+   "iecImage": "PTA012.PNG",
+   "abbreviation": "PTA012",
+   "sha256": "f7cc77cef6aee330eb84c8edefaa4cbb0c7800f91eaaf67a412ecdf879484985"
+  },
+  "PROUDLY METSIMAHOLO": {
+   "file": "/party-emblems/proudly_metsimaholo.png",
+   "iecImage": "PM.PNG",
+   "abbreviation": "PM",
+   "sha256": "00898dfa82c4359c45347abea33b906a21ee329ddeeef4ee0a5ad701cae1aa2f"
+  },
+  "PURPLE PARTY IKAGENG": {
+   "file": "/party-emblems/purple_party_ikageng.png",
+   "iecImage": "PURPLE.PNG",
+   "abbreviation": "PURPLE",
+   "sha256": "33934a0bdad9f8ebd331c832c510b4e44fda61e3552c91b779db19c8c4c19328"
+  },
+  "PUSH FOR CHANGE": {
+   "file": "/party-emblems/push_for_change.png",
+   "iecImage": "PFC.PNG",
+   "abbreviation": "PFC",
+   "sha256": "260c25e42a73ddf8dd9150f36e766d12af4b3a7d68930fa151d72b7b0d526f50"
+  },
+  "QINA MHLALI QINA": {
+   "file": "/party-emblems/qina_mhlali_qina.png",
+   "iecImage": "QINA.PNG",
+   "abbreviation": "QINA",
+   "sha256": "3d61a8d59afb1053b095c8ada660f4696a3e3053fd64df68af2b5144db05524b",
+   "chosenFrom": [
+    "QMQWC047.PNG",
+    "QINA.PNG"
+   ]
+  },
+  "RAND WEST PEOPLES PARTY": {
+   "file": "/party-emblems/rand_west_peoples_party.png",
+   "iecImage": "RWPP.PNG",
+   "abbreviation": "RWPP",
+   "sha256": "9ce1a955d29134ff939dff7b935cfb842858f6f3a36462c52631826d61f876bb"
+  },
+  "REBUILDING OUR OWN SOUTH AFRICA": {
+   "file": "/party-emblems/rebuilding_our_own_south_africa.png",
+   "iecImage": "ROOSA.PNG",
+   "abbreviation": "ROOSA",
+   "sha256": "309db82dde0f4141bf89383d8952aaf9d93e07eb01f3343d7ea2162e7564d9fc"
+  },
+  "REFENGKGOTSO CIVIL PARTY": {
+   "file": "/party-emblems/refengkgotso_civil_party.png",
+   "iecImage": "RCP.PNG",
+   "abbreviation": "RCP",
+   "sha256": "ddaa8416625e5c3cbab4d99443172aaeb7a79bac8bdb7a7512b053f44644d5a3"
+  },
+  "REFORM ALLIANCE OF SOUTH AFRICA": {
+   "file": "/party-emblems/reform_alliance_of_south_africa.png",
+   "iecImage": "RASA.PNG",
+   "abbreviation": "RASA",
+   "sha256": "5e9e36f4e5dde8f29d320ee2a2b204b2cd51623d6bc111f0cc8da0f691c2d5da"
+  },
+  "REGION 7 NEW GENERATION PARTY": {
+   "file": "/party-emblems/region_7_new_generation_party.png",
+   "iecImage": "NEGEPA7.PNG",
+   "abbreviation": "NEGEPA7",
+   "sha256": "98c26c4b9225f97da55e077253b31d193e173ffd84a3830bb12e3486547230ba"
+  },
+  "REPUBLICAN CONFERENCE OF TSHWANE": {
+   "file": "/party-emblems/republican_conference_of_tshwane.png",
+   "iecImage": "RCTSH.PNG",
+   "abbreviation": "RC",
+   "sha256": "00c91e07c4219f6ddd8a220e96f7c745c0b618b907942a8b595aa80a8ba26b3c"
+  },
+  "RESIDENT DEVELOPMENT": {
+   "file": "/party-emblems/resident_development.png",
+   "iecImage": "RD.PNG",
+   "abbreviation": "RD",
+   "sha256": "41384001abcc440390ac8f0eb4f82f83f87fb6b40cdba94591c4ea5cb24f0824"
+  },
+  "RESTORATION COMMUNITY FORUM": {
+   "file": "/party-emblems/restoration_community_forum.png",
+   "iecImage": "RCFNW371.PNG",
+   "abbreviation": "RCF",
+   "sha256": "16c6e61de87040b18eec05e1185c8a4dcefe3db7d0d59536b4f408799a8d67d7"
+  },
+  "RESTORATION SA": {
+   "file": "/party-emblems/restoration_sa.png",
+   "iecImage": "RESTORSA.PNG",
+   "abbreviation": "RESTORSA",
+   "sha256": "30c149be8c1b7d529657a39950b81f241f1f55f51092d8a11b0b2c4e3a5cef6d"
+  },
+  "RESTORE AZANIA MOVEMENT": {
+   "file": "/party-emblems/restore_azania_movement.png",
+   "iecImage": "RAM.PNG",
+   "abbreviation": "RAM",
+   "sha256": "6126675f74a408982da3b53450c66f4bdefeffdc429bc245df67ee848f74555c"
+  },
+  "RISE MZANSI": {
+   "file": "/party-emblems/rise_mzansi.png",
+   "iecImage": "RISE.PNG",
+   "abbreviation": "RISE",
+   "sha256": "bbc5d66dc429ca571e57ca3632d2d5d0c43e5f94665adfac18c5677318768b8d"
+  },
+  "RISE TSANTSABANE COMMUNITIES": {
+   "file": "/party-emblems/rise_tsantsabane_communities.png",
+   "iecImage": "RTC.PNG",
+   "abbreviation": "RTC",
+   "sha256": "d22eede95a3fef69960bc477cc3cba35e484281537a6cd88a88930784b62d00f"
+  },
+  "RISE UP AFRICA / TSOGA AFRICA": {
+   "file": "/party-emblems/rise_up_africa_tsoga_africa.png",
+   "iecImage": "RUA.PNG",
+   "abbreviation": "RUA",
+   "sha256": "0e761dfa935802c47f84fb7da7ccc8548a5a9ddc3bfceb582a62d9f2db1087d2"
+  },
+  "RUSTENBURG PEOPLE'S PARTY": {
+   "file": "/party-emblems/rustenburg_people_s_party.png",
+   "iecImage": "RPPDC37.PNG",
+   "abbreviation": "RPP",
+   "sha256": "559e95de334f67e93d5f520ad1872ddd4f372ce285212b1a963430a2bd665ea4"
+  },
+  "SAAMSTAAN SUID-AFRIKA": {
+   "file": "/party-emblems/saamstaan_suid_afrika.png",
+   "iecImage": "ISASSA.PNG",
+   "abbreviation": "ISASSA",
+   "sha256": "4dc87b0ab4deb3af59fc7b4b8968f77a00d2cea77b52a7edd01bc8b521d7be95"
+  },
+  "SAKHISIZWE CONVENTION": {
+   "file": "/party-emblems/sakhisizwe_convention.png",
+   "iecImage": "S.C..PNG",
+   "abbreviation": "S.C.",
+   "sha256": "169f0088f430435ff6d198973d1305152066140e170a0315c7d4a861c0f41099"
+  },
+  "SAKK MILITARY VETERANS PARTY": {
+   "file": "/party-emblems/sakk_military_veterans_party.png",
+   "iecImage": "SAKKMVP.PNG",
+   "abbreviation": "SAKKMVP",
+   "sha256": "2fe23d4e0cb5e359242a79e90b0d23950637fa3a772bed9fa199e778e6cbdbae"
+  },
+  "SALDANHA BAY RESIDENTS ALLIANCE": {
+   "file": "/party-emblems/saldanha_bay_residents_alliance.png",
+   "iecImage": "SRA-SIA.PNG",
+   "abbreviation": "SRA-SIA",
+   "sha256": "c2ebb99110e8f78afa5fd7cf97287abcad24f806b33a3dfb8a3006107743bd8e"
+  },
+  "SAVE DITSOBOTLA MOVEMENT": {
+   "file": "/party-emblems/save_ditsobotla_movement.png",
+   "iecImage": "SEDIMO.PNG",
+   "abbreviation": "SEDIMO",
+   "sha256": "53b26d47a265a3cd061c0bfe7851188ce3c01e5e87ccd6bc36bc6fa82c6a5c88"
+  },
+  "SEBOTHA COMMUNITY PARTY": {
+   "file": "/party-emblems/sebotha_community_party.png",
+   "iecImage": "SCP.PNG",
+   "abbreviation": "SCP",
+   "sha256": "efc0fce37120040f8b2f72d279e2bc785506b56dab71bcd15723a080f76a9dd4"
+  },
+  "SECURITY PERSONNEL PARTY OF SOUTH AFRICA": {
+   "file": "/party-emblems/security_personnel_party_of_south_africa.png",
+   "iecImage": "SPPSA.PNG",
+   "abbreviation": "SPPSA",
+   "sha256": "cdc23cca2e9e59b9185ca047a243a198455ce5c47e71cff0244f8ff837373a96",
+   "chosenFrom": [
+    "",
+    "SPPSA.PNG"
+   ]
+  },
+  "SEDIBENG EMFULENI RESIDENTS ASSOCIATIONS": {
+   "file": "/party-emblems/sedibeng_emfuleni_residents_associations.png",
+   "iecImage": "SERA.PNG",
+   "abbreviation": "SERA",
+   "sha256": "b0b845a7db9c879d8a2719cc16a36ae93016dd99bd27c28d91c1281452f5ac04"
+  },
+  "SERITI LE KAELO INDEPENDENT PARTY": {
+   "file": "/party-emblems/seriti_le_kaelo_independent_party.png",
+   "iecImage": "SLK26.PNG",
+   "abbreviation": "SLK26",
+   "sha256": "cf47849909ba6e647935add56b31c52e13b953e0c5aae30ea4bb87484ac536f8"
+  },
+  "SERVICE DELIVERY FRONT": {
+   "file": "/party-emblems/service_delivery_front.png",
+   "iecImage": "SDF.PNG",
+   "abbreviation": "SDF",
+   "sha256": "02a351a205c8b5470793ed587332a70b15592de532ec81aac7e3005e62cc7a26"
+  },
+  "SERVICE DELIVERY PARTY": {
+   "file": "/party-emblems/service_delivery_party.png",
+   "iecImage": "SDP.PNG",
+   "abbreviation": "SDP",
+   "sha256": "4e67e6cd0d141fd6ba0a75a0e574fdbdfd41b8bed487a808def615423ae97adc"
+  },
+  "SERVICE MOVEMENT FOR METSIMAHOLO": {
+   "file": "/party-emblems/service_movement_for_metsimaholo.png",
+   "iecImage": "SMM.PNG",
+   "abbreviation": "SMM",
+   "sha256": "7072326c8f1a9fff6a9cc22de732f03c54d2c9de89b0310a862d67f4ae88cd8f"
+  },
+  "SERVICE TO OUR PEOPLE'S PARTY": {
+   "file": "/party-emblems/service_to_our_people_s_party.png",
+   "iecImage": "STOPP.PNG",
+   "abbreviation": "STOPP",
+   "sha256": "1db13a584fe8b8e76df1e78ff0a58e78821ff9b95dc80c5cc4fc08cda54206b6",
+   "chosenFrom": [
+    "STOPPWC014.PNG",
+    "STOPP.PNG"
+   ]
+  },
+  "SETSOTO SERVICE DELIVERY FORUM": {
+   "file": "/party-emblems/setsoto_service_delivery_forum.png",
+   "iecImage": "SSDFFS191.PNG",
+   "abbreviation": "SSDF",
+   "sha256": "f73deee31713cce4dcd6a13f29d8f42793915c3a82f1aeb0758f8dcb05420c95"
+  },
+  "SHOSHOLOZA PROGRESSIVE PARTY": {
+   "file": "/party-emblems/shosholoza_progressive_party.png",
+   "iecImage": "SHOSH.PNG",
+   "abbreviation": "SHOSH",
+   "sha256": "921cd6a3ca67664ddc6e5cd00e128c00afc671d3b16e8d3a8db1aa34570818bb"
+  },
+  "SIBANYE (WE ARE ONE)": {
+   "file": "/party-emblems/sibanye_we_are_one.png",
+   "iecImage": "SWO.PNG",
+   "abbreviation": "SWO",
+   "sha256": "d2e2f43f448a941ac028ee74d118787a3cb802b6193c98e0ba5b44ab076f854e"
+  },
+  "SINDAWONYE PROGRESSIVE PARTY": {
+   "file": "/party-emblems/sindawonye_progressive_party.png",
+   "iecImage": "SPP.PNG",
+   "abbreviation": "SPP",
+   "sha256": "ab826e5179a2eb0b28b3ba04fb53a231bdcc47c686077fa2b36a0a7307a5aa85"
+  },
+  "SINGUKUKHANYA KWEZWE CHRISTIAN PARTY": {
+   "file": "/party-emblems/singukukhanya_kwezwe_christian_party.png",
+   "iecImage": "SKCPMP307.PNG",
+   "abbreviation": "SKCP",
+   "sha256": "c3216d9fbdc5799fc240f12b777aefb467f8cb9b3e4dfaa3014db9e4c5da9a1b"
+  },
+  "SISONKE SOLIDARITY MOVEMENT": {
+   "file": "/party-emblems/sisonke_solidarity_movement.png",
+   "iecImage": "SSM.PNG",
+   "abbreviation": "SSM",
+   "sha256": "499fc419ebcbf465a6b81931d832e2c0322c4e167af6d178a190dae528835ccd"
+  },
+  "SIYANCUMA INDEPENDENT FORUM": {
+   "file": "/party-emblems/siyancuma_independent_forum.png",
+   "iecImage": "SIF.PNG",
+   "abbreviation": "SIF",
+   "sha256": "9d1191b77dc648ad7bb15df72882953642644d2839619aa98a162d34bb5650e0"
+  },
+  "SIYANQOBA INDEPENDENT PARTY": {
+   "file": "/party-emblems/siyanqoba_independent_party.png",
+   "iecImage": "SIP.PNG",
+   "abbreviation": "SIP",
+   "sha256": "3bed6027b9de9298b80238786f1e669d103830b4664bf050bf69dcf62060eb2d"
+  },
+  "SIYATHEMBA COMMUNITY MOVEMENT": {
+   "file": "/party-emblems/siyathemba_community_movement.png",
+   "iecImage": "SGBDC7.PNG",
+   "abbreviation": "SGB",
+   "sha256": "4ec2fd862a1c3e8725436f3973315ef3d1e79decbdf8604f3feaf431a173bd4f"
+  },
+  "SIZWE UMMAH NATION": {
+   "file": "/party-emblems/sizwe_ummah_nation.png",
+   "iecImage": "SUN.PNG",
+   "abbreviation": "SUN",
+   "sha256": "bc66777042447a12cbffc7c5aabbcc2bb6688314811293f37341e7fe30ba9d68"
+  },
+  "SOCIAL DEMOCRATIC MOVEMENT": {
+   "file": "/party-emblems/social_democratic_movement.png",
+   "iecImage": "SM.PNG",
+   "abbreviation": "SM",
+   "sha256": "485fdfa218721a49507b1b43925e8143edc6f67aaed059ed56539cbe37422d6b"
+  },
+  "SOCIALIST AGENDA OF DISPOSSESSED AFRICANS": {
+   "file": "/party-emblems/socialist_agenda_of_dispossessed_africans.png",
+   "iecImage": "SADA.PNG",
+   "abbreviation": "SADA",
+   "sha256": "9631e101f37dfc61b63261a6b488c55d98f8b2a6beea18f42deadb86822d0401"
+  },
+  "SOCIALIST CIVIC MOVEMENT": {
+   "file": "/party-emblems/socialist_civic_movement.png",
+   "iecImage": "SCM.PNG",
+   "abbreviation": "SCM",
+   "sha256": "1d7fe3637eefd164aaea97c2817b65676065399295a4898f1b10a9e413b46da2"
+  },
+  "SOCIALIST ECONOMIC FREEDOM MOVEMENT": {
+   "file": "/party-emblems/socialist_economic_freedom_movement.png",
+   "iecImage": "SEFMGT423.PNG",
+   "abbreviation": "SEFM",
+   "sha256": "4489e4a5a6db473c2a096254232f8e9f668b44e06f3500c302223244acdbc1b5"
+  },
+  "SOCIALIST REVOLUTIONARY WORKERS PARTY": {
+   "file": "/party-emblems/socialist_revolutionary_workers_party.png",
+   "iecImage": "SRWP.PNG",
+   "abbreviation": "SRWP",
+   "sha256": "20e371d1ea3850df510271c0a5a709acb796340be43ab78f736f2eda424562f3"
+  },
+  "SOL- PLAATJIE SERVICE DELIVERY FORUM": {
+   "file": "/party-emblems/sol_plaatjie_service_delivery_forum.png",
+   "iecImage": "SPSDFNC091.PNG",
+   "abbreviation": "SPSDF",
+   "sha256": "3534f32600846189d6f652cfa44abb8f2ab1e864f04321356b74a6aebd25f977"
+  },
+  "SOLIDARITY ACTION COMMITTEE COLLECTIVE": {
+   "file": "/party-emblems/solidarity_action_committee_collective.png",
+   "iecImage": "SACC.PNG",
+   "abbreviation": "SACC",
+   "sha256": "ad30dd18014345fbdd2748da0b46b8424ec4193d0ae8a6d49ca4507bee0c0f73"
+  },
+  "SOUTH AFRICA FIRST": {
+   "file": "/party-emblems/south_africa_first.png",
+   "iecImage": "SAF.PNG",
+   "abbreviation": "SAF",
+   "sha256": "c4d5fb9b2d4381e6fe744719d221cf99f0fb91982c885cb0e48a39d635ad4dde"
+  },
+  "SOUTH AFRICA FOR SOUTH AFRICANS": {
+   "file": "/party-emblems/south_africa_for_south_africans.png",
+   "iecImage": "SA4SA.PNG",
+   "abbreviation": "SA4SA",
+   "sha256": "926cf43153ae7dea47184b4afe147c43ef301a6d4b58dcf96fc7b8273bf3286b"
+  },
+  "SOUTH AFRICA MY HOME RESIDENTS ASSOCIATION": {
+   "file": "/party-emblems/south_africa_my_home_residents_association.png",
+   "iecImage": "SAHRA.PNG",
+   "abbreviation": "SAHRA",
+   "sha256": "a605cb6083a918a6557565be48677c04d27cd38c576c6e3ed9613ffc079e129f"
+  },
+  "SOUTH AFRICAN COMMUNIST PARTY": {
+   "file": "/party-emblems/sacp.png",
+   "iecImage": "SACP.PNG",
+   "abbreviation": "SACP",
+   "sha256": "29b2b97710716593b003c1f8df0a75f49cc300163b3331abd7624f061f5ca538"
+  },
+  "SOUTH AFRICAN MAINTENANCE AND ESTATE BENEFICIARIES ASSOCIATI": {
+   "file": "/party-emblems/south_african_maintenance_and_estate_beneficiaries_associati.png",
+   "iecImage": "SAMEBA.PNG",
+   "abbreviation": "SAMEBA",
+   "sha256": "2eb116f668afa2d805e87a36b023df106d6ebc7c3a255dbd03b1858e86470168"
+  },
+  "SOUTH AFRICAN MASS MOVEMENT": {
+   "file": "/party-emblems/south_african_mass_movement.png",
+   "iecImage": "SAMMO.PNG",
+   "abbreviation": "SAMMO",
+   "sha256": "9da48d3825a3a0855d56d2ca8101e6f69dd9111dea14f78b0668c45ce05b9d9e"
+  },
+  "SOUTH AFRICAN PARTY": {
+   "file": "/party-emblems/south_african_party.png",
+   "iecImage": "S.A.P..PNG",
+   "abbreviation": "S.A.P.",
+   "sha256": "e441e324bb628241aeed841cae0bc5b6eccc0e24c82f48c664de187a0e39bd8d"
+  },
+  "SOUTH AFRICAN PEOPLES MOVEMENT": {
+   "file": "/party-emblems/south_african_peoples_movement.png",
+   "iecImage": "SAPM.PNG",
+   "abbreviation": "SAPM",
+   "sha256": "8dfd198ef6eef857a31b4a64721e8bf019856e8cdc6bcb2c677c9d596872d6f7"
+  },
+  "SOUTH AFRICAN PEOPLES PARTY": {
+   "file": "/party-emblems/south_african_peoples_party.png",
+   "iecImage": "SAPP.PNG",
+   "abbreviation": "SAPP",
+   "sha256": "7f0145ea391ee0b737d646f9d23fb673052fe18a98beca1ae59b3d6b3a6c16db"
+  },
+  "SOUTH AFRICAN PEOPLE’S CIVIC ORGANIZATION": {
+   "file": "/party-emblems/south_african_people_s_civic_organization.png",
+   "iecImage": "SAPCO.PNG",
+   "abbreviation": "SAPCO",
+   "sha256": "21dcf133133c65115acf405f44a061f6e682c55f2819e69e163e230fe0222625"
+  },
+  "SOUTH AFRICAN POLITICAL ASSOCIATION": {
+   "file": "/party-emblems/south_african_political_association.png",
+   "iecImage": "SAPA.PNG",
+   "abbreviation": "SAPA",
+   "sha256": "e645a38731ac4df697a34a148f12c2a5af4747a11aafc1952da2498877d3f6fa"
+  },
+  "SOUTH AFRICAN RESIDENTS ASSOCIATION": {
+   "file": "/party-emblems/south_african_residents_association.png",
+   "iecImage": "SAREA.PNG",
+   "abbreviation": "SAREA",
+   "sha256": "e6119db53d15f59f3ee39e51f3ae5f6997d3ba3b967c794a079caf7bd43a3678"
+  },
+  "SOUTH AFRICAN ROYAL KINGDOMS ORGANIZATION": {
+   "file": "/party-emblems/south_african_royal_kingdoms_organization.png",
+   "iecImage": "SARKO.PNG",
+   "abbreviation": "SARKO",
+   "sha256": "917a223108bb9db372752451f47facb42932bee59e674103bb7740ca9c5bee46"
+  },
+  "SPECTRUM NATIONAL PARTY": {
+   "file": "/party-emblems/spectrum_national_party.png",
+   "iecImage": "SNP.PNG",
+   "abbreviation": "SNP",
+   "sha256": "c72125ab159b02c16675d4dfa4741cf332b198034828a8b63d6739697f2b4fd8"
+  },
+  "STERKSPRUIT CIVIC ASSOCIATION": {
+   "file": "/party-emblems/sterkspruit_civic_association.png",
+   "iecImage": "CIVICEC141.PNG",
+   "abbreviation": "CIVIC",
+   "sha256": "fa0a314200fc50a73d839265a476db73ce672d3e1f86a0e93d77aeed344de269"
+  },
+  "STRETFORD WILDEBEESFONTEIN ELECTED CIVIC ORGANISATION": {
+   "file": "/party-emblems/stretford_wildebeesfontein_elected_civic_organisation.png",
+   "iecImage": "STREWECO.PNG",
+   "abbreviation": "STREWECO",
+   "sha256": "ca63ef9d463f75e5d3109ae8bee1a843fae39c642f9d26c2c9400cea981a5128"
+  },
+  "SUCCESS AFRICAN MOVEMENT": {
+   "file": "/party-emblems/success_african_movement.png",
+   "iecImage": "NO_ABBR2055.PNG",
+   "abbreviation": "SUCCESS AFRICAN MOVEMENT",
+   "sha256": "6f73b38cc677c76e88c4b3e2caa1018f78332d0b4dfcd5e1aa7547bee626251e"
+  },
+  "TAU DIA RORA CULTURAL AND TRADITIONAL LEKGOTLA": {
+   "file": "/party-emblems/tau_dia_rora_cultural_and_traditional_lekgotla.png",
+   "iecImage": "DITAU.PNG",
+   "abbreviation": "DITAU",
+   "sha256": "7c7d1730ddc0d8cc661e1ed01c42778e35cf61c7d1424f64cefc9ee323bf4a34"
+  },
+  "THABAZIMBI FORUM FOR SERVICE DELIVERY": {
+   "file": "/party-emblems/thabazimbi_forum_for_service_delivery.png",
+   "iecImage": "TFSDLIM361.PNG",
+   "abbreviation": "TFSD",
+   "sha256": "238afdc5afff4b1f46e967d322122f16fc351a471c0fc0a4cba581675240c900"
+  },
+  "THABAZIMBI RESIDENTS ASSOCIATION": {
+   "file": "/party-emblems/thabazimbi_residents_association.png",
+   "iecImage": "TRALIM361.PNG",
+   "abbreviation": "TRA",
+   "sha256": "da7d53f8528c42aaf2bdd90945b2359accdcdbe8601a7d7df2884353420dbe18"
+  },
+  "THE FARMER PARTY": {
+   "file": "/party-emblems/the_farmer_party.png",
+   "iecImage": "TFP.PNG",
+   "abbreviation": "TFP",
+   "sha256": "e9e89ae4e3d7b8be0ad1c056e6e67495f1dc65401f0151e9eb4537c63859e883"
+  },
+  "THE INDEPENDENTS": {
+   "file": "/party-emblems/the_independents.png",
+   "iecImage": "NO_ABBR1636.PNG",
+   "abbreviation": "THE INDEPENDENTS",
+   "sha256": "7dae7ac425f4aa0bde51c1afad0ff620a04129d271ee947341f570cb0a822866"
+  },
+  "THE MOVEMENT FOR SOCIAL JUSTICE": {
+   "file": "/party-emblems/the_movement_for_social_justice.png",
+   "iecImage": "MSJ.PNG",
+   "abbreviation": "MSJ",
+   "sha256": "48b8dc44bd77c39309fc5f511ef9d2481d5a8c255fe8d98d85aa87dd6ad36c64"
+  },
+  "THE WINNERS MOVEMENT PARTY": {
+   "file": "/party-emblems/the_winners_movement_party.png",
+   "iecImage": "TWMP.PNG",
+   "abbreviation": "TWMP",
+   "sha256": "73ea10bd388b97ee0175739a91cfdff0b2377ab593450155b53f4a10db4f8b02"
+  },
+  "THINA BAHLALI PEOPLE'S MOVEMENT": {
+   "file": "/party-emblems/thina_bahlali_people_s_movement.png",
+   "iecImage": "TBPM.PNG",
+   "abbreviation": "TBPM",
+   "sha256": "dc38d6f7ac63ae4887fd1409ed86fb10a38e3881d801f119d12f176338d957e7"
+  },
+  "THINA BANTU MOVEMENT": {
+   "file": "/party-emblems/thina_bantu_movement.png",
+   "iecImage": "TBM.PNG",
+   "abbreviation": "TBM",
+   "sha256": "6f1f028e399d6d0e5cd6c521b446a1401a245e22a8ef2f8b91f514e0ee70e6b4"
+  },
+  "TIKWANA YOUTH POWER": {
+   "file": "/party-emblems/tikwana_youth_power.png",
+   "iecImage": "TYPFS183.PNG",
+   "abbreviation": "TYP",
+   "sha256": "5088f87bab846e85e8dc67e405e93e92ea83ca3a65c4b9afcbb9cb9840b10d3f"
+  },
+  "TRANSFORMATIVE YES MOVEMENT": {
+   "file": "/party-emblems/transformative_yes_movement.png",
+   "iecImage": "TYM.PNG",
+   "abbreviation": "TYM",
+   "sha256": "266e22a6ef8cf9daccf943ba868d3b5c92be1eb9905b41c213448b7976b40235"
+  },
+  "TRUE REFORMATION PARTY": {
+   "file": "/party-emblems/true_reformation_party.png",
+   "iecImage": "TRP.PNG",
+   "abbreviation": "TRP",
+   "sha256": "eef70ced27ebb04bfb4521ede23bff38b85fc68645afe5f0c4ba246ba2de0ca2"
+  },
+  "TRULY ALLIANCE": {
+   "file": "/party-emblems/truly_alliance.png",
+   "iecImage": "TA.PNG",
+   "abbreviation": "TA",
+   "sha256": "51e978dbdf350d85bc95e1c0e298906e039b96974d071a3a4cd7f1df7b9a59d5"
+  },
+  "TRUTH AND SOLIDARITY MOVEMENT": {
+   "file": "/party-emblems/truth_and_solidarity_movement.png",
+   "iecImage": "TRUTH.PNG",
+   "abbreviation": "TRUTH",
+   "sha256": "a31ae286163fc2d04b90124e1d80b99dc212fea9319ba7ac78f53cc99e5cf348"
+  },
+  "TSOGANG CIVIC MOVEMENT": {
+   "file": "/party-emblems/tsogang_civic_movement.png",
+   "iecImage": "TSOGANGNW371.PNG",
+   "abbreviation": "TSOGANG",
+   "sha256": "c4c47bd3e566248b7e289ae7b042d819a28c43612e106b0d57a5af049980bfa2"
+  },
+  "TSOGANG MADIBENG": {
+   "file": "/party-emblems/tsogang_madibeng.png",
+   "iecImage": "TM.PNG",
+   "abbreviation": "TM",
+   "sha256": "b746eb40e3b6a5179cf64b404b429974ac01a9ee9d685b294161fbb3bcf89497"
+  },
+  "UBUNTU ABANDE POLITICAL PARTY": {
+   "file": "/party-emblems/ubuntu_abande_political_party.png",
+   "iecImage": "UAPP.PNG",
+   "abbreviation": "UAPP",
+   "sha256": "8bc5707febc8aaf7a18a64cae8ebcb8dc58629887e309c810a05ddb01c71db26"
+  },
+  "UMKHONTO WESIZWE PARTY": {
+   "file": "/party-emblems/mk.png",
+   "iecImage": "MKP.PNG",
+   "abbreviation": "MKP",
+   "sha256": "a7886fbe25425f54310cd8e113257e5c0a051a741d95b1fdd269aee98448d0d9"
+  },
+  "UMKHUMBI WESIZWE ORGANISATION": {
+   "file": "/party-emblems/umkhumbi_wesizwe_organisation.png",
+   "iecImage": "UWOKZN435.PNG",
+   "abbreviation": "UWO",
+   "sha256": "e081fd69acf184b2f996e5fffdf22bffb01c4e27152e11595500d1e47a762408"
+  },
+  "UMPHAKATHI KAI ONE PARTY": {
+   "file": "/party-emblems/umphakathi_kai_one_party.png",
+   "iecImage": "NO_ABBR1896.PNG",
+   "abbreviation": "UMPHAKATHI KAI ONE PARTY",
+   "sha256": "2800392fce5a3dc9ac55f9dbbe95b0cf2460d1c97c4165f649d2b965839625f4"
+  },
+  "UMPHAKATHI WARONA": {
+   "file": "/party-emblems/umphakathi_warona.png",
+   "iecImage": "NO_ABBR3204.PNG",
+   "abbreviation": "UMPHAKATHI WARONA",
+   "sha256": "c736a8cfd7dc878592770929128fd232f5931f58e28c535aa020aadb98ee0ca8"
+  },
+  "UNEMPLOYMENT MOVEMENT SA": {
+   "file": "/party-emblems/unemployment_movement_sa.png",
+   "iecImage": "UMSA.PNG",
+   "abbreviation": "UMSA",
+   "sha256": "97a34d026d9541118f17e0aeb3411613fcdc1a0b018467ec00f71b6e804a03da"
+  },
+  "UNIFIED CIVIC ORGANISATION": {
+   "file": "/party-emblems/unified_civic_organisation.png",
+   "iecImage": "UCO.PNG",
+   "abbreviation": "UCO",
+   "sha256": "cf3306e6ed8cde3fc310536865f0e1972d8cc38a7fbe6c7ca2cce95b58d3098c"
+  },
+  "UNITED AFRICANS TRANSFORMATION": {
+   "file": "/party-emblems/united_africans_transformation.png",
+   "iecImage": "UAT.PNG",
+   "abbreviation": "UAT",
+   "sha256": "6d219fbd2c32149ba21eb23f188bdac15c3c4b514c7f5dca1e5291f477d99132"
+  },
+  "UNITED CHRISTIAN DEMOCRATIC PARTY": {
+   "file": "/party-emblems/united_christian_democratic_party.png",
+   "iecImage": "UCDP.PNG",
+   "abbreviation": "UCDP",
+   "sha256": "4c621488bb181b1b7a7dc67c95a5ada757ff77ced6af0484ca8a7f5df2356a75"
+  },
+  "UNITED CULTURAL MOVEMENT": {
+   "file": "/party-emblems/united_cultural_movement.png",
+   "iecImage": "UCM.PNG",
+   "abbreviation": "UCM",
+   "sha256": "6a4e712d8b7862b1d285a71728106944dd0bf702682d9074562e5ac1ad41ba30"
+  },
+  "UNITED DEMOCRATIC FRONT PARTY": {
+   "file": "/party-emblems/united_democratic_front_party.png",
+   "iecImage": "NO_ABBR1966.PNG",
+   "abbreviation": "UNITED DEMOCRATIC FRONT PARTY",
+   "sha256": "f66333bf333b4cb40362f271eef138b117b323bf5f5d3e6b592679375422f3aa"
+  },
+  "UNITED DEMOCRATIC MOVEMENT": {
+   "file": "/party-emblems/united_democratic_movement.png",
+   "iecImage": "UDM.PNG",
+   "abbreviation": "UDM",
+   "sha256": "3d5c48b207be02d6ade03d9519156666a3491485223730c02c74cb6e3fb580f1"
+  },
+  "UNITED DEMOCRATS": {
+   "file": "/party-emblems/united_democrats.png",
+   "iecImage": "UD.PNG",
+   "abbreviation": "UD",
+   "sha256": "a54364740b80f5c394c5c09904847d0d8882bf7ada4f397b60fc2171551c7075"
+  },
+  "UNITED DEVELOPMENT FORUM": {
+   "file": "/party-emblems/united_development_forum.png",
+   "iecImage": "UD4DC20.PNG",
+   "abbreviation": "UD4",
+   "sha256": "d5fe43d29526f64b8fac0a94b3e5633c23ac8e32b4af0f4f38a370be2beb971f"
+  },
+  "UNITED INDEPENDENT MOVEMENT": {
+   "file": "/party-emblems/united_independent_movement.png",
+   "iecImage": "UIM.PNG",
+   "abbreviation": "UIM",
+   "sha256": "293b785a27bb2ac27918d7994a7faba6c62afb3d1c544f57964d740331ede8b8"
+  },
+  "UNITED PEOPLE": {
+   "file": "/party-emblems/united_people.png",
+   "iecImage": "NO_ABBR2117.PNG",
+   "abbreviation": "UNITED PEOPLE",
+   "sha256": "d493313548b07b038d2e6dec00a5b35a8ccdad77db00213b83a93184cea83289"
+  },
+  "UNITED PROGRESSIVE PEOPLE ALLIANCE": {
+   "file": "/party-emblems/united_progressive_people_alliance.png",
+   "iecImage": "UPPA..PNG",
+   "abbreviation": "UPPA.",
+   "sha256": "93e1634c49aac9d989a92667eef9e6bd16f6a3d38560c18441e26ac317d58738",
+   "chosenFrom": [
+    "UPPA.PNG",
+    "UPPA..PNG"
+   ]
+  },
+  "UNITED RESIDENT'S PARTY": {
+   "file": "/party-emblems/united_resident_s_party.png",
+   "iecImage": "URP.PNG",
+   "abbreviation": "URP",
+   "sha256": "93d97eb180628e3eea66bbdb09c29f7a11dbefd65b18681460a47d25070ddde5"
+  },
+  "UNITED RESIDENTS FRONT": {
+   "file": "/party-emblems/united_residents_front.png",
+   "iecImage": "URF.PNG",
+   "abbreviation": "URF",
+   "sha256": "e4d36d8f5aafa0d55371157b8cf77d62d158c899d52713480fa6dd3a1644e8fb"
+  },
+  "UNITED SOUTH AFRICA": {
+   "file": "/party-emblems/united_south_africa.png",
+   "iecImage": "USA.PNG",
+   "abbreviation": "USA",
+   "sha256": "72a461e7b09fc6748c35782219d1f9319118b61f0c81410a36fb4de059f9b4e4"
+  },
+  "US THE PEOPLE": {
+   "file": "/party-emblems/us_the_people.png",
+   "iecImage": "US.PNG",
+   "abbreviation": "US",
+   "sha256": "bf8af4b7ff82f77d6c4bb45fe723ff6997637bd39db351c8d6f185f324bd4cb1"
+  },
+  "UTLWANG VOICE OF THE PEOPLE": {
+   "file": "/party-emblems/utlwang_voice_of_the_people.png",
+   "iecImage": "U.V.P..PNG",
+   "abbreviation": "U.V.P.",
+   "sha256": "d94f64ef48208cfbcc95388f584f20b51541219b69c038bc0efdc6be4ab502d1",
+   "chosenFrom": [
+    "",
+    "U.V.P..PNG"
+   ]
+  },
+  "VAAL PARTY": {
+   "file": "/party-emblems/vaal_party.png",
+   "iecImage": "VAAL.PNG",
+   "abbreviation": "VAAL",
+   "sha256": "2a3ac916bb494ed4d0b4512e0dc59351d2df53f2e28d22556a6fbba4889ddc17"
+  },
+  "VAAL RIVER CITY DEMOCRATIC MOVEMENT": {
+   "file": "/party-emblems/vaal_river_city_democratic_movement.png",
+   "iecImage": "VDM.PNG",
+   "abbreviation": "VDM",
+   "sha256": "66e45b7fe5a46370c39f7cb70cbe06298d72bbf80bbbaaf768b2ae20efce8867"
+  },
+  "VHEMBE INDEPENDENT PARTY (MUSIKITEDZI)": {
+   "file": "/party-emblems/vhembe_independent_party_musikitedzi.png",
+   "iecImage": "VIP.PNG",
+   "abbreviation": "VIP",
+   "sha256": "c8a6ca99b6abfd4bda70bef1b5b7f508b3573569d4d970af666a1d80701001e9"
+  },
+  "VOICE FOR CHANGE": {
+   "file": "/party-emblems/voice_for_change.png",
+   "iecImage": "VFC.PNG",
+   "abbreviation": "VFC",
+   "sha256": "33df842abd86280031101c89d07f4c4e86bfaf2e5c64fcd443a3763dff6c545c"
+  },
+  "VRYHEIDSFRONT PLUS | FREEDOM FRONT PLUS": {
+   "file": "/party-emblems/vfp.png",
+   "iecImage": "VF PLUS.PNG",
+   "abbreviation": "VF PLUS",
+   "sha256": "6db581f331d7a18e71930f7de1ed6da7afbf7d47b792202a96c17862a45760c3"
+  },
+  "VUKA SA": {
+   "file": "/party-emblems/vuka_sa.png",
+   "iecImage": "VSA.PNG",
+   "abbreviation": "VSA",
+   "sha256": "c24f2c4be7f50b6b8aaf3eff8747d5893bb4c78a7f27ff4958fdfa7f122b0f11"
+  },
+  "WITZENBERG AKSIE": {
+   "file": "/party-emblems/witzenberg_aksie.png",
+   "iecImage": "WAWC022.PNG",
+   "abbreviation": "WA",
+   "sha256": "f5accd919fdc5faac030f5cb690841729a52077491c27c6e62d4cc8ac6d79aff"
+  },
+  "WITZENBERG ONAFHANKLIKE DEMOKRATIESE PARTY": {
+   "file": "/party-emblems/witzenberg_onafhanklike_demokratiese_party.png",
+   "iecImage": "WIDWC022.PNG",
+   "abbreviation": "WID",
+   "sha256": "cbf62b165e8450271e4fd4c6c614d846025d7e7a4463ed68d914ce153481cd2e"
+  },
+  "WITZENBERG PARTY": {
+   "file": "/party-emblems/witzenberg_party.png",
+   "iecImage": "WP.PNG",
+   "abbreviation": "WP",
+   "sha256": "53a9ca28d968f5aecf249072f11a9c895e1846ff86787eea46b4e1a396b5e0b0",
+   "chosenFrom": [
+    "NO_ABBR623.PNG",
+    "WP.PNG"
+   ]
+  },
+  "WOMEN AND YOUTH ORGANISATION": {
+   "file": "/party-emblems/women_and_youth_organisation.png",
+   "iecImage": "WAYO.PNG",
+   "abbreviation": "WAYO",
+   "sha256": "7a6785b212d77d6c0cc3768fbdd79ca2103ffa368705b9922377743dee75d38f"
+  },
+  "XIMOKO PARTY": {
+   "file": "/party-emblems/ximoko_party.png",
+   "iecImage": "XP.PNG",
+   "abbreviation": "XP",
+   "sha256": "db48d634870c96cf3c584e3e3fe7874cb60413f8dba6f18591ef626b2bf8f397"
+  },
+  "YA BAAGI FORUM": {
+   "file": "/party-emblems/ya_baagi_forum.png",
+   "iecImage": "YBF.PNG",
+   "abbreviation": "YBF",
+   "sha256": "b6d759bb43a57e6dfbbd5fca8a693d6be04ce092dc1dc83875f9dc8f69ccac3b"
+  },
+  "YOUTH PARTY": {
+   "file": "/party-emblems/youth_party.png",
+   "iecImage": "YP.PNG",
+   "abbreviation": "YP",
+   "sha256": "4cdb215d2375e6bdbe77b275005da8cf1fe249dd3e2b9b97c8d2c774a0176f99"
+  }
+ },
+ "missing": [],
+ "unavailable": [
+  "ABAFUNA INGUBO YESKHETHU PARTY: HTTP 404 for NO_ABBR2068.PNG",
+  "IZWI LABAHLALI BEWARD: the Commission's list names no image",
+  "SAVE SOUTH AFRICA: HTTP 404 for SAVE SA.PNG",
+  "UNITY MZANSE: the Commission's list names no image",
+  "VOICE OF THE VOICELESS CIVIC ORGANIZATION: HTTP 404 for THE VOICE.PNG"
+ ]
+}
