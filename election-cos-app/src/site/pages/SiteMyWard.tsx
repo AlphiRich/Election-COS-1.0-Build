@@ -10,6 +10,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { SiteCard, SiteSection } from '../SiteChrome';
 import { PageIntro, SourceNote } from './pageParts';
 import { StatusPill } from './resultsParts';
+import { Emblem, PartyMark } from './PartyMark';
 import { nf, provinceName, titleCase } from '../tools/resultsFormat';
 import { councilPath, TRACKER_PATH } from '../resultsPaths';
 import { AdSlot } from '../ads/AdSlot';
@@ -134,7 +135,8 @@ export function SiteMyWard({ hasConsent }: { hasConsent: boolean }) {
                 {!councillor ? 'Loading…' : councillor.name ? titleCase(councillor.name) : 'Not yet named'}
               </h2>
               {councillor && (
-                <p className="m-0 text-site-base">
+                <p className="m-0 flex flex-wrap items-center gap-2 text-site-base">
+                  <Emblem id={partyIdOf(councillor.party)} name={partyLabel(councillor.party)} size={40} />
                   {councillor.party === 'INDEPENDENT' ? 'Independent' : partyLabel(councillor.party)}
                   {councillor.status === 'elected' || councillor.status === 'independentNamed' ? ', ward councillor-elect' : ''}
                 </p>
@@ -201,7 +203,9 @@ export function SiteMyWard({ hasConsent }: { hasConsent: boolean }) {
                     const gap = people.vacant.find((v) => partyIdOf(v.party) === h.id);
                     return (
                       <tr key={h.id} className="border-b border-line align-top last:border-b-0">
-                        <th scope="row" className="py-2.5 pr-3 font-normal">{h.name}</th>
+                        <th scope="row" className="py-2.5 pr-3 font-normal">
+                          <PartyMark id={h.id} name={h.name} size={28} />
+                        </th>
                         <td className="py-2.5 pr-3 text-right font-mono font-semibold">{h.seats - h.wardSeats}</td>
                         <td className="py-2.5">
                           {named.map((p) => titleCase(p.name)).join(', ')}
@@ -268,7 +272,7 @@ function VoteBars({ parties, valid }: { parties: PartyVotes; valid: number }) {
         return (
           <li key={p}>
             <div className="flex justify-between gap-3 text-site-sm">
-              <span className="min-w-0 truncate">{p === 'INDEPENDENT' ? 'Independent candidates' : partyLabel(p)}</span>
+              <PartyMark id={partyIdOf(p)} name={p === 'INDEPENDENT' ? 'Independent candidates' : partyLabel(p)} size={22} />
               <span className="font-mono">
                 {nf.format(v)} · {pct}%
               </span>

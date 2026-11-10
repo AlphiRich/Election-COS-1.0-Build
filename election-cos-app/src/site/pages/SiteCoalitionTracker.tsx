@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { SiteCard, SiteSection } from '../SiteChrome';
 import { PageIntro, SourceNote } from './pageParts';
 import { SeatBar, StatTile, StatusPill } from './resultsParts';
+import { PartyMark } from './PartyMark';
 import { kindOf, nf, provinceName } from '../tools/resultsFormat';
 import { councilPath, MY_WARD_PATH } from '../resultsPaths';
 import { fewestPartiesToGovern, seatsShort } from '../tools/tracker';
@@ -176,12 +177,12 @@ function MetroCard({ c }: { c: CouncilSeats }) {
         </h3>
         <StatusPill hung={c.hung} />
       </div>
-      <SeatBar holders={c.holders} councillors={c.councillors} label={c.name} />
-      <ul className="m-0 flex list-none flex-col gap-1 p-0 text-site-sm">
+      <SeatBar holders={c.holders} councillors={c.councillors} label={c.name} legend={false} />
+      <ul className="m-0 flex list-none flex-col gap-1.5 p-0 text-site-sm">
         {top.map((h) => (
-          <li key={h.id} className="flex justify-between gap-3">
-            <span className="min-w-0 truncate">{h.name}</span>
-            <span className="font-mono">{h.seats}</span>
+          <li key={h.id} className="flex items-center justify-between gap-3">
+            <PartyMark id={h.id} name={h.name} size={28} />
+            <span className="font-mono font-semibold">{h.seats}</span>
           </li>
         ))}
       </ul>
@@ -206,7 +207,9 @@ function CouncilRow({ c }: { c: CouncilSeats }) {
       </th>
       <td className="px-4 py-3 font-mono">{c.councillors}</td>
       <td className="px-4 py-3">
-        {top.name} <span className="font-mono text-slate">{top.seats}</span>
+        <span className="inline-flex items-center gap-2">
+          <PartyMark id={top.id} name={top.name} size={24} /> <span className="font-mono text-slate">{top.seats}</span>
+        </span>
       </td>
       <td className="px-4 py-3 font-mono">{short === 0 ? '–' : short}</td>
       <td className="px-4 py-3 font-mono">{fewest ?? '5 or more'}</td>

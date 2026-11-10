@@ -85,12 +85,6 @@ export function SiteResults() {
                 <StatusPill hung={m.hung} />
               </div>
               <SeatBar holders={m.holders} councillors={m.councillors} label={m.name} />
-              <p className="m-0 text-site-sm">
-                {m.holders
-                  .slice(0, 4)
-                  .map((h) => `${h.name} ${h.seats}`)
-                  .join(' · ')}
-              </p>
             </li>
           ))}
         </ul>

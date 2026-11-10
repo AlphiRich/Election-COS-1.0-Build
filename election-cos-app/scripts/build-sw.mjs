@@ -51,6 +51,9 @@ const walk = (dir, prefix = '') => {
     const full = path.join(dir, entry.name);
     const webPath = `${prefix}/${entry.name}`;
     if (entry.isDirectory()) {
+      // The ~515 party emblems (public/party-emblems, ~2.4 MB) are fetched when a results page shows them; precaching
+      // them would multiply the app's offline download for images most users never see.
+      if (webPath === '/party-emblems') continue;
       walk(full, webPath);
       continue;
     }

@@ -7,11 +7,12 @@
 import type { ReactNode } from 'react';
 import { majorityThreshold } from '../tools/coalition';
 import type { CouncilSeats, IecStatus } from '@/modules/lge2026/nationalResults';
+import { PartyLegend } from './PartyMark';
 
 /** Alternating neutral tones for adjacent segments, so neighbours stay distinguishable. */
 const TONES = ['bg-ink', 'bg-teal', 'bg-slate', 'bg-gold'];
 
-export function SeatBar({ holders, councillors, label }: { holders: CouncilSeats['holders']; councillors: number; label: string }) {
+export function SeatBar({ holders, councillors, label, legend = true }: { holders: CouncilSeats['holders']; councillors: number; label: string; legend?: boolean }) {
   const need = majorityThreshold(councillors);
   const described = holders.map((h) => `${h.name} ${h.seats}`).join(', ');
   return (
@@ -27,6 +28,11 @@ export function SeatBar({ holders, councillors, label }: { holders: CouncilSeats
       <p className="m-0 text-site-micro text-slate">
         The marker shows a majority: {need} of {councillors} seats.
       </p>
+      {legend && (
+        <div className="pt-2">
+          <PartyLegend holders={holders} />
+        </div>
+      )}
     </div>
   );
 }

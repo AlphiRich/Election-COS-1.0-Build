@@ -15,6 +15,7 @@ import { allocateSeats } from '@/modules/analytics/seatCalculator';
 import { NW405_2021_EXAMPLE } from '@/modules/analytics/nw405Example';
 import { NATIONAL_SEATS } from '@/modules/lge2026/nationalResults';
 import { provinceName } from '../tools/resultsFormat';
+import { PartyMark } from './PartyMark';
 import { smallMajorities } from '../tools/tracker';
 import { majorityThreshold, seatsHeld, type SeatHolder } from '../tools/coalition';
 
@@ -122,8 +123,8 @@ export function SiteCoalitionTool() {
                     checked={chosen.has(h.id)}
                     onChange={() => toggle(h.id)}
                   />
-                  <label htmlFor={`co-${i}`} className="min-w-0 flex-1 truncate">
-                    {h.name}
+                  <label htmlFor={`co-${i}`} className="min-w-0 flex-1">
+                    <PartyMark id={h.id} name={h.name} size={28} />
                   </label>
                   <label htmlFor={`seats-${i}`} className="sr-only">
                     {h.name} seats

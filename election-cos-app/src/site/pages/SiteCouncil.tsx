@@ -10,12 +10,13 @@ import { Link, useParams } from 'react-router-dom';
 import { Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
 import { SourceNote } from './pageParts';
 import { IecStatusNote, SeatBar, StatusPill } from './resultsParts';
+import { Emblem, PartyMark } from './PartyMark';
 import { kindOf, nf, provinceName, titleCase } from '../tools/resultsFormat';
 import { TRACKER_PATH, myWardPath } from '../resultsPaths';
 import { majorityThreshold } from '../tools/coalition';
 import { inSmallestGroups, seatsShort, smallMajorities, NOT_A_PARTY } from '../tools/tracker';
 import { AdSlot } from '../ads/AdSlot';
-import { partyLabel } from '@/modules/lge2026/councilResults';
+import { partyId, partyLabel } from '@/modules/lge2026/councilResults';
 import { NATIONAL_SEATS, loadCouncillors, type CouncilCouncillors, type CouncilSeats, type WardCouncillor } from '@/modules/lge2026/nationalResults';
 
 export function SiteCouncil({ hasConsent }: { hasConsent: boolean }) {
@@ -90,7 +91,9 @@ function Council({ c, hasConsent }: { c: CouncilSeats; hasConsent: boolean }) {
               <tbody>
                 {c.holders.map((h) => (
                   <tr key={h.id} className="border-b border-line last:border-b-0">
-                    <th scope="row" className="py-2 pr-3 font-normal">{h.name}</th>
+                    <th scope="row" className="py-2 pr-3 font-normal">
+                      <PartyMark id={h.id} name={h.name} size={28} />
+                    </th>
                     <td className="py-2 text-right font-mono font-semibold">{h.seats}</td>
                     <td className="py-2 text-right font-mono">{h.wardSeats}</td>
                     <td className="py-2 text-right font-mono">{h.seats - h.wardSeats}</td>
@@ -114,8 +117,14 @@ function Council({ c, hasConsent }: { c: CouncilSeats; hasConsent: boolean }) {
                 </p>
                 <ul className="m-0 flex list-none flex-col gap-1.5 p-0 text-site-sm">
                   {groups.slice(0, 10).map((g) => (
-                    <li key={g.ids.join('+')} className="rounded-md border border-line bg-white px-3 py-2">
-                      {g.ids.map(name).join(' + ')} <span className="font-mono text-slate">· {g.seats} seats</span>
+                    <li key={g.ids.join('+')} className="flex flex-wrap items-center gap-x-2 gap-y-1 rounded-md border border-line bg-white px-3 py-2">
+                      {g.ids.map((id, k) => (
+                        <span key={id} className="inline-flex items-center gap-2">
+                          {k > 0 && <span className="text-slate">+</span>}
+                          <PartyMark id={id} name={name(id)} size={24} />
+                        </span>
+                      ))}
+                      <span className="font-mono text-slate">· {g.seats} seats</span>
                     </li>
                   ))}
                 </ul>
@@ -123,7 +132,7 @@ function Council({ c, hasConsent }: { c: CouncilSeats; hasConsent: boolean }) {
                 {groups.filter((g) => g.ids.length === groups[0].ids.length).length > 1 && (
                   <p className="m-0 text-site-caption text-slate">
                     How often each party appears in the {groups.filter((g) => g.ids.length === groups[0].ids.length).length}{' '}
-                    {groups[0].ids.length}-party groups:{' '}
+                    {['', 'one', 'two', 'three', 'four'][groups[0].ids.length]}-party groups:{' '}
                     {[...counts]
                       .sort((a, b) => b[1] - a[1])
                       .map(([id, n]) => `${name(id)} ${n}`)
@@ -178,7 +187,9 @@ function Council({ c, hasConsent }: { c: CouncilSeats; hasConsent: boolean }) {
                         <Link to={myWardPath(c.code, w.ward)} className="text-teal">{w.ward}</Link>
                       </th>
                       <td className="px-4 py-2.5">{wardName(w)}</td>
-                      <td className="px-4 py-2.5">{w.party === 'INDEPENDENT' ? 'Independent' : partyLabel(w.party)}</td>
+                      <td className="px-4 py-2.5">
+                        <PartyMark id={partyId(w.party)} name={w.party === 'INDEPENDENT' ? 'Independent' : partyLabel(w.party)} size={24} />
+                      </td>
                       <td className="px-4 py-2.5 text-right font-mono">{w.status === 'tieUnresolved' ? 'tied' : `${w.margin} pts`}</td>
                     </tr>
                   ))}
@@ -205,7 +216,10 @@ function Council({ c, hasConsent }: { c: CouncilSeats; hasConsent: boolean }) {
               {groupBy(people.pr, (p) => p.party).map(([party, list]) => (
                 <details key={party} className="rounded-[10px] border border-line bg-white p-4" open={list.length <= 6}>
                   <summary className="cursor-pointer font-semibold">
-                    {partyLabel(party)} <span className="font-mono text-slate">· {list.length}</span>
+                    <span className="inline-flex items-center gap-2 align-middle">
+                      <Emblem id={partyId(party)} name={partyLabel(party)} size={28} />
+                      {partyLabel(party)} <span className="font-mono text-slate">· {list.length}</span>
+                    </span>
                   </summary>
                   <ol className="mb-0 mt-3 flex flex-col gap-1 pl-5 text-site-sm">
                     {list.map((p) => (
@@ -261,7 +275,9 @@ function Simulator({ c }: { c: CouncilSeats }) {
                     })
                   }
                 />
-                <span className="min-w-0 flex-1 truncate">{p.name}</span>
+                <span className="min-w-0 flex-1">
+                  <PartyMark id={p.id} name={p.name} size={28} />
+                </span>
                 <span className="font-mono">{p.seats}</span>
               </label>
             ))}
