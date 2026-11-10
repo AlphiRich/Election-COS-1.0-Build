@@ -10,12 +10,15 @@
  * and is deliberately a different thing from `app.electioncos.co.za`.
  *
  * No Firebase, no auth, no Dexie. A visitor arriving from a search
- * result downloads a marketing page, not an application.
+ * result downloads a marketing page, not an application. The site's own
+ * small worker (site-assets/pwa/site-sw.js) makes it installable and keeps
+ * pages already opened readable offline; it never touches the application.
  */
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { SiteApp } from './SiteApp';
+import { registerSiteWorker } from './pwa/installApp';
 import './site.css';
 
 const root = document.getElementById('root');
@@ -28,3 +31,5 @@ createRoot(root).render(
     </BrowserRouter>
   </StrictMode>,
 );
+
+registerSiteWorker();

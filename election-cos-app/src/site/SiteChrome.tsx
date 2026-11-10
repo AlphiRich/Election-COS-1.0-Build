@@ -41,6 +41,7 @@ import whatsAppQr from './assets/whatsapp-qr.svg';
 import { AdConsentWithdrawLink } from './ads/ConsentBanner';
 import { VotingRibbon } from './VotingRibbon';
 import { BrandMark } from '@/components/BrandMark';
+import { InstallAppButton } from './pwa/InstallAppButton';
 
 /* ------------------------------------------------------------- mark */
 
@@ -74,9 +75,11 @@ export function SiteHeader({ enquirySubject }: { enquirySubject: string }) {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-[18px]">
+        <div className="flex flex-wrap items-center gap-[18px]">
+          <InstallAppButton />
+          {/* The application is the staff workspace; the public never needs to sign in. */}
           <a href={SITE.appOrigin} className="text-site-sm font-semibold text-paper">
-            Sign in
+            Staff sign-in
           </a>
           <Link to="/book-a-demo" className="site-btn-outline-paper text-site-sm">
             Book a demo
