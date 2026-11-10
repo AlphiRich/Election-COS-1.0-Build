@@ -93,6 +93,8 @@ def parse(text, code):
     for r, w in zip(rows, ward_rows): r['wardSeats'] = w['wardSeats']; r['prSeats'] = w['prSeats']
     return {'code': code, 'excessiveCase': excessive, 'Q': q, 'A': a, 'totalSeats': total, 'independentWardSeats': indep, 'noPrListWardSeats': nolist,
             'excessiveVotes': ex_votes, 'excessiveSeats': ex_seats, 'rows': rows, 'partySeatsTotal': party_seats,
+            # "(PF) Potential Forfeiture - this party has fewer candidates than the seats allocated."
+            'potentialForfeiture': '(PF) Potential Forfeiture' in t,
             **({'incomplete': True, 'unallocatedSeats': unallocated} if incomplete else {})}
 
 def self_test():

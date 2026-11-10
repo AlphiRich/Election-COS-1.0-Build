@@ -110,6 +110,49 @@ export interface NationalSeats {
   councils: Record<string, CouncilSeats>;
 }
 
+export type WardCouncillorStatus = 'elected' | 'independentNamed' | 'independentUnnamed' | 'tieUnresolved' | 'countIncomplete' | 'noMatch';
+export interface WardCouncillor {
+  ward: number;
+  wardId: string;
+  /** The winning party as the Commission prints it ("INDEPENDENT" where independents led). */
+  party: string;
+  /** Null unless status is 'elected' or 'independentNamed'. */
+  name: string | null;
+  status: WardCouncillorStatus;
+  /** Points of the ward's valid vote between first and second. */
+  margin: number;
+  votes: number;
+  valid: number;
+}
+export interface PrCouncillor {
+  party: string;
+  rank: number;
+  name: string;
+}
+/** List seats a party won but cannot fill from its certified list: the Commission's "(PF) Potential Forfeiture". */
+export interface VacantSeats {
+  party: string;
+  listSeats: number;
+  filled: number;
+  vacant: number;
+}
+export interface CouncilCouncillors {
+  code: string;
+  ward: WardCouncillor[];
+  pr: PrCouncillor[];
+  vacant: VacantSeats[];
+}
+export interface CouncillorsFile {
+  source: string;
+  lists: Array<{ province: string; url: string; sha256: string; fetchedOn: string; supplemented: boolean }>;
+  councils: Record<string, CouncilCouncillors>;
+}
+
+/** Everyone elected to the 213 councils (about 1 MB), loaded on demand. Built by scripts/build-lge2026-councillors.ts. */
+export async function loadCouncillors(): Promise<CouncillorsFile> {
+  return (await import('@/data/lge2026/national/councillors-2026.json')).default as unknown as CouncillorsFile;
+}
+
 export const NATIONAL_SEATS = seatsRaw as unknown as NationalSeats;
 export const COUNCIL_CODES = Object.keys(NATIONAL_SEATS.councils).sort();
 

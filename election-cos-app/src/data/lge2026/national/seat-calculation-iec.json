@@ -246,7 +246,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 100
+   "partySeatsTotal": 100,
+   "potentialForfeiture": true
   },
   "CPT": {
    "code": "CPT",
@@ -700,7 +701,8 @@
      "prSeats": 8
     }
    ],
-   "partySeatsTotal": 235
+   "partySeatsTotal": 235,
+   "potentialForfeiture": true
   },
   "EC101": {
    "code": "EC101",
@@ -802,7 +804,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 24
+   "partySeatsTotal": 24,
+   "potentialForfeiture": false
   },
   "EC102": {
    "code": "EC102",
@@ -888,7 +891,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 11
+   "partySeatsTotal": 11,
+   "potentialForfeiture": false
   },
   "EC104": {
    "code": "EC104",
@@ -998,7 +1002,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 25
+   "partySeatsTotal": 25,
+   "potentialForfeiture": false
   },
   "EC105": {
    "code": "EC105",
@@ -1116,7 +1121,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 20
+   "partySeatsTotal": 20,
+   "potentialForfeiture": true
   },
   "EC106": {
    "code": "EC106",
@@ -1218,7 +1224,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 16
+   "partySeatsTotal": 16,
+   "potentialForfeiture": false
   },
   "EC108": {
    "code": "EC108",
@@ -1336,7 +1343,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 30
+   "partySeatsTotal": 30,
+   "potentialForfeiture": false
   },
   "EC109": {
    "code": "EC109",
@@ -1422,7 +1430,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 12
+   "partySeatsTotal": 12,
+   "potentialForfeiture": false
   },
   "EC121": {
    "code": "EC121",
@@ -1556,7 +1565,8 @@
      "prSeats": 12
     }
    ],
-   "partySeatsTotal": 62
+   "partySeatsTotal": 62,
+   "potentialForfeiture": true
   },
   "EC123": {
    "code": "EC123",
@@ -1666,7 +1676,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 13
+   "partySeatsTotal": 13,
+   "potentialForfeiture": false
   },
   "EC124": {
    "code": "EC124",
@@ -1784,7 +1795,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 27
+   "partySeatsTotal": 27,
+   "potentialForfeiture": true
   },
   "EC126": {
    "code": "EC126",
@@ -1886,7 +1898,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 21
+   "partySeatsTotal": 21,
+   "potentialForfeiture": true
   },
   "EC129": {
    "code": "EC129",
@@ -2004,7 +2017,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 41
+   "partySeatsTotal": 41,
+   "potentialForfeiture": true
   },
   "EC131": {
    "code": "EC131",
@@ -2082,7 +2096,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 17
+   "partySeatsTotal": 17,
+   "potentialForfeiture": false
   },
   "EC135": {
    "code": "EC135",
@@ -2200,7 +2215,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 40
+   "partySeatsTotal": 40,
+   "potentialForfeiture": true
   },
   "EC136": {
    "code": "EC136",
@@ -2310,7 +2326,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 33
+   "partySeatsTotal": 33,
+   "potentialForfeiture": true
   },
   "EC137": {
    "code": "EC137",
@@ -2444,7 +2461,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 38
+   "partySeatsTotal": 38,
+   "potentialForfeiture": false
   },
   "EC138": {
    "code": "EC138",
@@ -2546,7 +2564,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 17
+   "partySeatsTotal": 17,
+   "potentialForfeiture": false
   },
   "EC139": {
    "code": "EC139",
@@ -2720,7 +2739,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 68
+   "partySeatsTotal": 68,
+   "potentialForfeiture": true
   },
   "EC141": {
    "code": "EC141",
@@ -2830,7 +2850,8 @@
      "prSeats": 3
     }
    ],
-   "partySeatsTotal": 34
+   "partySeatsTotal": 34,
+   "potentialForfeiture": true
   },
   "EC142": {
    "code": "EC142",
@@ -2956,7 +2977,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 33
+   "partySeatsTotal": 33,
+   "potentialForfeiture": true
   },
   "EC145": {
    "code": "EC145",
@@ -3058,7 +3080,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 22
+   "partySeatsTotal": 22,
+   "potentialForfeiture": true
   },
   "EC153": {
    "code": "EC153",
@@ -3208,7 +3231,8 @@
      "prSeats": 3
     }
    ],
-   "partySeatsTotal": 60
+   "partySeatsTotal": 60,
+   "potentialForfeiture": true
   },
   "EC154": {
    "code": "EC154",
@@ -3318,7 +3342,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 42
+   "partySeatsTotal": 42,
+   "potentialForfeiture": true
   },
   "EC155": {
    "code": "EC155",
@@ -3428,7 +3453,8 @@
      "prSeats": 3
     }
    ],
-   "partySeatsTotal": 64
+   "partySeatsTotal": 64,
+   "potentialForfeiture": true
   },
   "EC156": {
    "code": "EC156",
@@ -3522,7 +3548,8 @@
      "prSeats": 7
     }
    ],
-   "partySeatsTotal": 50
+   "partySeatsTotal": 50,
+   "potentialForfeiture": true
   },
   "EC157": {
    "code": "EC157",
@@ -3705,6 +3732,7 @@
     }
    ],
    "partySeatsTotal": 51,
+   "potentialForfeiture": true,
    "incomplete": true,
    "unallocatedSeats": 9
   },
@@ -3832,7 +3860,8 @@
      "prSeats": 3
     }
    ],
-   "partySeatsTotal": 52
+   "partySeatsTotal": 52,
+   "potentialForfeiture": true
   },
   "EC442": {
    "code": "EC442",
@@ -3982,7 +4011,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 55
+   "partySeatsTotal": 55,
+   "potentialForfeiture": true
   },
   "EC443": {
    "code": "EC443",
@@ -4156,7 +4186,8 @@
      "prSeats": 5
     }
    ],
-   "partySeatsTotal": 64
+   "partySeatsTotal": 64,
+   "potentialForfeiture": true
   },
   "EC444": {
    "code": "EC444",
@@ -4258,7 +4289,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 38
+   "partySeatsTotal": 38,
+   "potentialForfeiture": true
   },
   "EKU": {
    "code": "EKU",
@@ -4848,7 +4880,8 @@
      "prSeats": 11
     }
    ],
-   "partySeatsTotal": 224
+   "partySeatsTotal": 224,
+   "potentialForfeiture": true
   },
   "ETH": {
    "code": "ETH",
@@ -5430,7 +5463,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 223
+   "partySeatsTotal": 223,
+   "potentialForfeiture": true
   },
   "FS161": {
    "code": "FS161",
@@ -5508,7 +5542,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 13
+   "partySeatsTotal": 13,
+   "potentialForfeiture": false
   },
   "FS162": {
    "code": "FS162",
@@ -5594,7 +5629,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 16
+   "partySeatsTotal": 16,
+   "potentialForfeiture": false
   },
   "FS163": {
    "code": "FS163",
@@ -5672,7 +5708,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 13
+   "partySeatsTotal": 13,
+   "potentialForfeiture": true
   },
   "FS181": {
    "code": "FS181",
@@ -5798,7 +5835,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 19
+   "partySeatsTotal": 19,
+   "potentialForfeiture": false
   },
   "FS182": {
    "code": "FS182",
@@ -5876,7 +5914,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 13
+   "partySeatsTotal": 13,
+   "potentialForfeiture": true
   },
   "FS183": {
    "code": "FS183",
@@ -5970,7 +6009,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 16
+   "partySeatsTotal": 16,
+   "potentialForfeiture": true
   },
   "FS184": {
    "code": "FS184",
@@ -6224,7 +6264,8 @@
      "prSeats": 3
     }
    ],
-   "partySeatsTotal": 72
+   "partySeatsTotal": 72,
+   "potentialForfeiture": true
   },
   "FS185": {
    "code": "FS185",
@@ -6326,7 +6367,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 23
+   "partySeatsTotal": 23,
+   "potentialForfeiture": true
   },
   "FS191": {
    "code": "FS191",
@@ -6492,7 +6534,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 30
+   "partySeatsTotal": 30,
+   "potentialForfeiture": true
   },
   "FS192": {
    "code": "FS192",
@@ -6650,7 +6693,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 38
+   "partySeatsTotal": 38,
+   "potentialForfeiture": true
   },
   "FS193": {
    "code": "FS193",
@@ -6784,7 +6828,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 18
+   "partySeatsTotal": 18,
+   "potentialForfeiture": false
   },
   "FS194": {
    "code": "FS194",
@@ -7038,7 +7083,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 70
+   "partySeatsTotal": 70,
+   "potentialForfeiture": true
   },
   "FS195": {
    "code": "FS195",
@@ -7148,7 +7194,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 16
+   "partySeatsTotal": 16,
+   "potentialForfeiture": false
   },
   "FS196": {
    "code": "FS196",
@@ -7290,7 +7337,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 18
+   "partySeatsTotal": 18,
+   "potentialForfeiture": true
   },
   "FS201": {
    "code": "FS201",
@@ -7464,7 +7512,8 @@
      "prSeats": 3
     }
    ],
-   "partySeatsTotal": 40
+   "partySeatsTotal": 40,
+   "potentialForfeiture": true
   },
   "FS203": {
    "code": "FS203",
@@ -7598,7 +7647,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 27
+   "partySeatsTotal": 27,
+   "potentialForfeiture": true
   },
   "FS204": {
    "code": "FS204",
@@ -7852,7 +7902,8 @@
      "prSeats": 3
     }
    ],
-   "partySeatsTotal": 46
+   "partySeatsTotal": 46,
+   "potentialForfeiture": true
   },
   "FS205": {
    "code": "FS205",
@@ -7978,7 +8029,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 17
+   "partySeatsTotal": 17,
+   "potentialForfeiture": false
   },
   "GT421": {
    "code": "GT421",
@@ -8352,7 +8404,8 @@
      "prSeats": 5
     }
    ],
-   "partySeatsTotal": 90
+   "partySeatsTotal": 90,
+   "potentialForfeiture": true
   },
   "GT422": {
    "code": "GT422",
@@ -8542,7 +8595,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 30
+   "partySeatsTotal": 30,
+   "potentialForfeiture": false
   },
   "GT423": {
    "code": "GT423",
@@ -8772,7 +8826,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 26
+   "partySeatsTotal": 26,
+   "potentialForfeiture": true
   },
   "GT481": {
    "code": "GT481",
@@ -8962,7 +9017,8 @@
      "prSeats": 7
     }
    ],
-   "partySeatsTotal": 77
+   "partySeatsTotal": 77,
+   "potentialForfeiture": true
   },
   "GT484": {
    "code": "GT484",
@@ -9152,7 +9208,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 49
+   "partySeatsTotal": 49,
+   "potentialForfeiture": true
   },
   "GT485": {
    "code": "GT485",
@@ -9382,7 +9439,8 @@
      "prSeats": 3
     }
    ],
-   "partySeatsTotal": 69
+   "partySeatsTotal": 69,
+   "potentialForfeiture": true
   },
   "JHB": {
    "code": "JHB",
@@ -10012,7 +10070,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 270
+   "partySeatsTotal": 270,
+   "potentialForfeiture": true
   },
   "KZN212": {
    "code": "KZN212",
@@ -10178,7 +10237,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 37
+   "partySeatsTotal": 37,
+   "potentialForfeiture": true
   },
   "KZN213": {
    "code": "KZN213",
@@ -10304,7 +10364,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 39
+   "partySeatsTotal": 39,
+   "potentialForfeiture": true
   },
   "KZN214": {
    "code": "KZN214",
@@ -10430,7 +10491,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 21
+   "partySeatsTotal": 21,
+   "potentialForfeiture": true
   },
   "KZN216": {
    "code": "KZN216",
@@ -10620,7 +10682,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 71
+   "partySeatsTotal": 71,
+   "potentialForfeiture": true
   },
   "KZN221": {
    "code": "KZN221",
@@ -10730,7 +10793,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 27
+   "partySeatsTotal": 27,
+   "potentialForfeiture": true
   },
   "KZN222": {
    "code": "KZN222",
@@ -10904,7 +10968,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 25
+   "partySeatsTotal": 25,
+   "potentialForfeiture": true
   },
   "KZN223": {
    "code": "KZN223",
@@ -10990,7 +11055,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 11
+   "partySeatsTotal": 11,
+   "potentialForfeiture": false
   },
   "KZN224": {
    "code": "KZN224",
@@ -11100,7 +11166,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 11
+   "partySeatsTotal": 11,
+   "potentialForfeiture": false
   },
   "KZN225": {
    "code": "KZN225",
@@ -11394,7 +11461,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 80
+   "partySeatsTotal": 80,
+   "potentialForfeiture": true
   },
   "KZN226": {
    "code": "KZN226",
@@ -11504,7 +11572,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 19
+   "partySeatsTotal": 19,
+   "potentialForfeiture": true
   },
   "KZN227": {
    "code": "KZN227",
@@ -11606,7 +11675,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 17
+   "partySeatsTotal": 17,
+   "potentialForfeiture": true
   },
   "KZN235": {
    "code": "KZN235",
@@ -11780,7 +11850,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 29
+   "partySeatsTotal": 29,
+   "potentialForfeiture": true
   },
   "KZN237": {
    "code": "KZN237",
@@ -11922,7 +11993,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 46
+   "partySeatsTotal": 46,
+   "potentialForfeiture": true
   },
   "KZN238": {
    "code": "KZN238",
@@ -12104,7 +12176,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 73
+   "partySeatsTotal": 73,
+   "potentialForfeiture": true
   },
   "KZN241": {
    "code": "KZN241",
@@ -12222,7 +12295,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 15
+   "partySeatsTotal": 15,
+   "potentialForfeiture": false
   },
   "KZN242": {
    "code": "KZN242",
@@ -12356,7 +12430,8 @@
      "prSeats": 7
     }
    ],
-   "partySeatsTotal": 39
+   "partySeatsTotal": 39,
+   "potentialForfeiture": true
   },
   "KZN244": {
    "code": "KZN244",
@@ -12458,7 +12533,8 @@
      "prSeats": 11
     }
    ],
-   "partySeatsTotal": 41
+   "partySeatsTotal": 41,
+   "potentialForfeiture": true
   },
   "KZN245": {
    "code": "KZN245",
@@ -12576,7 +12652,8 @@
      "prSeats": 5
     }
    ],
-   "partySeatsTotal": 27
+   "partySeatsTotal": 27,
+   "potentialForfeiture": true
   },
   "KZN252": {
    "code": "KZN252",
@@ -12854,7 +12931,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 71
+   "partySeatsTotal": 71,
+   "potentialForfeiture": true
   },
   "KZN253": {
    "code": "KZN253",
@@ -12988,7 +13066,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 11
+   "partySeatsTotal": 11,
+   "potentialForfeiture": true
   },
   "KZN254": {
    "code": "KZN254",
@@ -13210,7 +13289,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 25
+   "partySeatsTotal": 25,
+   "potentialForfeiture": false
   },
   "KZN261": {
    "code": "KZN261",
@@ -13352,7 +13432,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 19
+   "partySeatsTotal": 19,
+   "potentialForfeiture": true
   },
   "KZN262": {
    "code": "KZN262",
@@ -13518,7 +13599,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 29
+   "partySeatsTotal": 29,
+   "potentialForfeiture": true
   },
   "KZN263": {
    "code": "KZN263",
@@ -13700,7 +13782,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 47
+   "partySeatsTotal": 47,
+   "potentialForfeiture": true
   },
   "KZN265": {
    "code": "KZN265",
@@ -13826,7 +13909,8 @@
      "prSeats": 8
     }
    ],
-   "partySeatsTotal": 45
+   "partySeatsTotal": 45,
+   "potentialForfeiture": true
   },
   "KZN266": {
    "code": "KZN266",
@@ -13960,7 +14044,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 49
+   "partySeatsTotal": 49,
+   "potentialForfeiture": true
   },
   "KZN271": {
    "code": "KZN271",
@@ -14150,7 +14235,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 39
+   "partySeatsTotal": 39,
+   "potentialForfeiture": true
   },
   "KZN272": {
    "code": "KZN272",
@@ -14316,7 +14402,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 49
+   "partySeatsTotal": 49,
+   "potentialForfeiture": true
   },
   "KZN275": {
    "code": "KZN275",
@@ -14554,7 +14641,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 45
+   "partySeatsTotal": 45,
+   "potentialForfeiture": true
   },
   "KZN276": {
    "code": "KZN276",
@@ -14680,7 +14768,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 27
+   "partySeatsTotal": 27,
+   "potentialForfeiture": true
   },
   "KZN281": {
    "code": "KZN281",
@@ -14822,7 +14911,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 35
+   "partySeatsTotal": 35,
+   "potentialForfeiture": true
   },
   "KZN282": {
    "code": "KZN282",
@@ -15004,7 +15094,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 71
+   "partySeatsTotal": 71,
+   "potentialForfeiture": true
   },
   "KZN284": {
    "code": "KZN284",
@@ -15154,7 +15245,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 55
+   "partySeatsTotal": 55,
+   "potentialForfeiture": true
   },
   "KZN285": {
    "code": "KZN285",
@@ -15256,7 +15348,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 25
+   "partySeatsTotal": 25,
+   "potentialForfeiture": true
   },
   "KZN286": {
    "code": "KZN286",
@@ -15350,7 +15443,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 27
+   "partySeatsTotal": 27,
+   "potentialForfeiture": true
   },
   "KZN291": {
    "code": "KZN291",
@@ -15484,7 +15578,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 35
+   "partySeatsTotal": 35,
+   "potentialForfeiture": false
   },
   "KZN292": {
    "code": "KZN292",
@@ -15650,7 +15745,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 59
+   "partySeatsTotal": 59,
+   "potentialForfeiture": true
   },
   "KZN293": {
    "code": "KZN293",
@@ -15776,7 +15872,8 @@
      "prSeats": 3
     }
    ],
-   "partySeatsTotal": 37
+   "partySeatsTotal": 37,
+   "potentialForfeiture": true
   },
   "KZN294": {
    "code": "KZN294",
@@ -15910,7 +16007,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 25
+   "partySeatsTotal": 25,
+   "potentialForfeiture": true
   },
   "KZN433": {
    "code": "KZN433",
@@ -16028,7 +16126,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 21
+   "partySeatsTotal": 21,
+   "potentialForfeiture": true
   },
   "KZN434": {
    "code": "KZN434",
@@ -16130,7 +16229,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 27
+   "partySeatsTotal": 27,
+   "potentialForfeiture": false
   },
   "KZN435": {
    "code": "KZN435",
@@ -16240,7 +16340,8 @@
      "prSeats": 14
     }
    ],
-   "partySeatsTotal": 43
+   "partySeatsTotal": 43,
+   "potentialForfeiture": true
   },
   "KZN436": {
    "code": "KZN436",
@@ -16326,7 +16427,8 @@
      "prSeats": 4
     }
    ],
-   "partySeatsTotal": 29
+   "partySeatsTotal": 29,
+   "potentialForfeiture": true
   },
   "LIM331": {
    "code": "LIM331",
@@ -16556,7 +16658,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 62
+   "partySeatsTotal": 62,
+   "potentialForfeiture": true
   },
   "LIM332": {
    "code": "LIM332",
@@ -16786,7 +16889,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 60
+   "partySeatsTotal": 60,
+   "potentialForfeiture": true
   },
   "LIM333": {
    "code": "LIM333",
@@ -17056,7 +17160,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 69
+   "partySeatsTotal": 69,
+   "potentialForfeiture": true
   },
   "LIM334": {
    "code": "LIM334",
@@ -17254,7 +17359,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 37
+   "partySeatsTotal": 37,
+   "potentialForfeiture": true
   },
   "LIM335": {
    "code": "LIM335",
@@ -17444,7 +17550,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 26
+   "partySeatsTotal": 26,
+   "potentialForfeiture": true
   },
   "LIM341": {
    "code": "LIM341",
@@ -17618,7 +17725,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 24
+   "partySeatsTotal": 24,
+   "potentialForfeiture": true
   },
   "LIM343": {
    "code": "LIM343",
@@ -17864,7 +17972,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 81
+   "partySeatsTotal": 81,
+   "potentialForfeiture": true
   },
   "LIM344": {
    "code": "LIM344",
@@ -18078,7 +18187,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 75
+   "partySeatsTotal": 75,
+   "potentialForfeiture": true
   },
   "LIM345": {
    "code": "LIM345",
@@ -18284,7 +18394,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 71
+   "partySeatsTotal": 71,
+   "potentialForfeiture": true
   },
   "LIM351": {
    "code": "LIM351",
@@ -18506,7 +18617,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 44
+   "partySeatsTotal": 44,
+   "potentialForfeiture": true
   },
   "LIM353": {
    "code": "LIM353",
@@ -18752,7 +18864,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 32
+   "partySeatsTotal": 32,
+   "potentialForfeiture": true
   },
   "LIM354": {
    "code": "LIM354",
@@ -19062,7 +19175,8 @@
      "prSeats": 3
     }
    ],
-   "partySeatsTotal": 90
+   "partySeatsTotal": 90,
+   "potentialForfeiture": true
   },
   "LIM355": {
    "code": "LIM355",
@@ -19308,7 +19422,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 60
+   "partySeatsTotal": 60,
+   "potentialForfeiture": true
   },
   "LIM361": {
    "code": "LIM361",
@@ -19474,7 +19589,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 23
+   "partySeatsTotal": 23,
+   "potentialForfeiture": true
   },
   "LIM362": {
    "code": "LIM362",
@@ -19672,7 +19788,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 30
+   "partySeatsTotal": 30,
+   "potentialForfeiture": true
   },
   "LIM366": {
    "code": "LIM366",
@@ -19814,7 +19931,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 17
+   "partySeatsTotal": 17,
+   "potentialForfeiture": true
   },
   "LIM367": {
    "code": "LIM367",
@@ -20036,7 +20154,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 64
+   "partySeatsTotal": 64,
+   "potentialForfeiture": true
   },
   "LIM368": {
    "code": "LIM368",
@@ -20170,7 +20289,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 28
+   "partySeatsTotal": 28,
+   "potentialForfeiture": true
   },
   "LIM471": {
    "code": "LIM471",
@@ -20360,7 +20480,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 32
+   "partySeatsTotal": 32,
+   "potentialForfeiture": true
   },
   "LIM472": {
    "code": "LIM472",
@@ -20630,7 +20751,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 61
+   "partySeatsTotal": 61,
+   "potentialForfeiture": true
   },
   "LIM473": {
    "code": "LIM473",
@@ -20932,7 +21054,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 62
+   "partySeatsTotal": 62,
+   "potentialForfeiture": true
   },
   "LIM476": {
    "code": "LIM476",
@@ -21202,7 +21325,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 77
+   "partySeatsTotal": 77,
+   "potentialForfeiture": true
   },
   "MAN": {
    "code": "MAN",
@@ -21472,7 +21596,8 @@
      "prSeats": 6
     }
    ],
-   "partySeatsTotal": 101
+   "partySeatsTotal": 101,
+   "potentialForfeiture": true
   },
   "MP301": {
    "code": "MP301",
@@ -21622,7 +21747,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 49
+   "partySeatsTotal": 49,
+   "potentialForfeiture": true
   },
   "MP302": {
    "code": "MP302",
@@ -21764,7 +21890,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 38
+   "partySeatsTotal": 38,
+   "potentialForfeiture": true
   },
   "MP303": {
    "code": "MP303",
@@ -21882,7 +22009,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 38
+   "partySeatsTotal": 38,
+   "potentialForfeiture": false
   },
   "MP304": {
    "code": "MP304",
@@ -21984,7 +22112,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 21
+   "partySeatsTotal": 21,
+   "potentialForfeiture": true
   },
   "MP305": {
    "code": "MP305",
@@ -22126,7 +22255,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 29
+   "partySeatsTotal": 29,
+   "potentialForfeiture": true
   },
   "MP306": {
    "code": "MP306",
@@ -22252,7 +22382,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 12
+   "partySeatsTotal": 12,
+   "potentialForfeiture": false
   },
   "MP307": {
    "code": "MP307",
@@ -22442,7 +22573,8 @@
      "prSeats": 4
     }
    ],
-   "partySeatsTotal": 65
+   "partySeatsTotal": 65,
+   "potentialForfeiture": true
   },
   "MP311": {
    "code": "MP311",
@@ -22584,7 +22716,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 17
+   "partySeatsTotal": 17,
+   "potentialForfeiture": true
   },
   "MP312": {
    "code": "MP312",
@@ -22798,7 +22931,8 @@
      "prSeats": 4
     }
    ],
-   "partySeatsTotal": 71
+   "partySeatsTotal": 71,
+   "potentialForfeiture": true
   },
   "MP313": {
    "code": "MP313",
@@ -23004,7 +23138,8 @@
      "prSeats": 3
     }
    ],
-   "partySeatsTotal": 58
+   "partySeatsTotal": 58,
+   "potentialForfeiture": true
   },
   "MP314": {
    "code": "MP314",
@@ -23114,7 +23249,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 15
+   "partySeatsTotal": 15,
+   "potentialForfeiture": false
   },
   "MP315": {
    "code": "MP315",
@@ -23360,7 +23496,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 66
+   "partySeatsTotal": 66,
+   "potentialForfeiture": true
   },
   "MP316": {
    "code": "MP316",
@@ -23654,7 +23791,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 60
+   "partySeatsTotal": 60,
+   "potentialForfeiture": true
   },
   "MP321": {
    "code": "MP321",
@@ -23796,7 +23934,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 27
+   "partySeatsTotal": 27,
+   "potentialForfeiture": true
   },
   "MP324": {
    "code": "MP324",
@@ -23978,7 +24117,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 69
+   "partySeatsTotal": 69,
+   "potentialForfeiture": true
   },
   "MP325": {
    "code": "MP325",
@@ -24240,7 +24380,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 79
+   "partySeatsTotal": 79,
+   "potentialForfeiture": true
   },
   "MP326": {
    "code": "MP326",
@@ -24446,7 +24587,8 @@
      "prSeats": 4
     }
    ],
-   "partySeatsTotal": 90
+   "partySeatsTotal": 90,
+   "potentialForfeiture": true
   },
   "NC061": {
    "code": "NC061",
@@ -24516,7 +24658,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 11
+   "partySeatsTotal": 11,
+   "potentialForfeiture": false
   },
   "NC062": {
    "code": "NC062",
@@ -24618,7 +24761,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 17
+   "partySeatsTotal": 17,
+   "potentialForfeiture": false
   },
   "NC064": {
    "code": "NC064",
@@ -24712,7 +24856,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 11
+   "partySeatsTotal": 11,
+   "potentialForfeiture": false
   },
   "NC065": {
    "code": "NC065",
@@ -24806,7 +24951,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 13
+   "partySeatsTotal": 13,
+   "potentialForfeiture": false
   },
   "NC066": {
    "code": "NC066",
@@ -24876,7 +25022,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 11
+   "partySeatsTotal": 11,
+   "potentialForfeiture": false
   },
   "NC067": {
    "code": "NC067",
@@ -24962,7 +25109,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 11
+   "partySeatsTotal": 11,
+   "potentialForfeiture": false
   },
   "NC071": {
    "code": "NC071",
@@ -25032,7 +25180,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 10
+   "partySeatsTotal": 10,
+   "potentialForfeiture": false
   },
   "NC072": {
    "code": "NC072",
@@ -25094,7 +25243,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 13
+   "partySeatsTotal": 13,
+   "potentialForfeiture": true
   },
   "NC073": {
    "code": "NC073",
@@ -25164,7 +25314,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 15
+   "partySeatsTotal": 15,
+   "potentialForfeiture": false
   },
   "NC074": {
    "code": "NC074",
@@ -25226,7 +25377,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 11
+   "partySeatsTotal": 11,
+   "potentialForfeiture": false
   },
   "NC075": {
    "code": "NC075",
@@ -25280,7 +25432,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 11
+   "partySeatsTotal": 11,
+   "potentialForfeiture": false
   },
   "NC076": {
    "code": "NC076",
@@ -25366,7 +25519,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 11
+   "partySeatsTotal": 11,
+   "potentialForfeiture": false
   },
   "NC077": {
    "code": "NC077",
@@ -25452,7 +25606,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 11
+   "partySeatsTotal": 11,
+   "potentialForfeiture": false
   },
   "NC078": {
    "code": "NC078",
@@ -25538,7 +25693,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 13
+   "partySeatsTotal": 13,
+   "potentialForfeiture": true
   },
   "NC082": {
    "code": "NC082",
@@ -25648,7 +25804,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 19
+   "partySeatsTotal": 19,
+   "potentialForfeiture": true
   },
   "NC084": {
    "code": "NC084",
@@ -25742,7 +25899,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 11
+   "partySeatsTotal": 11,
+   "potentialForfeiture": false
   },
   "NC085": {
    "code": "NC085",
@@ -25836,7 +25994,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 13
+   "partySeatsTotal": 13,
+   "potentialForfeiture": false
   },
   "NC086": {
    "code": "NC086",
@@ -25938,7 +26097,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 11
+   "partySeatsTotal": 11,
+   "potentialForfeiture": false
   },
   "NC087": {
    "code": "NC087",
@@ -26056,7 +26216,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 33
+   "partySeatsTotal": 33,
+   "potentialForfeiture": true
   },
   "NC091": {
    "code": "NC091",
@@ -26278,7 +26439,8 @@
      "prSeats": 3
     }
    ],
-   "partySeatsTotal": 65
+   "partySeatsTotal": 65,
+   "potentialForfeiture": true
   },
   "NC092": {
    "code": "NC092",
@@ -26396,7 +26558,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 15
+   "partySeatsTotal": 15,
+   "potentialForfeiture": true
   },
   "NC093": {
    "code": "NC093",
@@ -26498,7 +26661,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 11
+   "partySeatsTotal": 11,
+   "potentialForfeiture": true
   },
   "NC094": {
    "code": "NC094",
@@ -26656,7 +26820,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 19
+   "partySeatsTotal": 19,
+   "potentialForfeiture": true
   },
   "NC451": {
    "code": "NC451",
@@ -26782,7 +26947,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 29
+   "partySeatsTotal": 29,
+   "potentialForfeiture": true
   },
   "NC452": {
    "code": "NC452",
@@ -26932,7 +27098,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 29
+   "partySeatsTotal": 29,
+   "potentialForfeiture": true
   },
   "NC453": {
    "code": "NC453",
@@ -27050,7 +27217,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 15
+   "partySeatsTotal": 15,
+   "potentialForfeiture": false
   },
   "NMA": {
    "code": "NMA",
@@ -27368,7 +27536,8 @@
      "prSeats": 3
     }
    ],
-   "partySeatsTotal": 120
+   "partySeatsTotal": 120,
+   "potentialForfeiture": true
   },
   "NW371": {
    "code": "NW371",
@@ -27590,7 +27759,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 50
+   "partySeatsTotal": 50,
+   "potentialForfeiture": true
   },
   "NW372": {
    "code": "NW372",
@@ -27876,7 +28046,8 @@
      "prSeats": 5
     }
    ],
-   "partySeatsTotal": 81
+   "partySeatsTotal": 81,
+   "potentialForfeiture": true
   },
   "NW373": {
    "code": "NW373",
@@ -28202,7 +28373,8 @@
      "prSeats": 3
     }
    ],
-   "partySeatsTotal": 90
+   "partySeatsTotal": 90,
+   "potentialForfeiture": true
   },
   "NW374": {
    "code": "NW374",
@@ -28344,7 +28516,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 13
+   "partySeatsTotal": 13,
+   "potentialForfeiture": false
   },
   "NW375": {
    "code": "NW375",
@@ -28566,7 +28739,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 68
+   "partySeatsTotal": 68,
+   "potentialForfeiture": true
   },
   "NW381": {
    "code": "NW381",
@@ -28700,7 +28874,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 27
+   "partySeatsTotal": 27,
+   "potentialForfeiture": true
   },
   "NW382": {
    "code": "NW382",
@@ -28818,7 +28993,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 28
+   "partySeatsTotal": 28,
+   "potentialForfeiture": true
   },
   "NW383": {
    "code": "NW383",
@@ -29016,7 +29192,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 70
+   "partySeatsTotal": 70,
+   "potentialForfeiture": true
   },
   "NW384": {
    "code": "NW384",
@@ -29246,7 +29423,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 39
+   "partySeatsTotal": 39,
+   "potentialForfeiture": true
   },
   "NW385": {
    "code": "NW385",
@@ -29404,7 +29582,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 37
+   "partySeatsTotal": 37,
+   "potentialForfeiture": true
   },
   "NW392": {
    "code": "NW392",
@@ -29546,7 +29725,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 18
+   "partySeatsTotal": 18,
+   "potentialForfeiture": false
   },
   "NW393": {
    "code": "NW393",
@@ -29664,7 +29844,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 16
+   "partySeatsTotal": 16,
+   "potentialForfeiture": true
   },
   "NW394": {
    "code": "NW394",
@@ -29846,7 +30027,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 47
+   "partySeatsTotal": 47,
+   "potentialForfeiture": true
   },
   "NW396": {
    "code": "NW396",
@@ -29956,7 +30138,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 14
+   "partySeatsTotal": 14,
+   "potentialForfeiture": false
   },
   "NW397": {
    "code": "NW397",
@@ -30098,7 +30281,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 29
+   "partySeatsTotal": 29,
+   "potentialForfeiture": true
   },
   "NW403": {
    "code": "NW403",
@@ -30288,7 +30472,8 @@
      "prSeats": 5
     }
    ],
-   "partySeatsTotal": 77
+   "partySeatsTotal": 77,
+   "potentialForfeiture": true
   },
   "NW404": {
    "code": "NW404",
@@ -30422,7 +30607,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 22
+   "partySeatsTotal": 22,
+   "potentialForfeiture": true
   },
   "NW405": {
    "code": "NW405",
@@ -30596,7 +30782,8 @@
      "prSeats": 6
     }
    ],
-   "partySeatsTotal": 67
+   "partySeatsTotal": 67,
+   "potentialForfeiture": true
   },
   "TSH": {
    "code": "TSH",
@@ -31194,7 +31381,8 @@
      "prSeats": 17
     }
    ],
-   "partySeatsTotal": 214
+   "partySeatsTotal": 214,
+   "potentialForfeiture": true
   },
   "WC011": {
    "code": "WC011",
@@ -31344,7 +31532,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 15
+   "partySeatsTotal": 15,
+   "potentialForfeiture": false
   },
   "WC012": {
    "code": "WC012",
@@ -31470,7 +31659,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 11
+   "partySeatsTotal": 11,
+   "potentialForfeiture": false
   },
   "WC013": {
    "code": "WC013",
@@ -31596,7 +31786,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 13
+   "partySeatsTotal": 13,
+   "potentialForfeiture": false
   },
   "WC014": {
    "code": "WC014",
@@ -31754,7 +31945,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 31
+   "partySeatsTotal": 31,
+   "potentialForfeiture": false
   },
   "WC015": {
    "code": "WC015",
@@ -31872,7 +32064,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 23
+   "partySeatsTotal": 23,
+   "potentialForfeiture": false
   },
   "WC022": {
    "code": "WC022",
@@ -32078,7 +32271,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 23
+   "partySeatsTotal": 23,
+   "potentialForfeiture": false
   },
   "WC023": {
    "code": "WC023",
@@ -32284,7 +32478,8 @@
      "prSeats": 4
     }
    ],
-   "partySeatsTotal": 64
+   "partySeatsTotal": 64,
+   "potentialForfeiture": false
   },
   "WC024": {
    "code": "WC024",
@@ -32450,7 +32645,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 45
+   "partySeatsTotal": 45,
+   "potentialForfeiture": true
   },
   "WC025": {
    "code": "WC025",
@@ -32624,7 +32820,8 @@
      "prSeats": 3
     }
    ],
-   "partySeatsTotal": 41
+   "partySeatsTotal": 41,
+   "potentialForfeiture": false
   },
   "WC026": {
    "code": "WC026",
@@ -32806,7 +33003,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 23
+   "partySeatsTotal": 23,
+   "potentialForfeiture": false
   },
   "WC031": {
    "code": "WC031",
@@ -32980,7 +33178,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 27
+   "partySeatsTotal": 27,
+   "potentialForfeiture": false
   },
   "WC032": {
    "code": "WC032",
@@ -33138,7 +33337,8 @@
      "prSeats": 3
     }
    ],
-   "partySeatsTotal": 29
+   "partySeatsTotal": 29,
+   "potentialForfeiture": false
   },
   "WC033": {
    "code": "WC033",
@@ -33256,7 +33456,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 11
+   "partySeatsTotal": 11,
+   "potentialForfeiture": false
   },
   "WC034": {
    "code": "WC034",
@@ -33350,7 +33551,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 11
+   "partySeatsTotal": 11,
+   "potentialForfeiture": false
   },
   "WC041": {
    "code": "WC041",
@@ -33476,7 +33678,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 10
+   "partySeatsTotal": 10,
+   "potentialForfeiture": false
   },
   "WC042": {
    "code": "WC042",
@@ -33594,7 +33797,8 @@
      "prSeats": 2
     }
    ],
-   "partySeatsTotal": 17
+   "partySeatsTotal": 17,
+   "potentialForfeiture": false
   },
   "WC043": {
    "code": "WC043",
@@ -33736,7 +33940,8 @@
      "prSeats": 3
     }
    ],
-   "partySeatsTotal": 33
+   "partySeatsTotal": 33,
+   "potentialForfeiture": false
   },
   "WC044": {
    "code": "WC044",
@@ -33910,7 +34115,8 @@
      "prSeats": 4
     }
    ],
-   "partySeatsTotal": 55
+   "partySeatsTotal": 55,
+   "potentialForfeiture": false
   },
   "WC045": {
    "code": "WC045",
@@ -34100,7 +34306,8 @@
      "prSeats": 3
     }
    ],
-   "partySeatsTotal": 25
+   "partySeatsTotal": 25,
+   "potentialForfeiture": false
   },
   "WC047": {
    "code": "WC047",
@@ -34266,7 +34473,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 13
+   "partySeatsTotal": 13,
+   "potentialForfeiture": false
   },
   "WC048": {
    "code": "WC048",
@@ -34456,7 +34664,8 @@
      "prSeats": 1
     }
    ],
-   "partySeatsTotal": 21
+   "partySeatsTotal": 21,
+   "potentialForfeiture": false
   },
   "WC051": {
    "code": "WC051",
@@ -34550,7 +34759,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 10
+   "partySeatsTotal": 10,
+   "potentialForfeiture": false
   },
   "WC052": {
    "code": "WC052",
@@ -34644,7 +34854,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 10
+   "partySeatsTotal": 10,
+   "potentialForfeiture": false
   },
   "WC053": {
    "code": "WC053",
@@ -34794,7 +35005,8 @@
      "prSeats": 0
     }
    ],
-   "partySeatsTotal": 13
+   "partySeatsTotal": 13,
+   "potentialForfeiture": false
   }
  },
  "files": {
