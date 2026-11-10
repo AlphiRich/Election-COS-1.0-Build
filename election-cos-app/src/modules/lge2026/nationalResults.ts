@@ -185,3 +185,30 @@ export function nationalSummary(): NationalSummary {
   const councils = COUNCIL_CODES.length;
   return { councils, hung, majority: councils - hung, byProvince };
 }
+
+export interface PartyTotals {
+  id: string;
+  name: string;
+  /** Seats held across all 213 councils. */
+  seats: number;
+  /** Councils where it holds the most seats (ties count for each). */
+  largestIn: number;
+  /** Councils where it holds a majority on its own. */
+  majorityIn: number;
+}
+/** Every party's seats and councils nationally, largest first. Independents (merged) and undecided seats are excluded. */
+export function nationalPartyTotals(): PartyTotals[] {
+  const by = new Map<string, PartyTotals>();
+  for (const c of Object.values(NATIONAL_SEATS.councils)) {
+    const parties = c.holders.filter((h) => h.id !== 'IND' && h.id !== 'TIED');
+    const top = Math.max(...parties.map((h) => h.seats));
+    for (const h of parties) {
+      const t = by.get(h.id) ?? { id: h.id, name: h.name, seats: 0, largestIn: 0, majorityIn: 0 };
+      t.seats += h.seats;
+      if (h.seats === top) t.largestIn++;
+      if (h.seats >= c.majority) t.majorityIn++;
+      by.set(h.id, t);
+    }
+  }
+  return [...by.values()].sort((a, b) => b.seats - a.seats || a.name.localeCompare(b.name));
+}

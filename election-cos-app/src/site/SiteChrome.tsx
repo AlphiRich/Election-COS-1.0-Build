@@ -34,9 +34,9 @@
  * `aria-label`, decorative SVG is `aria-hidden`, and status is carried
  * by the word as well as the colour, which is the canvas's own rule.
  */
-import type { ReactNode } from 'react';
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { SITE, SITE_NAV, whatsAppHref } from './siteContent';
+import { SITE, SITE_NAV, whatsAppHref, type NavGroup } from './siteContent';
 import whatsAppQr from './assets/whatsapp-qr.svg';
 import { AdConsentWithdrawLink } from './ads/ConsentBanner';
 import { VotingRibbon } from './VotingRibbon';
@@ -96,26 +96,11 @@ export function SiteHeader({ enquirySubject }: { enquirySubject: string }) {
           </span>
         </Link>
 
-        <nav aria-label="Primary" className="flex-[1_1_520px]">
+        <nav aria-label="Primary" className="flex-[1_1_480px]">
           <ul className="m-0 flex list-none flex-wrap gap-x-[22px] gap-y-1 p-0 text-site-sm font-semibold">
-            {SITE_NAV.map((item) => {
-              const current = item.href === here || (item.href !== '/' && pathname === item.href);
-              return (
-                <li key={item.label}>
-                  <Link
-                    to={item.href}
-                    aria-current={current ? 'page' : undefined}
-                    className={
-                      current
-                        ? 'text-gold underline underline-offset-[6px]'
-                        : 'text-paper no-underline hover:underline hover:underline-offset-[6px]'
-                    }
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              );
-            })}
+            {SITE_NAV.map((group) => (
+              <NavMenu key={group.label} group={group} here={here} pathname={pathname} />
+            ))}
           </ul>
         </nav>
 
@@ -132,6 +117,76 @@ export function SiteHeader({ enquirySubject }: { enquirySubject: string }) {
         </div>
       </div>
     </header>
+  );
+}
+
+/**
+ * One group of the primary menu: a button that opens a panel of links. A disclosure, not an ARIA menu: Tab moves
+ * through the links, Escape closes and returns focus to the button, and the panel closes on a click outside or when
+ * the page changes. The group reads as current when any of its pages is open.
+ */
+function NavMenu({ group, here, pathname }: { group: NavGroup; here: string; pathname: string }) {
+  const [open, setOpen] = useState(false);
+  const id = useId();
+  const root = useRef<HTMLLIElement>(null);
+  const button = useRef<HTMLButtonElement>(null);
+  const isHere = (href: string) => href === here || pathname === href || (href !== '/' && pathname.startsWith(`${href}/`));
+  const current = group.items.some((i) => isHere(i.href)) || (group.label.startsWith('Results') && pathname.startsWith('/councils/'));
+
+  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => {
+      if (root.current && !root.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOpen(false);
+        button.current?.focus();
+      }
+    };
+    document.addEventListener('mousedown', onDown);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onDown);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
+
+  return (
+    <li ref={root} className="relative">
+      <button
+        ref={button}
+        type="button"
+        aria-expanded={open}
+        aria-controls={id}
+        onClick={() => setOpen((o) => !o)}
+        className={`inline-flex min-h-[44px] items-center gap-1.5 ${current ? 'text-gold underline underline-offset-[6px]' : 'text-paper hover:underline hover:underline-offset-[6px]'}`}
+      >
+        {group.label}
+        <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" className={`transition-transform ${open ? 'rotate-180' : ''}`}>
+          <path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+      <ul
+        id={id}
+        hidden={!open}
+        className="absolute left-0 top-full z-40 m-0 mt-1 flex w-[min(86vw,300px)] list-none flex-col gap-0.5 rounded-[10px] border border-line bg-white p-2 font-normal text-ink shadow-lg"
+      >
+        {group.items.map((item) => (
+          <li key={item.href}>
+            <Link
+              to={item.href}
+              aria-current={isHere(item.href) ? 'page' : undefined}
+              className={`flex flex-col rounded-md px-3 py-2 no-underline hover:bg-paper ${isHere(item.href) ? 'bg-paper' : ''}`}
+            >
+              <span className="text-site-sm font-semibold text-ink">{item.label}</span>
+              {item.hint && <span className="text-site-caption text-slate">{item.hint}</span>}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </li>
   );
 }
 

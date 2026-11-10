@@ -90,19 +90,55 @@ export function whatsAppHref(subject: string): string {
 export interface NavItem {
   label: string;
   href: string;
+  /** One line under the label in a menu. */
+  hint?: string;
+}
+export interface NavGroup {
+  label: string;
+  items: NavItem[];
 }
 
-// After 4 November 2026 the results lead; "Election day" moved to the footer's results links.
-export const SITE_NAV: NavItem[] = [
-  { label: 'Coalitions', href: '/coalitions' },
-  { label: 'My ward', href: '/my-ward' },
-  { label: 'Tour', href: '/tutorial' },
-  { label: 'Videos', href: '/watch' },
-  { label: 'Research', href: '/research' },
-  { label: 'Explainers', href: '/explainers' },
-  { label: 'Voter tools', href: '/tools' },
-  { label: 'For campaigns', href: '/for-campaigns' },
-  { label: 'Compliance', href: '/compliance' },
+/**
+ * The primary menu, grouped. After 4 November 2026 the certified results lead: who runs each council, and who your
+ * councillors are. Learning material and the campaign product follow. Every page a menu reaches is one the router serves
+ * (siteContent.test.ts).
+ */
+export const SITE_NAV: NavGroup[] = [
+  {
+    label: 'Results 2026',
+    items: [
+      { label: 'Coalition Tracker', href: '/coalitions', hint: 'Every council: who holds the seats, who needs whom' },
+      { label: 'My ward', href: '/my-ward', hint: 'Your ward councillor and PR councillors' },
+      { label: 'Results by province', href: '/results', hint: 'Certified figures, provinces and metros' },
+    ],
+  },
+  {
+    label: 'Tools',
+    items: [
+      { label: 'Try a coalition', href: '/tools/how-coalitions-work', hint: 'Combine parties in any council' },
+      { label: 'How seats are calculated', href: '/tools/how-seats-are-calculated', hint: 'From votes to seats, step by step' },
+      { label: 'Party-funding checker', href: '/tools/party-funding-checker', hint: 'Where a donation sits against the law' },
+      { label: 'All voter tools', href: '/tools' },
+    ],
+  },
+  {
+    label: 'Learn',
+    items: [
+      { label: 'Explainers', href: '/explainers', hint: 'The rules, in plain language, with sources' },
+      { label: 'Videos', href: '/watch' },
+      { label: 'Research', href: '/research' },
+      { label: 'Tour', href: '/tutorial', hint: 'The 60-second tour' },
+    ],
+  },
+  {
+    label: 'For campaigns',
+    items: [
+      { label: 'Campaign OS', href: '/for-campaigns', hint: 'The product for parties and councillors' },
+      { label: 'Casework Tracker', href: '/casework-tracker' },
+      { label: 'Packages', href: '/packages' },
+      { label: 'Compliance', href: '/compliance' },
+    ],
+  },
 ];
 
 /* ------------------------------------------------------------- home */

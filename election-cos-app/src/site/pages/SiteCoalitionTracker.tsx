@@ -11,6 +11,7 @@ import { SiteCard, SiteSection } from '../SiteChrome';
 import { PageIntro, SourceNote } from './pageParts';
 import { SeatBar, StatTile, StatusPill } from './resultsParts';
 import { PartyMark } from './PartyMark';
+import { BarList, StatusSplit } from '../charts/Charts';
 import { kindOf, nf, provinceName } from '../tools/resultsFormat';
 import { councilPath, MY_WARD_PATH } from '../resultsPaths';
 import { fewestPartiesToGovern, seatsShort } from '../tools/tracker';
@@ -21,6 +22,7 @@ import {
   PROVINCE_CODES,
   council,
   loadCouncillors,
+  nationalPartyTotals,
   nationalSummary,
   type CouncilSeats,
   type ProvinceCode,
@@ -30,6 +32,7 @@ type Filter = 'all' | 'hung' | 'majority';
 
 export function SiteCoalitionTracker({ hasConsent }: { hasConsent: boolean }) {
   const summary = useMemo(nationalSummary, []);
+  const totals = useMemo(nationalPartyTotals, []);
   const [province, setProvince] = useState<ProvinceCode | 'all'>('all');
   const [filter, setFilter] = useState<Filter>('hung');
   const [q, setQ] = useState('');
@@ -79,6 +82,38 @@ export function SiteCoalitionTracker({ hasConsent }: { hasConsent: boolean }) {
           <StatTile value={vacant ? nf.format(vacant.seats) : '…'} label="List seats a party cannot fill yet">
             {vacant ? `in ${vacant.councils} councils: the party won more seats than it has candidates` : 'counting'}
           </StatTile>
+        </div>
+      </SiteSection>
+
+
+      <SiteSection labelledBy="dash-h" className="pb-8">
+        <h2 id="dash-h" className="m-0 mb-4 font-site-display text-site-h4">The country in charts</h2>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,340px),1fr))] gap-5">
+          <SiteCard className="p-5">
+            <StatusSplit
+              title="Councils with and without a majority, by province"
+              rows={PROVINCE_CODES.map((p) => ({ id: p, name: provinceName(p), hung: summary.byProvince[p].hung, majority: summary.byProvince[p].councils - summary.byProvince[p].hung }))}
+            />
+          </SiteCard>
+          <SiteCard className="p-5">
+            <BarList
+              title="Largest party in how many councils"
+              unit="Party"
+              series={['Councils']}
+              rows={[...totals].sort((a, b) => b.largestIn - a.largestIn).filter((t) => t.largestIn > 0).slice(0, 8).map((t) => ({ id: t.id, name: t.name, values: [t.largestIn], emblem: true }))}
+              note="Where two parties tie for the most seats, each is counted."
+            />
+          </SiteCard>
+          <SiteCard className="p-5">
+            <BarList
+              title="Council seats won across the country"
+              unit="Party"
+              series={['Seats']}
+              format={(v) => nf.format(v)}
+              rows={totals.slice(0, 10).map((t) => ({ id: t.id, name: t.name, values: [t.seats], emblem: true }))}
+              note={`Top ten of ${totals.length} parties holding seats, across all ${summary.councils} metro and local councils.`}
+            />
+          </SiteCard>
         </div>
       </SiteSection>
 
