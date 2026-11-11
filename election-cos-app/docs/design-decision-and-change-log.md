@@ -3296,3 +3296,17 @@ function.
 **Also printed as the Commission has it, flagged not fixed:** Leilanie Natasja Barends is listed in wards 10 and 21 and Fikile Joseph Mohoka in wards 31 and 32 (same name, same masked ID prefix); Kham is PR 1 and ward 23.
 
 **Not done.** District (DC40) seats are not allocated (Schedule 2 is not implemented); the DC40 list (one name) is shown but not tested against seats. Nothing here names who sits on the council: seat counts follow from the votes, names from the list, and the list is short.
+
+### Session 56 — 15 s vertical explainer built from "V1 Shot List, Voice-Over and SRT" (11 Nov 2026)
+
+**Arrived:** a design-canvas HTML bundle (fonts packed in a manifest; the page is a shot list, voice-over direction, post copy, SRT, alt text and a "not yet done" QA note). Read by unpacking its template block, not by running it.
+
+**Built** (`scripts/build-explainer-video.ts`, re-runnable; output `marketing/video/explainer-15s/`): the MP4 (1080x1920, 30 fps, H.264, 15.0 s, **427 KB**, no audio stream), SRT, post copy, alt text, shot list, voice-over brief, poster frame and `QA.json`. Frames are rendered from the repo's tokens, self-hosted fonts and app mark, with the spec's motion (220 ms slide-up, bar grows 3.0 to 3.6 s with no count-up, nodes join in 250 ms, button slides in 200 ms, logo reveal at 13 s). Captions burned in above the strip. Checked by extracting frames from the finished file; the first render clipped the strip's last line and wrapped the headline figure, both fixed. Measured contrast: ink on paper and paper on ink 14.05:1, paper on blue 8.61:1, qualifier slate on paper 4.62:1.
+
+**Decisions and flags:**
+1. **"139 of 213" is not verifiable from this build.** The repo holds North West results only (18 locals, 4 districts). What can be said from it: **11 of the 18 North West local councils have no majority** (JB Marks included). The spec's national figure was rendered as supplied and is one constant (`HEADLINE`) that drives the video, SRT, post copy and alt text. **Do not publish until a person has checked it against the Commission's national certified results.** The strip says "as at 10 Nov 2026; calculated by Election-COS".
+2. **AI-voice line left out of the strip.** The spec keeps it only if the voice is synthetic; this file is silent, so the line would be false. Rebuild with `--ai-voice` once a synthetic track is laid over it. Voice-over and music are **not produced** (the spec says so too).
+3. **Entity name** in the strip and post copy is `SITE.entity` (Just Be Trading 10 (Pty) Ltd t/a Innovation Consult, Reg. 2007/021390/07), matching the spec.
+4. **Link probed:** `/tools/your-council` exists on the public site (`COUNCIL_PATH`). The post copy uses it; the video shows `electioncos.co.za`, as the spec's captions do.
+5. **Not measured:** the spec's "4.125 pt" size check (its rule is not stated in the document). Platform safe zones were assumed (content above y 1260, strip 1470 to 1760), not taken from a platform's own overlay guide.
+6. "Non-partisan", "independent" and "not affiliated" are the spec's wording; they are claims the owner makes and I did not verify them.
