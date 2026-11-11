@@ -21,7 +21,7 @@ export function GatheringsAdvisoryPage() {
     <Card className="max-w-3xl">
       <PageHeader
         slug="/knowledge/gatherings-advisory"
-        title="Advisory: Public gatherings and the Regulation of Gatherings Act 205 of 1993"
+        title="Advisory: Public Gatherings and the Regulation of Gatherings Act 205 of 1993"
       />
 
       <div className="mt-4 space-y-4 text-body-md font-body leading-relaxed text-ink">

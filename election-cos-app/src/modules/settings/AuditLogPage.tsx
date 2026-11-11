@@ -40,7 +40,7 @@ export function AuditLogPage() {
   if (!session) {
     return (
       <Card className="max-w-lg">
-        <PageHeader slug="/settings/audit" title="Audit log" />
+        <PageHeader slug="/settings/audit" title="Audit Log" />
         <p className="mt-3 text-body-md font-body text-slate">
           No active session — see BUILD-STATUS.md (no live Firebase project provisioned yet).
         </p>
@@ -56,7 +56,7 @@ export function AuditLogPage() {
     <div className="space-y-6 max-w-3xl">
       <PageHeader
         slug="/settings/audit"
-        title="Audit log"
+        title="Audit Log"
         action={
           <div className="flex flex-wrap items-end gap-3">
             <Button
@@ -93,7 +93,7 @@ export function AuditLogPage() {
 
       <div className="border-l-4 border-gold bg-white p-3 space-y-2">
         <SectionLabel as="h2" tone="ink">
-          What this log is
+          What This Log Is
         </SectionLabel>
         <p className="text-body-md font-body text-slate">{AUDIT_INTEGRITY_BASIS}</p>
         <p className="text-body-md font-body text-slate">{AUDIT_SCOPE_BASIS}</p>

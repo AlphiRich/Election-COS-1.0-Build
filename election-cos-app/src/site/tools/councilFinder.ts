@@ -105,7 +105,7 @@ export function ballotsFor(c: CouncilSummary): BallotLine[] {
   if (c.category === 'C') {
     return [
       {
-        title: 'District council',
+        title: 'District Council',
         detail:
           'A district council has no wards. You do not vote for a district council on its own; it is covered by the ballots in the local municipality you live in.',
       },
@@ -113,18 +113,18 @@ export function ballotsFor(c: CouncilSummary): BallotLine[] {
   }
   const lines: BallotLine[] = [
     {
-      title: 'Ward ballot',
+      title: 'Ward Ballot',
       detail: 'You choose one ward councillor from the candidates standing in your ward.',
     },
     {
-      title: 'Proportional (PR) ballot',
+      title: 'Proportional (PR) Ballot',
       detail:
         'You choose a party. Parties win PR seats in proportion to their votes, filled from the party’s submitted list.',
     },
   ];
   if (c.category === 'B') {
     lines.push({
-      title: 'District council ballot',
+      title: 'District Council Ballot',
       detail:
         'You also vote for the district council that covers your local municipality. This ballot is for a party.',
     });

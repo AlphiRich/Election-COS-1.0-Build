@@ -2,7 +2,7 @@ window.ECOS_EXPLAINERS = [
  {
   "id": "canvasser-knocks",
   "audience": "voters",
-  "title": "When a canvasser knocks",
+  "title": "When a Canvasser Knocks",
   "seconds": 20,
   "sentences": [
    "They must ask your permission before they record anything about you.",
@@ -14,7 +14,7 @@ window.ECOS_EXPLAINERS = [
  {
   "id": "poll-answer",
   "audience": "voters",
-  "title": "Your answer to a poll",
+  "title": "Your Answer to a Poll",
   "seconds": 20,
   "invented": true,
   "sentences": [
@@ -27,7 +27,7 @@ window.ECOS_EXPLAINERS = [
  {
   "id": "seats-won",
   "audience": "voters",
-  "title": "How seats are won",
+  "title": "How Seats Are Won",
   "seconds": 30,
   "invented": true,
   "sentences": [
@@ -40,7 +40,7 @@ window.ECOS_EXPLAINERS = [
  {
   "id": "roles",
   "audience": "parties",
-  "title": "Seven roles, each sees only its own ground",
+  "title": "Seven Roles, Each Sees Only Its Own Ground",
   "seconds": 10,
   "sentences": [
    "A ward lead sees a ward.",
@@ -52,7 +52,7 @@ window.ECOS_EXPLAINERS = [
  {
   "id": "command-view",
   "audience": "parties",
-  "title": "One view of the campaign",
+  "title": "One View of the Campaign",
   "seconds": 10,
   "invented": true,
   "sentences": [
@@ -65,7 +65,7 @@ window.ECOS_EXPLAINERS = [
  {
   "id": "capture-consent",
   "audience": "parties",
-  "title": "Capture with consent",
+  "title": "Capture With Consent",
   "seconds": 10,
   "invented": true,
   "sentences": [
@@ -77,7 +77,7 @@ window.ECOS_EXPLAINERS = [
  {
   "id": "offline",
   "audience": "parties",
-  "title": "Offline in a dead zone",
+  "title": "Offline in a Dead Zone",
   "seconds": 10,
   "invented": true,
   "sentences": [
@@ -90,7 +90,7 @@ window.ECOS_EXPLAINERS = [
  {
   "id": "funding-30-day",
   "audience": "parties",
-  "title": "Funding line and the 30-day clock",
+  "title": "Funding Line and the 30-Day Clock",
   "seconds": 10,
   "invented": true,
   "sentences": [
@@ -102,7 +102,7 @@ window.ECOS_EXPLAINERS = [
  {
   "id": "sentiment-polls",
   "audience": "parties",
-  "title": "Sentiment polls: what they can and cannot tell you",
+  "title": "Sentiment Polls: What They Can and Cannot Tell You",
   "seconds": 30,
   "invented": true,
   "sentences": [
@@ -115,7 +115,7 @@ window.ECOS_EXPLAINERS = [
  {
   "id": "scenario-runner",
   "audience": "parties",
-  "title": "The scenario runner: your assumptions, run many times",
+  "title": "The Scenario Runner: Your Assumptions, Run Many Times",
   "seconds": 30,
   "invented": true,
   "sentences": [

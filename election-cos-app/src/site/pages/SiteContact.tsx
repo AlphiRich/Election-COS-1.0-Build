@@ -46,7 +46,7 @@ import {
 } from '../enquiryClient';
 
 const CONFIG = enquiryConfig(import.meta.env as Record<string, string | undefined>);
-const DEMO = 'Book a demo';
+const DEMO = 'Book a Demo';
 
 function Field({
   id,
@@ -116,7 +116,7 @@ export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'de
       <SiteSection className="flex flex-col gap-4 pb-10 pt-[88px]">
         <Eyebrow>{demo ? 'Demo' : 'Contact'}</Eyebrow>
         <h1 className="m-0 font-site-display text-site-h3 md:text-site-h1">
-          {demo ? 'Book a demo' : 'Talk to us'}
+          {demo ? 'Book a Demo' : 'Talk to Us'}
         </h1>
         <p className="m-0 max-w-[36em] text-site-lead">
           {demo
@@ -131,7 +131,7 @@ export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'de
           {sent ? (
             <div className="flex flex-col gap-4">
               <h2 className="m-0 font-site-display text-site-h4">
-                Thank you. We have your enquiry.
+                Thank You. We Have Your Enquiry.
               </h2>
               {CONFIG ? (
                 <p className="m-0">
@@ -165,12 +165,12 @@ export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'de
               onSubmit={onSubmit}
             >
               <h2 className="m-0 font-site-display text-site-h4">
-                {demo ? 'Your demo request' : 'Your enquiry'}
+                {demo ? 'Your Demo Request' : 'Your Enquiry'}
               </h2>
               {/* Honeypot: hidden from people and from assistive technology. */}
               <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
                 <label>
-                  Leave this empty
+                  Leave This Empty
                   <input type="text" name="website" tabIndex={-1} autoComplete="off" />
                 </label>
               </div>
@@ -192,7 +192,7 @@ export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'de
               </p>
 
               <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,200px),1fr))] gap-5">
-                <Field id="f-role" label="Your role" required>
+                <Field id="f-role" label="Your Role" required>
                   <select id="f-role" name="role" required defaultValue="" className="site-field">
                     <option value="">Choose one</option>
                     {CONTACT_ROLES.map((r) => (
@@ -200,7 +200,7 @@ export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'de
                     ))}
                   </select>
                 </Field>
-                <Field id="f-interest" label="Interested in" required>
+                <Field id="f-interest" label="Interested In" required>
                   <select
                     id="f-interest"
                     name="interest"
@@ -224,7 +224,7 @@ export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'de
                 <Field id="f-muni" label="Municipality">
                   <input id="f-muni" name="municipality" type="text" className="site-field" />
                 </Field>
-                <Field id="f-ward" label="Ward number">
+                <Field id="f-ward" label="Ward Number">
                   <input
                     id="f-ward"
                     name="ward"
@@ -239,7 +239,7 @@ export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'de
               </p>
 
               {demo && (
-                <Field id="f-window" label="When suits you" hint="For example: weekday mornings, or after 17:00.">
+                <Field id="f-window" label="When Suits You" hint="For example: weekday mornings, or after 17:00.">
                   <input id="f-window" name="demoWindow" type="text" maxLength={120} className="site-field" />
                 </Field>
               )}
@@ -306,7 +306,7 @@ export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'de
                   Protected by a Cloudflare Turnstile check.
                 </span>
                 <button type="submit" disabled={busy} className="site-btn-primary">
-                  {busy ? 'Sending…' : demo ? 'Request a demo' : 'Send enquiry'}
+                  {busy ? 'Sending…' : demo ? 'Request a Demo' : 'Send Enquiry'}
                 </button>
               </div>
               {CONFIG && <div ref={widget} />}
@@ -322,7 +322,7 @@ export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'de
         {/* ------------------------------------------------ other ways */}
         <div className="flex flex-col gap-5">
           <article className="flex flex-col gap-3 rounded-[10px] bg-ink p-8 text-paper">
-            <h2 className="m-0 font-site-display text-site-h4">Faster: message us</h2>
+            <h2 className="m-0 font-site-display text-site-h4">Faster: Message Us</h2>
             <p className="m-0 text-line">
               {SITE.whatsApp.role}: <strong>WhatsApp {SITE.whatsApp.display}</strong>. It reaches a person
               directly during working hours.
@@ -336,12 +336,12 @@ export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'de
             />
             <a href={whatsAppHref('Election Campaign OS enquiry')} className="site-btn-primary mt-auto self-start">
               <WhatsAppIcon />
-              Talk to us on WhatsApp
+              Talk to Us on WhatsApp
             </a>
           </article>
 
           <SiteCard className="flex flex-col gap-2 p-8">
-            <h2 className="m-0 font-site-display text-site-h5">By email</h2>
+            <h2 className="m-0 font-site-display text-site-h5">By Email</h2>
             {SITE.mailboxes.map((box) => (
               <p key={box.address} className="m-0 text-site-base">
                 <a href={`mailto:${box.address}`}>{box.address}</a>
@@ -352,7 +352,7 @@ export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'de
           </SiteCard>
 
           <SiteCard className="flex flex-col gap-2 p-8">
-            <h2 className="m-0 font-site-display text-site-h5">Already a customer?</h2>
+            <h2 className="m-0 font-site-display text-site-h5">Already a Customer?</h2>
             <p className="m-0 text-site-base">
               Sign in to the application at{' '}
               <a href={SITE.appOrigin}>app.electioncos.co.za</a>.

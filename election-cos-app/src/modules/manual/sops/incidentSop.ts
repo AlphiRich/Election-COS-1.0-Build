@@ -28,7 +28,7 @@ const FORWARD = ['LOGGED', 'TRIAGED', 'ESCALATED', 'REFERRED'] as const;
 
 export const INCIDENT_SOP: Sop = {
   number: 'SOP-06',
-  title: 'Logging, triaging and escalating an incident',
+  title: 'Logging, Triaging and Escalating an Incident',
   area: 'FIELD',
   roles: ['canvasser', 'vd-captain', 'ward-lead', 'municipal-team-lead'],
   requiresAnyCapability: ['incidents.create', 'incidents.view'],
@@ -38,7 +38,7 @@ export const INCIDENT_SOP: Sop = {
     'afterwards.',
   sections: [
     {
-      heading: 'What an incident is here, and what it is not',
+      heading: 'What an Incident Is Here, and What It Is Not',
       body: [
         'An incident is a service delivery problem affecting a street: ' +
           Object.values(CATEGORY_LABEL).join(', ').toLowerCase() +
@@ -50,7 +50,7 @@ export const INCIDENT_SOP: Sop = {
       ],
     },
     {
-      heading: 'Logging one, as a canvasser',
+      heading: 'Logging One, as a Canvasser',
       body: [
         'From the round, choose "Report an incident". Pick the category, describe what you can see, and add a photograph if you have one.',
       ],
@@ -66,7 +66,7 @@ export const INCIDENT_SOP: Sop = {
       ],
     },
     {
-      heading: 'Triage: confirming how serious it is',
+      heading: 'Triage: Confirming How Serious It Is',
       body: [
         'Whoever holds triage — a ward lead, or the HQ admin — reviews what was logged and confirms or adjusts the severity. That is what moves an incident from ' +
           STATUS_LABEL.LOGGED.toLowerCase() +
@@ -80,7 +80,7 @@ export const INCIDENT_SOP: Sop = {
       ],
     },
     {
-      heading: 'Escalation and the referral',
+      heading: 'Escalation and the Referral',
       body: [
         'A municipal lead escalates a triaged incident, then prepares the referral — the document that actually goes to the municipality. Preparing it produces a draft, watermarked as one, which can be read and checked before anything is issued.',
         'Issuing it is the authorisation step. It stamps the document, records who authorised it and when, stores it, and moves the incident to ' +
@@ -93,7 +93,7 @@ export const INCIDENT_SOP: Sop = {
       ],
     },
     {
-      heading: 'Closing the loop',
+      heading: 'Closing the Loop',
       body: [
         'An incident does not end at the referral. Two more moves exist, and until they are used a campaign’s count of open incidents only ever goes up.',
       ],
@@ -108,7 +108,7 @@ export const INCIDENT_SOP: Sop = {
       ],
     },
     {
-      heading: 'Who does which step',
+      heading: 'Who Does Which Step',
       body: [
         'Four roles share this procedure and none of them can do all of it. The steps and the permission each needs:',
       ],

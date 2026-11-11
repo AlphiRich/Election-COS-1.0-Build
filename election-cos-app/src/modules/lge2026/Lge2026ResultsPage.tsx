@@ -44,7 +44,7 @@ export function Lge2026ResultsPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader slug="/analytics/lge-2026-results" title="LGE 2026 results, North West" />
+      <PageHeader slug="/analytics/lge-2026-results" title="LGE 2026 Results, North West" />
       <BasisNote>
         The Electoral Commission&rsquo;s published results for 4 November 2026 (event {LGE2026.source.eventId}), read from its
         downloadable party-results files. File for {code} generated up to {file.generatedTo.replace('T', ' ')}. Seats are
@@ -75,10 +75,10 @@ export function Lge2026ResultsPage() {
       </Card>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <StatTile label="Council seats" value={n(alloc.councilSizeFinal)} sub={`${gaz.wardSeats} ward + ${gaz.prSeats} list`} emphasis />
-        <StatTile label="Turnout, PR ballot" value={`${p1(pr.pct)}%`} sub={`${n(pr.cast)} cast of ${n(pr.registered)}`} />
-        <StatTile label="Turnout, ward ballot" value={`${p1(wardT.pct)}%`} sub={`${n(wardT.cast)} cast`} />
-        <StatTile label="Turnout, district 40% ballot" value={`${p1(dcT.pct)}%`} sub={`${n(dcT.cast)} cast`} />
+        <StatTile label="Council Seats" value={n(alloc.councilSizeFinal)} sub={`${gaz.wardSeats} ward + ${gaz.prSeats} list`} emphasis />
+        <StatTile label="Turnout, PR Ballot" value={`${p1(pr.pct)}%`} sub={`${n(pr.cast)} cast of ${n(pr.registered)}`} />
+        <StatTile label="Turnout, Ward Ballot" value={`${p1(wardT.pct)}%`} sub={`${n(wardT.cast)} cast`} />
+        <StatTile label="Turnout, District 40% Ballot" value={`${p1(dcT.pct)}%`} sub={`${n(dcT.cast)} cast`} />
       </div>
       <p className="text-body-md font-body text-slate">
         Turnout is cast votes (valid plus spoilt) divided by the voters the Commission lists as registered on that ballot, taken
@@ -92,7 +92,7 @@ export function Lge2026ResultsPage() {
       </p>
 
       <Card>
-        <SectionLabel as="h2">Council seats</SectionLabel>
+        <SectionLabel as="h2">Council Seats</SectionLabel>
         <Table caption={`Seats after Schedule 1: quota ${n(alloc.quota)}${alloc.newQuota ? `, recalculated to ${n(alloc.newQuota)} under Item 16 because a party won more ward seats than its entitlement` : ''}.`}>
           <thead>
             <tr>
@@ -142,7 +142,7 @@ export function Lge2026ResultsPage() {
       </Card>
 
       <Card>
-        <SectionLabel as="h2">Wards, closest first</SectionLabel>
+        <SectionLabel as="h2">Wards, Closest First</SectionLabel>
         <Table caption="Ward ballot result by ward: winner, runner-up and the gap in points of the ward's valid vote.">
           <thead>
             <tr>
@@ -215,7 +215,7 @@ export function Lge2026ResultsPage() {
       )}
 
       <Card>
-        <SectionLabel as="h2">District council: {`DC${code.slice(2, 4)}`}</SectionLabel>
+        <SectionLabel as="h2">District Council: {`DC${code.slice(2, 4)}`}</SectionLabel>
         <p className="text-body-md font-body mt-1">
           The district council&rsquo;s directly elected seats are voted on through the 40% ballot in each local municipality.
           Across its {dc.members.length} local municipalities ({dc.members.join(', ')}), {n(dc.dc40.valid)} valid votes and{' '}

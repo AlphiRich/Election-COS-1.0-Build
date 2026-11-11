@@ -53,25 +53,25 @@ export interface UnsearchedSource {
  */
 export const UNSEARCHED_SOURCES: UnsearchedSource[] = [
   {
-    label: 'Donation and donor records',
+    label: 'Donation and Donor Records',
     reason:
       'Donor identity numbers are held encrypted and cannot be searched by name. If the person has donated, ' +
       'the finance officer must look them up by donor record and add what is found.',
   },
   {
-    label: 'Candidate records',
+    label: 'Candidate Records',
     reason:
       'Candidate identity numbers are held encrypted. If the person has stood as a candidate, that record ' +
       'must be retrieved separately.',
   },
   {
-    label: 'Staff and volunteer records',
+    label: 'Staff and Volunteer Records',
     reason:
       'Staff records are keyed by sign-in identifier, not by name. If the person has worked for the campaign, ' +
       'an administrator must retrieve their record.',
   },
   {
-    label: 'Incidents and casework',
+    label: 'Incidents and Casework',
     reason:
       'These record faults at places rather than information about named people, and are not searchable by ' +
       'name. If the person reported something, say so in the covering note.',
@@ -130,24 +130,24 @@ function voterBlocks(voter: Voter, households: Household[]): Block[] {
   const household = households.find((h) => h.id === voter.householdId);
   const blocks: Block[] = [
     { kind: 'heading', level: 3, text: `${voter.firstName} ${voter.lastName}` },
-    { kind: 'field', label: 'Contact number', value: voter.phoneMasked },
-    { kind: 'field', label: 'Voting district', value: voter.vdCode },
+    { kind: 'field', label: 'Contact Number', value: voter.phoneMasked },
+    { kind: 'field', label: 'Voting District', value: voter.vdCode },
     { kind: 'field', label: 'Ward', value: voter.wardCode },
-    { kind: 'field', label: 'Recorded view', value: SENTIMENT_META[voter.sentiment].label },
-    { kind: 'field', label: 'Consent recorded', value: voter.popiaConsentMethod },
+    { kind: 'field', label: 'Recorded View', value: SENTIMENT_META[voter.sentiment].label },
+    { kind: 'field', label: 'Consent Recorded', value: voter.popiaConsentMethod },
   ];
-  if (voter.popiaConsentAt) blocks.push({ kind: 'field', label: 'Consent date', value: voter.popiaConsentAt });
+  if (voter.popiaConsentAt) blocks.push({ kind: 'field', label: 'Consent Date', value: voter.popiaConsentAt });
   if (voter.popiaConsentReference) {
-    blocks.push({ kind: 'field', label: 'Consent reference', value: voter.popiaConsentReference });
+    blocks.push({ kind: 'field', label: 'Consent Reference', value: voter.popiaConsentReference });
   }
-  blocks.push({ kind: 'field', label: 'Record created', value: voter.createdAt });
+  blocks.push({ kind: 'field', label: 'Record Created', value: voter.createdAt });
 
   if (household) {
-    blocks.push({ kind: 'field', label: 'Address held', value: household.addressLine });
+    blocks.push({ kind: 'field', label: 'Address Held', value: household.addressLine });
     if (household.contactStatus) {
       blocks.push({
         kind: 'field',
-        label: 'Canvassing status',
+        label: 'Canvassing Status',
         value: CONTACT_STATUS_LABEL[household.contactStatus],
       });
     }
@@ -181,8 +181,8 @@ export function subjectAccessDocument(
 
     { kind: 'heading', level: 1, text: 'Your request' },
     { kind: 'field', label: 'Received', value: request.receivedAt },
-    { kind: 'field', label: 'Request type', value: request.requestType },
-    { kind: 'field', label: 'Name given', value: request.requesterName },
+    { kind: 'field', label: 'Request Type', value: request.requestType },
+    { kind: 'field', label: 'Name Given', value: request.requesterName },
     { kind: 'field', label: 'Reference', value: request.id },
 
     { kind: 'heading', level: 1, text: 'What was found on the voter roll' },
@@ -245,7 +245,7 @@ export function subjectAccessDocument(
   );
 
   return {
-    title: 'Response to your request for access',
+    title: 'Response to Your Request for Access',
     subtitle: 'Personal information held by this campaign, and what was not searched',
     meta: {
       organisation: meta.organisation,

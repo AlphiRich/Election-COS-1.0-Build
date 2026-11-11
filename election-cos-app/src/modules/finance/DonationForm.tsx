@@ -62,7 +62,7 @@ export function DonationForm({ ctx, donorId, config, onDone, onCancel }: Donatio
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 border border-gold/40 bg-paper p-4 rounded">
-      <h3 className="text-label-caps font-display uppercase text-ink">Record donation</h3>
+      <h3 className="text-label-caps font-display uppercase text-ink">Record Donation</h3>
 
       <div className="grid grid-cols-2 gap-3">
         <label className="space-y-1 block">

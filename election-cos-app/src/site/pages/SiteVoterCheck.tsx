@@ -24,31 +24,31 @@ const MDB = 'https://www.demarcation.org.za';
 const STEPS = [
   {
     id: 'registered',
-    title: 'Confirm you are on the voters’ roll',
+    title: 'Confirm You Are on the Voters’ Roll',
     body: 'Only the Electoral Commission can tell you this. Use its voter registration status service. This site never asks for your ID number.',
     href: IEC,
     label: 'Open elections.org.za',
   },
   {
     id: 'address',
-    title: 'Check the address or voting district it has for you',
+    title: 'Check the Address or Voting District It Has for You',
     body: 'Your voting station depends on where you registered. The roll closed to new registrations and changes on 7 August 2026, so if it is wrong now, ask the Electoral Commission what your options are.',
   },
   {
     id: 'ward',
-    title: 'Find your ward and voting station',
+    title: 'Find Your Ward and Voting Station',
     body: 'JB Marks has a search below. For any other municipality, ward information comes from the Municipal Demarcation Board and the Electoral Commission.',
     href: MDB,
     label: 'Municipal Demarcation Board',
   },
   {
     id: 'id',
-    title: 'Have your identity document ready',
+    title: 'Have Your Identity Document Ready',
     body: 'Take the document you registered with to the voting station on 4 November 2026.',
   },
   {
     id: 'special',
-    title: 'Special votes',
+    title: 'Special Votes',
     body: 'Applications closed on 12 October 2026. Special votes are cast on 2 and 3 November 2026 for people who applied.',
   },
 ];
@@ -69,9 +69,9 @@ export function SiteVoterCheck() {
     <>
       <SiteSection className="pb-8 pt-[88px]">
         <div className="flex max-w-[760px] flex-col gap-4">
-          <Eyebrow>Voter tool</Eyebrow>
+          <Eyebrow>Voter Tool</Eyebrow>
           <h1 className="m-0 font-site-display text-site-h3 md:text-site-h2">
-            Check your voter details
+            Check Your Voter Details
           </h1>
           <p className="m-0 text-site-lead">
             A checklist for polling week. The personal checks happen on the Electoral Commission’s
@@ -83,9 +83,9 @@ export function SiteVoterCheck() {
       <SiteSection labelledBy="steps-h" className="pb-10">
         <div className="flex max-w-[760px] flex-col gap-4">
           <h2 id="steps-h" className="m-0 font-site-display text-site-h4">
-            Your checklist{' '}
+            Your Checklist{' '}
             <span className="font-mono text-site-sm text-slate" role="status" aria-live="polite">
-              {finished} of {STEPS.length} done
+              {finished} of {STEPS.length} Done
             </span>
           </h2>
           <ul className="m-0 flex list-none flex-col gap-3 p-0">
@@ -118,7 +118,7 @@ export function SiteVoterCheck() {
       <SiteSection labelledBy="find-h" className="pb-10">
         <SiteCard className="flex max-w-[760px] flex-col gap-4 p-8">
           <h2 id="find-h" className="m-0 font-site-display text-site-h4">
-            Find your ward and voting station in JB Marks
+            Find Your Ward and Voting Station in JB Marks
           </h2>
           <p className="m-0 text-site-sm text-slate">
             Type a ward number (for example 12) or part of a voting station’s name. This covers JB
@@ -130,7 +130,7 @@ export function SiteVoterCheck() {
 
       <SiteSection labelledBy="dates-h" className="pb-[88px]">
         <h2 id="dates-h" className="mb-4 mt-0 font-site-display text-site-h4">
-          Key dates, 2026 election
+          Key Dates, 2026 Election
         </h2>
         <dl className="m-0 grid max-w-[760px] grid-cols-[repeat(auto-fit,minmax(min(100%,220px),1fr))] gap-x-6 gap-y-3">
           {DATES.map(([d, t]) => (

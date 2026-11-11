@@ -158,7 +158,7 @@ export function PPFAThresholdsPage() {
            */}
           <Card tone="accent" className="space-y-4">
             <div className="grid grid-cols-2 gap-3">
-              <Field label="Disclosure threshold (ZAR)" required>
+              <Field label="Disclosure Threshold (ZAR)" required>
                 {(props) => (
                   <input
                     {...props}
@@ -170,7 +170,7 @@ export function PPFAThresholdsPage() {
                   />
                 )}
               </Field>
-              <Field label="Annual donor cap (ZAR)" required>
+              <Field label="Annual Donor Cap (ZAR)" required>
                 {(props) => (
                   <input
                     {...props}
@@ -194,7 +194,7 @@ export function PPFAThresholdsPage() {
                   />
                 )}
               </Field>
-              <Field label="Financial year starts">
+              <Field label="Financial Year Starts">
                 {(props) => (
                   <select {...props} value={fyStartMonth} onChange={(e) => setFyStartMonth(Number(e.target.value))}>
                     {MONTH_LABEL.map((label, i) => (
@@ -205,7 +205,7 @@ export function PPFAThresholdsPage() {
                   </select>
                 )}
               </Field>
-              <Field label="Aggregation rule">
+              <Field label="Aggregation Rule">
                 {(props) => (
                   <select
                     {...props}
@@ -217,7 +217,7 @@ export function PPFAThresholdsPage() {
                   </select>
                 )}
               </Field>
-              <Field label="Effective date" required>
+              <Field label="Effective Date" required>
                 {(props) => (
                   <input
                     {...props}
@@ -231,7 +231,7 @@ export function PPFAThresholdsPage() {
             </div>
 
             <Field
-              label="Source citation"
+              label="Source Citation"
               required
               hint="For example: Government Gazette No. XXXXX, DD Month YYYY."
             >

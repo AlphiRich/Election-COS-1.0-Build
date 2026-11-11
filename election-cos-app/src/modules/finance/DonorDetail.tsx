@@ -125,7 +125,7 @@ export function DonorDetail({ ctx, donor, config }: DonorDetailProps) {
 
       {openAlerts.length > 0 && (
         <div className="space-y-2">
-          <h4 className="text-label-caps font-display uppercase text-slate">Open alerts (system-raised)</h4>
+          <h4 className="text-label-caps font-display uppercase text-slate">Open Alerts (System-Raised)</h4>
           {openAlerts.map((alert) => (
             <div key={alert.id} className="border-l-4 border-maroon bg-white p-3 space-y-2">
               <p className="text-body-md font-body text-ink">

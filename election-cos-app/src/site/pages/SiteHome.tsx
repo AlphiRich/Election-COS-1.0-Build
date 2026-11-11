@@ -24,11 +24,11 @@ import SUMMARY from '@/data/lge2026/national/summary-2026.json';
 const IEC_URL = 'https://www.elections.org.za';
 
 const TOOLS = [
-  { to: DETAILS_PATH, title: 'Check your voter details', body: 'A polling-week checklist, and a ward and voting station search for JB Marks.' },
-  { to: COUNCIL_PATH, title: 'Your council and your ballot', body: 'How many councillors, wards and PR seats your municipality has, and what you vote on.' },
-  { to: SEATS_PATH, title: 'How seats are calculated', body: 'Step from votes to seats, starting from a real result.' },
-  { to: COALITION_PATH, title: 'How coalitions work', body: 'Combine parties and see whether they pass half the seats.' },
-  { to: FUNDING_CHECKER_PATH, title: 'Party-funding checker', body: 'Where one donor’s total sits against the disclosure line.' },
+  { to: DETAILS_PATH, title: 'Check Your Voter Details', body: 'A polling-week checklist, and a ward and voting station search for JB Marks.' },
+  { to: COUNCIL_PATH, title: 'Your Council and Your Ballot', body: 'How many councillors, wards and PR seats your municipality has, and what you vote on.' },
+  { to: SEATS_PATH, title: 'How Seats Are Calculated', body: 'Step from votes to seats, starting from a real result.' },
+  { to: COALITION_PATH, title: 'How Coalitions Work', body: 'Combine parties and see whether they pass half the seats.' },
+  { to: FUNDING_CHECKER_PATH, title: 'Party-Funding Checker', body: 'Where one donor’s total sits against the disclosure line.' },
 ];
 
 const WONT = [
@@ -42,9 +42,9 @@ export function SiteHome() {
     <>
       <section className="border-t border-teal bg-ink text-paper">
         <div className="mx-auto flex max-w-[1200px] flex-col gap-6 px-6 pb-[88px] pt-[80px]">
-          <Eyebrow tone="gold">Local government elections 2026 · certified results</Eyebrow>
+          <Eyebrow tone="gold">Local Government Elections 2026 · Certified Results</Eyebrow>
           <h1 className="m-0 max-w-[16em] font-site-display text-site-h3 md:text-site-hero">
-            {SUMMARY.hung} of {SUMMARY.councils} councils have no majority.
+            {SUMMARY.hung} of {SUMMARY.councils} Councils Have No Majority.
           </h1>
           <p className="m-0 max-w-[36em] text-site-lead text-line">
             Including {SUMMARY.metrosHung} of the {SUMMARY.metros} metros. See who holds the seats in your council, which
@@ -56,10 +56,10 @@ export function SiteHome() {
               Open the Coalition Tracker
             </Link>
             <Link to={MY_WARD_PATH} className="site-btn-outline-paper">
-              Find your ward councillor
+              Find Your Ward Councillor
             </Link>
             <Link to="/explainers/how-a-council-is-made-up" className="site-btn-outline-paper">
-              How a council is made up
+              How a Council Is Made Up
             </Link>
           </div>
         </div>
@@ -67,7 +67,7 @@ export function SiteHome() {
 
       <SiteSection labelledBy="tool-h" className="pb-6 pt-[72px]">
         <h2 id="tool-h" className="mb-8 mt-0 font-site-display text-site-h3">
-          Tools you can use now
+          Tools You Can Use Now
         </h2>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-5">
           {TOOLS.map((t) => (
@@ -96,7 +96,7 @@ export function SiteHome() {
 
       <SiteSection labelledBy="ex-h" className="py-[56px]">
         <h2 id="ex-h" className="mb-8 mt-0 font-site-display text-site-h3">
-          Questions people ask
+          Questions People Ask
         </h2>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-5">
           {EXPLAINERS.map((e) => (
@@ -117,9 +117,9 @@ export function SiteHome() {
       <section aria-labelledby="wont-h" className="border-y border-line bg-white">
         <div className="mx-auto grid max-w-[1200px] grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] items-start gap-10 px-6 py-[72px]">
           <div>
-            <Eyebrow>What this site will not do</Eyebrow>
+            <Eyebrow>What This Site Will Not Do</Eyebrow>
             <h2 id="wont-h" className="mb-0 mt-3 font-site-display text-site-h2">
-              Informative, and nothing more.
+              Informative, and Nothing More.
             </h2>
           </div>
           <ul className="m-0 flex list-none flex-col gap-3 p-0 text-site-base">
@@ -136,7 +136,7 @@ export function SiteHome() {
         <div className="flex flex-wrap items-center justify-between gap-6 rounded-xl bg-ink p-10 text-paper">
           <div className="min-w-0 flex-[1_1_360px]">
             <h2 id="who-h" className="m-0 font-site-display text-site-h3">
-              Run a ward office or a campaign?
+              Run a Ward Office or a Campaign?
             </h2>
             <p className="mb-0 mt-1.5 text-site-base text-line">
               Election Campaign OS is also the casework and compliance software behind this site,
@@ -144,7 +144,7 @@ export function SiteHome() {
             </p>
           </div>
           <Link to="/for-campaigns" className="site-btn-primary">
-            See the software
+            See the Software
           </Link>
         </div>
       </SiteSection>

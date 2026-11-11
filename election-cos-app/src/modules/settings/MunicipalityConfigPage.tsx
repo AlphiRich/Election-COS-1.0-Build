@@ -189,7 +189,7 @@ export function MunicipalityConfigPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {/* The code field is monospaced because it is a code, and it
                 is the field everything else on this form derives from. */}
-            <Field label="Municipality code" required mono hint="For example NW405.">
+            <Field label="Municipality Code" required mono hint="For example NW405.">
               {(props) => (
                 <input {...props} value={municipalityCode} onChange={(e) => onCodeChange(e.target.value)} required />
               )}
@@ -201,7 +201,7 @@ export function MunicipalityConfigPage() {
             </Field>
           </div>
 
-          <Field label="Municipality name" required hint="Filled in from the code where the baseline carries it.">
+          <Field label="Municipality Name" required hint="Filled in from the code where the baseline carries it.">
             {(props) => (
               <input
                 {...props}
@@ -217,7 +217,7 @@ export function MunicipalityConfigPage() {
             * fields were three chances to disagree with the delimitation.
             */}
           <div className="border border-ink/10 rounded p-3 space-y-2">
-            <SectionLabel as="h2">Seats · from the proclaimed delimitation</SectionLabel>
+            <SectionLabel as="h2">Seats · From the Proclaimed Delimitation</SectionLabel>
             {baseline ? (
               <>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -251,7 +251,7 @@ export function MunicipalityConfigPage() {
             )}
           </div>
 
-          <Field label="Election day">
+          <Field label="Election Day">
             {(props) => (
               <input
                 {...props}

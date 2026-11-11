@@ -38,7 +38,7 @@ import type { Sop } from '../manualModel';
 
 export const DATA_SUBJECT_REQUEST_SOP: Sop = {
   number: 'SOP-09',
-  title: 'Handling a data subject request',
+  title: 'Handling a Data Subject Request',
   area: 'COMPLIANCE',
   roles: ['compliance-officer', 'party-hq-admin'],
   requiresAnyCapability: ['dsr.view'],
@@ -48,7 +48,7 @@ export const DATA_SUBJECT_REQUEST_SOP: Sop = {
     'search, what a deletion request can and cannot achieve here, and how to record an outcome that is true.',
   sections: [
     {
-      heading: 'Who is answering, and what you are answering',
+      heading: 'Who Is Answering, and What You Are Answering',
       body: [
         'POPIA gives a person the right to ask a responsible party what personal information it holds about them, to have it corrected, and to ask for it to be deleted or destroyed. Condition 8 is where those rights live.',
         'The responsible party here is the campaign — your party. Innovation Consult operates the platform on your behalf and is an operator, not the responsible party. That distinction is not a technicality on this page: it means the decision about what may lawfully be disclosed is yours, and no part of this software makes it for you.',
@@ -59,7 +59,7 @@ export const DATA_SUBJECT_REQUEST_SOP: Sop = {
       ],
     },
     {
-      heading: 'Logging it the moment it arrives',
+      heading: 'Logging It the Moment It Arrives',
       body: [
         'The log is the compliance record. If the Information Regulator ever asks how this campaign handles requests, the log is the answer — and a request handled well but never logged looks identical to one ignored.',
       ],
@@ -74,7 +74,7 @@ export const DATA_SUBJECT_REQUEST_SOP: Sop = {
       ],
     },
     {
-      heading: 'How long you have',
+      heading: 'How Long You Have',
       body: [
         'The log flags a request as overdue against an internal target, and shows the basis for that figure on the page.',
         RESPONSE_TARGET_BASIS,
@@ -84,7 +84,7 @@ export const DATA_SUBJECT_REQUEST_SOP: Sop = {
       ],
     },
     {
-      heading: 'Answering an access request',
+      heading: 'Answering an Access Request',
       body: [
         '"Prepare response" on the request searches the voter roll for the name given, collects every field held on each record found, and builds a draft document you can read before anything goes anywhere.',
         ASSEMBLY_BASIS,
@@ -103,7 +103,7 @@ export const DATA_SUBJECT_REQUEST_SOP: Sop = {
       ],
     },
     {
-      heading: 'The part of the response that matters most',
+      heading: 'The Part of the Response That Matters Most',
       body: [
         'Some of what this campaign holds cannot be searched by name at all, and the response says so on its own face rather than in a footnote you could drop.',
         COMPLETENESS_NOTICE,
@@ -116,7 +116,7 @@ export const DATA_SUBJECT_REQUEST_SOP: Sop = {
       ],
     },
     {
-      heading: 'Correction requests',
+      heading: 'Correction Requests',
       body: [
         'A correction request is the straightforward one: this platform can genuinely correct a voter record, and doing so is an ordinary edit.',
         'Find the record the same way — the same search — then correct it and tell the person what you changed.',
@@ -132,7 +132,7 @@ export const DATA_SUBJECT_REQUEST_SOP: Sop = {
       ],
     },
     {
-      heading: 'Deletion requests, and what this platform can actually do',
+      heading: 'Deletion Requests, and What This Platform Can Actually Do',
       body: [
         'This is the section to read twice, because the honest answer is narrower than the request.',
         ERASURE_CAPABILITY_BASIS,
@@ -152,7 +152,7 @@ export const DATA_SUBJECT_REQUEST_SOP: Sop = {
       ],
     },
     {
-      heading: 'What your canvassers say at a gate',
+      heading: 'What Your Canvassers Say at a Gate',
       body: [
         'Most deletion requests will not arrive at your office. They will be said to a canvasser, at a door, by somebody who wants a straight answer on the spot.',
         'SOP-01 gives them one, and it is the same answer as this procedure — because a canvasser improvising a promise at a gate is how the false claim gets made in the first place.',
@@ -160,7 +160,7 @@ export const DATA_SUBJECT_REQUEST_SOP: Sop = {
       warnings: [DOORSTEP_ERASURE_ANSWER],
     },
     {
-      heading: 'Recording the outcome',
+      heading: 'Recording the Outcome',
       body: [
         'The last act is the compliance record, and it is the one a regulator reads. Record what happened, not what was asked for.',
       ],

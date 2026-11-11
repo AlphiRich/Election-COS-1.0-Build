@@ -26,7 +26,7 @@ import type { Sop } from '../manualModel';
 
 export const WAR_ROOM_SOP: Sop = {
   number: 'SOP-08',
-  title: 'Reading the war room',
+  title: 'Reading the War Room',
   area: 'WAR_ROOM',
   roles: ['municipal-team-lead', 'party-hq-admin'],
   requiresAnyCapability: ['warroom.view'],
@@ -36,7 +36,7 @@ export const WAR_ROOM_SOP: Sop = {
     'means, and what the war room cannot tell you at all.',
   sections: [
     {
-      heading: 'Where these numbers come from',
+      heading: 'Where These Numbers Come From',
       body: [
         'The war room reads a single pre-aggregated counter document, maintained by triggers as voters, households, incidents and diary entries are written. It never scans the underlying records — on a tenant with a municipal roll that would be slow and expensive enough to make the screen unusable.',
         'One consequence is worth holding onto: every tile is a running total that was updated when something was written. It is not a query, and it is not recomputed when you open the page. If a figure looks wrong, the question is what was written, not what the dashboard calculated.',
@@ -46,7 +46,7 @@ export const WAR_ROOM_SOP: Sop = {
       ],
     },
     {
-      heading: 'The two numbers that sound the same and are not',
+      heading: 'The Two Numbers That Sound the Same and Are Not',
       body: [
         'Under Voters captured you will see a percentage of the registered roll. That is the share of the electorate this campaign holds a record for. It is a data-capture figure.',
         'On a round, you will see a coverage percentage. That is doors worked out of doors workable, and it excludes households who asked not to be contacted. It is a fieldwork figure.',
@@ -57,7 +57,7 @@ export const WAR_ROOM_SOP: Sop = {
       ],
     },
     {
-      heading: 'Doors worked, and doors somebody said they worked',
+      heading: 'Doors Worked, and Doors Somebody Said They Worked',
       body: [
         'Two figures sit beside each other on purpose. The larger reading is counted from the door records: every household whose canvasser recorded an outcome. The smaller line beside it is self-reported — the sum of household counts canvassers entered in their own diary entries.',
         'They will differ. That is not an error in either. A diary entry is a person\'s account of their shift, written at the end of it; a door record is what was recorded at the door. Both are worth having and neither corrects the other.',
@@ -72,7 +72,7 @@ export const WAR_ROOM_SOP: Sop = {
       ],
     },
     {
-      heading: 'Doors by state',
+      heading: 'Doors by State',
       body: [
         'The full breakdown, from the door records. Six states, and each says something different about what to do next.',
       ],
@@ -83,7 +83,7 @@ export const WAR_ROOM_SOP: Sop = {
       ],
     },
     {
-      heading: 'Wards seeded, and why it shows two numbers',
+      heading: 'Wards Seeded, and Why It Shows Two Numbers',
       body: [
         'The tile shows the wards loaded against the number Municipality Config says there should be. If they disagree, the seed check flag appears, and the Wards page explains which ward is missing or duplicated.',
         RECONCILIATION_BASIS,
@@ -93,7 +93,7 @@ export const WAR_ROOM_SOP: Sop = {
       ],
     },
     {
-      heading: 'Open incidents',
+      heading: 'Open Incidents',
       body: [
         'The count of incidents still awaiting campaign action: logged, triaged, escalated or referred. Resolved and closed drop out of it, which is the point of being able to reach those states at all.',
         'A number that only ever rises means nobody is closing the loop, not that the municipality is failing — SOP-06 covers resolving and closing, and both are deliberate acts somebody has to perform.',
@@ -103,7 +103,7 @@ export const WAR_ROOM_SOP: Sop = {
       ],
     },
     {
-      heading: 'What the war room cannot tell you',
+      heading: 'What the War Room Cannot Tell You',
       body: [
         'It is a picture of what has been recorded, and nothing more. Read against that, it is useful; read as a picture of the campaign, it will mislead you in predictable directions.',
       ],

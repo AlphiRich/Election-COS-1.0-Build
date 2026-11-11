@@ -59,7 +59,7 @@ export function SiteCasework() {
         <div className="flex flex-col gap-5">
           <Eyebrow>Councillor Casework Tracker</Eyebrow>
           <h1 className="m-0 font-site-display text-site-h3 md:text-site-hero">
-            Every case, followed through.
+            Every Case, Followed Through.
           </h1>
           <p className="m-0 max-w-[32em] text-site-lead">
             A resident raises a problem at the door. Your office triages it, you authorise it, and a
@@ -78,10 +78,10 @@ export function SiteCasework() {
           </p>
           <div className="flex flex-wrap gap-3">
             <Link to="/contact" className="site-btn-primary">
-              Request a tracker call
+              Request a Tracker Call
             </Link>
             <Link to="/contact" className="site-btn-outline-ink">
-              Download the brochure
+              Download the Brochure
             </Link>
           </div>
         </SiteCard>
@@ -91,7 +91,7 @@ export function SiteCasework() {
       <section aria-labelledby="flow-h" className="bg-ink text-paper">
         <div className="mx-auto max-w-[1200px] px-6 py-20">
           <h2 id="flow-h" className="mb-10 mt-0 font-site-display text-site-h3">
-            How a case moves
+            How a Case Moves
           </h2>
           <ol className="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,190px),1fr))] gap-4 p-0">
             {CASE_STEPS.map((s) => (
@@ -115,7 +115,7 @@ export function SiteCasework() {
       >
         <div className="flex flex-col gap-4">
           <h2 id="ref-h" className="m-0 font-site-display text-site-h3">
-            The signed referral
+            The Signed Referral
           </h2>
           <p className="m-0">
             Each referral is a PDF the municipality can file and act on. It carries an integrity
@@ -152,7 +152,7 @@ export function SiteCasework() {
 
       {/* ---------------------------------------------------- features */}
       <SiteSection
-        label="Built for the ward"
+        label="Built for the Ward"
         className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-5 pb-[88px]"
       >
         {CASEWORK_FEATURES.map((f) => (
@@ -163,7 +163,7 @@ export function SiteCasework() {
             <FeatureIcon kind={f.icon} />
             <h3 className="m-0 font-site-display text-site-h6">{f.title}</h3>
             <p className="m-0 text-site-base">
-              {f.title === 'POPIA by design' ? (
+              {f.title === 'POPIA by Design' ? (
                 <>
                   Consent recorded before storage. Numbers masked, as in{' '}
                   <span className="font-mono text-site-sm">07• ••• ••14</span>. Suppression on
@@ -200,12 +200,12 @@ export function SiteCasework() {
         </div>
       </section>
 
-      <CtaBand headingId="cta-h" heading="Start with one ward.">
+      <CtaBand headingId="cta-h" heading="Start With One Ward.">
         <Link to="/contact" className="site-btn-primary">
-          Request a tracker call
+          Request a Tracker Call
         </Link>
         <Link to="/contact" className="site-btn-outline-paper">
-          Download the brochure
+          Download the Brochure
         </Link>
       </CtaBand>
     </>

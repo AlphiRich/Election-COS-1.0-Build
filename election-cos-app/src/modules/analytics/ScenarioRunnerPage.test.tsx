@@ -34,10 +34,10 @@ describe('Scenario Runner page', () => {
   });
   it('runs, shows the seat table, majority frequencies with sampling error, and the caveat again', async () => {
     const el = await mount();
-    const run = [...el.querySelectorAll('button')].find((b) => b.textContent === 'Run scenarios')!;
+    const run = [...el.querySelectorAll('button')].find((b) => b.textContent === 'Run Scenarios')!;
     await click(run);
-    expect(el.textContent).toMatch(/Seats across 2[\s\u00a0]?000 draws/);
-    expect(el.textContent).toContain('Outright majority, within these assumptions');
+    expect(el.textContent).toMatch(/Seats across 2[\s\u00a0]?000 draws/i);
+    expect(el.textContent).toContain('Outright Majority, Within These Assumptions');
     expect(el.textContent).toMatch(/Sampling error on each figure is at most/);
     expect(el.textContent).toContain('not a forecast');
     expect(el.textContent).toContain('No ward changes hands in any draw');
@@ -50,9 +50,9 @@ describe('Scenario Runner page', () => {
       set.call(draws, '5');
       draws.dispatchEvent(new Event('input', { bubbles: true }));
     });
-    await click([...el.querySelectorAll('button')].find((b) => b.textContent === 'Run scenarios')!);
+    await click([...el.querySelectorAll('button')].find((b) => b.textContent === 'Run Scenarios')!);
     expect(el.querySelector('[role="alert"]')?.textContent).toMatch(/draws must be/);
-    expect(el.textContent).not.toContain('Seats across');
+    expect(el.textContent).not.toContain('Seats Across');
   });
   it('starts from the certified 2026 result and offers a swing for every party with at least 2% of the party votes', async () => {
     const el = await mount();
@@ -66,7 +66,7 @@ describe('Scenario Runner page', () => {
   });
   it('shows what moved between 2021 and 2026 and can copy the observed ward spreads, which the person may then change', async () => {
     const el = await mount();
-    expect(el.textContent).toContain('What moved between 2021 and 2026 in JB Marks');
+    expect(el.textContent).toContain('What Moved Between 2021 and 2026 in JB Marks');
     expect(el.textContent).toContain('One election pair, described and not modelled');
     await click([...el.querySelectorAll('button')].find((b) => b.textContent?.startsWith('Use these spreads'))!);
     const spread = [...el.querySelectorAll('input')].find((i) => i.id && el.querySelector(`label[for="${i.id}"]`)?.textContent === 'ANC spread')!;
@@ -92,7 +92,7 @@ describe('Scenario Runner page', () => {
     });
     expect(el.textContent).toContain('Madibeng, 2026');
     expect(el.textContent).toContain('82 council seats');
-    await click([...el.querySelectorAll('button')].find((b) => b.textContent === 'Run scenarios')!);
-    expect(el.textContent).toMatch(/Seats across 2[\s\u00a0]?000 draws/);
+    await click([...el.querySelectorAll('button')].find((b) => b.textContent === 'Run Scenarios')!);
+    expect(el.textContent).toMatch(/Seats across 2[\s\u00a0]?000 draws/i);
   });
 });

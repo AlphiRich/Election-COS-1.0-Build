@@ -36,11 +36,11 @@ describe('Data analyst page', () => {
     const el = await mount(<AnalystPage />);
     const paste = el.querySelectorAll('textarea')[0] as HTMLTextAreaElement;
     await setValue(paste, CSV);
-    await click(byText(el, 'button', 'Add pasted data'));
+    await click(byText(el, 'button', 'Add Pasted Data'));
     expect(el.textContent).toContain('contact in pasted-1.csv');
     expect(el.textContent).toContain('Removed.');
     await setValue(el.querySelectorAll('textarea')[1] as HTMLTextAreaElement, 'What are the top segments by value?');
-    await click(byText(el, 'button', 'Run analysis'));
+    await click(byText(el, 'button', 'Run Analysis'));
     expect(el.textContent).toContain('votes by');
     expect(el.textContent).toContain('removed: contact');
     expect(el.textContent).not.toContain('0821234567');
@@ -49,9 +49,9 @@ describe('Data analyst page', () => {
   it('profiles only the cleaned table: a summary shows neither the removed column nor its values', async () => {
     const el = await mount(<AnalystPage />);
     await setValue(el.querySelectorAll('textarea')[0] as HTMLTextAreaElement, CSV);
-    await click(byText(el, 'button', 'Add pasted data'));
+    await click(byText(el, 'button', 'Add Pasted Data'));
     await setValue(el.querySelectorAll('textarea')[1] as HTMLTextAreaElement, 'Summarize the key trends in this data.');
-    await click(byText(el, 'button', 'Run analysis'));
+    await click(byText(el, 'button', 'Run Analysis'));
     const table = el.querySelector('table[aria-label], table')!;
     expect(table.textContent).toContain('party');
     expect(table.textContent).not.toContain('contact');
@@ -60,14 +60,14 @@ describe('Data analyst page', () => {
   it('says plainly when the question is outside what it can do', async () => {
     const el = await mount(<AnalystPage />);
     await setValue(el.querySelectorAll('textarea')[0] as HTMLTextAreaElement, CSV);
-    await click(byText(el, 'button', 'Add pasted data'));
+    await click(byText(el, 'button', 'Add Pasted Data'));
     await setValue(el.querySelectorAll('textarea')[1] as HTMLTextAreaElement, 'Who will win ward 7?');
-    await click(byText(el, 'button', 'Run analysis'));
-    expect(el.textContent).toContain('cannot answer that question');
+    await click(byText(el, 'button', 'Run Analysis'));
+    expect(el.textContent).toMatch(/cannot answer that question/i);
   });
   it('will not run with no data or no question', async () => {
     const el = await mount(<AnalystPage />);
-    expect((byText(el, 'button', 'Run analysis') as HTMLButtonElement).disabled).toBe(true);
+    expect((byText(el, 'button', 'Run Analysis') as HTMLButtonElement).disabled).toBe(true);
   });
 });
 

@@ -108,17 +108,17 @@ export const SITE_NAV: NavGroup[] = [
     label: 'Results 2026',
     items: [
       { label: 'Coalition Tracker', href: '/coalitions', hint: 'Every council: who holds the seats, who needs whom' },
-      { label: 'My ward', href: '/my-ward', hint: 'Your ward councillor and PR councillors' },
-      { label: 'Results by province', href: '/results', hint: 'Certified figures, provinces and metros' },
+      { label: 'My Ward', href: '/my-ward', hint: 'Your ward councillor and PR councillors' },
+      { label: 'Results by Province', href: '/results', hint: 'Certified figures, provinces and metros' },
     ],
   },
   {
     label: 'Tools',
     items: [
-      { label: 'Try a coalition', href: '/tools/how-coalitions-work', hint: 'Combine parties in any council' },
-      { label: 'How seats are calculated', href: '/tools/how-seats-are-calculated', hint: 'From votes to seats, step by step' },
-      { label: 'Party-funding checker', href: '/tools/party-funding-checker', hint: 'Where a donation sits against the law' },
-      { label: 'All voter tools', href: '/tools' },
+      { label: 'Try a Coalition', href: '/tools/how-coalitions-work', hint: 'Combine parties in any council' },
+      { label: 'How Seats Are Calculated', href: '/tools/how-seats-are-calculated', hint: 'From votes to seats, step by step' },
+      { label: 'Party-Funding Checker', href: '/tools/party-funding-checker', hint: 'Where a donation sits against the law' },
+      { label: 'All Voter Tools', href: '/tools' },
     ],
   },
   {
@@ -131,7 +131,7 @@ export const SITE_NAV: NavGroup[] = [
     ],
   },
   {
-    label: 'For campaigns',
+    label: 'For Campaigns',
     items: [
       { label: 'Campaign OS', href: '/for-campaigns', hint: 'The product for parties and councillors' },
       { label: 'Casework Tracker', href: '/casework-tracker' },
@@ -157,20 +157,20 @@ export const SEASON: Season = 'casework';
 
 export const HERO = {
   casework: {
-    eyebrow: 'Casework season · from 5 November 2026',
-    line: 'Every case, followed through.',
+    eyebrow: 'Casework Season · From 5 November 2026',
+    line: 'Every Case, Followed Through.',
     sub: 'Doorstep complaints become signed referrals to the municipality, tracked to resolution.',
     cta: 'See the Casework Tracker',
     ctaHref: '/casework-tracker',
-    band: 'R2,500 per ward a month',
+    band: 'R2,500 per Ward a Month',
   },
   'pre-election': {
-    eyebrow: 'Election season',
-    line: 'Comply before you campaign.',
+    eyebrow: 'Election Season',
+    line: 'Comply Before You Campaign.',
     sub: 'Party-funding tracking, POPIA-by-design voter contact and offline field operations, set up before the proclamation.',
-    cta: 'See the platform',
+    cta: 'See the Platform',
     ctaHref: '/for-campaigns#pillars',
-    band: 'Set up your wards before the proclamation',
+    band: 'Set Up Your Wards Before the Proclamation',
   },
 } as const;
 
@@ -184,21 +184,21 @@ export interface Audience {
 
 export const AUDIENCES: Audience[] = [
   {
-    title: 'Ward councillors and caucus offices',
+    title: 'Ward Councillors and Caucus Offices',
     blurb: "Follow every resident's complaint from the doorstep to the municipality and back.",
     linkLabel: 'Casework Tracker',
     href: '/casework-tracker',
     icon: 'office',
   },
   {
-    title: 'Party structures',
+    title: 'Party Structures',
     blurb: 'Run field operations, funding tracking and ward intelligence across a municipality.',
-    linkLabel: 'The platform',
+    linkLabel: 'The Platform',
     href: '/for-campaigns#pillars',
     icon: 'grid',
   },
   {
-    title: 'Independent candidates',
+    title: 'Independent Candidates',
     blurb: 'One ward licence, the same modules and terms as everyone else.',
     linkLabel: 'Packages',
     href: '/packages',
@@ -215,8 +215,8 @@ export const AUDIENCES: Audience[] = [
  */
 export const REFERENCE_FIGURES = [
   { label: 'Wards', value: '34' },
-  { label: 'Voting stations', value: '108' },
-  { label: 'Registered voters', value: '122,059' },
+  { label: 'Voting Stations', value: '108' },
+  { label: 'Registered Voters', value: '122,059' },
 ] as const;
 
 export const REFERENCE_FOOTNOTE =
@@ -233,31 +233,31 @@ export interface Pillar {
 
 export const PILLARS: Pillar[] = [
   {
-    name: 'Offline-first field operations',
+    name: 'Offline-First Field Operations',
     does: 'Canvassers capture on a phone through load-shedding and dead zones; it syncs when signal returns.',
     proof: 'offline capture and sync tested on mobile networks',
     status: 'built',
   },
   {
-    name: 'POPIA by design',
+    name: 'POPIA by Design',
     does: 'Consent is recorded before anything is stored; numbers are masked; suppression on request.',
     proof: 'consent record on every contact',
     status: 'built',
   },
   {
-    name: 'Party-funding tracking',
+    name: 'Party-Funding Tracking',
     does: 'Nightly donor totals with alerts at the disclosure line and warnings near the cap.',
     proof: 'donor aggregation tested on simulated streams',
     status: 'built',
   },
   {
-    name: 'Incident-to-council escalation',
+    name: 'Incident-to-Council Escalation',
     does: 'A logged incident becomes a signed referral the municipality can act on.',
     proof: 'integrity hash on every referral PDF',
     status: 'built',
   },
   {
-    name: 'Ward-level intelligence',
+    name: 'Ward-Level Intelligence',
     does: 'Issues and sentiment summarised by ward, never by person.',
     proof: 'ward-scoped access, three-place tenant isolation',
     status: 'built',
@@ -285,8 +285,8 @@ export const CASE_STEPS: CaseStep[] = [
   { n: '01', title: 'Report', body: 'A canvasser or the office logs the complaint at the door, online or offline.' },
   { n: '02', title: 'Triage', body: 'The office sorts it by service: water, electricity, roads, safety.' },
   { n: '03', title: 'Authorise', body: 'The councillor approves what goes out under their name.' },
-  { n: '04', title: 'Signed referral', body: 'A signed, hashed PDF goes to the right municipal department.' },
-  { n: '05', title: 'Tracked to resolution', body: 'The case stays open until it is resolved, and the resident is told.' },
+  { n: '04', title: 'Signed Referral', body: 'A signed, hashed PDF goes to the right municipal department.' },
+  { n: '05', title: 'Tracked to Resolution', body: 'The case stays open until it is resolved, and the resident is told.' },
 ];
 
 /**
@@ -300,7 +300,7 @@ export const CASE_STEPS: CaseStep[] = [
 export const EXAMPLE_CASE = {
   reference: 'CASE EX-0417',
   referralReference: 'REF EX-2026-0417',
-  title: 'Streetlights out on four blocks',
+  title: 'Streetlights Out on Four Blocks',
   where: 'Ward 07, Example Local Municipality · reported at the door',
   office: "Ward 07 Councillor's Office",
   hash: 'sha256 9f3a…c21e',
@@ -309,24 +309,24 @@ export const EXAMPLE_CASE = {
     { label: 'Reported', detail: 'by canvasser', at: '06 Nov 09:12', current: false },
     { label: 'Triaged', detail: '· electricity', at: '06 Nov 11:40', current: false },
     { label: 'Authorised', detail: 'by ward councillor', at: '06 Nov 16:05', current: false },
-    { label: 'Signed referral', detail: 'sent to municipality', at: '07 Nov 08:30', current: false },
+    { label: 'Signed Referral', detail: 'sent to municipality', at: '07 Nov 08:30', current: false },
     { label: 'Tracking', detail: '· day 3 of 14', at: 'Open', current: true },
   ],
 } as const;
 
 export const CASEWORK_FEATURES = [
   {
-    title: 'Works offline',
+    title: 'Works Offline',
     body: 'Capture cases through load-shedding and rural dead zones. They sync when signal returns.',
     icon: 'offline' as const,
   },
   {
-    title: 'Ward-scoped access',
+    title: 'Ward-Scoped Access',
     body: 'Each person sees only the wards they are assigned to.',
     icon: 'shield' as const,
   },
   {
-    title: 'POPIA by design',
+    title: 'POPIA by Design',
     body: 'Consent recorded before storage. Numbers masked. Suppression on request.',
     icon: 'lock' as const,
   },
@@ -334,13 +334,13 @@ export const CASEWORK_FEATURES = [
 
 export const CASEWORK_FAQ = [
   {
-    q: 'What does it cost?',
+    q: 'What Does It Cost?',
     a: 'R2,500 per ward a month, the full price (no VAT is charged). The same price for every party and every independent councillor.',
   },
-  { q: 'How does onboarding work?', a: '[ONBOARDING STEPS AND TIMELINE]' },
-  { q: 'Who owns the case data?', a: '[DATA OWNERSHIP ANSWER, AS IN THE TERMS]' },
+  { q: 'How Does Onboarding Work?', a: '[ONBOARDING STEPS AND TIMELINE]' },
+  { q: 'Who Owns the Case Data?', a: '[DATA OWNERSHIP ANSWER, AS IN THE TERMS]' },
   {
-    q: 'What happens to the data if a councillor leaves office?',
+    q: 'What Happens to the Data If a Councillor Leaves Office?',
     a: '[HANDOVER AND RETENTION ANSWER, AS IN THE TERMS]',
   },
 ];
@@ -387,7 +387,7 @@ export const CLAIM_ROWS: ClaimRow[] = [
   { does: '[SIXTH ROW, AS IN LEG-03]', not: '[SIXTH ROW, AS IN LEG-03]', ref: '[LEG-03 T-06]' },
 ];
 
-export const CLAIMS_CAPTION = 'Rows as published in IC-ECOS-LEG-03, 8 August 2026';
+export const CLAIMS_CAPTION = 'Rows as Published in IC-ECOS-LEG-03, 8 August 2026';
 
 export const FUNDING_POINTS = [
   'Donor totals aggregated every night',
@@ -437,24 +437,24 @@ export interface Package {
 }
 
 export const PACKAGES: Package[] = [
-  { buyer: 'Independent ward candidate', pkg: 'Ward licence', price: 'R1,800', unit: 'ward licence', href: '/contact' },
-  { buyer: 'Small party, selected wards', pkg: 'Ward licences', price: 'R1,800', unit: 'per ward', href: '/contact' },
+  { buyer: 'Independent Ward Candidate', pkg: 'Ward Licence', price: 'R1,800', unit: 'ward licence', href: '/contact' },
+  { buyer: 'Small Party, Selected Wards', pkg: 'Ward Licences', price: 'R1,800', unit: 'per ward', href: '/contact' },
   {
-    buyer: 'Established party, municipal',
-    pkg: 'Municipal package',
+    buyer: 'Established Party, Municipal',
+    pkg: 'Municipal Package',
     price: 'R45,000',
     unit: 'per cycle, plus the PPFA add-on by consultation',
     href: '/contact',
   },
   {
-    buyer: 'Provincial structure',
-    pkg: 'Provincial package',
+    buyer: 'Provincial Structure',
+    pkg: 'Provincial Package',
     price: 'By agreement',
     unit: 'scoped with you',
     href: '/contact',
   },
   {
-    buyer: "Ward councillor's office",
+    buyer: "Ward Councillor's Office",
     pkg: 'Councillor Casework Tracker',
     price: 'R2,500',
     unit: 'per ward a month',

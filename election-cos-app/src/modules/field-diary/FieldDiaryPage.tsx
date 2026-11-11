@@ -70,7 +70,7 @@ export function FieldDiaryPage() {
           generates the id and ties the two together. */}
       <div className="max-w-xs">
         <Field
-          label="Voting district"
+          label="Voting District"
           hint={
             session.vdScope
               ? undefined

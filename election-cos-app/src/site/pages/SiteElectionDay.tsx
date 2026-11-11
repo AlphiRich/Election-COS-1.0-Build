@@ -22,7 +22,7 @@ export function SiteElectionDay() {
     <>
       <PageIntro
         eyebrow="Wednesday 4 November 2026"
-        title="Election day guide"
+        title="Election Day Guide"
         lead="What to take, when to go, what to do if your ID is lost, and how to find your voting station."
       />
 
@@ -30,7 +30,7 @@ export function SiteElectionDay() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-5">
           <SiteCard className="flex min-w-0 flex-col gap-2 p-6">
             <h2 id="hrs-h" className="m-0 font-site-display text-site-h5">
-              Voting hours
+              Voting Hours
             </h2>
             <p className="m-0 font-mono text-site-h3 font-medium">07:00 – 21:00</p>
             <p className="m-0 text-site-sm">
@@ -42,7 +42,7 @@ export function SiteElectionDay() {
             </p>
           </SiteCard>
           <SiteCard className="flex min-w-0 flex-col gap-2 p-6">
-            <h2 className="m-0 font-site-display text-site-h5">Take with you</h2>
+            <h2 className="m-0 font-site-display text-site-h5">Take With You</h2>
             <ul className="m-0 flex list-disc flex-col gap-1 pl-5 text-site-sm">
               <li>Your identity document (see below).</li>
               <li>The address of the voting station where you are registered.</li>
@@ -58,7 +58,7 @@ export function SiteElectionDay() {
       <SiteSection id="lost-id" labelledBy="id-h" className="pb-8">
         <SiteCard className="flex max-w-[760px] flex-col gap-3 p-8">
           <h2 id="id-h" className="m-0 font-site-display text-site-h4">
-            Lost your ID?
+            Lost Your ID?
           </h2>
           <p className="m-0 text-site-base">
             At earlier elections the Electoral Commission accepted a green bar-coded ID book, a
@@ -95,7 +95,7 @@ export function SiteElectionDay() {
       <SiteSection id="station" labelledBy="st-h" className="pb-8">
         <SiteCard className="flex max-w-[760px] flex-col gap-4 p-8">
           <h2 id="st-h" className="m-0 font-site-display text-site-h4">
-            Find your voting station and get there
+            Find Your Voting Station and Get There
           </h2>
           <p className="m-0 text-site-sm text-slate">
             Search for your ward number or station name in JB Marks, then open directions in the map
@@ -116,17 +116,17 @@ export function SiteElectionDay() {
 
       <SiteSection labelledBy="more-h" className="pb-10">
         <h2 id="more-h" className="mb-4 mt-0 font-site-display text-site-h4">
-          More to read and watch
+          More to Read and Watch
         </h2>
         <ul className="m-0 flex list-none flex-col gap-2 p-0 font-semibold">
           <li>
             <Link to="/code-of-conduct" className="text-teal">
-              What parties may and may not do →
+              What Parties May and May Not Do →
             </Link>
           </li>
           <li>
             <Link to="/tools/check-your-details" className="text-teal">
-              Voter details checklist →
+              Voter Details Checklist →
             </Link>
           </li>
           <li>
@@ -151,7 +151,7 @@ export function SiteElectionDay() {
           </li>
           <li>
             <Link to="/official-sources" className="text-teal">
-              All the Commission’s pages →
+              All the Commission’s Pages →
             </Link>
           </li>
           <li>

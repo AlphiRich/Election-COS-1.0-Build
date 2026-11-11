@@ -207,7 +207,7 @@ function summary(t: Table, p: ColumnProfile[]): Pick<Report, 'title' | 'summary'
   const spread = [...nums].filter((c) => c.mean).sort((a, b) => (b.max! - b.min!) / Math.abs(b.mean!) - (a.max! - a.min!) / Math.abs(a.mean!))[0];
   if (spread) insights.push({ title: `Widest spread: ${spread.name}`, detail: `Runs from ${fmt(spread.min!)} to ${fmt(spread.max!)}; mean ${fmt(spread.mean!)}, median ${fmt(spread.median!)}.`, metric: 'Median', value: fmt(spread.median!) });
   const table = {
-    title: 'Column profile',
+    title: 'Column Profile',
     columns: ['Column', 'Type', 'Filled', 'Distinct', 'Range or most common'],
     rows: p.map((c) => [c.name, c.type, String(c.filled), String(c.distinct), c.type === 'number' ? `${fmt(c.min!)} to ${fmt(c.max!)}` : (c.top ?? []).slice(0, 2).map(([v, n]) => `${v} (${n})`).join(', ')]),
   };
@@ -290,14 +290,14 @@ function anomalies(t: Table, p: ColumnProfile[]): ReturnType<typeof summary> {
     if (seen.has(k)) dupes++;
     seen.add(k);
   }
-  insights.push({ title: 'Duplicate rows', detail: `${dupes} row${dupes === 1 ? ' is' : 's are'} an exact copy of an earlier row.`, metric: 'Duplicates', value: String(dupes) });
+  insights.push({ title: 'Duplicate Rows', detail: `${dupes} row${dupes === 1 ? ' is' : 's are'} an exact copy of an earlier row.`, metric: 'Duplicates', value: String(dupes) });
   const sparse = p.filter((c) => t.rows.length && c.missing / t.rows.length > 0.2);
-  if (sparse.length) insights.push({ title: 'Mostly empty columns', detail: `${sparse.map((c) => c.name).join(', ')} ${sparse.length === 1 ? 'is' : 'are'} more than 20% empty.`, metric: 'Columns', value: String(sparse.length) });
+  if (sparse.length) insights.push({ title: 'Mostly Empty Columns', detail: `${sparse.map((c) => c.name).join(', ')} ${sparse.length === 1 ? 'is' : 'are'} more than 20% empty.`, metric: 'Columns', value: String(sparse.length) });
   return {
     title: outlierTotal || dupes ? `${outlierTotal} outlier value${outlierTotal === 1 ? '' : 's'} and ${dupes} duplicate row${dupes === 1 ? '' : 's'} found` : 'No outliers or duplicates found',
     summary: 'An outlier is a number more than 1.5 interquartile ranges beyond the middle half of its column. It is a prompt to look, not proof of an error.',
     insights,
-    table: rows.length ? { title: 'Furthest outliers (row numbers count the header as row 1)', columns: ['Row', 'Column', 'Value'], rows } : undefined,
+    table: rows.length ? { title: 'Furthest Outliers (Row Numbers Count the Header as Row 1)', columns: ['Row', 'Column', 'Value'], rows } : undefined,
   };
 }
 
@@ -311,7 +311,7 @@ export function runAnalysis(tables: Table[], question: string, excluded: string[
     ...(excluded.length ? [`${excluded.length} column${excluded.length === 1 ? ' was' : 's were'} removed as personal information before analysis.`] : []),
   ];
   if (kind === 'unsupported') {
-    return { ...base, title: 'This analyst cannot answer that question', summary: 'It answers three kinds of question: a summary of the data, the top segments by a number, and anomalies or outliers. Rephrase to one of those.', insights: [], methodology: 'No analysis was run.', limitations };
+    return { ...base, title: 'This Analyst Cannot Answer That Question', summary: 'It answers three kinds of question: a summary of the data, the top segments by a number, and anomalies or outliers. Rephrase to one of those.', insights: [], methodology: 'No analysis was run.', limitations };
   }
   const p = profile(t);
   let body: ReturnType<typeof summary> | null;
@@ -323,7 +323,7 @@ export function runAnalysis(tables: Table[], question: string, excluded: string[
     body = segments(t, p, choice);
     methodology = 'The chosen (or first) numeric column was summed by the chosen (or first) text column that has 2 to 50 distinct values. Rows with an empty value in either are skipped.';
     if (!body) {
-      return { ...base, title: 'This data has nothing to group', summary: 'Segments need one numeric column and one text column with 2 to 50 distinct values. This file has no such pair.', insights: [], methodology, limitations };
+      return { ...base, title: 'This Data Has Nothing to Group', summary: 'Segments need one numeric column and one text column with 2 to 50 distinct values. This file has no such pair.', insights: [], methodology, limitations };
     }
   } else {
     body = anomalies(t, p);

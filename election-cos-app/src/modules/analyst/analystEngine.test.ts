@@ -94,7 +94,7 @@ describe('runAnalysis', () => {
     const r = runAnalysis([t], 'any outliers?', [], NOW);
     expect(r.insights.find((i) => i.title.startsWith('Outliers in amt'))?.value).toBe('1');
     expect(r.table!.rows[0]).toEqual(['row 10', 'amt', '500']);
-    expect(r.insights.find((i) => i.title === 'Duplicate rows')?.value).toBe('2');
+    expect(r.insights.find((i) => i.title === 'Duplicate Rows')?.value).toBe('2');
     expect(r.summary).toMatch(/prompt to look, not proof/);
   });
   it('summary: counts rows and reports completeness', () => {
@@ -104,9 +104,9 @@ describe('runAnalysis', () => {
     expect(r.table!.rows).toHaveLength(3);
   });
   it('says so when the question is out of scope, and when there is nothing to group', () => {
-    expect(runAnalysis([sales], 'who will win?', [], NOW).title).toMatch(/cannot answer/);
+    expect(runAnalysis([sales], 'who will win?', [], NOW).title).toMatch(/cannot answer/i);
     const textOnly = parseCsv('a,b\nx,y\nz,w\n');
-    expect(runAnalysis([textOnly], 'top segments', [], NOW).title).toMatch(/nothing to group/);
+    expect(runAnalysis([textOnly], 'top segments', [], NOW).title).toMatch(/nothing to group/i);
   });
   it('is descriptive only and states removed columns and extra tables', () => {
     const r = runAnalysis([sales, sales], 'summarize', ['surname'], NOW);

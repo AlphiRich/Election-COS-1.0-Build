@@ -27,9 +27,9 @@ export function SiteCouncilFinder() {
     <>
       <SiteSection className="pb-8 pt-[88px]">
         <div className="flex max-w-[760px] flex-col gap-4">
-          <Eyebrow>Voter tool</Eyebrow>
+          <Eyebrow>Voter Tool</Eyebrow>
           <h1 className="m-0 font-site-display text-site-h3 md:text-site-h2">
-            Your council and your ballot
+            Your Council and Your Ballot
           </h1>
           <p className="m-0 text-site-lead">
             Find your municipality to see how many councillors it has, how many of them come from
@@ -42,7 +42,7 @@ export function SiteCouncilFinder() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-6">
           <SiteCard className="flex min-w-0 flex-col gap-3 p-6">
             <label htmlFor="council-search" className="font-semibold">
-              Search municipalities
+              Search Municipalities
             </label>
             <input
               id="council-search"
@@ -60,7 +60,7 @@ export function SiteCouncilFinder() {
               autoComplete="off"
             />
             <label htmlFor="council-pick" className="font-semibold">
-              Municipality ({matches.length} shown)
+              Municipality ({matches.length} Shown)
             </label>
             <select
               id="council-pick"
@@ -70,7 +70,7 @@ export function SiteCouncilFinder() {
             >
               {!matches.some((m) => m.code === code) && (
                 <option value="">
-                  {matches.length === 0 ? 'No match' : 'Choose a municipality'}
+                  {matches.length === 0 ? 'No Match' : 'Choose a Municipality'}
                 </option>
               )}
               {matches.map((m) => (
@@ -135,7 +135,7 @@ export function SiteCouncilFinder() {
         <SiteSection labelledBy="ballot-h" className="pb-10">
           <div className="flex flex-col gap-4">
             <h2 id="ballot-h" className="m-0 font-site-display text-site-h4">
-              What you will vote on
+              What You Will Vote On
             </h2>
             <ol className="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-4 p-0">
               {ballotsFor(council).map((b) => (
@@ -159,7 +159,7 @@ export function SiteCouncilFinder() {
       <SiteSection labelledBy="cand-h" className="pb-10">
         <SiteCard className="flex flex-col gap-3 p-8">
           <h2 id="cand-h" className="m-0 font-site-display text-site-h4">
-            Who is standing in your ward
+            Who Is Standing in Your Ward
           </h2>
           <p className="m-0 text-site-base">
             This site does not hold candidate names. Putting a name here that the Electoral

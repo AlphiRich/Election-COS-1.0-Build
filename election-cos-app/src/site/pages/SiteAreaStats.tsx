@@ -45,15 +45,15 @@ export function SiteAreaStats() {
   return (
     <>
       <PageIntro
-        eyebrow="For parties and campaign teams"
-        title="Registered voters in your area"
+        eyebrow="For Parties and Campaign Teams"
+        title="Registered Voters in Your Area"
         lead="How many voters the delimitation counted in a municipality, how many wards and councillors it has, and how those voters are spread across wards."
       />
       <SiteSection className="pb-8">
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-6">
           <SiteCard className="flex min-w-0 flex-col gap-3 p-6">
             <label htmlFor="as-search" className="font-semibold">
-              Search municipalities
+              Search Municipalities
             </label>
             <input
               id="as-search"
@@ -70,7 +70,7 @@ export function SiteAreaStats() {
               placeholder="Name, province or code"
             />
             <label htmlFor="as-pick" className="font-semibold">
-              Municipality ({matches.length} shown)
+              Municipality ({matches.length} Shown)
             </label>
             <select
               id="as-pick"
@@ -140,7 +140,7 @@ export function SiteAreaStats() {
         <SiteSection labelledBy="ward-h" className="pb-8">
           <SiteCard className="flex flex-col gap-3 p-6">
             <h2 id="ward-h" className="m-0 font-site-display text-site-h4">
-              JB Marks, ward by ward
+              JB Marks, Ward by Ward
             </h2>
             <p className="m-0 text-site-sm text-slate">
               Wards are drawn to stay within 15% of the average ({nf.format(reg.minNorm ?? 0)} to{' '}
@@ -157,10 +157,10 @@ export function SiteAreaStats() {
                       Voters
                     </th>
                     <th scope="col" className="py-2 pr-4 text-right">
-                      Voting districts
+                      Voting Districts
                     </th>
                     <th scope="col" className="py-2">
-                      Against the band
+                      Against the Band
                     </th>
                   </tr>
                 </thead>
@@ -191,13 +191,13 @@ export function SiteAreaStats() {
       <SiteSection labelledBy="prov-h" className="pb-8">
         <SiteCard className="flex flex-col gap-3 p-6">
           <h2 id="prov-h" className="m-0 font-site-display text-site-h4">
-            By province
+            By Province
           </h2>
           <div className="relative overflow-x-auto">
             <table className="w-full min-w-[560px] border-collapse text-site-sm">
               <caption className="pb-2 text-left text-site-caption text-slate">
-                National total: {nf.format(nationalVoters())} registered voters (local and
-                metropolitan municipalities)
+                National Total: {nf.format(nationalVoters())} Registered Voters (Local and
+                Metropolitan Municipalities)
               </caption>
               <thead>
                 <tr className="border-b border-line text-left">
@@ -214,7 +214,7 @@ export function SiteAreaStats() {
                     Councillors
                   </th>
                   <th scope="col" className="py-2 text-right">
-                    Registered voters
+                    Registered Voters
                   </th>
                 </tr>
               </thead>
@@ -239,7 +239,7 @@ export function SiteAreaStats() {
       <SiteSection labelledBy="age-h" className="pb-8">
         <SiteCard className="flex max-w-[760px] flex-col gap-2 p-6">
           <h2 id="age-h" className="m-0 font-site-display text-site-h5">
-            Age groups: not shown, and why
+            Age Groups: Not Shown, and Why
           </h2>
           <p className="m-0 text-site-base">
             The delimitation gives a voter total per municipality and nothing about age, and this

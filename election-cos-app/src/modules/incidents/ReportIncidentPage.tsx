@@ -33,7 +33,7 @@ export function ReportIncidentPage() {
   if (!session) {
     return (
       <Card className="max-w-lg">
-        <PageHeader slug="/incidents/new" title="Report an incident" />
+        <PageHeader slug="/incidents/new" title="Report an Incident" />
         <p className="mt-3 text-body-md font-body text-slate">
           No active session — see BUILD-STATUS.md (no live Firebase project provisioned yet).
         </p>
@@ -44,7 +44,7 @@ export function ReportIncidentPage() {
   if (!session.caps.includes('incidents.create')) {
     return (
       <Card className="max-w-lg">
-        <PageHeader slug="/incidents/new" title="Report an incident" />
+        <PageHeader slug="/incidents/new" title="Report an Incident" />
         <p className="mt-3 text-body-md font-body text-slate">
           Your role does not include logging incidents.
         </p>
@@ -58,7 +58,7 @@ export function ReportIncidentPage() {
     <div className="space-y-6 max-w-2xl">
       <PageHeader
         slug="/incidents/new"
-        title="Report an incident"
+        title="Report an Incident"
         description="A service delivery problem you can see: water, electricity, roads, or something affecting public safety. Report the thing, not the household — an incident is about a street, not about the people on it."
       />
 
@@ -81,7 +81,7 @@ export function ReportIncidentPage() {
               to="/round"
               className="inline-flex min-h-11 items-center rounded border border-ink/20 px-4 py-2 text-label-caps font-display uppercase text-ink"
             >
-              Back to the round
+              Back to the Round
             </Link>
           </div>
         </div>

@@ -108,7 +108,7 @@ export function GatheringsPage() {
       {canEdit && (
         <Card className="space-y-4">
           <h2 className="text-headline-md font-display text-ink" id={formId}>
-            Add a gathering
+            Add a Gathering
           </h2>
           <form
             aria-labelledby={formId}
@@ -119,11 +119,11 @@ export function GatheringsPage() {
             }}
           >
             <div className="sm:col-span-2">
-              <Field label="What is it" required>
+              <Field label="What Is It" required>
                 {(p) => <input {...p} value={title} onChange={(e) => setTitle(e.target.value)} />}
               </Field>
             </div>
-            <Field label="Ward code" required mono hint={session.wardScope ? undefined : 'Enter the ward this is in.'}>
+            <Field label="Ward Code" required mono hint={session.wardScope ? undefined : 'Enter the ward this is in.'}>
               {(p) => (
                 <input {...p} value={wardCode} readOnly={Boolean(session.wardScope)} onChange={(e) => setWardCode(e.target.value)} />
               )}
@@ -148,7 +148,7 @@ export function GatheringsPage() {
       {listQuery.isLoading ? (
         <p className="text-body-md font-body text-slate">Loading…</p>
       ) : rows.length === 0 ? (
-        <EmptyState title="No upcoming gatherings">
+        <EmptyState title="No Upcoming Gatherings">
           Add a rally, march or public meeting and this page will count down to its notice deadline.
         </EmptyState>
       ) : (
@@ -185,7 +185,7 @@ export function GatheringsPage() {
 
       {(alertsQuery.data?.length ?? 0) > 0 && (
         <Card className="space-y-2">
-          <h2 className="text-headline-md font-display text-ink">Alerts raised</h2>
+          <h2 className="text-headline-md font-display text-ink">Alerts Raised</h2>
           <ul className="space-y-2">
             {alertsQuery.data!.map((a) => (
               <li key={a.id} className="text-body-md font-body text-ink">

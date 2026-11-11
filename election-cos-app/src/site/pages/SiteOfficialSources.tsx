@@ -13,8 +13,8 @@ export function SiteOfficialSources() {
   return (
     <>
       <PageIntro
-        eyebrow="Check it at the source"
-        title="Official Electoral Commission sources"
+        eyebrow="Check It at the Source"
+        title="Official Electoral Commission Sources"
         lead="This site summarises. The Electoral Commission decides. These are its own pages for each process, grouped by who needs them."
       />
       <SiteSection className="pb-[88px]">

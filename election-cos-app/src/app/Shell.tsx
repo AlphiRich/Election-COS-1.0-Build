@@ -100,7 +100,7 @@ export function Shell() {
            * holding the account is the only one who can supply it.
            */}
           <div className="rounded border border-ink/10 bg-paper p-3">
-            <SectionLabel>Your sign-in ID</SectionLabel>
+            <SectionLabel>Your Sign-In ID</SectionLabel>
             <p className="text-data-mono font-mono text-ink mt-1 break-all">{user?.uid}</p>
           </div>
           <Button variant="ghost" onClick={() => void signOut()}>

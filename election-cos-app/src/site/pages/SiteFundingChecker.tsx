@@ -32,9 +32,9 @@ export function SiteFundingChecker({ hasConsent }: { hasConsent: boolean }) {
   return (
     <>
       <SiteSection className="flex max-w-[760px] flex-col gap-4 pb-8 pt-[88px]">
-        <Eyebrow>Free tool</Eyebrow>
+        <Eyebrow>Free Tool</Eyebrow>
         <h1 className="m-0 font-site-display text-site-h3 md:text-site-h2">
-          Party-funding threshold checker
+          Party-Funding Threshold Checker
         </h1>
         <p className="m-0 text-site-lead">
           Type the total one donor has given a party or candidate in a financial year. We show
@@ -47,7 +47,7 @@ export function SiteFundingChecker({ hasConsent }: { hasConsent: boolean }) {
       <SiteSection className="flex max-w-[760px] flex-col gap-6 pb-10">
         <SiteCard className="flex flex-col gap-3 p-8">
           <label htmlFor="total" className="font-semibold">
-            Total from one donor, in rand
+            Total From One Donor, in Rand
           </label>
           <input
             id="total"

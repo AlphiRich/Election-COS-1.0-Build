@@ -94,7 +94,7 @@ export function IncidentReportPage() {
   if (!session) {
     return (
       <Card className="max-w-lg">
-        <PageHeader slug="/incidents/report" title="Municipal incident report" />
+        <PageHeader slug="/incidents/report" title="Municipal Incident Report" />
         <p className="mt-3 text-body-md font-body text-slate">
           No active session — see BUILD-STATUS.md (no live Firebase project provisioned yet).
         </p>
@@ -121,12 +121,12 @@ export function IncidentReportPage() {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      <PageHeader slug="/incidents/report" title="Municipal incident report" description={REPORT_BASIS} />
+      <PageHeader slug="/incidents/report" title="Municipal Incident Report" description={REPORT_BASIS} />
 
       <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-6">
         {/* Filters */}
         {/*
-         * The three checkbox groups are <fieldset>/<legend> rather than a
+         * The three checkbox groups are <fieldset>/<legend> Rather Than a
          * <p> above a run of checkboxes. The checkboxes themselves were
          * always labelled — each sits inside its own <label> — but
          * nothing tied them together, so a screen reader read twelve
@@ -204,7 +204,7 @@ export function IncidentReportPage() {
           {incidentsQuery.isLoading && <p className="text-body-md font-body text-slate">Loading…</p>}
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <StatTile label="In this report" value={report.summary.total} />
+            <StatTile label="In This Report" value={report.summary.total} />
             {/* Hand-rolled: the open count is maroon, which StatTile has
                 no state for. Same call as the Vote Calculator's tied-seats
                 tile. */}
@@ -212,12 +212,12 @@ export function IncidentReportPage() {
               <p className="text-label-caps font-display uppercase text-slate">Still open</p>
               <p className="text-display-lg-mobile font-display text-maroon">{report.summary.open}</p>
             </div>
-            <StatTile label="Wards affected" value={report.summary.wardsAffected.length} />
-            <StatTile label="With photographs" value={report.summary.withPhotos} />
+            <StatTile label="Wards Affected" value={report.summary.wardsAffected.length} />
+            <StatTile label="With Photographs" value={report.summary.withPhotos} />
           </div>
 
           <Card className="space-y-2">
-            <SectionLabel as="h2">By category</SectionLabel>
+            <SectionLabel as="h2">By Category</SectionLabel>
             {CATEGORIES.map((category) => (
               <p key={category} className="text-body-md font-body text-ink">
                 {CATEGORY_LABEL[category]}{' '}

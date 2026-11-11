@@ -160,19 +160,19 @@ export function WardComparisonPage() {
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <StatTile
-          label="Days to polling day"
+          label="Days to Polling Day"
           value={daysToPoll > 0 ? daysToPoll : 0}
           sub="4 November 2026"
           emphasis
         />
         <StatTile label="Quota (Item 12)" value={int(projection.allocation.quota)} sub="⌊A / (B − C − D)⌋ + 1" />
         <StatTile
-          label="Council size"
+          label="Council Size"
           value={projection.allocation.councilSizeFinal}
           sub={`${majority.seatsForMajority} for a majority`}
         />
         <StatTile
-          label="Wards changing hands"
+          label="Wards Changing Hands"
           value={projection.flipped.length}
           sub={projection.flipped.length === 0 ? 'at this swing' : projection.flipped.map((w) => w.wardNumber).join(', ')}
         />
@@ -202,7 +202,7 @@ export function WardComparisonPage() {
             </Field>
           ))}
           <Field
-            label="Valid votes assumed"
+            label="Valid Votes Assumed"
             mono
             hint={`2021 was ${int(NW405_2021_EXAMPLE.totalValidVotes)}.`}
           >
@@ -223,7 +223,7 @@ export function WardComparisonPage() {
         </div>
 
         <div className="mt-4">
-          <SectionLabel as="h3">Inputs in force</SectionLabel>
+          <SectionLabel as="h3">Inputs in Force</SectionLabel>
           <ul className="mt-1 space-y-1 text-body-md font-body">
             {inputs.map((i) => (
               <li key={i.name}>
@@ -246,7 +246,7 @@ export function WardComparisonPage() {
 
       {/* --------------------------------------------------- seat change */}
       <Card>
-        <SectionLabel as="h2">Council under this scenario</SectionLabel>
+        <SectionLabel as="h2">Council Under This Scenario</SectionLabel>
         <Table caption="Seats in 2021 against seats under the swing set above.">
           <thead>
             <tr>
@@ -293,7 +293,7 @@ export function WardComparisonPage() {
 
       {/* --------------------------------------------------- ward table */}
       <Card>
-        <SectionLabel as="h2">Wards, closest first</SectionLabel>
+        <SectionLabel as="h2">Wards, Closest First</SectionLabel>
         <p className="text-body-md font-body text-slate mt-1">
           &ldquo;Swing to turn&rdquo; is the two-party swing that would have changed the 2021 result —
           a property of a certified count, not a probability. {WARD_CORRESPONDENCE_CAVEAT}
@@ -325,13 +325,13 @@ export function WardComparisonPage() {
                 <Td numeric>{pts(projected.swingToFlip)}</Td>
                 <Td numeric>
                   {sentimentFailed ? (
-                    <span className="text-maroon" title="The ward counter could not be read">
+                    <span className="text-maroon" title="The Ward Counter Could Not Be Read">
                       unavailable
                     </span>
                   ) : sentiment === null ? (
                     <span className="text-slate">…</span>
                   ) : sentiment.totalVoters === 0 ? (
-                    <span className="text-slate" title="No voter records captured in this ward yet">
+                    <span className="text-slate" title="No Voter Records Captured in This Ward Yet">
                       none yet
                     </span>
                   ) : (
@@ -362,7 +362,7 @@ export function WardComparisonPage() {
 
       {/* -------------------------------------------------- what is left out */}
       <Card>
-        <SectionLabel as="h2">What this screen does not know</SectionLabel>
+        <SectionLabel as="h2">What This Screen Does Not Know</SectionLabel>
         <ul className="text-body-md font-body text-slate mt-2 space-y-2 list-disc pl-5">
           <li>
             The 2021 ward file holds the winner and the runner-up only.{' '}

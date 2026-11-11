@@ -58,14 +58,14 @@ export function SiteForms() {
   return (
     <>
       <PageIntro
-        eyebrow="For party election teams"
-        title="Election-day documents and forms"
+        eyebrow="For Party Election Teams"
+        title="Election-Day Documents and Forms"
         lead="The documents an agent needs on election day, what the Act says each is for, and where to get the official versions."
       />
       <SiteSection className="pb-8">
         <SiteCard className="flex max-w-[900px] flex-col gap-3 p-6">
           <h2 className="m-0 font-site-display text-site-h5">
-            Get the official forms and documents
+            Get the Official Forms and Documents
           </h2>
           <p className="m-0 text-site-sm">
             The prescribed forms are published by the Electoral Commission. Its forms page lists a
@@ -103,7 +103,7 @@ export function SiteForms() {
       </SiteSection>
       <SiteSection labelledBy="docs-h" className="pb-8">
         <h2 id="docs-h" className="mb-4 mt-0 font-site-display text-site-h4">
-          What the Act requires, and when
+          What the Act Requires, and When
         </h2>
         <div className="relative overflow-x-auto rounded-[10px] border border-line bg-white">
           <table className="w-full min-w-[760px] border-collapse text-site-sm">
@@ -113,7 +113,7 @@ export function SiteForms() {
                   Document
                 </th>
                 <th scope="col" className="px-4 py-3">
-                  What it is for
+                  What It Is For
                 </th>
                 <th scope="col" className="px-4 py-3">
                   Act

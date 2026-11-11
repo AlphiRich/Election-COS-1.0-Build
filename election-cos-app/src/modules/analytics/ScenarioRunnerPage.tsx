@@ -90,7 +90,7 @@ export function ScenarioRunnerPage() {
       </BasisNote>
 
       <Card>
-        <SectionLabel as="h2">Starting point</SectionLabel>
+        <SectionLabel as="h2">Starting Point</SectionLabel>
         <div className="grid gap-3 sm:grid-cols-2 mt-2">
           <Field label="Municipality">
             {(props) => (
@@ -113,7 +113,7 @@ export function ScenarioRunnerPage() {
               </select>
             )}
           </Field>
-          <Field label="Certified result to start from" hint="Only JB Marks has a 2021 ward result in this build.">
+          <Field label="Certified Result to Start From" hint="Only JB Marks has a 2021 ward result in this build.">
             {(props) => (
               <select
                 {...props}
@@ -155,7 +155,7 @@ export function ScenarioRunnerPage() {
 
       {baseline.code === 'NW405' && baseline.year === 2026 && (
         <Card>
-          <SectionLabel as="h2">What moved between 2021 and 2026 in JB Marks</SectionLabel>
+          <SectionLabel as="h2">What Moved Between 2021 and 2026 in JB Marks</SectionLabel>
           <Table caption="Share of the party votes (PR plus ward, parties on the PR list) in 2021 and 2026, and the change in points.">
             <thead>
               <tr>
@@ -206,7 +206,7 @@ export function ScenarioRunnerPage() {
       )}
 
       <Card>
-        <SectionLabel as="h2">Your assumptions</SectionLabel>
+        <SectionLabel as="h2">Your Assumptions</SectionLabel>
         <p className="text-body-md font-body text-slate mt-1">
           For each party set the swing you expect (points of the valid vote) and how unsure you are
           (spread, in points). A spread of 0 holds that party fixed.
@@ -239,7 +239,7 @@ export function ScenarioRunnerPage() {
               </Field>
             </div>
           ))}
-          <Field label="Valid votes (mean)" mono>
+          <Field label="Valid Votes (Mean)" mono>
             {(props) => (
               <input
                 {...props}
@@ -250,7 +250,7 @@ export function ScenarioRunnerPage() {
               />
             )}
           </Field>
-          <Field label="Valid votes (spread)" mono>
+          <Field label="Valid Votes (Spread)" mono>
             {(props) => (
               <input
                 {...props}
@@ -290,7 +290,7 @@ export function ScenarioRunnerPage() {
           Balance the swings (what one party gains, others lose)
         </label>
         <div className="mt-4 flex items-center gap-3">
-          <Button onClick={run}>Run scenarios</Button>
+          <Button onClick={run}>Run Scenarios</Button>
           {error && (
             <span role="alert" className="text-body-md text-maroon">
               {error}
@@ -303,7 +303,7 @@ export function ScenarioRunnerPage() {
         <>
           <Card>
             <SectionLabel as="h2">
-              Seats across {result.draws.toLocaleString('en-ZA')} draws
+              Seats Across {result.draws.toLocaleString('en-ZA')} draws
             </SectionLabel>
             <p className="text-caption font-body text-slate mt-1">{result.caveat}</p>
             <Table caption={`Council seats per party across the draws, against the certified ${baseline.year} council.`}>
@@ -333,7 +333,7 @@ export function ScenarioRunnerPage() {
           </Card>
 
           <Card>
-            <SectionLabel as="h2">Outright majority, within these assumptions</SectionLabel>
+            <SectionLabel as="h2">Outright Majority, Within These Assumptions</SectionLabel>
             <ul className="mt-2 space-y-1 text-body-md font-body">
               {Object.entries(result.majority.byParty).map(([id, f]) => (
                 <li key={id}>
@@ -352,7 +352,7 @@ export function ScenarioRunnerPage() {
           </Card>
 
           <Card>
-            <SectionLabel as="h2">Which assumption matters most</SectionLabel>
+            <SectionLabel as="h2">Which Assumption Matters Most</SectionLabel>
             <Field label="Seats of">
               {(props) => (
                 <select {...props} value={target} onChange={(e) => setTarget(e.target.value)}>
@@ -393,7 +393,7 @@ export function ScenarioRunnerPage() {
           </Card>
 
           <Card>
-            <SectionLabel as="h2">Wards that change hands most often</SectionLabel>
+            <SectionLabel as="h2">Wards That Change Hands Most Often</SectionLabel>
             <ul className="mt-2 space-y-1 text-body-md font-body">
               {[...result.wardFlip]
                 .filter((w) => w.frequency > 0)

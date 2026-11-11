@@ -63,23 +63,23 @@ export function SiteCoalitionTracker({ hasConsent }: { hasConsent: boolean }) {
   return (
     <>
       <PageIntro
-        eyebrow="Local government elections 2026 · certified results"
-        title="Who will run your council?"
+        eyebrow="Local Government Elections 2026 · Certified Results"
+        title="Who Will Run Your Council?"
         lead={`${summary.hung} of the ${summary.councils} metro and local councils elected on 4 November have no party with a majority of seats. Seven of the eight metros are among them. Their mayors and executives will be chosen by coalitions.`}
       >
         <p className="m-0 flex flex-wrap gap-3">
-          <a href="#councils" className="site-btn-primary">Find a council</a>
-          <Link to={MY_WARD_PATH} className="site-btn-outline-ink">Find your ward councillor</Link>
+          <a href="#councils" className="site-btn-primary">Find a Council</a>
+          <Link to={MY_WARD_PATH} className="site-btn-outline-ink">Find Your Ward Councillor</Link>
         </p>
       </PageIntro>
 
       <SiteSection labelledBy="summary-h" className="pb-8">
-        <h2 id="summary-h" className="sr-only">The country at a glance</h2>
+        <h2 id="summary-h" className="sr-only">The Country at a Glance</h2>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,200px),1fr))] gap-4">
-          <StatTile value={summary.hung} label="Councils with no majority">of {summary.councils} metros and local councils</StatTile>
-          <StatTile value={summary.majority} label="Councils with a majority">one party holds more than half the seats</StatTile>
-          <StatTile value={`${metros.filter((m) => m.hung).length} of ${metros.length}`} label="Metros with no majority" />
-          <StatTile value={vacant ? nf.format(vacant.seats) : '…'} label="List seats a party cannot fill yet">
+          <StatTile value={summary.hung} label="Councils With No Majority">of {summary.councils} metros and local councils</StatTile>
+          <StatTile value={summary.majority} label="Councils With a Majority">one party holds more than half the seats</StatTile>
+          <StatTile value={`${metros.filter((m) => m.hung).length} of ${metros.length}`} label="Metros With No Majority" />
+          <StatTile value={vacant ? nf.format(vacant.seats) : '…'} label="List Seats a Party Cannot Fill Yet">
             {vacant ? `in ${vacant.councils} councils: the party won more seats than it has candidates` : 'counting'}
           </StatTile>
         </div>
@@ -87,17 +87,17 @@ export function SiteCoalitionTracker({ hasConsent }: { hasConsent: boolean }) {
 
 
       <SiteSection labelledBy="dash-h" className="pb-8">
-        <h2 id="dash-h" className="m-0 mb-4 font-site-display text-site-h4">The country in charts</h2>
+        <h2 id="dash-h" className="m-0 mb-4 font-site-display text-site-h4">The Country in Charts</h2>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,340px),1fr))] gap-5">
           <SiteCard className="p-5">
             <StatusSplit
-              title="Councils with and without a majority, by province"
+              title="Councils With and Without a Majority, by Province"
               rows={PROVINCE_CODES.map((p) => ({ id: p, name: provinceName(p), hung: summary.byProvince[p].hung, majority: summary.byProvince[p].councils - summary.byProvince[p].hung }))}
             />
           </SiteCard>
           <SiteCard className="p-5">
             <BarList
-              title="Largest party in how many councils"
+              title="Largest Party in How Many Councils"
               unit="Party"
               series={['Councils']}
               rows={[...totals].sort((a, b) => b.largestIn - a.largestIn).filter((t) => t.largestIn > 0).slice(0, 8).map((t) => ({ id: t.id, name: t.name, values: [t.largestIn], emblem: true }))}
@@ -106,7 +106,7 @@ export function SiteCoalitionTracker({ hasConsent }: { hasConsent: boolean }) {
           </SiteCard>
           <SiteCard className="p-5">
             <BarList
-              title="Council seats won across the country"
+              title="Council Seats Won Across the Country"
               unit="Party"
               series={['Seats']}
               format={(v) => nf.format(v)}
@@ -118,7 +118,7 @@ export function SiteCoalitionTracker({ hasConsent }: { hasConsent: boolean }) {
       </SiteSection>
 
       <SiteSection labelledBy="metros-h" className="pb-8">
-        <h2 id="metros-h" className="m-0 mb-4 font-site-display text-site-h4">The eight metros</h2>
+        <h2 id="metros-h" className="m-0 mb-4 font-site-display text-site-h4">The Eight Metros</h2>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-4">
           {metros.map((m) => (
             <MetroCard key={m.code} c={m} />
@@ -128,7 +128,7 @@ export function SiteCoalitionTracker({ hasConsent }: { hasConsent: boolean }) {
 
       <SiteSection id="councils" labelledBy="councils-h" className="pb-8">
         <div className="flex flex-col gap-4">
-          <h2 id="councils-h" className="m-0 font-site-display text-site-h4">Every council</h2>
+          <h2 id="councils-h" className="m-0 font-site-display text-site-h4">Every Council</h2>
           <div className="flex flex-wrap items-end gap-4">
             <label className="flex flex-col gap-1 text-site-caption text-slate" htmlFor="tr-province">
               Province
@@ -136,7 +136,7 @@ export function SiteCoalitionTracker({ hasConsent }: { hasConsent: boolean }) {
                 <option value="all">All provinces</option>
                 {PROVINCE_CODES.map((p) => (
                   <option key={p} value={p}>
-                    {provinceName(p)} ({summary.byProvince[p].hung} of {summary.byProvince[p].councils} with no majority)
+                    {provinceName(p)} ({summary.byProvince[p].hung} of {summary.byProvince[p].councils} With No Majority)
                   </option>
                 ))}
               </select>
@@ -145,7 +145,7 @@ export function SiteCoalitionTracker({ hasConsent }: { hasConsent: boolean }) {
               <legend className="mb-1 text-site-caption text-slate">Show</legend>
               {(
                 [
-                  ['hung', 'No majority'],
+                  ['hung', 'No Majority'],
                   ['majority', 'Majority'],
                   ['all', 'All'],
                 ] as const
@@ -157,7 +157,7 @@ export function SiteCoalitionTracker({ hasConsent }: { hasConsent: boolean }) {
               ))}
             </fieldset>
             <label className="flex min-w-[220px] flex-1 flex-col gap-1 text-site-caption text-slate" htmlFor="tr-q">
-              Search by name or code
+              Search by Name or Code
               <input id="tr-q" className="site-field min-h-[44px]" value={q} onChange={(e) => setQ(e.target.value)} placeholder="e.g. Rustenburg or NW373" />
             </label>
           </div>
@@ -170,9 +170,9 @@ export function SiteCoalitionTracker({ hasConsent }: { hasConsent: boolean }) {
                 <tr className="border-b border-line bg-paper text-site-caption text-slate">
                   <th scope="col" className="px-4 py-3 font-semibold">Council</th>
                   <th scope="col" className="px-4 py-3 font-semibold">Seats</th>
-                  <th scope="col" className="px-4 py-3 font-semibold">Largest party</th>
-                  <th scope="col" className="px-4 py-3 font-semibold">Short of a majority</th>
-                  <th scope="col" className="px-4 py-3 font-semibold">Fewest parties to govern</th>
+                  <th scope="col" className="px-4 py-3 font-semibold">Largest Party</th>
+                  <th scope="col" className="px-4 py-3 font-semibold">Short of a Majority</th>
+                  <th scope="col" className="px-4 py-3 font-semibold">Fewest Parties to Govern</th>
                   <th scope="col" className="px-4 py-3 font-semibold">Status</th>
                 </tr>
               </thead>

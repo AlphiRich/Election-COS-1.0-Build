@@ -148,9 +148,9 @@ export function signoffHtml(s: Signoff): string {
 <title>VD sign-off ${esc(s.vdCode)} ${esc(s.day)}</title>
 <style>body{font:16px/1.6 Arial,sans-serif;color:${tokens.color.ink};margin:0;background:white}main{max-width:720px;margin:0 auto;padding:28px 20px}h1{margin:0 0 4px;font-size:1.6rem}table{width:100%;border-collapse:collapse;margin:12px 0}th,td{text-align:left;padding:8px 10px;border-top:1px solid ${tokens.color.line}}th{width:60%;font-weight:600}.note{border-left:4px solid ${tokens.color.gold};padding:10px 14px;background:${tokens.color.paper};margin:16px 0}.sig{display:flex;gap:24px;margin-top:36px}.sig div{flex:1;border-top:1px solid ${tokens.color.ink};padding-top:6px;font-size:.9rem}@media print{main{padding:0}}</style></head>
 <body><main>
-<h1>VD Captain daily sign-off</h1>
+<h1>VD Captain Daily Sign-Off</h1>
 <p>Ward ${esc(s.wardCode)} · Voting district ${esc(s.vdCode)} · ${esc(s.day)}</p>
-<table><caption class="sr-only">Counts for the day</caption>
+<table><caption class="sr-only">Counts for the Day</caption>
 ${row('Doors worked', s.doors.total)}${row('Contacted', s.doors.contacted)}${row('No answer', s.doors.noAnswer)}${row('Could not be reached', s.doors.inaccessible)}${row('Asked not to be contacted', s.doors.askedNotToBeContacted)}
 ${row('People recorded with consent', s.capturedWithConsent)}${row('Of those, leaning or strongly supportive', s.supportiveResponses)}
 ${row('Recorded per contacted door', s.capturesPerContact === null ? 'not yet' : s.capturesPerContact.toFixed(2))}

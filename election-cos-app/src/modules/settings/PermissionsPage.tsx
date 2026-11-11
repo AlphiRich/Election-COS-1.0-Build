@@ -151,7 +151,7 @@ export function PermissionsPage() {
       <PageHeader slug="/settings/permissions" title="Permissions" />
 
       <div className="space-y-2">
-        <SectionLabel as="h2">Roles (system-defined)</SectionLabel>
+        <SectionLabel as="h2">Roles (System-Defined)</SectionLabel>
         {SEED_ROLES.map((role) => (
           <Card key={role.id}>
             <p className="text-body-md font-body text-ink font-semibold">
@@ -184,7 +184,7 @@ export function PermissionsPage() {
              * class as Voters and Field Diary — see this session's
              * correction in src/components/ui/index.tsx.
              */}
-            <Field label="Sign-in ID" mono error={problemFor('signInId')}>
+            <Field label="Sign-In ID" mono error={problemFor('signInId')}>
               {(props) => (
                 <input
                   {...props}
@@ -195,7 +195,7 @@ export function PermissionsPage() {
             </Field>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <Field label="First name">
+              <Field label="First Name">
                 {(props) => (
                   <input
                     {...props}
@@ -204,7 +204,7 @@ export function PermissionsPage() {
                   />
                 )}
               </Field>
-              <Field label="Last name">
+              <Field label="Last Name">
                 {(props) => (
                   <input
                     {...props}
@@ -213,7 +213,7 @@ export function PermissionsPage() {
                   />
                 )}
               </Field>
-              <Field label="Contact number">
+              <Field label="Contact Number">
                 {(props) => (
                   <input
                     {...props}
@@ -250,7 +250,7 @@ export function PermissionsPage() {
                * record by inScope(). Both are refused in staffProvisioning.
                */}
               {(newStaffScope === 'WARD' || newStaffScope === 'VD') && (
-                <Field label="Ward code" mono>
+                <Field label="Ward Code" mono>
                   {(props) => (
                     <input
                       {...props}
@@ -261,7 +261,7 @@ export function PermissionsPage() {
                 </Field>
               )}
               {newStaffScope === 'VD' && (
-                <Field label="VD code" mono>
+                <Field label="VD Code" mono>
                   {(props) => (
                     <input
                       {...props}
@@ -355,12 +355,12 @@ export function PermissionsPage() {
                       </select>
                     )}
                   </Field>
-                  <Field label="Ward scope" mono>
+                  <Field label="Ward Scope" mono>
                     {(props) => (
                       <input {...props} value={wardScope} onChange={(e) => setWardScope(e.target.value)} />
                     )}
                   </Field>
-                  <Field label="VD scope" mono>
+                  <Field label="VD Scope" mono>
                     {(props) => (
                       <input {...props} value={vdScope} onChange={(e) => setVdScope(e.target.value)} />
                     )}
@@ -379,7 +379,7 @@ export function PermissionsPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <fieldset>
                     <legend className="text-label-caps font-display uppercase text-slate mb-1">
-                      Additional capabilities granted
+                      Additional Capabilities Granted
                     </legend>
                     <div className="max-h-40 overflow-y-auto space-y-1 border border-ink/10 rounded p-2">
                       {ALL_CAPABILITIES.map((cap) => (
@@ -397,7 +397,7 @@ export function PermissionsPage() {
                   </fieldset>
                   <fieldset>
                     <legend className="text-label-caps font-display uppercase text-slate mb-1">
-                      Capabilities revoked
+                      Capabilities Revoked
                     </legend>
                     <div className="max-h-40 overflow-y-auto space-y-1 border border-ink/10 rounded p-2">
                       {ALL_CAPABILITIES.map((cap) => (

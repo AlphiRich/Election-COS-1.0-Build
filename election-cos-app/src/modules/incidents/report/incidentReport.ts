@@ -171,9 +171,9 @@ export function incidentReportDocument(report: IncidentReport, meta: IncidentRep
     { kind: 'field', label: 'Prepared on', value: meta.preparedAt },
 
     { kind: 'heading', level: 1, text: 'What was logged' },
-    { kind: 'field', label: 'Incidents in this period', value: String(summary.total) },
-    { kind: 'field', label: 'Still awaiting campaign action', value: String(summary.open) },
-    { kind: 'field', label: 'Wards affected', value: String(summary.wardsAffected.length) },
+    { kind: 'field', label: 'Incidents in This Period', value: String(summary.total) },
+    { kind: 'field', label: 'Still Awaiting Campaign Action', value: String(summary.open) },
+    { kind: 'field', label: 'Wards Affected', value: String(summary.wardsAffected.length) },
   ];
 
   for (const category of CATEGORIES) {
@@ -217,10 +217,10 @@ export function incidentReportDocument(report: IncidentReport, meta: IncidentRep
     });
     blocks.push({
       kind: 'field',
-      label: 'Severity and state',
+      label: 'Severity and State',
       value: `${SEVERITY_META[incident.severity].label} · ${STATUS_LABEL[incident.status]}`,
     });
-    blocks.push({ kind: 'field', label: 'Voting district', value: incident.vdCode });
+    blocks.push({ kind: 'field', label: 'Voting District', value: incident.vdCode });
     blocks.push({ kind: 'para', text: incident.description });
     if (incident.photoPaths.length > 0) {
       blocks.push({
@@ -244,7 +244,7 @@ export function incidentReportDocument(report: IncidentReport, meta: IncidentRep
   );
 
   return {
-    title: 'Municipal incident report',
+    title: 'Municipal Incident Report',
     subtitle: `${meta.municipalityName} · ${dateOnly(filter.fromIso)} to ${dateOnly(filter.toIso)}`,
     meta: {
       organisation: meta.organisation,

@@ -14,7 +14,7 @@ export function SiteAbout() {
       />
       <SiteSection id="pledge" labelledBy="ab-pledge" className="pb-[88px]">
         <h2 id="ab-pledge" className="mb-4 mt-0 font-site-display text-site-h4">
-          Neutrality pledge
+          Neutrality Pledge
         </h2>
         <ul className="m-0 flex list-disc flex-col gap-2 pl-5">
           {NEUTRALITY_PLEDGE.map((l) => (

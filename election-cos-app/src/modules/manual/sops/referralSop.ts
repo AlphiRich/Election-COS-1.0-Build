@@ -30,7 +30,7 @@ import type { Sop } from '../manualModel';
 
 export const REFERRAL_SOP: Sop = {
   number: 'SOP-07',
-  title: 'Issuing a service delivery referral',
+  title: 'Issuing a Service Delivery Referral',
   area: 'WAR_ROOM',
   roles: ['municipal-team-lead'],
   requiresAnyCapability: ['incidents.escalate'],
@@ -40,7 +40,7 @@ export const REFERRAL_SOP: Sop = {
     'and how to prove afterwards what was sent.',
   sections: [
     {
-      heading: 'What you are signing',
+      heading: 'What You Are Signing',
       body: [
         'A referral is your campaign formally handing a logged service-delivery fault to the department responsible for it, with a reference number both sides can quote. Your organisation is named at the top. Your name is on the bottom.',
         'It is not a municipal document and it must never be able to be mistaken for one. The addressee appears as an addressee, not as an authority issuing anything, and the disclaimer below is printed on every copy — draft or authorised — and cannot be removed.',
@@ -48,7 +48,7 @@ export const REFERRAL_SOP: Sop = {
       warnings: [STANDING_DISCLAIMER],
     },
     {
-      heading: 'Before you prepare one',
+      heading: 'Before You Prepare One',
       body: [
         'A referral can only be prepared for an incident that has been escalated. If the action is not offered, the incident has not reached that point — triage it and escalate it first, which is SOP-06.',
       ],
@@ -63,7 +63,7 @@ export const REFERRAL_SOP: Sop = {
       ],
     },
     {
-      heading: 'The draft, and reading it properly',
+      heading: 'The Draft, and Reading It Properly',
       body: [
         'Preparing produces a draft: the complete document, watermarked as a draft, which you can read before anything is issued. Nothing has been written to the record at this point and nothing has left the campaign.',
         'Read the whole thing, not the form you typed into. The draft is what a municipal official will see.',
@@ -79,7 +79,7 @@ export const REFERRAL_SOP: Sop = {
       ],
     },
     {
-      heading: 'Authorising it',
+      heading: 'Authorising It',
       body: [
         'Authorising is the act that makes the document real. It removes the draft watermark, stamps it with your name, your role and the moment, stores it, and moves the incident to referred.',
         'It is signed in your name because you are the one signing it. The name and role come from your own staff record, not from a setting — a referral signed by nobody, or by a constant, is what this build found in the material it was handed and refused to reproduce.',
@@ -96,7 +96,7 @@ export const REFERRAL_SOP: Sop = {
       ],
     },
     {
-      heading: 'Proving later what you sent',
+      heading: 'Proving Later What You Sent',
       body: [
         'Every issued referral carries an integrity hash. ' + INTEGRITY_HASH_BASIS,
         'From the incident, "Check against the record" recomputes it. That is worth doing before any conversation where the contents of a referral are in dispute, and worth doing at least once so you know what a pass looks like.',
@@ -112,7 +112,7 @@ export const REFERRAL_SOP: Sop = {
       ],
     },
     {
-      heading: 'Re-issuing, and why you usually should not',
+      heading: 'Re-Issuing, and Why You Usually Should Not',
       body: [
         'Issuing the same referral twice is safe — the document is addressed by its own content, so an identical referral lands in the same place and does not fork into two authorised copies. That is there so a failed upload can be retried, not so a document can be revised.',
         'A referral whose particulars have changed is a different document and hashes differently. Issuing it creates a second authorised referral for the same incident, and the municipality now holds two.',

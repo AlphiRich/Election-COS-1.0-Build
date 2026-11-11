@@ -58,7 +58,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'roles',
     start: 0,
     end: 10,
-    title: 'Seven roles. Each sees only its own ground.',
+    title: 'Seven Roles. Each Sees Only Its Own Ground.',
     lead: 'A person signs in and the software knows their role and their place on the map. It shows them that, and refuses the rest.',
     points: [
       ...ROLE_LINES.map((r) => `${r.label}: ${r.sees}`),
@@ -69,7 +69,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'command',
     start: 10,
     end: 20,
-    title: 'One view of the campaign.',
+    title: 'One View of the Campaign.',
     lead: 'The command view reads running totals the software keeps as work happens, so it does not rescan every record to draw a screen.',
     points: [
       'People recorded with consent, and how they said they lean.',
@@ -82,7 +82,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'capture',
     start: 20,
     end: 30,
-    title: 'Capture at the door, with consent.',
+    title: 'Capture at the Door, With Consent.',
     lead: 'A canvasser confirms who lives there, asks, and records the person only if they agree out loud.',
     points: [
       'The canvasser types the person’s name back before the record button works, so a mis-tap cannot create consent.',
@@ -95,7 +95,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'offline',
     start: 30,
     end: 40,
-    title: 'Works where the signal does not.',
+    title: 'Works Where the Signal Does Not.',
     lead: 'Work is kept on the phone and sent when signal returns.',
     points: [
       'The screen shows what is still waiting on the phone, so “saved here” is never mistaken for “received”.',
@@ -107,7 +107,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'seats',
     start: 40,
     end: 50,
-    title: 'From votes to seats.',
+    title: 'From Votes to Seats.',
     lead: 'The seat calculator applies Schedule 1 of the Municipal Structures Act to the numbers you enter.',
     points: [
       'On the Electoral Commission’s published 2021 result for JB Marks it gives the published quota (1,515) and all 67 seats, to the seat.',
@@ -115,20 +115,20 @@ export const CHAPTERS: Chapter[] = [
       'It forecasts nothing. You set the scenario; it shows what that scenario means.',
       'A majority of 67 is 34.',
     ],
-    tryIt: { label: 'Try the seat tool', href: '/tools/how-seats-are-calculated' },
+    tryIt: { label: 'Try the Seat Tool', href: '/tools/how-seats-are-calculated' },
   },
   {
     id: 'rules',
     start: 50,
     end: 60,
-    title: 'The funding and privacy rules, built in.',
+    title: 'The Funding and Privacy Rules, Built In.',
     lead: 'The rules a treasurer and an information officer worry about are checks in the software, not memory.',
     points: [
       'A donor’s payments are added up, because the disclosure line applies to the total: R200,000. The annual cap is R30 million. (Government Gazette 53182; both are under court challenge, and the software is updated if they change.)',
       'A request from a person about their own data is tracked against a 30-day response target.',
       'The software is bookkeeping and record-keeping help. It is not legal advice and does not file anything for you.',
     ],
-    tryIt: { label: 'Try the funding checker', href: '/tools/party-funding-checker' },
+    tryIt: { label: 'Try the Funding Checker', href: '/tools/party-funding-checker' },
   },
 ];
 

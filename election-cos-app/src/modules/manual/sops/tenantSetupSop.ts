@@ -55,7 +55,7 @@ const roleLine = (id: string): string => {
 
 export const TENANT_SETUP_SOP: Sop = {
   number: 'SOP-02',
-  title: 'Setting up a tenant and inviting your team',
+  title: 'Setting Up a Tenant and Inviting Your Team',
   area: 'ONBOARDING',
   roles: ['party-hq-admin'],
   requiresAnyCapability: ['team.manage'],
@@ -65,7 +65,7 @@ export const TENANT_SETUP_SOP: Sop = {
     'and take access away again when someone leaves.',
   sections: [
     {
-      heading: 'What a tenant is, and why it is the only boundary that matters',
+      heading: 'What a Tenant Is, and Why It Is the Only Boundary That Matters',
       body: [
         'Your subscription is a tenant. Every record your campaign creates — voters, households, incidents, donations, documents — lives inside it, and nothing in this platform reads across from one tenant to another.',
         'That separation is enforced in three independent places: the token your browser holds after sign-in, the database security rules, and the code that builds every query. A request that satisfies one still has to satisfy the other two. You do not configure this and you cannot weaken it.',
@@ -73,7 +73,7 @@ export const TENANT_SETUP_SOP: Sop = {
       ],
     },
     {
-      heading: 'Record the municipality first',
+      heading: 'Record the Municipality First',
       body: [
         'Settings → Municipality Config. Do this before you add anyone, because the seat numbers recorded here are what the analytics read, and a team working against the wrong council size will not notice until a projection looks wrong.',
       ],
@@ -88,7 +88,7 @@ export const TENANT_SETUP_SOP: Sop = {
       ],
     },
     {
-      heading: 'How a person gets an account — they start, you finish',
+      heading: 'How a Person Gets an Account — They Start, You Finish',
       body: [
         'This platform does not create anyone’s sign-in account for them, and will not ask you for a colleague’s password. Each person creates their own account and then you give it a role. In that order.',
         'Tell the person to open the application and sign in — with Google, or with an email address and a password they choose. They will land on a screen headed "Awaiting access", because a new account belongs to no tenant and can see nothing at all.',
@@ -99,7 +99,7 @@ export const TENANT_SETUP_SOP: Sop = {
       ],
     },
     {
-      heading: 'Add the person and give them their ground',
+      heading: 'Add the Person and Give Them Their Ground',
       body: [
         'Settings → Permissions → Add a person. Paste the sign-in ID they sent you, enter their name and a contact number, and choose their role.',
       ],
@@ -116,7 +116,7 @@ export const TENANT_SETUP_SOP: Sop = {
       ],
     },
     {
-      heading: 'Choosing the role',
+      heading: 'Choosing the Role',
       body: [
         'There are seven roles. They are fixed — you cannot invent an eighth — and each carries a default set of permissions and a geographic reach.',
       ],
@@ -126,7 +126,7 @@ export const TENANT_SETUP_SOP: Sop = {
       ],
     },
     {
-      heading: 'When the role is not quite right',
+      heading: 'When the Role Is Not Quite Right',
       body: [
         'A role can be adjusted for one person: Edit on their record lets you grant an extra permission or take one away. The result is the role’s defaults, plus what you granted, minus what you revoked.',
         'Use this sparingly and for a reason you could state out loud. A team where half the people carry adjustments is a team where nobody can answer the question "who can do this?" without opening seven records.',
@@ -138,7 +138,7 @@ export const TENANT_SETUP_SOP: Sop = {
       ],
     },
     {
-      heading: 'When someone leaves',
+      heading: 'When Someone Leaves',
       body: [
         'Deactivate on their record. Their permissions are stripped from their account immediately, and the next time their application asks the server for anything, it is refused. Their record stays: it is not deleted, and neither is any work they did.',
       ],

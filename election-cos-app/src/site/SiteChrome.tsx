@@ -41,6 +41,7 @@ import whatsAppQr from './assets/whatsapp-qr.svg';
 import { AdConsentWithdrawLink } from './ads/ConsentBanner';
 import { VotingRibbon } from './VotingRibbon';
 import { BrandMark } from '@/components/BrandMark';
+import { InstallAppButton } from './pwa/InstallAppButton';
 
 /* ------------------------------------------------------------- mark */
 
@@ -74,15 +75,17 @@ export function SiteHeader({ enquirySubject }: { enquirySubject: string }) {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-[18px]">
+        <div className="flex flex-wrap items-center gap-[18px]">
+          <InstallAppButton />
+          {/* The application is the staff workspace; the public never needs to sign in. */}
           <a href={SITE.appOrigin} className="text-site-sm font-semibold text-paper">
-            Sign in
+            Staff Sign-In
           </a>
           <Link to="/book-a-demo" className="site-btn-outline-paper text-site-sm">
-            Book a demo
+            Book a Demo
           </Link>
           <a href={whatsAppHref(enquirySubject)} className="site-btn-primary text-site-sm">
-            Talk to us
+            Talk to Us
           </a>
         </div>
       </div>
@@ -203,16 +206,16 @@ export function SiteFooter({
         <div className="flex flex-col gap-1.5">
           <span className="font-semibold text-paper">Legal</span>
           <Link to="/legal/privacy" className="text-line">
-            Privacy notice
+            Privacy Notice
           </Link>
           <Link to="/legal/terms" className="text-line">
             Terms
           </Link>
           <Link to="/legal/cookies" className="text-line">
-            Cookie notice
+            Cookie Notice
           </Link>
           <Link to="/about#pledge" className="text-line">
-            Neutrality pledge
+            Neutrality Pledge
           </Link>
           <Link to="/code-of-conduct" className="text-line">
             Electoral Code of Conduct
@@ -221,7 +224,7 @@ export function SiteFooter({
             Results
           </Link>
           <Link to="/official-sources" className="text-line">
-            Official Commission sources
+            Official Commission Sources
           </Link>
           {/*
            * In the footer, on every page — including the ones where no
@@ -241,7 +244,7 @@ export function SiteFooter({
             Packages
           </Link>
           <Link to="/whats-in-the-app" className="text-line">
-            What is in the app
+            What Is in the App
           </Link>
           <a href={SITE.corporateUrl} className="text-line">
             innovationconsult.co.za
@@ -253,7 +256,7 @@ export function SiteFooter({
             About
           </Link>
           <a href={SITE.appOrigin} className="text-line">
-            Sign in
+            Staff Sign-In
           </a>
         </div>
       </div>

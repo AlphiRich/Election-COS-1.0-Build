@@ -27,26 +27,26 @@ export function SiteCodeOfConduct() {
   return (
     <>
       <PageIntro
-        eyebrow="Know the rules"
+        eyebrow="Know the Rules"
         title="The Electoral Code of Conduct"
         lead="Every party contesting an election and every party and ward candidate is bound by it. It is the reason a canvasser may knock on your door and the reason nobody may buy or bully your vote."
       >
         <p className="m-0 text-site-sm text-slate">{CODE_CAVEAT}</p>
         <nav
-          aria-label="On this page"
+          aria-label="On This Page"
           className="flex flex-wrap gap-x-5 gap-y-1 text-site-sm font-semibold"
         >
           <a href="#voters" className="text-teal">
-            For voters
+            For Voters
           </a>
           <a href="#parties" className="text-teal">
-            For parties and candidates
+            For Parties and Candidates
           </a>
           <a href="#station" className="text-teal">
-            Inside a voting station
+            Inside a Voting Station
           </a>
           <a href="#penalties" className="text-teal">
-            If the Code is broken
+            If the Code Is Broken
           </a>
         </nav>
       </PageIntro>
@@ -54,21 +54,21 @@ export function SiteCodeOfConduct() {
       <SiteSection id="voters" labelledBy="v-h" className="pb-10">
         <div className="flex max-w-[760px] flex-col gap-6">
           <h2 id="v-h" className="m-0 font-site-display text-site-h3">
-            For voters
+            For Voters
           </h2>
           <div className="flex flex-col gap-3">
-            <h3 className="m-0 font-site-display text-site-h5">What the Code says you may do</h3>
+            <h3 className="m-0 font-site-display text-site-h5">What the Code Says You May Do</h3>
             <p className="m-0 text-site-sm text-slate">
               Every party and candidate must publicly state that everyone has the right to:
             </p>
             <RuleList lines={STATED_RIGHTS} />
           </div>
           <div className="flex flex-col gap-3">
-            <h3 className="m-0 font-site-display text-site-h5">What protects you</h3>
+            <h3 className="m-0 font-site-display text-site-h5">What Protects You</h3>
             <RuleList lines={VOTER_PROTECTIONS} />
           </div>
           <div className="flex flex-col gap-3">
-            <h3 className="m-0 font-site-display text-site-h5">On voting day</h3>
+            <h3 className="m-0 font-site-display text-site-h5">On Voting Day</h3>
             <RuleList lines={VOTING_DAY_RIGHTS} />
           </div>
           <SiteCard className="p-6">
@@ -86,12 +86,12 @@ export function SiteCodeOfConduct() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,340px),1fr))] gap-8">
           <div className="flex min-w-0 flex-col gap-3">
             <h2 id="p-h" className="m-0 font-site-display text-site-h3">
-              Parties and candidates must
+              Parties and Candidates Must
             </h2>
             <RuleList lines={PARTY_MUST} />
           </div>
           <div className="flex min-w-0 flex-col gap-3">
-            <h2 className="m-0 font-site-display text-site-h3">Parties and candidates must not</h2>
+            <h2 className="m-0 font-site-display text-site-h3">Parties and Candidates Must Not</h2>
             <RuleList lines={PARTY_MUST_NOT} />
           </div>
         </div>
@@ -100,7 +100,7 @@ export function SiteCodeOfConduct() {
       <SiteSection id="station" labelledBy="s-h" className="pb-10">
         <div className="flex max-w-[760px] flex-col gap-3">
           <h2 id="s-h" className="m-0 font-site-display text-site-h3">
-            Agents and candidates inside a voting station
+            Agents and Candidates Inside a Voting Station
           </h2>
           <RuleList lines={AT_THE_STATION} />
         </div>
@@ -109,7 +109,7 @@ export function SiteCodeOfConduct() {
       <SiteSection id="penalties" labelledBy="pen-h" className="pb-10">
         <SiteCard className="flex max-w-[760px] flex-col gap-2 p-8">
           <h2 id="pen-h" className="m-0 font-site-display text-site-h4">
-            If the Code is broken
+            If the Code Is Broken
           </h2>
           <p className="m-0 text-site-base">{CONSEQUENCES}</p>
           <p className="m-0 font-mono text-site-micro text-slate">{CONSEQUENCES_REF}</p>
@@ -134,7 +134,7 @@ export function SiteCodeOfConduct() {
       <SiteSection id="disinformation" labelledBy="dis-h" className="pb-10">
         <SiteCard className="flex max-w-[760px] flex-col gap-2 p-8">
           <h2 id="dis-h" className="m-0 font-site-display text-site-h4">
-            Seen election disinformation?
+            Seen Election Disinformation?
           </h2>
           <p className="m-0 text-site-base">
             The Commission sends reports to Real411, an independent platform for digital election

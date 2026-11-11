@@ -56,7 +56,7 @@ export function VotersPage() {
              * them. A round is work done on the voter roll, so this is where
              * it belongs anyway.
              *
-             * Links, not <Button>s — the primitive renders a real <button>,
+             * Links, not <Button>S — The Primitive Renders a Real <button>,
              * which would break cmd-click and "copy link address" on what
              * are plainly navigations. Same treatment as Button's `ghost`
              * variant, with its 44px target matched by hand.
@@ -65,21 +65,21 @@ export function VotersPage() {
               to="/round"
               className="inline-flex min-h-11 items-center rounded border border-ink/20 px-4 py-2 text-label-caps font-display uppercase text-ink"
             >
-              Work a round
+              Work a Round
             </Link>
             {session?.caps.includes('roll.view') && (
               <Link
                 to="/roll"
                 className="inline-flex min-h-11 items-center rounded border border-ink/20 px-4 py-2 text-label-caps font-display uppercase text-ink"
               >
-                Voters’ roll
+                Voters’ Roll
               </Link>
             )}
             <Link
               to="/voters/import"
               className="inline-flex min-h-11 items-center rounded border border-ink/20 px-4 py-2 text-label-caps font-display uppercase text-ink"
             >
-              Import a register
+              Import a Register
             </Link>
             <Button onClick={() => setForm({ mode: 'create' })} disabled={!vdCode}>
               + New voter
@@ -92,7 +92,7 @@ export function VotersPage() {
           screen reader announced an unlabelled text field. */}
       <div className="max-w-xs">
         <Field
-          label="Voting district"
+          label="Voting District"
           hint={
             session.vdScope
               ? undefined

@@ -75,7 +75,7 @@ export function RollFieldPage() {
   if (!allowed) {
     return (
       <Card className="max-w-lg">
-        <PageHeader slug="/roll" title="Voters’ roll" />
+        <PageHeader slug="/roll" title="Voters’ Roll" />
         <p className="text-body-md font-body">
           {access?.reason || 'Your role does not include the voters’ roll.'}
         </p>
@@ -85,7 +85,7 @@ export function RollFieldPage() {
 
   return (
     <div className="space-y-4">
-      <PageHeader slug="/roll" title="Voters’ roll" action={undefined} />
+      <PageHeader slug="/roll" title="Voters’ Roll" action={undefined} />
       <p className="text-body-md font-body max-w-prose">
         You see only the roll for your own district. Each person you <strong>confirm</strong> and
         each person you <strong>record</strong> is counted once for your party’s usage. Nobody is
@@ -93,16 +93,16 @@ export function RollFieldPage() {
       </p>
 
       <div className="grid grid-cols-3 gap-3">
-        <StatTile label="Confirmed today" value={stats.verify} />
-        <StatTile label="Recorded with consent" value={stats.capture} />
+        <StatTile label="Confirmed Today" value={stats.verify} />
+        <StatTile label="Recorded With Consent" value={stats.capture} />
         <StatTile
-          label="Consent rate"
+          label="Consent Rate"
           value={stats.captureRate === null ? '—' : `${Math.round(stats.captureRate * 100)}%`}
         />
       </div>
 
       {edition.isSuccess && !edition.data && (
-        <EmptyState title="No roll loaded">
+        <EmptyState title="No Roll Loaded">
           The roll for your district has not been loaded yet. Ask your campaign administrator.
         </EmptyState>
       )}
@@ -110,7 +110,7 @@ export function RollFieldPage() {
       {edition.data && !selected && (
         <>
           <div className="max-w-md">
-            <Field label="Find an address">
+            <Field label="Find an Address">
               {(props) => (
                 <input
                   {...props}
@@ -182,7 +182,7 @@ function AddressPanel({
   return (
     <div className="space-y-3">
       <Button variant="ghost" onClick={onBack}>
-        ← Back to addresses
+        ← Back to Addresses
       </Button>
       <Card>
         <p className="font-display">{address.addressRaw}</p>

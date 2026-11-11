@@ -82,7 +82,7 @@ export interface ModuleDefinition {
 export const MODULES: ModuleDefinition[] = [
   {
     key: 'core',
-    label: 'Core campaign platform',
+    label: 'Core Campaign Platform',
     scope: 'TENANT',
     bundled: true,
     gatedCapabilities: [],
@@ -91,7 +91,7 @@ export const MODULES: ModuleDefinition[] = [
   },
   {
     key: 'campaign-diary',
-    label: 'Campaign Diary & IEC timetable',
+    label: 'Campaign Diary & IEC Timetable',
     scope: 'TENANT',
     bundled: true,
     gatedCapabilities: ['diary.view', 'diary.edit'],
@@ -100,7 +100,7 @@ export const MODULES: ModuleDefinition[] = [
   },
   {
     key: 'ppfa-disclosure',
-    label: 'PPFA disclosure',
+    label: 'PPFA Disclosure',
     scope: 'TENANT',
     bundled: false,
     gatedCapabilities: ['ppfa.view', 'ppfa.edit', 'ppfa.export', 'ppfa.manage_thresholds'],
@@ -127,7 +127,7 @@ export const MODULES: ModuleDefinition[] = [
   },
   {
     key: 'casework',
-    label: 'Councillor casework',
+    label: 'Councillor Casework',
     scope: 'WARD',
     bundled: false,
     gatedCapabilities: [],
@@ -136,7 +136,7 @@ export const MODULES: ModuleDefinition[] = [
   },
   {
     key: 'voter-verification',
-    label: 'Voter verification & capture',
+    label: 'Voter Verification & Capture',
     scope: 'TENANT',
     bundled: false,
     metering: 'PER_USE',

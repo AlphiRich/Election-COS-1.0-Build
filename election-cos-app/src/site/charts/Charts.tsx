@@ -30,7 +30,7 @@ function Frame({ title, children, table, note }: { title: string; children: Reac
       {children}
       {note && <p className="m-0 text-site-caption text-slate">{note}</p>}
       <details className="text-site-caption">
-        <summary className="cursor-pointer text-teal">Show as a table</summary>
+        <summary className="cursor-pointer text-teal">Show as a Table</summary>
         <div className="mt-2 overflow-x-auto">{table}</div>
       </details>
     </figure>
@@ -269,7 +269,7 @@ export function StatusSplit({ rows, title }: { rows: Array<{ id: string; name: s
           <thead>
             <tr className="border-b border-line text-slate">
               <th scope="col" className="py-1 pr-3 font-semibold">Province</th>
-              <th scope="col" className="py-1 text-right font-semibold">No majority</th>
+              <th scope="col" className="py-1 text-right font-semibold">No Majority</th>
               <th scope="col" className="py-1 text-right font-semibold">Majority</th>
             </tr>
           </thead>

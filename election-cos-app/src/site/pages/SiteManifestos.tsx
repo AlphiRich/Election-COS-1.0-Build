@@ -17,14 +17,14 @@ export function SiteManifestos() {
   return (
     <>
       <PageIntro
-        eyebrow="Voter tool"
-        title="Read and watch the manifestos"
+        eyebrow="Voter Tool"
+        title="Read and Watch the Manifestos"
         lead="Type any party or independent candidate’s name and open a web search or a video search for their manifesto. The same searches are built for everyone."
       />
       <SiteSection className="pb-10">
         <SiteCard className="flex max-w-[760px] flex-col gap-4 p-8">
           <label htmlFor="party" className="font-semibold">
-            Party or candidate
+            Party or Candidate
           </label>
           <input
             id="party"
@@ -56,7 +56,7 @@ export function SiteManifestos() {
       </SiteSection>
       <SiteSection className="pb-10">
         <SiteCard className="flex max-w-[760px] flex-col gap-2 p-8">
-          <h2 className="m-0 font-site-display text-site-h5">Learn how voting works</h2>
+          <h2 className="m-0 font-site-display text-site-h5">Learn How Voting Works</h2>
           <p className="m-0 text-site-sm">
             The Electoral Commission publishes voter-education videos on YouTube.
           </p>

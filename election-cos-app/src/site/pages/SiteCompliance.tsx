@@ -57,7 +57,7 @@ export function SiteCompliance() {
       <SiteSection className="flex flex-col gap-5 pb-14 pt-[88px]">
         <Eyebrow>Capability and Limitations Statement · IC-ECOS-LEG-03</Eyebrow>
         <h1 className="m-0 max-w-[14em] font-site-display text-site-h3 md:text-site-display">
-          What we do, and what we will not claim.
+          What We Do, and What We Will Not Claim.
         </h1>
         <p className="m-0 max-w-[36em] text-site-lead">
           For treasurers and compliance officers. Every row below points to the test that proves it.
@@ -67,7 +67,7 @@ export function SiteCompliance() {
       {/* ------------------------------------------------ claims table */}
       <SiteSection labelledBy="claims-h" className="pb-20">
         <h2 id="claims-h" className="mb-5 mt-0 font-site-display text-site-h4">
-          Does, and will not claim
+          Does, and Will Not Claim
         </h2>
         <div className="overflow-x-auto rounded-[10px] border border-line bg-white">
           <table className="w-full min-w-[760px] border-collapse text-site-base">
@@ -77,13 +77,13 @@ export function SiteCompliance() {
             <thead>
               <tr className="bg-paper text-left">
                 <th scope="col" className="w-[44%] px-5 py-3.5">
-                  What it does
+                  What It Does
                 </th>
                 <th scope="col" className="w-[36%] px-5 py-3.5">
-                  What we will not claim
+                  What We Will Not Claim
                 </th>
                 <th scope="col" className="px-5 py-3.5">
-                  Test reference
+                  Test Reference
                 </th>
               </tr>
             </thead>
@@ -117,7 +117,7 @@ export function SiteCompliance() {
         <div className="mx-auto grid max-w-[1200px] grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-12 px-6 py-20">
           <div className="flex flex-col gap-4">
             <h2 id="ppfa-h" className="m-0 font-site-display text-site-h3">
-              Party funding, tracked nightly
+              Party Funding, Tracked Nightly
             </h2>
             <ul className="m-0 flex list-disc flex-col gap-2 pl-5">
               {FUNDING_POINTS.map((p) => (
@@ -176,15 +176,15 @@ export function SiteCompliance() {
           aria-labelledby="addon-h"
           className="flex flex-col gap-3.5 rounded-[10px] bg-ink p-8 text-paper"
         >
-          <Eyebrow tone="gold">Add-on</Eyebrow>
+          <Eyebrow tone="gold">Add-On</Eyebrow>
           <h2 id="addon-h" className="m-0 font-site-display text-site-h4">
-            PPFA Governance and Disclosure Add-on
+            PPFA Governance and Disclosure Add-On
           </h2>
           <p className="m-0 text-line">
             Priced after a scoping consultation with our engineering team.
           </p>
           <Link to="/contact" className="site-btn-primary mt-auto self-start">
-            Book a consultation
+            Book a Consultation
           </Link>
         </article>
 
@@ -234,7 +234,7 @@ export function SiteCompliance() {
             </div>
           </div>
           <Link to="/contact" className="site-btn-primary">
-            Request the statement
+            Request the Statement
           </Link>
         </div>
       </SiteSection>

@@ -140,7 +140,7 @@ export function CandidatesPage() {
     <div className="space-y-6 max-w-3xl">
       <PageHeader
         slug="/settings/candidates"
-        title="Candidates & party list"
+        title="Candidates & Party List"
         description={PR_LIST_EXPORT_BASIS}
         action={
           canManage ? (
@@ -184,7 +184,7 @@ export function CandidatesPage() {
 
       <section className="space-y-2">
         <div className="flex items-baseline justify-between gap-3 flex-wrap">
-          <h2 className="text-headline-md font-display text-ink">The list, in order of preference</h2>
+          <h2 className="text-headline-md font-display text-ink">The List, in Order of Preference</h2>
           <DataLine>
             {result.ordered.length} of a cap of {result.maxListLength} · {result.womenCount} of{' '}
             {result.declaredCount} declared are women
@@ -227,7 +227,7 @@ export function CandidatesPage() {
 
       <section className="space-y-2">
         <div className="flex items-baseline justify-between gap-3 flex-wrap">
-          <h2 className="text-headline-md font-display text-ink">Ward candidates</h2>
+          <h2 className="text-headline-md font-display text-ink">Ward Candidates</h2>
           <DataLine>
             {wardRoll.covered.length} of {wardRoll.wardCount} wards have exactly one candidate
           </DataLine>
@@ -302,7 +302,7 @@ export function CandidatesPage() {
             have to guess the purpose of. */}
         <div className="max-w-sm">
           <Field
-            label="Party name, for the document"
+            label="Party Name, for the Document"
             hint="Exactly as it must appear on the list."
           >
             {(props) => (
@@ -311,7 +311,7 @@ export function CandidatesPage() {
           </Field>
         </div>
         <Button variant="secondary" disabled={!result.canExport} onClick={handleExport}>
-          Download the checked list
+          Download the Checked List
         </Button>
         {!result.canExport && result.ordered.length > 0 && (
           <p className="text-body-md font-body text-maroon">

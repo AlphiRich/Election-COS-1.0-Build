@@ -95,7 +95,7 @@ function PollDetail({ poll }: { poll: PollDefinition }) {
       </div>
 
       <div className="mt-4">
-        <SectionLabel as="h3">Share it</SectionLabel>
+        <SectionLabel as="h3">Share It</SectionLabel>
         <p className="text-body-md font-body mt-1">
           Each button opens the platform with the link ready. You choose to send; nothing is sent
           for you.
@@ -128,7 +128,7 @@ function PollDetail({ poll }: { poll: PollDefinition }) {
       </div>
 
       <div className="mt-4">
-        <SectionLabel as="h3">Responses so far: {dash.total}</SectionLabel>
+        <SectionLabel as="h3">Responses So Far: {dash.total}</SectionLabel>
         <p className="text-caption font-body text-slate mt-1">{SELF_SELECTED_CAVEAT}</p>
         {dash.total < 5 ? (
           <p className="text-body-md font-body mt-2">
@@ -137,7 +137,7 @@ function PollDetail({ poll }: { poll: PollDefinition }) {
         ) : (
           <>
             <Shares rows={dash.overall} />
-            <SectionLabel as="h3">By channel</SectionLabel>
+            <SectionLabel as="h3">By Channel</SectionLabel>
             {dash.byChannel.map((c) => (
               <div key={c.channel} className="mt-2">
                 <p className="font-mono text-data-mono">
@@ -152,7 +152,7 @@ function PollDetail({ poll }: { poll: PollDefinition }) {
             ))}
             {dash.byWard.length > 0 && (
               <>
-                <SectionLabel as="h3">By ward</SectionLabel>
+                <SectionLabel as="h3">By Ward</SectionLabel>
                 {dash.byWard.map((w) => (
                   <div key={w.ward} className="mt-2">
                     <p className="font-mono text-data-mono">
@@ -220,14 +220,14 @@ export function PollsPage() {
   if (!session) return <p>No active session.</p>;
   return (
     <div className="space-y-6">
-      <PageHeader slug="/analytics/polls" title="Voter sentiment polls" />
+      <PageHeader slug="/analytics/polls" title="Voter Sentiment Polls" />
       <BasisNote>
         Answers are counted, not recorded against anyone: no name, number, ID, device or free text
         is collected. {SELF_SELECTED_CAVEAT} Notice wording: {POLL_NOTICE_VERSION}.
       </BasisNote>
 
       <Card>
-        <SectionLabel as="h2">New poll</SectionLabel>
+        <SectionLabel as="h2">New Poll</SectionLabel>
         <div className="grid gap-3 mt-3">
           <Field label="Question">
             {(props) => (
@@ -235,7 +235,7 @@ export function PollsPage() {
             )}
           </Field>
           <Field
-            label="Options, one per line"
+            label="Options, One per Line"
             hint="'Undecided' and 'Prefer not to say' are added for you."
           >
             {(props) => (
@@ -247,13 +247,13 @@ export function PollsPage() {
               />
             )}
           </Field>
-          <Field label="Who is running this poll">
+          <Field label="Who Is Running This Poll">
             {(props) => (
               <input {...props} value={organiser} onChange={(e) => setOrganiser(e.target.value)} />
             )}
           </Field>
           <Field
-            label="Link type"
+            label="Link Type"
             hint="One answer per link suits invitations; a public link can be answered by anyone who has it."
           >
             {(props) => (

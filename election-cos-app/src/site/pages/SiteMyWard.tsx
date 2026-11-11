@@ -67,14 +67,14 @@ export function SiteMyWard({ hasConsent }: { hasConsent: boolean }) {
   return (
     <>
       <PageIntro
-        eyebrow="Local government elections 2026 · certified results"
-        title="Your ward and your councillor"
+        eyebrow="Local Government Elections 2026 · Certified Results"
+        title="Your Ward and Your Councillor"
         lead="Choose your municipality and ward to see who was elected, how every party did in your ward, and who now holds your council’s seats."
       />
 
       <SiteSection labelledBy="pick-h" className="pb-8">
         <SiteCard className="flex flex-col gap-4 p-6">
-          <h2 id="pick-h" className="m-0 font-site-display text-site-h5">Find your ward</h2>
+          <h2 id="pick-h" className="m-0 font-site-display text-site-h5">Find Your Ward</h2>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,220px),1fr))] gap-4">
             <label className="flex flex-col gap-1 text-site-caption text-slate" htmlFor="mw-province">
               Province
@@ -98,7 +98,7 @@ export function SiteMyWard({ hasConsent }: { hasConsent: boolean }) {
             <label className="flex flex-col gap-1 text-site-caption text-slate" htmlFor="mw-council">
               Municipality
               <select id="mw-council" className="site-field min-h-[44px]" value={c ? c.code : ''} disabled={!province} onChange={(e) => set({ council: e.target.value })}>
-                <option value="">Choose a municipality</option>
+                <option value="">Choose a Municipality</option>
                 {councils.map((x) => (
                   <option key={x.code} value={x.code}>
                     {x.name}
@@ -109,7 +109,7 @@ export function SiteMyWard({ hasConsent }: { hasConsent: boolean }) {
             <label className="flex flex-col gap-1 text-site-caption text-slate" htmlFor="mw-ward">
               Ward
               <select id="mw-ward" className="site-field min-h-[44px]" value={ward || ''} disabled={!c} onChange={(e) => set({ council: c?.code, ward: Number(e.target.value) })}>
-                <option value="">Choose a ward</option>
+                <option value="">Choose a Ward</option>
                 {c && Array.from({ length: c.wards }, (_, i) => results?.wardResults[i]?.wardNumber ?? i + 1).map((n) => (
                   <option key={n} value={n}>
                     Ward {n}
@@ -154,7 +154,7 @@ export function SiteMyWard({ hasConsent }: { hasConsent: boolean }) {
             </SiteCard>
 
             <SiteCard className="flex min-w-0 flex-col gap-3 p-6">
-              <h2 className="m-0 font-site-display text-site-h5">How the ward voted</h2>
+              <h2 className="m-0 font-site-display text-site-h5">How the Ward Voted</h2>
               {!wardResult ? (
                 <p className="m-0 text-site-sm">{results ? `Ward ${ward} is not in ${c.name}’s results.` : 'Loading…'}</p>
               ) : (
@@ -178,7 +178,7 @@ export function SiteMyWard({ hasConsent }: { hasConsent: boolean }) {
       {c && people && (
         <SiteSection labelledBy="pr-h" className="pb-8">
           <SiteCard className="flex flex-col gap-4 p-6">
-            <h2 id="pr-h" className="m-0 font-site-display text-site-h5">Your PR councillors</h2>
+            <h2 id="pr-h" className="m-0 font-site-display text-site-h5">Your PR Councillors</h2>
             <p className="m-0 max-w-[52em] text-site-sm">
               Besides your ward councillor, {prSeats} of {c.name}’s {c.councillors} seats are filled from party lists, shared
               out by each party’s votes on the PR ballot across the municipality. These councillors represent the whole
@@ -189,8 +189,8 @@ export function SiteMyWard({ hasConsent }: { hasConsent: boolean }) {
                 <thead>
                   <tr className="border-b border-line text-site-caption text-slate">
                     <th scope="col" className="py-2 pr-3 font-semibold">Party</th>
-                    <th scope="col" className="py-2 pr-3 text-right font-semibold">PR seats</th>
-                    <th scope="col" className="py-2 font-semibold">PR councillors-elect</th>
+                    <th scope="col" className="py-2 pr-3 text-right font-semibold">PR Seats</th>
+                    <th scope="col" className="py-2 font-semibold">PR Councillors-Elect</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -240,7 +240,7 @@ export function SiteMyWard({ hasConsent }: { hasConsent: boolean }) {
             </p>
             <p className="m-0">
               <Link to={councilPath(c.code)} className="site-btn-primary">
-                See the council and every councillor
+                See the Council and Every Councillor
               </Link>
             </p>
           </SiteCard>

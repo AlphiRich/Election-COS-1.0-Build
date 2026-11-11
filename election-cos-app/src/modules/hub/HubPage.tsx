@@ -44,7 +44,7 @@ function Strategy() {
   return (
     <div className="space-y-6">
       <Card>
-        <SectionLabel as="h2">Section 1: Dual-funnel marketing and audience targeting</SectionLabel>
+        <SectionLabel as="h2">Section 1: Dual-Funnel Marketing and Audience Targeting</SectionLabel>
         <p className="text-body-md font-body mt-1">
           Behavioural micro-targeting for political campaigns is restricted on the major ad networks, so ECOS relies on contextual placement,
           intent-based search queries and geotargeted campaign hubs. Toggle between the 2026 bottom-of-funnel tactical engine and the 2029
@@ -53,8 +53,8 @@ function Strategy() {
       </Card>
       <div className="grid gap-4 lg:grid-cols-3">
         <Card>
-          <SectionLabel as="h3">Select campaign funnel</SectionLabel>
-          <div className="mt-2 grid grid-cols-2 gap-2" role="group" aria-label="Campaign funnel">
+          <SectionLabel as="h3">Select Campaign Funnel</SectionLabel>
+          <div className="mt-2 grid grid-cols-2 gap-2" role="group" aria-label="Campaign Funnel">
             {(['bofu', 'tofu'] as const).map((k) => (
               <button
                 key={k}
@@ -80,9 +80,9 @@ function Strategy() {
         </Card>
         <div className="lg:col-span-2 space-y-4">
           <Card>
-            <SectionLabel as="h3">Channel cost per acquisition: planning targets</SectionLabel>
+            <SectionLabel as="h3">Channel Cost per Acquisition: Planning Targets</SectionLabel>
             <BarChart
-              title="Target cost per acquisition (R)"
+              title="Target Cost per Acquisition (R)"
               bars={CHANNELS.map<Bar>((c) => ({ label: c.label, value: c.cpaTarget, shown: `R${n(c.cpaTarget)}` }))}
               orientation="row"
               valueLabel="Target CPA (R)"
@@ -90,9 +90,9 @@ function Strategy() {
             />
           </Card>
           <Card>
-            <SectionLabel as="h3">Channel conversion rate: planning assumptions</SectionLabel>
+            <SectionLabel as="h3">Channel Conversion Rate: Planning Assumptions</SectionLabel>
             <BarChart
-              title="Assumed conversion rate (%)"
+              title="Assumed Conversion Rate (%)"
               bars={CHANNELS.map<Bar>((c) => ({ label: c.label, value: c.conversionAssumption, shown: `${c.conversionAssumption}%` }))}
               orientation="row"
               valueLabel="Assumed conversion (%)"
@@ -106,7 +106,7 @@ function Strategy() {
         </div>
       </div>
       <Card>
-        <SectionLabel as="h3">Phased implementation roadmap</SectionLabel>
+        <SectionLabel as="h3">Phased Implementation Roadmap</SectionLabel>
         <div className="mt-2 grid gap-3 md:grid-cols-3">
           {ROADMAP.map((r) => (
             <div key={r.phase} className="rounded border-l-4 border-gold bg-paper p-3 space-y-1">
@@ -179,7 +179,7 @@ function Teleprompter() {
   const start = () => { setElapsed(0); setActive(true); };
   return (
     <Card>
-      <SectionLabel as="h3">Interactive promo script teleprompter</SectionLabel>
+      <SectionLabel as="h3">Interactive Promo Script Teleprompter</SectionLabel>
       <p className="text-body-md font-body text-slate">Simulates voice-over pacing and visual cut timing: a block lights every {PROMPTER_STEP_MS / 1000} seconds.</p>
       <div className="mt-2 flex flex-wrap items-center gap-2">
         <Field label="Script">
@@ -218,13 +218,13 @@ function Assets() {
   return (
     <div className="space-y-6">
       <Card>
-        <SectionLabel as="h2">Section 2: Marketing collateral manifest, voice profile and video teleprompter</SectionLabel>
+        <SectionLabel as="h2">Section 2: Marketing Collateral Manifest, Voice Profile and Video Teleprompter</SectionLabel>
         <p className="text-body-md font-body mt-1">Assets follow the Paper and Ink design protocol: high contrast, and an authoritative South African voice profile.</p>
       </Card>
       <Card>
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <SectionLabel as="h3">Asset manifest catalogue</SectionLabel>
-          <div className="flex flex-wrap gap-2" role="group" aria-label="Asset category">
+          <SectionLabel as="h3">Asset Manifest Catalogue</SectionLabel>
+          <div className="flex flex-wrap gap-2" role="group" aria-label="Asset Category">
             {([['all', 'All assets'], ['digital', 'Digital banners'], ['print', 'Print collateral'], ['video', 'Video & audio']] as const).map(([k, label]) => (
               <button key={k} type="button" aria-pressed={cat === k} onClick={() => setCat(k)} className={`min-h-11 rounded border px-3 text-body-md font-body ${cat === k ? 'border-ink bg-ink text-paper' : 'border-ink/20'}`}>{label}</button>
             ))}
@@ -247,28 +247,28 @@ function Assets() {
       </Card>
       <div className="grid gap-4 lg:grid-cols-3">
         <Card>
-          <SectionLabel as="h3">South African VO talent profile</SectionLabel>
+          <SectionLabel as="h3">South African VO Talent Profile</SectionLabel>
           <dl className="mt-2 space-y-2 text-body-md font-body">
             {VOICE_PROFILE.map(([k, v]) => (<div key={k}><dt className="text-label-caps font-display uppercase text-slate">{k}</dt><dd>{v}</dd></div>))}
           </dl>
           <div className="mt-3 rounded bg-paper p-3">
             <p className="text-label-caps font-display uppercase text-roadmap">Canva AI Magic prompt generator</p>
-            <Button className="mt-2 w-full" onClick={copy}>Copy Canva prompt</Button>
+            <Button className="mt-2 w-full" onClick={copy}>Copy Canva Prompt</Button>
             {copied && <p role="status" className="text-caption font-body text-green mt-1 font-bold">Copied to clipboard</p>}
           </div>
         </Card>
         <div className="lg:col-span-2"><Teleprompter /></div>
       </div>
       <Card>
-        <SectionLabel as="h3">Daily Ground Intelligence (lead magnet)</SectionLabel>
+        <SectionLabel as="h3">Daily Ground Intelligence (Lead Magnet)</SectionLabel>
         <p className="text-body-md font-body mt-1">
           The newsletter generated in the browser from the field&rsquo;s logged signals, with small groups suppressed, the Item 12 explainer, the
           Commission&rsquo;s registration notice and the compliance notice. Nothing is sent.
         </p>
-        <div className="mt-2"><Button onClick={makeNewsletter}>Generate preview</Button></div>
+        <div className="mt-2"><Button onClick={makeNewsletter}>Generate Preview</Button></div>
         {newsletter && (
           <>
-            <iframe title="Daily Ground Intelligence preview" sandbox="" srcDoc={newsletter} className="mt-3 h-96 w-full rounded border border-ink/10 bg-white" />
+            <iframe title="Daily Ground Intelligence Preview" sandbox="" srcDoc={newsletter} className="mt-3 h-96 w-full rounded border border-ink/10 bg-white" />
             <a className="mt-2 inline-block min-h-11 underline" download="daily-ground-intelligence.html" href={`data:text/html;charset=utf-8,${encodeURIComponent(newsletter)}`}>Download the HTML file</a>
           </>
         )}
@@ -303,7 +303,7 @@ function Tech() {
   return (
     <div className="space-y-6">
       <Card>
-        <SectionLabel as="h2">Section 3: topology, 32 bounded responsibilities and the offline engine</SectionLabel>
+        <SectionLabel as="h2">Section 3: Topology, 32 Bounded Responsibilities and the Offline Engine</SectionLabel>
         <p className="text-body-md font-body mt-1">
           The master stack describes four tiers on AWS. This build runs on Firebase and a Cloudflare edge worker, so each tier below says what
           is actually there. Of the 32 named responsibilities, {sum.built} are built, {sum.partial} partly, {sum['not-built']} not built,{' '}
@@ -321,8 +321,8 @@ function Tech() {
       </div>
       <Card>
         <div className="flex flex-wrap items-end justify-between gap-3">
-          <SectionLabel as="h3">Catalogue of 32 bounded responsibilities</SectionLabel>
-          <Field label="Search agents (for example POPIA, quota, sync)">
+          <SectionLabel as="h3">Catalogue of 32 Bounded Responsibilities</SectionLabel>
+          <Field label="Search Agents (For Example POPIA, Quota, Sync)">
             {(props) => <input {...props} type="search" value={term} onChange={(e) => setTerm(e.target.value)} />}
           </Field>
         </div>
@@ -346,10 +346,10 @@ function Tech() {
       <Card>
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
-            <SectionLabel as="h3">Client offline outbox state machine</SectionLabel>
+            <SectionLabel as="h3">Client Offline Outbox State Machine</SectionLabel>
             <p className="text-body-md font-body text-slate">Runs the real transitions from <span className="font-mono">src/offline/outboxStatus.ts</span>, from the phone&rsquo;s local store to accepted.</p>
           </div>
-          <Button onClick={simulate} disabled={running}>Simulate field canvass sync</Button>
+          <Button onClick={simulate} disabled={running}>Simulate Field Canvass Sync</Button>
         </div>
         <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
           {STATES.map(([s, d], i) => (
@@ -383,7 +383,7 @@ function Quota() {
   return (
     <div className="space-y-6">
       <Card>
-        <SectionLabel as="h2">Section 4: statutory seat allocation quota engine</SectionLabel>
+        <SectionLabel as="h2">Section 4: Statutory Seat Allocation Quota Engine</SectionLabel>
         <p className="text-body-md font-body mt-1">
           Schedule 1 (Items 12 and 13) of the Municipal Structures Act: the quota is Q = floor(A / (B - C - D)) + 1. Here it starts from the
           certified 2026 result for JB Marks, which the Commission&rsquo;s own seat calculation confirms (quota 2,069, ANC 22, DA 21, VF+ 6).
@@ -391,7 +391,7 @@ function Quota() {
       </Card>
       <div className="grid gap-4 lg:grid-cols-3">
         <Card>
-          <SectionLabel as="h3">NW405 quota controls · Item 12 engine</SectionLabel>
+          <SectionLabel as="h3">NW405 Quota Controls · Item 12 Engine</SectionLabel>
           <div className="space-y-3 mt-2">
             <Field label={`Total valid votes cast (A): ${n(a)}`}>
               {(props) => <input {...props} type="range" min={60000} max={160000} step={500} value={a} onChange={(e) => setA(Number(e.target.value))} />}
@@ -411,9 +411,9 @@ function Quota() {
           </div>
         </Card>
         <Card className="lg:col-span-2">
-          <SectionLabel as="h3">Council seats, JB Marks 2026 (Schedule 1)</SectionLabel>
+          <SectionLabel as="h3">Council Seats, JB Marks 2026 (Schedule 1)</SectionLabel>
           <BarChart
-            title="Council seats by party, JB Marks 2026"
+            title="Council Seats by Party, JB Marks 2026"
             bars={holders.slice(0, 8).map<Bar>((h) => ({ label: h.name, value: h.seats, shown: String(h.seats), detail: `${h.wardSeats} ward seats` }))}
             orientation="row"
             valueLabel="Seats"
@@ -430,12 +430,12 @@ function Quota() {
       </div>
       <div className="grid gap-4 lg:grid-cols-2">
         <Card>
-          <SectionLabel as="h3">Voter turnout, JB Marks: 2021 and 2026</SectionLabel>
+          <SectionLabel as="h3">Voter Turnout, JB Marks: 2021 and 2026</SectionLabel>
           <BarChart
-            title="Valid PR votes as a share of registered voters"
+            title="Valid PR Votes as a Share of Registered Voters"
             bars={[
-              { label: '2021 local government election', value: (t.prValid2021 / t.registered2021) * 100, shown: `${((t.prValid2021 / t.registered2021) * 100).toFixed(1)}%` },
-              { label: '2026 local government election', value: (t.prValid2026 / t.registered2026) * 100, shown: `${((t.prValid2026 / t.registered2026) * 100).toFixed(1)}%` },
+              { label: '2021 Local Government Election', value: (t.prValid2021 / t.registered2021) * 100, shown: `${((t.prValid2021 / t.registered2021) * 100).toFixed(1)}%` },
+              { label: '2026 Local Government Election', value: (t.prValid2026 / t.registered2026) * 100, shown: `${((t.prValid2026 / t.registered2026) * 100).toFixed(1)}%` },
             ]}
             orientation="column"
             valueLabel="Share of registered (%)"
@@ -444,9 +444,9 @@ function Quota() {
           <p className="text-caption font-body text-slate mt-2">Two elections are all this build holds for JB Marks. No turnout is forecast.</p>
         </Card>
         <Card>
-          <SectionLabel as="h3">Wards closest to changing hands, 2026</SectionLabel>
+          <SectionLabel as="h3">Wards Closest to Changing Hands, 2026</SectionLabel>
           <BarChart
-            title="Margin between first and second, in points"
+            title="Margin Between First and Second, in Points"
             bars={closest.map<Bar>((w) => ({ label: `Ward ${w.wardNumber}`, value: w.margin, shown: `${w.margin.toFixed(1)}`, detail: `${partyLabel(w.winner)} over ${w.runnerUp ? partyLabel(w.runnerUp) : 'no one'}` }))}
             orientation="row"
             valueLabel="Margin (points)"
@@ -468,14 +468,14 @@ function Legal() {
   return (
     <div className="space-y-6">
       <Card>
-        <SectionLabel as="h2">Section 5: statutory repository, legal briefs and party funding aggregator</SectionLabel>
+        <SectionLabel as="h2">Section 5: Statutory Repository, Legal Briefs and Party Funding Aggregator</SectionLabel>
         <p className="text-body-md font-body mt-1">
           Briefs for POPIA, the Political Party Funding Act, PAIA and the Public Gatherings Act. No instrument here is a binding legal document:
           each shows its real status, and the drafting is for a qualified South African attorney.
         </p>
       </Card>
       <Card>
-        <div className="flex flex-wrap gap-2" role="tablist" aria-label="Legal documents">
+        <div className="flex flex-wrap gap-2" role="tablist" aria-label="Legal Documents">
           {LEGAL_DOCS.map((x) => (
             <button key={x.id} role="tab" aria-selected={doc === x.id} type="button" onClick={() => setDoc(x.id)} className={`min-h-11 rounded border px-3 text-body-md font-body ${doc === x.id ? 'border-ink bg-ink text-paper' : 'border-ink/20'}`}>{x.button}</button>
           ))}
@@ -487,11 +487,11 @@ function Legal() {
         </div>
       </Card>
       <Card>
-        <SectionLabel as="h3">Political Party Funding Act: donor threshold position</SectionLabel>
+        <SectionLabel as="h3">Political Party Funding Act: Donor Threshold Position</SectionLabel>
         <p className="text-body-md font-body text-slate">Lines from Government Gazette 53182 (under court challenge): warning rung R160,000, disclosure line R200,000, annual donor line R30,000,000. This reports a position, never that anything is lawful. How donations are added across a year is an open legal question; enter a total you have worked out.</p>
         <div className="mt-3 grid gap-4 lg:grid-cols-3 items-center">
           <div className="space-y-3">
-            <Field label="Donor name or registration (not stored or sent)">
+            <Field label="Donor Name or Registration (Not Stored or Sent)">
               {(props) => <input {...props} type="text" value={donor} onChange={(e) => setDonor(e.target.value)} />}
             </Field>
             <Field label={`Simulated annual donation total: ${f.total}`}>
@@ -516,14 +516,14 @@ function Dns() {
   return (
     <div className="space-y-6">
       <Card>
-        <SectionLabel as="h2">Section 6: DNS topology and build discipline gate</SectionLabel>
+        <SectionLabel as="h2">Section 6: DNS Topology and Build Discipline Gate</SectionLabel>
         <p className="text-body-md font-body mt-1">
           The master stack pins <span className="font-mono">app.electioncos.co.za</span> to Grey Cloud (DNS-only) so Firebase can renew its certificate directly. The table
           below sets that specification beside what was observed on 8 November 2026. Two rows differ; the page does not change DNS.
         </p>
       </Card>
       <Card>
-        <SectionLabel as="h3">Authoritative DNS zone: as specified</SectionLabel>
+        <SectionLabel as="h3">Authoritative DNS Zone: As Specified</SectionLabel>
         <Table caption="DNS records as the master stack specifies them.">
           <thead><tr><Th>Type</Th><Th>Host</Th><Th>Target</Th><Th>Cloudflare posture</Th><Th>Rationale</Th></tr></thead>
           <tbody>{DNS_SPECIFIED.map((r) => (<tr key={r.type + r.host}><Td>{r.type}</Td><Td>{r.host}</Td><Td>{r.value}</Td><Td>{r.posture}</Td><Td>{r.why}</Td></tr>))}</tbody>
@@ -539,7 +539,7 @@ function Dns() {
       </Card>
       <Card>
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <SectionLabel as="h3">Build discipline checklist (rules 1 to 13)</SectionLabel>
+          <SectionLabel as="h3">Build Discipline Checklist (Rules 1 to 13)</SectionLabel>
           <Pill>{s.enforced} enforced by a test or check · {s.partial} partial · {s.process} process rules</Pill>
         </div>
         <div className="mt-3 grid gap-3 md:grid-cols-2 lg:grid-cols-3" data-testid="discipline-grid">
@@ -564,16 +564,16 @@ export function HubPage() {
   const q2026 = quotaFor(seatInput('NW405').totalValidVotes, 67, 0, 0);
   return (
     <div className="space-y-6">
-      <PageHeader slug="/analytics/hub" title="Master command & media hub" description="Election Campaign OS: strategy, assets, the agent stack, the Schedule 1 calculator, the legal vault and the DNS gate." />
+      <PageHeader slug="/analytics/hub" title="Master Command & Media Hub" description="Election Campaign OS: strategy, assets, the agent stack, the Schedule 1 calculator, the legal vault and the DNS gate." />
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
-        <StatTile label="Target wards" value={n(wards)} sub={`${REGISTER_ENTRIES.length} municipalities`} />
-        <StatTile label="Ward entry fee" value="R1,800" sub="BOFU ward tier" />
-        <StatTile label="Volunteer cost" value="not set" sub="no activity-based schedule adopted" />
-        <StatTile label="NW405 quota, 2026" value={q2026 === null ? 'ERR' : n(q2026)} sub="valid votes per seat" />
-        <StatTile label="Named agents" value={HUB_AGENTS.length} sub={`${agents.built} built`} />
-        <StatTile label="Legal instruments" value={LEGAL_DOCS.length} sub="none published" />
+        <StatTile label="Target Wards" value={n(wards)} sub={`${REGISTER_ENTRIES.length} municipalities`} />
+        <StatTile label="Ward Entry Fee" value="R1,800" sub="BOFU ward tier" />
+        <StatTile label="Volunteer Cost" value="not set" sub="no activity-based schedule adopted" />
+        <StatTile label="NW405 Quota, 2026" value={q2026 === null ? 'ERR' : n(q2026)} sub="valid votes per seat" />
+        <StatTile label="Named Agents" value={HUB_AGENTS.length} sub={`${agents.built} built`} />
+        <StatTile label="Legal Instruments" value={LEGAL_DOCS.length} sub="none published" />
       </div>
-      <div className="flex flex-wrap gap-2" role="tablist" aria-label="Hub sections">
+      <div className="flex flex-wrap gap-2" role="tablist" aria-label="Hub Sections">
         {TABS.map(([k, label]) => (
           <button key={k} id={`tab-${k}`} role="tab" aria-selected={tab === k} aria-controls={`panel-${k}`} type="button" onClick={() => setTab(k)} className={`min-h-11 rounded border px-3 text-body-md font-body font-semibold ${tab === k ? 'border-gold bg-ink text-paper' : 'border-ink/20 text-slate'}`}>{label}</button>
         ))}

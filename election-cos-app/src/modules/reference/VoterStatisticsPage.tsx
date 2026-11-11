@@ -47,7 +47,7 @@ export function VoterStatisticsPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader slug="/analytics/voter-statistics" title="Voter statistics" />
+      <PageHeader slug="/analytics/voter-statistics" title="Voter Statistics" />
       <BasisNote>
         Registered voters are the gazetted baseline for JB Marks: {n(REGISTERED_TOTAL)} (Electoral
         Commission Circular 1 of 2025), split by ward and voting district in the delimitation
@@ -59,23 +59,23 @@ export function VoterStatisticsPage() {
 
       <div className="grid gap-3 sm:grid-cols-3">
         <StatTile
-          label="Registered voters"
+          label="Registered Voters"
           value={n(REGISTERED_TOTAL)}
           sub="gazetted baseline"
           emphasis
         />
         <StatTile label="Wards" value={WARD_ROWS.length} sub="proclaimed 7 Aug 2026" />
         <StatTile
-          label="Voting districts"
+          label="Voting Districts"
           value={new Set(VD_ROWS.map((r) => r.vdCode)).size}
           sub={`${VD_ROWS.length} rows, one per ward a district serves`}
         />
       </div>
 
       <Card>
-        <SectionLabel as="h2">Age profile, whole municipality</SectionLabel>
+        <SectionLabel as="h2">Age Profile, Whole Municipality</SectionLabel>
         <BarChart
-          title="Age mix, whole municipality"
+          title="Age Mix, Whole Municipality"
           bars={mixBars(VD_REFERENCE.municipalityAgeMix)}
           orientation="column"
           valueLabel="Share of voters (%)"
@@ -84,12 +84,12 @@ export function VoterStatisticsPage() {
       </Card>
 
       <Card>
-        <SectionLabel as="h2">Which wards are youngest</SectionLabel>
+        <SectionLabel as="h2">Which Wards Are Youngest</SectionLabel>
         <p className="text-body-md font-body text-slate mt-1">
           Share of each ward&rsquo;s voters aged 18 to 29, highest first.
         </p>
         <BarChart
-          title="Share aged 18 to 29, by ward"
+          title="Share Aged 18 to 29, by Ward"
           bars={rank}
           orientation="row"
           valueLabel="Share aged 18 to 29 (%)"
@@ -98,7 +98,7 @@ export function VoterStatisticsPage() {
       </Card>
 
       <Card>
-        <SectionLabel as="h2">One ward</SectionLabel>
+        <SectionLabel as="h2">One Ward</SectionLabel>
         <Field label="Ward">
           {(props) => (
             <select {...props} value={ward} onChange={(e) => setWard(Number(e.target.value))}>

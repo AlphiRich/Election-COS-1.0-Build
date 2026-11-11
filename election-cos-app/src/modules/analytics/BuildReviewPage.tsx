@@ -54,7 +54,7 @@ export function BuildReviewPage() {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      <PageHeader slug="/analytics/build-review" title="Build review — JB Marks (NW405)" />
+      <PageHeader slug="/analytics/build-review" title="Build Review — JB Marks (NW405)" />
       <BasisNote>
         Every figure here is computed from a source in this build, or labelled as not having one.
         The roll figures appear only once a roll is loaded.
@@ -62,18 +62,18 @@ export function BuildReviewPage() {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <StatTile
-          label="Council seats"
+          label="Council Seats"
           value={reg.councillors}
           sub={`${reg.wards} ward · ${reg.councillors - (reg.wards ?? 0)} PR`}
         />
         <StatTile label="Registered (Annexure A)" value={reg.registeredVoters.toLocaleString()} />
         <StatTile
-          label="Ward norm"
+          label="Ward Norm"
           value={reg.norm?.toLocaleString() ?? '—'}
           sub={`band ${reg.minNorm?.toLocaleString()}–${reg.maxNorm?.toLocaleString()}`}
         />
         <StatTile
-          label="2021 quota"
+          label="2021 Quota"
           value={seats.quota.toLocaleString()}
           sub="2021 result, not 2026"
         />
@@ -107,9 +107,9 @@ export function BuildReviewPage() {
           <p className="font-display mb-2">Voters’ roll — field usage in your scope</p>
           <div className="grid grid-cols-3 gap-3">
             <StatTile label="Confirmed" value={stats.verify} />
-            <StatTile label="Recorded with consent" value={stats.capture} />
+            <StatTile label="Recorded With Consent" value={stats.capture} />
             <StatTile
-              label="Consent rate"
+              label="Consent Rate"
               value={stats.captureRate === null ? '—' : `${Math.round(stats.captureRate * 100)}%`}
             />
           </div>

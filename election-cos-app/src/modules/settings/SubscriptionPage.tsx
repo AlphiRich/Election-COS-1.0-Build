@@ -129,7 +129,7 @@ export function SubscriptionPage() {
     <div className="space-y-6 max-w-2xl">
       <PageHeader
         slug="/settings/subscription"
-        title="What your subscription includes"
+        title="What Your Subscription Includes"
         description={SUBSCRIPTION_PRICE_BASIS}
       />
 

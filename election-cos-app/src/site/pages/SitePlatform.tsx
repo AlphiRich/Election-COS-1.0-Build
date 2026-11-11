@@ -10,12 +10,12 @@ export function SitePlatform() {
     <>
       <PageIntro
         eyebrow="Platform"
-        title="One platform, seven roles, every ward."
+        title="One Platform, Seven Roles, Every Ward."
         lead="Each person sees only the wards they are assigned to. Every capability below is marked built or roadmap."
       />
       <SiteSection labelledBy="pf-pillars" className="pb-14">
         <h2 id="pf-pillars" className="mb-5 mt-0 font-site-display text-site-h4">
-          What it does
+          What It Does
         </h2>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-5">
           {PILLARS.map((p) => (
@@ -30,7 +30,7 @@ export function SitePlatform() {
       <SiteSection labelledBy="pf-roles" className="pb-[88px]">
         <Eyebrow>Roles</Eyebrow>
         <h2 id="pf-roles" className="mb-5 mt-2 font-site-display text-site-h4">
-          Who does what
+          Who Does What
         </h2>
         <ul className="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-4 p-0">
           {PLATFORM_ROLES.map((r) => (
@@ -44,7 +44,7 @@ export function SitePlatform() {
         </ul>
         <p className="mt-8">
           <Link to="/book-a-demo" className="site-btn-primary">
-            Book a demo
+            Book a Demo
           </Link>
         </p>
       </SiteSection>

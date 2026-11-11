@@ -47,15 +47,15 @@ export interface IncidentTransition {
 }
 
 export const INCIDENT_TRANSITIONS: IncidentTransition[] = [
-  { from: 'LOGGED', to: 'TRIAGED', capability: 'incidents.triage', label: 'Confirm severity' },
+  { from: 'LOGGED', to: 'TRIAGED', capability: 'incidents.triage', label: 'Confirm Severity' },
   { from: 'TRIAGED', to: 'ESCALATED', capability: 'incidents.escalate', label: 'Escalate' },
-  { from: 'ESCALATED', to: 'REFERRED', capability: 'incidents.escalate', label: 'Issue referral' },
+  { from: 'ESCALATED', to: 'REFERRED', capability: 'incidents.escalate', label: 'Issue Referral' },
 
   // Something got fixed. Reachable from any point after it was triaged,
   // because a municipality can act before a referral is ever issued.
-  { from: 'TRIAGED', to: 'RESOLVED', capability: 'incidents.triage', label: 'Mark resolved' },
-  { from: 'ESCALATED', to: 'RESOLVED', capability: 'incidents.triage', label: 'Mark resolved' },
-  { from: 'REFERRED', to: 'RESOLVED', capability: 'incidents.triage', label: 'Mark resolved' },
+  { from: 'TRIAGED', to: 'RESOLVED', capability: 'incidents.triage', label: 'Mark Resolved' },
+  { from: 'ESCALATED', to: 'RESOLVED', capability: 'incidents.triage', label: 'Mark Resolved' },
+  { from: 'REFERRED', to: 'RESOLVED', capability: 'incidents.triage', label: 'Mark Resolved' },
 
   // The campaign will do nothing further.
   { from: 'LOGGED', to: 'CLOSED', capability: 'incidents.escalate', label: 'Close' },

@@ -160,7 +160,7 @@ export function RoundPage() {
               to="/incidents/new"
               className="inline-flex min-h-11 items-center whitespace-nowrap rounded border border-ink/20 px-4 py-2 text-label-caps font-display uppercase text-ink"
             >
-              Report an incident
+              Report an Incident
             </Link>
           ) : undefined}
           </div>
@@ -170,7 +170,7 @@ export function RoundPage() {
       {/* Was a bare <label> wrapping the input: nothing associated. The
           monospace treatment stays — a ward code is a code. */}
       <div className="max-w-xs">
-        <Field label="Ward code" mono>
+        <Field label="Ward Code" mono>
           {(props) => (
             <input
               {...props}
@@ -193,9 +193,9 @@ export function RoundPage() {
         <>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <StatTile label="Doors" value={summary.total} />
-            <StatTile label="Left to work" value={summary.queueable} />
-            <StatTile label="Waiting out a cool-off" value={summary.waiting} />
-            <StatTile label="Asked not to be contacted" value={summary.refused} />
+            <StatTile label="Left to Work" value={summary.queueable} />
+            <StatTile label="Waiting Out a Cool-Off" value={summary.waiting} />
+            <StatTile label="Asked Not to Be Contacted" value={summary.refused} />
           </div>
 
           <div className="bg-ink text-paper rounded p-4">
@@ -210,7 +210,7 @@ export function RoundPage() {
           </div>
 
           <Card className="space-y-1">
-            <SectionLabel as="h2">Every door, by state</SectionLabel>
+            <SectionLabel as="h2">Every Door, by State</SectionLabel>
             {(Object.keys(CONTACT_STATUS_LABEL) as ContactStatus[]).map((status) => (
               <p key={status} className="text-body-md font-body text-ink">
                 {CONTACT_STATUS_LABEL[status]}

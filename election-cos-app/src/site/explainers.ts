@@ -57,26 +57,26 @@ export const EXPLAINERS: Explainer[] = [
   {
     slug: 'party-funding-thresholds',
     path: '/explainers/party-funding-thresholds',
-    title: 'The party-funding disclosure line, and the annual cap',
-    question: 'What is the PPFA disclosure threshold in South Africa?',
+    title: 'The Party-Funding Disclosure Line, and the Annual Cap',
+    question: 'What Is the PPFA Disclosure Threshold in South Africa?',
     standfirst:
       'Two figures govern political donations: the amount above which a donation must be disclosed, and the most one donor may give a party in a year.',
     sections: [
       {
-        heading: 'The two figures',
+        heading: 'The Two Figures',
         paragraphs: [
           'A donation above R200,000 must be disclosed. A single donor may give a party no more than R30 million in a financial year.',
           'Both were published in Government Gazette 53182 of 18 August 2025. They replaced an earlier regime in which the disclosure line was R100,000 and the annual cap R15 million, and a still earlier R80,000 figure. Material published before August 2025 — including some that is still online — quotes the superseded numbers.',
         ],
       },
       {
-        heading: 'They are under challenge',
+        heading: 'They Are Under Challenge',
         paragraphs: [
           'The thresholds are the subject of litigation. They are the law as it stands, and they are what this software applies, but they are not settled in the sense that a long-standing provision is settled. Anybody planning around them should know that.',
         ],
       },
       {
-        heading: 'What the arithmetic is actually for',
+        heading: 'What the Arithmetic Is Actually For',
         paragraphs: [
           'The disclosure line applies per donor, aggregated. The question is rarely whether one payment crossed R200,000; it is whether a donor has crossed it across several payments over a period, which is a running total somebody has to keep.',
           'That is the part worth automating, and it is what this product does: donor totals aggregated nightly, an alert at the disclosure line, warnings as a donor approaches the cap, and a quarterly export prepared for a person to check and sign.',
@@ -94,13 +94,13 @@ export const EXPLAINERS: Explainer[] = [
   {
     slug: 'how-a-council-is-made-up',
     path: '/explainers/how-a-council-is-made-up',
-    title: 'How a municipal council is made up',
-    question: 'How are seats allocated in a South African municipal council?',
+    title: 'How a Municipal Council Is Made Up',
+    question: 'How Are Seats Allocated in a South African Municipal Council?',
     standfirst:
       'A local council is filled two ways at once: one councillor elected in each ward, and a second group allocated so the whole council reflects the proportional vote.',
     sections: [
       {
-        heading: 'Two ballots, one council',
+        heading: 'Two Ballots, One Council',
         paragraphs: [
           'In a local municipality a voter gets two ballots. One elects the councillor for their ward, first past the post. The other is for a party, and it decides the proportional half of the council.',
           'Seats are then allocated so that each party’s total share of the council — ward seats and proportional seats together — reflects its proportional vote. A party that wins many wards therefore receives fewer proportional seats, because its ward wins have already filled part of its entitlement.',
@@ -108,14 +108,14 @@ export const EXPLAINERS: Explainer[] = [
         ],
       },
       {
-        heading: 'A worked example',
+        heading: 'A Worked Example',
         paragraphs: [
           'JB Marks Local Municipality, the reference build for this software, has 34 wards and 67 council seats: 34 ward seats and 33 proportional seats, across 108 voting stations and 122,059 registered voters.',
           'The split is not always even. The number of seats a council has, and how they divide between ward and proportional, is set in the provincial gazette for that municipality.',
         ],
       },
       {
-        heading: 'When a party wins more wards than it is entitled to',
+        heading: 'When a Party Wins More Wards Than It Is Entitled To',
         paragraphs: [
           'A party can win more wards than its proportional share would give it. The Municipal Structures Act deals with this: the ward councillors keep their seats, and the council is enlarged rather than anybody being removed.',
           'It is uncommon, it is provided for, and it is worth knowing before election night — because a council that ends up larger than the gazetted figure is not an error in the count.',
@@ -132,34 +132,34 @@ export const EXPLAINERS: Explainer[] = [
   {
     slug: 'popia-and-voter-contact',
     path: '/explainers/popia-and-voter-contact',
-    title: 'POPIA and voter contact',
-    question: 'What does POPIA require when a campaign contacts voters?',
+    title: 'POPIA and Voter Contact',
+    question: 'What Does POPIA Require When a Campaign Contacts Voters?',
     standfirst:
       'Canvassing collects personal information, and some of what it collects is in the category the Act protects most strongly.',
     sections: [
       {
-        heading: 'Political opinion is special personal information',
+        heading: 'Political Opinion Is Special Personal Information',
         paragraphs: [
           'Section 26 of the Protection of Personal Information Act treats a person’s political persuasion as special personal information, alongside health, religion and biometrics. Processing it is prohibited unless a specific ground applies.',
           'This matters more than it first appears. A canvassing record that notes how somebody intends to vote, or how sympathetic they seemed at the door, is a record of political opinion — whatever the field is called in the software.',
         ],
       },
       {
-        heading: 'Consent, and the right to take it back',
+        heading: 'Consent, and the Right to Take It Back',
         paragraphs: [
           'Where processing rests on consent, section 11(2)(b) gives the person the right to withdraw it at any time. A consent that is awkward to withdraw is weaker than it looks.',
           'That is why this product records consent before storing a contact record rather than after, keeps the version of the wording a person agreed to, and supports suppressing a person’s records from use on request.',
         ],
       },
       {
-        heading: 'Direct marketing is its own rule',
+        heading: 'Direct Marketing Is Its Own Rule',
         paragraphs: [
           'Section 69 governs electronic direct marketing and is an opt-in rule, not an opt-out one. Having somebody’s number because they raised a service complaint is not permission to send them campaign messages.',
           'The practical consequence for a campaign is that the purpose a person gave their details for is the purpose those details may be used for, and widening it needs a fresh basis.',
         ],
       },
       {
-        heading: 'Suppression is not deletion',
+        heading: 'Suppression Is Not Deletion',
         paragraphs: [
           'Removing somebody from use and erasing every trace of them are different operations, and conflating them is how a campaign ends up re-contacting a person who asked not to be. A suppression record has to persist in order to keep working.',
           'This product suppresses records from use on request. It does not claim to delete data, and that distinction is in its Capability and Limitations Statement rather than buried in a settings screen.',

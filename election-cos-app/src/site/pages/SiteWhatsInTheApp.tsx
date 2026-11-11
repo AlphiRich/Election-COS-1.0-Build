@@ -17,8 +17,8 @@ export function SiteWhatsInTheApp() {
     <>
       <SiteSection className="pb-8 pt-[88px]">
         <div className="flex max-w-[760px] flex-col gap-4">
-          <Eyebrow>For councillors, ward offices and parties</Eyebrow>
-          <h1 className="m-0 font-site-display text-site-h3 md:text-site-h2">What is in the app</h1>
+          <Eyebrow>For Councillors, Ward Offices and Parties</Eyebrow>
+          <h1 className="m-0 font-site-display text-site-h3 md:text-site-h2">What Is in the App</h1>
           <p className="m-0 text-site-lead">
             The voter tools on this site are free. The app behind them is what a ward office or a
             party uses between elections, and what residents notice as faster answers.
@@ -28,7 +28,7 @@ export function SiteWhatsInTheApp() {
 
       <SiteSection labelledBy="pill-h" className="pb-10">
         <h2 id="pill-h" className="mb-6 mt-0 font-site-display text-site-h4">
-          Five capabilities
+          Five Capabilities
         </h2>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-4">
           {PILLARS.map((p) => (
@@ -50,7 +50,7 @@ export function SiteWhatsInTheApp() {
       <SiteSection labelledBy="case-h" className="pb-10">
         <SiteCard className="flex flex-col gap-5 p-8">
           <h2 id="case-h" className="m-0 font-site-display text-site-h4">
-            What a resident’s complaint goes through
+            What a Resident’s Complaint Goes Through
           </h2>
           <ol className="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,200px),1fr))] gap-4 p-0">
             {CASE_STEPS.map((s) => (
@@ -66,7 +66,7 @@ export function SiteWhatsInTheApp() {
       <SiteSection labelledBy="free-h" className="pb-10">
         <div className="flex flex-col gap-4">
           <h2 id="free-h" className="m-0 font-site-display text-site-h4">
-            Free for any campaign team, today
+            Free for Any Campaign Team, Today
           </h2>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-4">
             {[
@@ -117,7 +117,7 @@ export function SiteWhatsInTheApp() {
 
       <SiteSection labelledBy="safe-h" className="pb-10">
         <h2 id="safe-h" className="mb-6 mt-0 font-site-display text-site-h4">
-          Built to work in the field and to keep data safe
+          Built to Work in the Field and to Keep Data Safe
         </h2>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-4">
           {CASEWORK_FEATURES.map((f) => (
@@ -132,10 +132,10 @@ export function SiteWhatsInTheApp() {
       <SiteSection className="pb-[88px]">
         <div className="flex flex-wrap gap-3">
           <Link to="/for-campaigns" className="site-btn-primary">
-            See the software and prices
+            See the Software and Prices
           </Link>
           <a href={whatsAppHref('Election Campaign OS enquiry')} className="site-btn-outline-ink">
-            Talk to us on WhatsApp
+            Talk to Us on WhatsApp
           </a>
         </div>
       </SiteSection>

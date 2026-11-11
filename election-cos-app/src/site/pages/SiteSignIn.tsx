@@ -11,8 +11,8 @@ export function SiteSignIn() {
   return (
     <>
       <PageIntro
-        eyebrow="Sign in"
-        title="Taking you to the application."
+        eyebrow="Sign In"
+        title="Taking You to the Application."
         lead="Sign-in happens on the application, not on this site."
       />
       <SiteSection className="pb-[88px]">

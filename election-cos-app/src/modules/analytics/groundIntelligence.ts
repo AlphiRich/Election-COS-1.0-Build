@@ -122,7 +122,7 @@ export function sentimentTableHtml(rows: SentimentRow[]): string {
         : `<tr><td>${esc(r.ward)}</td><td>${esc(r.vd)}</td><td>${r.avg.toFixed(1)} / 5.0</td><td>${esc(r.issue)}</td><td>${r.polled}</td></tr>`,
     )
     .join('');
-  return `<section class="card"><p class="eyebrow">SENTIMENT AND ISSUES BY WARD AND VOTING DISTRICT</p><table><thead><tr><th>Ward</th><th>VD</th><th>Average sentiment</th><th>Primary issue</th><th>Polled</th></tr></thead><tbody>${body}</tbody></table></section>`;
+  return `<section class="card"><p class="eyebrow">SENTIMENT AND ISSUES BY WARD AND VOTING DISTRICT</p><table><thead><tr><th>Ward</th><th>VD</th><th>Average Sentiment</th><th>Primary Issue</th><th>Polled</th></tr></thead><tbody>${body}</tbody></table></section>`;
 }
 
 const esc = (s: string) =>
@@ -137,7 +137,7 @@ export function groundIntelligenceHtml(g: GroundIntelligence, sentiment: Sentime
     ? g.wards
         .map(
           (w) =>
-            `<section class="card"><p class="eyebrow">${esc(w.wardCode)}</p><h2>Reported by the field</h2>${
+            `<section class="card"><p class="eyebrow">${esc(w.wardCode)}</p><h2>Reported by the Field</h2>${
               w.shown.length
                 ? `<ul>${w.shown.map((s) => `<li><span>${esc(s.category)}</span><strong>${s.count}</strong></li>`).join('')}</ul>`
                 : '<p>No category reached the minimum group size.</p>'
@@ -155,11 +155,11 @@ export function groundIntelligenceHtml(g: GroundIntelligence, sentiment: Sentime
 <style>body{margin:0;background:${tokens.color.paper};color:${tokens.color.ink};font:16px/1.65 Arial,sans-serif}main{max-width:760px;margin:0 auto;padding:32px 20px}header{border-bottom:3px solid ${tokens.color.gold};padding-bottom:20px}h1,h2{line-height:1.2}h1{margin:0;font-size:2rem}h2{margin:4px 0 12px;font-size:1.25rem}.eyebrow{color:${tokens.color.teal};font-size:.85rem;font-weight:600}.card{margin:20px 0;padding:20px;border:1px solid ${tokens.color.line};border-radius:8px;background:white}ul{margin:0;padding:0;list-style:none}li{display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-top:1px solid ${tokens.color.line}}strong{font-family:Consolas,monospace}.small{color:${tokens.color.slate};font-size:.9rem}.notice{margin-top:28px;padding:16px;border-left:4px solid ${tokens.color.gold};background:white}.empty{padding:18px;background:white}footer{margin-top:24px;color:${tokens.color.slate};font-size:.9rem}</style></head>
 <body><main>
 <header><p class="eyebrow">GROUND INTELLIGENCE</p><h1>Daily Ground Intelligence</h1><p>Reporting period: ${esc(g.period)}</p></header>
-<h2>Aggregated field signals</h2>
+<h2>Aggregated Field Signals</h2>
 ${cards}
 ${sentimentTableHtml(sentiment)}
 <aside class="notice"><strong>Voter education notice</strong><br>${esc(VOTER_EDUCATION_NOTICE)}</aside>
-<section class="card"><p class="eyebrow">SEAT CALCULATION EXPLAINER</p><h2>From votes to representation</h2><p>${esc(SEAT_EXPLAINER)}</p></section>
+<section class="card"><p class="eyebrow">SEAT CALCULATION EXPLAINER</p><h2>From Votes to Representation</h2><p>${esc(SEAT_EXPLAINER)}</p></section>
 <aside class="notice"><strong>Compliance and data notice</strong><br>${esc(COMPLIANCE_NOTICE)}</aside>
 <footer>Generated ${esc(g.generatedAt)} in the browser. No email is sent and no data is transmitted.</footer>
 </main></body></html>`;

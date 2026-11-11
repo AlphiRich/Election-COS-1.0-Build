@@ -79,7 +79,7 @@ export function SiteForCampaigns() {
             <div className="flex flex-wrap gap-3 pt-2">
               <a href={whatsAppHref(ENQUIRY)} className="site-btn-primary">
                 <WhatsAppIcon />
-                Talk to us on WhatsApp
+                Talk to Us on WhatsApp
               </a>
               <Link to={hero.ctaHref} className="site-btn-outline-paper">
                 {hero.cta}
@@ -124,7 +124,7 @@ export function SiteForCampaigns() {
       {/* ------------------------------------------------- who it is for */}
       <SiteSection labelledBy="doors-h" className="pb-10 pt-[88px]">
         <h2 id="doors-h" className="mb-8 mt-0 font-site-display text-site-h3">
-          Who it is for
+          Who It Is For
         </h2>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-5">
           {AUDIENCES.map((a) => (
@@ -147,7 +147,7 @@ export function SiteForCampaigns() {
         <div className="flex flex-wrap gap-5">
           <SiteCard className="flex min-w-0 flex-[2_1_560px] flex-col gap-5 p-8">
             <h2 id="proof-h" className="m-0 font-site-display text-site-h4">
-              Every ward and voter reconciles
+              Every Ward and Voter Reconciles
             </h2>
             <dl className="m-0 grid grid-cols-[repeat(auto-fit,minmax(min(100%,140px),1fr))] gap-5">
               {REFERENCE_FIGURES.map((f) => (
@@ -180,7 +180,7 @@ export function SiteForCampaigns() {
       <SiteSection id="pillars" labelledBy="pillars-h" className="pb-[88px] pt-14">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
           <h2 id="pillars-h" className="m-0 font-site-display text-site-h3">
-            Five pillars, each with its proof
+            Five Pillars, Each With Its Proof
           </h2>
         </div>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,210px),1fr))] gap-4">
@@ -204,9 +204,9 @@ export function SiteForCampaigns() {
       <section id="pledge" aria-labelledby="pledge-h" className="border-y border-line bg-white">
         <div className="mx-auto grid max-w-[1200px] grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] items-start gap-10 px-6 py-[72px]">
           <div>
-            <Eyebrow>Neutrality pledge</Eyebrow>
+            <Eyebrow>Neutrality Pledge</Eyebrow>
             <h2 id="pledge-h" className="mb-0 mt-3 font-site-display text-site-h2">
-              Every party, the same modules, the same terms.
+              Every Party, the Same Modules, the Same Terms.
             </h2>
           </div>
           <ul className="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,220px),1fr))] gap-x-6 gap-y-3 p-0 text-site-base">
@@ -225,7 +225,7 @@ export function SiteForCampaigns() {
         note={`${VAT_NOTE} Pilot price on record.`}
       >
         <a href={whatsAppHref('Casework Tracker enquiry')} className="site-btn-primary">
-          Talk to us
+          Talk to Us
         </a>
       </CtaBand>
     </>
