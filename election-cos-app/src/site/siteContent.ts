@@ -61,7 +61,15 @@ export const SITE = {
     e164: '27824497310',
     role: 'Customer care and sales line',
   },
-  bbbee: '[B-BBEE STATUTORY COMPLIANCE NOTE]',
+  /**
+   * From the CIPC B-BBEE certificate for Exempted Micro Enterprises (owner, 11 Nov 2026), which serves as the
+   * affidavit under Code Series 000, s 4.5 of the Amended Codes (2013). The certificate's disability and other
+   * designated-group percentages are left off on purpose: they describe identifiable shareholders (POPIA).
+   * Renew before `bbbeeExpires` (the last valid day); a test fails after it so a lapsed level is never shown.
+   */
+  bbbee:
+    'B-BBEE: Just Be Trading 10 (Pty) Ltd is a Level 1 Contributor with 135% procurement recognition, as an Exempted Micro Enterprise (annual revenue of R10 million or less). 100% black-owned; 50% black female-owned. CIPC certificate no. 9410484353, issued 8 November 2026, valid until 7 November 2027.',
+  bbbeeExpires: '2027-11-07',
   /**
    * The company's addresses on electioncos.co.za (owner, 2 Nov 2026; `accounts@` replaced by `cto@` and the order changed 8 Nov 2026). Seven, in this order. `noreply` only sends;
    * nobody reads replies to it, and the page says so.

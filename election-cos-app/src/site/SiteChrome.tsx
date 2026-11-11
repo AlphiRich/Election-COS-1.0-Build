@@ -60,15 +60,15 @@ export function SiteHeader({ enquirySubject }: { enquirySubject: string }) {
     <header className="bg-ink text-paper">
       <div className="mx-auto flex max-w-[1200px] flex-wrap items-center gap-x-8 gap-y-4 px-6 py-4">
         <Link to="/" className="flex items-center gap-3 text-paper no-underline">
-          <SiteMark />
+          <SiteMark size={52} />
           <span className="flex flex-col leading-tight">
-            <span className="font-site-display text-site-h6">{SITE.productName}</span>
-            <span className="text-site-nano text-line">{SITE.byline}</span>
+            <span className="font-site-display text-site-h5">{SITE.productName}</span>
+            <span className="text-site-micro text-line">{SITE.byline}</span>
           </span>
         </Link>
 
         <nav aria-label="Primary" className="flex-[1_1_480px]">
-          <ul className="m-0 flex list-none flex-wrap gap-x-[22px] gap-y-1 p-0 text-site-sm font-semibold">
+          <ul className="m-0 flex list-none flex-wrap gap-x-[26px] gap-y-1 p-0 text-site-body font-semibold">
             {SITE_NAV.map((group) => (
               <NavMenu key={group.label} group={group} here={here} pathname={pathname} />
             ))}
@@ -137,7 +137,7 @@ function NavMenu({ group, here, pathname }: { group: NavGroup; here: string; pat
         className={`inline-flex min-h-[44px] items-center gap-1.5 ${current ? 'text-gold underline underline-offset-[6px]' : 'text-paper hover:underline hover:underline-offset-[6px]'}`}
       >
         {group.label}
-        <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" className={`transition-transform ${open ? 'rotate-180' : ''}`}>
+        <svg width="12" height="12" viewBox="0 0 10 10" aria-hidden="true" className={`transition-transform ${open ? 'rotate-180' : ''}`}>
           <path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
@@ -153,7 +153,7 @@ function NavMenu({ group, here, pathname }: { group: NavGroup; here: string; pat
               aria-current={isHere(item.href) ? 'page' : undefined}
               className={`flex flex-col rounded-md px-3 py-2 no-underline hover:bg-paper ${isHere(item.href) ? 'bg-paper' : ''}`}
             >
-              <span className="text-site-sm font-semibold text-ink">{item.label}</span>
+              <span className="text-site-base font-semibold text-ink">{item.label}</span>
               {item.hint && <span className="text-site-caption text-slate">{item.hint}</span>}
             </Link>
           </li>

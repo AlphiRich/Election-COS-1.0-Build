@@ -147,7 +147,6 @@ describe('what the site will not do', () => {
       'claims · T-01 reference': CLAIM_ROWS[0].ref,
       'claims · T-06 reference': CLAIM_ROWS[5].ref,
       'information officer': INFORMATION_OFFICER,
-      'B-BBEE note': SITE.bbbee,
       'consent wording version': CONSENT_VERSION,
     };
 
@@ -171,6 +170,23 @@ describe('what the site will not do', () => {
       expect(m.address).not.toMatch(PLACEHOLDER_RE);
     }
     expect(SITE.mailboxes.find((m) => m.address.startsWith('noreply'))!.purpose).toMatch(/not read/);
+  });
+  it('states the B-BBEE level exactly as the CIPC certificate does, and never after it expires', () => {
+    expect(SITE.bbbee).not.toMatch(PLACEHOLDER_RE);
+    for (const fact of [
+      'Level 1 Contributor',
+      '135% procurement recognition',
+      'Exempted Micro Enterprise',
+      '100% black-owned',
+      '9410484353',
+      '7 November 2027',
+    ]) {
+      expect(SITE.bbbee).toContain(fact);
+    }
+    // Designated-group percentages identify the shareholders (POPIA); they stay on the certificate only.
+    expect(SITE.bbbee).not.toMatch(/disab|youth|rural|veteran/i);
+    // Failing here means the certificate has lapsed: get the renewed one from CIPC and update the statement.
+    expect(new Date() <= new Date(`${SITE.bbbeeExpires}T23:59:59+02:00`), 'B-BBEE certificate has expired').toBe(true);
   });
   it('names the WhatsApp number as the customer-care and sales line, and pins the QR code that dials it', () => {
     expect(SITE.whatsApp.role).toBe('Customer care and sales line');
