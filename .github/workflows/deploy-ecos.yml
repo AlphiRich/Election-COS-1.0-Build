@@ -93,6 +93,10 @@ jobs:
           # Deliberately NOT written: VITE_FIREBASE_USE_EMULATORS (the preflight fails if it is set).
 
       - name: Checks
+        # The keyless sign-in exports GOOGLE_APPLICATION_CREDENTIALS pointing at an external-account file, which firebase-admin
+        # (imported by the functions tests) rejects. The tests use no cloud credential, so they run without it.
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ''
         run: npm run check:all
 
       - name: Build
