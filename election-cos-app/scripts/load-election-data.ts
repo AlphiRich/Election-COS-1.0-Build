@@ -43,11 +43,11 @@ const councils = writes.filter((w) => /\/councils\/[^/]+$/.test(w.path)).length;
 console.log(`${writes.length} documents: 1 election, ${councils} councils, ${writes.length - councils - 1} wards.`);
 if (!write) { console.log('Dry run. Nothing written. Add --write to load.'); process.exit(0); }
 
+// @google-cloud/firestore (a dependency of firebase-admin) reads Application Default Credentials itself, including the keyless
+// Workload Identity Federation file CI signs in with; firebase-admin's own credential parser rejects that file type.
 const req = createRequire(path.join(root, 'functions/package.json'));
-const { initializeApp, applicationDefault } = req('firebase-admin/app');
-const { getFirestore } = req('firebase-admin/firestore');
-initializeApp({ projectId: project, ...(process.env.FIRESTORE_EMULATOR_HOST ? {} : { credential: applicationDefault() }) });
-const db = getFirestore();
+const { Firestore } = req('@google-cloud/firestore');
+const db = new Firestore({ projectId: project });
 (async () => {
   for (let i = 0; i < writes.length; i += 400) {
     const batch = db.batch();
