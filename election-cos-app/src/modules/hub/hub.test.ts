@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { REGISTER_ENTRIES } from '@/modules/reference/municipalRegister';
@@ -61,12 +61,20 @@ describe('catalogue and filters', () => {
     expect(searchAgents('zzzzqq')).toEqual([]);
     expect(searchAgents('')).toHaveLength(32);
   });
-  it('filters assets by category and keeps all six under "all"', () => {
-    expect(ASSETS).toHaveLength(6);
-    expect(filterAssets('all')).toHaveLength(6);
+  it('filters assets by category and keeps all seven under "all"', () => {
+    expect(ASSETS).toHaveLength(7);
+    expect(filterAssets('all')).toHaveLength(7);
     expect(filterAssets('digital').map((a) => a.id)).toEqual([1, 2]);
     expect(filterAssets('print')).toHaveLength(2);
-    expect(filterAssets('video')).toHaveLength(2);
+    expect(filterAssets('video')).toHaveLength(3);
+  });
+  it('every file the hub says is built exists in the repository, and each built asset says what is open or that nothing is', () => {
+    for (const a of ASSETS) {
+      for (const f of a.built?.files ?? []) expect(existsSync(path.resolve(__dirname, '../../..', f)), `${a.name}: ${f}`).toBe(true);
+    }
+    expect(ASSETS.filter((a) => a.built === null).map((a) => a.id)).toEqual([5, 6]); // the two videos that need voice and footage
+    expect(ASSETS.find((a) => a.id === 1)!.built!.flag).toMatch(/no free trial/);
+    expect(ASSETS.find((a) => a.id === 7)!.built!.flag).toMatch(/not verified/);
   });
 });
 

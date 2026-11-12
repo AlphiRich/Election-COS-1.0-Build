@@ -239,6 +239,19 @@ function Assets() {
                 <p className="text-body-md font-body font-semibold">{a.name}</p>
                 <p className="text-body-md font-body">{a.copy}</p>
                 <p className="text-data-mono font-mono text-teal uppercase">{a.cta}</p>
+                {a.built ? (
+                  <div className="mt-2 border-t border-ink/10 pt-2">
+                    <p className="text-label-caps font-display uppercase text-green">Built</p>
+                    <ul className="list-none p-0">
+                      {a.built.files.map((f) => (
+                        <li key={f} className="break-all text-caption font-mono text-slate">{f}</li>
+                      ))}
+                    </ul>
+                    {a.built.flag && <p className="mt-1 text-caption font-body text-maroon">{a.built.flag}</p>}
+                  </div>
+                ) : (
+                  <p className="mt-2 border-t border-ink/10 pt-2 text-label-caps font-display uppercase text-roadmap">Not built</p>
+                )}
               </div>
             </div>
           ))}

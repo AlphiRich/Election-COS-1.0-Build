@@ -3310,3 +3310,11 @@ function.
 4. **Link probed:** `/tools/your-council` exists on the public site (`COUNCIL_PATH`). The post copy uses it; the video shows `electioncos.co.za`, as the spec's captions do.
 5. **Not measured:** the spec's "4.125 pt" size check (its rule is not stated in the document). Platform safe zones were assumed (content above y 1260, strip 1470 to 1760), not taken from a platform's own overlay guide.
 6. "Non-partisan", "independent" and "not affiliated" are the spec's wording; they are claims the owner makes and I did not verify them.
+
+### Session 56 (cont.) — review of the marketing assets against the build, and the hub now says what is built (12 Nov 2026)
+
+**Review.** Rendered on `main` already: 14 banners, the A3 poster, three lower-thirds, the 4-page playbook, the dual-funnel figure, the party report and the party page. Not on `main`: the 15 s explainer (this PR). **Integrated into the build: none of the rendered files.** No page, route, hosting rule or build step referenced `marketing/`; the hub's manifest (`ASSETS`) described the assets but linked to nothing and never said which existed. The public site's videos (`site-assets/videos`) are the earlier self-hosted product explainers, a different set.
+
+**Change.** Each hub asset card now carries `built`: the real repo paths and the one open flag, or "Not built". New seventh asset for the explainer. A test fails if any listed file does not exist (proved: one wrong extension named the asset and path), and pins the flags that must not be lost: no free trial behind the "Start Free Trial" banner, the poster QR is the sales line, the explainer's headline is unverified. Flags are the ones recorded above; none were softened.
+
+**Deliberately not done.** The binaries are not bundled into the app or the site build: the app precaches its assets for offline field use, and 1.2 MB of campaign creative has no business on a canvasser's phone. The public site does not carry them either, because three of the assets have an unresolved claim. Publishing the explainer to the site belongs after its figure is checked.
