@@ -80,14 +80,20 @@ export interface Asset {
   copy: string;
   cta: string;
   bg: string;
+  /**
+   * What has actually been rendered, as repo-relative paths (a test fails if one does not exist), and the one thing a
+   * person must settle before it runs. `null` = not built, and the card says so.
+   */
+  built: { files: string[]; flag: string | null } | null;
 }
 export const ASSETS: Asset[] = [
-  { id: 1, name: 'BOFU Urgency Square Banner', category: 'digital', dims: '1080x1080', copy: 'Manage your ward legally. R1,800/ward.', cta: 'Start Free Trial', bg: 'Paper' },
-  { id: 2, name: 'TOFU Strategy Leaderboard', category: 'digital', dims: '16:9 Ratio', copy: 'Enterprise data intelligence for South African elections.', cta: 'Request Demo', bg: 'Ink' },
-  { id: 4, name: 'Field Canvasser Poster', category: 'print', dims: 'A3 Field Poster', copy: 'Take the War Room to the Streets. WhatsApp Engine.', cta: 'Scan QR Code', bg: 'High-Vis Paper' },
-  { id: 3, name: 'Ward Candidate Playbook', category: 'print', dims: '4-Page A4 PDF', copy: 'POPIA compliance risks, PPFA donor limits & seat formulas.', cta: 'Download Whitepaper', bg: 'Paper Whitepaper' },
-  { id: 5, name: 'The Ground Game (30s)', category: 'video', dims: '16:9 & 9:16 Video', copy: 'Electoral compliance is stricter than ever. Comply before you campaign.', cta: 'Watch Teaser', bg: 'Kinetic Video' },
-  { id: 6, name: 'Casework Tracker (15s)', category: 'video', dims: '9:16 Mobile Video', copy: 'Doorstep complaints shouldn’t get lost in WhatsApp groups.', cta: 'Sign Up Today', bg: 'App Screenshot' },
+  { id: 1, name: 'BOFU Urgency Square Banner', category: 'digital', dims: '1080x1080', copy: 'Manage your ward legally. R1,800/ward.', cta: 'Start Free Trial', bg: 'Paper', built: { files: ['marketing/banners/bofu-1080x1080-a.png', 'marketing/banners/bofu-1080x1080-b.png'], flag: 'The CTA says “Start Free Trial” but the product has no free trial. Change the CTA or do not run it.' } },
+  { id: 2, name: 'TOFU Strategy Leaderboard', category: 'digital', dims: '16:9 Ratio', copy: 'Enterprise data intelligence for South African elections.', cta: 'Request Demo', bg: 'Ink', built: { files: ['marketing/banners/tofu-1200x628-a.png', 'marketing/banners/tofu-1200x628-b.png', 'marketing/banners/tofu-1080x1920-a.png'], flag: null } },
+  { id: 4, name: 'Field Canvasser Poster', category: 'print', dims: 'A3 Field Poster', copy: 'Take the War Room to the Streets. WhatsApp Engine.', cta: 'Scan QR Code', bg: 'High-Vis Paper', built: { files: ['marketing/print/poster-a3.pdf', 'marketing/print/poster-a3.png'], flag: 'The QR code dials the sales line, not a polling number: no WhatsApp polling number exists yet.' } },
+  { id: 3, name: 'Ward Candidate Playbook', category: 'print', dims: '4-Page A4 PDF', copy: 'POPIA compliance risks, PPFA donor limits & seat formulas.', cta: 'Download Whitepaper', bg: 'Paper Whitepaper', built: { files: ['marketing/print/ward-candidate-playbook.pdf', 'marketing/print/ward-candidate-playbook.docx'], flag: 'General information, not legal advice (page 4 says so). Have your attorney read the POPIA and PPFA pages before it is handed out.' } },
+  { id: 5, name: 'The Ground Game (30s)', category: 'video', dims: '16:9 & 9:16 Video', copy: 'Electoral compliance is stricter than ever. Comply before you campaign.', cta: 'Watch Teaser', bg: 'Kinetic Video', built: null },
+  { id: 6, name: 'Casework Tracker (15s)', category: 'video', dims: '9:16 Mobile Video', copy: 'Doorstep complaints shouldn’t get lost in WhatsApp groups.', cta: 'Sign Up Today', bg: 'App Screenshot', built: null },
+  { id: 7, name: 'Who Governs Your Council? (15s explainer)', category: 'video', dims: '1080x1920, 15 s, silent', copy: 'After the 2026 elections: councils with no majority, and who governs.', cta: 'Find Your Council', bg: 'Paper', built: { files: ['marketing/video/explainer-15s/ecos-explainer-15s-1080x1920.mp4', 'marketing/video/explainer-15s/ecos-explainer-15s.srt', 'marketing/video/explainer-15s/post-copy.txt', 'marketing/video/explainer-15s/QA.json'], flag: 'No voice-over yet. The national headline figure is not verified (this build holds North West only: 11 of 18 local councils have no majority). Do not publish until a person has checked it.' } },
 ];
 
 export interface ScriptBlock {
