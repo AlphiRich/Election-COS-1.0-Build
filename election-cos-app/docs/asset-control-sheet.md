@@ -5608,4 +5608,5 @@ Five NotebookLM exports arrived. Full triage in `docs/design-decision-and-change
 | Marketing collateral | `scripts/build-marketing.ts`, `scripts/build-playbook.ts`, `marketing/` | 14 banners, A3 poster, lower-thirds, 4-page playbook, dual-funnel figure; CTA 'Start Free Trial' not yet true |
 | Party candidates and result | `src/modules/lge2026/partyProfile.ts`, `PartyProfilePage.tsx`, `PartyCharts.tsx`, `tools/candidates/verify-party-list.py`, `reports/actionsa-nw405.html` | IEC 23 Oct list joined to LGE 2026 results; ActionSA PR list is one name against 5 seats (unresolved, see change log) |
 | 15 s explainer video | `scripts/build-explainer-video.ts`, `marketing/video/explainer-15s/` | Silent MP4 + SRT + post copy; headline '139 of 213' unverified (NW holds 11 of 18); no voice-over |
+| Public site SEO | `src/site/seo.ts`, `scripts/build-seo-pages.ts`, `site-hosting/gcp/nginx.conf` | One page per URL with own title/canonical, sitemap (251), 404.html, true 404s; Search Console 'Validate fix' is the owner's |
 
