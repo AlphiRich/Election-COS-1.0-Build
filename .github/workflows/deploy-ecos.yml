@@ -42,6 +42,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write # keyless Google sign-in (Workload Identity Federation); no key secret needed
 
 concurrency:
   # Two deploys racing each other to the same project is how a half-built
@@ -71,25 +72,25 @@ jobs:
       - name: Install functions dependencies
         run: npm ci --prefix functions
 
-      # The web config is compiled into the bundle, so it has to exist
-      # before the build, not before the deploy. These are not secrets —
-      # a Firebase web config is public by design and security comes from
-      # firestore.rules — but they are repository configuration, so they
-      # live in Actions variables rather than in the repository.
-      - name: Write .env
+      - name: Sign in to Google Cloud (Workload Identity Federation)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER || 'projects/960903975002/locations/global/workloadIdentityPools/github/providers/github-oidc' }}
+          service_account: ${{ vars.GCP_SITE_DEPLOYER || 'ecos-site-deployer@electioncos1-0.iam.gserviceaccount.com' }}
+
+      # The web config is compiled into the bundle, so it exists before the build. It is not secret (a Firebase web config is
+      # public by design; security comes from firestore.rules). Read from the project itself, so no variables need setting.
+      - name: Write .env from the registered web app
+        env:
+          APP_ID: ${{ vars.VITE_FIREBASE_APP_ID || '1:960903975002:web:77cb23f705bf9eb7d4c863' }}
         run: |
-          cat > .env <<EOF
-          VITE_FIREBASE_API_KEY=${{ vars.VITE_FIREBASE_API_KEY }}
-          VITE_FIREBASE_AUTH_DOMAIN=${{ vars.VITE_FIREBASE_AUTH_DOMAIN }}
-          VITE_FIREBASE_PROJECT_ID=${{ vars.VITE_FIREBASE_PROJECT_ID }}
-          VITE_FIREBASE_STORAGE_BUCKET=${{ vars.VITE_FIREBASE_STORAGE_BUCKET }}
-          VITE_FIREBASE_MESSAGING_SENDER_ID=${{ vars.VITE_FIREBASE_MESSAGING_SENDER_ID }}
-          VITE_FIREBASE_APP_ID=${{ vars.VITE_FIREBASE_APP_ID }}
-          VITE_DAL_ADAPTER=firestore
-          EOF
-          # Deliberately NOT written: VITE_FIREBASE_USE_EMULATORS. The
-          # preflight fails if it is set, because that build would point
-          # a published site at localhost.
+          npx firebase apps:sdkconfig web "$APP_ID" --project electioncos1-0 --json > "$RUNNER_TEMP/cfg.json"
+          node -e "
+          const c=JSON.parse(require('fs').readFileSync(process.env.RUNNER_TEMP+'/cfg.json','utf8')).result.sdkConfig;
+          const k={VITE_FIREBASE_API_KEY:c.apiKey,VITE_FIREBASE_AUTH_DOMAIN:c.authDomain,VITE_FIREBASE_PROJECT_ID:c.projectId,VITE_FIREBASE_STORAGE_BUCKET:c.storageBucket,VITE_FIREBASE_MESSAGING_SENDER_ID:c.messagingSenderId,VITE_FIREBASE_APP_ID:c.appId,VITE_DAL_ADAPTER:'firestore'};
+          for(const [n,v] of Object.entries(k)) if(!v) throw new Error('web config missing '+n);
+          require('fs').writeFileSync('.env',Object.entries(k).map(([n,v])=>n+'='+v).join('\n')+'\n');"
+          # Deliberately NOT written: VITE_FIREBASE_USE_EMULATORS (the preflight fails if it is set).
 
       - name: Checks
         run: npm run check:all
@@ -97,30 +98,10 @@ jobs:
       - name: Build
         run: npm run build
 
-      # Written to a file because the Firebase CLI reads a path, not a
-      # value. Under the runner's workspace, which is wiped with the job.
-      - name: Write service-account credential
-        env:
-          SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-        run: |
-          if [ -z "$SERVICE_ACCOUNT" ]; then
-            echo "::error::FIREBASE_SERVICE_ACCOUNT is not set. See election-cos-app/docs/deploy-credentials-request.md for the roles it needs."
-            exit 1
-          fi
-          printf '%s' "$SERVICE_ACCOUNT" > "$RUNNER_TEMP/sa.json"
-          # Fail loudly on a truncated or pasted-wrong secret rather than
-          # letting the CLI report something unrelated.
-          node -e "JSON.parse(require('fs').readFileSync(process.env.RUNNER_TEMP + '/sa.json','utf8'))" \
-            || { echo "::error::FIREBASE_SERVICE_ACCOUNT is not valid JSON."; exit 1; }
-
       - name: Preflight
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/sa.json
         run: npm run preflight
 
       - name: Deploy
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/sa.json
         run: |
           case "${{ inputs.target }}" in
             hosting)    ONLY="hosting" ;;
@@ -133,18 +114,3 @@ jobs:
           else
             npx firebase deploy --project default --non-interactive
           fi
-
-      - name: Remove credential
-        if: always()
-        run: rm -f "$RUNNER_TEMP/sa.json"
-
-      - name: What went live
-        if: success()
-        run: |
-          echo "### Deployed" >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "Target: \`${{ inputs.target }}\`" >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "The landing page launch card probes the app and becomes a live link on its own — it needs no change." >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "**Still verify by hand:** that Firestore and Storage were created in \`africa-south1\`. That is fixed at creation time, cannot be read without authenticating, and cannot be changed once data exists." >> "$GITHUB_STEP_SUMMARY"
