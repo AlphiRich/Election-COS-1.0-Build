@@ -46,6 +46,7 @@ import {
   type ProvisioningField,
   type StaffDraft,
 } from './staffProvisioning';
+import { RoleMatrixPanel } from './RoleMatrixPanel';
 import { CONCENTRATION_BASIS, dutyConcentrations, withholdingBreaches } from './dutyConcentration';
 import { SPLIT_VD_BASIS } from './staffProvisioning';
 
@@ -147,7 +148,7 @@ export function PermissionsPage() {
   }
 
   return (
-    <div className="space-y-8 max-w-3xl">
+    <div className="space-y-8 max-w-5xl">
       <PageHeader slug="/settings/permissions" title="Permissions" />
 
       <div className="space-y-2">
@@ -161,6 +162,8 @@ export function PermissionsPage() {
           </Card>
         ))}
       </div>
+
+      <RoleMatrixPanel />
 
       <div className="space-y-3">
         <div className="flex items-center justify-between">
