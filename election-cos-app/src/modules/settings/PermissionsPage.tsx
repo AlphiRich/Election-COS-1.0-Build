@@ -45,6 +45,7 @@ import {
   type ProvisioningField,
   type StaffDraft,
 } from './staffProvisioning';
+import { RoleMatrixPanel } from './RoleMatrixPanel';
 import { CONCENTRATION_BASIS, dutyConcentrations, withholdingBreaches } from './dutyConcentration';
 
 function toggle<T>(list: T[], value: T): T[] {
@@ -146,7 +147,7 @@ export function PermissionsPage() {
   }
 
   return (
-    <div className="space-y-8 max-w-3xl">
+    <div className="space-y-8 max-w-5xl">
       <div>
         <p className="text-label-caps font-display uppercase text-slate">/settings/permissions</p>
         <h1 className="text-headline-md font-display text-ink mt-1">Permissions</h1>
@@ -163,6 +164,8 @@ export function PermissionsPage() {
           </div>
         ))}
       </div>
+
+      <RoleMatrixPanel />
 
       <div className="space-y-3">
         <div className="flex items-center justify-between">
