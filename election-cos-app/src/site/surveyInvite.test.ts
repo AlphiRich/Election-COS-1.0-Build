@@ -28,3 +28,10 @@ describe('dismissal', () => {
     expect(() => rememberDismissal(broken)).not.toThrow();
   });
 });
+
+describe('the live survey form', () => {
+  it('is accepted by the allow-list, query string and all', () => {
+    const u = 'https://docs.google.com/forms/d/e/1FAIpQLSfGqRP3v4rSkAmElNyxafKT6BreVtsCRHQq8sPwjQtBCFr87w/viewform?usp=header';
+    expect(resolveSurveyUrl(u)).toBe(u);
+  });
+});

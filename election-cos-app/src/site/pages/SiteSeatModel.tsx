@@ -14,6 +14,7 @@
  */
 import { useMemo, useRef, useState } from 'react';
 import { SiteCard, SiteSection } from '../SiteChrome';
+import { SiteVideo } from '../SiteVideo';
 import { PageIntro, SourceNote } from './pageParts';
 import { IEC_LINK } from '../officialSources';
 import { searchCouncils } from '../tools/councilFinder';
@@ -146,6 +147,12 @@ export function SiteSeatModel() {
               {t.label}
             </button>
           ))}
+        </div>
+      </SiteSection>
+
+      <SiteSection className="pb-8">
+        <div className="grid gap-6 ">
+          <SiteVideo id="scenario-runner" className="max-w-[560px]" />
         </div>
       </SiteSection>
 

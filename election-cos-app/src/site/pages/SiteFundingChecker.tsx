@@ -11,6 +11,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
+import { SiteVideo } from '../SiteVideo';
 import { AdSlot } from '../ads/AdSlot';
 import { FUNDING_SOURCE } from '../siteContent';
 import {
@@ -42,6 +43,12 @@ export function SiteFundingChecker({ hasConsent }: { hasConsent: boolean }) {
           annual donor line ({formatRand(ANNUAL_CAP_CENTS)}). It runs in your browser: nothing you
           type leaves your device.
         </p>
+      </SiteSection>
+
+      <SiteSection className="pb-8">
+        <div className="grid gap-6 ">
+          <SiteVideo id="funding-30-day" className="max-w-[560px]" />
+        </div>
       </SiteSection>
 
       <SiteSection className="flex max-w-[760px] flex-col gap-6 pb-10">
