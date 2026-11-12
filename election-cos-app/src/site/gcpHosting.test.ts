@@ -28,6 +28,10 @@ describe('GCP hosting (nginx) matches the Cloudflare headers file', () => {
     expect(nginx).toMatch(/if \(\$request_uri ~\* "\^\/index\\\.html[^"]*"\) \{\s*return 301 \/;/);
     expect(nginx).toContain('rewrite ^/(.+)/$ /$1 permanent;');
   });
+  it('redirects with a relative Location, so it never leaks the container\'s own host and port', () => {
+    // Behind Firebase Hosting the container sees *.run.app:8080. Absolute redirects sent /results/ and /index.html there.
+    expect(nginx).toMatch(/^\s*absolute_redirect off;/m);
+  });
   it('still serves poll links (issued per person, not in the sitemap) as the app shell', () => {
     expect(nginx).toMatch(/location ~ \^\/poll\/\[\^\/\]\+\$ \{\s*rewrite \^ \/poll-shell\.html break;/);
   });

@@ -3339,3 +3339,11 @@ function.
 3. **Canonical host** is a constant (`CANONICAL_ORIGIN`). If the apex-to-www redirect is ever reversed, change it there.
 4. The Cloudflare Workers config (`wrangler.site.jsonc`, not the live host) still uses single-page fallback and would not give true 404s or serve per-route pages the same way; it was left alone because it is not deployed.
 5. Titles and descriptions do not change on in-app navigation (the browser tab keeps the page's first title); search engines read the per-route files, which are right.
+
+### Session 57 (cont.) — hotfix: redirects were sending visitors to the container's own address (12 Nov 2026)
+
+**Defect, mine.** After PR #46 deployed, a live check showed `/index.html` and `/results/` answering 301 to `http://ecos-site-…-ew.a.run.app:8080/…`: Cloud Run's internal host, plain http, port 8080, instead of staying on `www.electioncos.co.za`. nginx builds an absolute `Location` from the Host and port it sees, and behind Firebase Hosting that is the container's own. My local test reached nginx directly, so it showed a correct host and hid this. Everything else in #46 checked out live (sitemap 251 URLs, true 404s, per-page titles and canonicals, polls, security headers). Effect before the fix: only the redirecting addresses (`/index.html`, any trailing-slash URL); they were duplicate 200s before the change, now dead-end redirects until this ships.
+
+**Fix.** `absolute_redirect off;` in the server block, so every redirect is a relative `Location` (`/`, `/results`) that resolves on whatever host the visitor used. **Proved** by reproducing it locally with the Cloud Run `Host` header: without the directive the Location names the `run.app` host; with it, `/` and `/results`. A test now fails if the directive is removed.
+
+**Lesson recorded.** A server behind a proxy must be tested with the proxy's headers, not directly. The live probe, not the local one, found this.
