@@ -52,7 +52,19 @@ export interface VoterIntelligence {
   competitive: { wards: number[]; electorateShare: number };
   iecStatus: CouncilSeats['iec'];
   source: string;
+  /** Where the ward figures were read from: the election database, or the results bundled with the app. */
+  wardData: 'database' | 'bundled';
 }
+
+/** One ward's figures, as either source supplies them. */
+export interface WardRow {
+  wardNumber: number;
+  registered: number;
+  valid: number;
+  parties: ReadonlyArray<readonly [string, number]>;
+}
+/** Supplies a council's wards from the database, or null to use the bundled results. */
+export type WardSource = (code: string) => Promise<WardRow[] | null>;
 
 /** The instrument's tiers, by the leader's share of the ward's valid votes. */
 export const tierOf = (share: number): WardTier => (share > 60 ? 'Safe' : share > 50 ? 'Comfortable' : share >= 40 ? 'Marginal' : 'Contested');
@@ -76,13 +88,27 @@ export function minimalCoalitions(holders: Array<{ name: string; seats: number }
   return out.sort((a, b) => a.parties.length - b.parties.length || a.surplus - b.surplus || a.parties.join().localeCompare(b.parties.join())).slice(0, limit);
 }
 
-export async function voterIntelligence(code: string): Promise<VoterIntelligence> {
+export async function voterIntelligence(code: string, wardSource?: WardSource): Promise<VoterIntelligence> {
   const seats = council(code);
-  const province = await loadProvince(seats.province);
-  const full = province.municipalities[code];
-  if (!full) throw new Error(`${code} is in the seat table but not in the ${seats.province} results file.`);
+  // The database is used only if it returns exactly the council's wards, each with votes. Anything else (a partial load, an
+  // older delimitation) falls back to the bundled results instead of drawing a wrong map.
+  let rows: WardRow[] | null = null;
+  let wardData: VoterIntelligence['wardData'] = 'database';
+  try {
+    rows = (await wardSource?.(code)) ?? null;
+  } catch {
+    rows = null;
+  }
+  if (rows && (rows.length !== seats.wards || rows.some((r) => !r.parties.length))) rows = null;
+  if (!rows) {
+    wardData = 'bundled';
+    const province = await loadProvince(seats.province);
+    const full = province.municipalities[code];
+    if (!full) throw new Error(`${code} is in the seat table but not in the ${seats.province} results file.`);
+    rows = full.wardResults;
+  }
 
-  const wards: WardLine[] = full.wardResults.map((w) => {
+  const wards: WardLine[] = rows.map((w) => {
     const sorted = [...w.parties].sort((a, b) => b[1] - a[1]);
     const [first, second] = sorted;
     const total = w.valid || sorted.reduce((s, [, v]) => s + v, 0);
@@ -116,6 +142,7 @@ export async function voterIntelligence(code: string): Promise<VoterIntelligence
     wardsLedBy: [...ledBy].map(([party, n]) => ({ party, wards: n })).sort((a, b) => b.wards - a.wards || a.party.localeCompare(b.party)),
     competitive: { wards: competitiveWards.map((w) => w.ward), electorateShare: registeredAll ? (competitiveWards.reduce((s, w) => s + w.registered, 0) / registeredAll) * 100 : 0 },
     iecStatus: seats.iec,
+    wardData,
     source: `Electoral Commission LGE 2026 certified results (EEID1887); seats by Schedule 1, ${seats.iec} against the Commission's Seat Calculation Detail`,
   };
 }

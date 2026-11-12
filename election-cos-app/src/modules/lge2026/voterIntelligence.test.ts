@@ -63,3 +63,50 @@ describe('every one of the 213 councils', () => {
     }
   }, 120_000);
 });
+
+describe('ward figures from the election database', () => {
+  const bundled = async () => voterIntelligence('NW405');
+  const asRows = async () => {
+    const province = await (await import('./nationalResults')).loadProvince('NW');
+    return province.municipalities.NW405.wardResults.map((w) => ({ wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, parties: w.parties }));
+  };
+  it('uses the database rows when they cover every ward, and gives the same map as the bundled results', async () => {
+    const rows = await asRows();
+    const fromDb = await voterIntelligence('NW405', async () => rows);
+    expect(fromDb.wardData).toBe('database');
+    expect(fromDb.wards).toEqual((await bundled()).wards);
+  });
+  it('falls back to the bundled results when the database has nothing, a partial load, empty wards, or fails', async () => {
+    const rows = await asRows();
+    for (const src of [async () => null, async () => rows.slice(1), async () => rows.map((r, i) => (i ? r : { ...r, parties: [] })), async () => { throw new Error('offline'); }]) {
+      const v = await voterIntelligence('NW405', src);
+      expect(v.wardData).toBe('bundled');
+      expect(v.wards).toHaveLength(34);
+    }
+  });
+  it('is bundled when no database is offered', async () => {
+    expect((await voterIntelligence('NW405')).wardData).toBe('bundled');
+  });
+});
+
+describe('the stored form of every council gives the same instrument as the bundled results', () => {
+  it('for all 213 councils: documents made by the loader, read back as ward rows, reproduce the ward map', async () => {
+    const { councilDocs } = await import('@/modules/electionData/model');
+    const { loadProvince, PROVINCE_CODES, NATIONAL_SEATS } = await import('./nationalResults');
+    let checked = 0;
+    for (const prov of PROVINCE_CODES) {
+      const file = await loadProvince(prov);
+      for (const [code, c] of Object.entries(file.municipalities)) {
+        if (!NATIONAL_SEATS.councils[code]) continue;
+        const { wards } = councilDocs('EEID1887', prov, code, c);
+        const stored = async () => wards.map((w) => ({ wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, parties: w.parties.map((x) => [x.party, x.votes] as const) }));
+        const a = await voterIntelligence(code, stored);
+        const b = await voterIntelligence(code);
+        expect(a.wardData, code).toBe('database');
+        expect(a.wards, code).toEqual(b.wards);
+        checked++;
+      }
+    }
+    expect(checked).toBe(213);
+  }, 120000);
+});

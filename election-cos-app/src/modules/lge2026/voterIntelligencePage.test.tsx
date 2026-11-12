@@ -2,7 +2,10 @@
 import { act } from 'react';
 import { createRoot } from 'react-dom/client';
 import { MemoryRouter } from 'react-router-dom';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
+
+// The page asks the election database first. Tests run without one, so it answers "nothing" and the bundled results are used.
+vi.mock('@/dal/adapters/firestore/electionData', () => ({ fetchCouncilWards: async () => null }));
 import { VoterIntelligencePage } from './VoterIntelligencePage';
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;

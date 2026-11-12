@@ -10,11 +10,16 @@ import { Link } from 'react-router-dom';
 import { BasisNote, Card, Field, PageHeader, Pill, SectionLabel, StatTile, Table, Td, Th } from '@/components/ui';
 import { COUNCIL_CODES, NATIONAL_SEATS, PROVINCES } from './nationalResults';
 import { partyLabel } from './councilResults';
-import { voterIntelligence, partyName, type VoterIntelligence, type WardTier } from './voterIntelligence';
+import { fetchCouncilWards } from '@/dal/adapters/firestore/electionData';
+import { voterIntelligence, partyName, type VoterIntelligence, type WardSource, type WardTier } from './voterIntelligence';
 
 const n = (v: number) => v.toLocaleString('en-ZA');
 const p1 = (v: number) => v.toFixed(1);
 const TIER_NOTE: Record<WardTier, string> = { Safe: 'leader above 60%', Comfortable: '50 to 60%', Marginal: '40 to 50%', Contested: 'leader below 40%' };
+
+/** Ward figures from the election database when it answers; the bundled results otherwise. */
+const databaseWards: WardSource = async (c) =>
+  (await fetchCouncilWards(c))?.map((w) => ({ wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, parties: w.parties.map((x) => [x.party, x.votes] as const) })) ?? null;
 
 export function VoterIntelligencePage() {
   const [code, setCode] = useState('NW405');
@@ -24,7 +29,7 @@ export function VoterIntelligencePage() {
     let live = true;
     setVi(null);
     setError(null);
-    voterIntelligence(code).then((v) => live && setVi(v), (e: Error) => live && setError(e.message));
+    voterIntelligence(code, databaseWards).then((v) => live && setVi(v), (e: Error) => live && setError(e.message));
     return () => {
       live = false;
     };
@@ -138,7 +143,7 @@ export function VoterIntelligencePage() {
               <li>Special-vote counts, and any trend before 2021: not ingested.</li>
             </ul>
             <BasisNote>
-              Source: {vi.source}. For one party&rsquo;s candidates against this result see <Link to="/analytics/lge-2026-party">party candidates and result</Link>;
+              Source: {vi.source}. Ward figures read from the {vi.wardData === 'database' ? 'election database' : 'results bundled with the app'}. For one party&rsquo;s candidates against this result see <Link to="/analytics/lge-2026-party">party candidates and result</Link>;
               for the full tables, <Link to="/analytics/lge-2026-results">LGE 2026 results</Link>.
             </BasisNote>
           </Card>
