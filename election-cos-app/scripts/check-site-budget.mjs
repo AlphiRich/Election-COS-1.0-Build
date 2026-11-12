@@ -32,7 +32,7 @@ if (home > 500 * 1024) {
 
 // Structure guard: the public site must carry its headers, videos, and its own manifest and worker (site-assets/pwa),
 // and must not carry the application's service worker.
-const must = ['_headers', 'index.html', 'videos/roles.mp4', 'videos/roles.vtt', 'videos/roles.jpg', 'site-sw.js', 'site.webmanifest'];
+const must = ['_headers', 'index.html', 'videos/roles.mp4', 'videos/roles.vtt', 'videos/roles.jpg', 'site-sw.js', 'site.webmanifest', 'sitemap.xml', 'robots.txt', '404.html', 'poll-shell.html', 'results/index.html', 'councils/BUF/index.html', 'tools/your-council/index.html'];
 const missing = must.filter((f) => !existsSync(path.join(DIR, f)));
 const stray = ['sw.js', 'manifest.webmanifest'].filter((f) => existsSync(path.join(DIR, f)));
 if (missing.length || stray.length) {

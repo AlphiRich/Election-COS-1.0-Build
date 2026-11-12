@@ -17,8 +17,21 @@ describe('GCP hosting (nginx) matches the Cloudflare headers file', () => {
       expect(nginx.split(line).length - 1, k).toBeGreaterThanOrEqual(4); // server, /assets/, /videos/, captions
     }
   });
-  it('falls back to index.html for client routes and caches hashed assets as immutable', () => {
-    expect(nginx).toContain('try_files $uri $uri/ /index.html;');
+  it('serves real pages and real 404s, never the home page for an unknown path', () => {
+    // The old rule answered every path with index.html and status 200: duplicates and soft 404s in Search Console.
+    expect(nginx).not.toMatch(/try_files[^;]*\/index\.html;/);
+    expect(nginx).toContain('try_files $uri $uri/index.html =404;');
+    expect(nginx).toContain('error_page 404 /404.html;');
+    expect(nginx).toMatch(/location = \/404\.html \{\s*internal;/);
+  });
+  it('has one address for the home page and one for each page with or without a slash', () => {
+    expect(nginx).toMatch(/if \(\$request_uri ~\* "\^\/index\\\.html[^"]*"\) \{\s*return 301 \/;/);
+    expect(nginx).toContain('rewrite ^/(.+)/$ /$1 permanent;');
+  });
+  it('still serves poll links (issued per person, not in the sitemap) as the app shell', () => {
+    expect(nginx).toMatch(/location ~ \^\/poll\/\[\^\/\]\+\$ \{\s*rewrite \^ \/poll-shell\.html break;/);
+  });
+  it('caches hashed assets as immutable', () => {
     expect(nginx).toMatch(/location \/assets\/[\s\S]*immutable/);
   });
   it('serves captions as text/vtt', () => {

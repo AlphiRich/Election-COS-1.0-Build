@@ -5,7 +5,8 @@
  *
  * What is NOT here, as the spec says: voice-over audio. The mp4 has no audio stream, so the "Contains AI-generated voice"
  * line is left OUT of the strip (it would be false); pass --ai-voice once a synthetic voice track is laid over it.
- * The headline "139 of 213" is the spec's figure and is NOT verifiable from this build's data (North West only); see HEADLINE.
+ * The headline "139 of 213" is the spec's figure. It matches this build's national seat table (src/data/lge2026/national/seats-2026.json,
+ * `hung` flag, 12 Nov 2026): 208 councils reconciled to the Commission's reports, five not fully confirmed; see HEADLINE.
  */
 import { createRequire } from 'node:module';
 import { execFileSync } from 'node:child_process';
@@ -21,7 +22,7 @@ const ROOT = path.resolve(__dirname, '..');
 const OUT = path.join(ROOT, 'marketing/video/explainer-15s');
 const AI_VOICE = process.argv.includes('--ai-voice');
 
-/** The spec's headline figure. Change here and the video, SRT, post copy and alt text all follow. UNVERIFIED in this build. */
+/** The spec's headline figure. Change here and the video, SRT, post copy and alt text all follow. Checked against the national seat table, 12 Nov 2026. */
 const HEADLINE = { noMajority: 139, councils: 213, asAt: '10 Nov 2026' };
 const URL_SHORT = 'electioncos.co.za';
 const URL_TOOL = `${URL_SHORT}/tools/your-council`;
@@ -146,7 +147,7 @@ async function main() {
       'paper on blue (button)': +contrast(C.paper, C.teal).toFixed(2), 'slate on paper (qualifier)': +contrast(C.slate, C.paper).toFixed(2),
     },
     notMeasured: ['The "4.125 pt" size check in the spec: its rule is not stated in the document, so it was not measured.', 'Voice-over: not produced (spec: audio is recorded separately).'],
-    unverified: [`"${HEADLINE.noMajority} of ${HEADLINE.councils}" is the spec's national figure; this build holds North West only (11 of 18 local councils have no majority).`],
+    verified: [`"${HEADLINE.noMajority} of ${HEADLINE.councils}" matches this build's national seat table (hung flag, and an independent count with no disagreement). 208 of the 213 councils are reconciled to the Commission's Seat Calculation reports; five are not fully confirmed (Mnquma not published, King Sabata Dalindyebo incomplete, Matjhabeng, Ray Nkonyeni and Msunduzi count not finished) and all five are counted as no majority, so 134 of the 208 reconciled councils have none. A person should confirm against the Commission's own figures before publishing.`],
     aiVoiceLineInStrip: AI_VOICE,
   };
   writeFileSync(path.join(OUT, 'QA.json'), JSON.stringify(qa, null, 2));

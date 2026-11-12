@@ -74,7 +74,7 @@ describe('catalogue and filters', () => {
     }
     expect(ASSETS.filter((a) => a.built === null).map((a) => a.id)).toEqual([5, 6]); // the two videos that need voice and footage
     expect(ASSETS.find((a) => a.id === 1)!.built!.flag).toMatch(/no free trial/);
-    expect(ASSETS.find((a) => a.id === 7)!.built!.flag).toMatch(/not verified/);
+    expect(ASSETS.find((a) => a.id === 7)!.built!.flag).toMatch(/five not fully confirmed/);
   });
 });
 
