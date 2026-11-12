@@ -60,6 +60,26 @@ service cloud.firestore {
       return request.resource.data[field] == resource.data[field];
     }
 
+    // Public reference data: the Commission's published results and Statistics South Africa's published counts
+    // (src/modules/electionData/model.ts). No person is in it, so any signed-in account may read it, whatever its tenant or
+    // second-factor state. Nobody writes it from a client; scripts/load-election-data.ts writes with the Admin SDK.
+    match /elections/{electionId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+    match /elections/{electionId}/councils/{code} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+    match /elections/{electionId}/councils/{code}/wards/{wardId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+    match /municipalProfiles/{code}/layers/{layerId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
     // Sales enquiries (Book a demo, report requests) are written by the
     // `submitEnquiry` Cloud Function with the Admin SDK and read by staff
     // in the console. No client, signed in or not, reads or writes them:

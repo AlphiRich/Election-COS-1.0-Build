@@ -8,6 +8,8 @@
  */
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { BarChart, type Bar } from '@/modules/reference/BarChart';
+import { SITE_DOMAIN } from '@/config/publicDomain';
+import { HELD } from '@/site/promoVideos';
 import { Button, Card, Field, PageHeader, Pill, SectionLabel, StatTile, Table, Td, Th } from '@/components/ui';
 import whatsAppQr from '@/site/assets/whatsapp-qr.svg';
 import { SITE } from '@/site/siteContent';
@@ -248,6 +250,11 @@ function Assets() {
                       ))}
                     </ul>
                     {a.built.flag && <p className="mt-1 text-caption font-body text-maroon">{a.built.flag}</p>}
+                    {a.watch && (
+                      <p className="mt-1 text-caption font-body">
+                        <a href={`https://www.${SITE_DOMAIN}${a.watch}`} target="_blank" rel="noopener noreferrer" className="text-teal underline">Watch on the public site</a>
+                      </p>
+                    )}
                   </div>
                 ) : (
                   <p className="mt-2 border-t border-ink/10 pt-2 text-label-caps font-display uppercase text-roadmap">Not built</p>
@@ -256,6 +263,14 @@ function Assets() {
             </div>
           ))}
         </div>
+        <details className="mt-3 rounded border border-ink/10 bg-paper p-3">
+          <summary className="cursor-pointer text-label-caps font-display uppercase text-roadmap">Videos supplied but held back ({HELD.length})</summary>
+          <ul className="mt-2 list-none space-y-1 p-0">
+            {HELD.map((h) => (
+              <li key={h.file} className="text-caption font-body"><span className="font-mono text-slate">{h.file}</span>: {h.reason}</li>
+            ))}
+          </ul>
+        </details>
         <p className="text-caption font-body text-slate mt-2">Copy is draft. It is to be held to the claims list (docs: must-not-claim) and checked by a person before it runs.</p>
       </Card>
       <div className="grid gap-4 lg:grid-cols-3">

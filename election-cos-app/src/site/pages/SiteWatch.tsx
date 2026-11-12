@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
 import { IEC_LINK } from '../officialSources';
+import { PromoPlayer } from '../PromoPlayer';
 import { byAudience, embedUrl, fmtSeconds, hostedUrls, type Explainer } from '../explainerVideos';
 
 function Player({ e }: { e: Explainer }) {
@@ -143,6 +144,14 @@ export function SiteWatch() {
             The 60-Second Tour, as Text
           </Link>
         </p>
+      </SiteSection>
+
+      <SiteSection className="pb-10">
+        <h2 className="m-0 font-site-display text-site-h3">The 2026 Results in 15 Seconds</h2>
+        <div className="mt-4 grid gap-6 md:grid-cols-2">
+          <PromoPlayer id="who-governs-your-council" className="max-w-[420px]" />
+          <PromoPlayer id="landing-survey" />
+        </div>
       </SiteSection>
 
       <SiteSection className="pb-10">

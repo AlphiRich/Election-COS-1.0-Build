@@ -16,6 +16,7 @@
  */
 import { useMemo, useState } from 'react';
 import { Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
+import { SiteVideo } from '../SiteVideo';
 import { allocateSeats } from '@/modules/analytics/seatCalculator';
 import { NW405_2021_EXAMPLE } from '@/modules/analytics/nw405Example';
 import { IEC_LINK } from '../officialSources';
@@ -90,6 +91,12 @@ export function SiteSeatTool() {
             lists so that the whole council reflects the vote. Change the numbers and watch each
             step.
           </p>
+        </div>
+      </SiteSection>
+
+      <SiteSection className="pb-8">
+        <div className="grid gap-6 ">
+          <SiteVideo id="seats-won" className="max-w-[560px]" />
         </div>
       </SiteSection>
 

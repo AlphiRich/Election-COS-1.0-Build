@@ -40,12 +40,14 @@ describe('Master hub', () => {
   it('filters the asset grid by category and shows the real QR on the poster', async () => {
     const el = await mount();
     await click(tab(el, 'Media & Campaign Assets'));
-    expect(el.querySelectorAll('[data-testid="asset-grid"] > div')).toHaveLength(7);
+    expect(el.querySelectorAll('[data-testid="asset-grid"] > div')).toHaveLength(8);
     const grid = el.querySelector('[data-testid="asset-grid"]')!.textContent ?? '';
     expect(grid.match(/Not built/g)).toHaveLength(2);
     expect(grid.match(/Built/g)!.length).toBeGreaterThanOrEqual(5);
-    expect(grid).toContain('marketing/video/explainer-15s/ecos-explainer-15s-1080x1920.mp4');
+    expect(grid).toContain('site-assets/videos/who-governs-your-council.mp4');
     expect(grid).toContain('the product has no free trial');
+    expect(el.textContent).toContain('Videos supplied but held back');
+    expect(el.querySelector('a[href="https://www.electioncos.co.za/watch"]')).not.toBeNull();
     await click(button(el, 'Print collateral'));
     expect(el.querySelectorAll('[data-testid="asset-grid"] > div')).toHaveLength(2);
     expect(el.querySelector('img[alt^="QR code for WhatsApp"]')).not.toBeNull();

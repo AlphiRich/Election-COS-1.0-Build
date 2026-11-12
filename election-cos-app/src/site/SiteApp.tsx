@@ -28,6 +28,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { Suspense, lazy, useCallback, useEffect, useState } from 'react';
 import { SiteShell } from './SiteChrome';
 import { SiteHome } from './pages/SiteHome';
+import { SurveyInvite } from './SurveyInvite';
 const SiteForCampaigns = lazy(() =>
   import('./pages/SiteForCampaigns').then((m) => ({ default: m.SiteForCampaigns })),
 );
@@ -246,6 +247,7 @@ export function SiteApp() {
       </Suspense>
 
       {consent === 'unasked' && <ConsentBanner pathname={pathname} onChoice={choose} />}
+      {pathname === '/' && <SurveyInvite />}
     </SiteShell>
   );
 }

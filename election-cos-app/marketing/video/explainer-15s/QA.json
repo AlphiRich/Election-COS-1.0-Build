@@ -25,8 +25,8 @@
     "The \"4.125 pt\" size check in the spec: its rule is not stated in the document, so it was not measured.",
     "Voice-over: not produced (spec: audio is recorded separately)."
   ],
-  "unverified": [
-    "\"139 of 213\" is the spec's national figure; this build holds North West only (11 of 18 local councils have no majority)."
-  ],
-  "aiVoiceLineInStrip": false
+  "aiVoiceLineInStrip": false,
+  "verified": [
+    "\"139 of 213\" matches this build's national seat table (hung flag, and an independent count with no disagreement). 208 of the 213 councils are reconciled to the Commission's Seat Calculation reports; five are not fully confirmed (Mnquma not published, King Sabata Dalindyebo incomplete, Matjhabeng, Ray Nkonyeni and Msunduzi count not finished) and all five are counted as no majority, so 134 of the 208 reconciled councils have none. A person should confirm against the Commission's own figures before publishing."
+  ]
 }

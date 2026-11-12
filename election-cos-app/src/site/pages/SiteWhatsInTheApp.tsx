@@ -11,6 +11,7 @@
 import { Link } from 'react-router-dom';
 import { CASEWORK_FEATURES, CASE_STEPS, PILLARS, whatsAppHref } from '../siteContent';
 import { Eyebrow, SiteCard, SiteSection, StatusBadge } from '../SiteChrome';
+import { SiteVideo } from '../SiteVideo';
 
 export function SiteWhatsInTheApp() {
   return (
@@ -23,6 +24,13 @@ export function SiteWhatsInTheApp() {
             The voter tools on this site are free. The app behind them is what a ward office or a
             party uses between elections, and what residents notice as faster answers.
           </p>
+        </div>
+      </SiteSection>
+
+      <SiteSection className="pb-8">
+        <div className="grid gap-6 md:grid-cols-2">
+          <SiteVideo id="offline" className="max-w-[560px]" />
+          <SiteVideo id="capture-consent" className="max-w-[560px]" />
         </div>
       </SiteSection>
 

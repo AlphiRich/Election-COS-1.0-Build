@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { PILLARS } from '../siteContent';
 import { PLATFORM_ROLES } from '../platformContent';
 import { Eyebrow, SiteCard, SiteSection, StatusBadge } from '../SiteChrome';
+import { SiteVideo } from '../SiteVideo';
 import { PageIntro } from './pageParts';
 
 export function SitePlatform() {
@@ -13,6 +14,13 @@ export function SitePlatform() {
         title="One Platform, Seven Roles, Every Ward."
         lead="Each person sees only the wards they are assigned to. Every capability below is marked built or roadmap."
       />
+      <SiteSection className="pb-8">
+        <div className="grid gap-6 md:grid-cols-2">
+          <SiteVideo id="roles" className="max-w-[560px]" />
+          <SiteVideo id="command-view" className="max-w-[560px]" />
+        </div>
+      </SiteSection>
+
       <SiteSection labelledBy="pf-pillars" className="pb-14">
         <h2 id="pf-pillars" className="mb-5 mt-0 font-site-display text-site-h4">
           What It Does

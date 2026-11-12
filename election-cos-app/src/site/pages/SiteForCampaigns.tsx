@@ -23,6 +23,7 @@ import {
   whatsAppHref,
 } from '../siteContent';
 import { CtaBand, Eyebrow, SiteCard, SiteSection, StatusBadge, WhatsAppIcon } from '../SiteChrome';
+import { SiteVideo } from '../SiteVideo';
 
 const ENQUIRY = 'Election Campaign OS enquiry';
 const hero = HERO[SEASON === 'casework' ? 'casework' : 'pre-election'];
@@ -122,6 +123,13 @@ export function SiteForCampaigns() {
       </section>
 
       {/* ------------------------------------------------- who it is for */}
+      <SiteSection className="pb-8">
+        <div className="grid gap-6 md:grid-cols-2">
+          <SiteVideo id="command-view" className="max-w-[560px]" />
+          <SiteVideo id="offline" className="max-w-[560px]" />
+        </div>
+      </SiteSection>
+
       <SiteSection labelledBy="doors-h" className="pb-10 pt-[88px]">
         <h2 id="doors-h" className="mb-8 mt-0 font-site-display text-site-h3">
           Who It Is For

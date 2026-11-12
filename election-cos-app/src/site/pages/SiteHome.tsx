@@ -18,6 +18,7 @@ import { EXPLAINERS } from '../explainers';
 import { FUNDING_CHECKER_PATH } from './SiteFundingChecker';
 import { COALITION_PATH, COUNCIL_PATH, DETAILS_PATH, SEATS_PATH } from './SiteVoterTools';
 import { Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
+import { SiteVideo } from '../SiteVideo';
 import { MY_WARD_PATH, TRACKER_PATH } from '../resultsPaths';
 import SUMMARY from '@/data/lge2026/national/summary-2026.json';
 
@@ -64,6 +65,13 @@ export function SiteHome() {
           </div>
         </div>
       </section>
+
+      <SiteSection className="pb-8">
+        <div className="grid gap-6 md:grid-cols-2">
+          <SiteVideo id="who-governs-your-council" className="max-w-[560px]" />
+          <SiteVideo id="seats-won" className="max-w-[560px]" />
+        </div>
+      </SiteSection>
 
       <SiteSection labelledBy="tool-h" className="pb-6 pt-[72px]">
         <h2 id="tool-h" className="mb-8 mt-0 font-site-display text-site-h3">

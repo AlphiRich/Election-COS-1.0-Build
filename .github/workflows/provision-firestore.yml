@@ -1,0 +1,52 @@
+name: Provision Firestore and load election data
+
+# Creates the Firestore database for electioncos1-0 if it does not exist (Standard edition, africa-south1, per the project's
+# data-residency rule), deploys firestore.rules and indexes, then loads the election results
+# (election-cos-app/scripts/load-election-data.ts). Safe to re-run: an existing database is left alone and the load overwrites
+# identical documents. Signs in keylessly via Workload Identity Federation as ecos-site-deployer (same as deploy-site-gcp.yml),
+# so no service-account key secret is needed.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # for the keyless Google sign-in
+
+concurrency:
+  group: provision-firestore
+  cancel-in-progress: false
+
+jobs:
+  provision:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: election-cos-app
+    env:
+      PROJECT: electioncos1-0
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: election-cos-app/package-lock.json
+      - run: npm ci
+      - run: npm ci --prefix functions
+      - name: Sign in to Google Cloud (Workload Identity Federation)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER || 'projects/960903975002/locations/global/workloadIdentityPools/github/providers/github-oidc' }}
+          service_account: ${{ vars.GCP_SITE_DEPLOYER || 'ecos-site-deployer@electioncos1-0.iam.gserviceaccount.com' }}
+      - name: Create the database if absent
+        run: |
+          if npx firebase firestore:databases:list --project "$PROJECT" --non-interactive | grep -q '(default)'; then
+            echo "Database (default) already exists; leaving it."
+          else
+            npx firebase firestore:databases:create '(default)' --location=africa-south1 --edition=standard --project "$PROJECT" --non-interactive
+          fi
+      - name: Deploy rules and indexes
+        run: npx firebase deploy --only firestore --project "$PROJECT" --non-interactive
+      - name: Load election results
+        run: npx vite-node scripts/load-election-data.ts --write --project "$PROJECT"
