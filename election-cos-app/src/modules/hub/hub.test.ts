@@ -61,12 +61,12 @@ describe('catalogue and filters', () => {
     expect(searchAgents('zzzzqq')).toEqual([]);
     expect(searchAgents('')).toHaveLength(32);
   });
-  it('filters assets by category and keeps all seven under "all"', () => {
-    expect(ASSETS).toHaveLength(7);
-    expect(filterAssets('all')).toHaveLength(7);
+  it('filters assets by category and keeps all eight under "all"', () => {
+    expect(ASSETS).toHaveLength(8);
+    expect(filterAssets('all')).toHaveLength(8);
     expect(filterAssets('digital').map((a) => a.id)).toEqual([1, 2]);
     expect(filterAssets('print')).toHaveLength(2);
-    expect(filterAssets('video')).toHaveLength(3);
+    expect(filterAssets('video')).toHaveLength(4);
   });
   it('every file the hub says is built exists in the repository, and each built asset says what is open or that nothing is', () => {
     for (const a of ASSETS) {
@@ -74,7 +74,8 @@ describe('catalogue and filters', () => {
     }
     expect(ASSETS.filter((a) => a.built === null).map((a) => a.id)).toEqual([5, 6]); // the two videos that need voice and footage
     expect(ASSETS.find((a) => a.id === 1)!.built!.flag).toMatch(/no free trial/);
-    expect(ASSETS.find((a) => a.id === 7)!.built!.flag).toMatch(/five not fully confirmed/);
+    expect(ASSETS.find((a) => a.id === 7)!.built!.flag).toMatch(/verified against the national seat table/);
+    expect(ASSETS.find((a) => a.id === 8)!.built!.flag).toMatch(/VITE_SURVEY_URL/);
   });
 });
 

@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { EXPLAINERS } from '../explainerVideos';
+import { PROMO_VIDEOS } from '../promoVideos';
 import { SiteWatch } from './SiteWatch';
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
@@ -27,7 +28,7 @@ describe('the /watch page', () => {
     for (const e of EXPLAINERS) expect(el.textContent).toContain(e.title);
     expect(el.querySelectorAll('iframe')).toHaveLength(0);
     const videos = [...el.querySelectorAll('video')];
-    expect(videos).toHaveLength(EXPLAINERS.length);
+    expect(videos).toHaveLength(EXPLAINERS.length + PROMO_VIDEOS.length); // the explainers, plus the two promo players
     for (const v of videos) {
       expect(v.getAttribute('preload')).toBe('none');
       expect(v.getAttribute('poster')).toMatch(/^\/videos\/[a-z0-9-]+\.jpg$/);
@@ -43,7 +44,7 @@ describe('the /watch page', () => {
     try {
       const el = await mount();
       expect(el.textContent).toContain('Video not recorded yet');
-      expect(el.querySelectorAll('video')).toHaveLength(EXPLAINERS.length - 1);
+      expect(el.querySelectorAll('video')).toHaveLength(EXPLAINERS.length - 1 + PROMO_VIDEOS.length);
     } finally {
       first.hosted = true;
     }

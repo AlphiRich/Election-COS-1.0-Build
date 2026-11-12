@@ -58,6 +58,8 @@ jobs:
       - name: Build site
         env:
           VITE_AD_CLIENT_ID: ${{ vars.VITE_AD_CLIENT_ID }}
+          # The landing-page survey invitation appears only when this is set (a Google Forms address).
+          VITE_SURVEY_URL: ${{ vars.VITE_SURVEY_URL }}
           VITE_AD_SLOT_ID: ${{ vars.VITE_AD_SLOT_ID }}
           VITE_AD_CATEGORY_BLOCKS_CONFIRMED: ${{ vars.VITE_AD_CATEGORY_BLOCKS_CONFIRMED }}
         run: npm run build:site && npm run check:site-budget

@@ -10,6 +10,7 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
+import { PromoPlayer } from '../PromoPlayer';
 import { ballotsFor, findCouncil, searchCouncils } from '../tools/councilFinder';
 import { BASELINE_AUTHORITY, ROLL_BASIS } from '@/modules/reference/municipalRegister';
 import { DETAILS_PATH, SEATS_PATH } from './SiteVoterTools';
@@ -36,6 +37,10 @@ export function SiteCouncilFinder() {
             wards, and what you will be asked to vote on.
           </p>
         </div>
+      </SiteSection>
+
+      <SiteSection className="pb-8">
+        <PromoPlayer id="who-governs-your-council" className="max-w-[420px]" />
       </SiteSection>
 
       <SiteSection className="pb-10">
