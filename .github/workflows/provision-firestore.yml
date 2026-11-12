@@ -3,13 +3,15 @@ name: Provision Firestore and load election data
 # Creates the Firestore database for electioncos1-0 if it does not exist (Standard edition, africa-south1, per the project's
 # data-residency rule), deploys firestore.rules and indexes, then loads the election results
 # (election-cos-app/scripts/load-election-data.ts). Safe to re-run: an existing database is left alone and the load overwrites
-# identical documents. Needs the FIREBASE_SERVICE_ACCOUNT secret (docs/deploy-credentials-request.md) with Firestore admin.
+# identical documents. Signs in keylessly via Workload Identity Federation as ecos-site-deployer (same as deploy-site-gcp.yml),
+# so no service-account key secret is needed.
 
 on:
   workflow_dispatch:
 
 permissions:
   contents: read
+  id-token: write # for the keyless Google sign-in
 
 concurrency:
   group: provision-firestore
@@ -23,7 +25,6 @@ jobs:
         working-directory: election-cos-app
     env:
       PROJECT: electioncos1-0
-      GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/sa.json
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -33,12 +34,11 @@ jobs:
           cache-dependency-path: election-cos-app/package-lock.json
       - run: npm ci
       - run: npm ci --prefix functions
-      - name: Credential
-        env:
-          SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-        run: |
-          [ -n "$SERVICE_ACCOUNT" ] || { echo "::error::FIREBASE_SERVICE_ACCOUNT is not set."; exit 1; }
-          printf '%s' "$SERVICE_ACCOUNT" > "$RUNNER_TEMP/sa.json"
+      - name: Sign in to Google Cloud (Workload Identity Federation)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER || 'projects/960903975002/locations/global/workloadIdentityPools/github/providers/github-oidc' }}
+          service_account: ${{ vars.GCP_SITE_DEPLOYER || 'ecos-site-deployer@electioncos1-0.iam.gserviceaccount.com' }}
       - name: Create the database if absent
         run: |
           if npx firebase firestore:databases:list --project "$PROJECT" --non-interactive | grep -q '(default)'; then
@@ -50,6 +50,3 @@ jobs:
         run: npx firebase deploy --only firestore --project "$PROJECT" --non-interactive
       - name: Load election results
         run: npx vite-node scripts/load-election-data.ts --write --project "$PROJECT"
-      - name: Remove credential
-        if: always()
-        run: rm -f "$RUNNER_TEMP/sa.json"
