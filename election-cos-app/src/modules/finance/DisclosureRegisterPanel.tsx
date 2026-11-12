@@ -59,7 +59,7 @@ export function DisclosureRegisterPanel({ ctx, config, onSelectDonor }: Disclosu
   return (
     <section className="space-y-3 border border-ink/10 bg-white rounded-lg p-4">
       <div className="flex items-baseline justify-between gap-3 flex-wrap">
-        <h2 className="text-headline-md font-display text-ink">Disclosure register — {register.financialYear}</h2>
+        <h2 className="text-headline-md font-display text-ink">Disclosure Register — {register.financialYear}</h2>
         <p className="text-data-mono font-mono text-slate">
           {formatZAR(register.totalZAR)} recorded · {register.undisclosedCount} not marked disclosed
         </p>
@@ -113,7 +113,7 @@ export function DisclosureRegisterPanel({ ctx, config, onSelectDonor }: Disclosu
             <tr className="text-label-caps font-display uppercase text-slate">
               <th className="py-1">Donor</th>
               <th className="py-1">Cumulative</th>
-              <th className="py-1">Largest single</th>
+              <th className="py-1">Largest Single</th>
               <th className="py-1">Status</th>
             </tr>
           </thead>

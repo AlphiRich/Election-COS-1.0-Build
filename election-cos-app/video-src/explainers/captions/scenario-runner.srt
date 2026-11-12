@@ -1,0 +1,11 @@
+1
+00:00:02,200 --> 00:00:10,050
+You set the swing and how unsure you are.
+
+2
+00:00:10,100 --> 00:00:23,250
+The software repeats the seat calculation across that range and shows which assumption matters most.
+
+3
+00:00:23,300 --> 00:00:27,650
+It is not a prediction.

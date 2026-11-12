@@ -87,7 +87,7 @@ export function HouseholdQuickAdd({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-3 border border-gold/40 bg-paper p-4 rounded">
-      <h4 className="text-label-caps font-display uppercase text-ink">New household</h4>
+      <h4 className="text-label-caps font-display uppercase text-ink">New Household</h4>
 
       {initialGeo && (
         <p className="text-body-md font-body text-teal">

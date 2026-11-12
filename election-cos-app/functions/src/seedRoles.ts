@@ -39,6 +39,7 @@ export const SEED_ROLES: Record<string, SeedRole> = {
       'settings.permissions',
       'dsr.view',
       'dsr.manage',
+      'roll.view',
     ],
   },
   'municipal-team-lead': {
@@ -55,6 +56,7 @@ export const SEED_ROLES: Record<string, SeedRole> = {
       'logistics.view',
       'logistics.edit',
       'analytics.view',
+      'roll.view',
     ],
   },
   'ward-lead': {
@@ -70,6 +72,8 @@ export const SEED_ROLES: Record<string, SeedRole> = {
       'logistics.view',
       'logistics.edit',
       'analytics.view',
+      'roll.view',
+      'roll.capture',
     ],
   },
   'vd-captain': {
@@ -83,6 +87,8 @@ export const SEED_ROLES: Record<string, SeedRole> = {
       'incidents.create',
       'logistics.view',
       'logistics.edit',
+      'roll.view',
+      'roll.capture',
     ],
   },
   'canvasser': {
@@ -93,6 +99,8 @@ export const SEED_ROLES: Record<string, SeedRole> = {
       'diary.view',
       'diary.edit',
       'incidents.create',
+      'roll.view',
+      'roll.capture',
     ],
   },
   'compliance-officer': {

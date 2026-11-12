@@ -11,18 +11,14 @@ const partyArb: fc.Arbitrary<Omit<PartyInput, 'id' | 'name'>> = fc.record({
   wardSeatsWon: fc.integer({ min: 0, max: 10 }),
 });
 
-const inputArb = fc
-  .array(partyArb, { minLength: 1, maxLength: 6 })
-  .chain((parties) => {
-    const totalValidVotes = parties.reduce((s, p) => s + p.votes, 0);
-    return fc.record({
-      totalSeats: fc.integer({ min: 1, max: 60 }),
-      totalValidVotes: fc.constant(totalValidVotes),
-      parties: fc.constant(
-        parties.map((p, i) => ({ ...p, id: `party-${i}`, name: `Party ${i}` })),
-      ),
-    });
+const inputArb = fc.array(partyArb, { minLength: 1, maxLength: 6 }).chain((parties) => {
+  const totalValidVotes = parties.reduce((s, p) => s + p.votes, 0);
+  return fc.record({
+    totalSeats: fc.integer({ min: 1, max: 60 }),
+    totalValidVotes: fc.constant(totalValidVotes),
+    parties: fc.constant(parties.map((p, i) => ({ ...p, id: `party-${i}`, name: `Party ${i}` }))),
   });
+});
 
 describe('allocateSeats — property-based', () => {
   it('PR seats are never negative, for any input', () => {
@@ -57,7 +53,9 @@ describe('allocateSeats — property-based', () => {
       fc.property(inputArb, (input) => {
         const result = allocateSeats(input);
         if (result.tieFlags.length === 0) {
-          return result.totalSeatsAllocated === result.councilSizeFinal && result.pendingSeats === 0;
+          return (
+            result.totalSeatsAllocated === result.councilSizeFinal && result.pendingSeats === 0
+          );
         }
         return true; // property vacuously holds when a tie occurred — see the dedicated tie test below
       }),
@@ -65,25 +63,25 @@ describe('allocateSeats — property-based', () => {
   });
 });
 
-describe('allocateSeats — overhang (the fixed arithmetic contradiction)', () => {
-  it('a party winning more ward seats than its quota entitlement keeps them and expands the council, with a visible overhang flag', () => {
-    // Reproduces the class of bug the prior spec had: 35 ward wins against
-    // 34 available seats. Here: one dominant party wins far more wards
-    // than its vote share would entitle it to under the quota.
+describe('allocateSeats — excessive ward seats (the fixed arithmetic contradiction)', () => {
+  it('a party winning more ward seats than its entitlement keeps them, takes no list seats, and the council stays its proclaimed size', () => {
+    // The prior spec allowed 35 ward wins against 34 seats. Here one party wins 30 wards on
+    // 6,000 votes. Item 16 (as amended by Act 3 of 2021): it takes no list seats; a new quota
+    // floor((40,000 - 6,000) / (34 - (30 + 0))) + 1 = 8,501 is set for the others, who share
+    // the 34 - 30 = 4 remaining seats. Hand-worked; see the Item 16 block below.
     const parties: PartyInput[] = [
       { id: 'A', name: 'Dominant Local Party', votes: 6_000, wardSeatsWon: 30 },
       { id: 'B', name: 'Opposition', votes: 34_000, wardSeatsWon: 4 },
     ];
     const result = allocateSeats({ totalValidVotes: 40_000, totalSeats: 34, parties });
-
     const partyA = result.parties.find((p) => p.id === 'A')!;
-    expect(partyA.wardSeatsWon).toBe(30);
-    expect(partyA.overhangSeats).toBeGreaterThan(0);
-    expect(partyA.totalSeats).toBe(30); // retains all ward seats even though entitlement is lower
-    expect(partyA.prSeats).toBe(0); // never negative, and no PR top-up beyond what it won on wards
-
-    // Council expands rather than silently capping someone's ward wins.
-    expect(result.councilSizeFinal).toBeGreaterThan(34);
+    const partyB = result.parties.find((p) => p.id === 'B')!;
+    expect(partyA.excessive).toBe(true);
+    expect(partyA.totalSeats).toBe(30);
+    expect(partyA.prSeats).toBe(0);
+    expect(result.newQuota).toBe(8_501);
+    expect(partyB.totalSeats).toBe(4);
+    expect(result.councilSizeFinal).toBe(34);
     expect(result.totalSeatsAllocated + result.pendingSeats).toBe(result.councilSizeFinal);
   });
 });
@@ -165,5 +163,140 @@ describe('allocateSeats — ties are flagged, never auto-resolved', () => {
     // Nobody was silently awarded the contested seat by array order or id.
     const tie = result.tieFlags[0];
     expect(tie.partyIds.sort()).toEqual(['A', 'B']);
+  });
+});
+
+/**
+ * Schedule 1 Item 16 as amended by Act 3 of 2021 s33 (in force 1 Nov 2021), read from the
+ * Gazette (formula checked on the printed page): if a party's ward seats are equal to or
+ * greater than the seats Item 13 gives it, it takes no list seats (16(1)); its ward seats
+ * stay (16(2)); a new quota floor((A - B) / (C - (D + E))) + 1 is set (16(3)) and the OTHER
+ * parties are divided by it (16(4)), ward seats deducted (16(6)). The council stays C.
+ *
+ * Hand-worked, one excessive party. C = 34, A = 34,000, E = 0.
+ *   Item 13: Q = 1,001. P 9 (rem 491), Q 13 (rem 987), R 10 (rem 490): 32 seats, 2 by surplus
+ *   -> Q, then P. Item 13 totals P 10, Q 14, R 10. P holds 12 wards >= 10: excessive.
+ *   New quota = floor((34,000 - 9,500) / (34 - 12)) + 1 = floor(1,113.6) + 1 = 1,114.
+ *   Q: 14,000 / 1,114 = 12 (rem 632); R: 10,500 / 1,114 = 9 (rem 474). 34 - 12 = 22 seats; 21
+ *   by quota; the surplus seat goes to Q (632). Totals Q 13, R 9. List seats: Q 13 - 5 = 8,
+ *   R 9 - 8 = 1, P 0. Council 12 + 13 + 9 = 34.
+ */
+describe('Item 16: excessive seats', () => {
+  const run = (partyWards: [number, number, number]) =>
+    allocateSeats({
+      totalValidVotes: 34_000,
+      totalSeats: 34,
+      parties: [
+        { id: 'P', name: 'P', votes: 9_500, wardSeatsWon: partyWards[0] },
+        { id: 'Q', name: 'Q', votes: 14_000, wardSeatsWon: partyWards[1] },
+        { id: 'R', name: 'R', votes: 10_500, wardSeatsWon: partyWards[2] },
+      ],
+    });
+  const by = (r: ReturnType<typeof run>, id: string) => r.parties.find((p) => p.id === id)!;
+
+  it('gives the excessive party no list seats, keeps its ward seats, and recalculates the others', () => {
+    const r = run([12, 5, 8]);
+    expect(r.quota).toBe(1_001);
+    expect(r.excessiveParties).toEqual(['P']);
+    expect(r.newQuota).toBe(1_114);
+    expect([by(r, 'P').totalSeats, by(r, 'Q').totalSeats, by(r, 'R').totalSeats]).toEqual([
+      12, 13, 9,
+    ]);
+    expect([by(r, 'P').prSeats, by(r, 'Q').prSeats, by(r, 'R').prSeats]).toEqual([0, 8, 1]);
+  });
+
+  it('does NOT let the council grow: it stays the proclaimed size', () => {
+    const r = run([12, 5, 8]);
+    expect(r.councilSizeFinal).toBe(34);
+    expect(r.totalSeatsAllocated).toBe(34);
+    expect(r.pendingSeats).toBe(0);
+  });
+
+  it('treats two excessive parties together and says so', () => {
+    // P 12 and R 12 wards both exceed their 10. B = 20,000, D = 24: new quota floor(14,000 / 10) + 1 = 1,401.
+    const r = run([12, 10, 12]);
+    expect(r.excessiveParties.sort()).toEqual(['P', 'R']);
+    expect(r.newQuota).toBe(1_401);
+    expect([by(r, 'P').totalSeats, by(r, 'Q').totalSeats, by(r, 'R').totalSeats]).toEqual([
+      12, 10, 12,
+    ]);
+    expect(r.councilSizeFinal).toBe(34);
+    expect(r.notes.join(' ')).toMatch(/More than one party/);
+  });
+
+  it('leaves the result untouched where nobody is excessive (the NW405 2021 result is checked elsewhere)', () => {
+    const r = run([3, 5, 4]);
+    expect(r.excessiveParties).toEqual([]);
+    expect(r.newQuota).toBeUndefined();
+    expect(r.councilSizeFinal).toBe(34);
+  });
+
+  it('a party with no ward seats is never excessive', () => {
+    const r = run([0, 0, 0]);
+    expect(r.excessiveParties).toEqual([]);
+  });
+});
+
+/**
+ * Item 13(2)(b): equal surpluses go to the party with the highest number of valid votes (the
+ * Act says "surplus"). The Act has no rule for equal surplus AND equal votes: flagged, never a lot.
+ */
+describe('Item 13(2)(b): ties between equal surpluses', () => {
+  it('awards the seat to the party with more valid votes when surpluses are equal', () => {
+    // C = 3, A = 298: Q = floor(298 / 3) + 1 = 100. X 249 = 2 x 100 + 49; Y 49 = 0 x 100 + 49.
+    const r = allocateSeats({
+      totalValidVotes: 298,
+      totalSeats: 3,
+      parties: [
+        { id: 'Y', name: 'Y', votes: 49, wardSeatsWon: 0 },
+        { id: 'X', name: 'X', votes: 249, wardSeatsWon: 0 },
+      ],
+    });
+    expect(r.quota).toBe(100);
+    expect(r.tieFlags).toEqual([]);
+    expect(r.parties.find((p) => p.id === 'X')!.totalSeats).toBe(3);
+    expect(r.parties.find((p) => p.id === 'Y')!.totalSeats).toBe(0);
+  });
+
+  it('is the same whichever order the parties arrive in', () => {
+    const mk = (order: 'xy' | 'yx') =>
+      allocateSeats({
+        totalValidVotes: 298,
+        totalSeats: 3,
+        parties:
+          order === 'xy'
+            ? [
+                { id: 'X', name: 'X', votes: 249, wardSeatsWon: 0 },
+                { id: 'Y', name: 'Y', votes: 49, wardSeatsWon: 0 },
+              ]
+            : [
+                { id: 'Y', name: 'Y', votes: 49, wardSeatsWon: 0 },
+                { id: 'X', name: 'X', votes: 249, wardSeatsWon: 0 },
+              ],
+      });
+    expect(
+      mk('xy')
+        .parties.map((p) => [p.id, p.totalSeats])
+        .sort(),
+    ).toEqual(
+      mk('yx')
+        .parties.map((p) => [p.id, p.totalSeats])
+        .sort(),
+    );
+  });
+
+  it('flags, and leaves the seat open, when surplus and votes are both equal', () => {
+    // C = 3, A = 300: Q = 101. X and Y each 150 = 1 x 101 + 49. One seat left, nothing separates them.
+    const r = allocateSeats({
+      totalValidVotes: 300,
+      totalSeats: 3,
+      parties: [
+        { id: 'X', name: 'X', votes: 150, wardSeatsWon: 0 },
+        { id: 'Y', name: 'Y', votes: 150, wardSeatsWon: 0 },
+      ],
+    });
+    expect(r.tieFlags).toHaveLength(1);
+    expect(r.tieFlags[0]!.partyIds.sort()).toEqual(['X', 'Y']);
+    expect(r.pendingSeats).toBe(1);
   });
 });

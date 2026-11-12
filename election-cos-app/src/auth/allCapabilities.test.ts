@@ -11,6 +11,6 @@ describe('ALL_CAPABILITIES', () => {
     // allCapabilities.ts is what actually enforces sync with the
     // Capability union) — this just makes an accidental count change
     // visible in a diff instead of silently passing.
-    expect(ALL_CAPABILITIES).toHaveLength(26);
+    expect(ALL_CAPABILITIES).toHaveLength(28);
   });
 });

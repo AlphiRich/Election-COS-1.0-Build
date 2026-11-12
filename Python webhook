@@ -1,0 +1,93 @@
+import csv
+import re
+from datetime import datetime, timezone
+from flask import Flask, request
+from twilio.twiml.messaging_response import MessagingResponse
+
+app = Flask(__name__)
+
+# In-memory session state (use Redis for production scale)
+# session_store[phone_number] = {"state": str, "consent": str, "area": str}
+session_store = {}
+
+CSV_FILE = "voter_responses.csv"
+REQUIRED_COLUMNS = ["date", "area", "question", "answer", "consent"]
+
+# Initialize CSV if it doesn't exist
+with open(CSV_FILE, "a", newline="", encoding="utf-8-sig") as f:
+    writer = csv.writer(f)
+    if f.tell() == 0:
+        writer.writerow(REQUIRED_COLUMNS)
+
+ISSUE_MAP = {
+    "A": "Water & Sewage",
+    "B": "Potholes & Roads",
+    "C": "Unemployment & Jobs",
+    "D": "Crime & Safety",
+    "E": "Corruption & Governance"
+}
+
+def append_to_sentiment_engine(area, question, answer, consent):
+    """Writes to the CSV strictly formatted for voter_sentiment_engine.py"""
+    now_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    # Clean inputs to meet the engine's 60-character alphanumeric bounds
+    safe_area = re.sub(r'[^A-Za-z0-9 _&./()+-]', '', area.strip())[:120]
+    safe_answer = re.sub(r'[^A-Za-z0-9 _&./()+-]', '', answer.strip())[:60]
+    
+    with open(CSV_FILE, "a", newline="", encoding="utf-8-sig") as f:
+        writer = csv.writer(f)
+        writer.writerow([now_date, safe_area, question, safe_answer, str(consent).lower()])
+
+@app.route("/whatsapp", methods=["POST"])
+def whatsapp_webhook():
+    incoming_msg = request.values.get("Body", "").strip().upper()
+    sender = request.values.get("From", "")
+    
+    resp = MessagingResponse()
+    msg = resp.message()
+    
+    # Initialize new user
+    if sender not in session_store:
+        session_store[sender] = {"state": "AWAITING_CONSENT"}
+        msg.body("Tomorrow is Election Day. Who is taking your municipality? Vote in the live ECOS National Barometer to see real-time projections for your area.\n\n*Reply 'YES' to start (your responses are completely anonymous).*")
+        return str(resp)
+    
+    session = session_store[sender]
+    state = session["state"]
+    
+    if state == "AWAITING_CONSENT":
+        if incoming_msg == "YES":
+            session["consent"] = "true"
+            session["state"] = "AWAITING_AREA"
+            msg.body("Great. Where are you voting tomorrow?\n\n*Reply with your Municipality and Ward (e.g., 'JB Marks Ward 10') or your exact Voting Station.*")
+        else:
+            msg.body("Reply 'YES' to participate.")
+            
+    elif state == "AWAITING_AREA":
+        session["area"] = incoming_msg.title()
+        session["state"] = "AWAITING_PARTY"
+        msg.body("If the election were held right now, which party gets your Ward ballot?\n\n*Reply with the party acronym (e.g., ANC, DA, FF+, EFF, MK, PA).*")
+        
+    elif state == "AWAITING_PARTY":
+        # Log the party preference
+        append_to_sentiment_engine(session["area"], "Party Support", incoming_msg, session["consent"])
+        session["state"] = "AWAITING_ISSUE"
+        msg.body("Last question: What is the single biggest issue deciding your vote tomorrow?\n\nA) Water & Sewage\nB) Potholes & Roads\nC) Unemployment & Jobs\nD) Crime & Safety\nE) Corruption & Governance\n\n*Reply A, B, C, D, or E.*")
+        
+    elif state == "AWAITING_ISSUE":
+        selected_issue = ISSUE_MAP.get(incoming_msg)
+        if selected_issue:
+            # Log the issue salience
+            append_to_sentiment_engine(session["area"], "Top Priority", selected_issue, session["consent"])
+            session["state"] = "COMPLETED"
+            msg.body("Recorded. See the live predictions for your ward here: https://electioncos.co.za/barometer\n\n*Notice IEC officials breaking the rules tomorrow? Save this number to log an instant incident report for party agents.*")
+        else:
+            msg.body("Invalid choice. Please reply with A, B, C, D, or E.")
+            
+    elif state == "COMPLETED":
+        msg.body("You have already completed the poll. To report an IEC incident, reply 'INCIDENT'.")
+        
+    return str(resp)
+
+if __name__ == "__main__":
+    app.run(port=5000, debug=True)

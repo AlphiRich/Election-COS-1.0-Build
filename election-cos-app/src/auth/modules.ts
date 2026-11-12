@@ -43,7 +43,8 @@ export type ModuleKey =
   | 'ppfa-disclosure'
   | 'ward-sentiment'
   | 'incident-pro'
-  | 'casework';
+  | 'casework'
+  | 'voter-verification';
 
 export type EntitlementScope = 'TENANT' | 'WARD';
 
@@ -67,13 +68,21 @@ export interface ModuleDefinition {
    * actually govern would be a claim rather than a fact.
    */
   gatedCapabilities: Capability[];
+  /**
+   * How the module is charged. Absent means a flat subscription. 'PER_USE'
+   * means each verification or capture is counted as a usage event and
+   * invoiced from the count on the platform's published, identical terms.
+   * The module still needs an entitlement (the campaign has switched it
+   * on); the entitlement carries no price and neither do the events.
+   */
+  metering?: 'PER_USE';
   description: string;
 }
 
 export const MODULES: ModuleDefinition[] = [
   {
     key: 'core',
-    label: 'Core campaign platform',
+    label: 'Core Campaign Platform',
     scope: 'TENANT',
     bundled: true,
     gatedCapabilities: [],
@@ -82,7 +91,7 @@ export const MODULES: ModuleDefinition[] = [
   },
   {
     key: 'campaign-diary',
-    label: 'Campaign Diary & IEC timetable',
+    label: 'Campaign Diary & IEC Timetable',
     scope: 'TENANT',
     bundled: true,
     gatedCapabilities: ['diary.view', 'diary.edit'],
@@ -91,7 +100,7 @@ export const MODULES: ModuleDefinition[] = [
   },
   {
     key: 'ppfa-disclosure',
-    label: 'PPFA disclosure',
+    label: 'PPFA Disclosure',
     scope: 'TENANT',
     bundled: false,
     gatedCapabilities: ['ppfa.view', 'ppfa.edit', 'ppfa.export', 'ppfa.manage_thresholds'],
@@ -118,12 +127,22 @@ export const MODULES: ModuleDefinition[] = [
   },
   {
     key: 'casework',
-    label: 'Councillor casework',
+    label: 'Councillor Casework',
     scope: 'WARD',
     bundled: false,
     gatedCapabilities: [],
     description:
       'Post-election constituency casework, bought per ward. Not built here yet.',
+  },
+  {
+    key: 'voter-verification',
+    label: 'Voter Verification & Capture',
+    scope: 'TENANT',
+    bundled: false,
+    metering: 'PER_USE',
+    gatedCapabilities: ['roll.view', 'roll.capture'],
+    description:
+      'Lets canvassers check people against the certified voters\' roll for their own district and, with the voter\'s consent, capture them. Charged per verification and per capture, counted as they happen, so a party pays for the doors it actually works and for the day\'s statistics it reads.',
   },
 ];
 

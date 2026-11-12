@@ -65,7 +65,7 @@ export interface SeparationRule {
  */
 export const SEPARATION_RULES: SeparationRule[] = [
   {
-    label: 'The whole disclosure chain, plus the donor’s own data requests',
+    label: 'The Whole Disclosure Chain, Plus the Donor’s Own Data Requests',
     capabilities: ['ppfa.edit', 'ppfa.manage_thresholds', 'dsr.manage'],
     reason:
       'One person would record a donor’s money, set the thresholds deciding what is disclosed about it, and ' +

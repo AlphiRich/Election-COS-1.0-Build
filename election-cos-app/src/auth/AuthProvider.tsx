@@ -18,6 +18,12 @@ import { getFirebaseAuth } from '@/dal/adapters/firestore/client';
 import type { Capability, GeoScope } from './types';
 import type { SessionContext } from '@/dal/ports/session';
 import { AuthContext, type AuthState } from './useSession';
+import { claimsWorkerConfig, ensureTenantClaims } from './claimsApi';
+
+const CLAIMS = claimsWorkerConfig(import.meta.env as Record<string, string | undefined>);
+// One attempt per uid per page load, so someone with no staff record does
+// not loop: request claims, token changes, request again.
+const claimsAttempted = new Set<string>();
 
 function claimsToSession(user: User, claims: Record<string, unknown>): SessionContext | null {
   const tenantId = claims.tenantId as string | undefined;
@@ -31,6 +37,8 @@ function claimsToSession(user: User, claims: Record<string, unknown>): SessionCo
     geoScope,
     wardScope: claims.wardScope as string | undefined,
     vdScope: claims.vdScope as string | undefined,
+    mfaRequired: typeof claims.mfaRequired === 'boolean' ? claims.mfaRequired : undefined,
+    mfaUntil: typeof claims.mfaUntil === 'number' ? claims.mfaUntil : undefined,
   };
 }
 
@@ -51,7 +59,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setState({ status: 'signed-out', user: null, session: null });
         return;
       }
-      const result = await user.getIdTokenResult();
+      let result = await user.getIdTokenResult();
+      if (CLAIMS && !result.claims.tenantId && !claimsAttempted.has(user.uid)) {
+        claimsAttempted.add(user.uid);
+        if (await ensureTenantClaims(user, CLAIMS)) result = await user.getIdTokenResult(true);
+      }
       const session = claimsToSession(user, result.claims);
       setState({ status: 'signed-in', user, session });
     });

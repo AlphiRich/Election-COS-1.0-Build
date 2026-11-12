@@ -43,6 +43,10 @@ import {
   summariseQueue,
   transitionRefusalReason,
 } from './canvassQueue';
+import { Button, Card, DataLine, Field, PageHeader, SectionLabel, StatTile } from '@/components/ui';
+import { downloadText } from '@/lib/csv';
+import { readQueueDepth } from '@/offline/queueDepth';
+import { buildSignoff, sastDay, signoffHtml } from './dailySignoff';
 
 /** Outcomes a canvasser records at a door, in the order they occur. */
 const OUTCOMES: ContactStatus[] = ['CONTACTED', 'NO_ANSWER', 'INACCESSIBLE', 'REFUSED_RECONTACT'];
@@ -75,13 +79,12 @@ export function RoundPage() {
 
   if (!session) {
     return (
-      <div className="rounded-lg border border-slate/30 bg-white p-6 max-w-lg">
-        <p className="text-label-caps font-display uppercase text-slate">/round</p>
-        <h1 className="text-headline-md font-display text-ink mt-1">Round</h1>
+      <Card className="max-w-lg">
+        <PageHeader slug="/round" title="Round" />
         <p className="mt-3 text-body-md font-body text-slate">
           No active session — see BUILD-STATUS.md (no live Firebase project provisioned yet).
         </p>
-      </div>
+      </Card>
     );
   }
 
@@ -100,39 +103,84 @@ export function RoundPage() {
     closeDoor.mutate({ household, status });
   }
 
+  /** End-of-day count for this voting district, as a printable file. Nothing is sent. */
+  async function downloadSignoff() {
+    const now = new Date();
+    const day = sastDay(now.toISOString());
+    const from = new Date(`${day}T00:00:00+02:00`).toISOString();
+    const [voters, incidents, pendingSync] = await Promise.all([
+      dal.voters.listByVD(session!, session!.vdScope!, { pageSize: 500 }),
+      dal.incidents.listByDateRange(session!, from, now.toISOString()),
+      readQueueDepth(),
+    ]);
+    downloadText(
+      `vd-signoff-${session!.vdScope}-${day}.html`,
+      'text/html',
+      signoffHtml(
+        buildSignoff({
+          day,
+          wardCode,
+          vdCode: session!.vdScope!,
+          households: householdsQuery.data?.items ?? [],
+          voters: voters.items,
+          incidents,
+          pendingSync,
+          now,
+        }),
+      ),
+    );
+  }
+
   return (
     <div className="space-y-6 max-w-3xl">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-label-caps font-display uppercase text-slate">/round</p>
-          <h1 className="text-headline-md font-display text-ink mt-1">Round</h1>
-        </div>
-        {/*
-         * A canvasser holds incidents.create and not incidents.view, so
-         * the Incidents nav item is hidden from them and this was the only
-         * permission in the product with nowhere to use it. Linked from
-         * the round because that is where they are standing when they see
-         * the burst pipe.
-         */}
-        {session.caps.includes('incidents.create') && (
-          <Link
-            to="/incidents/new"
-            className="border border-ink/20 rounded px-4 py-2 text-label-caps font-display uppercase text-ink"
-          >
-            Report an incident
-          </Link>
-        )}
-      </div>
+      <PageHeader
+        slug="/round"
+        title="Round"
+        action={
+          <div className="flex flex-wrap items-center gap-2">
+            <Button
+              variant="ghost"
+              disabled={!wardCode || !session.vdScope}
+              title={session.vdScope ? undefined : 'Sign-off is for a voting-district login'}
+              onClick={() => void downloadSignoff()}
+            >
+              Daily sign-off
+            </Button>
+          {/*
+           * A canvasser holds incidents.create and not incidents.view, so
+           * the Incidents nav item is hidden from them and this was the
+           * only permission in the product with nowhere to use it. Linked
+           * from the round because that is where they are standing when
+           * they see the burst pipe.
+           *
+           * A <Link>, not Button: it navigates.
+           */
+          session.caps.includes('incidents.create') ? (
+            <Link
+              to="/incidents/new"
+              className="inline-flex min-h-11 items-center whitespace-nowrap rounded border border-ink/20 px-4 py-2 text-label-caps font-display uppercase text-ink"
+            >
+              Report an Incident
+            </Link>
+          ) : undefined}
+          </div>
+        }
+      />
 
-      <label className="block space-y-1 max-w-xs">
-        <span className="text-label-caps font-display uppercase text-slate">Ward code</span>
-        <input
-          className="w-full border border-ink/20 rounded px-2 py-1.5 text-data-mono font-mono"
-          placeholder="NW405-W12"
-          value={wardCode}
-          onChange={(e) => setWardCode(e.target.value.trim())}
-        />
-      </label>
+      {/* Was a bare <label> wrapping the input: nothing associated. The
+          monospace treatment stays — a ward code is a code. */}
+      <div className="max-w-xs">
+        <Field label="Ward Code" mono>
+          {(props) => (
+            <input
+              {...props}
+              placeholder="NW405-W12"
+              value={wardCode}
+              onChange={(e) => setWardCode(e.target.value.trim())}
+            />
+          )}
+        </Field>
+      </div>
 
       {householdsQuery.isError && (
         <p className="text-body-md font-body text-maroon">
@@ -144,10 +192,10 @@ export function RoundPage() {
       {wardCode && !householdsQuery.isLoading && (
         <>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <Stat label="Doors" value={summary.total} />
-            <Stat label="Left to work" value={summary.queueable} />
-            <Stat label="Waiting out a cool-off" value={summary.waiting} />
-            <Stat label="Asked not to be contacted" value={summary.refused} />
+            <StatTile label="Doors" value={summary.total} />
+            <StatTile label="Left to Work" value={summary.queueable} />
+            <StatTile label="Waiting Out a Cool-Off" value={summary.waiting} />
+            <StatTile label="Asked Not to Be Contacted" value={summary.refused} />
           </div>
 
           <div className="bg-ink text-paper rounded p-4">
@@ -161,22 +209,22 @@ export function RoundPage() {
             </p>
           </div>
 
-          <div className="bg-white border border-ink/10 rounded-lg p-4 space-y-1">
-            <p className="text-label-caps font-display uppercase text-slate">Every door, by state</p>
+          <Card className="space-y-1">
+            <SectionLabel as="h2">Every Door, by State</SectionLabel>
             {(Object.keys(CONTACT_STATUS_LABEL) as ContactStatus[]).map((status) => (
               <p key={status} className="text-body-md font-body text-ink">
                 {CONTACT_STATUS_LABEL[status]}
                 <span className="text-data-mono font-mono text-slate"> · {summary.byStatus[status]}</span>
               </p>
             ))}
-          </div>
+          </Card>
 
           {refusalWarning && <p className="text-body-md font-body text-maroon">{refusalWarning}</p>}
 
           <div className="space-y-3">
-            <h2 className="text-label-caps font-display uppercase text-slate">
+            <SectionLabel as="h2">
               Next {Math.min(DOORS_SHOWN, doors.length)} door{doors.length === 1 ? '' : 's'}
-            </h2>
+            </SectionLabel>
 
             {doors.length === 0 && summary.total > 0 && (
               <p className="text-body-md font-body text-slate">
@@ -187,12 +235,12 @@ export function RoundPage() {
             )}
 
             {doors.map((household) => (
-              <div key={household.id} className="bg-white border border-ink/10 rounded-lg p-4 space-y-2">
+              <Card key={household.id} className="space-y-2">
                 <div>
                   <p className="text-body-md font-body text-ink font-semibold">{household.addressLine}</p>
-                  <p className="text-data-mono font-mono text-slate">
+                  <DataLine>
                     VD {household.vdCode} · {CONTACT_STATUS_LABEL[statusOf(household)]}
-                  </p>
+                  </DataLine>
                 </div>
 
                 <HouseholdAccessNoteCard household={household} showAccessCode={canClose} />
@@ -205,7 +253,8 @@ export function RoundPage() {
                         type="button"
                         disabled={closeDoor.isPending}
                         onClick={() => recordOutcome(household, status)}
-                        className={`px-3 py-1.5 border rounded text-label-caps font-display uppercase disabled:opacity-40 ${
+                        aria-label={`${CONTACT_STATUS_LABEL[status]} — ${household.addressLine}`}
+                        className={`inline-flex min-h-11 items-center rounded border px-3 py-1.5 text-label-caps font-display uppercase disabled:opacity-40 ${
                           status === 'REFUSED_RECONTACT' ? 'border-maroon/40 text-maroon' : 'border-ink/20 text-ink'
                         }`}
                       >
@@ -214,20 +263,11 @@ export function RoundPage() {
                     ))}
                   </div>
                 )}
-              </div>
+              </Card>
             ))}
           </div>
         </>
       )}
-    </div>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: number }) {
-  return (
-    <div className="bg-white border border-ink/10 rounded p-4">
-      <p className="text-label-caps font-display uppercase text-slate">{label}</p>
-      <p className="text-headline-md font-display text-ink">{value}</p>
     </div>
   );
 }

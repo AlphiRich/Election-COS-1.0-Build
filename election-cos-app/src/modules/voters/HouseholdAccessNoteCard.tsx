@@ -37,7 +37,7 @@ export function HouseholdAccessNoteCard({ household, showAccessCode = true }: Ho
 
   return (
     <section
-      aria-label="Access and safety note"
+      aria-label="Access and Safety Note"
       className="border-l-4 border-gold bg-gold/5 rounded-r p-3 space-y-2"
     >
       <p className="text-label-caps font-display uppercase text-ink">Before you open the gate</p>

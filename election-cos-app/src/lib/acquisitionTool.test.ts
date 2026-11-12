@@ -1,0 +1,251 @@
+/**
+ * Election Campaign OS — the acquisition tool stays honest
+ *
+ * `tools/source-acquisition/acquire.py` replaces a supplied ETL script
+ * whose defect was not missing code but false reporting: it printed a
+ * progress line per item and then "ETL Pipeline complete" while every
+ * network call in it sat commented out.
+ *
+ * That tool is Python and runs on an operator's machine, so the TypeScript
+ * suite cannot execute it. What this can do is hold the two properties
+ * that stop it decaying back into the thing it replaced — a completion
+ * message that cannot be reached on a failed run, and a registry whose
+ * entries are honest about never having been fetched.
+ *
+ * The tool's own `--self-test` proves the download-and-verify machinery,
+ * with a local server and no network. Run it before trusting the script:
+ *   python3 tools/source-acquisition/acquire.py --self-test
+ */
+import { describe, expect, it } from 'vitest';
+import { existsSync, readFileSync } from 'node:fs';
+import path from 'node:path';
+
+const REPO_ROOT = path.resolve(__dirname, '..', '..');
+const TOOL = path.join(REPO_ROOT, 'tools', 'source-acquisition');
+const script = readFileSync(path.join(TOOL, 'acquire.py'), 'utf8');
+const registry = JSON.parse(readFileSync(path.join(TOOL, 'sources.json'), 'utf8')) as {
+  sources: {
+    id: string;
+    url: string;
+    filename: string;
+    province: string;
+    category: string;
+    status: string;
+    note?: string;
+    expect?: Record<string, number | string | boolean>;
+  }[];
+};
+
+describe('the acquisition script cannot claim a completion it did not reach', () => {
+  it('returns non-zero before it can print a success line', () => {
+    // The ordering is the guarantee: report() returns 1 on any failure,
+    // and both completion sentences sit after that return.
+    const failureExit = script.indexOf('This run did not complete.');
+    const probeDone = script.indexOf('Every source responded.');
+    const fetchDone = script.indexOf('Every selected source was downloaded and verified.');
+    expect(failureExit).toBeGreaterThan(-1);
+    expect(probeDone).toBeGreaterThan(failureExit);
+    expect(fetchDone).toBeGreaterThan(failureExit);
+    expect(script).toMatch(/if failed:[\s\S]{0,400}return 1/);
+  });
+
+  it('has no silent pass where a fetch should be', () => {
+    // The original's two scrape functions ended in `pass` with every
+    // request commented out. Nothing here may do that.
+    expect(script).not.toMatch(/^\s*#\s*response = requests\.get/m);
+    expect(script).not.toMatch(/\n\s{8}pass\s*\n/);
+    expect(script).toMatch(/urllib\.request\.urlopen/);
+  });
+
+  it('renames a download only after it verifies', () => {
+    const verify = script.indexOf('problem = verify_payload(');
+    const rename = script.indexOf('temporary.replace(destination)');
+    expect(verify).toBeGreaterThan(-1);
+    expect(rename).toBeGreaterThan(verify);
+  });
+
+  it('writes a manifest of what actually arrived', () => {
+    expect(script).toMatch(/def write_manifest/);
+    expect(script).toMatch(/"sha256"|sha256=/);
+  });
+
+  it('carries no hardcoded desktop path and no credential', () => {
+    // The original targeted C:\Users\<name>\Desktop\... and told the
+    // operator to "plug in your IEC credentials here".
+    expect(script).not.toMatch(/C:\\+Users/i);
+    expect(script).not.toMatch(/\b(api[_-]?key|token)\s*=\s*["'][A-Za-z0-9]{8,}/i);
+    expect(script).toMatch(/os\.environ\.get\(source\.auth_env/);
+  });
+});
+
+describe('discovery proposes and never acquires', () => {
+  it('writes every proposed row as unconfirmed, with the human decisions left blank', () => {
+    expect(script).toMatch(/"status": "UNCONFIRMED"/);
+    expect(script).toMatch(/REPLACE_ME/);
+    expect(script).toMatch(/discovery proposes, it does not acquire/i);
+  });
+
+  it('scans one page rather than crawling a government portal', () => {
+    expect(script).toMatch(/a link scan and not a crawler/i);
+    // No recursion into discovered links: run_discovery reads one URL.
+    expect(script).not.toMatch(/def\s+crawl|while\s+queue|frontier/);
+  });
+
+  it('proposes only things that look like datasets', () => {
+    expect(script).toMatch(/DATASET_SUFFIXES/);
+    expect(script).toMatch(/mailto:/);
+  });
+});
+
+describe('the skill matches the tool it documents', () => {
+  const skill = readFileSync(
+    path.join(REPO_ROOT, '.claude', 'skills', 'iec-data-ingestion', 'SKILL.md'),
+    'utf8',
+  );
+
+  it('documents only flags the script actually has', () => {
+    // A skill naming a flag that does not exist sends the next session
+    // down a path the tool cannot walk.
+    for (const flag of ['--self-test', '--discover', '--probe', '--fetch', '--only', '--suggest-to']) {
+      expect(skill, `skill mentions ${flag}`).toContain(flag);
+      expect(script, `script implements ${flag}`).toContain(flag);
+    }
+  });
+
+  it('carries the refusal that governs this whole area', () => {
+    expect(skill).toMatch(/Nothing is reported as done unless it was done/i);
+    expect(skill).toMatch(/Never sentiment/i);
+  });
+
+  it('points at modules that exist', () => {
+    for (const file of [
+      'src/modules/ingest/electionResultSchema.ts',
+      'src/modules/ingest/ingestResult.ts',
+      'src/modules/ingest/mappings.ts',
+      'src/lib/saIdNumber.ts',
+      'docs/design-decision-and-change-log.md',
+      'tools/source-acquisition/acquire.py',
+    ]) {
+      expect(skill, `skill cites ${file}`).toContain(path.basename(file));
+      expect(existsSync(path.join(REPO_ROOT, file)), `${file} exists`).toBe(true);
+    }
+  });
+});
+
+describe('the source registry is honest about what has been checked', () => {
+  it('marks every entry CONFIRMED or UNCONFIRMED', () => {
+    expect(registry.sources.length).toBeGreaterThan(0);
+    for (const source of registry.sources) {
+      expect(['CONFIRMED', 'UNCONFIRMED'], source.id).toContain(source.status);
+    }
+  });
+
+  it('makes every CONFIRMED entry name its verifier and admit we did not fetch it', () => {
+    // Until session 36 this asserted that nothing could be CONFIRMED,
+    // because nothing had been fetched and the environment denies these
+    // hosts at CONNECT. A supplied repository manifest then provided
+    // endpoints its compiler had fetched, with row counts — which
+    // satisfies the registry's own promotion rule (somebody fetched it and
+    // recorded what came back). The guard therefore moved rather than
+    // being dropped: a promotion must still say who verified it, when, and
+    // that this build has not.
+    for (const source of registry.sources) {
+      if (source.status !== 'CONFIRMED') continue;
+      const note = source.note ?? '';
+      expect(note, `${source.id} is CONFIRMED but names no date`).toMatch(/\d{4}-\d{2}-\d{2}/);
+      expect(note, `${source.id} is CONFIRMED without saying who verified it`).toMatch(
+        /confirmed by the supplier|fetched by/i,
+      );
+      // Two honest ways to be CONFIRMED. A supplier fetched it and this build
+      // did not, and says so. Or this build fetched it, and then the entry
+      // must carry the proof: when, and the SHA-256 and byte count of what
+      // came back. Claiming a fetch with no hash is just a claim.
+      const fetched = (source as { fetched?: { on?: string; sha256?: string; bytes?: number } }).fetched;
+      if (fetched) {
+        expect(note, `${source.id} claims a fetch but its note does not say so`).toMatch(/FETCHED BY THIS BUILD/);
+        expect(fetched.on, `${source.id} fetch has no date`).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+        expect(fetched.sha256, `${source.id} fetch has no SHA-256`).toMatch(/^[0-9a-f]{64}$/);
+        expect(fetched.bytes, `${source.id} fetch has no byte count`).toBeGreaterThan(0);
+      } else {
+        expect(note, `${source.id} is CONFIRMED without admitting this build has not fetched it`).toMatch(
+          /has NOT fetched it/,
+        );
+      }
+    }
+  });
+
+  it('gives every CONFIRMED delimited export a row count to check against', () => {
+    // A row count is the one payload check that catches a portal answering
+    // with the right shape and a fraction of the data. Where a supplier
+    // recorded one, it has to be in `expect`, or it is a fact in a note
+    // that nothing acts on.
+    for (const source of registry.sources) {
+      if (source.status !== 'CONFIRMED') continue;
+      if (!source.filename.endsWith('.csv')) continue;
+      expect(source.expect?.min_rows, `${source.id} is a CONFIRMED CSV with no min_rows`).toBeGreaterThan(0);
+    }
+  });
+
+  it('gives every entry something to verify the payload against', () => {
+    // Without an `expect`, a portal's HTML error page lands on disk
+    // wearing the right filename and the run reports success.
+    for (const source of registry.sources) {
+      expect(source.expect, source.id).toBeTruthy();
+      expect(Object.keys(source.expect ?? {}).length, source.id).toBeGreaterThan(0);
+    }
+  });
+
+  it('does not repeat the endpoint nobody ever called', () => {
+    // api.elections.org.za/results/{year}/LGE/{prov} came from the
+    // supplied note, commented out. Stating it as a known URL would be
+    // the error this whole exercise corrects.
+    for (const source of registry.sources) {
+      expect(source.url, source.id).not.toMatch(/api\.elections\.org\.za/);
+    }
+  });
+});
+
+describe('the registry covers every province, and says which are guesses', () => {
+  const IEC_PROVINCE_TOKENS = ['EC', 'FS', 'GP', 'KZN', 'LP', 'MP', 'NC', 'NW', 'WC'];
+
+  it('carries results rows for all nine provinces', () => {
+    // A national product cannot ship one province's history. The five the
+    // supplied manifest named as outstanding, plus the three it did not,
+    // because the URL shape is identical and stopping at five would be
+    // arbitrary.
+    const withRows = new Set(
+      registry.sources.filter((s) => s.category === 'IEC_Results' && s.province !== 'ZA').map((s) => s.province),
+    );
+    expect([...withRows].sort()).toEqual([...IEC_PROVINCE_TOKENS].sort());
+  });
+
+  it('never claims an unfetched province row is confirmed', () => {
+    // Only North West was fetched. Every other province's URL has an
+    // inferred province token, and inference is not verification.
+    for (const source of registry.sources) {
+      if (source.category !== 'IEC_Results') continue;
+      if (source.province === 'NW' || source.province === 'ZA') continue;
+      expect(source.status, `${source.id} claims CONFIRMED`).toBe('UNCONFIRMED');
+      expect(source.note, `${source.id} does not say what is inferred`).toMatch(/province token is INFERRED/);
+      expect(source.note, `${source.id} does not say what is confirmed`).toMatch(/event id in this path is CONFIRMED/);
+    }
+  });
+
+  it('withholds min_rows where no row count is known', () => {
+    // min_rows is a real assertion about the payload. Inventing one for a
+    // province nobody has fetched would make the check a guess that fails
+    // honest downloads.
+    for (const source of registry.sources) {
+      if (source.status === 'CONFIRMED') continue;
+      expect(source.expect?.min_rows, `${source.id} has a min_rows nobody measured`).toBeUndefined();
+    }
+  });
+
+  it('keeps the national MDB layer as one row, not nine', () => {
+    const mdb = registry.sources.filter((s) => s.id.startsWith('mdb-wards-2026'));
+    expect(mdb).toHaveLength(1);
+    expect(mdb[0].province).toBe('ZA');
+    // And it must not imply the 4,488 national ward count came from the layer.
+    expect(mdb[0].note).toMatch(/has not been checked against the layer/);
+  });
+});

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-12 -23 154 154" role="img" aria-label="Election-COS">
+<rect x="-12" y="-23" width="154" height="154" rx="22" fill="#F7F4EE"/>
+<path d="M5 33V78H62V33 M5 33H20 M62 33H47" fill="none" stroke="#1A2246" stroke-width="10"/>
+<path d="M85.3 17H88.7V100H85.3Z M38 56.3H121V59.7H38Z" fill="#1A2246"/>
+<path d="M37 2L65 10L53 45H17Z" fill="#B7913F"/>
+<path d="M31 23L38 30L50 17" fill="none" stroke="#F7F4EE" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M77 50H97V70H77Z" fill="#33427E"/>
+<circle cx="87" cy="18" r="7.3" fill="#B7913F"/>
+<circle cx="87" cy="99" r="7.3" fill="#B7913F"/>
+<circle cx="121" cy="59" r="7.3" fill="#B7913F"/>
+</svg>

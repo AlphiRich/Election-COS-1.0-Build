@@ -1,0 +1,16 @@
+{
+  // Election Campaign OS — claims API Worker (route mode).
+  // Cloudflare routes ONLY /api/* on the app's hostname to this Worker; every other
+  // request goes on to Firebase Hosting. Deploy: npx wrangler deploy
+  // Secrets (never committed):
+  //   npx wrangler secret put FIREBASE_SERVICE_ACCOUNT   (a dedicated least-privilege key, whole JSON)
+  //   npx wrangler secret put OWNER_EMAILS               (comma-separated; may bootstrap the first tenant)
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ecos-claims-api",
+  "main": "worker/src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": false,
+  "routes": [{ "pattern": "app.electioncos.co.za/api/*", "zone_name": "electioncos.co.za" }],
+  "vars": { "FIREBASE_PROJECT_ID": "electioncos1-0" },
+  "observability": { "enabled": true }
+}

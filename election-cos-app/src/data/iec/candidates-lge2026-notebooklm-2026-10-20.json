@@ -1,0 +1,700 @@
+{
+  "provenance": {
+    "suppliedFile": "6995cdcf-lge2026_candidate_database.csv",
+    "sha256": "b3ca94cc55ecab791408a90349b51aa3e710ee52b9a52b942fb6821990e02ad3",
+    "bytes": 7966,
+    "receivedOn": "2026-11-01",
+    "producedBy": "NotebookLM export dated 2026-10-20 (not the Electoral Commission)",
+    "sourceDocumentNamed": "LGE2026 Certified Candidate List - NW.pdf and - EC.pdf (named in the export, not supplied)",
+    "sourceDocumentSupplied": false,
+    "status": "UNCONFIRMED",
+    "confirmedBy": null,
+    "confirmedOn": null
+  },
+  "status": "PARTIAL",
+  "entries": [
+    {
+      "municipalityCode": "NW405",
+      "party": "ACTIONSA",
+      "kind": "WARD",
+      "wardNumber": 11,
+      "fullName": "TSHEPANG",
+      "surname": "MOEKETSI"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "ACTIONSA",
+      "kind": "WARD",
+      "wardNumber": 12,
+      "fullName": "MOTLHOLO AMOS",
+      "surname": "MAMPE"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "ACTIONSA",
+      "kind": "WARD",
+      "wardNumber": 13,
+      "fullName": "CRADWIN UZANNE BARNARDTONIAN",
+      "surname": "TAFITA"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "ACTIONSA",
+      "kind": "WARD",
+      "wardNumber": 14,
+      "fullName": "TEBOGO ISAAK",
+      "surname": "LEPING"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "ACTIONSA",
+      "kind": "WARD",
+      "wardNumber": 15,
+      "fullName": "HENDRIK WILLEM JACOBUS",
+      "surname": "BLOM"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "ACTIONSA",
+      "kind": "WARD",
+      "wardNumber": 16,
+      "fullName": "DIEKETSENG MARIA",
+      "surname": "TSAMAI"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "ACTIONSA",
+      "kind": "WARD",
+      "wardNumber": 17,
+      "fullName": "NOMSA OLGA",
+      "surname": "GIBSON"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "ACTIONSA",
+      "kind": "WARD",
+      "wardNumber": 18,
+      "fullName": "NKOSANA ISHMAEL",
+      "surname": "MOFOKENG"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "ACTIONSA",
+      "kind": "WARD",
+      "wardNumber": 19,
+      "fullName": "MAGGIE SANNAH",
+      "surname": "KUMPI"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "ACTIONSA",
+      "kind": "WARD",
+      "wardNumber": 20,
+      "fullName": "ISAAC",
+      "surname": "MANZANI"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "ACTIONSA",
+      "kind": "WARD",
+      "wardNumber": 21,
+      "fullName": "LEILANIE NATASJA",
+      "surname": "BARENDS"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "ACTIONSA",
+      "kind": "WARD",
+      "wardNumber": 22,
+      "fullName": "BOKANG MOSA",
+      "surname": "MALEFANE"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "ACTIONSA",
+      "kind": "WARD",
+      "wardNumber": 23,
+      "fullName": "XOLILE DAVID",
+      "surname": "KHAM"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "ACTIONSA",
+      "kind": "WARD",
+      "wardNumber": 24,
+      "fullName": "THABANG AMOS",
+      "surname": "METSUAMERE"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "ACTIONSA",
+      "kind": "WARD",
+      "wardNumber": 25,
+      "fullName": "ANDA",
+      "surname": "MBONJENI"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "ACTIONSA",
+      "kind": "WARD",
+      "wardNumber": 26,
+      "fullName": "JOHANNES THABO",
+      "surname": "MALGAS"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "ACTIONSA",
+      "kind": "WARD",
+      "wardNumber": 27,
+      "fullName": "NOTHINI ELISA",
+      "surname": "MAGAELA"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "ACTIONSA",
+      "kind": "WARD",
+      "wardNumber": 28,
+      "fullName": "ALFRED TSHEPANG",
+      "surname": "MOGAJANE"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "AFRICAN NATIONAL CONGRESS",
+      "kind": "PR",
+      "listRank": 1,
+      "fullName": "GABA THITHIBA KA",
+      "surname": "QHELE"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "AFRICAN NATIONAL CONGRESS",
+      "kind": "PR",
+      "listRank": 2,
+      "fullName": "THANDIWE PRUDENCE",
+      "surname": "MBEPHA"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "AFRICAN NATIONAL CONGRESS",
+      "kind": "PR",
+      "listRank": 16,
+      "fullName": "DAVID DANIEL",
+      "surname": "NEVI"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "AFRICAN NATIONAL CONGRESS",
+      "kind": "PR",
+      "listRank": 17,
+      "fullName": "PULE MATTHEWS",
+      "surname": "LEGOETE"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "AFRICAN NATIONAL CONGRESS",
+      "kind": "PR",
+      "listRank": 18,
+      "fullName": "SEIPATI MAGDELINE",
+      "surname": "THULO"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "AFRICAN NATIONAL CONGRESS",
+      "kind": "WARD",
+      "wardNumber": 1,
+      "fullName": "RABODIBA DAVID",
+      "surname": "MALOGANYE"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "AFRICAN NATIONAL CONGRESS",
+      "kind": "WARD",
+      "wardNumber": 2,
+      "fullName": "RINAH NOMVOLAZANA",
+      "surname": "ZWANE"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "AFRICAN NATIONAL CONGRESS",
+      "kind": "WARD",
+      "wardNumber": 3,
+      "fullName": "KABELO DANIEL",
+      "surname": "MAHLATSI"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "AFRICAN NATIONAL CONGRESS",
+      "kind": "WARD",
+      "wardNumber": 4,
+      "fullName": "PITSO EDWIN",
+      "surname": "MOHLOPE"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "AFRICAN NATIONAL CONGRESS",
+      "kind": "WARD",
+      "wardNumber": 21,
+      "fullName": "RUFANE ALISTAIR",
+      "surname": "MAKOUSA"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "AFRICAN NATIONAL CONGRESS",
+      "kind": "WARD",
+      "wardNumber": 28,
+      "fullName": "MOGOROSI JOHN",
+      "surname": "MOYO"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "DEMOCRATIC ALLIANCE",
+      "kind": "PR",
+      "listRank": 3,
+      "fullName": "ANDRÉ",
+      "surname": "KLOPPER"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "DEMOCRATIC ALLIANCE",
+      "kind": "PR",
+      "listRank": 4,
+      "fullName": "ANNE",
+      "surname": "VAN ONSELEN"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "DEMOCRATIC ALLIANCE",
+      "kind": "PR",
+      "listRank": 5,
+      "fullName": "JOHANNA FREDRIKA",
+      "surname": "TERBLANCHE"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "DEMOCRATIC ALLIANCE",
+      "kind": "PR",
+      "listRank": 6,
+      "fullName": "WILLEM ANDRIES",
+      "surname": "MOSTERT"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "DEMOCRATIC ALLIANCE",
+      "kind": "WARD",
+      "wardNumber": 1,
+      "fullName": "METLHOLO PETRUS",
+      "surname": "MOSOUNYANA"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "DEMOCRATIC ALLIANCE",
+      "kind": "WARD",
+      "wardNumber": 2,
+      "fullName": "WERNER THOMAS",
+      "surname": "HITGE"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "DEMOCRATIC ALLIANCE",
+      "kind": "WARD",
+      "wardNumber": 4,
+      "fullName": "LUDWIG JOHANNES",
+      "surname": "ZERWICK"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "DEMOCRATIC ALLIANCE",
+      "kind": "WARD",
+      "wardNumber": 5,
+      "fullName": "HEINRICHA",
+      "surname": "HODGSON"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "VRYHEIDSFRONT PLUS | FREEDOM FRONT PLUS",
+      "kind": "PR",
+      "listRank": 1,
+      "fullName": "MARISKA ELIZABETH",
+      "surname": "OOSTHUIZEN-VAN TONDER"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "VRYHEIDSFRONT PLUS | FREEDOM FRONT PLUS",
+      "kind": "PR",
+      "listRank": 2,
+      "fullName": "HERMANUS",
+      "surname": "VAN DER WESTHUIZEN"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "VRYHEIDSFRONT PLUS | FREEDOM FRONT PLUS",
+      "kind": "WARD",
+      "wardNumber": 1,
+      "fullName": "GIDEON",
+      "surname": "DU PLESSIS"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "VRYHEIDSFRONT PLUS | FREEDOM FRONT PLUS",
+      "kind": "WARD",
+      "wardNumber": 2,
+      "fullName": "EVERHARDUS JOHANNES JACOBUS",
+      "surname": "LAING"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "PATRIOTIC ALLIANCE",
+      "kind": "PR",
+      "listRank": 1,
+      "fullName": "KIDILATILE MAGDELINE",
+      "surname": "SEOLWANE"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "PATRIOTIC ALLIANCE",
+      "kind": "WARD",
+      "wardNumber": 21,
+      "fullName": "MICHELLE ZELNA",
+      "surname": "BEUKES"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "UMKHONTO WESIZWE PARTY",
+      "kind": "WARD",
+      "wardNumber": 1,
+      "fullName": "MAHLOMOLA JOHANNES",
+      "surname": "MASHIANE"
+    },
+    {
+      "municipalityCode": "NW405",
+      "party": "UMKHONTO WESIZWE PARTY",
+      "kind": "WARD",
+      "wardNumber": 3,
+      "fullName": "NONTUTUZELI CONSOLATION",
+      "surname": "MOLETE"
+    },
+    {
+      "municipalityCode": "NMA",
+      "party": "DEMOCRATIC ALLIANCE",
+      "kind": "PR",
+      "listRank": 83,
+      "fullName": "DAVIDENE GWYNETH",
+      "surname": "JOHNSON"
+    },
+    {
+      "municipalityCode": "NMA",
+      "party": "DEMOCRATIC ALLIANCE",
+      "kind": "PR",
+      "listRank": 84,
+      "fullName": "MARC",
+      "surname": "CRONJÉ"
+    },
+    {
+      "municipalityCode": "NMA",
+      "party": "DEMOCRATIC ALLIANCE",
+      "kind": "PR",
+      "listRank": 85,
+      "fullName": "VICTORIA CLEMENCE DEVILLIERS",
+      "surname": "MASTERS"
+    }
+  ],
+  "report": {
+    "rowsRead": 51,
+    "rejected": [
+      {
+        "row": 47,
+        "reason": "The ward is not stated for Moses Kotane (only id 63705004); not placed in a ward."
+      },
+      {
+        "row": 48,
+        "reason": "The ward is not stated for Ditsobotla (only id 63804005); not placed in a ward."
+      },
+      {
+        "row": 49,
+        "reason": "The ward is not stated for Matlosana (only id 64003025); not placed in a ward."
+      }
+    ],
+    "findings": [
+      {
+        "severity": "blocking",
+        "text": "The ID column was refused: 51 of 51 values open with a full date of birth. It was read only to be counted and was not copied."
+      },
+      {
+        "severity": "blocking",
+        "text": "The file is PARTIAL: some wards have no candidate at all and some PR lists have gaps. A voter looking at it would see a ward as uncontested, or a list as shorter than it is."
+      },
+      {
+        "severity": "warning",
+        "text": "3 row(s) were rejected; see the list."
+      }
+    ],
+    "coverage": [
+      {
+        "municipalityCode": "NMA",
+        "municipality": "Nelson Mandela Bay",
+        "wardsInDelimitation": 60,
+        "wardsWithACandidate": 0,
+        "wardsWithNoCandidate": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60
+        ],
+        "parties": [
+          {
+            "party": "DEMOCRATIC ALLIANCE",
+            "wardCandidates": 0,
+            "prCandidates": 3,
+            "prRanksPresent": [
+              83,
+              84,
+              85
+            ],
+            "prRankGaps": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82
+            ]
+          }
+        ]
+      },
+      {
+        "municipalityCode": "NW405",
+        "municipality": "JB Marks",
+        "wardsInDelimitation": 34,
+        "wardsWithACandidate": 23,
+        "wardsWithNoCandidate": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34
+        ],
+        "parties": [
+          {
+            "party": "ACTIONSA",
+            "wardCandidates": 18,
+            "prCandidates": 0,
+            "prRanksPresent": [],
+            "prRankGaps": []
+          },
+          {
+            "party": "AFRICAN NATIONAL CONGRESS",
+            "wardCandidates": 6,
+            "prCandidates": 5,
+            "prRanksPresent": [
+              1,
+              2,
+              16,
+              17,
+              18
+            ],
+            "prRankGaps": [
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15
+            ]
+          },
+          {
+            "party": "DEMOCRATIC ALLIANCE",
+            "wardCandidates": 4,
+            "prCandidates": 4,
+            "prRanksPresent": [
+              3,
+              4,
+              5,
+              6
+            ],
+            "prRankGaps": [
+              1,
+              2
+            ]
+          },
+          {
+            "party": "PATRIOTIC ALLIANCE",
+            "wardCandidates": 1,
+            "prCandidates": 1,
+            "prRanksPresent": [
+              1
+            ],
+            "prRankGaps": []
+          },
+          {
+            "party": "UMKHONTO WESIZWE PARTY",
+            "wardCandidates": 2,
+            "prCandidates": 0,
+            "prRanksPresent": [],
+            "prRankGaps": []
+          },
+          {
+            "party": "VRYHEIDSFRONT PLUS | FREEDOM FRONT PLUS",
+            "wardCandidates": 2,
+            "prCandidates": 2,
+            "prRanksPresent": [
+              1,
+              2
+            ],
+            "prRankGaps": []
+          }
+        ]
+      }
+    ],
+    "dualNominated": [],
+    "idColumn": {
+      "present": true,
+      "rowsShowingDateOfBirth": 51
+    },
+    "status": "PARTIAL"
+  }
+}

@@ -1,0 +1,161 @@
+/**
+ * NW405 2021 — the IEC's own published seat calculation, as a fixture.
+ *
+ * PROVENANCE
+ *
+ * The figures below are quoted in `legislative-source-excerpts.md`, which
+ * arrived 28 October 2026 in the asset batch recorded in
+ * `docs/asset-control-sheet.md`. That file cites the IEC seat-calculation
+ * detail sheet `NW405.pdf` for Electoral Event "LOCAL GOVERNMENT ELECTION
+ * 2021", and the Municipal Structures Act Schedule 1 as gazetted in
+ * Government Gazette No. 19614, 18 December 1998.
+ *
+ * WHY THIS TEST EXISTS SEPARATELY
+ *
+ * `seatCalculator.ts` was corrected in session 8 against an IEC seat
+ * calculation report, and its own regression block covers that. This
+ * fixture is an INDEPENDENT arrival of the same published result through a
+ * different conversation and a different document, so it is kept as its own
+ * test rather than folded in — if the two ever disagree, that is worth
+ * seeing as two failures, not one.
+ *
+ * WHAT IT SETTLES
+ *
+ * The uploaded `ecos-demarcation-baseline-config` SKILL.md states the Item
+ * 12 quota as `Q = A/(B-C) + 1`, which is the gazetted statutory text. This
+ * implementation uses `Q = (A/(B-C-D)) + 1`, where D is ward seats won by
+ * parties that filed no PR list — a term the IEC's operational report
+ * prints and the statute does not. Both agree here, because C = D = 0 in
+ * NW405 2021. They diverge only where a party wins ward seats and files no
+ * PR list, and the four-term version is the safer superset: with D = 0 it
+ * reduces exactly to the statutory formula.
+ */
+import { describe, it, expect } from 'vitest';
+import { allocateSeats } from './seatCalculator';
+
+/** Published party totals. `expected` is the IEC's own final seat count. */
+const PUBLISHED = [
+  { id: 'abc', name: 'Abantu Batho Congress', votes: 340, expected: 0 },
+  { id: 'anc', name: 'African National Congress', votes: 48911, expected: 33 },
+  { id: 'atm', name: 'African Transformation Movement', votes: 330, expected: 0 },
+  { id: 'blf', name: 'Black First Land First', votes: 428, expected: 0 },
+  { id: 'da', name: 'Democratic Alliance', votes: 25837, expected: 17 },
+  { id: 'eff', name: 'Economic Freedom Fighters', votes: 9200, expected: 6 },
+  { id: 'f4sd', name: 'Forum 4 Service Delivery', votes: 204, expected: 0 },
+  { id: 'pa', name: 'Patriotic Alliance', votes: 2389, expected: 2 },
+  { id: 'ffp', name: 'Vryheidsfront Plus', votes: 13800, expected: 9 },
+] as const;
+
+/**
+ * A, and where it comes from — established 28 Oct 2026, not inferred.
+ *
+ * This figure and every party total above were "as published" with no
+ * account of how they were composed. They are now reconciled against the
+ * IEC's own 2021 North West voting-district export, fetched through
+ * `tools/source-acquisition/acquire.py` and recorded in that run's
+ * manifest (SHA-256 a07f630d…, 10,606,612 bytes, 75,680 data rows):
+ *
+ *   PR ballot, valid votes            50,733
+ *   Ward ballot, valid votes        + 51,156
+ *                                   = 101,889
+ *   INDEPENDENT ward votes          −    450   (no PR list, no PR seats)
+ *                                   = 101,439  = A
+ *
+ * So A is the sum of BOTH ballots excluding independent candidates, and
+ * each party row above is likewise that party's PR plus ward votes — all
+ * nine match the export exactly. The quota then follows:
+ * floor(101,439 / 67) + 1 = 1,515, the published figure.
+ *
+ * The export itself is not committed (it is gitignored and re-fetchable
+ * from `sources.json`), so this block records what it showed rather than
+ * a test depending on a 10 MB download being present.
+ */
+const A = 101439;
+const B = 67; // council seats — matches the proclaimed Annexure A baseline
+const PUBLISHED_QUOTA = 1515;
+
+describe('NW405 2021 — IEC published seat calculation', () => {
+  const result = allocateSeats({
+    totalValidVotes: A,
+    totalSeats: B,
+    independentWardSeats: 0, // C, as published
+    noPRListWardSeats: 0, // D, as published
+    parties: PUBLISHED.map(({ id, name, votes }) => ({ id, name, votes, wardSeatsWon: 0 })),
+  });
+
+  it('the published party votes sum to the published total A', () => {
+    expect(PUBLISHED.reduce((sum, p) => sum + p.votes, 0)).toBe(A);
+  });
+
+  it('reproduces the published quota of 1,515', () => {
+    expect(result.quota).toBe(PUBLISHED_QUOTA);
+  });
+
+  it('reproduces every published party seat total', () => {
+    for (const party of PUBLISHED) {
+      const row = result.parties.find((r) => r.id === party.id);
+      expect(row, `${party.name} missing from the result`).toBeDefined();
+      expect(row!.totalSeats, party.name).toBe(party.expected);
+    }
+  });
+
+  it('allocates exactly the 67 seats the council has', () => {
+    expect(result.parties.reduce((sum, p) => sum + p.totalSeats, 0)).toBe(B);
+  });
+
+  it('with D = 0 the four-term divisor equals the statutory B - C', () => {
+    // Guards the reduction claim in this file's header: the extra term can
+    // never change the answer when no party wins a ward without a PR list.
+    const statutory = allocateSeats({
+      totalValidVotes: A,
+      totalSeats: B,
+      independentWardSeats: 0,
+      parties: PUBLISHED.map(({ id, name, votes }) => ({ id, name, votes, wardSeatsWon: 0 })),
+    });
+    expect(statutory.quota).toBe(result.quota);
+  });
+});
+
+/**
+ * Session 38 — what the D term is worth when it is NOT zero.
+ *
+ * A supplied Python implementation of Schedule 1 refuses the term
+ * outright — *"Item 12 has no D term"* — and carries a test asserting its
+ * `calculate_quota` has no `d` parameter. This file's header already
+ * answers the substance: the IEC's operational report prints the
+ * four-term divisor, the statute does not, and with D = 0 the two
+ * reduce to each other (guarded above).
+ *
+ * What was NOT written down is the size of the disagreement, or the fact
+ * that a user can reach it. Both are below. Nothing shipped is wrong —
+ * no code path passes a non-zero D, and NW405 has none — but
+ * `SeatCalculatorPage.tsx` renders it as an editable field, so the
+ * divergence is one keystroke away from a figure a campaign would quote.
+ */
+describe('the D term where D is not zero', () => {
+  const partiesAt = (noPRListWardSeats: number) =>
+    allocateSeats({
+      totalValidVotes: A,
+      totalSeats: B,
+      independentWardSeats: 0,
+      noPRListWardSeats,
+      parties: PUBLISHED.map(({ id, name, votes }) => ({ id, name, votes, wardSeatsWon: 0 })),
+    });
+
+  it('moves the quota by 46 votes per two ward seats, on NW405 figures', () => {
+    // The whole dispute in two numbers, so that whoever reads Item 12
+    // next has them rather than having to derive them.
+    expect(partiesAt(0).quota).toBe(1_515); // ⌊101 439 / 67⌋ + 1 — statutory B − C
+    expect(partiesAt(2).quota).toBe(1_561); // ⌊101 439 / 65⌋ + 1 — the IEC report's B − C − D
+  });
+
+  it('raises the quota monotonically, so D can only ever cost small parties seats', () => {
+    // Worth stating plainly: the four-term version is not neutral. A
+    // higher quota is a higher price per seat, and the parties that stop
+    // affording one are the small ones.
+    const quotas = [0, 1, 2, 3, 4].map((d) => partiesAt(d).quota);
+    for (let i = 1; i < quotas.length; i += 1) {
+      expect(quotas[i]).toBeGreaterThan(quotas[i - 1]);
+    }
+  });
+});

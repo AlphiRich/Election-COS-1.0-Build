@@ -74,7 +74,7 @@ export function DiaryEntryForm({ ctx, onDone, onCancel }: DiaryEntryFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 border border-gold/40 bg-paper p-4 rounded">
-      <h3 className="text-label-caps font-display uppercase text-ink">New diary entry</h3>
+      <h3 className="text-label-caps font-display uppercase text-ink">New Diary Entry</h3>
 
       {!vdCode && (
         <p className="text-body-md font-body text-maroon">
@@ -112,7 +112,7 @@ export function DiaryEntryForm({ ctx, onDone, onCancel }: DiaryEntryFormProps) {
 
       <label className="space-y-1 block">
         <span className="text-label-caps font-display uppercase text-slate">Activity</span>
-        <div className="grid grid-cols-4 gap-1">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-1">
           {ACTIVITY_ORDER.map((t) => (
             <button
               key={t}

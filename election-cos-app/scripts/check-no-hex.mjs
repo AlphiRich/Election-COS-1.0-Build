@@ -5,7 +5,7 @@
  * design tokens." ESLint's no-restricted-syntax struggles to reliably catch
  * hex strings buried in JSX className template literals and Tailwind
  * arbitrary-value classes (`bg-[#123456]`), so this is a source-text scan
- * run in CI (`npm run check:hex`) rather than a custom ESLint rule.
+ * run by `npm run check:hex` rather than a custom ESLint rule.
  *
  * Allow-listed files are the single source(s) of truth for colour.
  */
@@ -25,6 +25,29 @@ const ALLOW_LIST = new Set([
 ]);
 
 const HEX_RE = /#[0-9a-fA-F]{3}(?:[0-9a-fA-F]{3})?\b/g;
+
+/**
+ * Comments are blanked before the scan, not deleted, so the reported
+ * line numbers still point at the real line.
+ *
+ * `check-type-scale.mjs` was corrected for this in session 38 and this
+ * guard was not, which made it the third appearance of the defect class
+ * the discipline names: a guard that fails on the sentence explaining
+ * it. It first bit here when `src/site/SiteChrome.tsx` documented *why*
+ * the site needs its own border token and named the hex to say which
+ * one — a comment that could not be written without tripping the check
+ * it was describing.
+ *
+ * This is not a loosening. A hex inside a comment is documentation; a
+ * hex in a string or a style value is a second source of truth for a
+ * colour that already has one, and those are still caught — the
+ * injection test in the control sheet (§41) proves it.
+ */
+function stripComments(text) {
+  return text
+    .replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '))
+    .replace(/(^|[^:])\/\/[^\n]*/g, (m, lead) => lead + ' '.repeat(m.length - lead.length));
+}
 const SCAN_EXT = new Set(['.ts', '.tsx', '.css']);
 
 /** @type {string[]} */
@@ -43,7 +66,7 @@ function walk(dir) {
     if (ALLOW_LIST.has(full)) continue;
     if (full.endsWith('.test.ts') || full.endsWith('.test.tsx')) continue;
 
-    const text = readFileSync(full, 'utf-8');
+    const text = stripComments(readFileSync(full, 'utf-8'));
     const matches = text.match(HEX_RE);
     if (matches) {
       for (const m of matches) {

@@ -8,11 +8,42 @@
  * scan the voters/incidents/diaryEntries collections itself.
  *
  * Every delta is expressed as a flat `{ dotted.field.path: signedAmount }`
- * map and applied via `FieldValue.increment()` — no read-modify-write, no
- * transaction, and therefore no lost-update race between two concurrent
- * writes to different voters/incidents/entries (each increment commits
- * independently; Firestore serialises increments to the same field on the
- * same document server-side).
+ * map and applied via `FieldValue.increment()` — no read-modify-write, and
+ * therefore no lost-update race between two concurrent writes to different
+ * voters/incidents/entries (each increment commits independently;
+ * Firestore serialises increments to the same field on the same document
+ * server-side).
+ *
+ * WHY EACH EVENT IS APPLIED EXACTLY ONCE, AND WHY THAT NEEDED FIXING
+ *
+ * Firestore triggers are *at-least-once*. The same event can be delivered
+ * twice, and `FieldValue.increment` is not idempotent, so the second
+ * delivery silently adds the delta again. Nothing in this product ever
+ * recomputes these counters from the collections, so the drift is
+ * permanent and invisible: the War Room shows a voter total that is simply
+ * wrong, with no error anywhere and no way to tell by looking.
+ *
+ * So each event now writes a marker document alongside the increment, and
+ * both happen inside one transaction. On a redelivery the marker is
+ * already there and the whole thing is a no-op.
+ *
+ * The transaction is cheap *because of what it reads*. Its read set is the
+ * marker alone, and a marker id is unique to one event, so two concurrent
+ * events never read the same document and never contend. The counter
+ * document appears only in the write set, still as commutative increments.
+ * That keeps the property the original design was protecting — this is an
+ * addition to it, not a reversal of it.
+ *
+ * Markers are plumbing, not tenant data, and they expire: each carries an
+ * `expireAt` for a Firestore TTL policy on
+ * `tenants/{tenantId}/counterEvents`. **That policy has to be configured on
+ * the project** — it is not expressible in `firebase.json` and nothing here
+ * can check it. Without it the collection grows forever; it never goes
+ * wrong, it just costs. See docs/asset-control-sheet.md §33.
+ *
+ * (`firestore.rules` denies clients the collection outright — the
+ * `/tenants/{tid}/{document=**}` default-deny already covered it, and an
+ * explicit rule was added so a reviewer does not have to work that out.)
  *
  * NOTE: not yet deployed/wired to a live Firebase project this session —
  * see BUILD-STATUS.md blocker #2. The pure delta functions are unit
@@ -23,15 +54,29 @@
  * shapes (src/dal/ports/{voters,incidents,diary}.ts) — same rationale as
  * resolveCapabilities.ts: the two packages don't share a workspace yet.
  * Keep them in sync by hand until they do.
+ *
+ * @deployable yes
+ *
+ * Pre-aggregates the War Room counters so no page ever opens a live
+ * listener on voters or incidents. Covered by warRoomCounters.test.ts.
  */
 import { onDocumentWritten } from 'firebase-functions/v2/firestore';
-import { getFirestore, FieldValue } from 'firebase-admin/firestore';
+import { getFirestore, FieldValue, Timestamp } from 'firebase-admin/firestore';
 import { getApps, initializeApp } from 'firebase-admin/app';
+import { createHash } from 'node:crypto';
 import { REGION } from './region';
 
 if (!getApps().length) initializeApp();
 
 export type Delta = Record<string, number>;
+
+/**
+ * How long a marker outlives its event. Firestore keeps retrying a failed
+ * trigger for up to seven days, so anything shorter than that could expire
+ * a marker while a redelivery of its own event is still possible. Thirty
+ * days is that window with room to spare.
+ */
+export const COUNTER_EVENT_TTL_DAYS = 30;
 
 function mergeDeltas(...deltas: Delta[]): Delta {
   const merged: Delta = {};
@@ -43,17 +88,195 @@ function mergeDeltas(...deltas: Delta[]): Delta {
   return merged;
 }
 
-async function applyDelta(tenantId: string, delta: Delta): Promise<void> {
-  const nonZero = Object.entries(delta).filter(([, amount]) => amount !== 0);
-  if (nonZero.length === 0) return;
+/**
+ * A Firestore document id for an event id. Exported for testing.
+ *
+ * A CloudEvent id is a string, not a document id: it may legally contain
+ * `/`, which Firestore forbids, or be long enough to exceed the 1 500-byte
+ * limit, or be `__proto__`-shaped, which Firestore reserves. In practice
+ * the ids are UUID-ish — but "in practice" is exactly the assumption that
+ * fails once, in production, with nothing to point at.
+ *
+ * Sanitising alone is not enough, because it maps distinct ids onto the
+ * same string, and a collision here does not double-count — it does the
+ * other thing, and silently *drops* a real event. So the readable part is
+ * a convenience for whoever is reading the console, and a hash of the
+ * untouched id is what actually distinguishes two markers.
+ */
+export function counterEventDocId(eventId: string): string {
+  const fingerprint = createHash('sha256').update(eventId, 'utf8').digest('hex').slice(0, 24);
+  const readable = eventId.replace(/[^A-Za-z0-9-]/g, '_').slice(0, 100);
+  return `${readable}~${fingerprint}`;
+}
 
-  const update: Record<string, FirebaseFirestore.FieldValue> = {};
-  for (const [path, amount] of nonZero) {
-    update[path] = FieldValue.increment(amount);
+/** Exported for testing: the marker document path for one event. */
+export function counterEventPath(tenantId: string, eventId: string): string {
+  return `tenants/${tenantId}/counterEvents/${counterEventDocId(eventId)}`;
+}
+
+/**
+ * A counter document id within a tenant.
+ *
+ * `warRoom` is the tenant-wide aggregate the War Room has always read.
+ * `ward-{wardCode}` is the same shape, scoped to one ward — added so that
+ * a ward sentiment comparison reads real captured counts rather than an
+ * invented figure. Both are maintained by the same triggers, in the same
+ * transaction, from the same event.
+ */
+export const TENANT_SCOPE = 'warRoom';
+export const wardScope = (wardCode: string): string => `ward-${wardCode}`;
+
+/** A delta and the counter document it belongs on. */
+export interface ScopedDelta {
+  scope: string;
+  delta: Delta;
+}
+
+/** Exported for testing: the increments a delta turns into, zeroes dropped. */
+export function counterUpdateFor(delta: Delta): Record<string, number> {
+  return Object.fromEntries(Object.entries(delta).filter(([, amount]) => amount !== 0));
+}
+
+/**
+ * The three things the exactly-once rule needs a transaction to do.
+ *
+ * It is an interface rather than the Firestore transaction itself for one
+ * reason: this sandbox has no emulator, so without a seam the rule that
+ * matters most in this file would be the one part of it with no test.
+ * `warRoomCounters.test.ts` drives it with a fake that redelivers an event,
+ * which is the case the production code exists for and the case a live
+ * run almost never produces on demand.
+ */
+export interface CounterTransaction {
+  markerExists(path: string): Promise<boolean>;
+  writeMarker(path: string, expireAtMillis: number): void;
+  incrementCounter(path: string, amounts: Record<string, number>): void;
+}
+
+/**
+ * Applies a delta once, however many times its event is delivered.
+ *
+ * An empty delta writes nothing at all — not even a marker. Replaying an
+ * event that changes no counter is already harmless, and a marker for it
+ * would be storage bought for nothing.
+ */
+export async function applyCounterEvent(
+  tx: CounterTransaction,
+  tenantId: string,
+  eventId: string,
+  deltas: ScopedDelta[],
+  nowMillis: number,
+): Promise<void> {
+  const writes = deltas
+    .map((scoped) => ({ scope: scoped.scope, amounts: counterUpdateFor(scoped.delta) }))
+    .filter((w) => Object.keys(w.amounts).length > 0);
+  if (writes.length === 0) return;
+
+  const markerPath = counterEventPath(tenantId, eventId);
+  // The only read, and it is unique to this event — see the file header
+  // for why that is what makes the transaction cheap.
+  if (await tx.markerExists(markerPath)) return;
+
+  tx.writeMarker(markerPath, nowMillis + COUNTER_EVENT_TTL_DAYS * 24 * 60 * 60 * 1000);
+  // One marker covers every scope this event touches, because they are
+  // written in one transaction. A redelivery that updated the ward
+  // counter but not the tenant one would be worse than either.
+  for (const write of writes) {
+    tx.incrementCounter(`tenants/${tenantId}/counters/${write.scope}`, write.amounts);
   }
-  update.updatedAt = FieldValue.serverTimestamp();
+}
 
-  await getFirestore().doc(`tenants/${tenantId}/counters/warRoom`).set(update, { merge: true });
+async function applyDeltaOnce(tenantId: string, eventId: string, deltas: ScopedDelta[]): Promise<void> {
+  if (deltas.every((d) => Object.keys(counterUpdateFor(d.delta)).length === 0)) return; // don't open a transaction for nothing
+
+  const db = getFirestore();
+  await db.runTransaction(async (transaction) => {
+    const tx: CounterTransaction = {
+      markerExists: async (path) => (await transaction.get(db.doc(path))).exists,
+      writeMarker: (path, expireAtMillis) =>
+        void transaction.set(db.doc(path), {
+          appliedAt: FieldValue.serverTimestamp(),
+          expireAt: Timestamp.fromMillis(expireAtMillis),
+        }),
+      incrementCounter: (path, amounts) => {
+        const update: Record<string, FirebaseFirestore.FieldValue> = {};
+        for (const [field, amount] of Object.entries(amounts)) {
+          update[field] = FieldValue.increment(amount);
+        }
+        update.updatedAt = FieldValue.serverTimestamp();
+        transaction.set(db.doc(path), update, { merge: true });
+      },
+    };
+    await applyCounterEvent(tx, tenantId, eventId, deltas, Date.now());
+  });
+}
+
+/**
+ * Every trigger goes through this, so none of them can forget the event id.
+ *
+ * Without an id there is no way to tell a redelivery from a new event, and
+ * both available guesses are wrong: apply it and the counter drifts up,
+ * skip it and the counter drifts down. So it throws instead — which lands
+ * in the function's logs as an error somebody can see, rather than as a
+ * number nobody can check. CloudEvents guarantees the id, so this is a
+ * path that should never run; it exists so that if it ever does, it says so.
+ */
+async function handle(eventId: string | undefined, tenantId: string, deltas: ScopedDelta[]): Promise<void> {
+  if (!eventId) {
+    throw new Error(
+      `Counter event for tenant ${tenantId} arrived without an event id; refusing to apply a delta that cannot be deduplicated.`,
+    );
+  }
+  await applyDeltaOnce(tenantId, eventId, deltas);
+}
+
+/**
+ * Spreads a tenant-wide delta across the ward dimension as well.
+ *
+ * The ward counters reuse the very same delta functions rather than
+ * growing their own copy of the counting rules, which is what keeps the
+ * two scopes from disagreeing: a ward total that drifts away from the
+ * tenant total is a bug nobody can see from either screen alone.
+ *
+ * A record that *moves ward* is the case worth being careful about. It is
+ * not an update as far as the two ward counters are concerned — it is a
+ * departure from one and an arrival at the other — so it is expressed
+ * exactly that way, by calling the same delta function with the record
+ * leaving (`after` undefined) and then arriving (`before` undefined).
+ */
+function scoped<T extends { wardCode?: string }>(
+  before: T | undefined,
+  after: T | undefined,
+  delta: (b: T | undefined, a: T | undefined) => Delta,
+): ScopedDelta[] {
+  const deltas: ScopedDelta[] = [{ scope: TENANT_SCOPE, delta: delta(before, after) }];
+
+  const fromWard = before?.wardCode;
+  const toWard = after?.wardCode;
+
+  if (fromWard === toWard) {
+    if (toWard) deltas.push({ scope: wardScope(toWard), delta: delta(before, after) });
+    return deltas;
+  }
+  if (fromWard) deltas.push({ scope: wardScope(fromWard), delta: delta(before, undefined) });
+  if (toWard) deltas.push({ scope: wardScope(toWard), delta: delta(undefined, after) });
+  return deltas;
+}
+
+/** Exported for testing: the full scoped fan-out for a voter write. */
+export function voterScopedDeltas(
+  before: VoterSnapshot | undefined,
+  after: VoterSnapshot | undefined,
+): ScopedDelta[] {
+  return scoped(before, after, voterCounterDelta);
+}
+
+/** Exported for testing: the full scoped fan-out for a household write. */
+export function householdScopedDeltas(
+  before: HouseholdSnapshot | undefined,
+  after: HouseholdSnapshot | undefined,
+): ScopedDelta[] {
+  return scoped(before, after, householdCounterDelta);
 }
 
 // ---- voters ---------------------------------------------------------------
@@ -62,6 +285,8 @@ type Sentiment = 'STRONG_SUPPORT' | 'LEAN_SUPPORT' | 'UNDECIDED' | 'LEAN_OPPOSIT
 interface VoterSnapshot {
   sentiment: Sentiment;
   deletedAt: string | null;
+  /** Mirrors `Voter.wardCode` — what makes a per-ward sentiment count real. */
+  wardCode?: string;
 }
 
 /**
@@ -103,11 +328,11 @@ export function voterCounterDelta(before: VoterSnapshot | undefined, after: Vote
 export const maintainVoterCounters = onDocumentWritten(
   { document: 'tenants/{tenantId}/voters/{voterId}', region: REGION },
   async (event) => {
-    const delta = voterCounterDelta(
+    const deltas = voterScopedDeltas(
       event.data?.before?.data() as VoterSnapshot | undefined,
       event.data?.after?.data() as VoterSnapshot | undefined,
     );
-    await applyDelta((event.params as { tenantId: string }).tenantId, delta);
+    await handle(event.id, (event.params as { tenantId: string }).tenantId, deltas);
   },
 );
 
@@ -138,11 +363,14 @@ export function incidentCounterDelta(before: IncidentSnapshot | undefined, after
 export const maintainIncidentCounters = onDocumentWritten(
   { document: 'tenants/{tenantId}/incidents/{incidentId}', region: REGION },
   async (event) => {
+    // Tenant scope only. Incidents carry a ward, but nothing reads a
+    // per-ward incident count yet, and a counter nobody reads is storage
+    // and a migration with no reader to justify them.
     const delta = incidentCounterDelta(
       event.data?.before?.data() as IncidentSnapshot | undefined,
       event.data?.after?.data() as IncidentSnapshot | undefined,
     );
-    await applyDelta((event.params as { tenantId: string }).tenantId, delta);
+    await handle(event.id, (event.params as { tenantId: string }).tenantId, [{ scope: TENANT_SCOPE, delta }]);
   },
 );
 
@@ -184,6 +412,8 @@ type ContactStatus =
 interface HouseholdSnapshot {
   contactStatus?: ContactStatus;
   deletedAt: string | null;
+  /** Mirrors `Household.wardCode`. */
+  wardCode?: string;
 }
 
 /**
@@ -217,11 +447,11 @@ export function householdCounterDelta(
 export const maintainHouseholdCounters = onDocumentWritten(
   { document: 'tenants/{tenantId}/households/{householdId}', region: REGION },
   async (event) => {
-    const delta = householdCounterDelta(
+    const deltas = householdScopedDeltas(
       event.data?.before?.data() as HouseholdSnapshot | undefined,
       event.data?.after?.data() as HouseholdSnapshot | undefined,
     );
-    await applyDelta((event.params as { tenantId: string }).tenantId, delta);
+    await handle(event.id, (event.params as { tenantId: string }).tenantId, deltas);
   },
 );
 
@@ -232,6 +462,6 @@ export const maintainDiaryCounters = onDocumentWritten(
       event.data?.before?.data() as DiarySnapshot | undefined,
       event.data?.after?.data() as DiarySnapshot | undefined,
     );
-    await applyDelta((event.params as { tenantId: string }).tenantId, delta);
+    await handle(event.id, (event.params as { tenantId: string }).tenantId, [{ scope: TENANT_SCOPE, delta }]);
   },
 );

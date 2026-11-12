@@ -1,0 +1,14 @@
+# 1. Generate the updated Prisma Client
+npx prisma generate
+
+# 2. Checkout a new feature branch
+git checkout -b feat/iec-api-extractor
+
+# 3. Stage the extraction service and schema updates
+git add prisma/schema.prisma src/services/IECExtractorService.ts
+
+# 4. Commit using standard conventional commits
+git commit -m "feat(electoral-data): implement IEC API results extractor and Knowledge Hub ingestion"
+
+# 5. Push to remote to trigger your GitHub Actions CI pipeline
+git push -u origin feat/iec-api-extractor

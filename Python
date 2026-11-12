@@ -1,0 +1,7 @@
+elif state == "AWAITING_AREA":
+        session["area"] = incoming_msg.title()
+        session["state"] = "AWAITING_PARTY"
+        
+        # Attach visual ballot aide for elderly voters
+        msg.body("If the election were held right now, which party gets your Ward ballot?\n\n*Look at the image above and reply with the letter of your party (A, B, C, D, E, or F).*")
+        msg.media("https://electioncos.co.za/assets/ballot_emblems_guide.jpg")

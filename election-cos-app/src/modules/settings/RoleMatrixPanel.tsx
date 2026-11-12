@@ -3,6 +3,7 @@
  * build (see PermissionsPage), so cells are not editable; per-person changes
  * go through the overrides on the staff cards below.
  */
+import { SectionLabel } from '@/components/ui';
 import { SEED_ROLES } from '@/auth/seedRoles';
 import { ALL_CAPABILITIES } from '@/auth/allCapabilities';
 import { buildRoleMatrix, unassignedCapabilities } from './roleMatrix';
@@ -12,10 +13,10 @@ const unassigned = unassignedCapabilities(matrix);
 
 export function RoleMatrixPanel() {
   return (
-    <section className="space-y-3" aria-labelledby="role-matrix-title">
-      <h2 id="role-matrix-title" className="text-label-caps font-display uppercase text-slate">
-        Capability matrix
-      </h2>
+    <section className="space-y-3" aria-label="Capability Matrix">
+      <SectionLabel as="h2">
+        Capability Matrix
+      </SectionLabel>
       <p className="text-body-md font-body text-slate">
         What each role holds by default. A person's own grants and revocations, set below, are applied on top.
       </p>

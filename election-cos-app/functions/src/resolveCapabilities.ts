@@ -27,12 +27,18 @@
  * table is what it should be: static, generated from the client's copy by
  * `npm run gen:roles`, and guarded by `src/auth/roleMirror.test.ts`. If
  * tenant-defined roles ever arrive, this is the one place that changes.
+ *
+ * @deployable yes
+ *
+ * Mints the custom claims (tenantId, caps) every other check in this
+ * product reads. Complete and covered by roleModel/roleMirror tests.
  */
 import { onDocumentWritten } from 'firebase-functions/v2/firestore';
 import { getAuth } from 'firebase-admin/auth';
 import { initializeApp, getApps } from 'firebase-admin/app';
 import { REGION } from './region';
 import { seedRole } from './seedRoles';
+import { requiresSecondFactor } from './secondFactor';
 
 if (!getApps().length) initializeApp();
 
@@ -81,6 +87,8 @@ export const resolveCapabilities = onDocumentWritten(
     await getAuth().setCustomUserClaims(uid, {
       tenantId,
       roleId: after.roleId,
+      // Rewriting the claims object drops any `mfaUntil`: a changed role, scope or number must re-verify.
+      mfaRequired: requiresSecondFactor(after.roleId),
       caps,
       geoScope: role.geoScope,
       wardScope: after.wardScope,

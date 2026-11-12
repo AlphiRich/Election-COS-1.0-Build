@@ -188,7 +188,7 @@ export function ReferralPrepareModal({ ctx, incident, onClose }: ReferralPrepare
         <div className="p-5 border-b border-ink/10 flex items-start justify-between gap-4">
           <div>
             <p className="text-label-caps font-display uppercase text-slate">/incidents/referral</p>
-            <h2 className="text-headline-md font-display text-ink mt-1">Prepare service delivery referral</h2>
+            <h2 className="text-headline-md font-display text-ink mt-1">Prepare Service Delivery Referral</h2>
           </div>
           <button
             type="button"

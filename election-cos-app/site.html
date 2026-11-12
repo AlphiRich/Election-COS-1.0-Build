@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en-ZA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Election Campaign OS — campaign and casework software for South African local government</title>
+    <meta
+      name="description"
+      content="Offline-first field operations, POPIA-by-design voter contact, party-funding tracking and signed council referrals. One published price list for every party and every independent."
+    />
+    <!-- Routes carry no personal data, but the application's reasoning
+         applies here too: nothing about a visitor's path leaves with a
+         request to another origin. -->
+    <meta name="referrer" content="same-origin" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/icon-192.png" sizes="192x192" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- Installable: the public site's own manifest and worker (site-assets/pwa), not the application's. -->
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#1A2246" />
+    <meta name="apple-mobile-web-app-title" content="Election-COS" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;600&display=swap"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/site/main.tsx"></script>
+  </body>
+</html>

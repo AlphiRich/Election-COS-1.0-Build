@@ -117,7 +117,7 @@ export function SubjectAccessModal({ ctx, request, onClose }: SubjectAccessModal
       <div className="w-full max-w-2xl space-y-5 rounded-lg bg-white p-6 my-8">
         <div>
           <p className="text-label-caps font-display uppercase text-slate">POPIA §23 — access</p>
-          <h2 className="text-headline-md font-display text-ink mt-1">Prepare a response</h2>
+          <h2 className="text-headline-md font-display text-ink mt-1">Prepare a Response</h2>
           <p className="text-body-md font-body text-slate mt-2">{ASSEMBLY_BASIS}</p>
         </div>
 

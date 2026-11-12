@@ -36,6 +36,8 @@ export interface OutboxEntry {
   op: 'upsert' | 'softDelete';
   payload: unknown;
   _localUpdatedAt: string;
+  /** Failed delivery attempts so far (not indexed, so no schema bump). */
+  retryCount?: number;
 }
 
 export interface ConflictEntry {

@@ -1,0 +1,32 @@
+{
+  "file": "ecos-explainer-15s-1080x1920.mp4",
+  "codec": "h264",
+  "width": 1080,
+  "height": 1920,
+  "fps": "30/1",
+  "frames": 450,
+  "durationS": 15,
+  "bytes": 426756,
+  "audioStreams": 0,
+  "checks": {
+    "1080x1920": true,
+    "30fps": true,
+    "h264": true,
+    "duration 15 s": true,
+    "under 8 MB": true
+  },
+  "contrast": {
+    "ink on paper (headlines)": 14.05,
+    "paper on ink (captions, strip)": 14.05,
+    "paper on blue (button)": 8.61,
+    "slate on paper (qualifier)": 4.62
+  },
+  "notMeasured": [
+    "The \"4.125 pt\" size check in the spec: its rule is not stated in the document, so it was not measured.",
+    "Voice-over: not produced (spec: audio is recorded separately)."
+  ],
+  "unverified": [
+    "\"139 of 213\" is the spec's national figure; this build holds North West only (11 of 18 local councils have no majority)."
+  ],
+  "aiVoiceLineInStrip": false
+}

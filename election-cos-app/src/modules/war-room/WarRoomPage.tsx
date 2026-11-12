@@ -30,6 +30,8 @@ import { CONTACT_STATUS_LABEL } from '@/modules/voters/canvassQueue';
 import { TONE_PILL_CLASSES } from '@/design/toneClasses';
 import { totalsFor } from '@/modules/wards/wardStats';
 import { reconcileSeed } from '@/modules/wards/seedReconciliation';
+import { SITE_DOMAIN } from '@/config/publicDomain';
+import { BasisNote, Card, PageHeader, SectionLabel, StatTile } from '@/components/ui';
 
 const QUICK_LINKS = [
   { to: '/voters', label: 'Voter Roll' },
@@ -65,13 +67,12 @@ export function WarRoomPage() {
 
   if (!session) {
     return (
-      <div className="rounded-lg border border-slate/30 bg-white p-6 max-w-lg">
-        <p className="text-label-caps font-display uppercase text-slate">/war-room</p>
-        <h1 className="text-headline-md font-display text-ink mt-1">War Room</h1>
+      <Card className="max-w-lg">
+        <PageHeader slug="/war-room" title="War Room" />
         <p className="mt-3 text-body-md font-body text-slate">
           No active session — see BUILD-STATUS.md (no live Firebase project provisioned yet).
         </p>
-      </div>
+      </Card>
     );
   }
 
@@ -92,10 +93,34 @@ export function WarRoomPage() {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      <div>
-        <p className="text-label-caps font-display uppercase text-slate">/war-room</p>
-        <h1 className="text-headline-md font-display text-ink mt-1">War Room</h1>
-      </div>
+      <PageHeader slug="/war-room" title="War Room" />
+
+      <Card>
+        <SectionLabel as="h2">Reference Data</SectionLabel>
+        <p className="text-body-md font-body mt-1">
+          <Link to="/analytics/candidate-list">Candidates on the Commission&rsquo;s List</Link> ·{' '}
+          <Link to="/analytics/vd-locator">Voting-district locator</Link> ·{' '}
+          <Link to="/analytics/voter-statistics">Voter statistics by ward and age</Link> ·{' '}
+          <Link to="/analytics/polls">Voter sentiment polls</Link> ·{' '}
+          <Link to="/analytics/scenario-runner">Scenario runner</Link> ·{' '}
+          <Link to="/analytics/hub">Master command &amp; media hub</Link> ·{' '}
+          <Link to="/analytics/lge-2026-results">2026 election results, North West</Link> ·{' '}
+          <Link to="/analytics/drill-down">Drill-down by ward and voting district</Link> ·{' '}
+          <Link to="/analytics/analyst">Data analyst</Link>
+        </p>
+      </Card>
+
+      <Card>
+        <SectionLabel as="h2">Start Here: Short Videos</SectionLabel>
+        <p className="text-body-md font-body mt-1">
+          Each one makes a single point in ten to thirty seconds, with the words underneath if you would
+          rather read.{' '}
+          <a href={`https://${SITE_DOMAIN}/watch#parties`} target="_blank" rel="noopener noreferrer">
+            Watch the explainers
+          </a>
+          .
+        </p>
+      </Card>
 
       {(countersQuery.isLoading || wardsQuery.isLoading) && (
         <p className="text-body-md font-body text-slate">Loading…</p>
@@ -110,46 +135,50 @@ export function WarRoomPage() {
       )}
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="bg-ink text-paper rounded p-4">
-          <p className="text-label-caps font-display uppercase text-gold">Voters captured</p>
-          <p className="text-display-lg-mobile font-display">{(counters?.totalVoters ?? 0).toLocaleString('en-ZA')}</p>
-          {rollSharePct !== null && (
-            <p className="text-data-mono font-mono text-paper/70 mt-1">
-              {rollSharePct}% of {registeredVoters.toLocaleString('en-ZA')} registered
-            </p>
-          )}
-        </div>
-        <div className="bg-white border border-ink/10 rounded p-4">
-          <p className="text-label-caps font-display uppercase text-slate">Doors worked</p>
-          <p className="text-display-lg-mobile font-display text-ink">{doorsWorked.toLocaleString('en-ZA')}</p>
-          <p className="text-data-mono font-mono text-slate mt-1">
-            from door records · {(counters?.totalHouseholdsVisited ?? 0).toLocaleString('en-ZA')} self-reported
-          </p>
-        </div>
-        <div className="bg-white border border-ink/10 rounded p-4">
-          <p className="text-label-caps font-display uppercase text-slate">Wards seeded</p>
-          <p className="text-display-lg-mobile font-display text-ink">
-            {wardsQuery.data?.length ?? 0}
-            {seed?.expectedWardCount ? (
-              <span className="text-body-md font-body text-slate"> / {seed.expectedWardCount}</span>
-            ) : null}
-          </p>
-          {seed && !seed.reconciled && (
-            <p className="text-body-md font-body text-maroon mt-1">Seed check needs attention</p>
-          )}
-        </div>
-        <div className="bg-white border border-ink/10 rounded p-4">
-          <p className="text-label-caps font-display uppercase text-slate">Open incidents</p>
-          {/* isOpen() is the workflow module's own definition — the same
-              one the incident list uses. It was duplicated inline here. */}
-          <p className="text-display-lg-mobile font-display text-ink">
-            {STATUS_ORDER.filter(isOpen).reduce((sum, s) => sum + (counters?.incidentsByStatus[s] ?? 0), 0)}
-          </p>
-        </div>
+        <StatTile
+          emphasis
+          label="Voters Captured"
+          value={(counters?.totalVoters ?? 0).toLocaleString('en-ZA')}
+          sub={
+            rollSharePct !== null
+              ? `${rollSharePct}% of ${registeredVoters.toLocaleString('en-ZA')} registered`
+              : undefined
+          }
+        />
+        <StatTile
+          label="Doors Worked"
+          value={doorsWorked.toLocaleString('en-ZA')}
+          sub={`from door records · ${(counters?.totalHouseholdsVisited ?? 0).toLocaleString('en-ZA')} self-reported`}
+        />
+        <StatTile
+          label="Wards Seeded"
+          value={
+            <>
+              {wardsQuery.data?.length ?? 0}
+              {seed?.expectedWardCount ? (
+                <span className="text-body-md font-body text-slate"> / {seed.expectedWardCount}</span>
+              ) : null}
+            </>
+          }
+          // A span, not a second paragraph: StatTile wraps `sub` in a <p>,
+          // and the overriding classes are what keep this reading as a
+          // warning rather than as the monospaced figure line.
+          sub={
+            seed && !seed.reconciled ? (
+              <span className="text-body-md font-body text-maroon">Seed check needs attention</span>
+            ) : undefined
+          }
+        />
+        {/* isOpen() is the workflow module's own definition — the same
+            one the incident list uses. It was duplicated inline here. */}
+        <StatTile
+          label="Open Incidents"
+          value={STATUS_ORDER.filter(isOpen).reduce((sum, s) => sum + (counters?.incidentsByStatus[s] ?? 0), 0)}
+        />
       </div>
 
-      <div className="bg-white border border-ink/10 rounded-lg p-4 space-y-3">
-        <h2 className="text-label-caps font-display uppercase text-slate">Doors by state</h2>
+      <Card className="space-y-3">
+        <SectionLabel as="h2">Doors by State</SectionLabel>
         <div className="flex flex-wrap gap-2">
           {(Object.keys(CONTACT_STATUS_LABEL) as (keyof typeof CONTACT_STATUS_LABEL)[]).map((status) => (
             <span
@@ -161,15 +190,15 @@ export function WarRoomPage() {
             </span>
           ))}
         </div>
-        <p className="text-body-md font-body text-slate">
+        <BasisNote>
           Counted from the door records themselves. The self-reported figure beside &ldquo;Doors worked&rdquo; is
           summed from canvassers&rsquo; own diary entries and is a different measurement — the two will differ, and
           neither is a correction of the other.
-        </p>
-      </div>
+        </BasisNote>
+      </Card>
 
-      <div className="bg-white border border-ink/10 rounded-lg p-4 space-y-3">
-        <h2 className="text-label-caps font-display uppercase text-slate">Sentiment breakdown</h2>
+      <Card className="space-y-3">
+        <SectionLabel as="h2">Sentiment Breakdown</SectionLabel>
         <div className="flex flex-wrap gap-2">
           {SENTIMENT_ORDER.map((tier) => (
             <span
@@ -180,10 +209,10 @@ export function WarRoomPage() {
             </span>
           ))}
         </div>
-      </div>
+      </Card>
 
-      <div className="bg-white border border-ink/10 rounded-lg p-4 space-y-3">
-        <h2 className="text-label-caps font-display uppercase text-slate">Incidents by status</h2>
+      <Card className="space-y-3">
+        <SectionLabel as="h2">Incidents by Status</SectionLabel>
         <div className="flex flex-wrap gap-2">
           {STATUS_ORDER.map((s) => (
             <span
@@ -194,14 +223,18 @@ export function WarRoomPage() {
             </span>
           ))}
         </div>
-      </div>
+      </Card>
 
+      {/* Not <Button>: these navigate. A button that is really a link
+          breaks middle-click, cmd-click and "copy link address", and the
+          primitive renders a real <button>. The gold/ink treatment is
+          shared deliberately; the touch target is matched by hand. */}
       <div className="flex flex-wrap gap-2">
         {QUICK_LINKS.map((link) => (
           <Link
             key={link.to}
             to={link.to}
-            className="px-4 py-2 bg-gold text-ink rounded text-label-caps font-display uppercase"
+            className="inline-flex min-h-11 items-center rounded bg-gold px-4 py-2 text-label-caps font-display uppercase text-ink"
           >
             {link.label}
           </Link>

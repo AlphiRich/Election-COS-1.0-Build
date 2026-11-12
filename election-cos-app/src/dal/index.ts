@@ -30,10 +30,14 @@ import { donationsRepository } from './adapters/firestore/donationsRepository';
 import { ppfaConfigRepository } from './adapters/firestore/ppfaConfigRepository';
 import { donationAlertsRepository } from './adapters/firestore/donationAlertsRepository';
 import { dataSubjectRequestsRepository } from './adapters/firestore/dataSubjectRequestsRepository';
+import { pollsRepository } from './adapters/firestore/pollsRepository';
 import { warRoomCountersRepository } from './adapters/firestore/warRoomCountersRepository';
 import { municipalityProfileRepository } from './adapters/firestore/municipalityProfileRepository';
 import { fileStoreRepository } from './adapters/firestore/fileStoreRepository';
 import { entitlementsRepository } from './adapters/firestore/entitlementsRepository';
+import { gatheringsRepository } from './adapters/firestore/gatheringsRepository';
+import { rollRepository } from './adapters/firestore/rollRepository';
+import { connectivityProbe } from './adapters/firestore/connectivityProbe';
 
 const adapter = (import.meta.env.VITE_DAL_ADAPTER as string | undefined) ?? 'firestore';
 
@@ -69,6 +73,7 @@ export const dal = {
   donationAlerts: donationAlertsRepository,
   dataSubjectRequests: dataSubjectRequestsRepository,
   warRoomCounters: warRoomCountersRepository,
+  polls: pollsRepository,
   municipalityProfile: municipalityProfileRepository,
   // Cloud Storage rather than Firestore, but the same rule applies: module
   // code reaches object storage through the DAL or not at all (§5, §10).
@@ -76,6 +81,16 @@ export const dal = {
   // What the tenant bought, as opposed to what the user may do — see
   // src/auth/modules.ts. Read-only: provisioned server-side.
   entitlements: entitlementsRepository,
+  // The certified voters' roll for the caller's own district, and the
+  // per-use events that meter it. See src/dal/ports/roll.ts.
+  roll: rollRepository,
+  // Not a repository: no documents are read through it, only the
+  // listener metadata that says whether the client is talking to the
+  // backend at all. It is here because the rule in §2.2 is about the
+  // Firebase SDK, not about documents — the chrome may not import the
+  // SDK, so this is the seam it reaches the link state through.
+  gatherings: gatheringsRepository,
+  connectivity: connectivityProbe,
 };
 
 export type { SessionContext, GeoScope, Page, PageRequest } from './ports/session';

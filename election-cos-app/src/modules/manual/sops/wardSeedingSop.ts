@@ -20,7 +20,7 @@ import type { Sop } from '../manualModel';
 
 export const WARD_SEEDING_SOP: Sop = {
   number: 'SOP-03',
-  title: 'Seeding wards and voting districts',
+  title: 'Seeding Wards and Voting Districts',
   area: 'ONBOARDING',
   roles: ['party-hq-admin', 'municipal-team-lead'],
   requiresAnyCapability: ['wards.view'],
@@ -30,7 +30,7 @@ export const WARD_SEEDING_SOP: Sop = {
     'districts that belong to two wards at once.',
   sections: [
     {
-      heading: 'Where this data comes from, and where it does not',
+      heading: 'Where This Data Comes From, and Where It Does Not',
       body: [
         'The authority for your municipality’s wards is the Municipal Demarcation Board’s delimitation notice for that municipality, published in the provincial gazette. It states how many wards there are, what each is called, which voting stations fall in each, and how many registered voters each holds.',
         'This platform holds no national register of wards and does not fetch one. It holds what you load. That is deliberate — a ward list quietly refreshed from somewhere else would change coverage figures and seat projections under a campaign that had not asked for it.',
@@ -41,21 +41,21 @@ export const WARD_SEEDING_SOP: Sop = {
       ],
     },
     {
-      heading: 'Who can do which part',
+      heading: 'Who Can Do Which Part',
       body: [
         'Loading and editing wards needs the ward-editing permission, which the Party HQ Admin role holds. A Municipal Team Lead can see everything in this procedure and change none of it.',
         'That is not an oversight — the ward list is the tenant’s foundation, and a municipal lead who could re-draw it could change every coverage figure their own work is measured by. If the ward data is wrong, the team lead is usually the one who notices; the fix goes through the HQ admin.',
       ],
     },
     {
-      heading: 'Record the municipality before you load anything',
+      heading: 'Record the Municipality Before You Load Anything',
       body: [
         'Settings → Municipality Config, as in SOP-02. In particular the ward seats, PR seats and total council seats, taken from the notice.',
         'Do it first because it is the only place the expected ward count is stated, and it is what the seed check below measures the loaded wards against. Without it there is nothing to check against, and the check says so rather than passing silently.',
       ],
     },
     {
-      heading: 'The bulk path: parsing the gazette',
+      heading: 'The Bulk Path: Parsing the Gazette',
       body: [
         'Where the notice is a machine-readable PDF, there is a parser: `tools/seed-data/parse-nw405-demarcation.mjs`. It reads the ward schedule into a seed file, and a loader writes that file into your tenant. This is how the JB Marks (NW405) data in this repository was produced.',
         'The parser was written against one municipality’s gazette layout and verified against it. Another municipality’s notice may be laid out differently, so the output is checked rather than trusted.',
@@ -71,7 +71,7 @@ export const WARD_SEEDING_SOP: Sop = {
       ],
     },
     {
-      heading: 'The manual path: capturing wards by hand',
+      heading: 'The Manual Path: Capturing Wards by Hand',
       body: [
         'Where there is no machine-readable notice, wards go in through the Wards page one at a time. It is slower and it is not worse: the same three numbers get checked either way.',
       ],
@@ -83,9 +83,9 @@ export const WARD_SEEDING_SOP: Sop = {
       ],
     },
     {
-      heading: 'The voting district that belongs to two wards',
+      heading: 'The Voting District That Belongs to Two Wards',
       body: [
-        'A voting station’s roll can be split across a ward boundary: the same station code appears in two wards’ schedules, each with only its own portion of the registered voters. This is ordinary, not an error, and it is common — in the one municipality this build holds real gazette data for, 26 of 108 station codes are split, which is a quarter of them.',
+        'A voting station’s roll can be split across a ward boundary: the same station code appears in two wards’ schedules, each with only its own portion of the registered voters. This is ordinary, not an error, and it is common — in the one municipality this build holds real gazette data for, 25 of 108 station codes are split, which is close to a quarter of them.',
         'The platform is built for it. A voting district is identified by the ward and the code together, not by the code alone, so the second ward’s entry does not overwrite the first. When you enter a code that already exists elsewhere, the form tells you which other wards have it, and lets you continue.',
       ],
       warnings: [
@@ -94,7 +94,7 @@ export const WARD_SEEDING_SOP: Sop = {
       ],
     },
     {
-      heading: 'Check the seed before anyone works it',
+      heading: 'Check the Seed Before Anyone Works It',
       body: [
         'The Wards page shows a seed check whenever anything needs attention. It compares the loaded wards against the figures recorded in Municipality Config and against each other.',
         RECONCILIATION_BASIS,
@@ -111,7 +111,7 @@ export const WARD_SEEDING_SOP: Sop = {
       ],
     },
     {
-      heading: 'When the demarcation changes',
+      heading: 'When the Demarcation Changes',
       body: [
         'Wards are re-drawn between elections, and a re-drawn ward is not the same ward with a new boundary — the households in it change, and so does everything recorded against them.',
         'Nothing in this platform deletes a ward. A ward that no longer exists is suppressed and stops appearing; its history remains. Treat a new delimitation as a fresh load checked against the new notice, not as an edit of the old one.',

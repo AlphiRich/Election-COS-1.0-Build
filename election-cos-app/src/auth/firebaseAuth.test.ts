@@ -17,9 +17,8 @@ vi.mock('@/dal/adapters/firestore/client', () => ({
   getFirebaseAuth: () => ({ __fake: 'auth-instance' }),
 }));
 
-const { assertMinimalAuthPayload, toMinimalAuthRecord, signInWithGoogle, PERMITTED_AUTH_FIELDS } = await import(
-  './firebaseAuth'
-);
+const { assertMinimalAuthPayload, toMinimalAuthRecord, signInWithGoogle, PERMITTED_AUTH_FIELDS } =
+  await import('./firebaseAuth');
 
 // IC-ECOS-BUILD-2026-V2 §4.3: "Write a test that asserts this and run it in
 // CI. It is the kind of rule that erodes silently." This is that test.
@@ -31,14 +30,18 @@ describe('Firebase Auth minimal-footprint rule (§4.3)', () => {
     ).not.toThrow();
   });
 
-  it.each(['firstName', 'lastName', 'displayName', 'phoneNumber', 'idNumber', 'photoURL', 'wardScope', 'roleId'])(
-    'rejects a payload containing "%s"',
-    (forbiddenKey) => {
-      expect(() =>
-        assertMinimalAuthPayload({ uid: 'abc', [forbiddenKey]: 'anything' }),
-      ).toThrow();
-    },
-  );
+  it.each([
+    'firstName',
+    'lastName',
+    'displayName',
+    'phoneNumber',
+    'idNumber',
+    'photoURL',
+    'wardScope',
+    'roleId',
+  ])('rejects a payload containing "%s"', (forbiddenKey) => {
+    expect(() => assertMinimalAuthPayload({ uid: 'abc', [forbiddenKey]: 'anything' })).toThrow();
+  });
 
   it('rejects an entire StaffProfile-shaped object being spread into an Auth write', () => {
     const staffLike = {
@@ -102,5 +105,56 @@ describe('signInWithGoogle — scrubs the profile fields Firebase auto-populates
     await signInWithGoogle();
 
     expect(updateProfileMock).not.toHaveBeenCalled();
+  });
+});
+
+describe('signInWithProvider — Meta, Microsoft and Apple', () => {
+  const user = (over: object = {}) =>
+    ({
+      uid: 'u',
+      email: 'a@b.org',
+      emailVerified: true,
+      displayName: null,
+      photoURL: null,
+      ...over,
+    }) as unknown as User;
+
+  it("uses Facebook's provider with the email scope only, and scrubs the name and photo Meta supplies", async () => {
+    const { signInWithProvider } = await import('./firebaseAuth');
+    updateProfileMock.mockClear();
+    signInWithPopupMock.mockClear();
+    const u = user({ displayName: 'Thabo M', photoURL: 'https://graph.facebook.com/x.jpg' });
+    signInWithPopupMock.mockResolvedValueOnce({ user: u });
+    updateProfileMock.mockResolvedValueOnce(undefined);
+    await signInWithProvider('facebook');
+    const provider = signInWithPopupMock.mock.calls[0][1] as {
+      providerId: string;
+      getScopes(): string[];
+    };
+    expect(provider.providerId).toBe('facebook.com');
+    expect(provider.getScopes()).toEqual(['email']);
+    expect(updateProfileMock).toHaveBeenCalledWith(u, { displayName: null, photoURL: null });
+  });
+
+  it('maps Microsoft and Apple to their Firebase provider ids', async () => {
+    const { signInWithProvider } = await import('./firebaseAuth');
+    for (const [id, pid] of [
+      ['microsoft', 'microsoft.com'],
+      ['apple', 'apple.com'],
+    ] as const) {
+      signInWithPopupMock.mockClear();
+      signInWithPopupMock.mockResolvedValueOnce({ user: user() });
+      await signInWithProvider(id);
+      expect((signInWithPopupMock.mock.calls[0][1] as { providerId: string }).providerId).toBe(pid);
+    }
+  });
+
+  it('passes a provider error straight through, so the page can map its code, and links nothing', async () => {
+    const { signInWithProvider } = await import('./firebaseAuth');
+    const err = Object.assign(new Error('exists'), {
+      code: 'auth/account-exists-with-different-credential',
+    });
+    signInWithPopupMock.mockRejectedValueOnce(err);
+    await expect(signInWithProvider('facebook')).rejects.toBe(err);
   });
 });
