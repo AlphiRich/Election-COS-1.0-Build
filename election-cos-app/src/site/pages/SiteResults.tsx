@@ -12,6 +12,7 @@
  */
 import { Link } from 'react-router-dom';
 import { SiteSection } from '../SiteChrome';
+import { SiteVideo } from '../SiteVideo';
 import { PageIntro, SourceNote } from './pageParts';
 import { SeatBar, StatTile, StatusPill } from './resultsParts';
 import { nf, provinceName } from '../tools/resultsFormat';
@@ -36,6 +37,12 @@ export function SiteResults() {
           <Link to={MY_WARD_PATH} className="site-btn-outline-ink">Your Ward Councillor</Link>
         </p>
       </PageIntro>
+
+      <SiteSection className="pb-8">
+        <div className="grid gap-6 ">
+          <SiteVideo id="who-governs-your-council" className="max-w-[560px]" />
+        </div>
+      </SiteSection>
 
       <SiteSection labelledBy="nat-h" className="pb-8">
         <h2 id="nat-h" className="sr-only">National Figures</h2>

@@ -8,6 +8,7 @@
  * `codeOfConduct.ts`.
  */
 import { SiteCard, SiteSection } from '../SiteChrome';
+import { SiteVideo } from '../SiteVideo';
 import { PageIntro, RuleList, SourceNote } from './pageParts';
 import {
   AT_THE_STATION,
@@ -50,6 +51,12 @@ export function SiteCodeOfConduct() {
           </a>
         </nav>
       </PageIntro>
+
+      <SiteSection className="pb-8">
+        <div className="grid gap-6 ">
+          <SiteVideo id="canvasser-knocks" className="max-w-[560px]" />
+        </div>
+      </SiteSection>
 
       <SiteSection id="voters" labelledBy="v-h" className="pb-10">
         <div className="flex max-w-[760px] flex-col gap-6">

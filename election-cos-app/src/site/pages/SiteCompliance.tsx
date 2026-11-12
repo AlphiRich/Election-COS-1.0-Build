@@ -31,6 +31,7 @@ import {
   POPIA_POINTS,
 } from '../siteContent';
 import { Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
+import { SiteVideo } from '../SiteVideo';
 
 /** The "will not claim" marker: a crossed circle, not a colour. */
 function NotClaimIcon() {
@@ -65,6 +66,13 @@ export function SiteCompliance() {
       </SiteSection>
 
       {/* ------------------------------------------------ claims table */}
+      <SiteSection className="pb-8">
+        <div className="grid gap-6 md:grid-cols-2">
+          <SiteVideo id="capture-consent" className="max-w-[560px]" />
+          <SiteVideo id="funding-30-day" className="max-w-[560px]" />
+        </div>
+      </SiteSection>
+
       <SiteSection labelledBy="claims-h" className="pb-20">
         <h2 id="claims-h" className="mb-5 mt-0 font-site-display text-site-h4">
           Does, and Will Not Claim
