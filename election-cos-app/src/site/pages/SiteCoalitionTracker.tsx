@@ -9,6 +9,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SiteCard, SiteSection } from '../SiteChrome';
 import { PageIntro, SourceNote } from './pageParts';
+import { PromoPlayer } from '../PromoPlayer';
 import { SeatBar, StatTile, StatusPill } from './resultsParts';
 import { PartyMark } from './PartyMark';
 import { BarList, StatusSplit } from '../charts/Charts';
@@ -72,6 +73,10 @@ export function SiteCoalitionTracker({ hasConsent }: { hasConsent: boolean }) {
           <Link to={MY_WARD_PATH} className="site-btn-outline-ink">Find Your Ward Councillor</Link>
         </p>
       </PageIntro>
+
+      <SiteSection className="pb-8">
+        <PromoPlayer id="who-governs-your-council" className="max-w-[420px]" />
+      </SiteSection>
 
       <SiteSection labelledBy="summary-h" className="pb-8">
         <h2 id="summary-h" className="sr-only">The Country at a Glance</h2>

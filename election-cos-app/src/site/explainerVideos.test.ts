@@ -10,6 +10,7 @@ import {
   hostedUrls,
   isYoutubeId,
 } from './explainerVideos';
+import { PROMO_VIDEOS } from './promoVideos';
 
 describe('the explainer registry', () => {
   it('has unique ids, both audiences, and every explainer carries its words as text', () => {
@@ -55,8 +56,8 @@ describe('hosted videos', () => {
   it('serves every hosted file from this site, never another host', () => {
     for (const e of EXPLAINERS) for (const url of Object.values(hostedUrls(e.id))) expect(url.startsWith('/videos/')).toBe(true);
   });
-  it('has no stray file in the folder: every file belongs to a registered explainer', () => {
-    const ids = new Set(EXPLAINERS.map((e) => e.id));
+  it('has no stray file in the folder: every file belongs to a registered explainer or promo video', () => {
+    const ids = new Set([...EXPLAINERS.map((e) => e.id), ...PROMO_VIDEOS.map((v) => v.id)]);
     for (const f of readdirSync(dir)) expect(ids.has(f.replace(/\.(mp4|vtt|jpg)$/, '')), f).toBe(true);
   });
 });

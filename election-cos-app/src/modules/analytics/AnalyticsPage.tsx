@@ -27,6 +27,26 @@ const SUB_VIEWS = [
       'Quota, seats and ward-size band recomputed from sourced figures, field roll usage, and what a supplied dashboard claimed, checked.',
   },
   {
+    to: '/analytics/voter-intelligence',
+    label: 'Voter Intelligence',
+    description: 'Seats, coalition arithmetic and the ward map for any of the 213 councils, from the certified 2026 results.',
+  },
+  {
+    to: '/analytics/lge-2026-results',
+    label: 'LGE 2026 Results',
+    description: 'The Commission’s certified results for the North West, with the seat calculation reconciled to its own report.',
+  },
+  {
+    to: '/analytics/lge-2026-party',
+    label: 'Party Candidates and Result',
+    description: 'One party’s candidates against its result in one municipality, checked against the Commission’s list.',
+  },
+  {
+    to: '/analytics/hub',
+    label: 'Master Hub',
+    description: 'Marketing, assets, agents, reference data and the registry in one place.',
+  },
+  {
     to: '/analytics/scheduled-reports',
     label: 'Sentiment Summary Report',
     description: 'Tenant-wide sentiment breakdown, on demand, CSV export.',

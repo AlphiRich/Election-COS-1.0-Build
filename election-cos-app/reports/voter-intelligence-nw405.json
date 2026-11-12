@@ -1,0 +1,580 @@
+{
+  "code": "NW405",
+  "name": "JB Marks",
+  "province": "NW",
+  "seats": {
+    "code": "NW405",
+    "name": "JB Marks",
+    "province": "NW",
+    "category": "B",
+    "district": "DC40",
+    "councillors": 67,
+    "wards": 34,
+    "registered": 131963,
+    "turnoutPr": 53.4,
+    "holders": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "seats": 22,
+        "wardSeats": 22
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "seats": 21,
+        "wardSeats": 12
+      },
+      {
+        "id": "VFP",
+        "name": "Vryheidsfront Plus | Freedom Front Plus",
+        "seats": 6,
+        "wardSeats": 0
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "seats": 5,
+        "wardSeats": 0
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "seats": 5,
+        "wardSeats": 0
+      },
+      {
+        "id": "BAAGI",
+        "name": "BAAGI",
+        "seats": 3,
+        "wardSeats": 0
+      },
+      {
+        "id": "ACDP",
+        "name": "African Christian Democratic Party",
+        "seats": 1,
+        "wardSeats": 0
+      },
+      {
+        "id": "CONCERNED_POTCHEFSTROOM_RESIDENTS",
+        "name": "Concerned Potchefstroom Residents",
+        "seats": 1,
+        "wardSeats": 0
+      },
+      {
+        "id": "PA",
+        "name": "Patriotic Alliance",
+        "seats": 1,
+        "wardSeats": 0
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "seats": 1,
+        "wardSeats": 0
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "seats": 1,
+        "wardSeats": 0
+      }
+    ],
+    "majority": 34,
+    "hung": true,
+    "iec": "reconciled"
+  },
+  "majority": 34,
+  "topHolder": {
+    "name": "African National Congress",
+    "seats": 22
+  },
+  "shortOfMajority": 12,
+  "coalitions": [
+    {
+      "parties": [
+        "African National Congress",
+        "Democratic Alliance"
+      ],
+      "seats": 43,
+      "surplus": 9
+    },
+    {
+      "parties": [
+        "African National Congress",
+        "Vryheidsfront Plus | Freedom Front Plus",
+        "ActionSA",
+        "African Christian Democratic Party"
+      ],
+      "seats": 34,
+      "surplus": 0
+    },
+    {
+      "parties": [
+        "African National Congress",
+        "Vryheidsfront Plus | Freedom Front Plus",
+        "ActionSA",
+        "Concerned Potchefstroom Residents"
+      ],
+      "seats": 34,
+      "surplus": 0
+    },
+    {
+      "parties": [
+        "African National Congress",
+        "Vryheidsfront Plus | Freedom Front Plus",
+        "ActionSA",
+        "Patriotic Alliance"
+      ],
+      "seats": 34,
+      "surplus": 0
+    },
+    {
+      "parties": [
+        "African National Congress",
+        "Vryheidsfront Plus | Freedom Front Plus",
+        "ActionSA",
+        "South African Communist Party"
+      ],
+      "seats": 34,
+      "surplus": 0
+    },
+    {
+      "parties": [
+        "African National Congress",
+        "Vryheidsfront Plus | Freedom Front Plus",
+        "ActionSA",
+        "Umkhonto Wesizwe Party"
+      ],
+      "seats": 34,
+      "surplus": 0
+    },
+    {
+      "parties": [
+        "African National Congress",
+        "Vryheidsfront Plus | Freedom Front Plus",
+        "Economic Freedom Fighters",
+        "African Christian Democratic Party"
+      ],
+      "seats": 34,
+      "surplus": 0
+    },
+    {
+      "parties": [
+        "African National Congress",
+        "Vryheidsfront Plus | Freedom Front Plus",
+        "Economic Freedom Fighters",
+        "Concerned Potchefstroom Residents"
+      ],
+      "seats": 34,
+      "surplus": 0
+    },
+    {
+      "parties": [
+        "African National Congress",
+        "Vryheidsfront Plus | Freedom Front Plus",
+        "Economic Freedom Fighters",
+        "Patriotic Alliance"
+      ],
+      "seats": 34,
+      "surplus": 0
+    },
+    {
+      "parties": [
+        "African National Congress",
+        "Vryheidsfront Plus | Freedom Front Plus",
+        "Economic Freedom Fighters",
+        "South African Communist Party"
+      ],
+      "seats": 34,
+      "surplus": 0
+    },
+    {
+      "parties": [
+        "African National Congress",
+        "Vryheidsfront Plus | Freedom Front Plus",
+        "Economic Freedom Fighters",
+        "Umkhonto Wesizwe Party"
+      ],
+      "seats": 34,
+      "surplus": 0
+    },
+    {
+      "parties": [
+        "Democratic Alliance",
+        "ActionSA",
+        "Economic Freedom Fighters",
+        "BAAGI"
+      ],
+      "seats": 34,
+      "surplus": 0
+    }
+  ],
+  "wards": [
+    {
+      "ward": 1,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 52.586575459598116,
+      "runnerUp": "DEMOCRATIC ALLIANCE",
+      "margin": 36.29756306113724,
+      "tier": "Comfortable",
+      "registered": 4514,
+      "valid": 2339
+    },
+    {
+      "ward": 2,
+      "leader": "DEMOCRATIC ALLIANCE",
+      "leaderShare": 56.640625,
+      "runnerUp": "VRYHEIDSFRONT PLUS | FREEDOM FRONT PLUS",
+      "margin": 29.921874999999996,
+      "tier": "Comfortable",
+      "registered": 4206,
+      "valid": 2560
+    },
+    {
+      "ward": 3,
+      "leader": "DEMOCRATIC ALLIANCE",
+      "leaderShare": 72.04000930448942,
+      "runnerUp": "VRYHEIDSFRONT PLUS | FREEDOM FRONT PLUS",
+      "margin": 55.454756920213995,
+      "tier": "Safe",
+      "registered": 6172,
+      "valid": 4299
+    },
+    {
+      "ward": 4,
+      "leader": "DEMOCRATIC ALLIANCE",
+      "leaderShare": 51.684397163120565,
+      "runnerUp": "AFRICAN NATIONAL CONGRESS",
+      "margin": 33.998226950354606,
+      "tier": "Comfortable",
+      "registered": 3516,
+      "valid": 2256
+    },
+    {
+      "ward": 5,
+      "leader": "DEMOCRATIC ALLIANCE",
+      "leaderShare": 67.10634789777411,
+      "runnerUp": "VRYHEIDSFRONT PLUS | FREEDOM FRONT PLUS",
+      "margin": 42.126957955482276,
+      "tier": "Safe",
+      "registered": 3592,
+      "valid": 2426
+    },
+    {
+      "ward": 6,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 50.67155067155067,
+      "runnerUp": "DEMOCRATIC ALLIANCE",
+      "margin": 29.426129426129428,
+      "tier": "Comfortable",
+      "registered": 3206,
+      "valid": 1638
+    },
+    {
+      "ward": 7,
+      "leader": "DEMOCRATIC ALLIANCE",
+      "leaderShare": 64.00778210116731,
+      "runnerUp": "ECONOMIC FREEDOM FIGHTERS",
+      "margin": 53.15175097276265,
+      "tier": "Safe",
+      "registered": 5272,
+      "valid": 2570
+    },
+    {
+      "ward": 8,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 56.98421975452952,
+      "runnerUp": "DEMOCRATIC ALLIANCE",
+      "margin": 44.476914085330215,
+      "tier": "Comfortable",
+      "registered": 3088,
+      "valid": 1711
+    },
+    {
+      "ward": 9,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 43.14350797266515,
+      "runnerUp": "DEMOCRATIC ALLIANCE",
+      "margin": 28.337129840546698,
+      "tier": "Marginal",
+      "registered": 4582,
+      "valid": 2195
+    },
+    {
+      "ward": 10,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 42.25,
+      "runnerUp": "ACTIONSA",
+      "margin": 17.75,
+      "tier": "Marginal",
+      "registered": 4330,
+      "valid": 2000
+    },
+    {
+      "ward": 11,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 50.29991431019709,
+      "runnerUp": "DEMOCRATIC ALLIANCE",
+      "margin": 28.70608397600686,
+      "tier": "Comfortable",
+      "registered": 2269,
+      "valid": 1167
+    },
+    {
+      "ward": 12,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 56.26598465473146,
+      "runnerUp": "ACTIONSA",
+      "margin": 37.97953964194373,
+      "tier": "Comfortable",
+      "registered": 3194,
+      "valid": 1564
+    },
+    {
+      "ward": 13,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 40.04871259568545,
+      "runnerUp": "DEMOCRATIC ALLIANCE",
+      "margin": 20.45929018789144,
+      "tier": "Marginal",
+      "registered": 5965,
+      "valid": 2874
+    },
+    {
+      "ward": 14,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 53.161077515118194,
+      "runnerUp": "ACTIONSA",
+      "margin": 39.52721275426058,
+      "tier": "Comfortable",
+      "registered": 3453,
+      "valid": 1819
+    },
+    {
+      "ward": 15,
+      "leader": "DEMOCRATIC ALLIANCE",
+      "leaderShare": 66.69893514036787,
+      "runnerUp": "VRYHEIDSFRONT PLUS | FREEDOM FRONT PLUS",
+      "margin": 45.88576960309778,
+      "tier": "Safe",
+      "registered": 3516,
+      "valid": 2066
+    },
+    {
+      "ward": 16,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 62.206001622060015,
+      "runnerUp": "DEMOCRATIC ALLIANCE",
+      "margin": 52.23033252230332,
+      "tier": "Safe",
+      "registered": 2445,
+      "valid": 1233
+    },
+    {
+      "ward": 17,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 59.331103678929765,
+      "runnerUp": "DEMOCRATIC ALLIANCE",
+      "margin": 47.89297658862876,
+      "tier": "Comfortable",
+      "registered": 3082,
+      "valid": 1495
+    },
+    {
+      "ward": 18,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 54.71698113207547,
+      "runnerUp": "ACTIONSA",
+      "margin": 39.73699256718125,
+      "tier": "Comfortable",
+      "registered": 4296,
+      "valid": 1749
+    },
+    {
+      "ward": 19,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 55.769230769230774,
+      "runnerUp": "DEMOCRATIC ALLIANCE",
+      "margin": 44.5447409733124,
+      "tier": "Comfortable",
+      "registered": 5858,
+      "valid": 2548
+    },
+    {
+      "ward": 20,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 37.26254262055528,
+      "runnerUp": "DEMOCRATIC ALLIANCE",
+      "margin": 15.538236726741353,
+      "tier": "Contested",
+      "registered": 4294,
+      "valid": 2053
+    },
+    {
+      "ward": 21,
+      "leader": "DEMOCRATIC ALLIANCE",
+      "leaderShare": 31.57586408904511,
+      "runnerUp": "PATRIOTIC ALLIANCE",
+      "margin": 10.134739308728765,
+      "tier": "Contested",
+      "registered": 2890,
+      "valid": 1707
+    },
+    {
+      "ward": 22,
+      "leader": "DEMOCRATIC ALLIANCE",
+      "leaderShare": 47.04225352112676,
+      "runnerUp": "ECONOMIC FREEDOM FIGHTERS",
+      "margin": 28.450704225352112,
+      "tier": "Marginal",
+      "registered": 4641,
+      "valid": 1775
+    },
+    {
+      "ward": 23,
+      "leader": "DEMOCRATIC ALLIANCE",
+      "leaderShare": 75.29554410427403,
+      "runnerUp": "VRYHEIDSFRONT PLUS | FREEDOM FRONT PLUS",
+      "margin": 56.95665353137315,
+      "tier": "Safe",
+      "registered": 4677,
+      "valid": 3299
+    },
+    {
+      "ward": 24,
+      "leader": "DEMOCRATIC ALLIANCE",
+      "leaderShare": 76.94848084544253,
+      "runnerUp": "VRYHEIDSFRONT PLUS | FREEDOM FRONT PLUS",
+      "margin": 59.709379128137385,
+      "tier": "Safe",
+      "registered": 2405,
+      "valid": 1514
+    },
+    {
+      "ward": 25,
+      "leader": "DEMOCRATIC ALLIANCE",
+      "leaderShare": 50.749154180763654,
+      "runnerUp": "VRYHEIDSFRONT PLUS | FREEDOM FRONT PLUS",
+      "margin": 31.9478008699855,
+      "tier": "Comfortable",
+      "registered": 4440,
+      "valid": 2069
+    },
+    {
+      "ward": 26,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 53.20545179202423,
+      "runnerUp": "ACTIONSA",
+      "margin": 38.263503281171126,
+      "tier": "Comfortable",
+      "registered": 4370,
+      "valid": 1981
+    },
+    {
+      "ward": 27,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 45.718901453958,
+      "runnerUp": "ACTIONSA",
+      "margin": 21.24394184168013,
+      "tier": "Marginal",
+      "registered": 2048,
+      "valid": 1238
+    },
+    {
+      "ward": 28,
+      "leader": "DEMOCRATIC ALLIANCE",
+      "leaderShare": 34.816132858837484,
+      "runnerUp": "AFRICAN NATIONAL CONGRESS",
+      "margin": 6.524317912218268,
+      "tier": "Contested",
+      "registered": 3575,
+      "valid": 1686
+    },
+    {
+      "ward": 29,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 51.83044315992292,
+      "runnerUp": "BAAGI",
+      "margin": 24.084778420038536,
+      "tier": "Comfortable",
+      "registered": 3424,
+      "valid": 1557
+    },
+    {
+      "ward": 30,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 43.962159154145795,
+      "runnerUp": "BAAGI",
+      "margin": 12.632164718976071,
+      "tier": "Marginal",
+      "registered": 3412,
+      "valid": 1797
+    },
+    {
+      "ward": 31,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 32.17179902755267,
+      "runnerUp": "ECONOMIC FREEDOM FIGHTERS",
+      "margin": 5.9967585089141,
+      "tier": "Contested",
+      "registered": 4177,
+      "valid": 2468
+    },
+    {
+      "ward": 32,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 69.89459815546772,
+      "runnerUp": "ECONOMIC FREEDOM FIGHTERS",
+      "margin": 57.180500658761524,
+      "tier": "Safe",
+      "registered": 3283,
+      "valid": 1518
+    },
+    {
+      "ward": 33,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 60.03966286564204,
+      "runnerUp": "BAAGI",
+      "margin": 41.19980168567179,
+      "tier": "Safe",
+      "registered": 4074,
+      "valid": 2017
+    },
+    {
+      "ward": 34,
+      "leader": "AFRICAN NATIONAL CONGRESS",
+      "leaderShare": 63.0589430894309,
+      "runnerUp": "VRYHEIDSFRONT PLUS | FREEDOM FRONT PLUS",
+      "margin": 48.831300813008134,
+      "tier": "Safe",
+      "registered": 3697,
+      "valid": 1968
+    }
+  ],
+  "tierCounts": {
+    "Safe": 10,
+    "Comfortable": 14,
+    "Marginal": 6,
+    "Contested": 4
+  },
+  "wardsLedBy": [
+    {
+      "party": "AFRICAN NATIONAL CONGRESS",
+      "wards": 22
+    },
+    {
+      "party": "DEMOCRATIC ALLIANCE",
+      "wards": 12
+    }
+  ],
+  "competitive": {
+    "wards": [
+      28,
+      31
+    ],
+    "electorateShare": 5.874373877526276
+  },
+  "iecStatus": "reconciled",
+  "source": "Electoral Commission LGE 2026 certified results (EEID1887); seats by Schedule 1, reconciled against the Commission's Seat Calculation Detail"
+}
