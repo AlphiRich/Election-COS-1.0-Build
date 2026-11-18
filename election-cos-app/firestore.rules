@@ -440,6 +440,16 @@ service cloud.firestore {
       allow write: if false; // Cloud Functions (admin SDK) only
     }
 
+    // Cookieless page-view counts, one document per South African day:
+    // { day, total, routes: { '/wards/:wardCode': n }, updatedAt }. Counts
+    // only — no uid, no device, no address (functions/src/pageViews.ts).
+    // Written by the `recordPageViews` callable alone, so a client cannot
+    // inflate or erase a tenant's usage figures.
+    match /tenants/{tid}/pageViewsDaily/{day} {
+      allow read: if tenantOK(tid) && cap('analytics.view');
+      allow write: if false; // Cloud Functions (admin SDK) only
+    }
+
     // One marker per counter trigger event, so an at-least-once redelivery
     // cannot increment a counter twice (functions/src/warRoomCounters.ts).
     // The default-deny above already covered this; it is written out so a

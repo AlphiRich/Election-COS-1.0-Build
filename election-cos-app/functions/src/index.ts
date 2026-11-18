@@ -20,3 +20,4 @@ export {
 // build spec §6.8.1. Do not add it here without legal confirmation.
 export { submitEnquiry } from './enquiryHttp';
 export { poll } from './pollHttp';
+export { recordPageViewsCallable as recordPageViews } from './pageViewsCallable';

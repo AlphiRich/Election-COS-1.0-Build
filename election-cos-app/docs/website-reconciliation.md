@@ -32,4 +32,4 @@ rebuild; that is a founder decision for v1.1.
 1. Advertising: the paper (ADR-06) says none in v1; the repo has a consent-gated ad framework that is **inert** (no client id configured). Left off; founder to choose A/B/C.
 2. Voter-tool pages (manifestos, candidates, results) show party names from official data; the neutrality lint covers the marketing surfaces only.
 3. Rate limit 5/min/IP and 8 KB body: enquiry function refuses oversize; the rate limit is a Cloudflare rule not yet set.
-4. Cookieless analytics and Pagefind: not built. Hosting A vs B, Information Officer, nameservers: open founder decisions.
+4. Cookieless analytics: built for the application (first-party screen counts, see the Session 59 decision-log entry); the public site still has none. Pagefind: not built. Hosting A vs B, Information Officer, nameservers: open founder decisions.
