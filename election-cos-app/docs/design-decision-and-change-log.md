@@ -3378,3 +3378,13 @@ Owner instruction: "Cookieless analytics", chosen over Google Analytics behind a
 - **Counted:** only signed-in sessions past the second factor. Sign-in and second-factor screens are not counted.
 - **Privacy notice:** the Sub-processors paragraph in `src/modules/legal/notices.ts` now says the platform counts screen opens itself, without user, device, address or cookie. Binding text remains with the attorney (rule 3).
 - **Needs deploying:** the `recordPageViews` function and the rules. Until then the callable fails and the tally keeps at most 200 views in memory, then stops adding; nothing breaks for the user.
+
+### Session 59 (cont.) — the phone app, rebuilt from the supplied ElectionCOS Mobile prototype (18 Nov 2026)
+
+Owner instruction: "rebuild the mobile application". The prototype (`ElectionCOS Mobile.dc.html`) was read and its layout kept; its data, colours and role switcher were not.
+
+- **Tab bar on phones** (`src/app/fieldTabs.ts`, Shell, `md:hidden`): Today, Wards, Round, Menu. This changes the Session 38 decision (drawer, no tab bar) by owner instruction, and keeps its reason intact: `PRIMARY_NAV` is still the nine items of §3.2 and "Menu" opens all of them. Each tab uses the capability of the nav item for its screen, so a canvasser gets Today and Round only, and a ward lead (no `wards.view`) gets no Wards tab. Desktop is unchanged.
+- **Today** (`/today`, `src/modules/today/`): the tenant's council from the CERTIFIED 2026 seats (any of the 213 councils, not the prototype's JB Marks-only Wikipedia figures), drawn as a seat chart against the majority line in the fixed chart series, never party colours (design protocol §5); the person's own ward when their role is ward- or district-scoped, otherwise the three closest 2026 races; and shortcuts built from the role's capabilities (round, roll verification, incident report, diary, council intelligence).
+- **Left out of the prototype, and why:** its 34-ward profiles, "'24 turnout" and strategy labels (marked unverified by the prototype itself), the "service risk" card (no source), the "preview as" role switcher (real access comes from the token; the demo personas were retired in the consolidation review), and party brand colours.
+- **Counted:** `/today` added to `PAGE_VIEW_ROUTES` in `functions/src/pageViews.ts` (the mirror test requires it).
+- **Not verified in a browser:** signing in needs the Firebase emulators, which need Java, not installed on the build machine. `todayPage.test.tsx` renders the screen for a canvasser, a ward lead and a municipal lead instead.

@@ -48,6 +48,7 @@ import { IncidentReportPage } from '@/modules/incidents/report/IncidentReportPag
 import { GatheringsAdvisoryPage } from '@/modules/knowledge/GatheringsAdvisoryPage';
 import { RollFieldPage } from '@/modules/roll/RollFieldPage';
 import { ElectionTimetablePage } from '@/modules/knowledge/ElectionTimetablePage';
+import { TodayPage } from '@/modules/today/TodayPage';
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,7 @@ export const router = createBrowserRouter([
       { path: 'war-room', element: <WarRoomPage /> },
       { path: 'voters', element: <VotersPage /> },
       { path: 'voters/import', element: <BulkImportPage /> },
+      { path: 'today', element: <TodayPage /> },
       { path: 'round', element: <RoundPage /> },
       { path: 'roll', element: <RollFieldPage /> },
       { path: 'incidents/new', element: <ReportIncidentPage /> },
