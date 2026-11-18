@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 
 // The page asks the election database first. Tests run without one, so it answers "nothing" and the bundled results are used.
-vi.mock('@/dal/adapters/firestore/electionData', () => ({ fetchCouncilWards: async () => null }));
+vi.mock('@/dal/adapters/firestore/electionData', () => ({ fetchCouncil: async () => null }));
 import { VoterIntelligencePage } from './VoterIntelligencePage';
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
@@ -33,6 +33,9 @@ describe('Voter Intelligence page', () => {
     expect(t).toContain('Coalition arithmetic');
     expect(t).toContain('What this instrument does not have');
     expect(t).toContain('Safe: 10');
+    expect(t).toContain('Proportional ballot');
+    expect(t).toContain('22 822');
+    expect(t).toContain('Turnout by ward');
     expect(el.querySelectorAll('select')[0].options.length).toBe(213);
   });
   it('switches council: another council reads its own result', async () => {
