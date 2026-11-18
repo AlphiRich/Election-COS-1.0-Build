@@ -224,7 +224,8 @@ export function residencyDisclosure(meta: LegalDocumentMeta): PrintDocument {
       text:
         'The platform runs on Google Cloud Platform (Firebase). No other processor receives campaign data. ' +
         'There is no analytics vendor, no advertising identifier, and no third-party data enrichment in this ' +
-        'product.',
+        'product. The platform counts how many times each screen is opened, per subscriber per day, on its own ' +
+        'servers; the count carries no user, device or address and sets no cookie.',
     },
 
     heading('What separates one subscriber from another'),
