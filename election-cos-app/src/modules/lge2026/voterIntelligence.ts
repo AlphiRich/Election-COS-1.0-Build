@@ -19,7 +19,7 @@
  * A figure is either computed here from the Commission's results or absent.
  */
 import { council, loadProvince, majorityOf, type CouncilSeats } from './nationalResults';
-import { INDEPENDENT, partyLabel } from './councilResults';
+import { INDEPENDENT, partyId, partyLabel } from './councilResults';
 
 export type WardTier = 'Safe' | 'Comfortable' | 'Marginal' | 'Contested';
 export interface WardLine {
@@ -51,6 +51,10 @@ export interface VoterIntelligence {
   wardsLedBy: Array<{ party: string; wards: number }>;
   competitive: { wards: number[]; electorateShare: number };
   iecStatus: CouncilSeats['iec'];
+  /** Proportional ballot: each party's votes, share of valid PR votes, and seats held (0 if it won none). */
+  prShares: Array<{ party: string; votes: number; share: number; seats: number }>;
+  /** Ward-ballot turnout (cast / registered), five highest and five lowest wards. */
+  turnoutWards: { highest: Array<{ ward: number; turnout: number }>; lowest: Array<{ ward: number; turnout: number }> };
   source: string;
   /** Where the ward figures were read from: the election database, or the results bundled with the app. */
   wardData: 'database' | 'bundled';
@@ -61,10 +65,16 @@ export interface WardRow {
   wardNumber: number;
   registered: number;
   valid: number;
+  spoilt: number;
   parties: ReadonlyArray<readonly [string, number]>;
 }
-/** Supplies a council's wards from the database, or null to use the bundled results. */
-export type WardSource = (code: string) => Promise<WardRow[] | null>;
+/** A council as the database holds it: its wards, and its proportional-ballot votes by party. */
+export interface CouncilData {
+  wards: WardRow[];
+  pr: ReadonlyArray<readonly [string, number]>;
+}
+/** Supplies a council from the database, or null to use the bundled results. */
+export type CouncilSource = (code: string) => Promise<CouncilData | null>;
 
 /** The instrument's tiers, by the leader's share of the ward's valid votes. */
 export const tierOf = (share: number): WardTier => (share > 60 ? 'Safe' : share > 50 ? 'Comfortable' : share >= 40 ? 'Marginal' : 'Contested');
@@ -88,25 +98,26 @@ export function minimalCoalitions(holders: Array<{ name: string; seats: number }
   return out.sort((a, b) => a.parties.length - b.parties.length || a.surplus - b.surplus || a.parties.join().localeCompare(b.parties.join())).slice(0, limit);
 }
 
-export async function voterIntelligence(code: string, wardSource?: WardSource): Promise<VoterIntelligence> {
+export async function voterIntelligence(code: string, source?: CouncilSource): Promise<VoterIntelligence> {
   const seats = council(code);
   // The database is used only if it returns exactly the council's wards, each with votes. Anything else (a partial load, an
   // older delimitation) falls back to the bundled results instead of drawing a wrong map.
-  let rows: WardRow[] | null = null;
+  let data: CouncilData | null = null;
   let wardData: VoterIntelligence['wardData'] = 'database';
   try {
-    rows = (await wardSource?.(code)) ?? null;
+    data = (await source?.(code)) ?? null;
   } catch {
-    rows = null;
+    data = null;
   }
-  if (rows && (rows.length !== seats.wards || rows.some((r) => !r.parties.length))) rows = null;
-  if (!rows) {
+  if (data && (data.wards.length !== seats.wards || data.wards.some((r) => !r.parties.length) || !data.pr.length)) data = null;
+  if (!data) {
     wardData = 'bundled';
     const province = await loadProvince(seats.province);
     const full = province.municipalities[code];
     if (!full) throw new Error(`${code} is in the seat table but not in the ${seats.province} results file.`);
-    rows = full.wardResults;
+    data = { wards: full.wardResults, pr: full.parties.pr };
   }
+  const rows = data.wards;
 
   const wards: WardLine[] = rows.map((w) => {
     const sorted = [...w.parties].sort((a, b) => b[1] - a[1]);
@@ -141,6 +152,15 @@ export async function voterIntelligence(code: string, wardSource?: WardSource): 
     tierCounts,
     wardsLedBy: [...ledBy].map(([party, n]) => ({ party, wards: n })).sort((a, b) => b.wards - a.wards || a.party.localeCompare(b.party)),
     competitive: { wards: competitiveWards.map((w) => w.ward), electorateShare: registeredAll ? (competitiveWards.reduce((s, w) => s + w.registered, 0) / registeredAll) * 100 : 0 },
+    prShares: (() => {
+      const total = data.pr.reduce((t, [, v]) => t + v, 0);
+      const held = new Map(seats.holders.map((h) => [h.id, h.seats]));
+      return [...data.pr].sort((a, b) => b[1] - a[1]).map(([party, votes]) => ({ party, votes, share: total ? (votes / total) * 100 : 0, seats: held.get(partyId(party)) ?? 0 }));
+    })(),
+    turnoutWards: (() => {
+      const t = rows.filter((w) => w.registered > 0).map((w) => ({ ward: w.wardNumber, turnout: ((w.valid + w.spoilt) / w.registered) * 100 })).sort((a, b) => b.turnout - a.turnout || a.ward - b.ward);
+      return { highest: t.slice(0, 5), lowest: t.slice(-5).reverse() };
+    })(),
     iecStatus: seats.iec,
     wardData,
     source: `Electoral Commission LGE 2026 certified results (EEID1887); seats by Schedule 1, ${seats.iec} against the Commission's Seat Calculation Detail`,

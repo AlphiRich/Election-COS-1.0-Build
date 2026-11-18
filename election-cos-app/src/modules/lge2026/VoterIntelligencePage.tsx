@@ -10,16 +10,22 @@ import { Link } from 'react-router-dom';
 import { BasisNote, Card, Field, PageHeader, Pill, SectionLabel, StatTile, Table, Td, Th } from '@/components/ui';
 import { COUNCIL_CODES, NATIONAL_SEATS, PROVINCES } from './nationalResults';
 import { partyLabel } from './councilResults';
-import { fetchCouncilWards } from '@/dal/adapters/firestore/electionData';
-import { voterIntelligence, partyName, type VoterIntelligence, type WardSource, type WardTier } from './voterIntelligence';
+import { fetchCouncil } from '@/dal/adapters/firestore/electionData';
+import { voterIntelligence, partyName, type VoterIntelligence, type CouncilSource, type WardTier } from './voterIntelligence';
 
 const n = (v: number) => v.toLocaleString('en-ZA');
 const p1 = (v: number) => v.toFixed(1);
 const TIER_NOTE: Record<WardTier, string> = { Safe: 'leader above 60%', Comfortable: '50 to 60%', Marginal: '40 to 50%', Contested: 'leader below 40%' };
 
-/** Ward figures from the election database when it answers; the bundled results otherwise. */
-const databaseWards: WardSource = async (c) =>
-  (await fetchCouncilWards(c))?.map((w) => ({ wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, parties: w.parties.map((x) => [x.party, x.votes] as const) })) ?? null;
+/** The council from the election database when it answers; the bundled results otherwise. */
+const databaseCouncil: CouncilSource = async (c) => {
+  const d = await fetchCouncil(c);
+  if (!d) return null;
+  return {
+    wards: d.wards.map((w) => ({ wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, spoilt: w.spoilt, parties: w.parties.map((x) => [x.party, x.votes] as const) })),
+    pr: d.pr.map((x) => [x.party, x.votes] as const),
+  };
+};
 
 export function VoterIntelligencePage() {
   const [code, setCode] = useState('NW405');
@@ -29,7 +35,7 @@ export function VoterIntelligencePage() {
     let live = true;
     setVi(null);
     setError(null);
-    voterIntelligence(code, databaseWards).then((v) => live && setVi(v), (e: Error) => live && setError(e.message));
+    voterIntelligence(code, databaseCouncil).then((v) => live && setVi(v), (e: Error) => live && setError(e.message));
     return () => {
       live = false;
     };
@@ -110,6 +116,19 @@ export function VoterIntelligencePage() {
           )}
 
           <Card>
+            <SectionLabel as="h2">Proportional ballot</SectionLabel>
+            <Table caption={`Votes on the proportional (party) ballot in ${vi.name}, with the seats each party holds.`}>
+              <thead><tr><Th>Party</Th><Th numeric>Votes</Th><Th numeric>Share</Th><Th numeric>Seats held</Th></tr></thead>
+              <tbody>
+                {vi.prShares.slice(0, 12).map((r) => (
+                  <tr key={r.party}><Td>{partyName(r.party)}</Td><Td numeric>{n(r.votes)}</Td><Td numeric>{p1(r.share)}%</Td><Td numeric>{r.seats}</Td></tr>
+                ))}
+              </tbody>
+            </Table>
+            <BasisNote>{vi.prShares.length > 12 ? `The ${vi.prShares.length - 12} smallest parties are left out of this table. ` : ''}Seats held include ward seats, so a party can hold seats beyond its share of this ballot.</BasisNote>
+          </Card>
+
+          <Card>
             <SectionLabel as="h2">The ward map in numbers</SectionLabel>
             <div className="mt-2 flex flex-wrap gap-2">
               {(Object.keys(vi.tierCounts) as WardTier[]).map((t) => (
@@ -133,6 +152,19 @@ export function VoterIntelligencePage() {
                 ))}
               </tbody>
             </Table>
+          </Card>
+
+          <Card>
+            <SectionLabel as="h2">Turnout by ward</SectionLabel>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {([['Highest', vi.turnoutWards.highest], ['Lowest', vi.turnoutWards.lowest]] as const).map(([label, rows]) => (
+                <Table key={label} caption={`${label} ward-ballot turnout, ${vi.name}.`}>
+                  <thead><tr><Th numeric>Ward</Th><Th numeric>{label} turnout</Th></tr></thead>
+                  <tbody>{rows.map((r) => <tr key={r.ward}><Td numeric mono>{r.ward}</Td><Td numeric>{p1(r.turnout)}%</Td></tr>)}</tbody>
+                </Table>
+              ))}
+            </div>
+            <BasisNote>Ballots cast (valid and spoilt) on the ward ballot, over the ward&rsquo;s registered voters. Turnout is measured on one ballot, never on the two added together.</BasisNote>
           </Card>
 
           <Card>

@@ -68,17 +68,21 @@ describe('ward figures from the election database', () => {
   const bundled = async () => voterIntelligence('NW405');
   const asRows = async () => {
     const province = await (await import('./nationalResults')).loadProvince('NW');
-    return province.municipalities.NW405.wardResults.map((w) => ({ wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, parties: w.parties }));
+    const c = province.municipalities.NW405;
+    return {
+      wards: c.wardResults.map((w) => ({ wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, spoilt: w.spoilt, parties: w.parties })),
+      pr: c.parties.pr,
+    };
   };
   it('uses the database rows when they cover every ward, and gives the same map as the bundled results', async () => {
-    const rows = await asRows();
-    const fromDb = await voterIntelligence('NW405', async () => rows);
+    const data = await asRows();
+    const fromDb = await voterIntelligence('NW405', async () => data);
     expect(fromDb.wardData).toBe('database');
     expect(fromDb.wards).toEqual((await bundled()).wards);
   });
   it('falls back to the bundled results when the database has nothing, a partial load, empty wards, or fails', async () => {
-    const rows = await asRows();
-    for (const src of [async () => null, async () => rows.slice(1), async () => rows.map((r, i) => (i ? r : { ...r, parties: [] })), async () => { throw new Error('offline'); }]) {
+    const d = await asRows();
+    for (const src of [async () => null, async () => ({ ...d, wards: d.wards.slice(1) }), async () => ({ ...d, wards: d.wards.map((r, i) => (i ? r : { ...r, parties: [] })) }), async () => ({ ...d, pr: [] }), async () => { throw new Error('offline'); }]) {
       const v = await voterIntelligence('NW405', src);
       expect(v.wardData).toBe('bundled');
       expect(v.wards).toHaveLength(34);
@@ -99,14 +103,41 @@ describe('the stored form of every council gives the same instrument as the bund
       for (const [code, c] of Object.entries(file.municipalities)) {
         if (!NATIONAL_SEATS.councils[code]) continue;
         const { wards } = councilDocs('EEID1887', prov, code, c);
-        const stored = async () => wards.map((w) => ({ wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, parties: w.parties.map((x) => [x.party, x.votes] as const) }));
+        const { council } = councilDocs('EEID1887', prov, code, c);
+        const stored = async () => ({
+          wards: wards.map((w) => ({ wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, spoilt: w.spoilt, parties: w.parties.map((x) => [x.party, x.votes] as const) })),
+          pr: council.parties.pr.map((x) => [x.party, x.votes] as const),
+        });
         const a = await voterIntelligence(code, stored);
         const b = await voterIntelligence(code);
         expect(a.wardData, code).toBe('database');
         expect(a.wards, code).toEqual(b.wards);
+        expect(a.prShares, code).toEqual(b.prShares);
+        expect(a.turnoutWards, code).toEqual(b.turnoutWards);
         checked++;
       }
     }
     expect(checked).toBe(213);
   }, 120000);
+});
+
+describe('proportional ballot and ward turnout', () => {
+  it('JB Marks: shares come from the certified PR votes, add to 100, and ANC holds its 22 seats', async () => {
+    const v = await voterIntelligence('NW405');
+    expect(v.prShares.reduce((t, r) => t + r.share, 0)).toBeCloseTo(100, 6);
+    expect(v.prShares[0].party).toBe('AFRICAN NATIONAL CONGRESS');
+    expect(v.prShares[0].votes).toBe(22822);
+    expect(v.prShares[0].seats).toBe(22);
+    expect(v.prShares.map((r) => r.votes)).toEqual([...v.prShares.map((r) => r.votes)].sort((a, b) => b - a));
+  });
+  it('turnout is cast over registered per ward, highest and lowest five, in order', async () => {
+    const v = await voterIntelligence('NW405');
+    const { highest, lowest } = v.turnoutWards;
+    expect(highest).toHaveLength(5);
+    expect(lowest).toHaveLength(5);
+    expect(highest[0].turnout).toBeGreaterThanOrEqual(highest[4].turnout);
+    expect(lowest[0].turnout).toBeLessThanOrEqual(lowest[4].turnout);
+    expect(highest[4].turnout).toBeGreaterThanOrEqual(lowest[0].turnout);
+    for (const r of [...highest, ...lowest]) { expect(r.turnout).toBeGreaterThan(0); expect(r.turnout).toBeLessThanOrEqual(100); }
+  });
 });
