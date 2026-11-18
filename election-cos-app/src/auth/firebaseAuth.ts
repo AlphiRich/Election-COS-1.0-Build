@@ -23,7 +23,7 @@
  * src/auth/types.ts StaffProfile and src/dal/ports/staff.ts.
  */
 import { getFirebaseAuth } from '@/dal/adapters/firestore/client';
-import { PROVIDER_SCOPES, type ProviderId } from './authProviders';
+import { PROVIDER_SCOPES, isAllowedSignInEmail, signInEmailDomains, type ProviderId } from './authProviders';
 import {
   createUserWithEmailAndPassword,
   FacebookAuthProvider,
@@ -156,8 +156,20 @@ export async function signInWithProvider(id: ProviderId): Promise<User> {
  */
 const EMAIL_KEY = 'ecos.emailForSignIn';
 
+export class SignInDomainError extends Error {
+  constructor(domains: string[]) {
+    super(
+      `Sign-in by email link is for ${domains.map((d) => '@' + d).join(' and ')} addresses only. ` +
+        'Use your organisation email, or ask your administrator for access.',
+    );
+    this.name = 'SignInDomainError';
+  }
+}
+
 export async function sendEmailLink(email: string): Promise<void> {
   assertMinimalAuthPayload({ email });
+  const domains = signInEmailDomains(import.meta.env.VITE_SIGNIN_EMAIL_DOMAINS as string | undefined);
+  if (!isAllowedSignInEmail(email, domains)) throw new SignInDomainError(domains);
   await sendSignInLinkToEmail(getFirebaseAuth(), email, {
     url: `${window.location.origin}/`,
     handleCodeInApp: true,

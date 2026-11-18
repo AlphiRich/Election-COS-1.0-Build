@@ -37,6 +37,7 @@ import {
 import {
   PROVIDER_LABEL,
   emailLinkEnabled,
+  signInEmailDomains,
   enabledProviders,
   signInErrorMessage,
   type ProviderId,
@@ -49,6 +50,7 @@ import { BrandMark } from '@/components/BrandMark';
 
 const PROVIDERS = enabledProviders(import.meta.env.VITE_AUTH_PROVIDERS as string | undefined);
 const EMAIL_LINK = emailLinkEnabled(import.meta.env.VITE_AUTH_EMAIL_LINK as string | undefined);
+const SIGNIN_DOMAINS = signInEmailDomains(import.meta.env.VITE_SIGNIN_EMAIL_DOMAINS as string | undefined);
 
 export function SignInPage() {
   const [pending, setPending] = useState(false);
@@ -172,6 +174,12 @@ export function SignInPage() {
                     />
                   )}
                 </Field>
+                {!returning && (
+                  <p className="text-body-md font-body text-slate">
+                    For {SIGNIN_DOMAINS.map((d) => `@${d}`).join(' and ')} addresses. You sign in by opening the
+                    link we email you — no password.
+                  </p>
+                )}
                 <Button
                   variant="secondary"
                   className="w-full"
