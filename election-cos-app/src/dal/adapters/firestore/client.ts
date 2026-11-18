@@ -76,6 +76,11 @@ function readConfig() {
   return { config, isConfigured };
 }
 
+/** Whether this build carries a Firebase web config. The public site checks it before offering voter accounts. */
+export function firebaseConfigured(): boolean {
+  return readConfig().isConfigured;
+}
+
 let app: FirebaseApp | null = null;
 
 function getFirebaseApp(): FirebaseApp {
