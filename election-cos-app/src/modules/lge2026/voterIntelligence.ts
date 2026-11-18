@@ -15,7 +15,8 @@
  *  - Demographics (race, age, gender): not in this build, and the supplied estimates had no stated source.
  *  - "Psychographic voter segments": not derivable from results, and race-linked profiling of voters is the kind of
  *    thing POPIA treats as special personal information. Omitted rather than guessed.
- *  - Special-vote counts and any trend before 2021: not ingested.
+ *  - Special-vote counts: not ingested. Trends before 2021: only JB Marks (NW405) has its 2016 council, from the
+ *    Commission's 2016 results (`modules/analytics/seatHistory.ts`); no other council has a result before 2021 here.
  * A figure is either computed here from the Commission's results or absent.
  */
 import { council, loadProvince, majorityOf, type CouncilSeats } from './nationalResults';
