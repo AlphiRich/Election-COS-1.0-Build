@@ -48,6 +48,7 @@ import { IncidentReportPage } from '@/modules/incidents/report/IncidentReportPag
 import { GatheringsAdvisoryPage } from '@/modules/knowledge/GatheringsAdvisoryPage';
 import { RollFieldPage } from '@/modules/roll/RollFieldPage';
 import { RollSegmentationPage } from '@/modules/roll/RollSegmentationPage';
+import { RollEditionsPage } from '@/modules/roll/RollEditionsPage';
 import { ElectionTimetablePage } from '@/modules/knowledge/ElectionTimetablePage';
 
 export const router = createBrowserRouter([
@@ -103,6 +104,7 @@ export const router = createBrowserRouter([
           { path: 'data-requests', element: <DataSubjectRequestsPage /> },
           { path: 'candidates', element: <CandidatesPage /> },
           { path: 'subscription', element: <SubscriptionPage /> },
+          { path: 'roll-editions', element: <RollEditionsPage /> },
           { path: 'audit', element: <AuditLogPage /> },
         ],
       },

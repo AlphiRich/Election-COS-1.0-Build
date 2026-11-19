@@ -41,6 +41,7 @@ export const SEED_ROLES: Record<string, SeedRole> = {
       'dsr.manage',
       'roll.view',
       'roll.segment',
+      'roll.manage',
     ],
   },
   'municipal-team-lead': {

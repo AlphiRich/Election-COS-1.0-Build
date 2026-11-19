@@ -55,9 +55,27 @@ export interface UsageEvent {
   at: string;
 }
 
+/** A loaded (or loading) roll edition, from `roll_meta/{edition}`. Not the `active` pointer. */
+export interface RollEditionMeta {
+  edition: string;
+  status: 'LOADING' | 'LOADED' | 'FAILED';
+  entries: number;
+  addresses: number;
+  loadedAt: string | null;
+  note?: string;
+}
+
 export interface RollRepository {
   /** The edition devices may use, or null before any roll has been loaded. */
   activeEdition(ctx: SessionContext): Promise<string | null>;
+  /** Every roll edition's metadata (status, counts) — not the `active` pointer. For the admin edition screen. */
+  listEditions(ctx: SessionContext): Promise<RollEditionMeta[]>;
+  /**
+   * Make a loaded edition the live one (moves `roll_meta/active`). Goes through the
+   * `setActiveRollEdition` callable — roll_meta is client-write-forbidden, so the server
+   * re-checks `roll.manage` and the second factor and writes with the admin SDK.
+   */
+  setActiveEdition(ctx: SessionContext, edition: string): Promise<{ edition: string }>;
   /** Distinct addresses in the caller's own district (ward + VD), edition-filtered. */
   listAddresses(ctx: SessionContext, edition: string): Promise<RollAddress[]>;
   /** The people the roll lists at one address. */

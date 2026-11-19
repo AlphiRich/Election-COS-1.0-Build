@@ -63,7 +63,12 @@ export type Capability =
   // distributions with small cells suppressed — never an individual's
   // name, masked ID or isolated address. It is deliberately NOT a door
   // tool; a ward/VD canvasser uses the field screen, not this.
-  | 'roll.segment';
+  | 'roll.segment'
+  // `roll.manage` administers which roll edition is live: it sets the
+  // `roll_meta/active` pointer (via an admin-SDK callable, never a client
+  // write) to an edition the server-side ingest has fully loaded. It does
+  // NOT load or edit roll records — that is the ingest's job. HQ Admin only.
+  | 'roll.manage';
 
 export type GeoScope = 'TENANT' | 'MUNICIPALITY' | 'WARD' | 'VD';
 

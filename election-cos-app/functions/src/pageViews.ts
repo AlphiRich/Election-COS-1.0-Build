@@ -72,6 +72,7 @@ export const PAGE_VIEW_ROUTES: readonly string[] = [
   '/settings/data-requests',
   '/settings/candidates',
   '/settings/subscription',
+  '/settings/roll-editions',
   '/settings/audit',
   '/knowledge/gatherings-advisory',
   '/knowledge/election-timetable',
