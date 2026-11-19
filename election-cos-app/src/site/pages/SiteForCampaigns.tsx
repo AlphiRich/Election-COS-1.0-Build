@@ -235,6 +235,12 @@ export function SiteForCampaigns() {
         <a href={whatsAppHref('Casework Tracker enquiry')} className="site-btn-primary">
           Talk to Us
         </a>
+        <Link to="/packages" className="site-btn-outline-paper">
+          See Packages
+        </Link>
+        <Link to="/book-a-demo" className="site-btn-outline-paper">
+          Book a Demo
+        </Link>
       </CtaBand>
     </>
   );
