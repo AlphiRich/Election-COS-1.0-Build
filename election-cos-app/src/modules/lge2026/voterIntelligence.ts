@@ -25,6 +25,8 @@ import { INDEPENDENT, partyId, partyLabel } from './councilResults';
 export type WardTier = 'Safe' | 'Comfortable' | 'Marginal' | 'Contested';
 export interface WardLine {
   ward: number;
+  /** The 8-digit MDB ward code (e.g. 64005001) — the join key to the ward-boundary map tile. */
+  wardId: string;
   leader: string;
   leaderShare: number;
   runnerUp: string | null;
@@ -64,6 +66,8 @@ export interface VoterIntelligence {
 /** One ward's figures, as either source supplies them. */
 export interface WardRow {
   wardNumber: number;
+  /** The 8-digit MDB ward code (e.g. 64005001). */
+  wardId: string;
   registered: number;
   valid: number;
   spoilt: number;
@@ -126,7 +130,7 @@ export async function voterIntelligence(code: string, source?: CouncilSource): P
     const total = w.valid || sorted.reduce((s, [, v]) => s + v, 0);
     const share = first ? (first[1] / total) * 100 : 0;
     const margin = first ? ((first[1] - (second?.[1] ?? 0)) / total) * 100 : 0;
-    return { ward: w.wardNumber, leader: first ? first[0] : '—', leaderShare: share, runnerUp: second ? second[0] : null, margin, tier: tierOf(share), registered: w.registered, valid: w.valid };
+    return { ward: w.wardNumber, wardId: w.wardId, leader: first ? first[0] : '—', leaderShare: share, runnerUp: second ? second[0] : null, margin, tier: tierOf(share), registered: w.registered, valid: w.valid };
   }).sort((a, b) => a.ward - b.ward);
 
   const tierCounts: Record<WardTier, number> = { Safe: 0, Comfortable: 0, Marginal: 0, Contested: 0 };

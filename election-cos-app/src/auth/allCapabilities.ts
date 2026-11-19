@@ -39,6 +39,8 @@ const CAP_SET: Record<Capability, true> = {
   'dsr.manage': true,
   'roll.view': true,
   'roll.capture': true,
+  'roll.segment': true,
+  'roll.manage': true,
 };
 
 export const ALL_CAPABILITIES: Capability[] = Object.keys(CAP_SET) as Capability[];
