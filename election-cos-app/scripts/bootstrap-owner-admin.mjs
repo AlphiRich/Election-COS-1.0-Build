@@ -66,7 +66,11 @@ const HQ_ADMIN_CAPS = [
 ];
 
 const token = execSync('gcloud auth print-access-token', { encoding: 'utf8' }).trim();
-const auth = { authorization: `Bearer ${token}` };
+// x-goog-user-project routes the call to this project for billing/quota and
+// enablement. User credentials (gcloud print-access-token) set no quota project
+// by default, and identitytoolkit.googleapis.com refuses without one — a 403
+// "requires a quota project" (and SERVICE_DISABLED against the wrong project).
+const auth = { authorization: `Bearer ${token}`, 'x-goog-user-project': PROJECT };
 const DOCS = `https://firestore.googleapis.com/v1/projects/${PROJECT}/databases/(default)/documents`;
 
 // ---- minimal Firestore typed-value encoding (same shape as the Worker) ----
