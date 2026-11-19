@@ -50,6 +50,7 @@ import { RollFieldPage } from '@/modules/roll/RollFieldPage';
 import { RollSegmentationPage } from '@/modules/roll/RollSegmentationPage';
 import { RollEditionsPage } from '@/modules/roll/RollEditionsPage';
 import { ElectionTimetablePage } from '@/modules/knowledge/ElectionTimetablePage';
+import { CouncillorsAndElectoralLawPage } from '@/modules/knowledge/CouncillorsAndElectoralLawPage';
 
 export const router = createBrowserRouter([
   {
@@ -110,6 +111,7 @@ export const router = createBrowserRouter([
       },
       { path: 'knowledge/gatherings-advisory', element: <GatheringsAdvisoryPage /> },
       { path: 'knowledge/election-timetable', element: <ElectionTimetablePage /> },
+      { path: 'knowledge/councillors-and-electoral-law', element: <CouncillorsAndElectoralLawPage /> },
     ],
   },
 ]);

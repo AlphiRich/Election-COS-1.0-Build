@@ -76,6 +76,7 @@ export const PAGE_VIEW_ROUTES: readonly string[] = [
   '/settings/audit',
   '/knowledge/gatherings-advisory',
   '/knowledge/election-timetable',
+  '/knowledge/councillors-and-electoral-law',
 ];
 
 const KNOWN = new Set(PAGE_VIEW_ROUTES);

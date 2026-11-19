@@ -48,6 +48,12 @@ const SUB_VIEWS = [
     description: 'One party’s candidates against its result in one municipality, checked against the Commission’s list.',
   },
   {
+    to: '/knowledge/councillors-and-electoral-law',
+    label: 'Councillors & Electoral Law',
+    description:
+      'How a council is made up, how its seats are allocated, how long it sits, and the Code of Conduct councillors are bound by — anchored to the Acts.',
+  },
+  {
     to: '/analytics/hub',
     label: 'Master Hub',
     description: 'Marketing, assets, agents, reference data and the registry in one place.',
