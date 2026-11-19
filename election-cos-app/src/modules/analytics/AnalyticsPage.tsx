@@ -27,6 +27,12 @@ const SUB_VIEWS = [
       'Quota, seats and ward-size band recomputed from sourced figures, field roll usage, and what a supplied dashboard claimed, checked.',
   },
   {
+    to: '/analytics/roll-segmentation',
+    label: 'Roll Segmentation',
+    description:
+      'Your own voters’ roll as an aggregate — voters by ward, voting district and address density — for tenant and municipality leads. Counts only, no individual record.',
+  },
+  {
     to: '/analytics/voter-intelligence',
     label: 'Voter Intelligence',
     description: 'Seats, coalition arithmetic and the ward map for any of the 213 councils, from the certified 2026 results.',

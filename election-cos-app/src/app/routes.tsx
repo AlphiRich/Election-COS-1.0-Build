@@ -47,6 +47,7 @@ import { AuditLogPage } from '@/modules/settings/AuditLogPage';
 import { IncidentReportPage } from '@/modules/incidents/report/IncidentReportPage';
 import { GatheringsAdvisoryPage } from '@/modules/knowledge/GatheringsAdvisoryPage';
 import { RollFieldPage } from '@/modules/roll/RollFieldPage';
+import { RollSegmentationPage } from '@/modules/roll/RollSegmentationPage';
 import { ElectionTimetablePage } from '@/modules/knowledge/ElectionTimetablePage';
 
 export const router = createBrowserRouter([
@@ -89,6 +90,7 @@ export const router = createBrowserRouter([
           { path: 'vd-locator', element: <VdLocatorPage /> },
           { path: 'voter-statistics', element: <VoterStatisticsPage /> },
           { path: 'build-review', element: <BuildReviewPage /> },
+          { path: 'roll-segmentation', element: <RollSegmentationPage /> },
         ],
       },
       {

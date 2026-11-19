@@ -55,7 +55,15 @@ export type Capability =
   // statistics; `roll.capture` records a verification and, with the
   // voter's consent, creates the voter record.
   | 'roll.view'
-  | 'roll.capture';
+  | 'roll.capture'
+  // `roll.segment` is the enterprise/tenant-grade aggregate view: the roll
+  // summarised by ward, voting district and address density, for a
+  // TENANT- or MUNICIPALITY-scoped planner. It reads the SAME in-scope
+  // addresses `roll.view` already allows and returns only counts and
+  // distributions with small cells suppressed — never an individual's
+  // name, masked ID or isolated address. It is deliberately NOT a door
+  // tool; a ward/VD canvasser uses the field screen, not this.
+  | 'roll.segment';
 
 export type GeoScope = 'TENANT' | 'MUNICIPALITY' | 'WARD' | 'VD';
 

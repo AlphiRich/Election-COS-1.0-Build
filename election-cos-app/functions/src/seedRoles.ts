@@ -40,6 +40,7 @@ export const SEED_ROLES: Record<string, SeedRole> = {
       'dsr.view',
       'dsr.manage',
       'roll.view',
+      'roll.segment',
     ],
   },
   'municipal-team-lead': {
@@ -57,6 +58,7 @@ export const SEED_ROLES: Record<string, SeedRole> = {
       'logistics.edit',
       'analytics.view',
       'roll.view',
+      'roll.segment',
     ],
   },
   'ward-lead': {

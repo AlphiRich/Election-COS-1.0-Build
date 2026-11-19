@@ -64,6 +64,7 @@ export const PAGE_VIEW_ROUTES: readonly string[] = [
   '/analytics/vd-locator',
   '/analytics/voter-statistics',
   '/analytics/build-review',
+  '/analytics/roll-segmentation',
   '/settings',
   '/settings/municipality',
   '/settings/permissions',
