@@ -41,6 +41,7 @@ import { Button, Card, DataLine, SectionLabel } from '@/components/ui';
 import { SyncStatus } from './SyncStatus';
 import { BrandMark } from '@/components/BrandMark';
 import { PRIMARY_NAV, navItemAccess } from './nav';
+import { usePageViews } from './pageViews';
 
 export function Shell() {
   const { session, status, user } = useAuthState();
@@ -57,6 +58,9 @@ export function Shell() {
     enabled: Boolean(session),
   });
   const location = useLocation();
+  // Cookieless screen counts (src/app/pageViews.ts). Only once the person is fully signed in:
+  // the sign-in and second-factor screens are not counted.
+  usePageViews(status === 'signed-in' && session && secondFactorSatisfied(session) ? session : null);
 
   // Navigating must close the drawer, or the user taps a link and stares
   // at the menu they just used.

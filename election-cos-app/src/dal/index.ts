@@ -38,6 +38,7 @@ import { entitlementsRepository } from './adapters/firestore/entitlementsReposit
 import { gatheringsRepository } from './adapters/firestore/gatheringsRepository';
 import { rollRepository } from './adapters/firestore/rollRepository';
 import { connectivityProbe } from './adapters/firestore/connectivityProbe';
+import { pageViewsRepository } from './adapters/firestore/pageViewsRepository';
 
 const adapter = (import.meta.env.VITE_DAL_ADAPTER as string | undefined) ?? 'firestore';
 
@@ -91,6 +92,8 @@ export const dal = {
   // SDK, so this is the seam it reaches the link state through.
   gatherings: gatheringsRepository,
   connectivity: connectivityProbe,
+  // Cookieless usage counts per screen; write-only from the browser. See src/dal/ports/pageViews.ts.
+  pageViews: pageViewsRepository,
 };
 
 export type { SessionContext, GeoScope, Page, PageRequest } from './ports/session';
