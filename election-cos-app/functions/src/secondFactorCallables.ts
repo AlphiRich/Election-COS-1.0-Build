@@ -31,6 +31,12 @@ import {
   type SecondFactorStore,
   type SmsSender,
 } from './secondFactor';
+import {
+  WHATSAPP_API_TOKEN,
+  WHATSAPP_COST_CENTS_PER_MESSAGE,
+  WHATSAPP_PHONE_NUMBER_ID,
+} from './membershipOtpDelivery';
+import { whatsAppConfigured, whatsAppSecondFactorSender } from './secondFactorWhatsApp';
 
 if (!getApps().length) initializeApp();
 
@@ -89,13 +95,20 @@ export function whoFrom(request: CallableRequest): { uid: string; tenantId: stri
   return { uid: request.auth.uid, tenantId: t.tenantId, roleId: t.roleId };
 }
 
-export const requestSecondFactorCode = onCall({ region: REGION }, async (request) => {
+export const requestSecondFactorCode = onCall(
+  { region: REGION, secrets: [WHATSAPP_API_TOKEN, WHATSAPP_PHONE_NUMBER_ID] },
+  async (request) => {
   const who = whoFrom(request);
   // A canvasser never needs a code, so never spends a reservation on one.
   if (!requiresSecondFactor(who.roleId)) return { notRequired: true };
+  // Channel: WhatsApp when its credential is present (the owner's "same number"
+  // choice), otherwise the SMS seam — which has no provider, so it fails closed.
+  const viaWhatsApp = whatsAppConfigured();
+  const unitCost = viaWhatsApp ? WHATSAPP_COST_CENTS_PER_MESSAGE.value() : SMS_COST_CENTS_PER_MESSAGE.value();
+  const sender: SmsSender = viaWhatsApp ? whatsAppSecondFactorSender : unconfiguredSms;
   // Paid action: reserve before sending (costGuard.ts). Unset price or a reached ceiling stops it.
   try {
-    await reserveSpend(firestoreSpendStore(), parseUnitCost(SMS_COST_CENTS_PER_MESSAGE.value()), new Date());
+    await reserveSpend(firestoreSpendStore(), parseUnitCost(unitCost), new Date());
   } catch (error) {
     if (error instanceof CostGuardError) {
       logger.warn('requestSecondFactorCode: refused by cost guard', { code: error.code });
@@ -103,7 +116,7 @@ export const requestSecondFactorCode = onCall({ region: REGION }, async (request
     }
     throw error;
   }
-  const result = await requestSecondFactor(deps(), who);
+  const result = await requestSecondFactor(deps(sender), who);
   switch (result.kind) {
     case 'SENT':
       return { challengeId: result.challengeId, phoneMasked: result.phoneMasked, expiresAt: result.expiresAt };
