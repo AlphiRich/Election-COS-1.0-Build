@@ -298,6 +298,37 @@ export function segmentCoverage(seg: RollSegmentation, usage: UsageSummary): Cov
 }
 
 /**
+ * WHERE TO WORK NEXT — the deployment ranking.
+ *
+ * Coverage says how much of each ward is done; this turns that into an
+ * order. A ward's UNWORKED roll is its registered voters not yet
+ * doorstep-verified — `rollVoters × (1 − verified share)`. Ranked biggest
+ * first, it points a planner at the wards where the most unworked roll
+ * still sits, rather than at whichever ward is simply largest or simply
+ * least-covered. Reportable wards only, so suppression carries through.
+ */
+export interface WardPriority {
+  wardCode: string;
+  rollVoters: number;
+  verifiedPct: number;
+  /** Registered voters in the ward not yet verified: rollVoters − verified, floored at 0. */
+  unworkedVoters: number;
+  /** 1-based position in the deployment order. */
+  rank: number;
+}
+
+export function deploymentPriority(coverage: CoverageRow[]): WardPriority[] {
+  const rows = coverage.map((c) => ({
+    wardCode: c.wardCode,
+    rollVoters: c.rollVoters,
+    verifiedPct: c.verifiedPct,
+    unworkedVoters: Math.max(0, c.rollVoters - c.verified),
+  }));
+  rows.sort((a, b) => b.unworkedVoters - a.unworkedVoters || a.wardCode.localeCompare(b.wardCode));
+  return rows.map((r, i) => ({ ...r, rank: i + 1 }));
+}
+
+/**
  * The aggregate as a formula-safe CSV: ward rows, VD rows, the density
  * bands, and — when supplied — the per-ward coverage. No individual record
  * is ever written, only counts, so the export carries no personal data.

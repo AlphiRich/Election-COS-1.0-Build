@@ -3438,3 +3438,11 @@ The segmentation answered "where are the voters"; the planner's next question is
 - **`segmentationCsv(seg, coverage?)`** appends a Coverage section only when rows are supplied; still formula-safe, still counts only.
 - **`RollSegmentationPage`** gains a "Canvass Coverage" card (per-ward roll voters, verified, captured, and both percentages) and loads `usageEvents` in scope; the CSV export now carries coverage too.
 - No new data source, no new PII: coverage is the roll's own per-ward totals against the tenant's own field tallies, both already in scope.
+
+## Session 51 (cont.) — segmentation: "where to work next"
+
+Coverage says how much of each ward is done; this ranks what to do about it.
+
+- **`deploymentPriority(coverage)`** (pure; 2 tests) ranks reportable wards by **unworked roll** — `rollVoters − verified`, floored at 0 — biggest first. It points a planner at the ward with the most registered voters still unworked, not merely the largest ward or the least-covered one (a near-complete 5,000-voter ward ranks below a barely-touched 2,000-voter one). A lagging roll edition never yields a negative. Takes the coverage rows (already suppressed), so suppression carries through.
+- **`RollSegmentationPage`** gains a "Where To Work Next" card (top 10 wards: rank, unworked voters, roll voters, verified %), placed first among the detail cards as the actionable summary.
+- No new data: computed from the coverage rows alone. Guard proved by injection on the coverage suppression it inherits.

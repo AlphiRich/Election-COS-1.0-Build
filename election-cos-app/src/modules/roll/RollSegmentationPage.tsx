@@ -19,7 +19,13 @@ import { resolveAccess } from '@/auth/entitlements';
 import { BasisNote, Button, Card, EmptyState, PageHeader, StatTile } from '@/components/ui';
 import { downloadText } from '@/lib/csv';
 import { summariseUsage } from './rollCapture';
-import { SegmentationRefused, segmentCoverage, segmentRollFor, segmentationCsv } from './rollSegmentation';
+import {
+  SegmentationRefused,
+  deploymentPriority,
+  segmentCoverage,
+  segmentRollFor,
+  segmentationCsv,
+} from './rollSegmentation';
 
 export function RollSegmentationPage() {
   const session = useSession();
@@ -60,6 +66,10 @@ export function RollSegmentationPage() {
   const coverage = useMemo(
     () => (result?.seg ? segmentCoverage(result.seg, summariseUsage(usage.data ?? [])) : []),
     [result?.seg, usage.data],
+  );
+  const priority = useMemo(
+    () => (result?.seg ? deploymentPriority(coverage) : []),
+    [result?.seg, coverage],
   );
 
   if (!session) return null;
@@ -132,6 +142,41 @@ export function RollSegmentationPage() {
             <StatTile label="Addresses" value={seg.totals.addresses.toLocaleString('en-ZA')} />
             <StatTile label="Registered Voters" value={seg.totals.voters.toLocaleString('en-ZA')} />
           </div>
+
+          {priority.length > 0 && (
+            <Card>
+              <h2 className="font-display text-headline-md mb-3">Where To Work Next</h2>
+              <p className="font-body text-body-md text-ink/70 mb-2">
+                Wards ranked by <strong>unworked roll</strong> — registered voters not yet
+                doorstep-verified — so the biggest opportunity sits at the top, not merely the
+                biggest or the least-covered ward.
+              </p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-body-md font-body tabular-nums">
+                  <thead>
+                    <tr className="text-left text-ink/60">
+                      <th className="py-1 pr-4">#</th>
+                      <th className="py-1 pr-4">Ward</th>
+                      <th className="py-1 pr-4 text-right">Unworked Voters</th>
+                      <th className="py-1 pr-4 text-right">Roll Voters</th>
+                      <th className="py-1 text-right">Verified %</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {priority.slice(0, 10).map((p) => (
+                      <tr key={p.wardCode} className="border-t border-ink/10">
+                        <td className="py-1 pr-4 text-ink/60">{p.rank}</td>
+                        <td className="py-1 pr-4 font-mono">{p.wardCode}</td>
+                        <td className="py-1 pr-4 text-right">{p.unworkedVoters.toLocaleString('en-ZA')}</td>
+                        <td className="py-1 pr-4 text-right">{p.rollVoters.toLocaleString('en-ZA')}</td>
+                        <td className="py-1 text-right">{p.verifiedPct.toFixed(1)}%</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Card>
+          )}
 
           <Card>
             <h2 className="font-display text-headline-md mb-3">By Ward</h2>

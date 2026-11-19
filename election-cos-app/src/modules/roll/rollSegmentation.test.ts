@@ -6,11 +6,13 @@ import {
   SMALL_CELL,
   SegmentationRefused,
   assertCanSegment,
+  deploymentPriority,
   segmentCoverage,
   segmentRoll,
   segmentRollFor,
   segmentationCsv,
 } from './rollSegmentation';
+import type { CoverageRow } from './rollSegmentation';
 import type { UsageSummary } from './rollCapture';
 
 const EDITION = '2026-11';
@@ -192,6 +194,36 @@ describe('segmentCoverage — how much of each ward is worked', () => {
     const w2 = cov.find((c) => c.wardCode === 'W2')!;
     expect(w2.verifiedPct).toBe(100);
     expect(w2.capturedPct).toBe(100);
+  });
+});
+
+describe('deploymentPriority — where to work next', () => {
+  const cov = (rows: Array<Pick<CoverageRow, 'wardCode' | 'rollVoters' | 'verified'>>): CoverageRow[] =>
+    rows.map((r) => ({
+      ...r,
+      captured: 0,
+      verifiedPct: r.rollVoters ? (r.verified / r.rollVoters) * 100 : 0,
+      capturedPct: 0,
+    }));
+
+  it('ranks by unworked roll, not by size or coverage alone', () => {
+    // W-BIG: huge but mostly done. W-MID: smaller but barely touched.
+    const p = deploymentPriority(
+      cov([
+        { wardCode: 'W-BIG', rollVoters: 5000, verified: 4800 }, // 200 unworked
+        { wardCode: 'W-MID', rollVoters: 2000, verified: 100 }, // 1900 unworked
+        { wardCode: 'W-DONE', rollVoters: 1000, verified: 1000 }, // 0 unworked
+      ]),
+    );
+    expect(p.map((r) => r.wardCode)).toEqual(['W-MID', 'W-BIG', 'W-DONE']);
+    expect(p[0].unworkedVoters).toBe(1900);
+    expect(p[0].rank).toBe(1);
+    expect(p[2].unworkedVoters).toBe(0);
+  });
+
+  it('never shows negative unworked when verified overshoots a lagging roll', () => {
+    const p = deploymentPriority(cov([{ wardCode: 'W1', rollVoters: 100, verified: 150 }]));
+    expect(p[0].unworkedVoters).toBe(0);
   });
 });
 
