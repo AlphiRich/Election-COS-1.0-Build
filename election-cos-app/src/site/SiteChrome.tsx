@@ -57,7 +57,7 @@ export function SiteHeader({ enquirySubject }: { enquirySubject: string }) {
   const here = `${pathname}${hash}`;
 
   return (
-    <header className="bg-ink text-paper">
+    <header className="bg-ink text-paper print:hidden">
       <div className="mx-auto flex max-w-[1200px] flex-wrap items-center gap-x-8 gap-y-4 px-6 py-4">
         <Link to="/" className="flex items-center gap-3 text-paper no-underline">
           <SiteMark size={52} />
@@ -173,7 +173,7 @@ export function SiteFooter({
   adsEnabled: boolean;
 }) {
   return (
-    <footer className="bg-ink text-line text-site-sm">
+    <footer className="bg-ink text-line text-site-sm print:hidden">
       <div className="mx-auto grid max-w-[1200px] grid-cols-[repeat(auto-fit,minmax(min(100%,220px),1fr))] gap-8 px-6 pb-8 pt-14">
         <div className="flex flex-col gap-2">
           <span className="font-site-display text-site-h6 text-paper">

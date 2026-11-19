@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { SURVEY_DISMISS_KEY, rememberDismissal, resolveSurveyUrl, wasDismissed } from './surveyInvite';
+import { SURVEY_DISMISS_KEY, rememberDismissal, resolveSurveyUrl, wasDismissed } from './surveyInviteConfig';
 
 describe('the survey address', () => {
   it('accepts a Google Forms address over https', () => {

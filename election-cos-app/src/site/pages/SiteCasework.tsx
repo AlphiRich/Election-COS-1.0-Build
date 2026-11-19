@@ -13,6 +13,9 @@
 import { Link } from 'react-router-dom';
 import { CASEWORK_FAQ, CASEWORK_FEATURES, CASE_STEPS, EXAMPLE_CASE, VAT_NOTE } from '../siteContent';
 import { CtaBand, Eyebrow, SiteCard, SiteSection } from '../SiteChrome';
+import { answeredQuestions } from '../claimsGate';
+
+const FAQ = answeredQuestions(CASEWORK_FAQ);
 
 function FeatureIcon({ kind }: { kind: 'offline' | 'shield' | 'lock' }) {
   const common = {
@@ -80,7 +83,7 @@ export function SiteCasework() {
             <Link to="/contact" className="site-btn-primary">
               Request a Tracker Call
             </Link>
-            <Link to="/contact" className="site-btn-outline-ink">
+            <Link to="/casework-tracker/brochure" className="site-btn-outline-ink">
               Download the Brochure
             </Link>
           </div>
@@ -183,12 +186,12 @@ export function SiteCasework() {
           <h2 id="faq-h" className="mb-6 mt-0 font-site-display text-site-h3">
             Questions
           </h2>
-          {CASEWORK_FAQ.map((item, i) => (
+          {FAQ.map((item, i) => (
             <details
               key={item.q}
               open={i === 0}
               className={`border-t border-line py-[18px] ${
-                i === CASEWORK_FAQ.length - 1 ? 'border-b' : ''
+                i === FAQ.length - 1 ? 'border-b' : ''
               }`}
             >
               <summary className="min-h-[28px] cursor-pointer text-site-h6 font-semibold">
@@ -204,7 +207,7 @@ export function SiteCasework() {
         <Link to="/contact" className="site-btn-primary">
           Request a Tracker Call
         </Link>
-        <Link to="/contact" className="site-btn-outline-paper">
+        <Link to="/casework-tracker/brochure" className="site-btn-outline-paper">
           Download the Brochure
         </Link>
       </CtaBand>

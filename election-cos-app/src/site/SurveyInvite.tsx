@@ -5,7 +5,7 @@
  */
 import { useEffect, useRef, useState } from 'react';
 import { PromoPlayer } from './PromoPlayer';
-import { SURVEY_DELAY_MS, SURVEY_URL, rememberDismissal, wasDismissed } from './surveyInvite';
+import { SURVEY_DELAY_MS, SURVEY_URL, rememberDismissal, wasDismissed } from './surveyInviteConfig';
 
 export function SurveyInvite({ url = SURVEY_URL, delayMs = SURVEY_DELAY_MS }: { url?: string | null; delayMs?: number }) {
   const [open, setOpen] = useState(false);
