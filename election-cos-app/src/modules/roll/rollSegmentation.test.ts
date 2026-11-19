@@ -6,10 +6,12 @@ import {
   SMALL_CELL,
   SegmentationRefused,
   assertCanSegment,
+  segmentCoverage,
   segmentRoll,
   segmentRollFor,
   segmentationCsv,
 } from './rollSegmentation';
+import type { UsageSummary } from './rollCapture';
 
 const EDITION = '2026-11';
 
@@ -140,6 +142,59 @@ describe('segmentRollFor — guard before compute, real scope stamped', () => {
   });
 });
 
+describe('segmentCoverage — how much of each ward is worked', () => {
+  const seg = segmentRoll(
+    [
+      addr({ id: 'a', wardCode: 'W1', vdCode: 'VD1', voterCount: 100 }),
+      addr({ id: 'b', wardCode: 'W1', vdCode: 'VD2', voterCount: 100 }),
+      addr({ id: 'c', wardCode: 'W2', vdCode: 'VD3', voterCount: 50 }),
+      addr({ id: 'tiny', wardCode: 'W-TINY', vdCode: 'VD9', voterCount: SMALL_CELL - 1 }),
+    ],
+    EDITION,
+  );
+
+  const usage = (byVd: UsageSummary['byVd']): UsageSummary => ({
+    verify: 0,
+    capture: 0,
+    captureRate: null,
+    byVd,
+    byHour: {},
+    byUser: {},
+  });
+
+  it('folds VD-keyed usage up to the ward and computes percentages of the roll', () => {
+    const cov = segmentCoverage(
+      seg,
+      usage({ 'W1::VD1': { verify: 30, capture: 10 }, 'W1::VD2': { verify: 20, capture: 5 } }),
+    );
+    const w1 = cov.find((c) => c.wardCode === 'W1')!;
+    expect(w1.rollVoters).toBe(200);
+    expect(w1.verified).toBe(50);
+    expect(w1.captured).toBe(15);
+    expect(w1.verifiedPct).toBeCloseTo(25, 2);
+    expect(w1.capturedPct).toBeCloseTo(7.5, 2);
+  });
+
+  it('reports a reportable ward with no usage as zero, never omits it', () => {
+    const cov = segmentCoverage(seg, usage({ 'W1::VD1': { verify: 1, capture: 0 } }));
+    const w2 = cov.find((c) => c.wardCode === 'W2')!;
+    expect(w2.verified).toBe(0);
+    expect(w2.verifiedPct).toBe(0);
+  });
+
+  it('inherits suppression — a ward too small to report never appears here', () => {
+    const cov = segmentCoverage(seg, usage({ 'W-TINY::VD9': { verify: 3, capture: 2 } }));
+    expect(cov.some((c) => c.wardCode === 'W-TINY')).toBe(false);
+  });
+
+  it('caps a lagging roll edition at 100% rather than showing more than all', () => {
+    const cov = segmentCoverage(seg, usage({ 'W2::VD3': { verify: 999, capture: 999 } }));
+    const w2 = cov.find((c) => c.wardCode === 'W2')!;
+    expect(w2.verifiedPct).toBe(100);
+    expect(w2.capturedPct).toBe(100);
+  });
+});
+
 describe('segmentationCsv — formula-safe, no personal data', () => {
   const s = segmentRoll(
     [
@@ -160,5 +215,14 @@ describe('segmentationCsv — formula-safe, no personal data', () => {
     for (const forbidden of ['surname', 'fullname', 'full name', 'idnumber', 'id number', 'masked']) {
       expect(csv).not.toContain(forbidden);
     }
+  });
+
+  it('appends a coverage section only when coverage rows are supplied', () => {
+    expect(segmentationCsv(s)).not.toContain('Coverage');
+    const withCov = segmentationCsv(s, [
+      { wardCode: 'NW405-W02', rollVoters: 8, verified: 2, captured: 1, verifiedPct: 25, capturedPct: 12.5 },
+    ]);
+    expect(withCov).toContain('Coverage');
+    expect(withCov).toContain('25');
   });
 });

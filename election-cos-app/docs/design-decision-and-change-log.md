@@ -3429,3 +3429,12 @@ The field screen reads one address at a time, in a canvasser's own district. The
 - **New capability `roll.segment`**, gated by the `voter-verification` module, granted to **Party HQ Admin** (TENANT) and **Municipal Team Lead** (MUNICIPALITY) only — never a field role. Role mirror regenerated; capability count guard 28 → 29.
 - **`RollSegmentationPage.tsx`** at `/analytics/roll-segmentation` (reached from the Analytics index, top-level nav unchanged at nine). Totals, by-ward table, density table, concentrated sites, a suppression note, and a CSV export. Honest refusal states built in: no `roll.segment` → the role message; second factor not passed → the refusal; not loaded → "No Roll Loaded".
 - **No roll data exists in this build** and none is extracted from anywhere — the capability operates on a tenant's own lawfully-loaded roll (the §11.1 lawful-basis/retention/attorney-review items are unchanged by this). The build still never writes the roll into `voter`/`household` except at the door with consent, and the IEC Voter endpoints remain a hard never.
+
+## Session 51 (cont.) — segmentation extended: canvass coverage
+
+The segmentation answered "where are the voters"; the planner's next question is "where have we not worked yet". Added a coverage dimension so "segment by ward" drives deployment.
+
+- **`segmentCoverage(seg, usage)`** (pure; 4 tests) joins each reportable ward's roll voter total (the denominator) with the tenant's OWN verify/capture tallies (`usageEvents`, via `summariseUsage`, folded from `ward::vd` up to the ward). Returns per-ward verified/captured counts and their share of the roll. Still aggregates only; **inherits the segmentation's small-cell suppression** (coverage is reported for `seg.byWard` alone, so a ward too small to appear never appears here either). A lagging roll edition is capped at 100% rather than showing more than all; a reportable ward with no usage reads 0, never omitted.
+- **`segmentationCsv(seg, coverage?)`** appends a Coverage section only when rows are supplied; still formula-safe, still counts only.
+- **`RollSegmentationPage`** gains a "Canvass Coverage" card (per-ward roll voters, verified, captured, and both percentages) and loads `usageEvents` in scope; the CSV export now carries coverage too.
+- No new data source, no new PII: coverage is the roll's own per-ward totals against the tenant's own field tallies, both already in scope.

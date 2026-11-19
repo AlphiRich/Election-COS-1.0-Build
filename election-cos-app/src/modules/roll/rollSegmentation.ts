@@ -40,6 +40,7 @@ import type { RollAddress } from '@/dal/ports/roll';
 import type { SessionContext } from '@/dal/ports/session';
 import { secondFactorSatisfied } from '@/auth/secondFactor';
 import { toCsv } from '@/lib/csv';
+import type { UsageSummary } from './rollCapture';
 
 /** A ward or VD segment with fewer than this many voters is suppressed. */
 export const SMALL_CELL = 5;
@@ -247,11 +248,61 @@ export function segmentRollFor(
 }
 
 /**
- * The aggregate as a formula-safe CSV: ward rows, then VD rows, then the
- * density bands. No individual record is ever written — only counts — so
- * the export carries no personal data to leak.
+ * CANVASS COVERAGE — how much of each ward's roll has actually been worked.
+ *
+ * This is what "segment by ward" is for: the roll's registered-voter total
+ * per ward (the denominator) joined with the tenant's OWN verify/capture
+ * tallies (`usageEvents`, summarised by `summariseUsage`). It says, per
+ * ward, what share of the roll a canvass team has doorstep-verified and
+ * what share has been recorded with consent — so a planner sends people
+ * where the roll is least worked.
+ *
+ * Still aggregates only, and it inherits the segmentation's suppression:
+ * coverage is reported for the reportable wards (`seg.byWard`) alone, so a
+ * ward too small to appear above never appears here either.
  */
-export function segmentationCsv(seg: RollSegmentation): string {
+export interface CoverageRow {
+  wardCode: string;
+  rollVoters: number;
+  verified: number;
+  captured: number;
+  /** verified ÷ rollVoters as a percentage, 0–100 (capped: an older roll edition can lag reality). */
+  verifiedPct: number;
+  capturedPct: number;
+}
+
+const pct = (n: number, d: number) => (d > 0 ? Math.min(100, round2((n / d) * 100)) : 0);
+
+export function segmentCoverage(seg: RollSegmentation, usage: UsageSummary): CoverageRow[] {
+  // usage.byVd is keyed `${wardCode}::${vdCode}`; fold it down to the ward.
+  const byWard = new Map<string, { verify: number; capture: number }>();
+  for (const [key, c] of Object.entries(usage.byVd)) {
+    const wardCode = key.split('::')[0] ?? key;
+    const w = byWard.get(wardCode) ?? { verify: 0, capture: 0 };
+    w.verify += c.verify;
+    w.capture += c.capture;
+    byWard.set(wardCode, w);
+  }
+  // Only the reportable wards — same suppression as the rest of the view.
+  return seg.byWard.map((w) => {
+    const u = byWard.get(w.wardCode) ?? { verify: 0, capture: 0 };
+    return {
+      wardCode: w.wardCode,
+      rollVoters: w.voters,
+      verified: u.verify,
+      captured: u.capture,
+      verifiedPct: pct(u.verify, w.voters),
+      capturedPct: pct(u.capture, w.voters),
+    };
+  });
+}
+
+/**
+ * The aggregate as a formula-safe CSV: ward rows, VD rows, the density
+ * bands, and — when supplied — the per-ward coverage. No individual record
+ * is ever written, only counts, so the export carries no personal data.
+ */
+export function segmentationCsv(seg: RollSegmentation, coverage?: CoverageRow[]): string {
   const rows: Array<Array<string | number>> = [];
   rows.push(['Section', 'Ward', 'Voting district', 'Addresses', 'Voters', 'Voters per address']);
   for (const w of seg.byWard) {
@@ -262,6 +313,12 @@ export function segmentationCsv(seg: RollSegmentation): string {
   }
   for (const d of seg.density) {
     rows.push(['Address density', d.label, '', d.addresses, d.voters, '']);
+  }
+  if (coverage && coverage.length > 0) {
+    rows.push(['Coverage', 'Ward', 'Roll voters', 'Verified', 'Captured', 'Verified %', 'Captured %']);
+    for (const c of coverage) {
+      rows.push(['Coverage', c.wardCode, c.rollVoters, c.verified, c.captured, c.verifiedPct, c.capturedPct]);
+    }
   }
   return toCsv(rows);
 }

@@ -18,7 +18,8 @@ import { useEntitlements } from '@/auth/useEntitlements';
 import { resolveAccess } from '@/auth/entitlements';
 import { BasisNote, Button, Card, EmptyState, PageHeader, StatTile } from '@/components/ui';
 import { downloadText } from '@/lib/csv';
-import { SegmentationRefused, segmentRollFor, segmentationCsv } from './rollSegmentation';
+import { summariseUsage } from './rollCapture';
+import { SegmentationRefused, segmentCoverage, segmentRollFor, segmentationCsv } from './rollSegmentation';
 
 export function RollSegmentationPage() {
   const session = useSession();
@@ -38,6 +39,11 @@ export function RollSegmentationPage() {
     queryFn: () => dal.roll.listAddresses(session!, edition.data!),
     enabled: Boolean(allowed && edition.data),
   });
+  const usage = useQuery({
+    queryKey: ['roll-usage-all', session?.tenantId],
+    queryFn: () => dal.roll.listUsage(session!),
+    enabled: Boolean(allowed),
+  });
 
   // Compute only when the guardrails pass; a refusal (e.g. second factor not
   // yet passed) is shown as a message, never a thrown render.
@@ -50,6 +56,11 @@ export function RollSegmentationPage() {
       throw e;
     }
   }, [session, edition.data, addresses.data]);
+
+  const coverage = useMemo(
+    () => (result?.seg ? segmentCoverage(result.seg, summariseUsage(usage.data ?? [])) : []),
+    [result?.seg, usage.data],
+  );
 
   if (!session) return null;
   if (!allowed) {
@@ -78,7 +89,7 @@ export function RollSegmentationPage() {
                 downloadText(
                   `roll-segmentation-${seg.edition}.csv`,
                   'text/csv',
-                  segmentationCsv(seg),
+                  segmentationCsv(seg, coverage),
                 )
               }
             >
@@ -179,6 +190,43 @@ export function RollSegmentationPage() {
               </table>
             </div>
           </Card>
+
+          {coverage.length > 0 && (
+            <Card>
+              <h2 className="font-display text-headline-md mb-3">Canvass Coverage</h2>
+              <p className="font-body text-body-md text-ink/70 mb-2">
+                How much of each ward’s roll your team has worked — doorstep-verified and recorded
+                with consent — as a share of the registered voters on the roll. Send people where the
+                roll is least worked.
+              </p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-body-md font-body tabular-nums">
+                  <thead>
+                    <tr className="text-left text-ink/60">
+                      <th className="py-1 pr-4">Ward</th>
+                      <th className="py-1 pr-4 text-right">Roll Voters</th>
+                      <th className="py-1 pr-4 text-right">Verified</th>
+                      <th className="py-1 pr-4 text-right">Captured</th>
+                      <th className="py-1 pr-4 text-right">Verified %</th>
+                      <th className="py-1 text-right">Captured %</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {coverage.map((c) => (
+                      <tr key={c.wardCode} className="border-t border-ink/10">
+                        <td className="py-1 pr-4 font-mono">{c.wardCode}</td>
+                        <td className="py-1 pr-4 text-right">{c.rollVoters.toLocaleString('en-ZA')}</td>
+                        <td className="py-1 pr-4 text-right">{c.verified.toLocaleString('en-ZA')}</td>
+                        <td className="py-1 pr-4 text-right">{c.captured.toLocaleString('en-ZA')}</td>
+                        <td className="py-1 pr-4 text-right">{c.verifiedPct.toFixed(1)}%</td>
+                        <td className="py-1 text-right">{c.capturedPct.toFixed(1)}%</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Card>
+          )}
 
           {seg.concentratedAddresses.length > 0 && (
             <Card>
