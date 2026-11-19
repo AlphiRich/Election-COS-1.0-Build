@@ -208,6 +208,25 @@ export function SiteForCampaigns() {
         </div>
       </SiteSection>
 
+      {/* ------------------------------------------------ the maker */}
+      <SiteSection labelledBy="maker-h" className="pb-4">
+        <div className="flex flex-wrap items-center justify-between gap-6 rounded-xl border border-line bg-white p-8">
+          <div className="min-w-0 flex-[1_1_420px]">
+            <h2 id="maker-h" className="m-0 font-site-display text-site-h4">
+              One of Four Innovation Consult Products
+            </h2>
+            <p className="mb-0 mt-2 max-w-[46em] text-site-base text-slate">
+              Election Campaign OS is built by Innovation Consult, a South African Agentic AI
+              software-engineering firm, to the same ethos as the rest of its suite: verify before you
+              publish, every public claim backed by a test, and compliance encoded into the architecture.
+            </p>
+          </div>
+          <Link to="/about" className="site-btn-outline-ink shrink-0">
+            About Innovation Consult →
+          </Link>
+        </div>
+      </SiteSection>
+
       {/* ------------------------------------------------------ pledge */}
       <section id="pledge" aria-labelledby="pledge-h" className="border-y border-line bg-white">
         <div className="mx-auto grid max-w-[1200px] grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] items-start gap-10 px-6 py-[72px]">
