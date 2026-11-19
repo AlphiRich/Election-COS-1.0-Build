@@ -27,6 +27,7 @@ import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { dal } from '@/dal';
 import { useSession } from '@/auth/useSession';
+import { hasCapability } from '@/auth/capabilities';
 import type { MunicipalityProfileDraft } from '@/dal/ports/municipalityProfile';
 import {
   BASELINE_AUTHORITY,
@@ -34,6 +35,7 @@ import {
   SCHEDULE_2_BASIS,
   delimitationFor,
 } from '@/modules/reference/municipalRegister';
+import { buildTenantSeed, uniqueStationCount } from './tenantSeed';
 import { BasisNote, Button, Card, DataLine, Field, PageHeader, SectionLabel } from '@/components/ui';
 
 export function MunicipalityConfigPage() {
@@ -64,6 +66,32 @@ export function MunicipalityConfigPage() {
     },
   });
 
+  // What wards this tenant already holds. Empty on a fresh tenant — the
+  // state that makes every ward dropdown render with nothing in it.
+  const wardsQuery = useQuery({
+    queryKey: ['wards', session?.tenantId],
+    queryFn: () => dal.wards.listAll(session!),
+    enabled: Boolean(session),
+  });
+
+  // Populate the tenant's wards and voting districts from the register for
+  // the configured municipality. Writes wards then voting districts; both
+  // are gated on `wards.edit` in firestore.rules, which HQ Admin holds.
+  // Idempotent — upsert overwrites, so re-syncing is safe.
+  const seedMutation = useMutation({
+    mutationFn: async () => {
+      const prof = profileQuery.data;
+      const plan = prof ? buildTenantSeed(prof.municipalityCode, session!.tenantId) : null;
+      if (!plan) throw new Error('No ward dataset is available for this municipality code.');
+      for (const ward of plan.wards) await dal.wards.upsert(session!, ward);
+      for (const vd of plan.votingDistricts) await dal.votingDistricts.upsert(session!, vd);
+      return { wards: plan.wards.length, votingDistricts: plan.votingDistricts.length, source: plan.source };
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['wards', session?.tenantId] });
+    },
+  });
+
   if (!session) {
     return (
       <div className="rounded-lg border border-slate/30 bg-white p-6 max-w-lg">
@@ -82,6 +110,12 @@ export function MunicipalityConfigPage() {
   // municipality contesting on 4 November is in it, so a miss is a
   // mistyped code rather than an unusual municipality.
   const baseline = delimitationFor(municipalityCode);
+
+  // Ward/VD onboarding. The seed is offered once a municipality is
+  // configured and only to someone who may edit wards.
+  const canSeedWards = hasCapability(session.caps, 'wards.edit');
+  const existingWardCount = wardsQuery.data?.length ?? 0;
+  const seedPlan = profile ? buildTenantSeed(profile.municipalityCode, session.tenantId) : null;
 
   function openForm() {
     setMunicipalityCode(profile?.municipalityCode ?? '');
@@ -181,6 +215,77 @@ export function MunicipalityConfigPage() {
 
       {!editing && !profile && !profileQuery.isLoading && (
         <p className="text-body-md font-body text-slate">Not set up yet for this tenant.</p>
+      )}
+
+      {/*
+        * Ward & voting-district onboarding. A fresh tenant has no ward
+        * documents, so every ward/VD selector, the war room and the ward
+        * map render empty until these are written. Shown once a
+        * municipality is configured; the write is gated on `wards.edit`.
+        */}
+      {!editing && profile && canSeedWards && (
+        <Card className="space-y-3">
+          <SectionLabel as="h2">Wards &amp; Voting Districts</SectionLabel>
+          {existingWardCount > 0 ? (
+            <DataLine>
+              {existingWardCount} ward{existingWardCount === 1 ? '' : 's'} loaded for this tenant.
+            </DataLine>
+          ) : (
+            <p className="text-body-md font-body text-slate">
+              No wards loaded yet — ward, voting-district and map views stay empty until they are populated.
+            </p>
+          )}
+
+          {seedPlan ? (
+            <>
+              <p className="text-body-md font-body text-ink">
+                {seedPlan.source === 'detailed-register' ? (
+                  <>
+                    Populate {seedPlan.wards.length} wards and {uniqueStationCount(seedPlan)} voting districts for{' '}
+                    {profile.municipalityCode} from the proclaimed delimitation, with real station names and
+                    registered-voter counts.
+                  </>
+                ) : (
+                  <>
+                    Populate {seedPlan.wards.length} wards for {profile.municipalityCode} from the proclaimed
+                    delimitation. No per-ward voting-district data is held for this municipality yet, so wards are
+                    created numbered 1–{seedPlan.wards.length} with their rolls and districts left to be loaded.
+                  </>
+                )}
+              </p>
+              <Button
+                onClick={() => seedMutation.mutate()}
+                disabled={seedMutation.isPending}
+                className="whitespace-nowrap"
+              >
+                {seedMutation.isPending
+                  ? 'Populating…'
+                  : existingWardCount > 0
+                    ? 'Re-sync From Register'
+                    : 'Populate From Register'}
+              </Button>
+              {seedMutation.isError && (
+                <p className="text-body-md font-body text-maroon">
+                  {seedMutation.error instanceof Error ? seedMutation.error.message : 'Populate failed.'}
+                </p>
+              )}
+              {seedMutation.isSuccess && (
+                <p className="text-body-md font-body text-green">
+                  Loaded {seedMutation.data.wards} wards
+                  {seedMutation.data.votingDistricts > 0
+                    ? ` and ${seedMutation.data.votingDistricts} voting-district records`
+                    : ''}
+                  . Reopen ward, voter and war-room views to see them.
+                </p>
+              )}
+            </>
+          ) : (
+            <p className="text-body-md font-body text-maroon">
+              No ward dataset is available for {profile.municipalityCode}. Check the municipality code, or acquire its
+              delimitation before loading wards.
+            </p>
+          )}
+        </Card>
       )}
 
       {editing && (

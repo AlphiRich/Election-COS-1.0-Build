@@ -3499,3 +3499,41 @@ Merged PR #59 to `main` (`f2181703`) and deployed via the two workflow_dispatch 
 - **`innovationconsult.co.za`:** no separate deploy target (estate registry: platform undecided). The corporate content ships at `electioncos.co.za/about`.
 - **Cloud Functions: deferred (owner decision B).** The `functions` target failed twice. First: the keyless deployer lacked `iam.serviceAccounts.ActAs` on `electioncos1-0@appspot.gserviceaccount.com` — the owner granted `roles/iam.serviceAccountUser`, which cleared it. Second: `Failed to list functions` — the deployer has no Cloud Functions role. `scripts/setup-gcp-site.sh` deliberately provisioned the deployer for Cloud Run + Firebase Hosting + Artifact Registry only, never Cloud Functions, because the project uses the Cloudflare Claims Worker instead of Functions to stay off Blaze. Completing a functions deploy would need `roles/cloudfunctions.admin` + `roles/cloudbuild.builds.editor` + Artifact Registry/Storage on the deployer **and Blaze billing** — an infrastructure decision, not a grant. Deferred because both new functions are inert without config/data anyway (WhatsApp 2FA needs the WABA secret; `setActiveRollEdition` needs a loaded roll edition). The `roles/iam.serviceAccountUser` grant already made is harmless to leave in place.
 - **When the two functions are wanted:** either stand up Cloud Functions (Blaze + the role bundle above) or port `setActiveRollEdition` and the WhatsApp login-code sender to the Cloudflare Claims Worker, matching the current architecture. Code for both is on `main`, exported from `functions/src/index.ts`, undeployed.
+
+## Session 52 — tenant onboarding: wards & voting districts seeded from the register
+
+The owner signed in successfully but found the app "empty and arduous": no
+populated dropdowns, no IEC ward codes, no working map. Root cause diagnosed —
+a fresh tenant has **no ward documents**. Every ward/VD selector, the war room
+and the ward map scope to `tenants/{tid}/wards` and `tenants/{tid}/votingDistricts`,
+which are empty until something writes them, and Municipality Config stored the
+profile without creating any. Setting the municipality carried no structure into
+the tenant.
+
+- **`src/modules/settings/tenantSeed.ts`** (`buildTenantSeed`) turns a
+  configured municipality into the ward + voting-district records the app reads.
+  - **Detailed path (NW405 / JB Marks):** reads the verified
+    `seed-data/jb-marks-nw405-wards-vds.json` — the proclaimed delimitation
+    reconciled against the IEC's own VD totals — and seeds all **34 wards and
+    108 voting stations** (135 ward-VD rows; split stations keyed by the
+    `(wardCode, vdCode)` pair) with their real names and registered-voter counts.
+  - **Skeleton path (any other warded municipality):** builds the correct
+    **number** of wards from the proclaimed delimitation (`delimitationFor`),
+    numbered 1–N, with **registered voters left at 0 and no voting districts**.
+    It fills the ward dropdowns without inventing one voter count or station —
+    a 0 reads as "not loaded", never as a claim about a ward.
+- **UI:** a capability-gated card on Municipality Config (`settings/MunicipalityConfigPage.tsx`),
+  shown once a municipality is set and only to a user holding **`wards.edit`**
+  (Party HQ Admin). "Populate From Register" writes the wards then the voting
+  districts via the DAL; both collections are gated on `wards.edit` in
+  `firestore.rules`. Idempotent (upsert overwrites), so "Re-sync From Register"
+  is safe.
+- **Voters deliberately NOT seeded.** Writing voters needs `voters.edit`, which
+  HQ Admin does **not** hold (voter capture is a field role's job), and a
+  fabricated voter carries a fabricated POPIA consent. The seed stops at
+  structure. A clearly-labelled demo-voter seeder, if wanted, belongs to a
+  field-role path (`voters.edit` / `roll.capture`), not here.
+- **Tests:** `tenantSeed.test.ts` (12 cases) proves the NW405 seed carries the
+  dataset's ward/VD totals, registered-voter sum and split-station identities
+  unchanged (read from the seed file, not typed), and that the skeleton path
+  invents nothing. Full gate green (2036 app + 205 functions tests).
