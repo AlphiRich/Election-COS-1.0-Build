@@ -12,6 +12,7 @@ import { COUNCIL_CODES, NATIONAL_SEATS, PROVINCES } from './nationalResults';
 import { partyLabel } from './councilResults';
 import { fetchCouncil } from '@/dal/adapters/firestore/electionData';
 import { voterIntelligence, partyName, type VoterIntelligence, type CouncilSource, type WardTier } from './voterIntelligence';
+import { WardMap } from './WardMap';
 import { HISTORY_YEARS, NW405_2016, seatHistoryNW405 } from '@/modules/analytics/seatHistory';
 
 /** JB Marks only: the council at the last three elections, from the Commission's results for each. */
@@ -65,7 +66,7 @@ const databaseCouncil: CouncilSource = async (c) => {
   const d = await fetchCouncil(c);
   if (!d) return null;
   return {
-    wards: d.wards.map((w) => ({ wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, spoilt: w.spoilt, parties: w.parties.map((x) => [x.party, x.votes] as const) })),
+    wards: d.wards.map((w) => ({ wardId: w.wardId, wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, spoilt: w.spoilt, parties: w.parties.map((x) => [x.party, x.votes] as const) })),
     pr: d.pr.map((x) => [x.party, x.votes] as const),
   };
 };
@@ -172,6 +173,8 @@ export function VoterIntelligencePage() {
             </Table>
             <BasisNote>{vi.prShares.length > 12 ? `The ${vi.prShares.length - 12} smallest parties are left out of this table. ` : ''}Seats held include ward seats, so a party can hold seats beyond its share of this ballot.</BasisNote>
           </Card>
+
+          <WardMap vi={vi} />
 
           <Card>
             <SectionLabel as="h2">The ward map in numbers</SectionLabel>
