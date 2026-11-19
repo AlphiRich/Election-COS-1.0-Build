@@ -3477,3 +3477,7 @@ The redirect asked for Electoral Act / councillor content. First slice: a static
 ## Session 51 (cont.) — redirect, slice 2: ready-for-market conversion path
 
 The product landing (`/for-campaigns`) was content-complete but its closing call to action offered only "Talk to Us" — no path to pricing. Added **See Packages** and **Book a Demo** beside it in the CtaBand, so a reader at the bottom of the page reaches the two pages that actually convert (`/packages`, `/book-a-demo`) without scrolling back to the header. Small, gate-clean; the rest of the mature public site is left as the owner built it.
+
+## Session 51 (cont.) — usability: the basis notes become a disclosure
+
+The owner asked to trim repetitive side information, and chose to consolidate the per-page source notes rather than delete them. `BasisNote` — the "source beside every figure" line that repeats under a panel on ~25 screens — is now a **collapsed-by-default `<details>` disclosure** labelled "Basis", with a rotating caret. The discipline is unchanged: the basis is always *present*, just no longer always *open*. Native `<details>` keeps the text in the DOM when closed, so it stays there for a reader, for in-page search, and for the tests that assert it (the full gate passed with every basis-text assertion intact). No figure lost its source; the panels are now about the figure, with provenance one tap away.
