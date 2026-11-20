@@ -62,6 +62,10 @@ jobs:
           VITE_SURVEY_URL: ${{ vars.VITE_SURVEY_URL || 'https://docs.google.com/forms/d/e/1FAIpQLSfGqRP3v4rSkAmElNyxafKT6BreVtsCRHQq8sPwjQtBCFr87w/viewform?usp=header' }}
           VITE_AD_SLOT_ID: ${{ vars.VITE_AD_SLOT_ID }}
           VITE_AD_CATEGORY_BLOCKS_CONFIRMED: ${{ vars.VITE_AD_CATEGORY_BLOCKS_CONFIRMED }}
+          # Contact and Book a Demo post to the submitEnquiry function only when BOTH are set (enquiryClient.ts). Without
+          # them the forms hand the request to the visitor's email or WhatsApp instead (enquiryHandoff.ts).
+          VITE_ENQUIRY_URL: ${{ vars.VITE_ENQUIRY_URL }}
+          VITE_TURNSTILE_SITE_KEY: ${{ vars.VITE_TURNSTILE_SITE_KEY }}
         run: npm run build:site && npm run check:site-budget
 
       # The site's own tests include the nginx/_headers parity check and the

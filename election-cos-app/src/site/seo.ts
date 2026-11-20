@@ -54,6 +54,7 @@ export const STATIC_PAGES: PageMeta[] = [
   HOME,
   page('/for-campaigns', 'Campaign Software for Ward Candidates and Parties', 'Offline-first field operations, POPIA-by-design voter contact and party-funding tracking for ward candidates, parties and their teams.'),
   page('/casework-tracker', 'Every Case, Followed Through', 'A resident raises a problem at the door. Your office triages it, you authorise it, and a signed referral goes to the municipality, tracked until it is resolved.'),
+  page('/casework-tracker/brochure', 'Casework Tracker Brochure', 'The Councillor Casework Tracker on one printable page: how a case moves, the signed referral, the published price and how to start. Save it as a PDF.'),
   page('/compliance', 'What We Do, and What We Will Not Claim', 'For treasurers and compliance officers: the Capability and Limitations Statement, where every row points to the test that proves it.'),
   page('/packages', 'One Price List, Published for Everyone', 'The same modules and terms for every party and every independent. Pilot prices on record, the full amount payable: no VAT is charged.'),
   page('/contact', 'Talk to Us', 'Talk to Election Campaign OS about your role and your wards, by form, email or WhatsApp.'),

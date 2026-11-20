@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { SurveyInvite } from './SurveyInvite';
-import { SURVEY_DISMISS_KEY } from './surveyInvite';
+import { SURVEY_DISMISS_KEY } from './surveyInviteConfig';
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
 const URL_OK = 'https://forms.gle/AbC123';

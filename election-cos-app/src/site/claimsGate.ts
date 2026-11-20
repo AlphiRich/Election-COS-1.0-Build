@@ -27,6 +27,15 @@ export function gatedClaims(rows: readonly ClaimRow[]): { row: ClaimRow; gate: C
 }
 
 /**
+ * The same gate for questions and answers: a question whose answer is still a bracketed placeholder (an onboarding
+ * timeline, a data-ownership answer that must come from the attorney-reviewed terms) is not shown. The placeholder stays
+ * in the data, pinned by `siteContent.test.ts`, and the question appears by itself once somebody supplies the answer.
+ */
+export function answeredQuestions<T extends { a: string }>(items: readonly T[]): T[] {
+  return items.filter((item) => !PLACEHOLDER_RE.test(item.a));
+}
+
+/**
  * Wording the site must never assert. Each may appear only inside the
  * "what we will not claim" column, as a negated claim.
  */
