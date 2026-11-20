@@ -35,6 +35,9 @@ const SiteForCampaigns = lazy(() =>
 const SiteCasework = lazy(() =>
   import('./pages/SiteCasework').then((m) => ({ default: m.SiteCasework })),
 );
+const SiteCaseworkBrochure = lazy(() =>
+  import('./pages/SiteCaseworkBrochure').then((m) => ({ default: m.SiteCaseworkBrochure })),
+);
 const SiteCompliance = lazy(() =>
   import('./pages/SiteCompliance').then((m) => ({ default: m.SiteCompliance })),
 );
@@ -203,6 +206,7 @@ export function SiteApp() {
           <Route path="/" element={<SiteHome />} />
           <Route path="/for-campaigns" element={<SiteForCampaigns />} />
           <Route path="/casework-tracker" element={<SiteCasework />} />
+          <Route path="/casework-tracker/brochure" element={<SiteCaseworkBrochure />} />
           <Route path="/compliance" element={<SiteCompliance />} />
           <Route path="/packages" element={<SitePackages />} />
           <Route path="/contact" element={<SiteContact />} />

@@ -15,6 +15,7 @@ import {
   groundIntelligenceHtml,
 } from '@/modules/analytics/groundIntelligence';
 import { buildSignoff, signoffHtml } from '@/modules/voters/dailySignoff';
+import { segmentRoll, segmentationCsv } from '@/modules/roll/rollSegmentation';
 
 const ID = '8001015009087';
 const PHONE = '082 449 7310';
@@ -116,6 +117,21 @@ describe('generated exports carry no ID number or phone number', () => {
     );
     expect(findPii(html)).toEqual([]);
   });
+
+  it('roll segmentation CSV (hostile address, ID and phone in the roll)', () => {
+    // The roll's addresses carry hostile free text; the segmentation CSV must
+    // still emit only codes and counts — no address string, no ID, no phone.
+    const csv = segmentationCsv(
+      segmentRoll(
+        [
+          { id: 'a1', rollEdition: '2026-11', wardCode: 'NW405-W31', vdCode: '86999001', addressRaw: DIRTY, voterCount: 40 },
+          { id: 'a2', rollEdition: '2026-11', wardCode: 'NW405-W31', vdCode: '86999001', addressRaw: `${PHONE} flat`, voterCount: 6 },
+        ],
+        '2026-11',
+      ),
+    );
+    expect(findPii(csv)).toEqual([]);
+  });
 });
 
 describe('no exporter is missing from this sweep', () => {
@@ -124,6 +140,7 @@ describe('no exporter is missing from this sweep', () => {
     'modules/settings/SubscriptionPage.tsx',
     'modules/voters/RoundPage.tsx',
     'modules/analytics/ScheduledReportsPage.tsx',
+    'modules/roll/RollSegmentationPage.tsx',
     'site/pages/SiteAgentTool.tsx',
   ]);
   /**

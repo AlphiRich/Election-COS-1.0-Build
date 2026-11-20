@@ -3,14 +3,14 @@
  *
  * From the canvas artboard `Contact.dc.html`, 1280×1900, fluid.
  *
- * THE FORM DOES NOT SUBMIT ANYWHERE YET, AND SAYS SO
+ * HOW A REQUEST REACHES US
  *
- * There is no enquiry endpoint on this project. Rather than wire the
- * form to nothing and show a thank-you — which is the
- * `CanvassingIntake` mistake from §37.10, a person told their work was
- * saved when it was discarded — the submit handler shows the state the
- * canvas draws and labels it plainly as a preview. The WhatsApp link
- * beside it is live and is the route that actually reaches somebody.
+ * With the enquiry service configured (`enquiryClient.ts`), the form posts
+ * to `submitEnquiry` behind a Turnstile check. Without it, the form never
+ * shows a thank-you for a request that went nowhere (the
+ * `CanvassingIntake` mistake from §37.10): it writes the request out and
+ * hands it to the visitor's own email app or WhatsApp to send
+ * (`enquiryHandoff.ts`). Either way a submitted request reaches a person.
  *
  * WHAT THE FORM REFUSES TO COLLECT
  *
@@ -27,7 +27,7 @@
  * was given sits with the responsible party.
  */
 import { useEffect, useRef, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import {
   CONSENT_VERSION,
   CONTACT_INTERESTS,
@@ -44,6 +44,7 @@ import {
   mountTurnstile,
   sendEnquiry,
 } from '../enquiryClient';
+import { handoff, type Handoff } from '../enquiryHandoff';
 
 const CONFIG = enquiryConfig(import.meta.env as Record<string, string | undefined>);
 const DEMO = 'Book a Demo';
@@ -83,6 +84,7 @@ export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'de
   const askedOk = /^report:[a-z0-9-]{1,60}$/.test(asked) || CONTACT_INTERESTS.includes(asked);
   const startInterest = demo ? DEMO : askedOk ? asked : CONTACT_INTERESTS[0];
   const [sent, setSent] = useState(false);
+  const [ready, setReady] = useState<Handoff | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -97,7 +99,8 @@ export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'de
     e.preventDefault();
     setError(null);
     if (!CONFIG) {
-      setSent(true); // preview: nothing is sent, and the confirmation says so
+      // No enquiry service on this deployment: hand the written-out request to the visitor's email or WhatsApp.
+      setReady(handoff(new FormData(e.currentTarget), demo, CONSENT_VERSION));
       return;
     }
     if (!token) {
@@ -123,12 +126,64 @@ export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'de
             ? 'See the platform on invented data, for your role and your wards. Tell us when suits you; we reply within one working day to confirm.'
             : 'Tell us your role and your wards. We reply within one working day.'}
         </p>
+        {demo && (
+          <div className="mt-4 grid max-w-[60em] grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-5">
+            <SiteCard className="p-6">
+              <h2 className="m-0 font-site-display text-site-h4">What Happens Next</h2>
+              <ol className="mb-0 mt-3 flex list-decimal flex-col gap-2 pl-5">
+                <li>You send the request below, by email or WhatsApp.</li>
+                <li>We reply within one working day to confirm a time that suits you.</li>
+                <li>We walk through the platform on invented data, showing the screens your role and your wards would use.</li>
+              </ol>
+            </SiteCard>
+            <SiteCard className="p-6">
+              <h2 className="m-0 font-site-display text-site-h4">Before the Demo</h2>
+              <ul className="mb-0 mt-3 flex list-disc flex-col gap-2 pl-5">
+                <li>
+                  See every module and what it does: <Link to="/whats-in-the-app">What&rsquo;s in the App</Link>.
+                </li>
+                <li>
+                  Compare the packages and their prices: <Link to="/packages">Packages</Link>.
+                </li>
+                <li>
+                  Try the public tools now, no account needed: <Link to="/tools">Voter Tools</Link>.
+                </li>
+              </ul>
+            </SiteCard>
+          </div>
+        )}
       </SiteSection>
 
       <SiteSection className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] items-start gap-10 pb-[88px]">
         {/* ------------------------------------------------- the form */}
         <SiteCard className="p-8">
-          {sent ? (
+          {ready ? (
+            <div className="flex flex-col gap-4">
+              <h2 className="m-0 font-site-display text-site-h4">Your Request Is Ready to Send</h2>
+              <p className="m-0">
+                This page does not send it for you. Choose email or WhatsApp: your request opens there, already written
+                out, for you to send. We reply within one working day.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <a href={ready.mailto} className="site-btn-primary">
+                  Send by Email
+                </a>
+                <a href={ready.whatsApp} target="_blank" rel="noopener noreferrer" className="site-btn-outline-ink">
+                  <WhatsAppIcon />
+                  Send on WhatsApp
+                </a>
+              </div>
+              <details>
+                <summary className="cursor-pointer text-site-sm font-semibold">What will be sent</summary>
+                <pre className="mt-2 whitespace-pre-wrap rounded-md border border-line bg-paper p-3 font-body text-site-sm">
+                  {ready.body}
+                </pre>
+              </details>
+              <button type="button" onClick={() => setReady(null)} className="site-btn-outline-ink self-start">
+                Back to the form
+              </button>
+            </div>
+          ) : sent ? (
             <div className="flex flex-col gap-4">
               <h2 className="m-0 font-site-display text-site-h4">
                 Thank You. We Have Your Enquiry.
@@ -303,10 +358,12 @@ export function SiteContact({ variant = 'contact' }: { variant?: 'contact' | 'de
 
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <span className="text-site-micro text-slate">
-                  Protected by a Cloudflare Turnstile check.
+                  {CONFIG
+                    ? 'Protected by a Cloudflare Turnstile check.'
+                    : 'Next, you choose to send it by email or on WhatsApp.'}
                 </span>
                 <button type="submit" disabled={busy} className="site-btn-primary">
-                  {busy ? 'Sending…' : demo ? 'Request a Demo' : 'Send Enquiry'}
+                  {busy ? 'Sending…' : CONFIG ? (demo ? 'Request a Demo' : 'Send Enquiry') : 'Prepare My Request'}
                 </button>
               </div>
               {CONFIG && <div ref={widget} />}

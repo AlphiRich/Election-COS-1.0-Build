@@ -31,6 +31,11 @@ const SUB_VIEWS = [
     description: 'Which modules this campaign has bought, and until when. No prices — see the header there.',
   },
   {
+    to: '/settings/roll-editions',
+    label: 'Voters’ Roll Editions',
+    description: 'Which loaded roll edition is live for the whole campaign. Loading a roll is a server-side step — see the screen.',
+  },
+  {
     to: '/settings/audit',
     label: 'Audit Log',
     description: 'Acts the platform recorded — unmasking, exports, threshold changes. Read-only, and says what it is not.',

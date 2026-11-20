@@ -12,6 +12,50 @@ import { COUNCIL_CODES, NATIONAL_SEATS, PROVINCES } from './nationalResults';
 import { partyLabel } from './councilResults';
 import { fetchCouncil } from '@/dal/adapters/firestore/electionData';
 import { voterIntelligence, partyName, type VoterIntelligence, type CouncilSource, type WardTier } from './voterIntelligence';
+import { WardMap } from './WardMap';
+import { HISTORY_YEARS, NW405_2016, seatHistoryNW405 } from '@/modules/analytics/seatHistory';
+
+/** JB Marks only: the council at the last three elections, from the Commission's results for each. */
+export function SeatHistoryCard() {
+  const h = useMemo(() => seatHistoryNW405(), []);
+  const change = (v: number) => (v > 0 ? `+${v}` : v === 0 ? '0' : `${v}`);
+  return (
+    <Card>
+      <SectionLabel as="h2">Three councils: 2016, 2021, 2026</SectionLabel>
+      <p className="mt-1 text-body-md font-body text-slate">
+        {HISTORY_YEARS.map((y) => `${y}: largest party ${h.largest[y].seats} of ${h.totalSeats}`).join(' · ')}. A majority is{' '}
+        {h.majority} seats.
+      </p>
+      <Table caption={`Seats on the JB Marks council (${h.totalSeats} seats, 34 wards) after each election, and the change from 2021 to 2026.`}>
+        <thead>
+          <tr>
+            <Th>Party</Th>
+            {HISTORY_YEARS.map((y) => (
+              <Th key={y} numeric>{y}</Th>
+            ))}
+            <Th numeric>2021 to 2026</Th>
+          </tr>
+        </thead>
+        <tbody>
+          {h.rows.map((r) => (
+            <tr key={r.id}>
+              <Td>{r.name}</Td>
+              {HISTORY_YEARS.map((y) => (
+                <Td key={y} numeric>{r.seats[y]}</Td>
+              ))}
+              <Td numeric>{change(r.seats[2026] - r.seats[2021])}</Td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+      <BasisNote>
+        2016: the Commission&rsquo;s 2016 North West party results (SHA-256 {NW405_2016.sha256.slice(0, 12)}…), seats by Schedule 1;
+        &ldquo;Independent Councillors&rdquo; is a registered party, not independent candidates. 2021: the published seat
+        calculation. 2026: the certified result. Wards were redrawn between elections, so seats compare but ward numbers do not.
+      </BasisNote>
+    </Card>
+  );
+}
 
 const n = (v: number) => v.toLocaleString('en-ZA');
 const p1 = (v: number) => v.toFixed(1);
@@ -22,7 +66,7 @@ const databaseCouncil: CouncilSource = async (c) => {
   const d = await fetchCouncil(c);
   if (!d) return null;
   return {
-    wards: d.wards.map((w) => ({ wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, spoilt: w.spoilt, parties: w.parties.map((x) => [x.party, x.votes] as const) })),
+    wards: d.wards.map((w) => ({ wardId: w.wardId, wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, spoilt: w.spoilt, parties: w.parties.map((x) => [x.party, x.votes] as const) })),
     pr: d.pr.map((x) => [x.party, x.votes] as const),
   };
 };
@@ -115,6 +159,8 @@ export function VoterIntelligencePage() {
             </Card>
           )}
 
+          {vi.code === 'NW405' && <SeatHistoryCard />}
+
           <Card>
             <SectionLabel as="h2">Proportional ballot</SectionLabel>
             <Table caption={`Votes on the proportional (party) ballot in ${vi.name}, with the seats each party holds.`}>
@@ -127,6 +173,8 @@ export function VoterIntelligencePage() {
             </Table>
             <BasisNote>{vi.prShares.length > 12 ? `The ${vi.prShares.length - 12} smallest parties are left out of this table. ` : ''}Seats held include ward seats, so a party can hold seats beyond its share of this ballot.</BasisNote>
           </Card>
+
+          <WardMap vi={vi} />
 
           <Card>
             <SectionLabel as="h2">The ward map in numbers</SectionLabel>
@@ -172,7 +220,10 @@ export function VoterIntelligencePage() {
             <ul className="mt-2 list-disc space-y-1 pl-5 text-body-md font-body text-ink">
               <li>Demographics (race, age, gender): not in this build. The earlier JB Marks sheet&rsquo;s figures had no stated source.</li>
               <li>&ldquo;Psychographic&rdquo; voter segments: they cannot be derived from results, and race-linked profiling of voters is a POPIA special-personal-information question. Left out, not guessed.</li>
-              <li>Special-vote counts, and any trend before 2021: not ingested.</li>
+              <li>
+                Special-vote counts: not ingested. Results before 2021:{' '}
+                {vi.code === 'NW405' ? 'the 2016 council only (above); no 2016 votes by ward.' : 'not ingested for this council.'}
+              </li>
             </ul>
             <BasisNote>
               Source: {vi.source}. Ward figures read from the {vi.wardData === 'database' ? 'election database' : 'results bundled with the app'}. For one party&rsquo;s candidates against this result see <Link to="/analytics/lge-2026-party">party candidates and result</Link>;

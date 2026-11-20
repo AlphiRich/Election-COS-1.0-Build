@@ -27,6 +27,12 @@ const SUB_VIEWS = [
       'Quota, seats and ward-size band recomputed from sourced figures, field roll usage, and what a supplied dashboard claimed, checked.',
   },
   {
+    to: '/analytics/roll-segmentation',
+    label: 'Roll Segmentation',
+    description:
+      'Your own voters’ roll as an aggregate — voters by ward, voting district and address density — for tenant and municipality leads. Counts only, no individual record.',
+  },
+  {
     to: '/analytics/voter-intelligence',
     label: 'Voter Intelligence',
     description: 'Seats, coalition arithmetic and the ward map for any of the 213 councils, from the certified 2026 results.',
@@ -40,6 +46,12 @@ const SUB_VIEWS = [
     to: '/analytics/lge-2026-party',
     label: 'Party Candidates and Result',
     description: 'One party’s candidates against its result in one municipality, checked against the Commission’s list.',
+  },
+  {
+    to: '/knowledge/councillors-and-electoral-law',
+    label: 'Councillors & Electoral Law',
+    description:
+      'How a council is made up, how its seats are allocated, how long it sits, and the Code of Conduct councillors are bound by — anchored to the Acts.',
   },
   {
     to: '/analytics/hub',

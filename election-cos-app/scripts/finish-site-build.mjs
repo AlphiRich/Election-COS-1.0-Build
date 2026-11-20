@@ -21,6 +21,9 @@ if (!existsSync(OUT)) {
 }
 cpSync('site-hosting/_headers', `${OUT}/_headers`);
 cpSync('site-assets/videos', `${OUT}/videos`, { recursive: true });
+// Ward-boundary tiles (scripts/ingest-ward-boundaries.ts): the per-council GeoJSON the ward map fetches on demand.
+// Served from the public site (Cloudflare/Cloud Run), not Firestore, so geometry never touches the tenant database.
+if (existsSync('site-assets/ward-boundaries')) cpSync('site-assets/ward-boundaries', `${OUT}/ward-boundaries`, { recursive: true });
 for (const f of ['sw.js', 'manifest.webmanifest']) rmSync(`${OUT}/${f}`, { force: true });
 
 cpSync('site-assets/pwa/site.webmanifest', `${OUT}/site.webmanifest`);

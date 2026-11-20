@@ -15,8 +15,10 @@ import {
   where,
   writeBatch,
 } from 'firebase/firestore';
+import { httpsCallable } from 'firebase/functions';
+import { getFunctionsClient } from './client';
 import type { SessionContext } from '@/dal/ports/session';
-import type { RollAddress, RollEntry, RollRepository, UsageEvent } from '@/dal/ports/roll';
+import type { RollAddress, RollEditionMeta, RollEntry, RollRepository, UsageEvent } from '@/dal/ports/roll';
 import { assertCapturable } from '@/modules/roll/rollCapture';
 import { db, geoScopeConstraints, stampOnWrite, tenantCollectionPath, toISO } from './base';
 
@@ -61,6 +63,34 @@ export const rollRepository: RollRepository = {
   async activeEdition(ctx) {
     const snap = await getDoc(doc(db(), path(ctx, 'roll_meta'), 'active'));
     return snap.exists() ? ((snap.data().edition as string | null) ?? null) : null;
+  },
+
+  async listEditions(ctx) {
+    // Every roll_meta doc except the `active` pointer is an edition's metadata.
+    const snap = await getDocs(collection(db(), path(ctx, 'roll_meta')));
+    return snap.docs
+      .filter((d) => d.id !== 'active')
+      .map((d): RollEditionMeta => {
+        const x = d.data();
+        return {
+          edition: (x.edition as string | undefined) ?? d.id,
+          status: (x.status as RollEditionMeta['status']) ?? 'FAILED',
+          entries: (x.entries as number) ?? 0,
+          addresses: (x.addresses as number) ?? 0,
+          loadedAt: toISO(x.loadedAt as string | null) ?? null,
+          note: (x.note as string | undefined) ?? undefined,
+        };
+      })
+      .sort((a, b) => b.edition.localeCompare(a.edition));
+  },
+
+  async setActiveEdition(_ctx, edition) {
+    // Tenant and capability come from the verified token server-side, not from here.
+    const call = httpsCallable<{ edition: string }, { edition: string }>(
+      getFunctionsClient(),
+      'setActiveRollEdition',
+    );
+    return (await call({ edition })).data;
   },
 
   async listAddresses(ctx, edition) {

@@ -65,6 +65,7 @@ export const PAGE_VIEW_ROUTES: readonly string[] = [
   '/analytics/vd-locator',
   '/analytics/voter-statistics',
   '/analytics/build-review',
+  '/analytics/roll-segmentation',
   '/settings',
   '/settings/municipality',
   '/settings/permissions',
@@ -72,9 +73,11 @@ export const PAGE_VIEW_ROUTES: readonly string[] = [
   '/settings/data-requests',
   '/settings/candidates',
   '/settings/subscription',
+  '/settings/roll-editions',
   '/settings/audit',
   '/knowledge/gatherings-advisory',
   '/knowledge/election-timetable',
+  '/knowledge/councillors-and-electoral-law',
 ];
 
 const KNOWN = new Set(PAGE_VIEW_ROUTES);

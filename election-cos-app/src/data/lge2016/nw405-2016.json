@@ -1,0 +1,82 @@
+{
+  "source": "Electoral Commission of South Africa, LGE 2016 (event 402), Downloadable Party Results, North West",
+  "url": "https://results.elections.org.za/home/LGEPublicReports/402/Downloadable%20Party%20Results/NW.csv",
+  "sourceId": "iec-lge-2016-nw-vd-results",
+  "sha256": "7b73b6f29727564bc326e8d58cf1b203d1e6f82828241089e677ef9510554caf",
+  "dateGenerated": "2/16/2017 5:01:24 PM",
+  "municipality": "NW405",
+  "iecLabel": "NW405 - Ventersdorp/Tlokwe",
+  "note": "Seats computed with Schedule 1 (Items 12, 13, 16) by electoral/iec_etl_pipeline.py from the Commission's file; reproduced in TypeScript by seatHistory.test.ts.",
+  "totalSeats": 67,
+  "wards": 34,
+  "registeredVoters": 116321,
+  "totalValidVotes": 130716,
+  "quota": 1951,
+  "independentWardSeats": 0,
+  "noPRListWardSeats": 0,
+  "parties": [
+    {
+      "id": "ANC",
+      "name": "African National Congress",
+      "iecName": "AFRICAN NATIONAL CONGRESS",
+      "votes": 66689,
+      "wardSeatsWon": 24,
+      "listSeats": 10,
+      "totalSeats": 34
+    },
+    {
+      "id": "DA",
+      "name": "Democratic Alliance",
+      "iecName": "DEMOCRATIC ALLIANCE",
+      "votes": 42231,
+      "wardSeatsWon": 10,
+      "listSeats": 12,
+      "totalSeats": 22
+    },
+    {
+      "id": "EFF",
+      "name": "Economic Freedom Fighters",
+      "iecName": "ECONOMIC FREEDOM FIGHTERS",
+      "votes": 9812,
+      "wardSeatsWon": 0,
+      "listSeats": 5,
+      "totalSeats": 5
+    },
+    {
+      "id": "VFP",
+      "name": "Vryheidsfront Plus",
+      "iecName": "VRYHEIDSFRONT PLUS",
+      "votes": 7057,
+      "wardSeatsWon": 0,
+      "listSeats": 4,
+      "totalSeats": 4
+    },
+    {
+      "id": "INDEPENDENT_COUNCILLORS",
+      "name": "Independent Councillors",
+      "iecName": "INDEPENDENT COUNCILLORS",
+      "votes": 4137,
+      "wardSeatsWon": 0,
+      "listSeats": 2,
+      "totalSeats": 2
+    },
+    {
+      "id": "COPE",
+      "name": "Congress of the People",
+      "iecName": "CONGRESS  OF THE PEOPLE",
+      "votes": 595,
+      "wardSeatsWon": 0,
+      "listSeats": 0,
+      "totalSeats": 0
+    },
+    {
+      "id": "PAC",
+      "name": "Pan Africanist Congress of Azania",
+      "iecName": "PAN AFRICANIST CONGRESS OF AZANIA",
+      "votes": 195,
+      "wardSeatsWon": 0,
+      "listSeats": 0,
+      "totalSeats": 0
+    }
+  ]
+}
