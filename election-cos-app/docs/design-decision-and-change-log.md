@@ -3537,3 +3537,57 @@ the tenant.
   dataset's ward/VD totals, registered-voter sum and split-station identities
   unchanged (read from the seed file, not typed), and that the skeleton path
   invents nothing. Full gate green (2036 app + 205 functions tests).
+
+## Session 52 (cont.) — Campaign Director agent: the deterministic core first
+
+The owner supplied a handoff (two code PDFs + two architecture documents) for a
+**Campaign Director** — a LangGraph agent in `functions/` with a Firestore
+checkpointer, an MCP server wrapping ECOS primitives, a governance graph (cost
+guard, provenance gate, HITL interrupt before incident dispatch, an 8-iteration
+cap) and an `onCall` entry point. Built the part that is real, testable and
+deploy-independent now, and scoped the framework layer against three concrete
+blockers rather than pasting inert code.
+
+**Built (`functions/src/agents/campaignDirector/`):**
+- `scenarioPolicy.ts` (+ 12 tests) — the provenance gate, the reason a model is
+  allowed nowhere near a published figure. Two absolute rules, pure and
+  deterministic: a swing or turnout **delta** can never be labelled `sourced`
+  (it is always a user assumption — the design's "swings can never be sourced"),
+  and anything `sourced` must carry a citation. `assertProvenance` throws on any
+  violation; the graph's verify step will call it instead of trusting the model
+  (Evidence Hierarchy: a self-report is never sufficient).
+- `state.ts` (+ tests) — domain state types kept free of the LangGraph runtime so
+  they compile and test without the framework; `harnessContextFrom` **fails
+  closed** (no verified tenantId/uid → throw, never default — §4.4), the
+  8-iteration loop cap, and the HITL predicate (an incident dispatch is the only
+  outward action and never fires without human approval).
+
+**Corrected against this repo, not pasted blind:**
+- The handoff's MCP tools `get_certified_baseline` / `run_schedule1_scenario`
+  returned a fabricated `{source:"IEC Certified Results"}` stub. `functions/`
+  has `rootDir: src` and the certified-results **seat calculator lives in the
+  app**, not here — so those tools have no real engine to call from functions
+  and, per rule 2, must **fail closed**, not fabricate. Noted for the framework
+  phase (share the calculator into functions, or have the tools refuse).
+- `resolveCapabilities` is an `onDocumentWritten` **trigger**, not a helper to
+  call inside `callable.ts`; caps come straight off the verified token
+  (`harnessContextFrom` reads them there).
+- The harness modules the handoff marked `// TODO: wire` already exist with
+  concrete signatures (`costGuard.reserveSpend`, `auditChain.appendChained`,
+  `incidentDispatch.dispatchIncident`, `warRoomCounters`, `region.REGION`).
+
+**Framework layer — next phase, three real blockers (all disclosed, none faked):**
+1. **Dependencies.** `@langchain/langgraph`, `@langchain/core`,
+   `@langchain/langgraph-checkpoint`, `@modelcontextprotocol/sdk` (the handoff's
+   `@modelcontextprotocol/server` does not exist), `zod`. Heavy, and added to a
+   bundle that does not deploy — hold until the deploy target is decided.
+2. **LLM credential.** The agent node needs a model API key + outbound network;
+   off until one exists (same posture as `incidentDispatch`, off until the
+   WhatsApp credential exists).
+3. **Deploy.** Decision B stands: Cloud Functions are not deployed (Cloudflare
+   Claims Worker architecture, no Blaze). The checkpointer, MCP server, graph and
+   callable are written-and-tested-but-undeployed when built, like every other
+   function here, and every Cloud Function added will carry its `@deployable`
+   marker and pin `africa-south1`.
+
+Full gate green: 2036 app + 219 functions tests.
