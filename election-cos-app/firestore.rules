@@ -450,6 +450,15 @@ service cloud.firestore {
       allow write: if false; // Cloud Functions (admin SDK) only
     }
 
+    // Campaign Director agent state (LangGraph checkpoints + pending writes).
+    // Server-only end to end: the Admin SDK (FirestoreCheckpointSaver) reads and
+    // writes these; a client never does. They can hold an in-flight run's
+    // serialized state, so even reads stay closed — functions/src/agents/
+    // campaignDirector/firestoreCheckpointer.ts.
+    match /tenants/{tid}/agentCheckpoints/{document=**} {
+      allow read, write: if false; // Cloud Functions (admin SDK) only
+    }
+
     // One marker per counter trigger event, so an at-least-once redelivery
     // cannot increment a counter twice (functions/src/warRoomCounters.ts).
     // The default-deny above already covered this; it is written out so a

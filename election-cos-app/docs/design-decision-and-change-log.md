@@ -3591,3 +3591,42 @@ blockers rather than pasting inert code.
    marker and pin `africa-south1`.
 
 Full gate green: 2036 app + 219 functions tests.
+
+## Session 52 (cont.) — Campaign Director agent: the LangGraph framework layer
+
+With the owner's go-ahead to build it as Cloud Functions now (written + tested,
+not deployed), the agent's framework layer is in, wired to the real harness
+modules and held to the discipline.
+
+- **Dependencies added to `functions/`:** `@langchain/langgraph`,
+  `@langchain/core`, `@langchain/langgraph-checkpoint`, `@modelcontextprotocol/sdk`
+  (the handoff's `@modelcontextprotocol/server` does not exist), `zod`. They
+  resolve and `tsc`-build under the package's existing CommonJS config
+  (`skipLibCheck`); runtime `require(ESM)` is a deploy-time concern (Node 22), not
+  a gate concern, and noted in the folder README.
+- **`firestoreCheckpointer.ts`** — a tenant-scoped LangGraph `BaseCheckpointSaver`.
+  Every path is `tenants/{tid}/agentCheckpoints/{threadId}/...`; the thread id must
+  arrive `<tenantId>:<threadId>` or it throws. `parseScopedThread` is exported and
+  tested on its own (the security-critical guard), the Firestore CRUD left for
+  integration — the same split as `syncMerge`/`sync`.
+- **`graph.ts`** — the three governed nodes: `agent` (fails closed with no model,
+  via the `agentModel` seam), `verify_policy` (runs `scenarioPolicy` and never
+  synthesizes a briefing over an error), `execute_dispatch` (HITL `interrupt`
+  before the one outward action). 8-iteration cap. Tested with a fake model and an
+  in-memory saver, including the interrupt → reject/approve resume.
+- **`ecosMcpTools.ts` / `mcpServer.ts`** — the ECOS tools. `get_war_room_counters`
+  reads tenant-scoped counters (injected reader) with honest empty states;
+  `get_certified_baseline` and `run_schedule1_scenario` **fail closed** — the
+  certified-results seat engine lives in the app package, outside functions'
+  `rootDir`, so they refuse rather than return the handoff's fabricated stub.
+- **`callable.ts`** — `@deployable no`, region-pinned `africa-south1`, tenant from
+  the verified token only, **not exported** from `index.ts`. Refuses (fails
+  closed) until a model exists.
+- **Firestore wiring:** `firestore.rules` locks `tenants/{tid}/agentCheckpoints/**`
+  server-only (`allow read, write: if false`); `firestore.indexes.json` adds the
+  `checkpoints` composite index (`checkpointNs` ASC, `deletedAt` ASC, `createdAt`
+  DESC) the saver's queries need. `rulesAudit` stays green.
+
+Three blockers to `@deployable yes`, all in the folder README: a model credential
++ binding; a shared Schedule 1 engine in functions; and a Cloud Functions deploy
+target (decision B: not deployed). Full gate green: 2036 app + 238 functions tests.
