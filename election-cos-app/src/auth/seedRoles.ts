@@ -77,6 +77,13 @@ export const SEED_ROLES: Role[] = [
       'dsr.view',
       'dsr.manage',
       'roll.view',
+      // Tenant-wide planner: the aggregate roll segmentation (never the
+      // per-door capture — that is a field role's job, see roll.capture).
+      'roll.segment',
+      // Administers which roll edition is live (roll_meta/active). HQ Admin
+      // only — a municipality lead plans with the roll but does not switch
+      // the whole tenant's active edition.
+      'roll.manage',
     ],
   },
   {
@@ -97,6 +104,8 @@ export const SEED_ROLES: Role[] = [
       'logistics.edit',
       'analytics.view',
       'roll.view',
+      // Municipality-wide planner: segmentation across the wards in scope.
+      'roll.segment',
     ],
   },
   {

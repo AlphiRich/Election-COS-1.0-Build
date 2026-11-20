@@ -54,8 +54,13 @@ export interface SecondFactorStore {
   update(tenantId: string, id: string, patch: Partial<SecondFactorChallenge>): Promise<void>;
 }
 
-/** Sends the code. Throws `SmsNotConfigured` when no provider is wired. */
-export type SmsSender = (to: string, message: string) => Promise<boolean>;
+/**
+ * Sends the code. Throws `SmsNotConfigured` when no provider is wired.
+ * `message` is the full text (what an SMS sends); `code` is the bare code,
+ * for a channel that templates it (WhatsApp authentication templates carry
+ * the code as a parameter, not free text). A text-only sender ignores `code`.
+ */
+export type SmsSender = (to: string, message: string, code: string) => Promise<boolean>;
 
 export class SmsNotConfigured extends Error {
   constructor() {
@@ -114,7 +119,7 @@ export async function requestSecondFactor(
   const id = await deps.store.create(who.tenantId, challenge);
 
   try {
-    const ok = await deps.send(e164, loginMessage(code));
+    const ok = await deps.send(e164, loginMessage(code), code);
     await deps.store.update(who.tenantId, id, { status: ok ? 'SENT' : 'DELIVERY_FAILED' });
     return ok
       ? { kind: 'SENT', challengeId: id, phoneMasked: challenge.phoneMasked, expiresAt: challenge.expiresAt }

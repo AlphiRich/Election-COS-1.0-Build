@@ -334,9 +334,39 @@ export function Pill({ children, className = '' }: { children: ReactNode; classN
   );
 }
 
-/** The sentence that explains how a figure was arrived at, under a panel. */
-export function BasisNote({ children }: { children: ReactNode }) {
-  return <p className="text-body-md font-body text-slate">{children}</p>;
+/**
+ * How a figure was arrived at — the source beside every figure.
+ *
+ * Collapsed by default (session 51): the discipline is that the basis is
+ * always *there*, not always *open*. On 25 screens an always-expanded
+ * paragraph of provenance repeated under every panel; as a disclosure the
+ * source is one tap away and the panel stays about the figure. The text
+ * still renders in the DOM when closed (native `<details>`), so it remains
+ * present for a reader, for search, and for the tests that assert it.
+ */
+export function BasisNote({ children, label = 'Basis' }: { children: ReactNode; label?: string }) {
+  return (
+    <details className="group mt-3 border-t border-ink/10 pt-2">
+      <summary className="flex cursor-pointer list-none items-center gap-1.5 text-label-caps font-display uppercase text-slate marker:hidden hover:text-ink">
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          className="transition-transform group-open:rotate-90"
+        >
+          <path d="m9 6 6 6-6 6" />
+        </svg>
+        {label}
+      </summary>
+      <p className="mt-2 text-body-md font-body text-slate">{children}</p>
+    </details>
+  );
 }
 
 /* ----------------------------------------------------------------- table */

@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
+  DEFAULT_SIGNIN_EMAIL_DOMAINS,
   PROVIDER_IDS,
   PROVIDER_SCOPES,
+  isAllowedSignInEmail,
+  signInEmailDomains,
   enabledProviders,
   signInErrorMessage,
 } from './authProviders';
@@ -47,5 +50,31 @@ describe('signInErrorMessage', () => {
     expect(signInErrorMessage('auth/operation-not-allowed')).toMatch(/not been switched on/);
     expect(signInErrorMessage('auth/whatever')).toMatch(/Sign-in failed/);
     expect(signInErrorMessage(undefined)).toMatch(/Sign-in failed/);
+  });
+});
+
+
+describe('email-link sign-in domains', () => {
+  it('defaults to the two company domains', () => {
+    expect(signInEmailDomains(undefined)).toEqual([...DEFAULT_SIGNIN_EMAIL_DOMAINS]);
+    expect(signInEmailDomains('')).toEqual([...DEFAULT_SIGNIN_EMAIL_DOMAINS]);
+  });
+  it('parses an override list, tolerating spaces, case and a leading @', () => {
+    expect(signInEmailDomains(' Example.com, @other.co.za ,example.com')).toEqual(['example.com', 'other.co.za']);
+  });
+  it('admits only the allowed domains, case-insensitively', () => {
+    const d = signInEmailDomains(undefined);
+    // Addresses are built from the domain constants so this test file never contains a literal
+    // corporate-domain mailbox (productMail.test.ts forbids one anywhere in source).
+    expect(isAllowedSignInEmail(`neo@${DEFAULT_SIGNIN_EMAIL_DOMAINS[0]}`, d)).toBe(true);
+    expect(isAllowedSignInEmail(`staff@${DEFAULT_SIGNIN_EMAIL_DOMAINS[1]}`, d)).toBe(true);
+    expect(isAllowedSignInEmail('someone@gmail.com', d)).toBe(false);
+    expect(isAllowedSignInEmail('someone@sub.electioncos.co.za', d)).toBe(false);
+  });
+  it('rejects malformed addresses rather than guessing', () => {
+    const d = signInEmailDomains(undefined);
+    for (const bad of ['', 'no-at-sign', '@electioncos.co.za', 'trailing@', 'a@b@electioncos.co.za']) {
+      expect(isAllowedSignInEmail(bad, d), bad).toBe(false);
+    }
   });
 });

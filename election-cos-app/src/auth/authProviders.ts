@@ -47,6 +47,38 @@ export function enabledProviders(raw: string | undefined): ProviderId[] {
   return wanted.length ? [...new Set(wanted)] : ['google'];
 }
 
+/**
+ * Email-link sign-in is restricted to the organisation's own domains: a person at one of these
+ * addresses signs in by clicking a verification link sent to it, and nobody else can ask for a link.
+ * The owner's rule (session 59): every @electioncos.co.za and @innovationconsult.co.za account logs
+ * in through a verification email. The list is overridable with `VITE_SIGNIN_EMAIL_DOMAINS` (a comma
+ * list of bare domains) for a different deployment, but defaults to the two company domains.
+ *
+ * This is a front-door convenience check, NOT the authorisation boundary: a link only gets a person a
+ * signed-in session, and access to any tenant data still requires a staff profile an administrator
+ * created (resolveCapabilities.ts) plus, for every role above canvasser, the second factor. So a
+ * stricter server-side domain check is not load-bearing here — but keeping disallowed domains from
+ * even requesting a link avoids sending company sign-in mail to strangers.
+ */
+export const DEFAULT_SIGNIN_EMAIL_DOMAINS = ['electioncos.co.za', 'innovationconsult.co.za'] as const;
+
+export function signInEmailDomains(raw: string | undefined): string[] {
+  const parsed = (raw ?? '')
+    .split(',')
+    .map((s) => s.trim().toLowerCase().replace(/^@/, ''))
+    .filter(Boolean);
+  return parsed.length ? [...new Set(parsed)] : [...DEFAULT_SIGNIN_EMAIL_DOMAINS];
+}
+
+/** True when the email's domain is one the deployment allows to sign in by email link. */
+export function isAllowedSignInEmail(email: string, domains: string[]): boolean {
+  const parts = email.trim().toLowerCase().split('@');
+  if (parts.length !== 2) return false; // no '@', or more than one, is not an address to admit
+  const [local, domain] = parts;
+  if (!local || !domain) return false;
+  return domains.includes(domain);
+}
+
 /** A short, honest message for the sign-in failures a person can act on. Null = say nothing. */
 export function signInErrorMessage(code: string | undefined): string | null {
   switch (code) {

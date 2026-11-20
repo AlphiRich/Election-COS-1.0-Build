@@ -70,7 +70,7 @@ describe('ward figures from the election database', () => {
     const province = await (await import('./nationalResults')).loadProvince('NW');
     const c = province.municipalities.NW405;
     return {
-      wards: c.wardResults.map((w) => ({ wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, spoilt: w.spoilt, parties: w.parties })),
+      wards: c.wardResults.map((w) => ({ wardId: w.wardId, wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, spoilt: w.spoilt, parties: w.parties })),
       pr: c.parties.pr,
     };
   };
@@ -105,7 +105,7 @@ describe('the stored form of every council gives the same instrument as the bund
         const { wards } = councilDocs('EEID1887', prov, code, c);
         const { council } = councilDocs('EEID1887', prov, code, c);
         const stored = async () => ({
-          wards: wards.map((w) => ({ wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, spoilt: w.spoilt, parties: w.parties.map((x) => [x.party, x.votes] as const) })),
+          wards: wards.map((w) => ({ wardId: w.wardId, wardNumber: w.wardNumber, registered: w.registered, valid: w.valid, spoilt: w.spoilt, parties: w.parties.map((x) => [x.party, x.votes] as const) })),
           pr: council.parties.pr.map((x) => [x.party, x.votes] as const),
         });
         const a = await voterIntelligence(code, stored);

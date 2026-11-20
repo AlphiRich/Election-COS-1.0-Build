@@ -9,6 +9,7 @@ import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { getDb } from './client';
 
 export interface StoredWard {
+  wardId: string;
   wardNumber: number;
   registered: number;
   valid: number;

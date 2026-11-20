@@ -140,9 +140,9 @@ export const MODULES: ModuleDefinition[] = [
     scope: 'TENANT',
     bundled: false,
     metering: 'PER_USE',
-    gatedCapabilities: ['roll.view', 'roll.capture'],
+    gatedCapabilities: ['roll.view', 'roll.capture', 'roll.segment', 'roll.manage'],
     description:
-      'Lets canvassers check people against the certified voters\' roll for their own district and, with the voter\'s consent, capture them. Charged per verification and per capture, counted as they happen, so a party pays for the doors it actually works and for the day\'s statistics it reads.',
+      'Lets canvassers check people against the certified voters\' roll for their own district and, with the voter\'s consent, capture them. Charged per verification and per capture, counted as they happen, so a party pays for the doors it actually works and for the day\'s statistics it reads. A tenant- or municipality-wide planner can also read the roll as an aggregate segmentation (counts and distributions by ward, voting district and address density), never an individual record.',
   },
 ];
 
