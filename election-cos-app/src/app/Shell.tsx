@@ -42,6 +42,7 @@ import { SyncStatus } from './SyncStatus';
 import { BrandMark } from '@/components/BrandMark';
 import { PRIMARY_NAV, navItemAccess } from './nav';
 import { usePageViews } from './pageViews';
+import { MENU_ICON, visibleFieldTabs } from './fieldTabs';
 
 export function Shell() {
   const { session, status, user } = useAuthState();
@@ -228,9 +229,49 @@ export function Shell() {
         {navFooter}
       </nav>
 
-      <main id="main" className="flex-1 p-4 md:p-8 min-w-0">
+      <main id="main" className="flex-1 p-4 pb-28 md:p-8 min-w-0">
         <Outlet />
       </main>
+
+      {/* Phone: the field tab bar (fieldTabs.ts). Shortcuts only; "Menu" opens the full nav. */}
+      <nav
+        aria-label="Field"
+        className="md:hidden fixed inset-x-0 bottom-0 z-30 flex border-t border-ink/10 bg-white pb-[env(safe-area-inset-bottom)]"
+      >
+        {visibleFieldTabs(caps, entitlements).map((tab) => (
+          <NavLink
+            key={tab.route}
+            to={tab.route}
+            className={({ isActive }) =>
+              `flex min-h-14 flex-1 flex-col items-center justify-center gap-0.5 text-label-caps font-display uppercase ${
+                isActive ? 'text-ink' : 'text-slate'
+              }`
+            }
+          >
+            <svg aria-hidden width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d={tab.icon} />
+            </svg>
+            {tab.label}
+          </NavLink>
+        ))}
+        <button
+          type="button"
+          onClick={() => {
+            setDrawerOpen((open) => !open);
+            window.scrollTo({ top: 0 });
+          }}
+          aria-expanded={drawerOpen}
+          aria-controls="primary-nav"
+          className={`flex min-h-14 flex-1 flex-col items-center justify-center gap-0.5 text-label-caps font-display uppercase ${
+            drawerOpen ? 'text-ink' : 'text-slate'
+          }`}
+        >
+          <svg aria-hidden width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <path d={MENU_ICON} />
+          </svg>
+          Menu
+        </button>
+      </nav>
     </div>
   );
 }

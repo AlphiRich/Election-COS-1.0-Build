@@ -34,6 +34,7 @@
 /** Every screen of the application, as its route pattern. Mirrors src/app/routes.tsx. */
 export const PAGE_VIEW_ROUTES: readonly string[] = [
   '/war-room',
+  '/today',
   '/voters',
   '/voters/import',
   '/round',
