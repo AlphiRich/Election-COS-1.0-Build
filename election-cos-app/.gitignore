@@ -28,3 +28,6 @@ functions/lib
 !07_Geospatial_and_Electoral_Data/_runs/**
 dist-site
 dist-videos
+
+# Miniflare local state from `wrangler dev` (KV/D1/observability SQLite).
+.wrangler/
