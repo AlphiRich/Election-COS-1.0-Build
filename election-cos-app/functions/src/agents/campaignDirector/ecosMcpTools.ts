@@ -1,20 +1,25 @@
 /**
  * Election Campaign OS — Campaign Director: the deterministic ECOS tools.
  *
- * The tool LOGIC, as plain tested functions. `mcpServer.ts` registers these on
- * an MCP server for a model to call; keeping the logic here means the honesty
- * rules are proven without standing up a transport or a model.
+ * The tool LOGIC, as plain tested functions. `mcpServer.ts` and
+ * `ecosLangchainTools.ts` register these for a model to call; keeping the logic
+ * here means the honesty rules are proven without a transport or a model.
  *
- * Two of the three tools FAIL CLOSED. The certified-results seat engine
- * (`seatCalculator` / the certified baselines) lives in the APPLICATION
- * package, outside `functions`' `rootDir` — it cannot be reached from the Cloud
- * Functions runtime. Rather than return the handoff's fabricated
- * `{source:"IEC Certified Results"}` stub (which would violate build rule 2 —
- * never fabricate — and rule 6 — a tool that cannot do its job refuses), they
- * return `isError` with the reason. Wiring a shared engine into functions is the
- * prerequisite to turning them on.
+ * The seat figures come from the REAL, mirrored Schedule 1 engine
+ * (`./engine/seatCalculator` — `allocateSeats`, the Item 12 quota) and the REAL
+ * NW405 2021 result (`./engine/nw405Example`), copied into this package by
+ * `npm run gen:agent-engine` and guarded against drift by
+ * `agentEngineMirror.test.ts`. The statutory formula is never reimplemented; a
+ * scenario swing is a transparent, labelled USER ASSUMPTION applied on top of
+ * it (build rule 2; the provenance gate forbids calling a swing "sourced").
+ *
+ * What this runtime holds is NW405 (JB Marks). Anything else — another
+ * municipality, or 2026 certified results, which are not mirrored here — FAILS
+ * CLOSED rather than returning a figure it cannot stand behind.
  */
 import type { HarnessContext } from './state';
+import { allocateSeats, type SeatAllocationResult } from './engine/seatCalculator';
+import { NW405_2021_EXAMPLE } from './engine/nw405Example';
 
 /** The MCP tool result shape (a subset of CallToolResult; the index signature
  * keeps it assignable to the SDK's CallToolResult without pulling its type in). */
@@ -27,6 +32,32 @@ export interface McpToolResult {
 function textResult(text: string, isError = false): McpToolResult {
   return { content: [{ type: 'text', text }], isError };
 }
+
+function seatSummary(res: SeatAllocationResult) {
+  return {
+    quota: res.quota,
+    newQuota: res.newQuota,
+    councilSizeFinal: res.councilSizeFinal,
+    totalSeatsAllocated: res.totalSeatsAllocated,
+    pendingSeats: res.pendingSeats,
+    excessiveParties: res.excessiveParties,
+    notes: res.notes,
+    delimitationId: res.delimitationId,
+    parties: res.parties.map((p) => ({
+      id: p.id,
+      name: p.name,
+      votes: p.votes,
+      wardSeats: p.wardSeatsWon,
+      prSeats: p.prSeats,
+      totalSeats: p.totalSeats,
+    })),
+  };
+}
+
+const BASE = NW405_2021_EXAMPLE;
+const baseParties = () => BASE.parties.map((p) => ({ id: p.id, name: p.name, votes: p.votes, wardSeatsWon: p.wardSeatsWon }));
+
+// ---- Reader: war-room counters -------------------------------------------
 
 /**
  * Reads tenant-scoped war-room counters. Injected so the tool is tested without
@@ -45,23 +76,113 @@ export async function getWarRoomCountersTool(
   return textResult(JSON.stringify({ tenantId: ctx.tenantId, wardIds, counters }));
 }
 
-const BASELINE_UNAVAILABLE =
-  'Certified baseline is unavailable in the Cloud Functions runtime: the certified-results seat ' +
-  'calculator lives in the application package (outside functions/ rootDir), so there is no engine ' +
-  'to call here. This tool refuses rather than returning an unverified figure. Wire a shared ' +
-  'Schedule 1 engine into functions before enabling it.';
+// ---- Certified baseline ---------------------------------------------------
 
-const SCENARIO_UNAVAILABLE =
-  'Schedule 1 scenario runner is unavailable in the Cloud Functions runtime: the Schedule 1 quota ' +
-  'engine lives in the application package. This tool refuses rather than fabricating a seat ' +
-  'allocation. Wire a shared engine into functions before enabling it.';
-
-/** FAILS CLOSED — no certified-results engine in this runtime. */
-export function getCertifiedBaselineTool(): McpToolResult {
-  return textResult(BASELINE_UNAVAILABLE, true);
+export interface CertifiedBaselineInput {
+  municipality_code: string;
+  election_year?: '2026' | '2021';
 }
 
-/** FAILS CLOSED — no Schedule 1 engine in this runtime. */
-export function runSchedule1ScenarioTool(): McpToolResult {
-  return textResult(SCENARIO_UNAVAILABLE, true);
+/**
+ * The certified result for a municipality, run through the real Schedule 1
+ * engine. Only NW405 2021 is mirrored into this runtime; everything else fails
+ * closed rather than inventing a figure.
+ */
+export function getCertifiedBaselineTool(input: CertifiedBaselineInput): McpToolResult {
+  const code = input.municipality_code?.trim().toUpperCase();
+  const year = input.election_year ?? '2026';
+  if (code !== 'NW405' || year !== '2021') {
+    return textResult(
+      `No certified baseline is held in this runtime for ${code ?? '(none)'} ${year}. ` +
+        'Only NW405 (JB Marks) 2021 is mirrored into the Cloud Functions package; 2026 certified ' +
+        'results and other municipalities are not, so this refuses rather than returning an unverified figure.',
+      true,
+    );
+  }
+  const res = allocateSeats({
+    totalValidVotes: BASE.totalValidVotes,
+    totalSeats: BASE.totalSeats,
+    independentWardSeats: BASE.independentWardSeats,
+    noPRListWardSeats: BASE.noPRListWardSeats,
+    delimitationId: BASE.delimitationId,
+    parties: baseParties(),
+  });
+  return textResult(
+    JSON.stringify({
+      municipality_code: 'NW405',
+      election_year: '2021',
+      source: 'IEC Seat Calculation Detail for NW405 (2021 LGE), transcribed — see docs/nw405-seed-data.md',
+      totalValidVotes: BASE.totalValidVotes,
+      totalSeats: BASE.totalSeats,
+      ...seatSummary(res),
+    }),
+  );
+}
+
+// ---- Schedule 1 scenario --------------------------------------------------
+
+export interface Schedule1ScenarioInput {
+  municipality_code: string;
+  seed?: number;
+  turnout_delta_pct?: number;
+  party_swings_pct?: Record<string, number>;
+  assumption_acknowledged_by_user?: boolean;
+}
+
+/**
+ * Propagate user-stated swings and a turnout delta through the authoritative
+ * Schedule 1 quota formula. A simple proportional swing on the 2021 PR votes —
+ * a USER ASSUMPTION, never presented as sourced — with ward seats held at their
+ * 2021 values. It is a PR-seat scenario, not a ward-by-ward flip simulation
+ * (that richer model stays in the app). Only NW405 is supported here.
+ */
+export function runSchedule1ScenarioTool(input: Schedule1ScenarioInput): McpToolResult {
+  const code = input.municipality_code?.trim().toUpperCase();
+  if (code !== 'NW405') {
+    return textResult(
+      `Scenario is only available for NW405 (JB Marks) in this runtime; ${code ?? '(none)'} is not mirrored here.`,
+      true,
+    );
+  }
+  if (input.assumption_acknowledged_by_user !== true) {
+    return textResult(
+      'Scenario requires assumption_acknowledged_by_user: true — a swing and turnout delta are your ' +
+        'assumptions, not sourced figures, and the run will not proceed without that acknowledgement.',
+      true,
+    );
+  }
+
+  const swings = input.party_swings_pct ?? {};
+  const turnoutFactor = 1 + (input.turnout_delta_pct ?? 0) / 100;
+  const parties = BASE.parties.map((p) => {
+    const swingPct = swings[p.id] ?? 0;
+    const votes = Math.max(0, Math.round(p.votes * (1 + swingPct / 100) * turnoutFactor));
+    return { id: p.id, name: p.name, votes, wardSeatsWon: p.wardSeatsWon };
+  });
+  const totalValidVotes = parties.reduce((s, p) => s + p.votes, 0);
+
+  const res = allocateSeats({
+    totalValidVotes,
+    totalSeats: BASE.totalSeats,
+    independentWardSeats: BASE.independentWardSeats,
+    noPRListWardSeats: BASE.noPRListWardSeats,
+    delimitationId: BASE.delimitationId,
+    parties,
+  });
+
+  return textResult(
+    JSON.stringify({
+      municipality_code: 'NW405',
+      seed: input.seed ?? null,
+      provenance: 'user_assumption_propagated_via_schedule1',
+      model_note:
+        'Simple proportional swing applied to the 2021 PR votes (a user assumption), then the real ' +
+        'Schedule 1 Item 12 quota. Ward seats held at their 2021 values; this is a PR-seat scenario, not a ' +
+        'ward-by-ward flip simulation. Deterministic — the seed does not affect the result.',
+      turnout_delta_pct: input.turnout_delta_pct ?? 0,
+      party_swings_pct: swings,
+      totalValidVotes,
+      ...seatSummary(res),
+    }),
+  );
 }

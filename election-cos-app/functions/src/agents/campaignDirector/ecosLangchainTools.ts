@@ -46,10 +46,13 @@ export function buildEcosTools(counterReader: CounterReader): StructuredToolInte
   );
 
   const baseline = tool(
-    async (): Promise<string> => getCertifiedBaselineTool().content[0].text,
+    async (input: { municipality_code: string; election_year?: '2026' | '2021' }): Promise<string> =>
+      getCertifiedBaselineTool(input).content[0].text,
     {
       name: 'get_certified_baseline',
-      description: 'Certified municipality result lookup. Currently refuses: the engine lives in the app package.',
+      description:
+        'Certified municipality result via the real Schedule 1 engine. Serves NW405 (JB Marks) 2021; ' +
+        'other municipalities and 2026 are not mirrored into this runtime and refuse.',
       schema: z.object({
         municipality_code: z.string().regex(/^NW\d{3}$/),
         election_year: z.enum(['2026', '2021']).default('2026'),
@@ -58,10 +61,18 @@ export function buildEcosTools(counterReader: CounterReader): StructuredToolInte
   );
 
   const scenario = tool(
-    async (): Promise<string> => runSchedule1ScenarioTool().content[0].text,
+    async (input: {
+      municipality_code: string;
+      seed: number;
+      turnout_delta_pct: number;
+      party_swings_pct: Record<string, number>;
+      assumption_acknowledged_by_user: true;
+    }): Promise<string> => runSchedule1ScenarioTool(input).content[0].text,
     {
       name: 'run_schedule1_scenario',
-      description: 'Schedule 1 seat scenario runner. Currently refuses: the engine lives in the app package.',
+      description:
+        'Propagate user swings + turnout through the real Schedule 1 quota (NW405 only). A labelled ' +
+        'user assumption on 2021 PR votes; ward seats held. Deterministic.',
       schema: z.object({
         municipality_code: z.string().regex(/^NW\d{3}$/),
         seed: z.number().int(),

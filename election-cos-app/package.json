@@ -23,6 +23,7 @@
     "docs:emit": "vite-node scripts/emit-documents.ts --",
     "emulators": "firebase emulators:start --project demo-ecos",
     "gen:roles": "vite-node scripts/gen-roles.ts",
+    "gen:agent-engine": "vite-node scripts/gen-agent-engine.ts",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preflight": "node scripts/deploy-preflight.mjs",
     "preview": "vite preview",

@@ -29,13 +29,13 @@ export function createEcosMcpServer(ctx: HarnessContext, counterReader: CounterR
     'get_certified_baseline',
     {
       title: 'Get Certified Municipality Baseline',
-      description: 'Read-only certified result lookup. Currently refuses: the engine lives in the app package.',
+      description: 'Certified result via the real Schedule 1 engine. Serves NW405 2021; other codes/2026 refuse.',
       inputSchema: {
         municipality_code: z.string().regex(/^NW\d{3}$/, 'Must be a North West code, e.g. NW405'),
         election_year: z.enum(['2026', '2021']).default('2026'),
       },
     },
-    async () => getCertifiedBaselineTool(),
+    async (args) => getCertifiedBaselineTool(args),
   );
 
   server.registerTool(
@@ -54,7 +54,7 @@ export function createEcosMcpServer(ctx: HarnessContext, counterReader: CounterR
     'run_schedule1_scenario',
     {
       title: 'Run Schedule 1 Seat Scenario',
-      description: 'Propagates user-stated swings through the Schedule 1 engine. Currently refuses: engine in app package.',
+      description: 'Propagate user swings + turnout through the real Schedule 1 quota (NW405 only). Deterministic.',
       inputSchema: {
         municipality_code: z.string().regex(/^NW\d{3}$/),
         seed: z.number().int(),
@@ -63,7 +63,7 @@ export function createEcosMcpServer(ctx: HarnessContext, counterReader: CounterR
         assumption_acknowledged_by_user: z.literal(true),
       },
     },
-    async () => runSchedule1ScenarioTool(),
+    async (args) => runSchedule1ScenarioTool(args),
   );
 
   return server;

@@ -3676,3 +3676,34 @@ iteration cap, and the tenant-scoped tool read, alongside the existing
 fail-closed, provenance, and HITL cases. Full gate green: 2036 app + 251
 functions tests. Remaining before a live agent: the deploy target (decision B)
 and the `ANTHROPIC_API_KEY` secret at deploy.
+
+## Session 52 (cont.) — Campaign Director: the real Schedule 1 engine, mirrored in
+
+The agent's two deterministic tools now serve real figures instead of refusing.
+
+- **The engine is mirrored, not reimplemented.** `src/modules/analytics/agentEngineMirror.ts`
+  defines a copy of the Schedule 1 quota engine (`seatCalculator.ts`), the register
+  it depends on (`municipalRegister.ts` + the 61 KB annexure JSON) and the verified
+  NW405 2021 result (`nw405Example.ts`) into
+  `functions/src/agents/campaignDirector/engine/`, rewriting their `@/` imports to
+  local paths. `npm run gen:agent-engine` writes it; `agentEngineMirror.test.ts`
+  renders it again and compares byte-for-byte, so an engine change that is not
+  regenerated fails the build — the same zero-drift arrangement as the role mirror.
+  The statutory quota formula is never re-coded.
+- **`get_certified_baseline`** runs the real `allocateSeats` over the NW405 2021
+  result and returns the certified allocation (ANC plurality, per-party ward/PR/total
+  seats, quota). Other municipalities and 2026 (not mirrored into this runtime) fail
+  closed rather than return an unverified figure.
+- **`run_schedule1_scenario`** propagates a user swing + turnout delta through the
+  SAME real quota: a simple proportional swing on the 2021 PR votes — a labelled
+  USER ASSUMPTION, ward seats held — then `allocateSeats`. A zero-swing scenario
+  reproduces the certified baseline seats (a test asserts it). It is a PR-seat
+  scenario, not the app's ward-flip Monte-Carlo (that tree stays in the app).
+  Requires `assumption_acknowledged_by_user: true`.
+- Only `rootDir`-friendly: the mirror sidesteps the functions/`rootDir: src`
+  boundary without a module-system change, and the generated engine compiles and
+  lints clean under the functions tsconfig.
+
+Remaining before `@deployable yes`: the deploy target (decision B) and the
+`ANTHROPIC_API_KEY` secret. Broader baseline coverage (2026 / other municipalities)
+is a later data-mirror. Full gate green: 2043 app + 256 functions tests.

@@ -17,17 +17,24 @@ describe('buildEcosTools', () => {
     expect(JSON.parse(String(out))).toEqual({ tenantId: 'jb-marks', wardIds: [], counters: { votersCaptured: 7 } });
   });
 
-  it('the baseline and scenario tools refuse (fail closed) rather than fabricate', async () => {
+  it('the baseline and scenario tools serve real NW405 figures and refuse what they do not hold', async () => {
     const [, baseline, scenario] = buildEcosTools(async () => ({}));
-    const b = String(await baseline.invoke({ municipality_code: 'NW405', election_year: '2026' }, config));
-    const s = String(
-      await scenario.invoke(
-        { municipality_code: 'NW405', seed: 1, turnout_delta_pct: 0, party_swings_pct: {}, assumption_acknowledged_by_user: true },
-        config,
+    // Real NW405 2021 baseline through the mirrored Schedule 1 engine.
+    const ok = JSON.parse(String(await baseline.invoke({ municipality_code: 'NW405', election_year: '2021' }, config)));
+    expect(ok.municipality_code).toBe('NW405');
+    expect(ok.quota).toBeGreaterThan(0);
+    // 2026 is not mirrored here → refuses.
+    expect(String(await baseline.invoke({ municipality_code: 'NW405', election_year: '2026' }, config))).toMatch(/refuses|not mirrored/i);
+    // Scenario runs for NW405 and carries the user-assumption provenance.
+    const scen = JSON.parse(
+      String(
+        await scenario.invoke(
+          { municipality_code: 'NW405', seed: 1, turnout_delta_pct: 0, party_swings_pct: {}, assumption_acknowledged_by_user: true },
+          config,
+        ),
       ),
     );
-    expect(b).toMatch(/unavailable|refuses/i);
-    expect(s).toMatch(/unavailable|refuses/i);
+    expect(scen.provenance).toBe('user_assumption_propagated_via_schedule1');
   });
 });
 
