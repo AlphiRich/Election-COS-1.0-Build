@@ -3707,3 +3707,25 @@ The agent's two deterministic tools now serve real figures instead of refusing.
 Remaining before `@deployable yes`: the deploy target (decision B) and the
 `ANTHROPIC_API_KEY` secret. Broader baseline coverage (2026 / other municipalities)
 is a later data-mirror. Full gate green: 2043 app + 256 functions tests.
+
+## Session 52 (cont.) — Campaign Director: broaden the baseline to the certified 2026 NW results
+
+The agent's two deterministic tools now cover the whole of the North West for
+the current cycle, not just JB Marks 2021.
+
+- **`src/modules/analytics/agentBaseline2026.ts`** snapshots the certified LGE
+  2026 seat INPUT for all 18 NW local municipalities — computed from the app's
+  own tested `seatInput(code)` over `nw-results.json`, not hand-typed — into
+  `functions/.../engine/nw-seat-inputs-2026.json` (~58 KB). `npm run gen:agent-engine`
+  writes it; `agentEngineMirror.test.ts` recomputes and compares byte-for-byte,
+  so the snapshot can never drift from the certified pipeline.
+- **`get_certified_baseline`** now serves NW405 2021 and any of the 18 NW locals
+  for 2026 (the default year), each run through the real `allocateSeats`.
+  Everything else fails closed.
+- **`run_schedule1_scenario`** gains an `election_year` (default 2026): it
+  propagates a user swing + turnout delta through the real quota on the certified
+  2026 baseline for any NW local (or NW405 2021). A zero swing still reproduces
+  the certified baseline seats, asserted per year.
+- No fabrication: every figure is the app pipeline's reading of the certified
+  results; the swing stays a labelled user assumption. Full gate green: 2045 app
+  + 257 functions tests.

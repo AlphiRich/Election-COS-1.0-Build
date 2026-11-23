@@ -17,15 +17,18 @@ describe('buildEcosTools', () => {
     expect(JSON.parse(String(out))).toEqual({ tenantId: 'jb-marks', wardIds: [], counters: { votersCaptured: 7 } });
   });
 
-  it('the baseline and scenario tools serve real NW405 figures and refuse what they do not hold', async () => {
+  it('the baseline and scenario tools serve real figures and refuse what they do not hold', async () => {
     const [, baseline, scenario] = buildEcosTools(async () => ({}));
     // Real NW405 2021 baseline through the mirrored Schedule 1 engine.
     const ok = JSON.parse(String(await baseline.invoke({ municipality_code: 'NW405', election_year: '2021' }, config)));
     expect(ok.municipality_code).toBe('NW405');
     expect(ok.quota).toBeGreaterThan(0);
-    // 2026 is not mirrored here → refuses.
-    expect(String(await baseline.invoke({ municipality_code: 'NW405', election_year: '2026' }, config))).toMatch(/refuses|not mirrored/i);
-    // Scenario runs for NW405 and carries the user-assumption provenance.
+    // Real certified 2026 result for an NW local.
+    const ok2026 = JSON.parse(String(await baseline.invoke({ municipality_code: 'NW403', election_year: '2026' }, config)));
+    expect(ok2026.election_year).toBe('2026');
+    // A code this runtime does not hold → refuses.
+    expect(String(await baseline.invoke({ municipality_code: 'NW999', election_year: '2026' }, config))).toMatch(/refuses|No certified/i);
+    // Scenario runs and carries the user-assumption provenance.
     const scen = JSON.parse(
       String(
         await scenario.invoke(

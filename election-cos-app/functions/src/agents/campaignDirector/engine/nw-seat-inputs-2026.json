@@ -1,0 +1,2432 @@
+{
+  "NW371": {
+    "code": "NW371",
+    "name": "Moretele",
+    "delimitationId": "LGE-2026-PROCLAIMED",
+    "totalSeats": 50,
+    "totalValidVotes": 100639,
+    "independentWardSeats": 0,
+    "noPRListWardSeats": 0,
+    "parties": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "votes": 57007,
+        "wardSeatsWon": 25
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "votes": 12870,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "votes": 10504,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "votes": 8820,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "votes": 2769,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "votes": 2379,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_INDEPENDENT_CONGRESS",
+        "name": "African Independent Congress",
+        "votes": 1489,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SERVICE_DELIVERY_PARTY",
+        "name": "Service Delivery Party",
+        "votes": 627,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "VFP",
+        "name": "Vryheidsfront Plus | Freedom Front Plus",
+        "votes": 573,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "IFP",
+        "name": "Inkatha Freedom Party",
+        "votes": 523,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_ROYAL_RAINBOW_CONGRESS",
+        "name": "African Royal Rainbow Congress",
+        "votes": 422,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ALL_CITIZENS_PARTY",
+        "name": "All Citizens Party",
+        "votes": 458,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRIKA_MAYIBUYE_MOVEMENT",
+        "name": "Afrika Mayibuye Movement",
+        "votes": 357,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "BOPHUTHATSWANA_CIVIL_MOVEMENT",
+        "name": "Bophuthatswana Civil Movement",
+        "votes": 240,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_PEOPLE_S_CONVENTION",
+        "name": "African People's Convention",
+        "votes": 366,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_AFRICANS_TRANSFORMATION",
+        "name": "United Africans Transformation",
+        "votes": 163,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AGENDA_TO_CITIZENRY_GOVERNORS",
+        "name": "Agenda To Citizenry Governors",
+        "votes": 307,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_ECONOMIC_FREEDOM",
+        "name": "African Economic Freedom",
+        "votes": 180,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ECONOMIC_EMANCIPATION_FORUM",
+        "name": "Economic Emancipation Forum",
+        "votes": 177,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIVE_AFRICAN_CHRISTIANS_UNITED_MOVEMENT",
+        "name": "Active African Christians United Movement",
+        "votes": 139,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PA",
+        "name": "Patriotic Alliance",
+        "votes": 75,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "RESTORATION_COMMUNITY_FORUM",
+        "name": "Restoration Community Forum",
+        "votes": 69,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SOUTH_AFRICAN_POLITICAL_ASSOCIATION",
+        "name": "South African Political Association",
+        "votes": 32,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "DEFENDERS_OF_THE_PEOPLE",
+        "name": "Defenders of the People",
+        "votes": 36,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PURPLE_PARTY_IKAGENG",
+        "name": "Purple Party Ikageng",
+        "votes": 29,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "POELANO_REVELATION_PARTY",
+        "name": "Poelano Revelation Party",
+        "votes": 28,
+        "wardSeatsWon": 0
+      }
+    ]
+  },
+  "NW372": {
+    "code": "NW372",
+    "name": "Madibeng",
+    "delimitationId": "LGE-2026-PROCLAIMED",
+    "totalSeats": 82,
+    "totalValidVotes": 242845,
+    "independentWardSeats": 1,
+    "noPRListWardSeats": 0,
+    "parties": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "votes": 101631,
+        "wardSeatsWon": 29
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "votes": 38373,
+        "wardSeatsWon": 3
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "votes": 36639,
+        "wardSeatsWon": 5
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "votes": 15327,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "VFP",
+        "name": "Vryheidsfront Plus | Freedom Front Plus",
+        "votes": 15857,
+        "wardSeatsWon": 1
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "votes": 11260,
+        "wardSeatsWon": 1
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "votes": 3537,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "COMMUNITY_INDEPENDANT_PARTY",
+        "name": "Community Independant Party",
+        "votes": 3135,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "LABOUR_PARTY_OF_SOUTH_AFRICA",
+        "name": "Labour Party of South Africa",
+        "votes": 2503,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SAVE_SOUTH_AFRICA",
+        "name": "Save South Africa",
+        "votes": 2149,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AL_JAMA_AH",
+        "name": "Al Jama-ah",
+        "votes": 1995,
+        "wardSeatsWon": 1
+      },
+      {
+        "id": "ACDP",
+        "name": "African Christian Democratic Party",
+        "votes": 1752,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_AFRICANS_TRANSFORMATION",
+        "name": "United Africans Transformation",
+        "votes": 1090,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "INDEPENDENT_PARTY",
+        "name": "Independent Party",
+        "votes": 813,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "TSOGANG_MADIBENG",
+        "name": "Tsogang Madibeng",
+        "votes": 766,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "BOPHUTHATSWANA_CIVIL_MOVEMENT",
+        "name": "Bophuthatswana Civil Movement",
+        "votes": 580,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ALL_CITIZENS_PARTY",
+        "name": "All Citizens Party",
+        "votes": 860,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ATM",
+        "name": "African Transformation Movement",
+        "votes": 445,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_PEOPLE_S_CONVENTION",
+        "name": "African People's Convention",
+        "votes": 750,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRIKA_MAYIBUYE_MOVEMENT",
+        "name": "Afrika Mayibuye Movement",
+        "votes": 453,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_ECONOMIC_FREEDOM",
+        "name": "African Economic Freedom",
+        "votes": 414,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SERVICE_DELIVERY_PARTY",
+        "name": "Service Delivery Party",
+        "votes": 425,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_CHRISTIAN_DEMOCRATIC_PARTY",
+        "name": "United Christian Democratic Party",
+        "votes": 247,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "IFP",
+        "name": "Inkatha Freedom Party",
+        "votes": 227,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ECONOMIC_EMANCIPATION_FORUM",
+        "name": "Economic Emancipation Forum",
+        "votes": 237,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIVE_AFRICAN_CHRISTIANS_UNITED_MOVEMENT",
+        "name": "Active African Christians United Movement",
+        "votes": 216,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AZANIAN_PEOPLE_S_ORGANISATION",
+        "name": "Azanian People's Organisation",
+        "votes": 224,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UTLWANG_VOICE_OF_THE_PEOPLE",
+        "name": "Utlwang Voice of the People",
+        "votes": 206,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "FORUM_FOR_SOUTH_AFRICA",
+        "name": "Forum for South Africa",
+        "votes": 194,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PA",
+        "name": "Patriotic Alliance",
+        "votes": 91,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "FREEDOM_IN_SOUTH_AFRICA",
+        "name": "Freedom In South Africa",
+        "votes": 181,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SOUTH_AFRICAN_POLITICAL_ASSOCIATION",
+        "name": "South African Political Association",
+        "votes": 110,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PURPLE_PARTY_IKAGENG",
+        "name": "Purple Party Ikageng",
+        "votes": 66,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ORGANIC_HUMANITY_MOVEMENT",
+        "name": "Organic Humanity Movement",
+        "votes": 92,
+        "wardSeatsWon": 0
+      }
+    ]
+  },
+  "NW373": {
+    "code": "NW373",
+    "name": "Rustenburg",
+    "delimitationId": "LGE-2026-PROCLAIMED",
+    "totalSeats": 90,
+    "totalValidVotes": 277898,
+    "independentWardSeats": 0,
+    "noPRListWardSeats": 0,
+    "parties": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "votes": 108107,
+        "wardSeatsWon": 35
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "votes": 40421,
+        "wardSeatsWon": 7
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "votes": 37407,
+        "wardSeatsWon": 1
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "votes": 17454,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "votes": 13228,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "VFP",
+        "name": "Vryheidsfront Plus | Freedom Front Plus",
+        "votes": 9008,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "votes": 8690,
+        "wardSeatsWon": 1
+      },
+      {
+        "id": "LABOUR_PARTY_OF_SOUTH_AFRICA",
+        "name": "Labour Party of South Africa",
+        "votes": 8260,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SERITI_LE_KAELO_INDEPENDENT_PARTY",
+        "name": "Seriti Le Kaelo Independent Party",
+        "votes": 7174,
+        "wardSeatsWon": 1
+      },
+      {
+        "id": "RUSTENBURG_PEOPLE_S_PARTY",
+        "name": "Rustenburg People's Party",
+        "votes": 4424,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "LETHABONG_SERVICE_MOVEMENT",
+        "name": "Lethabong Service Movement",
+        "votes": 3964,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PA",
+        "name": "Patriotic Alliance",
+        "votes": 3184,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "BADIREDI_BA_SET_HABA",
+        "name": "Badiredi Ba Setšhaba",
+        "votes": 2450,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ATM",
+        "name": "African Transformation Movement",
+        "votes": 1536,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "TSOGANG_CIVIC_MOVEMENT",
+        "name": "Tsogang Civic Movement",
+        "votes": 1564,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PURPLE_PARTY_IKAGENG",
+        "name": "Purple Party Ikageng",
+        "votes": 1467,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_INDEPENDENT_CONGRESS",
+        "name": "African Independent Congress",
+        "votes": 933,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACDP",
+        "name": "African Christian Democratic Party",
+        "votes": 731,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "BAKANANA_PELE_CAMPAIGN",
+        "name": "Bakanana Pele Campaign",
+        "votes": 1015,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "BOPHUTHATSWANA_CIVIL_MOVEMENT",
+        "name": "Bophuthatswana Civil Movement",
+        "votes": 525,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PEOPLE_S_MANDATE_PARTY",
+        "name": "People's Mandate Party",
+        "votes": 738,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_ECONOMIC_TRANSFORMERS",
+        "name": "African Economic Transformers",
+        "votes": 613,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_ECONOMIC_FREEDOM",
+        "name": "African Economic Freedom",
+        "votes": 431,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_AFRICANS_TRANSFORMATION",
+        "name": "United Africans Transformation",
+        "votes": 408,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRIKA_MAYIBUYE_MOVEMENT",
+        "name": "Afrika Mayibuye Movement",
+        "votes": 567,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_CHRISTIAN_DEMOCRATIC_PARTY",
+        "name": "United Christian Democratic Party",
+        "votes": 551,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_PEOPLE_S_CONVENTION",
+        "name": "African People's Convention",
+        "votes": 458,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AZANIAN_PEOPLE_S_ORGANISATION",
+        "name": "Azanian People's Organisation",
+        "votes": 416,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "CONGRESS_OF_THE_PEOPLE",
+        "name": "Congress of the People",
+        "votes": 377,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "IFP",
+        "name": "Inkatha Freedom Party",
+        "votes": 173,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AL_JAMA_AH",
+        "name": "Al Jama-ah",
+        "votes": 220,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ARONA",
+        "name": "Arona",
+        "votes": 207,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "FREEDOM_IN_SOUTH_AFRICA",
+        "name": "Freedom In South Africa",
+        "votes": 255,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIVE_AFRICAN_CHRISTIANS_UNITED_MOVEMENT",
+        "name": "Active African Christians United Movement",
+        "votes": 183,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "COMMUNITY_PRIORITY_MOVEMENT",
+        "name": "Community Priority Movement",
+        "votes": 156,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SOUTH_AFRICAN_POLITICAL_ASSOCIATION",
+        "name": "South African Political Association",
+        "votes": 250,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SERVICE_DELIVERY_PARTY",
+        "name": "Service Delivery Party",
+        "votes": 150,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ECONOMIC_EMANCIPATION_FORUM",
+        "name": "Economic Emancipation Forum",
+        "votes": 140,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_CONGRESS_FOR_TRANSFORMATION",
+        "name": "African Congress for Transformation",
+        "votes": 63,
+        "wardSeatsWon": 0
+      }
+    ]
+  },
+  "NW374": {
+    "code": "NW374",
+    "name": "Kgetlengrivier",
+    "delimitationId": "LGE-2026-PROCLAIMED",
+    "totalSeats": 13,
+    "totalValidVotes": 25006,
+    "independentWardSeats": 0,
+    "noPRListWardSeats": 0,
+    "parties": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "votes": 10840,
+        "wardSeatsWon": 6
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "votes": 3918,
+        "wardSeatsWon": 1
+      },
+      {
+        "id": "VFP",
+        "name": "Vryheidsfront Plus | Freedom Front Plus",
+        "votes": 3588,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "votes": 2050,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "votes": 1483,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "votes": 1084,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "KGETLENG_PEOPLE_S_FORUM",
+        "name": "Kgetleng People's Forum",
+        "votes": 737,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "votes": 609,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "LABOUR_PARTY_OF_SOUTH_AFRICA",
+        "name": "Labour Party of South Africa",
+        "votes": 345,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ALL_CITIZENS_PARTY",
+        "name": "All Citizens Party",
+        "votes": 166,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_SPEAR_MOVEMENT",
+        "name": "African Spear Movement",
+        "votes": 71,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRIKA_MAYIBUYE_MOVEMENT",
+        "name": "Afrika Mayibuye Movement",
+        "votes": 53,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ORGANIC_HUMANITY_MOVEMENT",
+        "name": "Organic Humanity Movement",
+        "votes": 26,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PA",
+        "name": "Patriotic Alliance",
+        "votes": 18,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PURPLE_PARTY_IKAGENG",
+        "name": "Purple Party Ikageng",
+        "votes": 10,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SERITI_LE_KAELO_INDEPENDENT_PARTY",
+        "name": "Seriti Le Kaelo Independent Party",
+        "votes": 8,
+        "wardSeatsWon": 0
+      }
+    ]
+  },
+  "NW375": {
+    "code": "NW375",
+    "name": "Moses Kotane",
+    "delimitationId": "LGE-2026-PROCLAIMED",
+    "totalSeats": 69,
+    "totalValidVotes": 112210,
+    "independentWardSeats": 1,
+    "noPRListWardSeats": 0,
+    "parties": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "votes": 58396,
+        "wardSeatsWon": 33
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "votes": 18261,
+        "wardSeatsWon": 1
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "votes": 7062,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "votes": 6732,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "votes": 4263,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "votes": 3250,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PURPLE_PARTY_IKAGENG",
+        "name": "Purple Party Ikageng",
+        "votes": 1875,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SERITI_LE_KAELO_INDEPENDENT_PARTY",
+        "name": "Seriti Le Kaelo Independent Party",
+        "votes": 1929,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACDP",
+        "name": "African Christian Democratic Party",
+        "votes": 1263,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "LABOUR_PARTY_OF_SOUTH_AFRICA",
+        "name": "Labour Party of South Africa",
+        "votes": 1261,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_PEOPLE_S_CONVENTION",
+        "name": "African People's Convention",
+        "votes": 1066,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "BOPHUTHATSWANA_CIVIL_MOVEMENT",
+        "name": "Bophuthatswana Civil Movement",
+        "votes": 926,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_CHRISTIAN_DEMOCRATIC_PARTY",
+        "name": "United Christian Democratic Party",
+        "votes": 1112,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ATM",
+        "name": "African Transformation Movement",
+        "votes": 737,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "TSOGANG_CIVIC_MOVEMENT",
+        "name": "Tsogang Civic Movement",
+        "votes": 744,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_REVOLUTIONARY_COUNCIL",
+        "name": "African Revolutionary Council",
+        "votes": 447,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ALL_CITIZENS_PARTY",
+        "name": "All Citizens Party",
+        "votes": 483,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_AFRICANS_TRANSFORMATION",
+        "name": "United Africans Transformation",
+        "votes": 401,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AZANIAN_PEOPLE_S_ORGANISATION",
+        "name": "Azanian People's Organisation",
+        "votes": 431,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PA",
+        "name": "Patriotic Alliance",
+        "votes": 373,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_ECONOMIC_FREEDOM",
+        "name": "African Economic Freedom",
+        "votes": 345,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRIKA_MAYIBUYE_MOVEMENT",
+        "name": "Afrika Mayibuye Movement",
+        "votes": 243,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_SPEAR_MOVEMENT",
+        "name": "African Spear Movement",
+        "votes": 230,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ARONA",
+        "name": "Arona",
+        "votes": 140,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SOUTH_AFRICAN_POLITICAL_ASSOCIATION",
+        "name": "South African Political Association",
+        "votes": 93,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ECONOMIC_EMANCIPATION_FORUM",
+        "name": "Economic Emancipation Forum",
+        "votes": 147,
+        "wardSeatsWon": 0
+      }
+    ]
+  },
+  "NW381": {
+    "code": "NW381",
+    "name": "Ratlou",
+    "delimitationId": "LGE-2026-PROCLAIMED",
+    "totalSeats": 27,
+    "totalValidVotes": 50028,
+    "independentWardSeats": 0,
+    "noPRListWardSeats": 0,
+    "parties": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "votes": 28072,
+        "wardSeatsWon": 14
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "votes": 4521,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "votes": 4020,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "votes": 3388,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "votes": 2864,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "votes": 2243,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PA",
+        "name": "Patriotic Alliance",
+        "votes": 1188,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_PEOPLE_S_CONVENTION",
+        "name": "African People's Convention",
+        "votes": 1065,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_CHRISTIAN_DEMOCRATIC_PARTY",
+        "name": "United Christian Democratic Party",
+        "votes": 1011,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_SPEAR_MOVEMENT",
+        "name": "African Spear Movement",
+        "votes": 687,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRIKA_MAYIBUYE_MOVEMENT",
+        "name": "Afrika Mayibuye Movement",
+        "votes": 526,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "BOPHUTHATSWANA_CIVIL_MOVEMENT",
+        "name": "Bophuthatswana Civil Movement",
+        "votes": 165,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_REVOLUTIONARY_COUNCIL",
+        "name": "African Revolutionary Council",
+        "votes": 92,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "IFP",
+        "name": "Inkatha Freedom Party",
+        "votes": 146,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "FORUM_FOR_DEMOCRATS",
+        "name": "Forum for Democrats",
+        "votes": 40,
+        "wardSeatsWon": 0
+      }
+    ]
+  },
+  "NW382": {
+    "code": "NW382",
+    "name": "Tswaing",
+    "delimitationId": "LGE-2026-PROCLAIMED",
+    "totalSeats": 28,
+    "totalValidVotes": 49316,
+    "independentWardSeats": 0,
+    "noPRListWardSeats": 0,
+    "parties": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "votes": 27884,
+        "wardSeatsWon": 14
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "votes": 7237,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "votes": 4341,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "votes": 2548,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "votes": 2518,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "votes": 1867,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "VFP",
+        "name": "Vryheidsfront Plus | Freedom Front Plus",
+        "votes": 1435,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_SPEAR_MOVEMENT",
+        "name": "African Spear Movement",
+        "votes": 605,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "IFP",
+        "name": "Inkatha Freedom Party",
+        "votes": 237,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_CHRISTIAN_DEMOCRATIC_PARTY",
+        "name": "United Christian Democratic Party",
+        "votes": 203,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_REVOLUTIONARY_COUNCIL",
+        "name": "African Revolutionary Council",
+        "votes": 124,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRIKA_MAYIBUYE_MOVEMENT",
+        "name": "Afrika Mayibuye Movement",
+        "votes": 220,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ALL_CITIZENS_PARTY",
+        "name": "All Citizens Party",
+        "votes": 97,
+        "wardSeatsWon": 0
+      }
+    ]
+  },
+  "NW383": {
+    "code": "NW383",
+    "name": "Mafikeng",
+    "delimitationId": "LGE-2026-PROCLAIMED",
+    "totalSeats": 70,
+    "totalValidVotes": 134298,
+    "independentWardSeats": 0,
+    "noPRListWardSeats": 0,
+    "parties": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "votes": 60134,
+        "wardSeatsWon": 34
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "votes": 19086,
+        "wardSeatsWon": 1
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "votes": 15143,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "votes": 11671,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "votes": 6558,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PA",
+        "name": "Patriotic Alliance",
+        "votes": 2853,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "votes": 3062,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_CHRISTIAN_DEMOCRATIC_PARTY",
+        "name": "United Christian Democratic Party",
+        "votes": 2882,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRIKA_MAYIBUYE_MOVEMENT",
+        "name": "Afrika Mayibuye Movement",
+        "votes": 2648,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "BOPHUTHATSWANA_CIVIL_MOVEMENT",
+        "name": "Bophuthatswana Civil Movement",
+        "votes": 1492,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_SPEAR_MOVEMENT",
+        "name": "African Spear Movement",
+        "votes": 1696,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "VFP",
+        "name": "Vryheidsfront Plus | Freedom Front Plus",
+        "votes": 1252,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_INDEPENDENT_CONGRESS",
+        "name": "African Independent Congress",
+        "votes": 1158,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ALL_AND_CITIZENS",
+        "name": "All and Citizens",
+        "votes": 1201,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACDP",
+        "name": "African Christian Democratic Party",
+        "votes": 943,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "IFP",
+        "name": "Inkatha Freedom Party",
+        "votes": 669,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "KOPANO_MOVEMENT",
+        "name": "Kopano Movement",
+        "votes": 559,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_PEOPLE_S_CONVENTION",
+        "name": "African People's Convention",
+        "votes": 470,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_REVOLUTIONARY_COUNCIL",
+        "name": "African Revolutionary Council",
+        "votes": 252,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_AFRICANS_TRANSFORMATION",
+        "name": "United Africans Transformation",
+        "votes": 222,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SAVE_DITSOBOTLA_MOVEMENT",
+        "name": "Save Ditsobotla Movement",
+        "votes": 118,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PAN_AFRICANIST_CONGRESS_OF_AZANIA",
+        "name": "Pan Africanist Congress of Azania",
+        "votes": 101,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "FORUM_FOR_DEMOCRATS",
+        "name": "Forum for Democrats",
+        "votes": 128,
+        "wardSeatsWon": 0
+      }
+    ]
+  },
+  "NW384": {
+    "code": "NW384",
+    "name": "Ditsobotla",
+    "delimitationId": "LGE-2026-PROCLAIMED",
+    "totalSeats": 39,
+    "totalValidVotes": 81359,
+    "independentWardSeats": 0,
+    "noPRListWardSeats": 0,
+    "parties": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "votes": 32159,
+        "wardSeatsWon": 18
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "votes": 12121,
+        "wardSeatsWon": 2
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "votes": 8199,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SAVE_DITSOBOTLA_MOVEMENT",
+        "name": "Save Ditsobotla Movement",
+        "votes": 4999,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PA",
+        "name": "Patriotic Alliance",
+        "votes": 4059,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "votes": 3578,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "votes": 3136,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "KOPANO_MOVEMENT",
+        "name": "Kopano Movement",
+        "votes": 2754,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "VFP",
+        "name": "Vryheidsfront Plus | Freedom Front Plus",
+        "votes": 2343,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "votes": 2302,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ATM",
+        "name": "African Transformation Movement",
+        "votes": 1070,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PAN_AFRICANIST_CONGRESS_OF_AZANIA",
+        "name": "Pan Africanist Congress of Azania",
+        "votes": 639,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRIKA_MAYIBUYE_MOVEMENT",
+        "name": "Afrika Mayibuye Movement",
+        "votes": 589,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "NEW_FORCE",
+        "name": "New Force",
+        "votes": 493,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACDP",
+        "name": "African Christian Democratic Party",
+        "votes": 449,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "BOPHUTHATSWANA_CIVIL_MOVEMENT",
+        "name": "Bophuthatswana Civil Movement",
+        "votes": 430,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_PEOPLE_S_CONVENTION",
+        "name": "African People's Convention",
+        "votes": 490,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_HEART_CONGRESS",
+        "name": "African Heart Congress",
+        "votes": 303,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_SPEAR_MOVEMENT",
+        "name": "African Spear Movement",
+        "votes": 235,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_REVOLUTIONARY_COUNCIL",
+        "name": "African Revolutionary Council",
+        "votes": 156,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_AFRICANS_TRANSFORMATION",
+        "name": "United Africans Transformation",
+        "votes": 137,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_CHRISTIAN_DEMOCRATIC_PARTY",
+        "name": "United Christian Democratic Party",
+        "votes": 185,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "IFP",
+        "name": "Inkatha Freedom Party",
+        "votes": 168,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SERVICE_DELIVERY_PARTY",
+        "name": "Service Delivery Party",
+        "votes": 120,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ALL_CITIZENS_PARTY",
+        "name": "All Citizens Party",
+        "votes": 105,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "LABOUR_PARTY_OF_SOUTH_AFRICA",
+        "name": "Labour Party of South Africa",
+        "votes": 73,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "FREEDOM_IN_SOUTH_AFRICA",
+        "name": "Freedom In South Africa",
+        "votes": 67,
+        "wardSeatsWon": 0
+      }
+    ]
+  },
+  "NW385": {
+    "code": "NW385",
+    "name": "Ramotshere Moiloa",
+    "delimitationId": "LGE-2026-PROCLAIMED",
+    "totalSeats": 37,
+    "totalValidVotes": 72984,
+    "independentWardSeats": 0,
+    "noPRListWardSeats": 0,
+    "parties": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "votes": 31854,
+        "wardSeatsWon": 18
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "votes": 13321,
+        "wardSeatsWon": 1
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "votes": 7114,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_INDEPENDENT_NATIONAL_DEMOCRATIC_CAUCUS",
+        "name": "African Independent National Democratic Caucus",
+        "votes": 5903,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "votes": 4134,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "VFP",
+        "name": "Vryheidsfront Plus | Freedom Front Plus",
+        "votes": 2099,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_CHRISTIAN_DEMOCRATIC_PARTY",
+        "name": "United Christian Democratic Party",
+        "votes": 1562,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "votes": 1703,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "votes": 1142,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PA",
+        "name": "Patriotic Alliance",
+        "votes": 1126,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "LABOUR_PARTY_OF_SOUTH_AFRICA",
+        "name": "Labour Party of South Africa",
+        "votes": 962,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "BOPHUTHATSWANA_CIVIL_MOVEMENT",
+        "name": "Bophuthatswana Civil Movement",
+        "votes": 463,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "FORUM_FOR_DEMOCRATS",
+        "name": "Forum for Democrats",
+        "votes": 589,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_SPEAR_MOVEMENT",
+        "name": "African Spear Movement",
+        "votes": 267,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRIKA_MAYIBUYE_MOVEMENT",
+        "name": "Afrika Mayibuye Movement",
+        "votes": 306,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "IFP",
+        "name": "Inkatha Freedom Party",
+        "votes": 145,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PAN_AFRICANIST_CONGRESS_OF_AZANIA",
+        "name": "Pan Africanist Congress of Azania",
+        "votes": 182,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIVE_AFRICAN_CHRISTIANS_UNITED_MOVEMENT",
+        "name": "Active African Christians United Movement",
+        "votes": 112,
+        "wardSeatsWon": 0
+      }
+    ]
+  },
+  "NW392": {
+    "code": "NW392",
+    "name": "Naledi",
+    "delimitationId": "LGE-2026-PROCLAIMED",
+    "totalSeats": 18,
+    "totalValidVotes": 34248,
+    "independentWardSeats": 0,
+    "noPRListWardSeats": 0,
+    "parties": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "votes": 16979,
+        "wardSeatsWon": 8
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "votes": 5334,
+        "wardSeatsWon": 1
+      },
+      {
+        "id": "BATHO_PELE_COMMUNITY_ASSOCIATION",
+        "name": "Batho Pele Community Association",
+        "votes": 2687,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "votes": 2316,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "VFP",
+        "name": "Vryheidsfront Plus | Freedom Front Plus",
+        "votes": 1650,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PA",
+        "name": "Patriotic Alliance",
+        "votes": 1027,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "votes": 864,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRIKA_MAYIBUYE_MOVEMENT",
+        "name": "Afrika Mayibuye Movement",
+        "votes": 887,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "votes": 745,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "votes": 631,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_AFRICANS_TRANSFORMATION",
+        "name": "United Africans Transformation",
+        "votes": 374,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_CONGRESS_FOR_TRANSFORMATION",
+        "name": "African Congress for Transformation",
+        "votes": 278,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_SPEAR_MOVEMENT",
+        "name": "African Spear Movement",
+        "votes": 136,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_CHRISTIAN_DEMOCRATIC_PARTY",
+        "name": "United Christian Democratic Party",
+        "votes": 131,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PAN_AFRICANIST_CONGRESS_OF_AZANIA",
+        "name": "Pan Africanist Congress of Azania",
+        "votes": 135,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIVE_AFRICAN_CHRISTIANS_UNITED_MOVEMENT",
+        "name": "Active African Christians United Movement",
+        "votes": 74,
+        "wardSeatsWon": 0
+      }
+    ]
+  },
+  "NW393": {
+    "code": "NW393",
+    "name": "Mamusa",
+    "delimitationId": "LGE-2026-PROCLAIMED",
+    "totalSeats": 16,
+    "totalValidVotes": 31875,
+    "independentWardSeats": 0,
+    "noPRListWardSeats": 0,
+    "parties": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "votes": 14497,
+        "wardSeatsWon": 7
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "votes": 5183,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "votes": 3072,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "VFP",
+        "name": "Vryheidsfront Plus | Freedom Front Plus",
+        "votes": 2670,
+        "wardSeatsWon": 1
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "votes": 1548,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRIKA_MAYIBUYE_MOVEMENT",
+        "name": "Afrika Mayibuye Movement",
+        "votes": 1224,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "votes": 1155,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "votes": 1112,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PA",
+        "name": "Patriotic Alliance",
+        "votes": 807,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_AFRICANS_TRANSFORMATION",
+        "name": "United Africans Transformation",
+        "votes": 386,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "TSOGANG_CIVIC_MOVEMENT",
+        "name": "Tsogang Civic Movement",
+        "votes": 99,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AZANIAN_INDEPENDENT_COMMUNITY_MOVEMENT",
+        "name": "Azanian Independent Community Movement",
+        "votes": 70,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SOUTH_AFRICAN_POLITICAL_ASSOCIATION",
+        "name": "South African Political Association",
+        "votes": 52,
+        "wardSeatsWon": 0
+      }
+    ]
+  },
+  "NW394": {
+    "code": "NW394",
+    "name": "Greater Taung",
+    "delimitationId": "LGE-2026-PROCLAIMED",
+    "totalSeats": 47,
+    "totalValidVotes": 101343,
+    "independentWardSeats": 0,
+    "noPRListWardSeats": 0,
+    "parties": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "votes": 47150,
+        "wardSeatsWon": 24
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "votes": 17287,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "votes": 8285,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "votes": 7864,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "votes": 7319,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIVE_CITIZENRY_TAUNG_ASSOCIATION",
+        "name": "Active Citizenry Taung Association",
+        "votes": 1793,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_CONGRESS_FOR_TRANSFORMATION",
+        "name": "African Congress for Transformation",
+        "votes": 1716,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PA",
+        "name": "Patriotic Alliance",
+        "votes": 1572,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ALLIANCE_FOR_SOCIAL_EQUITY",
+        "name": "Alliance for Social Equity",
+        "votes": 1533,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "votes": 1148,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_AFRICANS_TRANSFORMATION",
+        "name": "United Africans Transformation",
+        "votes": 1076,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_INDEPENDENT_CONGRESS",
+        "name": "African Independent Congress",
+        "votes": 1245,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_CHRISTIAN_DEMOCRATIC_PARTY",
+        "name": "United Christian Democratic Party",
+        "votes": 714,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_MOVEMENT_CONGRESS",
+        "name": "African Movement Congress",
+        "votes": 696,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACDP",
+        "name": "African Christian Democratic Party",
+        "votes": 569,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "LABOUR_PARTY_OF_SOUTH_AFRICA",
+        "name": "Labour Party of South Africa",
+        "votes": 518,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "VFP",
+        "name": "Vryheidsfront Plus | Freedom Front Plus",
+        "votes": 386,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRIKA_MAYIBUYE_MOVEMENT",
+        "name": "Afrika Mayibuye Movement",
+        "votes": 221,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PAN_AFRICANIST_CONGRESS_OF_AZANIA",
+        "name": "Pan Africanist Congress of Azania",
+        "votes": 74,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AZANIAN_INDEPENDENT_COMMUNITY_MOVEMENT",
+        "name": "Azanian Independent Community Movement",
+        "votes": 90,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIVE_AFRICAN_CHRISTIANS_UNITED_MOVEMENT",
+        "name": "Active African Christians United Movement",
+        "votes": 87,
+        "wardSeatsWon": 0
+      }
+    ]
+  },
+  "NW396": {
+    "code": "NW396",
+    "name": "Lekwa-Teemane",
+    "delimitationId": "LGE-2026-PROCLAIMED",
+    "totalSeats": 14,
+    "totalValidVotes": 32046,
+    "independentWardSeats": 0,
+    "noPRListWardSeats": 0,
+    "parties": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "votes": 11210,
+        "wardSeatsWon": 2
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "votes": 10559,
+        "wardSeatsWon": 4
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "votes": 2623,
+        "wardSeatsWon": 1
+      },
+      {
+        "id": "AFRICAN_CONGRESS_FOR_TRANSFORMATION",
+        "name": "African Congress for Transformation",
+        "votes": 2539,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "VFP",
+        "name": "Vryheidsfront Plus | Freedom Front Plus",
+        "votes": 1953,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "votes": 1532,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PA",
+        "name": "Patriotic Alliance",
+        "votes": 366,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "LEKWA_TEEMANENG_DEVELOPMENT_PARTY",
+        "name": "Lekwa Teemaneng Development Party",
+        "votes": 373,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_AFRICANS_TRANSFORMATION",
+        "name": "United Africans Transformation",
+        "votes": 255,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "votes": 284,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "votes": 275,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRIKA_MAYIBUYE_MOVEMENT",
+        "name": "Afrika Mayibuye Movement",
+        "votes": 77,
+        "wardSeatsWon": 0
+      }
+    ]
+  },
+  "NW397": {
+    "code": "NW397",
+    "name": "Kagisano-Molopo",
+    "delimitationId": "LGE-2026-PROCLAIMED",
+    "totalSeats": 29,
+    "totalValidVotes": 52271,
+    "independentWardSeats": 0,
+    "noPRListWardSeats": 0,
+    "parties": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "votes": 33226,
+        "wardSeatsWon": 15
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "votes": 4448,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "votes": 3338,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "votes": 3510,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "REFORM_ALLIANCE_OF_SOUTH_AFRICA",
+        "name": "Reform Alliance of South Africa",
+        "votes": 1994,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_CHRISTIAN_DEMOCRATIC_PARTY",
+        "name": "United Christian Democratic Party",
+        "votes": 1792,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "votes": 1301,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "votes": 694,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_AFRICANS_TRANSFORMATION",
+        "name": "United Africans Transformation",
+        "votes": 406,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_SPEAR_MOVEMENT",
+        "name": "African Spear Movement",
+        "votes": 429,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACDP",
+        "name": "African Christian Democratic Party",
+        "votes": 193,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRIKA_MAYIBUYE_MOVEMENT",
+        "name": "Afrika Mayibuye Movement",
+        "votes": 314,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_CONGRESS_FOR_TRANSFORMATION",
+        "name": "African Congress for Transformation",
+        "votes": 200,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PA",
+        "name": "Patriotic Alliance",
+        "votes": 139,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "IFP",
+        "name": "Inkatha Freedom Party",
+        "votes": 171,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIVE_AFRICAN_CHRISTIANS_UNITED_MOVEMENT",
+        "name": "Active African Christians United Movement",
+        "votes": 116,
+        "wardSeatsWon": 0
+      }
+    ]
+  },
+  "NW403": {
+    "code": "NW403",
+    "name": "Matlosana",
+    "delimitationId": "LGE-2026-PROCLAIMED",
+    "totalSeats": 77,
+    "totalValidVotes": 188399,
+    "independentWardSeats": 0,
+    "noPRListWardSeats": 0,
+    "parties": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "votes": 78199,
+        "wardSeatsWon": 30
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "votes": 49595,
+        "wardSeatsWon": 8
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "votes": 15095,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "VFP",
+        "name": "Vryheidsfront Plus | Freedom Front Plus",
+        "votes": 14464,
+        "wardSeatsWon": 1
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "votes": 6097,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "votes": 6412,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "votes": 5435,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "MATLOSANA_SERVICE_DELIVERY_MOVEMENT",
+        "name": "Matlosana Service Delivery Movement",
+        "votes": 3196,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PA",
+        "name": "Patriotic Alliance",
+        "votes": 2797,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_AFRICANS_TRANSFORMATION",
+        "name": "United Africans Transformation",
+        "votes": 1403,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ALL_CITIZENS_PARTY",
+        "name": "All Citizens Party",
+        "votes": 1080,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PEOPLE_S_FREEDOM_PARTY",
+        "name": "People's Freedom Party",
+        "votes": 949,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACDP",
+        "name": "African Christian Democratic Party",
+        "votes": 574,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRIKA_MAYIBUYE_MOVEMENT",
+        "name": "Afrika Mayibuye Movement",
+        "votes": 630,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ATM",
+        "name": "African Transformation Movement",
+        "votes": 411,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PAN_AFRICANIST_CONGRESS_OF_AZANIA",
+        "name": "Pan Africanist Congress of Azania",
+        "votes": 447,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_CONGRESS_FOR_TRANSFORMATION",
+        "name": "African Congress for Transformation",
+        "votes": 409,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "LABOUR_PARTY_OF_SOUTH_AFRICA",
+        "name": "Labour Party of South Africa",
+        "votes": 378,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "IFP",
+        "name": "Inkatha Freedom Party",
+        "votes": 224,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AMALGAMATED_CONCERNED_RESIDENTS_ASSOCIATION",
+        "name": "Amalgamated Concerned Residents Association",
+        "votes": 219,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_CHRISTIAN_DEMOCRATIC_PARTY",
+        "name": "United Christian Democratic Party",
+        "votes": 171,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "INDEPENDENT_RATEPAYERS_ASSOCIATION_OF_SA",
+        "name": "Independent Ratepayers Association of Sa",
+        "votes": 214,
+        "wardSeatsWon": 0
+      }
+    ]
+  },
+  "NW404": {
+    "code": "NW404",
+    "name": "Maquassi Hills",
+    "delimitationId": "LGE-2026-PROCLAIMED",
+    "totalSeats": 22,
+    "totalValidVotes": 43896,
+    "independentWardSeats": 0,
+    "noPRListWardSeats": 0,
+    "parties": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "votes": 23797,
+        "wardSeatsWon": 10
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "votes": 8366,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "votes": 5015,
+        "wardSeatsWon": 1
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "votes": 1319,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "votes": 1182,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ALL_CITIZENS_PARTY",
+        "name": "All Citizens Party",
+        "votes": 1088,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "VFP",
+        "name": "Vryheidsfront Plus | Freedom Front Plus",
+        "votes": 1003,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "votes": 906,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "MATLOSANA_SERVICE_DELIVERY_MOVEMENT",
+        "name": "Matlosana Service Delivery Movement",
+        "votes": 380,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PA",
+        "name": "Patriotic Alliance",
+        "votes": 238,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_SPEAR_MOVEMENT",
+        "name": "African Spear Movement",
+        "votes": 194,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRIKA_MAYIBUYE_MOVEMENT",
+        "name": "Afrika Mayibuye Movement",
+        "votes": 128,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PAN_AFRICANIST_CONGRESS_OF_AZANIA",
+        "name": "Pan Africanist Congress of Azania",
+        "votes": 109,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PEOPLE_S_FREEDOM_PARTY",
+        "name": "People's Freedom Party",
+        "votes": 94,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_CHRISTIAN_DEMOCRATIC_PARTY",
+        "name": "United Christian Democratic Party",
+        "votes": 77,
+        "wardSeatsWon": 0
+      }
+    ]
+  },
+  "NW405": {
+    "code": "NW405",
+    "name": "JB Marks",
+    "delimitationId": "LGE-2026-PROCLAIMED",
+    "totalSeats": 67,
+    "totalValidVotes": 138579,
+    "independentWardSeats": 0,
+    "noPRListWardSeats": 0,
+    "parties": [
+      {
+        "id": "ANC",
+        "name": "African National Congress",
+        "votes": 45943,
+        "wardSeatsWon": 22
+      },
+      {
+        "id": "DA",
+        "name": "Democratic Alliance",
+        "votes": 44042,
+        "wardSeatsWon": 12
+      },
+      {
+        "id": "VFP",
+        "name": "Vryheidsfront Plus | Freedom Front Plus",
+        "votes": 12879,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACTIONSA",
+        "name": "ActionSA",
+        "votes": 10919,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "EFF",
+        "name": "Economic Freedom Fighters",
+        "votes": 10073,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "BAAGI",
+        "name": "BAAGI",
+        "votes": 6313,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "MK",
+        "name": "Umkhonto Wesizwe Party",
+        "votes": 1620,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PA",
+        "name": "Patriotic Alliance",
+        "votes": 1659,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SACP",
+        "name": "South African Communist Party",
+        "votes": 1338,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "CONCERNED_POTCHEFSTROOM_RESIDENTS",
+        "name": "Concerned Potchefstroom Residents",
+        "votes": 894,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ACDP",
+        "name": "African Christian Democratic Party",
+        "votes": 855,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "SOLIDARITY_ACTION_COMMITTEE_COLLECTIVE",
+        "name": "Solidarity Action Committee Collective",
+        "votes": 436,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRICAN_CONGRESS_FOR_TRANSFORMATION",
+        "name": "African Congress for Transformation",
+        "votes": 453,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "AFRIKA_MAYIBUYE_MOVEMENT",
+        "name": "Afrika Mayibuye Movement",
+        "votes": 277,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "BUILD_ONE_SOUTH_AFRICA",
+        "name": "Build One South Africa",
+        "votes": 272,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "DEFENDERS_OF_THE_PEOPLE",
+        "name": "Defenders of the People",
+        "votes": 196,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "UNITED_AFRICANS_TRANSFORMATION",
+        "name": "United Africans Transformation",
+        "votes": 130,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "ALL_CITIZENS_PARTY",
+        "name": "All Citizens Party",
+        "votes": 142,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PAN_AFRICANIST_CONGRESS_OF_AZANIA",
+        "name": "Pan Africanist Congress of Azania",
+        "votes": 88,
+        "wardSeatsWon": 0
+      },
+      {
+        "id": "PEOPLE_S_FREEDOM_PARTY",
+        "name": "People's Freedom Party",
+        "votes": 50,
+        "wardSeatsWon": 0
+      }
+    ]
+  }
+}

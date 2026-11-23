@@ -29,7 +29,7 @@ export function createEcosMcpServer(ctx: HarnessContext, counterReader: CounterR
     'get_certified_baseline',
     {
       title: 'Get Certified Municipality Baseline',
-      description: 'Certified result via the real Schedule 1 engine. Serves NW405 2021; other codes/2026 refuse.',
+      description: 'Certified result via the real Schedule 1 engine. Serves NW405 2021 and the 18 NW locals 2026; else refuses.',
       inputSchema: {
         municipality_code: z.string().regex(/^NW\d{3}$/, 'Must be a North West code, e.g. NW405'),
         election_year: z.enum(['2026', '2021']).default('2026'),
@@ -54,9 +54,10 @@ export function createEcosMcpServer(ctx: HarnessContext, counterReader: CounterR
     'run_schedule1_scenario',
     {
       title: 'Run Schedule 1 Seat Scenario',
-      description: 'Propagate user swings + turnout through the real Schedule 1 quota (NW405 only). Deterministic.',
+      description: 'Propagate user swings + turnout through the real Schedule 1 quota (NW405 2021 or an NW local 2026). Deterministic.',
       inputSchema: {
         municipality_code: z.string().regex(/^NW\d{3}$/),
+        election_year: z.enum(['2026', '2021']).default('2026'),
         seed: z.number().int(),
         turnout_delta_pct: z.number().min(-30).max(30),
         party_swings_pct: z.record(z.string(), z.number()),

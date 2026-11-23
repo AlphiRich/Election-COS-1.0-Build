@@ -8,6 +8,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { ENGINE_MIRRORS, renderMirror, type MirrorSpec } from './agentEngineMirror';
+import { NW_SEATS_2026_DEST, renderNwSeats2026 } from './agentBaseline2026';
 
 const ROOT = path.resolve(__dirname, '..', '..', '..'); // src/modules/analytics -> election-cos-app
 const read = (rel: string) => readFileSync(path.join(ROOT, rel), 'utf-8').replace(/\r\n/g, '\n');
@@ -18,6 +19,20 @@ describe('the agent’s mirrored seat engine is in sync with the source', () => 
       expect(read(spec.dest)).toBe(renderMirror(spec, read(spec.src)));
     });
   }
+
+  it(`${NW_SEATS_2026_DEST} matches the certified 2026 pipeline — run \`npm run gen:agent-engine\` if this fails`, () => {
+    expect(read(NW_SEATS_2026_DEST)).toBe(renderNwSeats2026());
+  });
+
+  it('the 2026 snapshot covers all 18 NW local municipalities with real figures', () => {
+    const snap = JSON.parse(read(NW_SEATS_2026_DEST)) as Record<string, { totalSeats: number; parties: unknown[] }>;
+    expect(Object.keys(snap)).toHaveLength(18);
+    for (const code of Object.keys(snap)) {
+      expect(code).toMatch(/^NW\d{3}$/);
+      expect(snap[code].totalSeats).toBeGreaterThan(0);
+      expect(snap[code].parties.length).toBeGreaterThan(0);
+    }
+  });
 });
 
 describe('renderMirror', () => {

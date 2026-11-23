@@ -51,8 +51,8 @@ export function buildEcosTools(counterReader: CounterReader): StructuredToolInte
     {
       name: 'get_certified_baseline',
       description:
-        'Certified municipality result via the real Schedule 1 engine. Serves NW405 (JB Marks) 2021; ' +
-        'other municipalities and 2026 are not mirrored into this runtime and refuse.',
+        'Certified municipality result via the real Schedule 1 engine. Serves NW405 (JB Marks) 2021 and the ' +
+        '18 North West local municipalities 2026 (the default year); anything else refuses.',
       schema: z.object({
         municipality_code: z.string().regex(/^NW\d{3}$/),
         election_year: z.enum(['2026', '2021']).default('2026'),
@@ -63,6 +63,7 @@ export function buildEcosTools(counterReader: CounterReader): StructuredToolInte
   const scenario = tool(
     async (input: {
       municipality_code: string;
+      election_year?: '2026' | '2021';
       seed: number;
       turnout_delta_pct: number;
       party_swings_pct: Record<string, number>;
@@ -71,10 +72,12 @@ export function buildEcosTools(counterReader: CounterReader): StructuredToolInte
     {
       name: 'run_schedule1_scenario',
       description:
-        'Propagate user swings + turnout through the real Schedule 1 quota (NW405 only). A labelled ' +
-        'user assumption on 2021 PR votes; ward seats held. Deterministic.',
+        'Propagate user swings + turnout through the real Schedule 1 quota, for NW405 2021 or any of the ' +
+        '18 NW local municipalities (2026, the default). A labelled user assumption on the baseline PR votes; ' +
+        'ward seats held. Deterministic.',
       schema: z.object({
         municipality_code: z.string().regex(/^NW\d{3}$/),
+        election_year: z.enum(['2026', '2021']).default('2026'),
         seed: z.number().int(),
         turnout_delta_pct: z.number().min(-30).max(30),
         party_swings_pct: z.record(z.string(), z.number()),
