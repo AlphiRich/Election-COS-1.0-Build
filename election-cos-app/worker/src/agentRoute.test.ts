@@ -2,6 +2,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { AGENT_REQUIRED_CAP, MAX_PROMPT_CHARS, handleCampaignDirector, mfaSatisfied, type AgentToken } from './agentRoute';
 import type { RunAgentResult } from '../../functions/src/agents/campaignDirector/runAgent';
+import { DocStoreCheckpointSaver, memoryDocStore } from '../../functions/src/agents/campaignDirector/firestoreCheckpointer';
 
 const NOW = 1_800_000_000;
 const okToken: AgentToken = { uid: 'u1', tenantId: 'jb-marks', caps: [AGENT_REQUIRED_CAP], mfaRequired: false };
@@ -108,4 +109,26 @@ describe('handleCampaignDirector — outcomes', () => {
     });
     expect(r.status).toBe(501);
   });
+
+  it.each([
+    ['nothing-to-resume', 409],
+    ['awaiting-approval', 409],
+    ['thread-too-long', 413],
+  ] as const)('maps %s to %i', async (reason, status) => {
+    const r = await handleCampaignDirector(okToken, { threadId: 't' }, { nowSec: NOW, run: stubRun({ ok: false, reason }) });
+    expect(r.status).toBe(status);
+  });
+
+  it('builds a durable saver when a checkpoint store is supplied, and none otherwise', async () => {
+    const withStore = stubRun();
+    await handleCampaignDirector(okToken, { threadId: 't' }, { nowSec: NOW, run: withStore, checkpointStore: memoryDocStore() });
+    const [, , d1] = withStore.mock.calls[0] as unknown as [unknown, unknown, { checkpointer?: unknown }];
+    expect(d1.checkpointer).toBeInstanceOf(DocStoreCheckpointSaver);
+
+    const without = stubRun();
+    await handleCampaignDirector(okToken, { threadId: 't' }, { nowSec: NOW, run: without });
+    const [, , d2] = without.mock.calls[0] as unknown as [unknown, unknown, { checkpointer?: unknown }];
+    expect(d2.checkpointer).toBeUndefined();
+  });
 });
+

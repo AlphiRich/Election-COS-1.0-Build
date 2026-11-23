@@ -31,9 +31,17 @@ worker (`ecos-claims-api`), not on Cloud Functions, so Firebase stays on Spark.
 `npx wrangler deploy`. Without the key the route answers 503 (refuses, never
 fabricates).
 
-**Stage 2 (not built):** a Firestore-REST checkpointer so a paused human
-approval can be resumed on a later request. Until then a resume is refused (501)
-rather than silently starting a fresh thread; single-request briefings work.
+**Stage 2 (built):** a durable checkpointer over Firestore REST, so a
+conversation carries across requests on the same `threadId`, and a run paused
+for human approval is resumed on a later request (`resumeDecision`). Each new
+prompt resets the per-turn state (errors, claims, iteration budget). A new prompt
+while an approval is pending → 409; a resume with nothing waiting → 409; a thread
+too large to store → 413 (start a new `threadId`).
+
+**Edge runtime fix (`asyncContext.ts`):** Cloudflare's bundler resolves
+LangGraph's `browser` build, which never initialises LangChain's AsyncLocalStorage
+— so on the worker `interrupt()` threw and the approval gate silently did not
+pause. `graph.ts` now initialises it first. Verified under workerd both ways.
 
 ## What is real and tested now
 
@@ -42,9 +50,11 @@ rather than silently starting a fresh thread; single-request briefings work.
   trusting the model.
 - `state.ts` — state types, fail-closed `harnessContextFrom`, the 8-iteration
   cap, the HITL predicate.
-- `firestoreCheckpointer.ts` — tenant-scoped `BaseCheckpointSaver`
-  (`<tenantId>:<threadId>` or it throws). `parseScopedThread` is tested on its
-  own.
+- `firestoreCheckpointer.ts` — ONE tenant-scoped `BaseCheckpointSaver`
+  (`DocStoreCheckpointSaver`) over a three-method store (`get`/`setMany`/`list`):
+  firebase-admin (Functions), Firestore REST (worker, `restCheckpointStore`),
+  memory (tests). A `heads` pointer per thread keeps loads to a few reads;
+  pending writes replay in LangGraph's `writesSortKey` order.
 - `graph.ts` — the governed nodes + routing with a full **ToolNode loop**
   (agent → tools → agent, capped at 8 iterations), tested with a scripted
   tool-calling model and an in-memory saver, including the human-in-the-loop
@@ -63,6 +73,5 @@ rather than silently starting a fresh thread; single-request briefings work.
 
 - `firestore.rules` — `tenants/{tid}/agentCheckpoints/**` is server-only
   (`allow read, write: if false`): only the Admin SDK touches checkpoints.
-- `firestore.indexes.json` — composite index on the `checkpoints` collection
-  (`checkpointNs` ASC, `deletedAt` ASC, `createdAt` DESC) for the saver's
-  `getTuple`/`list` queries.
+- No composite index is needed: the saver reads documents by path and lists
+  collections; it runs no `where`/`orderBy` queries.

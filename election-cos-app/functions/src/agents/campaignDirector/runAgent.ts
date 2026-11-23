@@ -22,11 +22,23 @@
  *    run must be found again on a later request. Without one, `MemorySaver` would
  *    silently start a fresh thread and "resume" nothing — so a resume with no
  *    durable checkpointer is refused, not attempted.
+ *  - With a durable checkpointer, a resume when nothing is paused is refused
+ *    (`nothing-to-resume`), and a NEW prompt while an approval is pending is
+ *    refused (`awaiting-approval`) — otherwise the new run would silently
+ *    abandon the decision a human was asked to make.
+ *  - A thread too large to store is refused (`thread-too-long`), never truncated.
+ *
+ * TURNS ON A DURABLE THREAD
+ *
+ * The conversation (messages) carries across requests on the same thread. The
+ * per-turn fields do not: each new prompt resets errors, claims, the iteration
+ * budget, the briefing and the pending action, so one turn's failure cannot
+ * poison the next and the 8-iteration cap applies per turn.
  *
  * Returns a plain JSON-safe summary, never raw graph state (which carries
  * message objects).
  */
-import { Command, MemorySaver } from '@langchain/langgraph';
+import { Command, INTERRUPT, MemorySaver } from '@langchain/langgraph';
 import type { BaseCheckpointSaver } from '@langchain/langgraph-checkpoint';
 import { HumanMessage } from '@langchain/core/messages';
 import { buildCampaignDirectorGraph } from './graph';
@@ -53,7 +65,12 @@ export interface RunAgentDeps {
   checkpointer?: BaseCheckpointSaver;
 }
 
-export type RunAgentFailure = 'model-not-configured' | 'resume-requires-durable-checkpointer';
+export type RunAgentFailure =
+  | 'model-not-configured'
+  | 'resume-requires-durable-checkpointer'
+  | 'nothing-to-resume'
+  | 'awaiting-approval'
+  | 'thread-too-long';
 
 export type RunAgentResult =
   | {
@@ -80,26 +97,43 @@ export async function runAgent(
     return { ok: false, reason: 'resume-requires-durable-checkpointer' };
   }
 
-  const graph = buildCampaignDirectorGraph({
-    checkpointer: deps.checkpointer ?? new MemorySaver(),
-    model,
-    counterReader: deps.counterReader,
-  });
+  const checkpointer = deps.checkpointer ?? new MemorySaver();
+  const graph = buildCampaignDirectorGraph({ checkpointer, model, counterReader: deps.counterReader });
   // The thread is scoped to the verified tenant, so a checkpoint can never be
-  // read or resumed across tenants (the Firestore saver also enforces this).
+  // read or resumed across tenants (the durable saver also enforces this).
   const config = { configurable: { thread_id: `${ctx.tenantId}:${req.threadId}`, harnessContext: ctx } };
 
-  const state = req.resumeDecision
-    ? await graph.invoke(new Command({ resume: req.resumeDecision }), config)
-    : await graph.invoke(
-        {
-          municipalityCode: req.municipalityCode ?? '',
-          messages: [new HumanMessage(req.prompt ?? 'Summarize the current baseline.')],
-        },
-        config,
-      );
+  if (deps.checkpointer) {
+    const latest = await checkpointer.getTuple(config);
+    const paused = Boolean(latest?.pendingWrites?.some(([, channel]) => channel === INTERRUPT));
+    if (req.resumeDecision && !paused) return { ok: false, reason: 'nothing-to-resume' };
+    if (!req.resumeDecision && paused) return { ok: false, reason: 'awaiting-approval' };
+  }
 
-  const interrupts = (state as Record<string, unknown>).__interrupt__ as Array<{ value: unknown }> | undefined;
+  let state;
+  try {
+    state = req.resumeDecision
+      ? await graph.invoke(new Command({ resume: req.resumeDecision }), config)
+      : await graph.invoke(
+          {
+            messages: [new HumanMessage(req.prompt ?? 'Summarize the current baseline.')],
+            ...(req.municipalityCode ? { municipalityCode: req.municipalityCode } : {}),
+            // Per-turn reset (see header): null clears claims/errors.
+            errors: null,
+            claims: null,
+            iterationCount: 0,
+            briefingOutput: null,
+            approvalStatus: 'pending' as const,
+            pendingAction: { type: 'none' as const },
+          },
+          config,
+        );
+  } catch (err) {
+    if (isCheckpointTooLarge(err)) return { ok: false, reason: 'thread-too-long' };
+    throw err;
+  }
+
+  const interrupts = (state as Record<string, unknown>)[INTERRUPT] as Array<{ value: unknown }> | undefined;
   return {
     ok: true,
     briefing: state.briefingOutput,
@@ -108,4 +142,12 @@ export async function runAgent(
     approvalStatus: state.approvalStatus,
     pendingApproval: interrupts?.[0]?.value ?? null,
   };
+}
+
+/** The saver's size refusal, recognised even if the graph runtime wraps it. */
+function isCheckpointTooLarge(err: unknown): boolean {
+  for (let e: unknown = err, depth = 0; e && depth < 5; e = (e as { cause?: unknown }).cause, depth += 1) {
+    if (e instanceof Error && (e.name === 'CheckpointTooLargeError' || e.message.includes('CheckpointTooLargeError'))) return true;
+  }
+  return false;
 }

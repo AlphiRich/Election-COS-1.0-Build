@@ -35,6 +35,7 @@
 import { createRemoteJWKSet, jwtVerify, SignJWT, importPKCS8, type JWTPayload } from 'jose';
 import { SEED_ROLES } from '../../src/auth/seedRoles';
 import { gateSync } from './edge';
+import type { CheckpointDocStore } from '../../functions/src/agents/campaignDirector/firestoreCheckpointer';
 
 // Minimal Workers types, so this package needs no extra type dependency.
 interface Fetcher {
@@ -257,6 +258,74 @@ export async function readWarRoomCounters(env: Env, tenantId: string): Promise<R
   return out;
 }
 
+const docName = (env: Env, path: string) =>
+  `projects/${env.FIREBASE_PROJECT_ID}/databases/(default)/documents/${path}`;
+
+/**
+ * Atomic full-document writes via `documents:commit` — one subrequest for a whole
+ * batch (Firestore caps a commit at 500 writes; chunked under that).
+ */
+async function fsSetMany(env: Env, writes: Array<{ path: string; data: Json }>): Promise<void> {
+  for (let i = 0; i < writes.length; i += 400) {
+    const res = await fetch(`${docsBase(env)}:commit`, {
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${await googleAccessToken(env)}`,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        writes: writes.slice(i, i + 400).map((w) => ({
+          update: {
+            name: docName(env, w.path),
+            fields: (toFs(w.data) as { mapValue: { fields: Record<string, FsValue> } }).mapValue.fields,
+          },
+        })),
+      }),
+    });
+    if (!res.ok) throw new HttpError(502, `Firestore commit failed (${res.status})`);
+  }
+}
+
+/** Every document directly in a collection, following pagination. */
+async function fsList(env: Env, collectionPath: string): Promise<Array<{ id: string; data: Json }>> {
+  const out: Array<{ id: string; data: Json }> = [];
+  let pageToken = '';
+  do {
+    const q = `pageSize=300${pageToken ? `&pageToken=${encodeURIComponent(pageToken)}` : ''}`;
+    const res = await fetch(`${docsBase(env)}/${collectionPath}?${q}`, {
+      headers: { authorization: `Bearer ${await googleAccessToken(env)}` },
+    });
+    if (res.status === 404) return out;
+    if (!res.ok) throw new HttpError(502, `Firestore list failed (${res.status})`);
+    const body = (await res.json()) as {
+      documents?: Array<{ name: string; fields?: Record<string, FsValue> }>;
+      nextPageToken?: string;
+    };
+    for (const d of body.documents ?? []) {
+      out.push({
+        id: d.name.slice(d.name.lastIndexOf('/') + 1),
+        data: fromFs({ mapValue: { fields: d.fields ?? {} } }) as Json,
+      });
+    }
+    pageToken = body.nextPageToken ?? '';
+  } while (pageToken);
+  return out;
+}
+
+/**
+ * The Campaign Director's durable checkpoint store on the edge (stage 2). The
+ * saver that uses it is built inside the lazily loaded agent route. Service-
+ * account access, so the route's own tenant/MFA/capability gates apply first;
+ * `agentCheckpoints` is closed to every client in firestore.rules.
+ */
+export function restCheckpointStore(env: Env): CheckpointDocStore {
+  return {
+    get: (path) => fsGet(env, path),
+    setMany: (writes) => fsSetMany(env, writes),
+    list: (collectionPath) => fsList(env, collectionPath),
+  };
+}
+
 async function fsAdd(env: Env, collectionPath: string, data: Json): Promise<void> {
   const res = await fetch(`${docsBase(env)}/${collectionPath}`, {
     method: 'POST',
@@ -432,6 +501,7 @@ async function handleApi(req: Request, env: Env, url: URL): Promise<Response> {
         apiKey: env.ANTHROPIC_API_KEY,
         modelId: env.CAMPAIGN_DIRECTOR_MODEL,
         counterReader: (tenantId) => readWarRoomCounters(env, tenantId),
+        checkpointStore: restCheckpointStore(env),
         nowSec: Math.floor(Date.now() / 1000),
       });
       return json(r.body as Json, r.status);

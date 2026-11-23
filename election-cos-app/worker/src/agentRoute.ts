@@ -25,6 +25,10 @@
  */
 import { runAgent, type RunAgentDeps } from '../../functions/src/agents/campaignDirector/runAgent';
 import { harnessContextFrom } from '../../functions/src/agents/campaignDirector/state';
+import {
+  DocStoreCheckpointSaver,
+  type CheckpointDocStore,
+} from '../../functions/src/agents/campaignDirector/firestoreCheckpointer';
 
 export const AGENT_REQUIRED_CAP = 'warroom.view';
 export const MAX_PROMPT_CHARS = 4000;
@@ -49,6 +53,8 @@ export interface AgentRouteDeps extends RunAgentDeps {
   nowSec: number;
   /** Injected in tests; the real runAgent otherwise. */
   run?: typeof runAgent;
+  /** Durable store (Firestore REST on the edge). Present → conversations and approvals persist. */
+  checkpointStore?: CheckpointDocStore;
 }
 
 export interface AgentRouteResult {
@@ -99,6 +105,8 @@ export async function handleCampaignDirector(
 
   // 5. Run.
   const run = deps.run ?? runAgent;
+  const checkpointer =
+    deps.checkpointer ?? (deps.checkpointStore ? new DocStoreCheckpointSaver(deps.checkpointStore) : undefined);
   const result = await run(
     ctx,
     {
@@ -107,12 +115,25 @@ export async function handleCampaignDirector(
       municipalityCode: municipalityCode as string | undefined,
       resumeDecision: decision,
     },
-    deps,
+    { ...deps, checkpointer },
   );
   if (!result.ok) {
-    return result.reason === 'model-not-configured'
-      ? fail(503, 'The Campaign Director has no model configured; it refuses to run rather than fabricate.')
-      : fail(501, 'Resuming an approval needs the durable checkpointer, which is not deployed on the edge yet.');
+    switch (result.reason) {
+      case 'model-not-configured':
+        return fail(503, 'The Campaign Director has no model configured; it refuses to run rather than fabricate.');
+      case 'resume-requires-durable-checkpointer':
+        return fail(501, 'Resuming an approval needs the durable checkpointer, which this deployment lacks.');
+      case 'nothing-to-resume':
+        return fail(409, 'There is no approval waiting on this thread.');
+      case 'awaiting-approval':
+        return fail(409, 'This thread is waiting for an approval decision. Send resumeDecision before a new prompt.');
+      case 'thread-too-long':
+        return fail(413, 'This conversation is too long to save. Start a new threadId.');
+      default: {
+        const unhandled: never = result.reason;
+        return fail(500, `Unhandled agent outcome: ${String(unhandled)}`);
+      }
+    }
   }
   return { status: 200, body: result };
 }

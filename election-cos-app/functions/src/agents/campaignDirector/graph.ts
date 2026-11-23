@@ -20,6 +20,8 @@
  * Nothing here is a Cloud Function; `callable.ts` is the deployable entry and
  * carries the `@deployable` marker.
  */
+// Must come first: gives interrupt() its run context on the edge (see asyncContext.ts).
+import './asyncContext';
 import { Annotation, StateGraph, START, END, interrupt } from '@langchain/langgraph';
 import { ToolNode } from '@langchain/langgraph/prebuilt';
 import type { BaseCheckpointSaver } from '@langchain/langgraph-checkpoint';
@@ -33,8 +35,17 @@ import type { CounterReader } from './ecosMcpTools';
 
 export const CampaignDirectorState = Annotation.Root({
   messages: Annotation<BaseMessage[]>({ reducer: (p, n) => p.concat(n), default: () => [] }),
-  claims: Annotation<ProvenanceClaim[]>({ reducer: (p, n) => p.concat(n), default: () => [] }),
-  errors: Annotation<string[]>({ reducer: (p, n) => p.concat(n), default: () => [] }),
+  // claims and errors accumulate within a turn; an update of `null` clears them.
+  // runAgent sends that at the start of each new turn, so on a durable thread an
+  // old turn's error or violation cannot block every later briefing.
+  claims: Annotation<ProvenanceClaim[], ProvenanceClaim[] | null>({
+    reducer: (p, n) => (n === null ? [] : p.concat(n)),
+    default: () => [],
+  }),
+  errors: Annotation<string[], string[] | null>({
+    reducer: (p, n) => (n === null ? [] : p.concat(n)),
+    default: () => [],
+  }),
   municipalityCode: Annotation<string>({ reducer: (_p, n) => n, default: () => '' }),
   wardIds: Annotation<string[]>({ reducer: (_p, n) => n, default: () => [] }),
   scenarioSeed: Annotation<number | null>({ reducer: (_p, n) => n, default: () => null }),

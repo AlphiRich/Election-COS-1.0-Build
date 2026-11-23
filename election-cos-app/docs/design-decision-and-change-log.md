@@ -3769,3 +3769,31 @@ the real worker boots (health 200, agent route 401/405). Full gate green: 2059 a
 **Not done:** deploy (owner: `wrangler secret put ANTHROPIC_API_KEY` +
 `wrangler deploy`), and Stage 2 — a Firestore-REST checkpointer for cross-request
 human-approval resume. No live Anthropic round-trip has been made from this build.
+
+## Session 52 (cont.) — Campaign Director deploy: Path B, Stage 2 (durable threads)
+
+- **One durable saver.** `firestoreCheckpointer.ts` is now `DocStoreCheckpointSaver`
+  over a `get`/`setMany`/`list` store, with three stores: firebase-admin (held
+  Functions path), Firestore REST on the worker (`restCheckpointStore`: batched
+  `documents:commit`, paged listing), memory (tests). A per-thread `heads` pointer
+  replaces the millisecond `createdAt` sort (ambiguous within a millisecond);
+  pending writes replay in LangGraph's `writesSortKey` order (the first version
+  sorted by index alone); base64 via `btoa`/`atob`, not Node's `Buffer`. A
+  checkpoint too large for a Firestore document is refused, never truncated.
+- **Durable turns.** `runAgent` resets per-turn state on each new prompt (claims
+  and errors reducers accept `null` to clear), so an earlier turn's error cannot
+  block later briefings and the 8-iteration cap is per turn. A new prompt while an
+  approval is pending, or a resume with nothing waiting, is refused.
+- **Edge bug found by running it.** Under workerd `interrupt()` threw "Called
+  interrupt() outside the context of a graph": Cloudflare's bundler takes
+  LangGraph's `browser` build, which never initialises LangChain's
+  AsyncLocalStorage. Stage 1 had the same latent defect (its workerd check only
+  exercised the tool loop). `asyncContext.ts` initialises it (idempotent under
+  Node); proven on workerd with and without the fix.
+- **Guards.** `singleCopy.test.ts` fails if a worker production file imports
+  `@langchain/*` (worker tests use `testKit.ts`). Injected defects caught: direct
+  LangGraph import, removed per-turn reset, new prompt allowed while paused.
+- The unused `checkpoints` composite index is removed from firestore.indexes.json.
+- Bundle ~840 KB gzip; one copy each of langgraph, core and langgraph-checkpoint.
+  Real worker boots (health 200, agent 401). Full gate green: 2074 app + 279
+  functions tests. Not deployed.

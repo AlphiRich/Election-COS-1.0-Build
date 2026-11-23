@@ -67,14 +67,12 @@ describe('runAgent', () => {
     expect(r).toEqual({ ok: false, reason: 'resume-requires-durable-checkpointer' });
   });
 
-  it('accepts a resume when a checkpointer is supplied', async () => {
-    // A fresh saver holds no paused run, so the resume is a no-op — but it is
-    // attempted, not refused, because the caller supplied durable state.
+  it('with a durable checkpointer, refuses a resume when nothing is paused (no silent no-op)', async () => {
     const r = await runAgent(
       ctx,
       { threadId: 't5', resumeDecision: { approved: false } },
       { model: scriptedModel([new AIMessage('x')]), checkpointer: new MemorySaver() },
     );
-    expect(r.ok).toBe(true);
+    expect(r).toEqual({ ok: false, reason: 'nothing-to-resume' });
   });
 });
