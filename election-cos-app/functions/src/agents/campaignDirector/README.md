@@ -11,10 +11,15 @@ closed; one `@deployable` marker per Cloud Function; region pinned).
 `callable.ts` is `@deployable no` and is deliberately **not** exported from
 `functions/src/index.ts`. Three things must land first:
 
-1. **A model.** `agentModel.resolveAgentModel()` returns `null` today, so the
-   agent node and the callable both fail closed — they refuse rather than
-   fabricate a briefing. Wire a provider (e.g. `@langchain/anthropic`) behind a
-   key-presence check, bound to the MCP tools.
+1. **A model credential.** The provider is wired — `agentModel.resolveAgentModel()`
+   builds a `ChatAnthropic` behind a key-presence check — but it returns `null`
+   (so the agent/callable fail closed) until `ANTHROPIC_API_KEY` is set in the
+   function environment. At deploy the owner sets it as a Firebase Functions
+   secret (`firebase functions:secrets:set ANTHROPIC_API_KEY`) and the callable
+   binds it (`defineSecret`). The model id defaults in `agentModel.ts` and is
+   overridable per deploy with `CAMPAIGN_DIRECTOR_MODEL`. Still to do: bind the
+   ECOS MCP tools to the model via a ToolNode loop (agent → tools → agent) so the
+   model can actually call `get_war_room_counters` et al.
 2. **The deterministic tools' engine.** `get_certified_baseline` and
    `run_schedule1_scenario` (`ecosMcpTools.ts`) fail closed: the certified-results
    seat calculator lives in the **application** package, outside `functions/`'s

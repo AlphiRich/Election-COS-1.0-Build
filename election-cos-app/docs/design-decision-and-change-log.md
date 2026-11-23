@@ -3630,3 +3630,18 @@ modules and held to the discipline.
 Three blockers to `@deployable yes`, all in the folder README: a model credential
 + binding; a shared Schedule 1 engine in functions; and a Cloud Functions deploy
 target (decision B: not deployed). Full gate green: 2036 app + 238 functions tests.
+
+## Session 52 (cont.) — Campaign Director: Anthropic model wired behind a key check
+
+Blocker #1 to a working agent: the model provider is now wired.
+`agentModel.resolveAgentModel()` builds a `ChatAnthropic` through the existing
+`AgentModel` seam, but only when `ANTHROPIC_API_KEY` is present in the function
+environment — otherwise it returns `null` and the agent node and callable fail
+closed (refuse rather than fabricate), unchanged. The model id defaults in code
+and is overridable per deploy with `CAMPAIGN_DIRECTOR_MODEL`. The key is never in
+this repo or chat (rule 10): at deploy it is a Firebase Functions secret the owner
+sets. Added `@langchain/anthropic`; `@langchain/core` moved 1.4.2 → 1.5.0 to meet
+its peer, which langgraph still satisfies. Tests prove null without a key and a
+constructed model (no network) with one. Still to do before `@deployable yes`:
+bind the ECOS MCP tools to the model via a ToolNode loop, and the deploy target
+(decision B). Full gate green: 2036 app + 242 functions tests.
