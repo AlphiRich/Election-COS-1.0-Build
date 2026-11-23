@@ -3797,3 +3797,42 @@ human-approval resume. No live Anthropic round-trip has been made from this buil
 - Bundle ~840 KB gzip; one copy each of langgraph, core and langgraph-checkpoint.
   Real worker boots (health 200, agent 401). Full gate green: 2074 app + 279
   functions tests. Not deployed.
+
+## Session 52 (cont.) — Campaign Director: fixes from the code review
+
+A `/code-review` of the agent (stages 1–2) raised seven important findings; all
+are fixed, each with a test that fails when the defect is put back.
+
+- **Cross-user access.** Threads were tenant-scoped only, so any colleague with
+  `warroom.view` who knew a threadId could read the conversation or approve its
+  held dispatch. Threads are now `tenant:uid:threadId`, and a resume needs
+  `incidents.escalate` (`approval-not-permitted` → 403).
+- **Concurrent requests.** Two requests on one thread could fork the history or
+  dispatch an approved incident twice. A lease (`threadLease.ts`: memory, Admin
+  SDK transaction, and `versionedThreadLease` over Firestore REST preconditions)
+  admits one run; others get `thread-busy` → 409. It expires after 120 s and is
+  released in a `finally`.
+- **Provenance gate was inert.** Nothing ever populated `claims`, and the
+  briefing was the model's last free text (empty for array content). A briefing
+  now exists only as a `submit_briefing` tool call with typed claims; the gate
+  runs on them, every percentage in the briefing must be declared, and a run
+  without a submission fails closed. A system prompt (never stored) says so. A
+  turn with an error can no longer reach the dispatch gate.
+- **Iteration cap broke durable threads.** At the cap the last AI message kept an
+  unanswered `tool_use`, which the next turn would send to Anthropic as an
+  invalid conversation, and the route answered 200 with an empty briefing. A
+  `budget_exhausted` node now answers each pending call "not run" and records an
+  error.
+- **No spend control.** Each request could make 8 paid calls with no ceiling. The
+  pure cost-guard logic moved to `costGuardCore.ts` (no firebase-admin, so the
+  worker bundles it; `costGuard.ts` re-exports it). Every model call reserves its
+  configured price (`CAMPAIGN_DIRECTOR_CALL_COST_CENTS`; unset → 503) on the
+  shared monthly ledger via `optimisticSpendStore` over `restVersionedStore`;
+  ceiling → 429. Plus a per-user edge rate limit (`AGENT_RATE`).
+- **Mislabelled counters.** Tenant-wide totals were returned beside the requested
+  `wardIds`, as if ward-scoped. Now `scope: 'tenant'` with a note.
+- Nit fixed: `putWrites` now refuses an oversized write like `put` does. Nit kept:
+  `fsSetMany` still chunks at 400 writes (a checkpoint batch is far smaller).
+- Gate green: 2086 app + 302 functions tests; one LangGraph copy, no
+  firebase-admin in the bundle; real worker boots (health 200, agent 401). Not
+  deployed; no live Anthropic call made.

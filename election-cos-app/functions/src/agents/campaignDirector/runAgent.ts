@@ -27,6 +27,19 @@
  *    refused (`awaiting-approval`) — otherwise the new run would silently
  *    abandon the decision a human was asked to make.
  *  - A thread too large to store is refused (`thread-too-long`), never truncated.
+ *  - Every model call is metered: `reserveModelCall` (the monthly paid-usage
+ *    guard) is required, and a refusal ends the run (`spend-ceiling-reached`,
+ *    or `cost-guard-not-configured` when no price is set).
+ *  - A durable thread runs one request at a time: a run takes a lease first,
+ *    and a second request meanwhile is refused (`thread-busy`) — two at once
+ *    would fork the history or dispatch an approved incident twice.
+ *
+ * WHO OWNS A THREAD
+ *
+ * A thread belongs to the verified user within the verified tenant
+ * (`tenant:uid:threadId`), so a colleague who guesses a threadId reaches a
+ * different, empty thread — never someone else's conversation. Deciding a
+ * paused dispatch takes `APPROVAL_REQUIRED_CAP` as well (`approval-not-permitted`).
  *
  * TURNS ON A DURABLE THREAD
  *
@@ -45,6 +58,10 @@ import { buildCampaignDirectorGraph } from './graph';
 import { anthropicAgentModel, type AgentModel } from './agentModel';
 import type { HarnessContext } from './state';
 import type { CounterReader } from './ecosMcpTools';
+import type { ThreadLease } from './threadLease';
+
+/** Deciding a held dispatch is an escalation decision, not a read. */
+export const APPROVAL_REQUIRED_CAP = 'incidents.escalate';
 
 export interface RunAgentRequest {
   threadId: string;
@@ -63,6 +80,12 @@ export interface RunAgentDeps {
   counterReader?: CounterReader;
   /** Durable checkpointer. Absent → in-memory, single-request runs only. */
   checkpointer?: BaseCheckpointSaver;
+  /** One run per durable thread at a time. Required with a durable checkpointer. */
+  lease?: ThreadLease;
+  /** Reserve one model call's cost (the monthly ceiling). Required: no meter, no run. */
+  reserveModelCall?: () => Promise<void>;
+  /** Clock for the lease (tests). */
+  nowMs?: () => number;
 }
 
 export type RunAgentFailure =
@@ -70,7 +93,12 @@ export type RunAgentFailure =
   | 'resume-requires-durable-checkpointer'
   | 'nothing-to-resume'
   | 'awaiting-approval'
-  | 'thread-too-long';
+  | 'thread-too-long'
+  | 'approval-not-permitted'
+  | 'cost-guard-not-configured'
+  | 'spend-ceiling-reached'
+  | 'lease-not-configured'
+  | 'thread-busy';
 
 export type RunAgentResult =
   | {
@@ -93,17 +121,48 @@ export async function runAgent(
   const model =
     deps.model !== undefined ? deps.model : apiKey ? anthropicAgentModel(apiKey, deps.modelId) : null;
   if (!model) return { ok: false, reason: 'model-not-configured' };
+  if (!deps.reserveModelCall) return { ok: false, reason: 'cost-guard-not-configured' };
+  if (req.resumeDecision && !ctx.capabilities.includes(APPROVAL_REQUIRED_CAP)) {
+    return { ok: false, reason: 'approval-not-permitted' };
+  }
   if (req.resumeDecision && !deps.checkpointer) {
     return { ok: false, reason: 'resume-requires-durable-checkpointer' };
   }
+  if (deps.checkpointer && !deps.lease) return { ok: false, reason: 'lease-not-configured' };
 
-  const checkpointer = deps.checkpointer ?? new MemorySaver();
-  const graph = buildCampaignDirectorGraph({ checkpointer, model, counterReader: deps.counterReader });
-  // The thread is scoped to the verified tenant, so a checkpoint can never be
-  // read or resumed across tenants (the durable saver also enforces this).
-  const config = { configurable: { thread_id: `${ctx.tenantId}:${req.threadId}`, harnessContext: ctx } };
+  // The thread is scoped to the verified tenant AND user (see header); the
+  // durable saver also refuses any thread outside its tenant.
+  const threadId = `${ctx.tenantId}:${ctx.uid}:${req.threadId}`;
+  if (!deps.checkpointer) return execute(ctx, req, deps, model, new MemorySaver(), threadId);
 
-  if (deps.checkpointer) {
+  const now = deps.nowMs ?? Date.now;
+  const token = await deps.lease!.acquire(threadId, now());
+  if (!token) return { ok: false, reason: 'thread-busy' };
+  try {
+    return await execute(ctx, req, deps, model, deps.checkpointer, threadId, true);
+  } finally {
+    await deps.lease!.release(threadId, token).catch(() => undefined); // expiry is the backstop
+  }
+}
+
+async function execute(
+  ctx: HarnessContext,
+  req: RunAgentRequest,
+  deps: RunAgentDeps,
+  model: AgentModel,
+  checkpointer: BaseCheckpointSaver,
+  threadId: string,
+  durable = false,
+): Promise<RunAgentResult> {
+  const graph = buildCampaignDirectorGraph({
+    checkpointer,
+    model,
+    counterReader: deps.counterReader,
+    deps: { reserveModelCall: deps.reserveModelCall },
+  });
+  const config = { configurable: { thread_id: threadId, harnessContext: ctx } };
+
+  if (durable) {
     const latest = await checkpointer.getTuple(config);
     const paused = Boolean(latest?.pendingWrites?.some(([, channel]) => channel === INTERRUPT));
     if (req.resumeDecision && !paused) return { ok: false, reason: 'nothing-to-resume' };
@@ -123,13 +182,17 @@ export async function runAgent(
             claims: null,
             iterationCount: 0,
             briefingOutput: null,
+            draftBriefing: null,
             approvalStatus: 'pending' as const,
             pendingAction: { type: 'none' as const },
           },
           config,
         );
   } catch (err) {
-    if (isCheckpointTooLarge(err)) return { ok: false, reason: 'thread-too-long' };
+    if (causeChainHas(err, 'CheckpointTooLargeError')) return { ok: false, reason: 'thread-too-long' };
+    const cost = costGuardCode(err);
+    if (cost === 'CEILING_REACHED') return { ok: false, reason: 'spend-ceiling-reached' };
+    if (cost === 'PRICE_NOT_CONFIGURED') return { ok: false, reason: 'cost-guard-not-configured' };
     throw err;
   }
 
@@ -144,10 +207,18 @@ export async function runAgent(
   };
 }
 
-/** The saver's size refusal, recognised even if the graph runtime wraps it. */
-function isCheckpointTooLarge(err: unknown): boolean {
+/** A named refusal (the saver's size limit), recognised even if the graph runtime wraps it. */
+function causeChainHas(err: unknown, name: string): boolean {
   for (let e: unknown = err, depth = 0; e && depth < 5; e = (e as { cause?: unknown }).cause, depth += 1) {
-    if (e instanceof Error && (e.name === 'CheckpointTooLargeError' || e.message.includes('CheckpointTooLargeError'))) return true;
+    if (e instanceof Error && (e.name === name || e.message.includes(name))) return true;
   }
   return false;
+}
+
+/** The cost guard's refusal code, if the run was stopped by it. */
+function costGuardCode(err: unknown): string | null {
+  for (let e: unknown = err, depth = 0; e && depth < 5; e = (e as { cause?: unknown }).cause, depth += 1) {
+    if (e instanceof Error && e.name === 'CostGuardError') return (e as Error & { code?: string }).code ?? null;
+  }
+  return null;
 }

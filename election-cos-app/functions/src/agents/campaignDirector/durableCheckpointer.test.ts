@@ -15,11 +15,13 @@ import {
   parseScopedThread,
 } from './firestoreCheckpointer';
 import { buildCampaignDirectorGraph, MAX_ITERATIONS } from './graph';
-import { runAgent } from './runAgent';
+import { runAgent, type RunAgentDeps } from './runAgent';
+import { freeMeter, memoryThreadLease, submitBriefing } from './testKit';
+import type { CheckpointDocStore } from './firestoreCheckpointer';
 import type { AgentModel } from './agentModel';
 import type { HarnessContext } from './state';
 
-const ctx: HarnessContext = { tenantId: 'jb-marks', uid: 'u1', capabilities: ['warroom.view'] };
+const ctx: HarnessContext = { tenantId: 'jb-marks', uid: 'u1', capabilities: ['warroom.view', 'incidents.escalate'] };
 const cfg = (threadId: string, tenant = 'jb-marks') => ({
   configurable: { thread_id: `${tenant}:${threadId}`, harnessContext: { ...ctx, tenantId: tenant } },
 });
@@ -35,7 +37,14 @@ function scriptedModel(replies: BaseMessage[], seen?: BaseMessage[][]): AgentMod
     }),
   };
 }
-const brief = (text = 'Briefing.') => scriptedModel([new AIMessage(text)]);
+const brief = (text = 'Briefing.') => scriptedModel([submitBriefing(text)]);
+/** What the worker hands runAgent per request: a fresh saver over the shared store, a lease, a meter. */
+const lease = memoryThreadLease();
+const durable = (store: CheckpointDocStore): RunAgentDeps => ({
+  checkpointer: new DocStoreCheckpointSaver(store),
+  lease,
+  reserveModelCall: freeMeter,
+});
 const dispatch = {
   type: 'incident_dispatch' as const,
   payload: { incidentId: 'i1', responderId: 'r1', summary: 'water main burst, ward 12' },
@@ -98,6 +107,14 @@ describe('DocStoreCheckpointSaver — storage', () => {
     await expect(g.invoke({ messages: [new HumanMessage('hi')] }, cfg('big'))).rejects.toThrow(/CheckpointTooLargeError/);
   });
 
+  it('refuses a pending write too large to store, too', async () => {
+    const saver = new DocStoreCheckpointSaver(memoryDocStore());
+    const config = { configurable: { thread_id: 'jb-marks:w', checkpoint_id: 'c1', checkpoint_ns: '' } };
+    await expect(saver.putWrites(config, [['messages', 'x'.repeat(MAX_CHECKPOINT_CHARS)]], 'task')).rejects.toThrow(
+      /CheckpointTooLargeError/,
+    );
+  });
+
   it('rejects a thread id that would escape its document path', () => {
     expect(() => parseScopedThread('jb-marks:a/b')).toThrow(/may not contain/);
     expect(() => parseScopedThread('jb/marks:a')).toThrow(/may not contain/);
@@ -145,15 +162,20 @@ describe('runAgent on a durable thread', () => {
     const store = memoryDocStore();
     await runAgent(ctx, { threadId: 'conv', prompt: 'What is the JB Marks quota?' }, {
       model: brief('First answer.'),
-      checkpointer: new DocStoreCheckpointSaver(store),
+      ...durable(store),
     });
     const seen: BaseMessage[][] = [];
     await runAgent(ctx, { threadId: 'conv', prompt: 'And the DA seats?' }, {
-      model: scriptedModel([new AIMessage('Second answer.')], seen),
-      checkpointer: new DocStoreCheckpointSaver(store),
+      model: scriptedModel([submitBriefing('Second answer.')], seen),
+      ...durable(store),
     });
-    const texts = seen[0].map((m) => String(m.content));
-    expect(texts).toEqual(['What is the JB Marks quota?', 'First answer.', 'And the DA seats?']);
+    // [system prompt, first question, the submitted answer (a tool call), its ack, the follow-up]
+    const [system, ...thread] = seen[0];
+    expect(system._getType()).toBe('system');
+    expect(thread.map((m) => m._getType())).toEqual(['human', 'ai', 'tool', 'human']);
+    expect(String(thread[0].content)).toBe('What is the JB Marks quota?');
+    expect((thread[1] as AIMessage).tool_calls?.[0].args.briefing).toBe('First answer.');
+    expect(String(thread[3].content)).toBe('And the DA seats?');
   });
 
   it("resets the turn: an earlier turn's error does not block the next briefing", async () => {
@@ -161,11 +183,11 @@ describe('runAgent on a durable thread', () => {
     // Turn 1 ends in a provenance violation (an error on the thread).
     await buildCampaignDirectorGraph({ checkpointer: new DocStoreCheckpointSaver(store), model: brief() }).invoke(
       { messages: [new HumanMessage('t1')], claims: [{ claim: 'a 5% swing', kind: 'sourced', citation: 'x' }] },
-      cfg('reset'),
+      cfg('u1:reset'),
     );
     const r = await runAgent(ctx, { threadId: 'reset', prompt: 't2' }, {
       model: brief('Clean briefing.'),
-      checkpointer: new DocStoreCheckpointSaver(store),
+      ...durable(store),
     });
     expect(r).toMatchObject({ ok: true, briefing: 'Clean briefing.', errors: [] });
   });
@@ -175,27 +197,28 @@ describe('runAgent on a durable thread', () => {
     const alwaysTool = scriptedModel([
       new AIMessage({ content: '', tool_calls: [{ name: 'get_war_room_counters', args: {}, id: 'c' }] }),
     ]);
-    const t1 = await runAgent(ctx, { threadId: 'cap' }, { model: alwaysTool, checkpointer: new DocStoreCheckpointSaver(store) });
-    expect(t1.ok && t1.iterationCount).toBe(MAX_ITERATIONS);
-    const t2 = await runAgent(ctx, { threadId: 'cap' }, { model: brief(), checkpointer: new DocStoreCheckpointSaver(store) });
-    expect(t2.ok && t2.iterationCount).toBe(1);
+    const t1 = await runAgent(ctx, { threadId: 'cap' }, { model: alwaysTool, ...durable(store) });
+    expect(t1).toMatchObject({ ok: true, iterationCount: MAX_ITERATIONS, briefing: null });
+    expect(t1.ok && t1.errors.join(' ')).toMatch(/iteration budget/);
+    const t2 = await runAgent(ctx, { threadId: 'cap' }, { model: brief(), ...durable(store) });
+    expect(t2).toMatchObject({ ok: true, iterationCount: 1, briefing: 'Briefing.', errors: [] });
   });
 
   it('refuses a new prompt while an approval is pending, then resumes it', async () => {
     const store = memoryDocStore();
     await buildCampaignDirectorGraph({ checkpointer: new DocStoreCheckpointSaver(store), model: brief() }).invoke(
       { messages: [new HumanMessage('dispatch')], pendingAction: dispatch },
-      cfg('pend'),
+      cfg('u1:pend'),
     );
     const blocked = await runAgent(ctx, { threadId: 'pend', prompt: 'something else' }, {
       model: brief(),
-      checkpointer: new DocStoreCheckpointSaver(store),
+      ...durable(store),
     });
     expect(blocked).toEqual({ ok: false, reason: 'awaiting-approval' });
 
     const resumed = await runAgent(ctx, { threadId: 'pend', resumeDecision: { approved: true } }, {
       model: brief(),
-      checkpointer: new DocStoreCheckpointSaver(store),
+      ...durable(store),
     });
     expect(resumed).toMatchObject({ ok: true, approvalStatus: 'approved' });
   });
@@ -203,7 +226,7 @@ describe('runAgent on a durable thread', () => {
   it('refuses a resume when nothing is waiting', async () => {
     const r = await runAgent(ctx, { threadId: 'none', resumeDecision: { approved: true } }, {
       model: brief(),
-      checkpointer: new DocStoreCheckpointSaver(memoryDocStore()),
+      ...durable(memoryDocStore()),
     });
     expect(r).toEqual({ ok: false, reason: 'nothing-to-resume' });
   });
@@ -211,15 +234,15 @@ describe('runAgent on a durable thread', () => {
   it('turns an oversized thread into a clear refusal', async () => {
     const r = await runAgent(ctx, { threadId: 'big' }, {
       model: scriptedModel([new AIMessage('x'.repeat(MAX_CHECKPOINT_CHARS))]),
-      checkpointer: new DocStoreCheckpointSaver(memoryDocStore()),
+      ...durable(memoryDocStore()),
     });
     expect(r).toEqual({ ok: false, reason: 'thread-too-long' });
   });
 
   it('still runs single-request with no durable saver', async () => {
-    const r = await runAgent(ctx, { threadId: 'mem' }, { model: brief('ok'), checkpointer: undefined });
+    const r = await runAgent(ctx, { threadId: 'mem' }, { model: brief('ok'), reserveModelCall: freeMeter });
     expect(r).toMatchObject({ ok: true, briefing: 'ok' });
     // MemorySaver remains usable as an explicit saver too.
-    expect(await runAgent(ctx, { threadId: 'mem2' }, { model: brief(), checkpointer: new MemorySaver() })).toMatchObject({ ok: true });
+    expect(await runAgent(ctx, { threadId: 'mem2' }, { model: brief(), checkpointer: new MemorySaver(), lease, reserveModelCall: freeMeter })).toMatchObject({ ok: true });
   });
 });

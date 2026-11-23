@@ -11,6 +11,7 @@ import {
 } from './graph';
 import type { AgentModel } from './agentModel';
 import type { HarnessContext } from './state';
+import { submitBriefing } from './testKit';
 
 const ctx: HarnessContext = { tenantId: 'jb-marks', uid: 'u1', capabilities: [] };
 const cfg = (threadId: string) => ({ configurable: { thread_id: `jb-marks:${threadId}`, harnessContext: ctx } });
@@ -20,7 +21,7 @@ function scriptedModel(replies: BaseMessage[]): AgentModel {
   let i = 0;
   return { bindTools: () => ({ invoke: async () => replies[Math.min(i++, replies.length - 1)] }) };
 }
-const briefing = () => scriptedModel([new AIMessage('Draft briefing prepared from certified baseline.')]);
+const briefing = () => scriptedModel([submitBriefing('Draft briefing prepared from certified baseline.')]);
 const toolCall = (name: string) =>
   new AIMessage({ content: '', tool_calls: [{ name, args: { ward_ids: [] }, id: `c-${name}` }] });
 const asState = (s: Partial<CampaignDirectorGraphState>) => s as CampaignDirectorGraphState;
@@ -36,7 +37,18 @@ describe('routing', () => {
   it('stops looping at the iteration cap even if tools were requested', () => {
     expect(
       routeAfterAgent(asState({ messages: [toolCall('get_war_room_counters')], iterationCount: MAX_ITERATIONS })),
-    ).toBe('verify_policy');
+    ).toBe('budget_exhausted');
+  });
+  it('routes a submitted briefing to capture, even alongside other tool calls', () => {
+    expect(routeAfterAgent(asState({ messages: [submitBriefing('b')], iterationCount: 1 }))).toBe('submit');
+    const both = new AIMessage({
+      content: '',
+      tool_calls: [
+        { name: 'get_war_room_counters', args: {}, id: 'a' },
+        { name: 'submit_briefing', args: { briefing: 'b', claims: [] }, id: 'b' },
+      ],
+    });
+    expect(routeAfterAgent(asState({ messages: [both], iterationCount: MAX_ITERATIONS }))).toBe('submit');
   });
 
   it('routes to the human gate only for a pending incident dispatch with a payload', () => {
@@ -47,6 +59,10 @@ describe('routing', () => {
         asState({ pendingAction: { type: 'incident_dispatch', payload: { incidentId: 'i', responderId: 'r', summary: 's' } } }),
       ),
     ).toBe('execute_dispatch');
+  });
+  it('never reaches the human gate over an error', () => {
+    const payload = { incidentId: 'i', responderId: 'r', summary: 's' };
+    expect(routeAfterVerify(asState({ errors: ['Policy violation'], pendingAction: { type: 'incident_dispatch', payload } }))).toBe(END);
   });
 });
 
@@ -86,11 +102,111 @@ describe('graph run', () => {
     expect(r.errors.join(' ')).toMatch(/Policy violation/);
     expect(r.briefingOutput).toBeNull();
   });
+
+  it('applies the gate to the claims the model submits with its briefing', async () => {
+    const graph = buildCampaignDirectorGraph({
+      checkpointer: new MemorySaver(),
+      model: scriptedModel([submitBriefing('A 6% swing wins Ward 4.', [{ claim: 'a 6% swing', kind: 'sourced', citation: 'IEC' }])]),
+    });
+    const r = await graph.invoke({ messages: [new HumanMessage('brief me')] }, cfg('submitted-violation'));
+    expect(r.errors.join(' ')).toMatch(/swing-marked-sourced/);
+    expect(r.briefingOutput).toBeNull();
+  });
+
+  it('refuses a percentage in the briefing that no claim declares', async () => {
+    const graph = buildCampaignDirectorGraph({
+      checkpointer: new MemorySaver(),
+      model: scriptedModel([
+        submitBriefing('Turnout was 44.8% and the DA holds 31%.', [
+          { claim: 'PR-ballot turnout 44.8%', kind: 'sourced', citation: 'IEC NW405 2021 results' },
+        ]),
+      ]),
+    });
+    const r = await graph.invoke({ messages: [new HumanMessage('brief me')] }, cfg('undeclared'));
+    expect(r.errors.join(' ')).toMatch(/not declared as claims — 31%/);
+    expect(r.briefingOutput).toBeNull();
+  });
+
+  it('passes a briefing whose every figure is declared and sound', async () => {
+    const graph = buildCampaignDirectorGraph({
+      checkpointer: new MemorySaver(),
+      model: scriptedModel([
+        submitBriefing('Turnout was 44.8%. If the ANC gains a 3% swing, it holds the council.', [
+          { claim: 'PR-ballot turnout 44.8%', kind: 'sourced', citation: 'IEC NW405 2021 results' },
+          { claim: 'a 3% swing to the ANC', kind: 'user_assumption', citation: null },
+        ]),
+      ]),
+    });
+    const r = await graph.invoke({ messages: [new HumanMessage('brief me')] }, cfg('declared'));
+    expect(r.errors).toEqual([]);
+    expect(r.briefingOutput).toMatch(/^Turnout was 44.8%/);
+    expect(r.claims).toHaveLength(2);
+  });
+
+  it('never ships free text: a plain reply with no submission fails closed', async () => {
+    const graph = buildCampaignDirectorGraph({ checkpointer: new MemorySaver(), model: scriptedModel([new AIMessage('Trust me.')]) });
+    const r = await graph.invoke({ messages: [new HumanMessage('brief me')] }, cfg('free-text'));
+    expect(r.errors.join(' ')).toMatch(/No briefing was submitted/);
+    expect(r.briefingOutput).toBeNull();
+  });
+
+  it('never ships an array-content reply either (the old empty-briefing path)', async () => {
+    const arrayReply = new AIMessage({ content: [{ type: 'text', text: 'Block content.' }] });
+    const graph = buildCampaignDirectorGraph({ checkpointer: new MemorySaver(), model: scriptedModel([arrayReply]) });
+    const r = await graph.invoke({ messages: [new HumanMessage('brief me')] }, cfg('array'));
+    expect(r.briefingOutput).toBeNull();
+    expect(r.errors.join(' ')).toMatch(/No briefing was submitted/);
+  });
+
+  it('rejects a malformed submission', async () => {
+    const bad = new AIMessage({ content: '', tool_calls: [{ name: 'submit_briefing', args: { briefing: 'x' }, id: 's' }] });
+    const graph = buildCampaignDirectorGraph({ checkpointer: new MemorySaver(), model: scriptedModel([bad]) });
+    const r = await graph.invoke({ messages: [new HumanMessage('brief me')] }, cfg('malformed'));
+    expect(r.errors.join(' ')).toMatch(/did not match the submit_briefing schema/);
+    expect(r.briefingOutput).toBeNull();
+  });
+
+  it('prepends the system prompt to every model call without storing it', async () => {
+    const seen: BaseMessage[][] = [];
+    const model: AgentModel = {
+      bindTools: (tools) => {
+        expect(tools.map((t: { name: string }) => t.name)).toContain('submit_briefing');
+        return { invoke: async (m: BaseMessage[]) => (seen.push(m), submitBriefing('ok')) };
+      },
+    };
+    const r = await buildCampaignDirectorGraph({ checkpointer: new MemorySaver(), model }).invoke(
+      { messages: [new HumanMessage('brief me')] },
+      cfg('system'),
+    );
+    expect(seen[0][0]._getType()).toBe('system');
+    expect(r.messages.some((m) => m._getType() === 'system')).toBe(false);
+  });
+
+  it('reserves the cost before every model call, and a refusal stops the run', async () => {
+    let reserved = 0;
+    const model = scriptedModel([toolCall('get_war_room_counters'), submitBriefing('done')]);
+    const ok = await buildCampaignDirectorGraph({
+      checkpointer: new MemorySaver(),
+      model,
+      deps: { reserveModelCall: async () => void (reserved += 1) },
+    }).invoke({ messages: [new HumanMessage('brief me')] }, cfg('meter'));
+    expect(reserved).toBe(2);
+    expect(ok.briefingOutput).toBe('done');
+
+    let called = false;
+    const refused = buildCampaignDirectorGraph({
+      checkpointer: new MemorySaver(),
+      model: { bindTools: () => ({ invoke: async () => ((called = true), submitBriefing('x')) }) },
+      deps: { reserveModelCall: async () => { throw Object.assign(new Error('ceiling'), { name: 'CostGuardError' }); } },
+    }).invoke({ messages: [new HumanMessage('brief me')] }, cfg('meter-refused'));
+    await expect(refused).rejects.toThrow(/ceiling/);
+    expect(called).toBe(false); // the model was never called
+  });
 });
 
 describe('tool loop', () => {
   it('runs a requested tool, feeds the result back, and finishes with a briefing', async () => {
-    const model = scriptedModel([toolCall('get_war_room_counters'), new AIMessage('Final briefing: 5 voters captured.')]);
+    const model = scriptedModel([toolCall('get_war_room_counters'), submitBriefing('Final briefing: 5 voters captured.')]);
     const graph = buildCampaignDirectorGraph({
       checkpointer: new MemorySaver(),
       model,
@@ -112,6 +228,13 @@ describe('tool loop', () => {
     });
     const r = await graph.invoke({ messages: [new HumanMessage('loop')] }, cfg('cap'));
     expect(r.iterationCount).toBe(MAX_ITERATIONS); // capped, did not run away
+    // Ends with a clear error and no briefing, not a 200 with an empty one…
+    expect(r.errors.join(' ')).toMatch(/iteration budget \(8\) ran out/);
+    expect(r.briefingOutput).toBeNull();
+    // …and the last tool call is answered, so a durable thread stays valid.
+    const last = r.messages[r.messages.length - 1];
+    expect(last._getType()).toBe('tool');
+    expect(String(last.content)).toMatch(/Not run: the iteration budget/);
   });
 });
 

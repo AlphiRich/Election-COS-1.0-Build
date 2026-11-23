@@ -28,6 +28,8 @@
  */
 export const SYNC_MAX_BYTES = 5 * 1024 * 1024;
 export const RATE = { capacity: 30, refillPerSecond: 0.5 }; // a burst of 30, then one every 2 s
+/** Campaign Director: each request can make up to 8 paid model calls, so far tighter. */
+export const AGENT_RATE = { capacity: 6, refillPerSecond: 1 / 30 }; // a burst of 6, then one every 30 s
 
 interface Bucket {
   tokens: number;

@@ -21,6 +21,8 @@ import { FirestoreCheckpointSaver } from './firestoreCheckpointer';
 import { firestoreCounterReader } from './ecosLangchainTools';
 import { resolveAgentModel } from './agentModel';
 import { runAgent } from './runAgent';
+import { firebaseAdminThreadLease } from './threadLease';
+import { firestoreSpendStore, parseUnitCost, reserveSpend } from '../../costGuard';
 
 export const runCampaignDirector = onCall({ region: REGION }, async (request) => {
   if (!request.auth?.uid || !(request.auth.token as Record<string, unknown>)?.tenantId) {
@@ -48,15 +50,19 @@ export const runCampaignDirector = onCall({ region: REGION }, async (request) =>
       // `null` when no key is set → runAgent fails closed (rule 2).
       model: resolveAgentModel(),
       checkpointer: new FirestoreCheckpointSaver(db),
+      lease: firebaseAdminThreadLease(db),
       counterReader: firestoreCounterReader(db),
+      // Unset price → parseUnitCost throws inside the run → cost-guard-not-configured.
+      reserveModelCall: async () => {
+        await reserveSpend(firestoreSpendStore(), parseUnitCost(process.env.CAMPAIGN_DIRECTOR_CALL_COST_CENTS), new Date());
+      },
     },
   );
   if (!result.ok) {
+    // The worker route (agentRoute.ts) carries the full wording per reason.
     throw new HttpsError(
-      'failed-precondition',
-      result.reason === 'model-not-configured'
-        ? 'Campaign Director has no model configured; it refuses to run rather than fabricate.'
-        : 'Resuming an approval needs a durable checkpointer.',
+      result.reason === 'approval-not-permitted' ? 'permission-denied' : 'failed-precondition',
+      `Campaign Director refused: ${result.reason}.`,
     );
   }
   return result;

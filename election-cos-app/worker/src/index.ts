@@ -34,8 +34,9 @@
  */
 import { createRemoteJWKSet, jwtVerify, SignJWT, importPKCS8, type JWTPayload } from 'jose';
 import { SEED_ROLES } from '../../src/auth/seedRoles';
-import { gateSync } from './edge';
+import { AGENT_RATE, allow, gateSync } from './edge';
 import type { CheckpointDocStore } from '../../functions/src/agents/campaignDirector/firestoreCheckpointer';
+import type { VersionedDocStore } from '../../functions/src/versionedDocStore';
 
 // Minimal Workers types, so this package needs no extra type dependency.
 interface Fetcher {
@@ -52,6 +53,11 @@ export interface Env {
   ANTHROPIC_API_KEY?: string;
   /** Optional model-id override for the Campaign Director. */
   CAMPAIGN_DIRECTOR_MODEL?: string;
+  /**
+   * Price of one Campaign Director model call, whole rand cents, reserved against
+   * the R500 monthly ceiling before each call. Unset → the agent refuses (503).
+   */
+  CAMPAIGN_DIRECTOR_CALL_COST_CENTS?: string;
 }
 
 type Json = Record<string, unknown>;
@@ -326,6 +332,54 @@ export function restCheckpointStore(env: Env): CheckpointDocStore {
   };
 }
 
+/**
+ * Firestore REST with preconditions (`currentDocument`), for the atomic
+ * read-check-writes the worker needs without a transactions SDK: the Campaign
+ * Director's thread lease and the paid-usage ledger. A failed precondition is a
+ * clash (`false`), never an error; anything else fails loudly.
+ */
+export function restVersionedStore(env: Env): VersionedDocStore {
+  return {
+    async getVersioned(path) {
+      const res = await fetch(`${docsBase(env)}/${path}`, {
+        headers: { authorization: `Bearer ${await googleAccessToken(env)}` },
+      });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new HttpError(502, `Firestore read failed (${res.status})`);
+      const doc = (await res.json()) as { fields?: Record<string, FsValue>; updateTime: string };
+      return { data: fromFs({ mapValue: { fields: doc.fields ?? {} } }) as Json, version: doc.updateTime };
+    },
+    async commit(writes) {
+      const res = await fetch(`${docsBase(env)}:commit`, {
+        method: 'POST',
+        headers: {
+          authorization: `Bearer ${await googleAccessToken(env)}`,
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          writes: writes.map((w) => ({
+            ...(w.delete
+              ? { delete: docName(env, w.path) }
+              : {
+                  update: {
+                    name: docName(env, w.path),
+                    fields: (toFs(w.data ?? {}) as { mapValue: { fields: Record<string, FsValue> } }).mapValue.fields,
+                  },
+                }),
+            ...(w.ifVersion === undefined
+              ? {}
+              : { currentDocument: w.ifVersion === null ? { exists: false } : { updateTime: w.ifVersion } }),
+          })),
+        }),
+      });
+      if (res.ok) return true;
+      const err = (await res.json().catch(() => ({}))) as { error?: { status?: string } };
+      if (['FAILED_PRECONDITION', 'ALREADY_EXISTS', 'NOT_FOUND', 'ABORTED'].includes(err.error?.status ?? '')) return false;
+      throw new HttpError(502, `Firestore commit failed (${res.status})`);
+    },
+  };
+}
+
 async function fsAdd(env: Env, collectionPath: string, data: Json): Promise<void> {
   const res = await fetch(`${docsBase(env)}/${collectionPath}`, {
     method: 'POST',
@@ -502,6 +556,9 @@ async function handleApi(req: Request, env: Env, url: URL): Promise<Response> {
         modelId: env.CAMPAIGN_DIRECTOR_MODEL,
         counterReader: (tenantId) => readWarRoomCounters(env, tenantId),
         checkpointStore: restCheckpointStore(env),
+        versionedStore: restVersionedStore(env),
+        callCostCents: env.CAMPAIGN_DIRECTOR_CALL_COST_CENTS,
+        rateLimit: (uid) => allow(`agent:${uid}`, Date.now(), AGENT_RATE),
         nowSec: Math.floor(Date.now() / 1000),
       });
       return json(r.body as Json, r.status);

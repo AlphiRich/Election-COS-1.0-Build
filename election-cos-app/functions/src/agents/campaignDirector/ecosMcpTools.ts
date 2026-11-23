@@ -161,7 +161,18 @@ export async function getWarRoomCountersTool(
 ): Promise<McpToolResult> {
   const counters = await reader(ctx.tenantId, wardIds);
   // Honest empty state: an empty object is reported as-is, never interpolated.
-  return textResult(JSON.stringify({ tenantId: ctx.tenantId, wardIds, counters }));
+  // The counters are TENANT-WIDE (ward-level counters are not held), so the
+  // result says so, and never echoes requested wards as if it were scoped to them.
+  return textResult(
+    JSON.stringify({
+      tenantId: ctx.tenantId,
+      scope: 'tenant',
+      counters,
+      ...(wardIds.length > 0
+        ? { note: `Ward-level counters are not held; these are tenant-wide totals, not figures for ${wardIds.join(', ')}.` }
+        : {}),
+    }),
+  );
 }
 
 // ---- Certified baseline ---------------------------------------------------

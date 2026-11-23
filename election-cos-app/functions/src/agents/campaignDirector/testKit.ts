@@ -10,3 +10,15 @@
  */
 export { Command } from '@langchain/langgraph';
 export { AIMessage, HumanMessage, type BaseMessage } from '@langchain/core/messages';
+export { memoryThreadLease } from './threadLease';
+
+import { AIMessage as AIMessageClass } from '@langchain/core/messages';
+import type { ProvenanceClaim } from './scenarioPolicy';
+
+/** A scripted model reply that delivers a briefing the only way the graph accepts. */
+export function submitBriefing(briefing: string, claims: ProvenanceClaim[] = [], id = 'submit-1') {
+  return new AIMessageClass({ content: '', tool_calls: [{ name: 'submit_briefing', args: { briefing, claims }, id }] });
+}
+
+/** A cost meter that allows every call (tests that are not about the meter). */
+export const freeMeter = async (): Promise<void> => undefined;

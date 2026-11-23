@@ -52,6 +52,19 @@ describe('handleCampaignDirector — gates', () => {
     expect(run).not.toHaveBeenCalled();
   });
 
+  it('rate-limits per verified user before running anything', async () => {
+    const run = stubRun();
+    const seen: string[] = [];
+    const r = await handleCampaignDirector(okToken, { threadId: 't' }, {
+      nowSec: NOW,
+      run,
+      rateLimit: (uid) => (seen.push(uid), false),
+    });
+    expect(r.status).toBe(429);
+    expect(seen).toEqual(['u1']);
+    expect(run).not.toHaveBeenCalled();
+  });
+
   it('uses the tenant from the TOKEN and ignores a tenantId in the body', async () => {
     const run = stubRun();
     await handleCampaignDirector(okToken, { threadId: 't', tenantId: 'someone-else' }, { nowSec: NOW, run });
@@ -114,6 +127,11 @@ describe('handleCampaignDirector — outcomes', () => {
     ['nothing-to-resume', 409],
     ['awaiting-approval', 409],
     ['thread-too-long', 413],
+    ['approval-not-permitted', 403],
+    ['cost-guard-not-configured', 503],
+    ['spend-ceiling-reached', 429],
+    ['lease-not-configured', 501],
+    ['thread-busy', 409],
   ] as const)('maps %s to %i', async (reason, status) => {
     const r = await handleCampaignDirector(okToken, { threadId: 't' }, { nowSec: NOW, run: stubRun({ ok: false, reason }) });
     expect(r.status).toBe(status);

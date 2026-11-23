@@ -14,7 +14,7 @@ describe('buildEcosTools', () => {
     const [warRoom] = buildEcosTools(async (tenantId) => ({ votersCaptured: tenantId === 'jb-marks' ? 7 : 0 }));
     const out = await warRoom.invoke({ ward_ids: [] }, config);
     expect(String(out)).toContain('votersCaptured');
-    expect(JSON.parse(String(out))).toEqual({ tenantId: 'jb-marks', wardIds: [], counters: { votersCaptured: 7 } });
+    expect(JSON.parse(String(out))).toEqual({ tenantId: 'jb-marks', scope: 'tenant', counters: { votersCaptured: 7 } });
   });
 
   it('the baseline and scenario tools serve real figures and refuse what they do not hold', async () => {

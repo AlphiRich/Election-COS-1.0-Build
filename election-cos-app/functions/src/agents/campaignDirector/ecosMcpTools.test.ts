@@ -92,11 +92,16 @@ describe('get_war_room_counters — real read, tenant-scoped, honest empty state
     const reader = vi.fn<CounterReader>(async () => ({ votersCaptured: 12, openIncidents: 3 }));
     const r = await getWarRoomCountersTool(ctx, reader, ['NW405-W1']);
     expect(reader).toHaveBeenCalledWith('jb-marks', ['NW405-W1']);
-    expect(JSON.parse(r.content[0].text)).toEqual({
-      tenantId: 'jb-marks',
-      wardIds: ['NW405-W1'],
-      counters: { votersCaptured: 12, openIncidents: 3 },
-    });
+    const out = JSON.parse(r.content[0].text);
+    expect(out).toMatchObject({ tenantId: 'jb-marks', scope: 'tenant', counters: { votersCaptured: 12, openIncidents: 3 } });
+    // Tenant-wide totals are never labelled with the wards that were asked for.
+    expect(out.wardIds).toBeUndefined();
+    expect(out.note).toMatch(/tenant-wide totals, not figures for NW405-W1/);
+  });
+
+  it('adds no ward note when no wards were asked for', async () => {
+    const r = await getWarRoomCountersTool(ctx, async () => ({ votersCaptured: 1 }));
+    expect(JSON.parse(r.content[0].text)).toEqual({ tenantId: 'jb-marks', scope: 'tenant', counters: { votersCaptured: 1 } });
   });
 
   it('reports an empty counter set as-is, never interpolated', async () => {

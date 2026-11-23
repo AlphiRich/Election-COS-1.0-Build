@@ -6,6 +6,8 @@
   //   npx wrangler secret put FIREBASE_SERVICE_ACCOUNT   (a dedicated least-privilege key, whole JSON)
   //   npx wrangler secret put OWNER_EMAILS               (comma-separated; may bootstrap the first tenant)
   //   npx wrangler secret put ANTHROPIC_API_KEY          (Campaign Director; absent → the agent route refuses, 503)
+  // Campaign Director price per model call, whole rand cents, reserved against the R500 monthly ceiling
+  // before each call: set the var CAMPAIGN_DIRECTOR_CALL_COST_CENTS (unset → the agent refuses, 503).
   // nodejs_compat: the Campaign Director's LangGraph runtime uses node:async_hooks
   // (AsyncLocalStorage). Verified under workerd before this was enabled.
   "$schema": "node_modules/wrangler/config-schema.json",

@@ -39,8 +39,8 @@ export function buildEcosTools(counterReader: CounterReader): StructuredToolInte
     {
       name: 'get_war_room_counters',
       description:
-        'Read tenant-scoped war-room operational counters (voters captured, open incidents, sentiment). ' +
-        'Honest empty states — never interpolated.',
+        'Read the tenant-wide war-room operational counters (voters captured, open incidents, sentiment). ' +
+        'Ward-level counters are not held: the totals are tenant-wide. Honest empty states — never interpolated.',
       schema: z.object({ ward_ids: z.array(z.string()).max(50).optional() }),
     },
   );

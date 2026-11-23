@@ -282,6 +282,8 @@ export class DocStoreCheckpointSaver extends BaseCheckpointSaver {
         type,
         valueBase64: toBase64(bytes),
       };
+      // Each write is its own document, under the same 1 MiB Firestore limit.
+      if (row.valueBase64.length > MAX_CHECKPOINT_CHARS) throw new CheckpointTooLargeError(row.valueBase64.length);
       batch.push({ path: `${col}/${taskId}_${idx}`, data: row as unknown as DocData });
     }
     await this.store.setMany(batch);

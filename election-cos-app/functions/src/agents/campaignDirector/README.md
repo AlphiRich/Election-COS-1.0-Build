@@ -27,9 +27,29 @@ worker (`ecos-claims-api`), not on Cloud Functions, so Firebase stays on Spark.
   executed under workerd; the real worker boots under `nodejs_compat`
   (health 200, agent route 401 without a token). Bundle ~836 KB gzipped.
 
-**To go live (owner):** `npx wrangler secret put ANTHROPIC_API_KEY`, then
-`npx wrangler deploy`. Without the key the route answers 503 (refuses, never
-fabricates).
+**To go live (owner):** set the price of one model call,
+`CAMPAIGN_DIRECTOR_CALL_COST_CENTS` (whole rand cents — a Worker variable, not a
+secret), then `npx wrangler secret put ANTHROPIC_API_KEY`, then
+`npx wrangler deploy`. Without the key or the price the route answers 503
+(refuses, never fabricates, never runs unmetered).
+
+**Review fixes (after stage 2):**
+- **Threads belong to a user**, not just a tenant (`tenant:uid:threadId`), and
+  deciding a held dispatch needs `incidents.escalate` (403 otherwise).
+- **One run per thread:** a lease beside the checkpoints
+  (`…/agentCheckpoints/{thread}/lease/current`, 120 s expiry) — a second request
+  meanwhile is 409, so history cannot fork and an approval cannot dispatch twice.
+- **A briefing exists only as a `submit_briefing` call** carrying its claims.
+  The provenance gate runs on those claims, every percentage in the briefing must
+  be declared as one, and free text (or array content) is never shipped.
+- **Iteration cap** answers every pending tool call "not run" and returns an
+  error, so a durable thread never carries an unanswered call.
+- **Every model call is metered** against the R500 monthly ceiling, on the same
+  `platform/spend_YYYY-MM` ledger as the paid OTP messages (optimistic
+  concurrency over Firestore REST on the edge), plus a per-user rate limit
+  (6 burst, then one per 30 s). Ceiling reached → 429.
+- **Counters are labelled tenant-wide**; requested wards are no longer echoed as
+  if the figures were for them.
 
 **Stage 2 (built):** a durable checkpointer over Firestore REST, so a
 conversation carries across requests on the same `threadId`, and a run paused
