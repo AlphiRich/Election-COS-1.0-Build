@@ -27,6 +27,7 @@ import { REGION } from '../../region';
 import { harnessContextFrom, type VerifiedAuthLike } from './state';
 import { buildCampaignDirectorGraph } from './graph';
 import { FirestoreCheckpointSaver } from './firestoreCheckpointer';
+import { firestoreCounterReader } from './ecosLangchainTools';
 import { resolveAgentModel } from './agentModel';
 
 export const runCampaignDirector = onCall({ region: REGION }, async (request) => {
@@ -56,9 +57,11 @@ export const runCampaignDirector = onCall({ region: REGION }, async (request) =>
     );
   }
 
+  const db = getFirestore();
   const graph = buildCampaignDirectorGraph({
-    checkpointer: new FirestoreCheckpointSaver(getFirestore()),
+    checkpointer: new FirestoreCheckpointSaver(db),
     model,
+    counterReader: firestoreCounterReader(db),
   });
 
   const config = {

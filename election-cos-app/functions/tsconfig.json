@@ -9,7 +9,15 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "sourceMap": true
+    "sourceMap": true,
+    // @langchain/langgraph exposes ToolNode only on its `/prebuilt` subpath,
+    // which is a valid runtime export but not resolvable under this package's
+    // CommonJS (node10) moduleResolution. Point tsc at its declarations; the
+    // import specifier stays the public `@langchain/langgraph/prebuilt`, which
+    // Node resolves normally via the package's exports map at runtime.
+    "paths": {
+      "@langchain/langgraph/prebuilt": ["./node_modules/@langchain/langgraph/dist/prebuilt/index.d.ts"]
+    }
   },
   "include": ["src"]
 }

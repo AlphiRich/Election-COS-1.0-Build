@@ -3645,3 +3645,34 @@ its peer, which langgraph still satisfies. Tests prove null without a key and a
 constructed model (no network) with one. Still to do before `@deployable yes`:
 bind the ECOS MCP tools to the model via a ToolNode loop, and the deploy target
 (decision B). Full gate green: 2036 app + 242 functions tests.
+
+## Session 52 (cont.) — Campaign Director: the ToolNode loop
+
+The agent now calls the ECOS tools and reasons over the results, instead of
+drafting from the prompt alone.
+
+- **`ecosLangchainTools.ts`** wraps the existing `ecosMcpTools` logic (one source)
+  as LangChain tools the model can call: `get_war_room_counters` reads the
+  tenant's counters via an injected reader, taking the verified tenant from the
+  run config at call time (never from the model); `get_certified_baseline` and
+  `run_schedule1_scenario` fail closed. Plus `firestoreCounterReader`, the real
+  reader over `tenants/{tid}/counters/warRoom` (numeric fields only).
+- **`graph.ts`** gains a `tools` node (`ToolNode`) and an agent→tools→agent loop:
+  `agentNode` binds the tools (`model.bindTools(tools)`), and `routeAfterAgent`
+  sends the run to the tools when the model asked for them and the iteration
+  budget is not spent, else to the policy gate. The 8-iteration cap stops a model
+  that never stops asking for tools.
+- **`agentModel.ts`** seam is now `bindTools(tools) → { invoke }`, so the model is
+  bound to the run's tools; the fake model in tests scripts tool-calling with no
+  network.
+- **`callable.ts`** passes `firestoreCounterReader(db)` so a live run reads real
+  counters.
+- **tsconfig:** a single `paths` entry points tsc at `@langchain/langgraph`'s
+  `prebuilt` declarations (ToolNode) — the import specifier stays the public
+  subpath Node resolves at runtime; no module-resolution change to the package.
+
+Tests cover the loop end to end (tool runs → result fed back → briefing), the
+iteration cap, and the tenant-scoped tool read, alongside the existing
+fail-closed, provenance, and HITL cases. Full gate green: 2036 app + 251
+functions tests. Remaining before a live agent: the deploy target (decision B)
+and the `ANTHROPIC_API_KEY` secret at deploy.

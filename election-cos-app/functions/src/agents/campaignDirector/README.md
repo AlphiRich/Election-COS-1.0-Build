@@ -17,9 +17,7 @@ closed; one `@deployable` marker per Cloud Function; region pinned).
    function environment. At deploy the owner sets it as a Firebase Functions
    secret (`firebase functions:secrets:set ANTHROPIC_API_KEY`) and the callable
    binds it (`defineSecret`). The model id defaults in `agentModel.ts` and is
-   overridable per deploy with `CAMPAIGN_DIRECTOR_MODEL`. Still to do: bind the
-   ECOS MCP tools to the model via a ToolNode loop (agent → tools → agent) so the
-   model can actually call `get_war_room_counters` et al.
+   overridable per deploy with `CAMPAIGN_DIRECTOR_MODEL`.
 2. **The deterministic tools' engine.** `get_certified_baseline` and
    `run_schedule1_scenario` (`ecosMcpTools.ts`) fail closed: the certified-results
    seat calculator lives in the **application** package, outside `functions/`'s
@@ -39,9 +37,14 @@ closed; one `@deployable` marker per Cloud Function; region pinned).
 - `firestoreCheckpointer.ts` — tenant-scoped `BaseCheckpointSaver`
   (`<tenantId>:<threadId>` or it throws). `parseScopedThread` is tested on its
   own.
-- `graph.ts` — the three governed nodes + routing, tested with a fake model and
-  an in-memory saver, including the human-in-the-loop interrupt/resume.
-- `ecosMcpTools.ts` / `mcpServer.ts` — the ECOS tools and their MCP wrapper.
+- `graph.ts` — the governed nodes + routing with a full **ToolNode loop**
+  (agent → tools → agent, capped at 8 iterations), tested with a scripted
+  tool-calling model and an in-memory saver, including the human-in-the-loop
+  interrupt/resume.
+- `ecosMcpTools.ts` — the tool logic (one source). `ecosLangchainTools.ts` wraps
+  it as LangChain tools the model calls in the loop (war-room counters read
+  tenant-scoped from the run config; baseline/scenario fail closed).
+  `mcpServer.ts` is the MCP-transport wrapper of the same logic.
 
 ## Firestore wiring (already in this repo)
 

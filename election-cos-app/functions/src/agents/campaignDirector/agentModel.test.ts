@@ -30,12 +30,14 @@ describe('resolveAgentModel — fails closed on the credential', () => {
     expect(resolveAgentModel()).toBeNull();
   });
 
-  it('constructs a model with an invoke method when a key is present', () => {
+  it('constructs a tool-binding model when a key is present', () => {
     process.env[KEY] = 'sk-ant-test-not-a-real-key';
     const model = resolveAgentModel();
     expect(model).not.toBeNull();
-    expect(typeof model!.invoke).toBe('function');
-    // Construction must not reach the network — only an actual invoke would.
+    expect(typeof model!.bindTools).toBe('function');
+    // Binding tools must not reach the network — only an actual invoke would.
+    const bound = model!.bindTools([]);
+    expect(typeof bound.invoke).toBe('function');
   });
 
   it('accepts a model-id override without a code change', () => {

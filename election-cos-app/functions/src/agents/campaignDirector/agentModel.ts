@@ -25,10 +25,22 @@
  * the node produces a briefing from its messages.
  */
 import type { BaseMessage } from '@langchain/core/messages';
+import type { StructuredToolInterface } from '@langchain/core/tools';
 import { ChatAnthropic } from '@langchain/anthropic';
 
-export interface AgentModel {
+/** A model bound to the ECOS tools; its reply may carry tool calls. */
+export interface BoundModel {
   invoke(messages: BaseMessage[]): Promise<BaseMessage>;
+}
+
+/**
+ * The model seam. The graph binds the run's ECOS tools and then invokes, so the
+ * model can call `get_war_room_counters` et al. The seam keeps the provider out
+ * of the graph and lets tests drive a scripted tool-calling model with no
+ * network.
+ */
+export interface AgentModel {
+  bindTools(tools: StructuredToolInterface[]): BoundModel;
 }
 
 const DEFAULT_MODEL = 'claude-sonnet-5-5';
@@ -44,5 +56,10 @@ export function resolveAgentModel(): AgentModel | null {
 
   const model = process.env.CAMPAIGN_DIRECTOR_MODEL?.trim() || DEFAULT_MODEL;
   const chat = new ChatAnthropic({ apiKey, model, temperature: 0, maxTokens: 1024 });
-  return { invoke: (messages: BaseMessage[]) => chat.invoke(messages) };
+  return {
+    bindTools: (tools: StructuredToolInterface[]): BoundModel => {
+      const bound = chat.bindTools(tools);
+      return { invoke: (messages: BaseMessage[]) => bound.invoke(messages) };
+    },
+  };
 }

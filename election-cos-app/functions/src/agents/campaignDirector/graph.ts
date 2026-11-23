@@ -21,12 +21,15 @@
  * carries the `@deployable` marker.
  */
 import { Annotation, StateGraph, START, END, interrupt } from '@langchain/langgraph';
+import { ToolNode } from '@langchain/langgraph/prebuilt';
 import type { BaseCheckpointSaver } from '@langchain/langgraph-checkpoint';
-import type { BaseMessage } from '@langchain/core/messages';
+import { isAIMessage, type BaseMessage } from '@langchain/core/messages';
 import type { RunnableConfig } from '@langchain/core/runnables';
 import { findProvenanceViolations, type ProvenanceClaim } from './scenarioPolicy';
 import { MAX_ITERATIONS, type HarnessContext, type PendingDispatch } from './state';
 import type { AgentModel } from './agentModel';
+import { buildEcosTools } from './ecosLangchainTools';
+import type { CounterReader } from './ecosMcpTools';
 
 export const CampaignDirectorState = Annotation.Root({
   messages: Annotation<BaseMessage[]>({ reducer: (p, n) => p.concat(n), default: () => [] }),
@@ -55,8 +58,16 @@ export function getHarnessContext(config?: RunnableConfig): HarnessContext {
   return ctx;
 }
 
-/** After the agent step: always re-check policy before anything leaves. */
-export function routeAfterAgent(): 'verify_policy' {
+/**
+ * After the agent step: if the model asked to call tools and the iteration
+ * budget is not spent, run them and loop back; otherwise re-check policy before
+ * anything leaves. The cap stops a model that keeps asking for tools from
+ * looping forever (the Loop layer's deterministic stop).
+ */
+export function routeAfterAgent(state: CampaignDirectorGraphState): 'tools' | 'verify_policy' {
+  const last = state.messages[state.messages.length - 1];
+  const toolCalls = last && isAIMessage(last) ? last.tool_calls ?? [] : [];
+  if (toolCalls.length > 0 && state.iterationCount < MAX_ITERATIONS) return 'tools';
   return 'verify_policy';
 }
 
@@ -69,10 +80,18 @@ export function routeAfterVerify(state: CampaignDirectorGraphState): 'execute_di
 }
 
 export function buildCampaignDirectorGraph(
-  opts: { checkpointer?: BaseCheckpointSaver; model?: AgentModel | null; deps?: GraphDeps } = {},
+  opts: {
+    checkpointer?: BaseCheckpointSaver;
+    model?: AgentModel | null;
+    deps?: GraphDeps;
+    counterReader?: CounterReader;
+  } = {},
 ) {
   const model = opts.model ?? null;
   const deps = opts.deps ?? {};
+  // Honest empty state when no reader is wired: the counter tool reports {}.
+  const tools = buildEcosTools(opts.counterReader ?? (async () => ({})));
+  const toolNode = new ToolNode(tools);
 
   async function agentNode(
     state: CampaignDirectorGraphState,
@@ -82,7 +101,7 @@ export function buildCampaignDirectorGraph(
     if (!model) {
       return { errors: ['Campaign Director model is not configured; refusing to fabricate a briefing.'] };
     }
-    const reply = await model.invoke(state.messages);
+    const reply = await model.bindTools(tools).invoke(state.messages);
     return { messages: [reply], iterationCount: state.iterationCount + 1 };
   }
 
@@ -124,10 +143,12 @@ export function buildCampaignDirectorGraph(
 
   const builder = new StateGraph(CampaignDirectorState)
     .addNode('agent', agentNode)
+    .addNode('tools', toolNode)
     .addNode('verify_policy', verifyPolicyNode)
     .addNode('execute_dispatch', executeDispatchNode)
     .addEdge(START, 'agent')
-    .addConditionalEdges('agent', routeAfterAgent, { verify_policy: 'verify_policy' })
+    .addConditionalEdges('agent', routeAfterAgent, { tools: 'tools', verify_policy: 'verify_policy' })
+    .addEdge('tools', 'agent')
     .addConditionalEdges('verify_policy', routeAfterVerify, { execute_dispatch: 'execute_dispatch', [END]: END })
     .addEdge('execute_dispatch', END);
 
