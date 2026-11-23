@@ -3729,3 +3729,43 @@ the current cycle, not just JB Marks 2021.
 - No fabrication: every figure is the app pipeline's reading of the certified
   results; the swing stays a labelled user assumption. Full gate green: 2045 app
   + 257 functions tests.
+
+## Session 52 (cont.) — Campaign Director deploy: Path B (Cloudflare worker), Stage 1
+
+**Decision (owner): Path B** — run the agent on the existing Cloudflare claims
+worker rather than Cloud Functions, keeping Firebase on Spark (decision B stands).
+
+**Spike first.** Before any port, a throwaway worker importing LangGraph and the
+Anthropic client was bundled (`wrangler deploy --dry-run`) and executed under
+workerd with `nodejs_compat`: the graph compiled and ran, the client constructed.
+LangGraph's only Node dependency is `node:async_hooks` (AsyncLocalStorage), which
+`nodejs_compat` provides.
+
+**Built (Stage 1):**
+- `runAgent.ts` — the single runtime-agnostic assembly (model, graph, tenant-scoped
+  thread, JSON-safe summary), fail-closed on no model and on a resume with no
+  durable checkpointer. `callable.ts` (held) now calls it too; `agentModel.ts` gains
+  `anthropicAgentModel(apiKey, modelId)` shared by both runtimes.
+- `worker/src/agentRoute.ts` — `POST /api/agent/campaign-director`: tenant from the
+  verified token only (a body `tenantId` is ignored), the rules' `mfaOK()` (absent =
+  required), `warroom.view`, body validation; maps no-model → 503, resume → 501.
+  Loaded via dynamic import so it cannot slow the sign-in routes.
+- `worker/src/index.ts` — the route, `ANTHROPIC_API_KEY`/`CAMPAIGN_DIRECTOR_MODEL`
+  bindings, and `readWarRoomCounters` over the worker's Firestore REST.
+- `wrangler.jsonc` — `compatibility_flags: ["nodejs_compat"]`.
+
+**Why the agent code stays in functions/src:** bundlers resolve imports per file;
+keeping every LangGraph import there means the worker bundle holds ONE LangGraph
+copy (two copies break `interrupt`/`Command`). Confirmed from the bundle sourcemap:
+1 LangGraph root, 0 firebase-admin/firebase-functions/MCP SDK files.
+
+**Verified:** guard tests proved to fail on injected defects (body tenant honoured;
+MFA gate removed) and pass restored; ad-hoc `tsc` over the worker (it is not in the
+repo's tsc graph — pre-existing gap); real worker bundles at ~836 KB gzip; the full
+agent (graph → ToolNode → mirrored seat engine → 2026 data) executed under workerd;
+the real worker boots (health 200, agent route 401/405). Full gate green: 2059 app +
+262 functions tests.
+
+**Not done:** deploy (owner: `wrangler secret put ANTHROPIC_API_KEY` +
+`wrangler deploy`), and Stage 2 — a Firestore-REST checkpointer for cross-request
+human-approval resume. No live Anthropic round-trip has been made from this build.

@@ -1,34 +1,26 @@
 /**
- * Election Campaign OS — Campaign Director: callable entry point.
+ * Election Campaign OS — Campaign Director: Cloud Functions entry point.
  *
  * @deployable no
  *
- * A half-wired path that can trigger an outward action (incident dispatch, via
- * the graph's HITL node), so by build rule 6 it does not ship and is NOT
- * exported from `index.ts`. Three things must land before it can become
- * `@deployable yes`:
- *   1. A model credential + provider binding (`agentModel.resolveAgentModel`
- *      returns null today, so this refuses rather than fabricating).
- *   2. The certified-baseline / Schedule 1 MCP tools need a shared engine in
- *      functions (they fail closed today — see `ecosMcpTools.ts`).
- *   3. A deploy target for Cloud Functions (decision B: not deployed; Cloudflare
- *      Claims Worker is the live backend, no Blaze).
+ * The Path A entry. Path B (decided) runs the agent on the Cloudflare worker
+ * instead — `worker/src/agentRoute.ts` — so this stays held: not exported from
+ * `index.ts`, never deployed. It is kept, compiled and pointed at the same
+ * `runAgent` as the worker, so the two runtimes cannot drift and Path A remains
+ * a working fallback if Blaze is ever chosen.
  *
- * It is region-pinned to `africa-south1` (rule 7), derives the tenant strictly
- * from the verified token (never request data), and scopes the checkpoint
- * thread as `<tenantId>:<threadId>` so the Firestore saver can never cross
- * tenants.
+ * It can trigger an outward action (incident dispatch, via the graph's HITL
+ * node), so by build rule 6 it does not ship unreviewed. Region-pinned to
+ * `africa-south1` (rule 7); the tenant comes strictly from the verified token.
  */
 import { onCall, HttpsError } from 'firebase-functions/v2/https';
-import { Command } from '@langchain/langgraph';
-import { HumanMessage } from '@langchain/core/messages';
 import { getFirestore } from 'firebase-admin/firestore';
 import { REGION } from '../../region';
 import { harnessContextFrom, type VerifiedAuthLike } from './state';
-import { buildCampaignDirectorGraph } from './graph';
 import { FirestoreCheckpointSaver } from './firestoreCheckpointer';
 import { firestoreCounterReader } from './ecosLangchainTools';
 import { resolveAgentModel } from './agentModel';
+import { runAgent } from './runAgent';
 
 export const runCampaignDirector = onCall({ region: REGION }, async (request) => {
   if (!request.auth?.uid || !(request.auth.token as Record<string, unknown>)?.tenantId) {
@@ -48,34 +40,24 @@ export const runCampaignDirector = onCall({ region: REGION }, async (request) =>
     throw new HttpsError('invalid-argument', 'threadId is required.');
   }
 
-  // Fail closed: no model → refuse, never fabricate a briefing (rule 2).
-  const model = resolveAgentModel();
-  if (!model) {
+  const db = getFirestore();
+  const result = await runAgent(
+    ctx,
+    { threadId, prompt, municipalityCode, resumeDecision },
+    {
+      // `null` when no key is set → runAgent fails closed (rule 2).
+      model: resolveAgentModel(),
+      checkpointer: new FirestoreCheckpointSaver(db),
+      counterReader: firestoreCounterReader(db),
+    },
+  );
+  if (!result.ok) {
     throw new HttpsError(
       'failed-precondition',
-      'Campaign Director has no model configured; it refuses to run rather than fabricate. Configure a model credential to enable it.',
+      result.reason === 'model-not-configured'
+        ? 'Campaign Director has no model configured; it refuses to run rather than fabricate.'
+        : 'Resuming an approval needs a durable checkpointer.',
     );
   }
-
-  const db = getFirestore();
-  const graph = buildCampaignDirectorGraph({
-    checkpointer: new FirestoreCheckpointSaver(db),
-    model,
-    counterReader: firestoreCounterReader(db),
-  });
-
-  const config = {
-    configurable: { thread_id: `${ctx.tenantId}:${threadId}`, harnessContext: ctx },
-  };
-
-  if (resumeDecision) {
-    return graph.invoke(new Command({ resume: resumeDecision }), config);
-  }
-  return graph.invoke(
-    {
-      municipalityCode: municipalityCode ?? '',
-      messages: [new HumanMessage(prompt ?? 'Summarize the current baseline.')],
-    },
-    config,
-  );
+  return result;
 });

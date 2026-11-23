@@ -46,20 +46,33 @@ export interface AgentModel {
 const DEFAULT_MODEL = 'claude-sonnet-5-5';
 
 /**
- * The configured model, or `null` when no credential is present. `null` is the
- * honest state whenever the key is absent — the agent refuses rather than
- * inventing. Reads the key and model id from the function environment only.
+ * The Anthropic-backed model, from a key the caller has already read out of its
+ * runtime's secret store — `process.env` on Cloud Functions, the `env` binding
+ * on the Cloudflare worker. One construction for both runtimes. Constructing it
+ * makes no network call; only an invoke does.
  */
-export function resolveAgentModel(): AgentModel | null {
-  const apiKey = process.env.ANTHROPIC_API_KEY?.trim();
-  if (!apiKey) return null;
-
-  const model = process.env.CAMPAIGN_DIRECTOR_MODEL?.trim() || DEFAULT_MODEL;
-  const chat = new ChatAnthropic({ apiKey, model, temperature: 0, maxTokens: 1024 });
+export function anthropicAgentModel(apiKey: string, modelId?: string): AgentModel {
+  const chat = new ChatAnthropic({
+    apiKey,
+    model: modelId?.trim() || DEFAULT_MODEL,
+    temperature: 0,
+    maxTokens: 1024,
+  });
   return {
     bindTools: (tools: StructuredToolInterface[]): BoundModel => {
       const bound = chat.bindTools(tools);
       return { invoke: (messages: BaseMessage[]) => bound.invoke(messages) };
     },
   };
+}
+
+/**
+ * The configured model on Cloud Functions, or `null` when no credential is
+ * present. `null` is the honest state whenever the key is absent — the agent
+ * refuses rather than inventing.
+ */
+export function resolveAgentModel(): AgentModel | null {
+  const apiKey = process.env.ANTHROPIC_API_KEY?.trim();
+  if (!apiKey) return null;
+  return anthropicAgentModel(apiKey, process.env.CAMPAIGN_DIRECTOR_MODEL);
 }

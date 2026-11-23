@@ -5,10 +5,14 @@
   // Secrets (never committed):
   //   npx wrangler secret put FIREBASE_SERVICE_ACCOUNT   (a dedicated least-privilege key, whole JSON)
   //   npx wrangler secret put OWNER_EMAILS               (comma-separated; may bootstrap the first tenant)
+  //   npx wrangler secret put ANTHROPIC_API_KEY          (Campaign Director; absent → the agent route refuses, 503)
+  // nodejs_compat: the Campaign Director's LangGraph runtime uses node:async_hooks
+  // (AsyncLocalStorage). Verified under workerd before this was enabled.
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "ecos-claims-api",
   "main": "worker/src/index.ts",
   "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
   "workers_dev": false,
   "routes": [{ "pattern": "app.electioncos.co.za/api/*", "zone_name": "electioncos.co.za" }],
   "vars": { "FIREBASE_PROJECT_ID": "electioncos1-0" },

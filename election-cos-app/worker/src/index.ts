@@ -47,6 +47,10 @@ export interface Env {
   FIREBASE_PROJECT_ID: string;
   FIREBASE_SERVICE_ACCOUNT: string; // secret: full service-account JSON
   OWNER_EMAILS: string; // comma-separated emails allowed to bootstrap a tenant
+  /** Secret. Absent → the Campaign Director refuses (503) rather than fabricate. */
+  ANTHROPIC_API_KEY?: string;
+  /** Optional model-id override for the Campaign Director. */
+  CAMPAIGN_DIRECTOR_MODEL?: string;
 }
 
 type Json = Record<string, unknown>;
@@ -239,6 +243,20 @@ async function fsCreate(env: Env, path: string, data: Json): Promise<void> {
   if (!res.ok) throw new HttpError(502, `Firestore write failed (${res.status})`);
 }
 
+/**
+ * The tenant's pre-aggregated war-room counters, numeric fields only — the
+ * Campaign Director's `get_war_room_counters` tool on the edge. A missing doc is
+ * an honest empty `{}`, never interpolated. The caller has already checked the
+ * tenant and `warroom.view` (agentRoute.ts), because this read uses the service
+ * account and so does not pass through firestore.rules.
+ */
+export async function readWarRoomCounters(env: Env, tenantId: string): Promise<Record<string, number>> {
+  const doc = await fsGet(env, `tenants/${tenantId}/counters/warRoom`);
+  const out: Record<string, number> = {};
+  for (const [k, v] of Object.entries(doc ?? {})) if (typeof v === 'number') out[k] = v;
+  return out;
+}
+
 async function fsAdd(env: Env, collectionPath: string, data: Json): Promise<void> {
   const res = await fetch(`${docsBase(env)}/${collectionPath}`, {
     method: 'POST',
@@ -401,6 +419,22 @@ async function handleApi(req: Request, env: Env, url: URL): Promise<Response> {
         source: 'worker',
       }).catch(() => undefined);
       return json({ ok: true, tenantId, claims, refreshToken: true }, 201);
+    }
+
+    case '/api/agent/campaign-director': {
+      const user = await verifyIdToken(req, env);
+      const body = await readJson(req);
+      // Loaded lazily: the agent (LangGraph, the seat engine, its data) is only
+      // evaluated when this route is hit, so it never weighs on the startup of
+      // the sign-in routes above.
+      const { handleCampaignDirector } = await import('./agentRoute');
+      const r = await handleCampaignDirector(user, body, {
+        apiKey: env.ANTHROPIC_API_KEY,
+        modelId: env.CAMPAIGN_DIRECTOR_MODEL,
+        counterReader: (tenantId) => readWarRoomCounters(env, tenantId),
+        nowSec: Math.floor(Date.now() / 1000),
+      });
+      return json(r.body as Json, r.status);
     }
 
     default:
